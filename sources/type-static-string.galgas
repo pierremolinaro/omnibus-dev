@@ -1,19 +1,19 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @literalStringDeclarationAST : @abstractDeclarationAST {
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @literalStringDeclarationAST locationForErrorSignaling -> @location outLocation {
   outLocation = .nowhere
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  PRECEDENCE GRAPH                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @literalStringDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
@@ -23,15 +23,15 @@ override method @literalStringDeclarationAST enterInPrecedenceGraph
   [!?ioGraph addEdge !from: literalStringTypeName !to: ["u8" nowhere]]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @literalStringDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = "literal string " + staticStringTypeName () 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  ENTER IN CONTEXT                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  ENTER IN CONTEXT                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @literalStringDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
@@ -43,15 +43,15 @@ override method @literalStringDeclarationAST enterInContext
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
-#--- Enter in type map
+//--- Enter in type map
   let selfType = literalStringType ()
   [!?ioContext.mTypeMap insertType
     ![staticStringTypeName () nowhere]
     !type: selfType
   ]
-#--- Enter assignment operator
+//--- Enter assignment operator
   let key = assignmentOperatorKey (!selfType !.nowhere !selfType)
   [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage ()]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

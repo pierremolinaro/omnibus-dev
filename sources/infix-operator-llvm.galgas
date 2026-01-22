@@ -1,6 +1,6 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @llvmInfixOperatorAST : @abstractDeclarationAST {
   public var @omnibusInfixOperator mInfixOperator
@@ -11,19 +11,19 @@ class @llvmInfixOperatorAST : @abstractDeclarationAST {
   public var @lstring mRightOperandName
   public var @lstring mRightTypeName
   public var @genericFormalParameterList mRightGenericFormalParameterList
- # @ctExpressionAST mWhereExpression
+ // @ctExpressionAST mWhereExpression
   public var @lstring mResultTypeName
-  public var @genericFormalParameterList mResultGenericFormalParameterList # À modifier
+  public var @genericFormalParameterList mResultGenericFormalParameterList // À modifier
   public var @llvmGenerationInstructionList mInstructionList
 }
 
-#·······················································································································
+//·······················································································································
 
 override getter @llvmInfixOperatorAST locationForErrorSignaling -> @location outLocation {
   outLocation = self.mInfixOperatorLocation
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc appendInfixOperatorDeclaration
      ?let @omnibusInfixOperator inInfixOperator
@@ -32,7 +32,7 @@ proc appendInfixOperatorDeclaration
      ?let @string inResultOmnibusTypeName
      ?!@semanticTypePrecedenceGraph ioPrecedenceGraph
 {
-#--- Operator type --- type
+//--- Operator type --- type
   var @llvmGenerationInstructionList llvmInstructionList = @[]
   var @llvmGenerationInstructionElementList instructionElements = @[]
   instructionElements += !.symbol {!name: ["result" nowhere]}
@@ -57,7 +57,7 @@ proc appendInfixOperatorDeclaration
     !llvmInstructionList
   }
   [declaration enterInPrecedenceGraph !?ioPrecedenceGraph]
-#--- Operator type --- ctInt
+//--- Operator type --- ctInt
   llvmInstructionList = @[]
   instructionElements = @[]
   instructionElements += !.symbol {!name: ["result" nowhere]}
@@ -82,7 +82,7 @@ proc appendInfixOperatorDeclaration
     !llvmInstructionList
   }
   [declaration enterInPrecedenceGraph !?ioPrecedenceGraph]
-#--- Operator ctInt --- type
+//--- Operator ctInt --- type
   llvmInstructionList = @[]
   instructionElements = @[]
   instructionElements += !.symbol {!name: ["result" nowhere]}
@@ -109,13 +109,13 @@ proc appendInfixOperatorDeclaration
   [declaration enterInPrecedenceGraph !?ioPrecedenceGraph]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
- #·····················································································································
+ //·····················································································································
 
   rule <declaration> ?!@ast ioAST {
     <llvm_function_header> ?let leftVariableName ?let leftTypeName ?let leftGenericFormalParameterList
@@ -147,13 +147,13 @@ syntax extension omnibus_syntax {
     }
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  PRECEDENCE GRAPH                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @llvmInfixOperatorAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
@@ -165,15 +165,15 @@ override method @llvmInfixOperatorAST enterInPrecedenceGraph
   [!?ioGraph addEdge !from: nodeName !to: self.mResultTypeName]
 }
 
-#·······················································································································
+//·······················································································································
 
 override getter @llvmInfixOperatorAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = self.mLeftTypeName.string + " " + self.mInfixOperator + " " + self.mRightTypeName
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  ENTER IN CONTEXT                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  ENTER IN CONTEXT                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @llvmInfixOperatorAST enterInContext
   ?!context:@semanticContext ioContext
@@ -185,7 +185,7 @@ override method @llvmInfixOperatorAST enterInContext
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
-#--- Check types
+//--- Check types
   [!?ioContext.mTypeMap makeEntry !self.mLeftTypeName ?let leftTypeProxy]
   let leftType = [leftTypeProxy type]
   [!?ioContext.mTypeMap makeEntry !self.mRightTypeName ?let rightTypeProxy]
@@ -196,9 +196,9 @@ override method @llvmInfixOperatorAST enterInContext
     error self.mInfixOperatorLocation : "one of the two argument types should not be a compile time type"
   end
   [resultType checkIsNotCompileTimeType !self.mResultTypeName.location]
-#--- Enter in infix operator map  
+//--- Enter in infix operator map  
   let key = infixOperatorMapKey (!leftType !self.mInfixOperator !self.mInfixOperatorLocation !rightType)
-#--- Generate function
+//--- Generate function
   if not [leftType isCompileTimeType] & not [rightType isCompileTimeType] then
     let definition = @llvmInfixOperatorUsage {
       !infixOperatorFunctionName (!leftType !self.mInfixOperator !rightType)
@@ -239,7 +239,7 @@ override method @llvmInfixOperatorAST enterInContext
       !allocaList
     }
     ioRoutineListIR += !routine
-  else # One argument is a compile time type
+  else // One argument is a compile time type
     let definition = @llvmInlineInfixOperatorUsage {
       !self.mLeftOperandName
       !self.mRightOperandName
@@ -249,9 +249,9 @@ override method @llvmInfixOperatorAST enterInContext
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#   INFIX OPERATOR USAGE
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//   INFIX OPERATOR USAGE
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @llvmInfixOperatorUsage : @omnibusInfixOperatorUsage {
   public var @string mInfixMangledFunctionName
@@ -260,7 +260,7 @@ class @llvmInfixOperatorUsage : @omnibusInfixOperatorUsage {
   public var @llvmGenerationInstructionList mInstructionList
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @llvmInfixOperatorUsage generateCode
   ?let @objectIR inLeftOperand
@@ -272,7 +272,7 @@ override method @llvmInfixOperatorUsage generateCode
   ?!@instructionListIR ioInstructionGenerationList
   !@objectIR outResultValue
 {
-#--- If reference, load it
+//--- If reference, load it
   var leftOperand = inLeftOperand
   [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
@@ -283,7 +283,7 @@ override method @llvmInfixOperatorUsage generateCode
     !?ioTemporaries
     !?rightOperand
   ]  
-#--- New LLVM variable for result
+//--- New LLVM variable for result
   getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
   var @procCallEffectiveParameterListIR argumentList = @[]
   argumentList += !.output !leftOperand
@@ -296,7 +296,7 @@ override method @llvmInfixOperatorUsage generateCode
   }
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @llvmInlineInfixOperatorUsage : @omnibusInfixOperatorUsage {
   public var @lstring mLeftOperandName
@@ -304,7 +304,7 @@ class @llvmInlineInfixOperatorUsage : @omnibusInfixOperatorUsage {
   public var @llvmGenerationInstructionList mInstructionList
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @llvmInlineInfixOperatorUsage generateCode
   ?let @objectIR inLeftOperand
@@ -316,7 +316,7 @@ override method @llvmInlineInfixOperatorUsage generateCode
   ?!@instructionListIR ioInstructionGenerationList
   !@objectIR outResultValue
 {
-#--- If reference, load it
+//--- If reference, load it
   var leftOperand = inLeftOperand
   [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
@@ -327,7 +327,7 @@ override method @llvmInlineInfixOperatorUsage generateCode
     !?ioTemporaries
     !?rightOperand
   ]  
-#--- New LLVM variable for result
+//--- New LLVM variable for result
   getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
   var @assignmentGenerationVarMap varMap = @()
   [!?varMap insertKey !self.mLeftOperandName ![leftOperand llvmName]]
@@ -347,9 +347,9 @@ override method @llvmInlineInfixOperatorUsage generateCode
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#   CODE GENERATION
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//   CODE GENERATION
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @infixOperatorRoutineIR : @abstractRoutineIR {
   public var @omnibusType mTargetType
@@ -361,7 +361,7 @@ class @infixOperatorRoutineIR : @abstractRoutineIR {
   public var @allocaList mAllocaList
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @infixOperatorRoutineIR llvmCodeGeneration 
   ?!@string ioLLVMcode
@@ -378,5 +378,5 @@ override method @infixOperatorRoutineIR llvmCodeGeneration
   ioLLVMcode += "}\n\n"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 

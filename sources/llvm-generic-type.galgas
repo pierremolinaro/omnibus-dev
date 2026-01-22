@@ -1,32 +1,32 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @genericFormalParameter %equatable {
   case constant (@lstring name)
   case type (@lstring name)
 }
 
-#·······················································································································
+//·······················································································································
 
 list @genericFormalParameterList %equatable {
   public var @genericFormalParameter mParameter
 }
 
-#·······················································································································
+//·······················································································································
 
 enum @llvmStringDefinitionElement %equatable {
   case variable (@lstring name)
   case string (@lstring value)
 }
 
-#·······················································································································
+//·······················································································································
 
 list @llvmStringDefinition %equatable {
   public var @llvmStringDefinitionElement mElement
 }
 
-#·······················································································································
+//·······················································································································
 
 class @llvmGenericType : @abstractDeclarationAST {
   public var @lstring mTypeName
@@ -35,36 +35,36 @@ class @llvmGenericType : @abstractDeclarationAST {
   public var @bigint mBitSize
 }
 
-#·······················································································································
+//·······················································································································
 
 override getter @llvmGenericType locationForErrorSignaling -> @location outLocation {
   outLocation = self.mTypeName.location
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
-#  rule <llvm_string_definition> !@llvmStringDefinition outStringDefinition {
-#    outStringDefinition = @[]
-#    repeat
-#      select
-#        $"string"$ ?let string
-#        outStringDefinition += !.string {!value: string}
-#      or
-#        $identifier$ ?let name
-#        outStringDefinition += !.variable {!name: name}
-#      end
-#    while
-#      $+$
-#    end
-#  }
+//  rule <llvm_string_definition> !@llvmStringDefinition outStringDefinition {
+//    outStringDefinition = @[]
+//    repeat
+//      select
+//        $"string"$ ?let string
+//        outStringDefinition += !.string {!value: string}
+//      or
+//        $identifier$ ?let name
+//        outStringDefinition += !.variable {!name: name}
+//      end
+//    while
+//      $+$
+//    end
+//  }
   
-  #·····················································································································
+  //·····················································································································
 
   rule <generic_formal_arguments> !@genericFormalParameterList outGenericFormalParameterList {
     outGenericFormalParameterList = @[]
@@ -86,7 +86,7 @@ syntax extension omnibus_syntax {
     end
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <generic_where_clause> !@ctExpressionAST outWhereClause {
     select
@@ -97,7 +97,7 @@ syntax extension omnibus_syntax {
     end
   }
   
-  #·····················································································································
+  //·····················································································································
 
   rule <declaration> ?!@ast ioAST {
     $llvm$
@@ -111,17 +111,17 @@ syntax extension omnibus_syntax {
     end
     $:$
     $integer$ ?let bitSize
-#    $identifier$ ?let sliceKey
-#    if sliceKey.string != "slice" then
-#      error sliceKey : "this identifier should be 'slice'"
-#    end
-#    $:$
-#    select
-#      $no$
-#    or
-#      $"string"$ ?let sliceString
-#      ioAST.mDeclarationListAST += !@sliceDeclarationAST.new {!sliceString !typeName}
-#    end
+//    $identifier$ ?let sliceKey
+//    if sliceKey.string != "slice" then
+//      error sliceKey : "this identifier should be 'slice'"
+//    end
+//    $:$
+//    select
+//      $no$
+//    or
+//      $"string"$ ?let sliceString
+//      ioAST.mDeclarationListAST += !@sliceDeclarationAST.new {!sliceString !typeName}
+//    end
     $}$
     ioAST.mDeclarationListAST += !@llvmGenericType {
       !typeName
@@ -131,13 +131,13 @@ syntax extension omnibus_syntax {
     }
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  PRECEDENCE GRAPH                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @llvmGenericType enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
@@ -146,15 +146,15 @@ override method @llvmGenericType enterInPrecedenceGraph
   [!?ioGraph addNode !nodeName !self]
 }
 
-#·······················································································································
+//·······················································································································
 
 override getter @llvmGenericType keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = "Generic type " + self.mTypeName.string
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  ENTER IN CONTEXT                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  ENTER IN CONTEXT                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @genericFormalParameterList buildFormalGenericConstantMap ?!@ctCheckMap ioMap {
   for (element) in self do
@@ -166,7 +166,7 @@ method @genericFormalParameterList buildFormalGenericConstantMap ?!@ctCheckMap i
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 method @llvmStringDefinition checkCompileTimeExpression ?let @ctCheckMap inMap {
   for (element) in self do
@@ -178,7 +178,7 @@ method @llvmStringDefinition checkCompileTimeExpression ?let @ctCheckMap inMap {
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @llvmGenericType enterInContext
   ?!context:@semanticContext ioContext
@@ -190,14 +190,14 @@ override method @llvmGenericType enterInContext
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
-#--- Build formal generic constant parameter map
+//--- Build formal generic constant parameter map
   var @ctCheckMap formalGenericConstantParameterMap = @()
   [self.mGenericFormalParameterList buildFormalGenericConstantMap !?formalGenericConstantParameterMap]
-#--- Check Where clause
+//--- Check Where clause
   [self.mWhereClause checkCompileTimeExpression !formalGenericConstantParameterMap]
-#--- Check native LLVM type expression
-#  [mTypeNameExpressionString checkCompileTimeExpression !formalGenericConstantParameterMap]
-#---
+//--- Check native LLVM type expression
+//  [mTypeNameExpressionString checkCompileTimeExpression !formalGenericConstantParameterMap]
+//---
   if [self.mGenericFormalParameterList count] == 0 then
     let llvmType = @omnibusType {
       !subscript:.noSubscript
@@ -211,23 +211,23 @@ override method @llvmGenericType enterInContext
       !type: llvmType
     ]
   else
-#    let genericType = @omnibusType.new {
-#      !propertyGetterMap: @[]
-#      !propertySetterMap: @[]
-#      !classConstantMap:@[]
-#      !constructorMap:@[]
-#      !subscript:.noSubscript
-#      !attributes: .none
-#      !omnibusTypeDescriptionName: mTypeName
-#      !kind: .generic {!parameters: mGenericFormalParameterList !whereClause: mWhereClause !llvmNativeTypeNameExpression: ""}
-#      !llvmBaseTypeName: "" # A generic type cannot be instancied
-#    }
-#    [!?ioContext.mTypeMap insertType
-#      !lkey: mTypeName
-#      !type: genericType
-#    ]
+//    let genericType = @omnibusType.new {
+//      !propertyGetterMap: @[]
+//      !propertySetterMap: @[]
+//      !classConstantMap:@[]
+//      !constructorMap:@[]
+//      !subscript:.noSubscript
+//      !attributes: .none
+//      !omnibusTypeDescriptionName: mTypeName
+//      !kind: .generic {!parameters: mGenericFormalParameterList !whereClause: mWhereClause !llvmNativeTypeNameExpression: ""}
+//      !llvmBaseTypeName: "" // A generic type cannot be instancied
+//    }
+//    [!?ioContext.mTypeMap insertType
+//      !lkey: mTypeName
+//      !type: genericType
+//    ]
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 

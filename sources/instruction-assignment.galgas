@@ -1,26 +1,26 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                                  
+//-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @assignmentInstructionAST : @instructionAST {
   public var @LValueAST mTargetAST
   public var @expressionAST mSourceExpression
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
     <lvalue> !?ioAST ?let assignmentTargetAST
-  #--- Source expression
+  //--- Source expression
     $=$
     <expression> !?ioAST ?let sourceExpression
-  #--- AST
+  //--- AST
     ioInstructionList += !@assignmentInstructionAST {
       !assignmentTargetAST.mIdentifier.location
       !assignmentTargetAST
@@ -28,22 +28,22 @@ syntax extension omnibus_syntax {
     }
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  NOTE TYPES                                                                                                           
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  NOTE TYPES                                                                                                           
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @assignmentInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [self.mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
   [self.mTargetAST noteInstructionTypesInPrecedenceGraph !?ioGraph]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  SEMANTICS                                                                                                            
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  SEMANTICS                                                                                                            
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @assignmentInstructionAST instructionSemanticAnalysis
   ?self:let @omnibusType inSelfType
@@ -57,7 +57,7 @@ override method @assignmentInstructionAST instructionSemanticAnalysis
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
   [ioUniversalMap searchValuedObjectType !context: inContext !selfType:inSelfType !self.mTargetAST ?let targetType]
-#--- Analyze source expression
+//--- Analyze source expression
   [self.mSourceExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
@@ -71,7 +71,7 @@ override method @assignmentInstructionAST instructionSemanticAnalysis
     !?instructionListIR:ioInstructionGenerationList
     ?result: let @objectIR sourceOperandPossibleReference
   ]
-#--- Analyze LValue
+//--- Analyze LValue
   var @instructionListListIR pendingStoreComputedPropertyInstructionGenerationList = @[]
   [self.mTargetAST analyzeLValueInAssignment
     !self: inSelfType
@@ -86,7 +86,7 @@ override method @assignmentInstructionAST instructionSemanticAnalysis
     !?pendingStoreComputedPropertyList: pendingStoreComputedPropertyInstructionGenerationList
     ?let @LValueRepresentation lvalueIR
   ]
-#--- New assignment test
+//--- New assignment test
   [!?ioInstructionGenerationList appendAssignmentIR
     !?ioTemporaries
     !inContext.mAssignmentOperatorMap
@@ -97,13 +97,13 @@ override method @assignmentInstructionAST instructionSemanticAnalysis
     !self.mInstructionLocation
     !initializedTarget: true
   ]
-#--- Append pending computed property store (in reverse order)
+//--- Append pending computed property store (in reverse order)
   for > (instructionList) in pendingStoreComputedPropertyInstructionGenerationList do
     ioInstructionGenerationList += instructionList
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 method @LValueAST analyzeLValueInAssignment
   ?self:let @omnibusType inSelfType
@@ -118,7 +118,7 @@ method @LValueAST analyzeLValueInAssignment
   ?!pendingStoreComputedPropertyList:@instructionListListIR ioPendingStoreComputedPropertyInstructionGenerationListList
   !@LValueRepresentation outInternalRepresentation
 {
-  if self.mIdentifier.string == "" then # Receiver is "self"
+  if self.mIdentifier.string == "" then // Receiver is "self"
     if inSelfType.kind == .void then
       error self.mIdentifier : "self is not available in this context" : outInternalRepresentation
     else
@@ -172,7 +172,7 @@ method @LValueAST analyzeLValueInAssignment
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 private proc analyzeVariableInLValueInAssignment
   ?self:let @omnibusType inSelfType
@@ -238,7 +238,7 @@ private proc analyzeVariableInLValueInAssignment
   outInternalRepresentation = @{!currentType !currentLLVMName}
 }
 
-#·······················································································································
+//·······················································································································
 
 private proc handlePropertyAccessInAssignment
   ?self:let @omnibusType inSelfType
@@ -256,14 +256,14 @@ private proc handlePropertyAccessInAssignment
   ?let @lstring inPropertyName
   ?let @LValueOperandAST inNextOperand
 {
-#  let typeName = @lstring.new {!ioCurrentType.omnibusTypeDescriptionName !.here}
+//  let typeName = @lstring.new {!ioCurrentType.omnibusTypeDescriptionName !.here}
   let propertySetterMap = [inContext propertySetterMap !ioCurrentType]
-#  [inContext.mTypePropertySetterMap searchKey !typeName ?let propertySetterMap]
-#  let @propertySetterMap propertySetterMap = ioCurrentType.propertySetterMap2
+//  [inContext.mTypePropertySetterMap searchKey !typeName ?let propertySetterMap]
+//  let @propertySetterMap propertySetterMap = ioCurrentType.propertySetterMap2
   [propertySetterMap searchKey !inPropertyName ?* ?let @propertySetterKind propertyAccess]
   switch propertyAccess
   case computedProperty (@unifiedTypeMapEntry computedPropertyType getterModeDictionary setterModeDictionary) :
-  #--- Get property value
+  //--- Get property value
     let getterRoutineLLVMName = checkModeAndReturnsRoutineLLVMName (!getterModeDictionary !inMode !inPropertyName)
     [!?ioInstructionGenerationList appendGetComputedPropertyValue
       !?ioTemporaries
@@ -272,9 +272,9 @@ private proc handlePropertyAccessInAssignment
       ![computedPropertyType type]
       ?@objectIR resultValueIR
     ]
-  #--- Transform in reference
+  //--- Transform in reference
     [!?ioInstructionGenerationList referenceFromPossibleValue !?ioTemporaries !?ioAllocaList !?resultValueIR]
-  #--- Append pending computed property store
+  //--- Append pending computed property store
     let setterRoutineLLVMName = checkModeAndReturnsRoutineLLVMName (!setterModeDictionary !inMode !inPropertyName)
     var @instructionListIR pendingStoreComputedPropertyInstructionGenerationList = @[]
     var tempValueIR = resultValueIR
@@ -285,7 +285,7 @@ private proc handlePropertyAccessInAssignment
       !tempValueIR
     ]
     ioPendingStoreComputedPropertyInstructionGenerationListList += !pendingStoreComputedPropertyInstructionGenerationList
-  #---
+  //---
     ioCurrentType = [resultValueIR type]
     ioCurrentLLVMName = [resultValueIR llvmName]
     handleNextOperandInAssignment (
@@ -332,7 +332,7 @@ private proc handlePropertyAccessInAssignment
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 private proc handleArrayAccessInAssignment
   ?self:let @omnibusType inSelfType
@@ -406,7 +406,7 @@ private proc handleArrayAccessInAssignment
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 private proc analyzeSelfLValueInAssignment
   ?self:let @omnibusType inSelfType
@@ -466,7 +466,7 @@ private proc analyzeSelfLValueInAssignment
   outInternalRepresentation = @{!currentType !currentLLVMName}
 }
 
-#·······················································································································
+//·······················································································································
 
 private proc handleNextOperandInAssignment
   ?self:let @omnibusType inSelfType
@@ -524,4 +524,4 @@ private proc handleNextOperandInAssignment
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

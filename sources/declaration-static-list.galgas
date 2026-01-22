@@ -1,20 +1,20 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @staticListPropertyTypeAST {
   case valueType (@lstring type)
   case function (@mode mode @routineFormalArgumentListAST formalArgs @lstring returnType)
 }
 
-#·······················································································································
+//·······················································································································
 
 list @staticListPropertyListAST {
   public var @lstring mPropertyName
   public var @staticListPropertyTypeAST mPropertyType
 }
 
-#·······················································································································
+//·······················································································································
 
 class @staticListAST : @abstractDeclarationAST {
   public var @lstring mStaticListName
@@ -22,41 +22,41 @@ class @staticListAST : @abstractDeclarationAST {
   public var @staticListValueListAST mValueList
 }
 
-#·······················································································································
+//·······················································································································
 
 list @staticListValueListAST {
   public var @extendStaticListElementAST mElement
   public var @location mLocation
 }
 
-#·······················································································································
+//·······················································································································
 
 enum @extendStaticListExpressionAST {
   case expression (@expressionAST exp)
   case function (@lstring functionName @routineFormalArgumentListAST formalArgs)
 }
 
-#·······················································································································
+//·······················································································································
 
 list @extendStaticListElementAST {
   public var @extendStaticListExpressionAST mExpression
   public var @location mEndOfExpression
 }
 
-#·······················································································································
+//·······················································································································
 
-#typealias @extendStaticArrayDeclarationDictAST = [@string : @staticListValueListAST] # key is static list name
-dict @extendStaticArrayDeclarationDictAST : @string { # key is static list name
+//typealias @extendStaticArrayDeclarationDictAST = [@string : @staticListValueListAST] // key is static list name
+dict @extendStaticArrayDeclarationDictAST : @string { // key is static list name
   public var @staticListValueListAST mStaticList
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  SYNTAX                                                                                                               
+///—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <declaration> ?!@ast ioAST {
     $staticArray$
@@ -71,7 +71,7 @@ syntax extension omnibus_syntax {
     ioAST.mDeclarationListAST += !@staticListAST {!staticListName !propertyList !@[]}
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <staticArrayProperty> ?!@ast ioAST ?!@staticListPropertyListAST ioPropertyList {
     $let$
@@ -100,9 +100,9 @@ syntax extension omnibus_syntax {
     end
   }
 
-  #·····················································································································
-  # STATIC ARRAY VALUE
-  #·····················································································································
+  //·····················································································································
+  // STATIC ARRAY VALUE
+  //·····················································································································
 
   rule <declaration> ?!@ast ioAST {
     $extend$
@@ -131,7 +131,7 @@ syntax extension omnibus_syntax {
     $)$
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <staticArray_exp> ?!@ast ioAST ?!@extendStaticListElementAST ioExpressions {
     select
@@ -147,13 +147,13 @@ syntax extension omnibus_syntax {
     end
    }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  ENTER EXTENSIONS                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  ENTER EXTENSIONS                                                                                                     
+//////////—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @staticListAST enterExtension
   ?!@extendStaticArrayDeclarationDictAST ioExtendStaticArrayDeclarationAST
@@ -171,15 +171,15 @@ override method @staticListAST enterExtension
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  PRECEDENCE GRAPH                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//////!  PRECEDENCE GRAPH                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @staticListAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-#--- Add node
+//--- Add node
   [!?ioGraph addNode !self.mStaticListName !self]
   [!?ioGraph addEdge !from: self.mStaticListName !to: compileTimeDeclarationBarrier ()]
-#--- Add dependency edges for type declaration
+//--- Add dependency edges for type declaration
   for (* type) in self.mPropertyList do
     switch type
     case valueType (@lstring propertyTypeName) :
@@ -193,7 +193,7 @@ override method @staticListAST enterInPrecedenceGraph ?!@semanticTypePrecedenceG
       end
     end
   end
-#--- Add dependency edge for static type values declarations
+//--- Add dependency edge for static type values declarations
   for (value *) in self.mValueList do
     for (operand *) in value do
       switch operand
@@ -208,47 +208,47 @@ override method @staticListAST enterInPrecedenceGraph ?!@semanticTypePrecedenceG
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 override getter @staticListAST locationForErrorSignaling -> @location {
   result = self.mStaticListName.location
 }
 
-#·······················································································································
+//·······················································································································
 
 override getter @staticListAST keyRepresentationForErrorSignaling -> @string {
   result = "staticlist " + self.mStaticListName
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  ENTER IN CONTEXT                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#! Static list
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  ENTER IN CONTEXT                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//! Static list
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 private func omnibusNameForStaticListType ?let @lstring inStaticListName -> @lstring {
   result = @{!"staticlist " + inStaticListName !inStaticListName}
 }
 
-#·······················································································································
+//·······················································································································
 
 private func llvmNameForStaticListType ?let @lstring inStaticListName -> @lstring {
   result = @{!"staticlist-" + inStaticListName !inStaticListName}
 }
 
-#·······················································································································
+//·······················································································································
 
 private func omnibusNameForStaticListElementType ?let @lstring inStaticListName -> @lstring {
   result = @{!"staticlist element " + inStaticListName !inStaticListName}
 }
 
-#·······················································································································
+//·······················································································································
 
 private func llvmNameForStaticListElementType ?let @lstring inStaticListName -> @lstring {
   result = @{!"staticlist-element-type-" + [inStaticListName assemblerRepresentation] !inStaticListName.location}
 }
 
-#·······················································································································
+//·······················································································································
 
 map @staticlistMap {
   public var @propertyList mStaticListPropertyList
@@ -256,7 +256,7 @@ map @staticlistMap {
   insert insertKey error message "static list '%K' is already defined"
 }
 
-#·······················································································································
+//·······················································································································
 
 map @staticListInitializationMap {
   public var @stringlist mInitializationList
@@ -264,7 +264,7 @@ map @staticListInitializationMap {
   insert insertKey error message "static list '%K' is already defined"
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @staticListAST enterInContext
   ?!context:@semanticContext ioContext
@@ -277,11 +277,11 @@ override method @staticListAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR ioUserLLVMTypeDefinitionListIR
 {
   var @propertyList propertyList = @[]
-#  @propertyGetterMap propertyGetterMap = @[]
+//  @propertyGetterMap propertyGetterMap = @[]
   var @stringset propertyNameSet = @[]
   let omnibusElementTypeName = omnibusNameForStaticListElementType (!self.mStaticListName)
   [!?ioContext.mTypeMap makeEntry !omnibusElementTypeName ?let elementTypeProxy]
-#-------------------------------------------------------------------- Build property list, map
+//-------------------------------------------------------------------- Build property list, map
   for (propertyName kind) in self.mPropertyList do (propertyIndex)
     switch kind
     case valueType (@lstring propertyTypeName) :
@@ -299,20 +299,20 @@ override method @staticListAST enterInContext
         ]
       end
     case function (@mode mode @routineFormalArgumentListAST formalArgs @lstring returnTypeName) :
-    #--- Routine LLVM name
+    //--- Routine LLVM name
       let routineLLVMName = routineMangledNameFromAST (
         !llvmNameForStaticListElementType (!self.mStaticListName)
         !propertyName
         !formalArgs
       )
-    #--- Signature
+    //--- Signature
       routineTypedSignature (!?ioContext.mTypeMap !formalArgs ?let signature)
       let @unifiedTypeMapEntry returnTypeProxy = if returnTypeName.string == "" then
         .null
       else
         [ioContext.mTypeMap searchKey !returnTypeName]
       end
-    #--- Enter routine type in type map
+    //--- Enter routine type in type map
       let propertyType = @omnibusType {
         !subscript:.noSubscript
         !attributes: @()
@@ -324,9 +324,9 @@ override method @staticListAST enterInContext
         }
         !llvmBaseTypeName:""
       }
-   #--- Enter property
+   //--- Enter property
       propertyList += !propertyName !propertyType
-    #--- Enter in routine map
+    //--- Enter in routine map
       let routineMangledName = @lstring {
         !omnibusNameForStaticListElementType (!self.mStaticListName).string + "." + propertyName.string + [formalArgs routineSignature !propertyName]
         !propertyName
@@ -340,20 +340,20 @@ override method @staticListAST enterInContext
         !false
         !.userMode
       ]
-    #--- Generate glue function
+    //--- Generate glue function
       ioRoutineListIR += !@staticListIndirectRoutineIR {
         !routineLLVMName
         !isRequired:true
         !warnsIfUnused:true
         !elementTypeProxy
         !signature
-        !returnTypeProxy # .void if no return value
+        !returnTypeProxy // .void if no return value
         !propertyIndex
       }
     end
   end
   [!?ioContext.mStaticListMap insertKey !self.mStaticListName !propertyList]
-#-------------------------------------------------------------------- Enter element type in type map
+//-------------------------------------------------------------------- Enter element type in type map
   let elementType = @omnibusType {
     !subscript:.noSubscript
     !attributes: @()
@@ -362,7 +362,7 @@ override method @staticListAST enterInContext
     !llvmBaseTypeName:llvmNameForStaticListElementType (!self.mStaticListName)
   }
   [!?ioContext.mTypeMap insertType !omnibusElementTypeName !type:elementType]
-#-------------------------------------------------------------------- Enter static list values
+//-------------------------------------------------------------------- Enter static list values
   var @stringlist stringValueList = @[]
   for (element *) in self.mValueList do
     if [propertyList count] != [element count] then
@@ -385,7 +385,7 @@ override method @staticListAST enterInContext
               !optionalContextualTypeName:["" nowhere]
               ?result:let @objectIR expressionResult
             )
-          #--- Enter in static value
+          //--- Enter in static value
             staticValue += [propertyType llvmTypeName] + " " + [expressionResult llvmName]
           end      
         case function (@lstring functionName @routineFormalArgumentListAST formalArgs) :
@@ -403,12 +403,12 @@ override method @staticListAST enterInContext
               !functionMangledName
               ?let unused candidateIsPublic
               ?let candidateSignature
-              ?let candidateReturnTypeProxy # null if no returned value
+              ?let candidateReturnTypeProxy // null if no returned value
               ?let implementedModeDictionary
               ?let unused implementedIsExported
               ?let unused candidateMode
             ]
-          #--- Check mode
+          //--- Check mode
             let routineLLVMName = checkModeAndReturnsRoutineLLVMName (!implementedModeDictionary !mode !functionName)
             if [functionReturnTypeProxy isNull] && not [candidateReturnTypeProxy isNull] then
               error functionName : "this function should return an $" + [candidateReturnTypeProxy key] + " object"
@@ -437,14 +437,14 @@ override method @staticListAST enterInContext
     end
   end
   [!?ioStaticListValueMap insertKey !self.mStaticListName !stringValueList]
-#-------------------------------------------------------------------- List type property map
+//-------------------------------------------------------------------- List type property map
   [!?ioContext insertGetter
     !omnibusTypeName: omnibusNameForStaticListType (!self.mStaticListName)
     ! @{!"count" !self.mStaticListName.location}
     !.isPublic
     !.constantProperty {!value:.literalInteger {!type: compileTimeIntegerType () !value:[self.mValueList count]}}
   ]
-#-------------------------------------------------------------------- Enter list type in type map
+//-------------------------------------------------------------------- Enter list type in type map
   let arrayType = @omnibusType {
     !subscript:.staticSubscript {!elementType:elementType !size:[stringValueList count]}
     !attributes:.instanciable | .copyable
@@ -456,7 +456,7 @@ override method @staticListAST enterInContext
     !omnibusNameForStaticListType (!self.mStaticListName)
     !type:arrayType
   ]
-#-------------------------------------------------------------------- Enter list in constant map
+//-------------------------------------------------------------------- Enter list in constant map
   let staticListType = [ioContext.mTypeMap searchKey !omnibusNameForStaticListType (!self.mStaticListName)]
   [!?ioContext.mGlobalConstantMap insertKey
     !self.mStaticListName
@@ -466,9 +466,9 @@ override method @staticListAST enterInContext
     !self.mStaticListName
     !.reference {!type:[staticListType type] !llvmName:llvmNameForGlobalVariable (!self.mStaticListName)}
   ]
-#---------------- Add decorated declaration
+//---------------- Add decorated declaration
   ioDecoratedDeclarationList += !@decoratedStaticList {!self.mStaticListName !self.mValueList}
-#-------------------------------------------- GenerateLLVM type definitions
+//-------------------------------------------- GenerateLLVM type definitions
   ioUserLLVMTypeDefinitionListIR += !@userLLVMSructureTypeDefinitionIR {
     ![elementType llvmTypeName]
     !propertyList
@@ -480,9 +480,9 @@ override method @staticListAST enterInContext
   }
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  SEMANTIC ANALYSIS                                                                                                    
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  SEMANTIC ANALYSIS                                                                                                    
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @staticListInvokedFunctionSetMap {
   public var @stringset mInvokedFunctionSet
@@ -491,14 +491,14 @@ map @staticListInvokedFunctionSetMap {
   search searchKey error message "INTERNAL ERROR"
 }
 
-#·······················································································································
+//·······················································································································
 
 class @decoratedStaticList : @abstractDecoratedDeclaration {
   public var @lstring mStaticListName
   public var @staticListValueListAST mValueList
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @decoratedStaticList semanticAnalysis
   ?context:let @semanticContext unused inContext
@@ -511,7 +511,7 @@ override method @decoratedStaticList semanticAnalysis
       switch operand
       case expression (@expressionAST unused exp) :
       case function (@lstring functionName @routineFormalArgumentListAST formalArgs) :
-      #--- Routine mangled name
+      //--- Routine mangled name
         let routineMangledName = routineMangledNameFromAST (
           !"" 
           !functionName
@@ -526,9 +526,9 @@ override method @decoratedStaticList semanticAnalysis
 }
 
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  CODE GENERATION                                                                                                    
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  CODE GENERATION                                                                                                    
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @staticListInitializationMap generateLLVMForStaticLists
   ?let @staticListInvokedFunctionSetMap inUsefulStaticArrayMap
@@ -554,18 +554,18 @@ method @staticListInitializationMap generateLLVMForStaticLists
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#! CODE GENERATION: INDIRECT FUNCTION CALL
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//! CODE GENERATION: INDIRECT FUNCTION CALL
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @staticListIndirectRoutineIR : @abstractRoutineIR {
   public var @unifiedTypeMapEntry mStaticListElementType
   public var @routineTypedSignature mFormalArgumentListForGeneration
-  public var @unifiedTypeMapEntry mReturnTypeProxy # .void if no return value
+  public var @unifiedTypeMapEntry mReturnTypeProxy // .void if no return value
   public var @uint mPropertyIndex
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @staticListIndirectRoutineIR llvmCodeGeneration 
   ?!@string ioLLVMcode
@@ -601,7 +601,7 @@ override method @staticListIndirectRoutineIR llvmCodeGeneration
     end
   end
   ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
-#--- Indirect function LLVM type name
+//--- Indirect function LLVM type name
   var @string llvmFunctionTypeName
   if [self.mReturnTypeProxy isNull] then
     llvmFunctionTypeName = "void"
@@ -626,7 +626,7 @@ override method @staticListIndirectRoutineIR llvmCodeGeneration
     end
   end
   llvmFunctionTypeName += ")*"
-#--- Indirect call
+//--- Indirect call
   ioLLVMcode += "  %ptr = getelementptr inbounds " + receiverLLVMTypeName 
   ioLLVMcode += ", " + receiverLLVMTypeName + "* %self, i32 0, i32 " + self.mPropertyIndex + "\n"
   ioLLVMcode += "  %f = load " + llvmFunctionTypeName + ", " + llvmFunctionTypeName + "* %ptr\n"
@@ -653,7 +653,7 @@ override method @staticListIndirectRoutineIR llvmCodeGeneration
     end
   end
   ioLLVMcode += ")\n"
-#--- Epilog
+//--- Epilog
   if [self.mReturnTypeProxy isNull] then
     ioLLVMcode += "  ret void\n"
   else
@@ -662,4 +662,4 @@ override method @staticListIndirectRoutineIR llvmCodeGeneration
   ioLLVMcode += "}\n\n"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

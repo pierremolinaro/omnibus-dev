@@ -1,6 +1,6 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @registerIntegerFieldListAST {
   public var @lstring mFieldName
@@ -8,7 +8,7 @@ list @registerIntegerFieldListAST {
   public var @location mExpressionLocation
 }
 
-#·······················································································································
+//·······················································································································
 
 class @registerConstantExpressionAST : @expressionAST {
   public var @lstring mRegisterGroupName
@@ -16,13 +16,13 @@ class @registerConstantExpressionAST : @expressionAST {
   public var @registerIntegerFieldListAST mFieldValues
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     ${$
@@ -40,13 +40,13 @@ syntax extension omnibus_syntax {
     outExpression = @registerConstantExpressionAST {!registerGroupName !registerName !integerFieldValues}
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @registerConstantExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring unused inConstantName
@@ -54,9 +54,9 @@ override method @registerConstantExpressionAST addDependenceEdgeForStaticExpress
 {
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  NOTE TYPES                                                                                                           
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  NOTE TYPES                                                                                                           
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @registerConstantExpressionAST noteExpressionTypesInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
@@ -66,9 +66,9 @@ override method @registerConstantExpressionAST noteExpressionTypesInPrecedenceGr
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTICS                                                                                                            
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SEMANTICS                                                                                                            
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @registerConstantExpressionAST analyzeExpression
   ?self:let @omnibusType inSelfType
@@ -83,13 +83,13 @@ override method @registerConstantExpressionAST analyzeExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
 {
-#------------------------------------------------------ Search Control register Group
+//------------------------------------------------------ Search Control register Group
   [inContext.mControlRegisterGroupMap searchKey
     !self.mRegisterGroupName
     ?*
     ?let controlRegisterMap
   ]
-#------------------------------------------------------ Search Control register
+//------------------------------------------------------ Search Control register
   [controlRegisterMap searchKey
     !self.mRegisterName
     ?let registerType
@@ -101,7 +101,7 @@ override method @registerConstantExpressionAST analyzeExpression
     ?let unused powerOfTwoForArraySize
     ?let unused elementArraySize
   ]
-#------------------------------------------------------ Valuated fields
+//------------------------------------------------------ Valuated fields
   var @bigint accumulatedFieldStaticValues = 0
   var @operandIRList operandList = @[]
   for (fieldName expression expressionLocation) in self.mFieldValues do
@@ -115,7 +115,7 @@ override method @registerConstantExpressionAST analyzeExpression
       ]
       let inferredTypeName = @lstring {!"u" + fieldBitCount !fieldName.location}
       [inContext.mTypeMap searchType !lkey:inferredTypeName ?type:let inferredType]
-    #--- Analyze expression
+    //--- Analyze expression
       [expression analyzeExpression
         !self:inSelfType
         !routineAttributes:inRoutineAttributes
@@ -133,7 +133,7 @@ override method @registerConstantExpressionAST analyzeExpression
         !?ioTemporaries
         !?expressionResult
       ]  
-    #--- Check expression type
+    //--- Check expression type
       if [[expressionResult type].kind isCompileTimeInteger] then 
         [expressionResult extractLiteralInteger ?1* ?value:let @bigint value]
         if value < 0 then
@@ -150,23 +150,23 @@ override method @registerConstantExpressionAST analyzeExpression
         elsif expressionBitCount != fieldBitCount then
             error expressionLocation : "type error, $uint" + fieldBitCount + " type required"
         else
-        #--- Perform an bit extend to register type or a trunc
+        //--- Perform an bit extend to register type or a trunc
           var partialResult = expressionResult
           if expressionBitCount < registerBitCount then
             getNewTempValue (!registerType !?ioTemporaries ?let extendedResult)
             [!?ioInstructionGenerationList appendExtend !extendedResult !partialResult]
             partialResult = extendedResult
           end
-        #--- Perform left shift
+        //--- Perform left shift
           getNewTempValue (!registerType !?ioTemporaries ?let shiftedResult)
           [!?ioInstructionGenerationList appendShiftLeft !shiftedResult !partialResult !fieldBitIndex]
-        #---- Accumulate 
+        //---- Accumulate 
           operandList += !shiftedResult
         end   
       end
     end
   end
-#------------------------------------------------------ Result
+//------------------------------------------------------ Result
   outResult = .literalInteger {!type: registerType!value:accumulatedFieldStaticValues}
   for (operand) in operandList do
     getNewTempValue (!registerType !?ioTemporaries ?let newResult)
@@ -182,4 +182,4 @@ override method @registerConstantExpressionAST analyzeExpression
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

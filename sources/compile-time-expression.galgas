@@ -1,11 +1,11 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract class @ctExpressionAST {
 }
 
-#·······················································································································
+//·······················································································································
 
 class @ctInfixExpressionAST : @ctExpressionAST {
   public var @ctExpressionAST mLeftExpression
@@ -14,7 +14,7 @@ class @ctInfixExpressionAST : @ctExpressionAST {
   public var @ctExpressionAST mRightExpression
 }
 
-#·······················································································································
+//·······················································································································
 
 class @ctPrefixExpressionAST : @ctExpressionAST {
   public var @location mOperatorLocation
@@ -22,35 +22,35 @@ class @ctPrefixExpressionAST : @ctExpressionAST {
   public var @ctExpressionAST mExpression
 }
 
-#·······················································································································
+//·······················································································································
 
 class @ctTrueExpressionAST : @ctExpressionAST {
 }
 
-#·······················································································································
+//·······················································································································
 
 class @ctFalseExpressionAST : @ctExpressionAST {
 }
 
-#·······················································································································
+//·······················································································································
 
 class @ctIntExpressionAST : @ctExpressionAST {
   public var @lbigint mValue
 }
 
-#·······················································································································
+//·······················································································································
 
 class @ctIdentifierExpressionAST : @ctExpressionAST {
   public var @lstring mIdentifier
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <compile_time_expression> !@ctExpressionAST outExpression {
     <compile_time_expression_bitwise_xor> ?outExpression
@@ -68,7 +68,7 @@ syntax extension omnibus_syntax {
     end
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <compile_time_expression_bitwise_xor> !@ctExpressionAST outExpression {
     <compile_time_expression_bitwise_and> ?outExpression
@@ -86,7 +86,7 @@ syntax extension omnibus_syntax {
     end
    }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <compile_time_expression_bitwise_and> !@ctExpressionAST outExpression {
     <compile_time_expression_equality> ?outExpression
@@ -104,7 +104,7 @@ syntax extension omnibus_syntax {
     end
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <compile_time_expression_equality> !@ctExpressionAST outExpression {
     <compile_time_expression_comparison> ?outExpression
@@ -120,7 +120,7 @@ syntax extension omnibus_syntax {
         !rightExpression
       }
     or
-      $≠$ # (a ≠ b) equivalent to not (a == b)
+      $≠$ // (a ≠ b) equivalent to not (a == b)
       let operatorLocation = @location.here
       <compile_time_expression_comparison> ?let rightExpression
       let expression = @ctInfixExpressionAST {
@@ -137,13 +137,13 @@ syntax extension omnibus_syntax {
     end
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <compile_time_expression_comparison> !@ctExpressionAST outExpression {
     <compile_time_expression_shift> ?outExpression
     select
     or
-      $≤$ # (a ≤ b) equivalent to (a == b) | (a < b)
+      $≤$ // (a ≤ b) equivalent to (a == b) | (a < b)
       let operatorLocation = @location.here
       <compile_time_expression_shift> ?let rightExpression
       let lessThanExpression = @ctInfixExpressionAST {
@@ -165,7 +165,7 @@ syntax extension omnibus_syntax {
         !equalExpression
       }
     or
-      $≥$ # (a ≥ b) equivalent to not (a < b)
+      $≥$ // (a ≥ b) equivalent to not (a < b)
       let operatorLocation = @location.here
       <compile_time_expression_shift> ?let rightExpression
       let expression = @ctInfixExpressionAST {
@@ -190,7 +190,7 @@ syntax extension omnibus_syntax {
         !rightExpression
       }
     or
-      $>$ # (a > b) equivalent to not ((a == b) | (a < b))
+      $>$ // (a > b) equivalent to not ((a == b) | (a < b))
       let operatorLocation = @location.here
       <compile_time_expression_shift> ?let rightExpression
      let lessThanExpression = @ctInfixExpressionAST {
@@ -219,7 +219,7 @@ syntax extension omnibus_syntax {
     end
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <compile_time_expression_shift> !@ctExpressionAST outExpression {
     <compile_time_expression_addition> ?outExpression
@@ -247,7 +247,7 @@ syntax extension omnibus_syntax {
     end
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <compile_time_expression_addition> !@ctExpressionAST outExpression {
     <compile_time_expression_product> ?outExpression
@@ -275,7 +275,7 @@ syntax extension omnibus_syntax {
     end
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <compile_time_expression_product> !@ctExpressionAST outExpression {
     <compile_time_primary> ?outExpression
@@ -333,7 +333,7 @@ syntax extension omnibus_syntax {
     end
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <compile_time_primary> !@ctExpressionAST outExpression {
     $not$
@@ -346,7 +346,7 @@ syntax extension omnibus_syntax {
     }
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <compile_time_primary> !@ctExpressionAST outExpression {
     $-$
@@ -359,7 +359,7 @@ syntax extension omnibus_syntax {
     }
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <compile_time_primary> !@ctExpressionAST outExpression {
     $($
@@ -367,88 +367,88 @@ syntax extension omnibus_syntax {
     $)$
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <compile_time_primary> !@ctExpressionAST outExpression {
     $yes$
     outExpression = @ctTrueExpressionAST ()
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <compile_time_primary> !@ctExpressionAST outExpression {
     $no$
     outExpression = @ctFalseExpressionAST ()
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <compile_time_primary> !@ctExpressionAST outExpression {
     $integer$ ?let value
     outExpression = @ctIntExpressionAST {!value}
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <compile_time_primary> !@ctExpressionAST outExpression {
     $identifier$ ?let name
     outExpression = @ctIdentifierExpressionAST {!name}
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  CHECK COMPILE TIME EXPRESSION                                                                                                            
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  CHECK COMPILE TIME EXPRESSION                                                                                                            
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @ctCheckMap {
   insert insertKey error message "the '%K' key is already declared in %L"
   search searchKey error message "there is no '%K' key"
 }
 
-#·······················································································································
+//·······················································································································
 
 abstract method @ctExpressionAST checkCompileTimeExpression ?let @ctCheckMap inMap
 
-#·······················································································································
+//·······················································································································
 
 override method @ctInfixExpressionAST checkCompileTimeExpression ?let @ctCheckMap inMap {
   [self.mLeftExpression checkCompileTimeExpression  !inMap]
   [self.mRightExpression checkCompileTimeExpression !inMap]
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @ctPrefixExpressionAST checkCompileTimeExpression ?let @ctCheckMap inMap {
   [self.mExpression checkCompileTimeExpression !inMap]
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @ctTrueExpressionAST checkCompileTimeExpression ?let @ctCheckMap unused inMap {
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @ctFalseExpressionAST checkCompileTimeExpression ?let @ctCheckMap unused inMap {
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @ctIntExpressionAST checkCompileTimeExpression ?let @ctCheckMap unused inMap {
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @ctIdentifierExpressionAST checkCompileTimeExpression ?let @ctCheckMap inMap {
   [inMap searchKey !self.mIdentifier]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  COMPUTE COMPILE TIME EXPRESSION                                                                                                            
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  COMPUTE COMPILE TIME EXPRESSION                                                                                                            
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @ctMap {
   public var @bigint mValue
@@ -456,13 +456,13 @@ map @ctMap {
   search searchKey error message "there is no '%K' key"
 }
 
-#·······················································································································
+//·······················································································································
 
 abstract method @ctExpressionAST computeCompileTimeExpression
   ?let @ctMap inMap
   !result: @bigint outValue
 
-#·······················································································································
+//·······················································································································
 
 override method @ctInfixExpressionAST computeCompileTimeExpression
   ?let @ctMap inMap
@@ -488,7 +488,7 @@ override method @ctInfixExpressionAST computeCompileTimeExpression
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @ctPrefixExpressionAST computeCompileTimeExpression
   ?let @ctMap inMap
@@ -501,7 +501,7 @@ override method @ctPrefixExpressionAST computeCompileTimeExpression
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @ctTrueExpressionAST computeCompileTimeExpression
   ?let @ctMap unused inMap
@@ -510,7 +510,7 @@ override method @ctTrueExpressionAST computeCompileTimeExpression
   outValue = 1
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @ctFalseExpressionAST computeCompileTimeExpression
   ?let @ctMap unused inMap
@@ -519,7 +519,7 @@ override method @ctFalseExpressionAST computeCompileTimeExpression
   outValue = 0
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @ctIntExpressionAST computeCompileTimeExpression
   ?let @ctMap unused inMap
@@ -528,7 +528,7 @@ override method @ctIntExpressionAST computeCompileTimeExpression
   outValue = self.mValue.bigint
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @ctIdentifierExpressionAST computeCompileTimeExpression
   ?let @ctMap inMap
@@ -537,4 +537,4 @@ override method @ctIdentifierExpressionAST computeCompileTimeExpression
   [inMap searchKey !self.mIdentifier ?outValue]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

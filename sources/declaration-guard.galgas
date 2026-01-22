@@ -1,16 +1,16 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @guardKind {
   case baseGuard
   case convenienceGuard (@callInstructionAST base)
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @guardDeclarationAST : @abstractDeclarationAST {
-  public var @lstring mReceiverTypeName # Empty string if standalone
+  public var @lstring mReceiverTypeName // Empty string if standalone
   public var @string mReceiverLLVMBaseTypeName
   public var @lstring mGuardName
   public var @bool mIsPublic
@@ -21,13 +21,13 @@ class @guardDeclarationAST : @abstractDeclarationAST {
   public var @location mEndOfGuardDeclaration
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <guard> ?!@ast ioAST
                ?receiverTypeName: let @lstring inReceiverTypeName
@@ -59,7 +59,7 @@ syntax extension omnibus_syntax {
     ${$
     <instructionList> !?ioAST ?let instructionList
     $}$
-#     ioGuardList +=
+//     ioGuardList +=
    ioAST.mDeclarationListAST += !@guardDeclarationAST {
       !inReceiverTypeName
       !inReceiverLLVMBaseTypeName
@@ -73,13 +73,13 @@ syntax extension omnibus_syntax {
     }
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  NOTE TYPES IN PRECEDENCE GRAPH                                                                                       
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  NOTE TYPES IN PRECEDENCE GRAPH                                                                                       
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @guardDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   var s = "guard."
@@ -92,7 +92,7 @@ override method @guardDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrece
   end
   s += ")"
   [!?ioGraph addNode ! @{!s !self.mGuardName.location} !self]
-#---
+//---
   for (* * formalArgumentTypeName *) in self.mGuardFormalArgumentList do
     [!?ioGraph noteNode !formalArgumentTypeName]
   end
@@ -102,21 +102,21 @@ override method @guardDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrece
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @guardDeclarationAST keyRepresentationForErrorSignaling -> @string {
   result = "guard " + self.mReceiverTypeName + "." + self.mGuardName
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @guardDeclarationAST locationForErrorSignaling -> @location {
   result = self.mGuardName.location
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  ENTER IN CONTEXT                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  ENTER IN CONTEXT                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @guardDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
@@ -128,17 +128,17 @@ override method @guardDeclarationAST enterInContext
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
-#--- Signature
+//--- Signature
   routineTypedSignature (!?ioContext.mTypeMap !self.mGuardFormalArgumentList ?let signature)
-#--- Guard mangled name
+//--- Guard mangled name
   let guardMangledName = [signature mangledName !receiverTypeName: self.mReceiverTypeName !functionName: self.mGuardName]
-#--- Guard user routine LLVM name
+//--- Guard user routine LLVM name
   let guardUserLLVMName = guardUserLLVMName (
     !self.mReceiverLLVMBaseTypeName
     !self.mGuardName
     !self.mGuardFormalArgumentList
   )
-#--- Guard implementation routine LLVM name
+//--- Guard implementation routine LLVM name
   let guardImplementationLLVMName = guardImplementationLLVMName (
     !self.mReceiverLLVMBaseTypeName
     !self.mGuardName
@@ -163,9 +163,9 @@ override method @guardDeclarationAST enterInContext
   }
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!   UTILITIES                                                                                                            
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!   UTILITIES                                                                                                            
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 private func guardUserLLVMName ?let @string inReceiverLLVMBaseTypeName
                                ?let @lstring inGuardName
@@ -182,7 +182,7 @@ private func guardUserLLVMName ?let @string inReceiverLLVMBaseTypeName
   result = @{!s !inGuardName.location}
 }
 
-#·······················································································································
+//·······················································································································
 
 private func guardImplementationLLVMName ?let @string inReceiverLLVMBaseTypeName
                                          ?let @lstring inGuardName
@@ -199,9 +199,9 @@ private func guardImplementationLLVMName ?let @string inReceiverLLVMBaseTypeName
   result = @{!s !inGuardName.location}
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  ENTER IN CONTEXT                                                                                                    
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  ENTER IN CONTEXT                                                                                                    
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @guardMapForContext {
   public var @bool mIsPublic
@@ -213,9 +213,9 @@ map @guardMapForContext {
   search searchKey error message "there is no '%K' guard"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  SEMANTIC ANALYSIS                                                                                                    
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  SEMANTIC ANALYSIS                                                                                                    
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @decoratedGuardDeclaration : @abstractDecoratedDeclaration {
   public var @lstring mReceiverTypeName
@@ -228,7 +228,7 @@ class @decoratedGuardDeclaration : @abstractDecoratedDeclaration {
   public var @location mEndOfGuardDeclaration
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @decoratedGuardDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
@@ -236,7 +236,7 @@ override method @decoratedGuardDeclaration semanticAnalysis
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   let receiverType = [[inContext.mTypeMap searchKey !self.mReceiverTypeName] type]
-#----------- 
+//----------- 
   var warnIfUnused = true
   for (attribute) in self.mGuardAttributeList do
     if attribute.string == noUnusedWarningAttribute () then
@@ -248,7 +248,7 @@ override method @decoratedGuardDeclaration semanticAnalysis
       error attribute : "unknown attribute; available attribute is @" + noUnusedWarningAttribute ()
     end
   end
-#--- Variable map
+//--- Variable map
   var universalMap = inContext.mValuedObjectMap
   [!?universalMap openOverrideForSelectBlock]
   [!?universalMap openBranch]
@@ -258,18 +258,18 @@ override method @decoratedGuardDeclaration semanticAnalysis
   var @instructionListIR instructionGenerationList = @[]
   switch self.mGuardKind
   case baseGuard :
-  #--- Add 'accept" output variable
+  //--- Add 'accept" output variable
     let resultVarName = @lstring {!acceptVariableOmnibusName() !self.mGuardName.location}
-#    let acceptableTypeList = [inContext.mAssignableTypesFromCompileTimeType_Map listForKey !ctBoolTypeName ()]
+//    let acceptableTypeList = [inContext.mAssignableTypesFromCompileTimeType_Map listForKey !ctBoolTypeName ()]
     let resultType = [inContext booleanType !resultVarName.location]
-#    if [acceptableTypeList length] == 0 then
-#      error resultVarName : "There is no type assignable from compile time bool type" : resultType
-#    elsif [acceptableTypeList length] == 1 then
-#      [acceptableTypeList first ?resultType]
-#    else
-#      error resultVarName : "There are several types assignable from compile time bool type" : resultType
-#    end
-#    [inContext.mTypeMap searchKey !lkey:[boolTypeName () nowhere] ?type:let resultType]
+//    if [acceptableTypeList length] == 0 then
+//      error resultVarName : "There is no type assignable from compile time bool type" : resultType
+//    elsif [acceptableTypeList length] == 1 then
+//      [acceptableTypeList first ?resultType]
+////    else
+//      error resultVarName : "There are several types assignable from compile time bool type" : resultType
+//    end
+//    [inContext.mTypeMap searchKey !lkey:[boolTypeName () nowhere] ?type:let resultType]
     allocaList += !llvmNameForLocalVariable (!resultVarName.string) !resultType !false
     [!?universalMap insertLocalVariable
       !resultVarName
@@ -278,7 +278,7 @@ override method @decoratedGuardDeclaration semanticAnalysis
       !.noValue
       !true
     ]
-  #--- Analyse formal arguments
+  //--- Analyse formal arguments
     enterFormalArguments (
       !context:inContext
       !self.mGuardFormalArgumentList
@@ -287,7 +287,7 @@ override method @decoratedGuardDeclaration semanticAnalysis
       !warningOnUnusedArgs: true
     )
     convenienceGuardGenerationIR = .baseGuard
-  #--- Analyze instruction list
+  //--- Analyze instruction list
     [self.mGuardInstructionList analyzeRoutineInstructionList
       !self:receiverType
       !routineAttributes:.mutatingRoutine
@@ -300,7 +300,7 @@ override method @decoratedGuardDeclaration semanticAnalysis
       !?generatedCode:instructionGenerationList
     ]
   case convenienceGuard (baseGuardInstruction):
-  #--- Analyse formal arguments
+  //--- Analyse formal arguments
     enterFormalArguments (
       !context:inContext
       !self.mGuardFormalArgumentList
@@ -308,23 +308,23 @@ override method @decoratedGuardDeclaration semanticAnalysis
       !?formalArguments
       !warningOnUnusedArgs: true
     )
-  #--- Analyze base guard
+  //--- Analyze base guard
     [baseGuardInstruction baseGuardAnalyze 
       !self:receiverType
       !routineAttributes:.mutatingRoutine
       !context:inContext
-      !mode:.serviceMode # Convenience guards instructions are executed in service mode
+      !mode:.serviceMode // Convenience guards instructions are executed in service mode
       !?temporary:ioTemporaries
       !?staticEntityMap:ioIntermediateCodeStruct.mStaticEntityMap
       !?variableMap:universalMap
       ?convenienceGuardGenerationIR
     ]
-  #--- Analyze instruction list
+  //--- Analyze instruction list
     [self.mGuardInstructionList analyzeRoutineInstructionList
       !self:receiverType
       !routineAttributes: .mutatingRoutine
       !context:inContext
-      !mode:.serviceMode # Convenience guards instructions are executed in service mode
+      !mode:.serviceMode // Convenience guards instructions are executed in service mode
       !?temporary:ioTemporaries
       !?staticEntityMap:ioIntermediateCodeStruct.mStaticEntityMap
       !?variableMap:universalMap
@@ -332,11 +332,11 @@ override method @decoratedGuardDeclaration semanticAnalysis
       !?generatedCode:instructionGenerationList
     ]
   end 
-#--- End of variableMap
+//--- End of variableMap
   [universalMap checkLocalVariableFinalState !?instructionGenerationList]
   [!?universalMap closeBranch !self.mEndOfGuardDeclaration]
   [!?universalMap closeOverride !self.mEndOfGuardDeclaration]
-#--- Guard mangled name
+//--- Guard mangled name
   let guardUserLLVMName = guardUserLLVMName (
     !receiverType.llvmBaseTypeName
     !self.mGuardName
@@ -347,10 +347,10 @@ override method @decoratedGuardDeclaration semanticAnalysis
     !self.mGuardName
     !self.mGuardFormalArgumentList
   )
-#--- Code generation
+//--- Code generation
   ioIntermediateCodeStruct.mRoutineListIR += !@guardUserRoutineIR {
     !guardUserLLVMName
-    !isRequired:false # Is not root
+    !isRequired:false // Is not root
     !warnsIfUnused:warnIfUnused
     !guardImplementationLLVMName
     !formalArguments
@@ -359,7 +359,7 @@ override method @decoratedGuardDeclaration semanticAnalysis
   }
   ioIntermediateCodeStruct.mRoutineListIR += !@guardImplementationRoutineIR {
     !guardImplementationLLVMName
-    !isRequired:false # Is not root
+    !isRequired:false // Is not root
     !warnsIfUnused:warnIfUnused
     !formalArguments
     !receiverType
@@ -369,9 +369,9 @@ override method @decoratedGuardDeclaration semanticAnalysis
   }
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  SEMANTIC ANALYSIS                                                                                                    
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  SEMANTIC ANALYSIS                                                                                                    
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract method @callInstructionAST baseGuardAnalyze
   ?self:let @omnibusType inSelfType
@@ -383,7 +383,7 @@ abstract method @callInstructionAST baseGuardAnalyze
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @standAloneProcedureCallInstructionAST baseGuardAnalyze
   ?self:let @omnibusType unused inSelfType
@@ -398,7 +398,7 @@ override method @standAloneProcedureCallInstructionAST baseGuardAnalyze
   error self.mSandAloneRoutineName : "NOT HANDLED YET" : outConvenienceGuardGenerationIR
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @procedureCallInstructionAST baseGuardAnalyze
   ?self:let @omnibusType inSelfType
@@ -412,9 +412,9 @@ override method @procedureCallInstructionAST baseGuardAnalyze
 {
   var @allocaList baseGuardAllocaList = @[]
   var @instructionListIR baseGuardInstructionGenerationList = @[]
-#--- Analyze header identifier : it a variable, as a standalone procedure call is handler otherwise
+//--- Analyze header identifier : it a variable, as a standalone procedure call is handler otherwise
   var @objectIR currentObject
-  if self.mIdentifier.string == "" then # Receiver is self
+  if self.mIdentifier.string == "" then // Receiver is self
     if inSelfType.kind == .void then
       error self.mIdentifier : "self is not available in this context" : currentObject
     else
@@ -428,17 +428,17 @@ override method @procedureCallInstructionAST baseGuardAnalyze
       ?currentObject
     ]
   end
-#--- Insulate last access
+//--- Insulate last access
   var accessList = self.mAccessList
   [!?accessList popLast ?let lastAccess]
-#---- Loop on access list
+//---- Loop on access list
   for (access) in accessList do
     let currentType = [currentObject type]
     switch access
     case property (@lstring propertyName) :
-#      let typeOmnibusName = @lstring.new {!currentType.omnibusTypeDescriptionName !propertyName.location}
+//      let typeOmnibusName = @lstring.new {!currentType.omnibusTypeDescriptionName !propertyName.location}
       let propertyGetterMap = [inContext propertyGetterMap !currentType]
-#      let @propertyGetterMap propertyGetterMap = currentType.propertyGetterMapp
+//      let @propertyGetterMap propertyGetterMap = currentType.propertyGetterMapp
       [propertyGetterMap searchKey !propertyName ?* ?let propertyAccess]
       switch propertyAccess
       case constantProperty (*) :
@@ -460,17 +460,17 @@ override method @procedureCallInstructionAST baseGuardAnalyze
       error endOfIndex : "not handled yet" : currentObject
     end
   end
-#--- Handle last access
+//--- Handle last access
   switch lastAccess
   case property (@lstring methodName) :
     let currentType = [currentObject type]
     let guardMangledName = [self.mArguments mangledName !receiverTypeName: currentType.omnibusTypeDescriptionName !functionName: methodName]
     [inContext.mGuardMap searchKey !guardMangledName ?* ?let formalSignature ?* ?let guardRoutineImplentationLLVMName]
-  #--- Add receiver as first parameter
+  //--- Add receiver as first parameter
     var @procCallEffectiveParameterListIR effectiveParameterListIR = @[
       @(.outputInput, .reference {!type:currentType !llvmName:[currentObject llvmName]})
     ]
-  #--- Analyze effective parameters
+  //--- Analyze effective parameters
     analyzeEffectiveParameters (
       !self:inSelfType
       !routineAttributes:inRoutineAttributes
@@ -486,7 +486,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
       !?instructionListIR:baseGuardInstructionGenerationList
       !?effectiveIR:effectiveParameterListIR
     )
-  #--- Generate guards
+  //--- Generate guards
     outConvenienceGuardGenerationIR = .convenienceGuard {
       !baseGuardAllocaList:baseGuardAllocaList
       !baseGuardInstructionGenerationList:baseGuardInstructionGenerationList
@@ -498,9 +498,9 @@ override method @procedureCallInstructionAST baseGuardAnalyze
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  CODE GENERATION                                                                                                      
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  CODE GENERATION                                                                                                      
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @guardKindGenerationIR {
   case baseGuard
@@ -510,7 +510,7 @@ enum @guardKindGenerationIR {
                          @procCallEffectiveParameterListIR baseGuardEffectiveParameterList)
 }
 
-#·······················································································································
+//·······················································································································
 
 class @guardUserRoutineIR : @abstractRoutineIR {
   public var @string mMangledImplementationGuardName
@@ -519,7 +519,7 @@ class @guardUserRoutineIR : @abstractRoutineIR {
   public var @guardKindGenerationIR mGuardKindGenerationIR
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @guardUserRoutineIR enterAccessibleEntities
    ?!@stringset ioInvokedRoutineSet
@@ -528,7 +528,7 @@ override method @guardUserRoutineIR enterAccessibleEntities
   ioInvokedRoutineSet ++= self.mMangledImplementationGuardName
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @guardUserRoutineIR svcDeclarationGeneration
   ?!@primitiveAndServiceIRlist ioPrimitiveAndServiceList
@@ -548,7 +548,7 @@ override method @guardUserRoutineIR svcDeclarationGeneration
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @guardUserRoutineIR llvmCodeGeneration 
   ?!@string ioLLVMcode
@@ -556,7 +556,7 @@ override method @guardUserRoutineIR llvmCodeGeneration
   ?!@generationAdds unused ioGenerationAdds
 {
   let prototype = llvmFunctionPrototype (
-    !"i1" # Boolean
+    !"i1" // Boolean
     ![self.mRoutineMangledName assemblerRepresentation]
     !self.mReceiverType
     !self.mFormalArgumentListForGeneration
@@ -564,7 +564,7 @@ override method @guardUserRoutineIR llvmCodeGeneration
   ioLLVMcode += "declare " + prototype + "\n\n"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @guardImplementationRoutineIR : @abstractRoutineIR {
   public var @routineFormalArgumentListIR mFormalArgumentListForGeneration
@@ -574,7 +574,7 @@ class @guardImplementationRoutineIR : @abstractRoutineIR {
   public var @instructionListIR mInstructionGenerationList
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @guardImplementationRoutineIR llvmCodeGeneration 
   ?!@string ioLLVMcode
@@ -609,9 +609,9 @@ override method @guardImplementationRoutineIR llvmCodeGeneration
     end
   end
   ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
-#--- Allocate local variables 
+//--- Allocate local variables 
   var allocaList = self.mAllocaList
-#--- Store input arguments in memory
+//--- Store input arguments in memory
   for (mFormalArgumentKind mFormalArgumentType mFormalArgumentName) in self.mFormalArgumentListForGeneration do
     switch mFormalArgumentKind
     case input :
@@ -619,9 +619,9 @@ override method @guardImplementationRoutineIR llvmCodeGeneration
     case output, inputOutput :
     end
   end
-#--- Allocate local variables 
+//--- Allocate local variables 
   [allocaList generateAllocaList !?ioLLVMcode]
-#---
+//---
   for (mFormalArgumentKind mFormalArgumentType mFormalArgumentName) in self.mFormalArgumentListForGeneration do
     switch mFormalArgumentKind
     case input :
@@ -631,10 +631,10 @@ override method @guardImplementationRoutineIR llvmCodeGeneration
     case output, inputOutput :
     end
   end
-#--- Declare "accept" variable 
+//--- Declare "accept" variable 
   let accepted_llvmName = llvmNameForLocalVariable (!acceptVariableOmnibusName ())
   let accepted_llvmName_loaded = llvmNameForLocalVariable (!acceptVariableOmnibusName () + ".loaded")
-#--- Base guard or convenience guard ?
+//--- Base guard or convenience guard ?
   switch self.mGuardKindGenerationIR
   case baseGuard :
     let accepted_label = acceptVariableOmnibusName () + ".guard.accepted"
@@ -678,7 +678,7 @@ override method @guardImplementationRoutineIR llvmCodeGeneration
   ioGenerationAdds.mExternFunctionDeclarationSet ++= "i1 @xtr.user.result ()"
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @guardImplementationRoutineIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
@@ -693,4 +693,4 @@ override method @guardImplementationRoutineIR enterAccessibleEntities
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

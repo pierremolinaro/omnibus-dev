@@ -1,6 +1,6 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @extendExpressionAST : @expressionAST {
   public var @expressionAST mExpression
@@ -8,13 +8,13 @@ class @extendExpressionAST : @expressionAST {
   public var @location mEndOfExpression
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     $extend$
@@ -35,13 +35,13 @@ syntax extension omnibus_syntax {
     }
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @extendExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
@@ -53,9 +53,9 @@ override method @extendExpressionAST addDependenceEdgeForStaticExpression
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  NOTE TYPES                                                                                                           
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  NOTE TYPES                                                                                                           
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @extendExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [self.mExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
@@ -64,9 +64,9 @@ override method @extendExpressionAST noteExpressionTypesInPrecedenceGraph ?!@sem
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  SEMANTICS                                                                                                            
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  SEMANTICS                                                                                                            
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @extendExpressionAST analyzeExpression
   ?self:let @omnibusType inSelfType
@@ -81,7 +81,7 @@ override method @extendExpressionAST analyzeExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
 {
-#--- Analyze expression
+//--- Analyze expression
   [self.mExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
@@ -99,12 +99,12 @@ override method @extendExpressionAST analyzeExpression
     !?ioTemporaries
     !?expressionResult
   ]  
-#--- Analyze type
+//--- Analyze type
   let @omnibusType resultType = if self.mTypeName.string == ""
     then inOptionalTargetType
     else [[inContext.mTypeMap searchKey !self.mTypeName] type]
   end
-#--- Check types
+//--- Check types
   if not [resultType.kind isInteger] then
     error self.mTypeName : "this type is not an integer type" : outResult
   elsif not [[expressionResult type].kind isInteger] then
@@ -112,19 +112,19 @@ override method @extendExpressionAST analyzeExpression
   else
     [[expressionResult type].kind extractInteger ?2* ?unsigned:let sourceIsUnsigned ?bitCount:let sourceSize]
     [resultType.kind extractInteger ?2* ?unsigned:let targetIsUnsigned ?bitCount:let targetSize]
-    if sourceIsUnsigned && targetIsUnsigned then # unsigned -> unsigned
+    if sourceIsUnsigned && targetIsUnsigned then // unsigned -> unsigned
       if sourceSize > targetSize then
         error self.mTypeName: "cannot extend, use convert or truncate"
       elsif sourceSize == targetSize then
         error self.mTypeName: "same size: useless extend operation"
       end
-    elsif sourceIsUnsigned && not targetIsUnsigned then # unsigned -> signed
+    elsif sourceIsUnsigned && not targetIsUnsigned then // unsigned -> signed
       if sourceSize >= targetSize then
         error self.mTypeName: "cannot extend, use convert or truncate"
       end
-    elsif not sourceIsUnsigned && targetIsUnsigned then # signed -> unsigned
+    elsif not sourceIsUnsigned && targetIsUnsigned then // signed -> unsigned
       error self.mTypeName: "cannot extend, use convert or truncate"
-    else # signed -> signed
+    else // signed -> signed
       if sourceSize > targetSize then
         error self.mTypeName: "cannot extend, use convert or truncate"
       elsif sourceSize == targetSize then
@@ -139,4 +139,4 @@ override method @extendExpressionAST analyzeExpression
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

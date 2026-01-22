@@ -1,35 +1,35 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @functionDeclarationAST : @abstractDeclarationAST {
   public var @mode mMode
   public var @bool mPublicFunction
-  public var @lstring mReceiverTypeName # Empty string if standalone
+  public var @lstring mReceiverTypeName // Empty string if standalone
   public var @lstring mFunctionName
   public var @lstringlist mFunctionAttributeList
   public var @routineFormalArgumentListAST mFunctionFormalArgumentList
-  public var @lstring mFunctionReturnTypeName # Empty string if no return value
+  public var @lstring mFunctionReturnTypeName // Empty string if no return value
   public var @instructionListAST mFunctionInstructionList
   public var @location mEndOfFunctionDeclaration
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <declaration> ?!@ast ioAST {
     <function_declaration> !?ioAST !receiverTypeName: ["" nowhere]
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <function_declaration> ?!@ast ioAST ?receiverTypeName: let @lstring inReceiverTypeName {
-  #--- Public ?
+  //--- Public ?
     let @bool publicAccess
     select
       publicAccess = false
@@ -66,7 +66,7 @@ syntax extension omnibus_syntax {
     }
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <mode> !@mode outMode {
     select
@@ -118,7 +118,7 @@ syntax extension omnibus_syntax {
     end
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <function_header>
     ?!@ast ioAST
@@ -139,13 +139,13 @@ syntax extension omnibus_syntax {
     <procedure_formal_arguments> !?ioAST ?outProcFormalArgumentList
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  NOTE TYPES IN PRECEDENCE GRAPH                                                                                       
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  NOTE TYPES IN PRECEDENCE GRAPH                                                                                       
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @functionDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   var s = ""
@@ -160,7 +160,7 @@ override method @functionDeclarationAST enterInPrecedenceGraph ?!@semanticTypePr
   let nodeName = @lstring {!s !self.mFunctionName.location}
   [!?ioGraph addNode !nodeName !self]
   [!?ioGraph addEdge !from: nodeName !to: compileTimeDeclarationBarrier ()]
-#---
+//---
   for (* * formalArgumentTypeName *) in self.mFunctionFormalArgumentList do
     [!?ioGraph noteNode !formalArgumentTypeName]
   end
@@ -173,21 +173,21 @@ override method @functionDeclarationAST enterInPrecedenceGraph ?!@semanticTypePr
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @functionDeclarationAST keyRepresentationForErrorSignaling -> @string {
   result = "function " + self.mReceiverTypeName + "." + self.mFunctionName
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @functionDeclarationAST locationForErrorSignaling -> @location {
   result = self.mFunctionName.location
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  ENTER IN CONTEXT                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  ENTER IN CONTEXT                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @functionDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
@@ -199,11 +199,11 @@ override method @functionDeclarationAST enterInContext
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
-#--- Signature
+//--- Signature
   routineTypedSignature (!?ioContext.mTypeMap !self.mFunctionFormalArgumentList ?let signature)
-#--- Return type
+//--- Return type
   [!?ioContext.mTypeMap makeOptionalEntry !self.mFunctionReturnTypeName ?let returnTypeProxy]
-#--- Attributes
+//--- Attributes
   var warnIfUnused = true
   var exportedFunction = false
   var canMutateProperties = false
@@ -228,13 +228,13 @@ override method @functionDeclarationAST enterInContext
         + noUnusedWarningAttribute () + ", @" + noUnusedWarningAttribute () + " and @" + exportedAttribute ()
     end
   end
-#--- Routine mangled name
+//--- Routine mangled name
   let functionLLVMName = routineMangledNameFromAST (
     !self.mReceiverTypeName.string
     !self.mFunctionName
     !self.mFunctionFormalArgumentList
   )
-#---------------- Enter in routine map (for function availability)
+//---------------- Enter in routine map (for function availability)
   let routineLLVMNameDict = [self.mMode routineLLVMDictionaryForFunction !functionLLVMName]
   let routineMangledName = [signature mangledName !receiverTypeName: self.mReceiverTypeName.string !functionName: self.mFunctionName]
   [!?ioContext.mRoutineMap insertKey
@@ -246,7 +246,7 @@ override method @functionDeclarationAST enterInContext
     !exportedFunction
     !self.mMode
   ]
-#---------------- Add decorated declaration (for function semantic analysis)
+//---------------- Add decorated declaration (for function semantic analysis)
   ioDecoratedRoutineList +=
     !receiverTypeName: self.mReceiverTypeName
     !mode:self.mMode
@@ -263,14 +263,14 @@ override method @functionDeclarationAST enterInContext
     !returnTypeName: self.mFunctionReturnTypeName
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#! ROUTINE MAP
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//! ROUTINE MAP
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @routineMapForContext {
   public var @bool mIsPublic
   public var @routineTypedSignature mSignature
-  public var @unifiedTypeMapEntry mReturnTypeProxy # null if no returned value
+  public var @unifiedTypeMapEntry mReturnTypeProxy // null if no returned value
   public var @routineLLVMNameDict mModeDictionary
   public var @bool mIsExported
   public var @mode mFunctionMode
@@ -279,14 +279,14 @@ map @routineMapForContext {
   search searchKey error message "there is no '%K' function"
 }
 
-#·······················································································································
+//·······················································································································
 
-#typealias @routineLLVMNameDict = [@mode : @string]
+//typealias @routineLLVMNameDict = [@mode : @string]
 dict @routineLLVMNameDict : @mode {
   let @string llvmName
 }
 
-#·······················································································································
+//·······················································································································
 
 setter @routineMapForContext addFunctionWithoutArgument
   ?omnibusTypeDescriptionName: let @string inOmnibusTypeDescriptionName
@@ -314,7 +314,7 @@ setter @routineMapForContext addFunctionWithoutArgument
   ]
 }
 
-#·······················································································································
+//·······················································································································
 
 setter @routineMapForContext addFunctionWithInputArgument
   ?omnibusTypeDescriptionName: let @string inOmnibusTypeDescriptionName
@@ -354,7 +354,7 @@ setter @routineMapForContext addFunctionWithInputArgument
   ]
 }
 
-#·······················································································································
+//·······················································································································
 
 setter @routineMapForContext addFunctionWithTwoInputArguments
   ?omnibusTypeDescriptionName: let @string inOmnibusTypeDescriptionName
@@ -407,4 +407,4 @@ setter @routineMapForContext addFunctionWithTwoInputArguments
   ]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

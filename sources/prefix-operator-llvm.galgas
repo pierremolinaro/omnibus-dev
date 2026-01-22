@@ -1,15 +1,15 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @llvmPrefixOperatorEnumeration {
- case notOp   # not
- case bitWiseComplement   # ~
- case minusOp # -
- case minusOpNoOvf # -%
+ case notOp   // not
+ case bitWiseComplement   // ~
+ case minusOp // -
+ case minusOpNoOvf // -%
 }
 
-#·······················································································································
+//·······················································································································
 
 getter @llvmPrefixOperatorEnumeration string -> @string {
   switch self
@@ -20,7 +20,7 @@ getter @llvmPrefixOperatorEnumeration string -> @string {
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 getter @llvmPrefixOperatorEnumeration prefixOperator -> @prefixOperator {
   switch self
@@ -31,7 +31,7 @@ getter @llvmPrefixOperatorEnumeration prefixOperator -> @prefixOperator {
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 class @llvmPrefixOperatorAST : @abstractDeclarationAST {
   public var @llvmPrefixOperatorEnumeration mPrefixOperator
@@ -42,19 +42,19 @@ class @llvmPrefixOperatorAST : @abstractDeclarationAST {
   public var @lstring mResultTypeName
 }
 
-#·······················································································································
+//·······················································································································
 
 override getter @llvmPrefixOperatorAST locationForErrorSignaling -> @location outLocation {
   outLocation = self.mPrefixOperatorLocation
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc appendPrefixOperatorDeclaration_minus
      ?let @string inOmnibusReceiverTypeName
      ?!@semanticTypePrecedenceGraph ioPrecedenceGraph
 {
-#--- Operator type
+//--- Operator type
   var @llvmGenerationInstructionList llvmInstructionList = @[]
   var @llvmGenerationInstructionElementList instructionElements = @[]
   instructionElements += !.symbol {!name: ["result" nowhere]}
@@ -83,13 +83,13 @@ proc appendPrefixOperatorDeclaration_minus
   [declaration enterInPrecedenceGraph !?ioPrecedenceGraph]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc appendPrefixOperatorDeclaration_bitWiseComplement
      ?let @string inOmnibusReceiverTypeName
      ?!@semanticTypePrecedenceGraph ioPrecedenceGraph
 {
-#--- Operator type
+//--- Operator type
   var @llvmGenerationInstructionList llvmInstructionList = @[]
   var @llvmGenerationInstructionElementList instructionElements = @[]
   instructionElements += !.symbol {!name: ["result" nowhere]}
@@ -110,13 +110,13 @@ proc appendPrefixOperatorDeclaration_bitWiseComplement
   [declaration enterInPrecedenceGraph !?ioPrecedenceGraph]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <llvmPrefixOperator> !@llvmPrefixOperatorEnumeration outOperator {
     select
@@ -134,7 +134,7 @@ syntax extension omnibus_syntax {
     end
   }
   
-  #·····················································································································
+  //·····················································································································
 
   rule <declaration> ?!@ast ioAST {
     $llvm$
@@ -160,13 +160,13 @@ syntax extension omnibus_syntax {
     }
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  PRECEDENCE GRAPH                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @llvmPrefixOperatorAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
@@ -177,15 +177,15 @@ override method @llvmPrefixOperatorAST enterInPrecedenceGraph
   [!?ioGraph addEdge !from: nodeName !to: self.mResultTypeName]
 }
 
-#·······················································································································
+//·······················································································································
 
 override getter @llvmPrefixOperatorAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = [self.mPrefixOperator string] + " " + self.mReceiverTypeName
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  ENTER IN CONTEXT                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  ENTER IN CONTEXT                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @llvmPrefixOperatorAST enterInContext
   ?!context:@semanticContext ioContext
@@ -197,14 +197,14 @@ override method @llvmPrefixOperatorAST enterInContext
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
-#--- Check types
+//--- Check types
   [!?ioContext.mTypeMap makeEntry !self.mReceiverTypeName ?let receiverTypeProxy]
   let receiverType = [receiverTypeProxy type]
   [receiverType checkIsNotCompileTimeType !self.mReceiverTypeName.location]
   [!?ioContext.mTypeMap makeEntry !self.mResultTypeName ?let resultTypeProxy]
   let resultType = [resultTypeProxy type]
   [resultType checkIsNotCompileTimeType !self.mResultTypeName.location]
-#--- Enter in infix operator map
+//--- Enter in infix operator map
   let prefixMangledFunctionName = prefixOperatorFunctionName (!receiverType !self.mPrefixOperator)
   let key = prefixOperatorMapKey (!receiverType !self.mPrefixOperator !self.mPrefixOperatorLocation)
   let definition = @llvmPrefixOperatorUsage {
@@ -213,7 +213,7 @@ override method @llvmPrefixOperatorAST enterInContext
     !self.mInstructionList
   }
   [!?ioContext.mPrefixOperatorMap insertKey !key !receiverType !resultType !definition]
-#--- Generation routine
+//--- Generation routine
   var @assignmentGenerationVarMap varMap = @()
   [!?varMap insertKey !self.mReceiverName !"%" + self.mReceiverName]
   var @assignmentGenerationVarMap typeMap = @()
@@ -240,9 +240,9 @@ override method @llvmPrefixOperatorAST enterInContext
   ioRoutineListIR += !routine
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#   INFIX OPERATOR MAP
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//   INFIX OPERATOR MAP
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @llvmPrefixOperatorUsage : @prefixOperatorUsage {
   public var @string mPrefixMangledFunctionName
@@ -250,7 +250,7 @@ class @llvmPrefixOperatorUsage : @prefixOperatorUsage {
   public var @llvmGenerationInstructionList mInstructionList
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @llvmPrefixOperatorUsage generateCode
   ?let @objectIR inReceiverOperand
@@ -262,13 +262,13 @@ override method @llvmPrefixOperatorUsage generateCode
   ?!@instructionListIR ioInstructionGenerationList
   !@objectIR outResultValue
 {
-#--- If reference, load it
+//--- If reference, load it
   var receiverOperand = inReceiverOperand
   [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
     !?receiverOperand
   ]  
-#--- New LLVM variable for result
+//--- New LLVM variable for result
   getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
   var @procCallEffectiveParameterListIR argumentList = @[]
   argumentList += !.output !receiverOperand
@@ -280,9 +280,9 @@ override method @llvmPrefixOperatorUsage generateCode
   }
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#   CODE GENERATION
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//   CODE GENERATION
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @prefixOperatorRoutineIR : @abstractRoutineIR {
   public var @omnibusType mReceiverType
@@ -292,7 +292,7 @@ class @prefixOperatorRoutineIR : @abstractRoutineIR {
   public var @allocaList mAllocaList
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @prefixOperatorRoutineIR llvmCodeGeneration 
   ?!@string ioLLVMcode
@@ -308,5 +308,5 @@ override method @prefixOperatorRoutineIR llvmCodeGeneration
   ioLLVMcode += "}\n\n"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 

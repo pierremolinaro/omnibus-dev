@@ -1,10 +1,10 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#                                                                                                                       
-#    C O D E    G E N E R A T I O N                                                                                     
-#                                                                                                                       
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#! @generationAdds
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//                                                                                                                       
+//    C O D E    G E N E R A T I O N                                                                                     
+//                                                                                                                       
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//! @generationAdds
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @generationAdds {
   public var @uint mUniqueIndex = 0
@@ -14,21 +14,21 @@ struct @generationAdds {
   public var @bool mNeedsDynamicMemoryAllocation = false
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#! @abstractInstructionIR
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//! @abstractInstructionIR
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract class @abstractInstructionIR {
 }
 
-#·······················································································································
+//·······················································································································
 
 abstract method @abstractInstructionIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 
-#·······················································································································
+//·······················································································································
 
 method @abstractInstructionIR enterAccessibleEntities
   ?!@stringset unused ioInvokedRoutineSet
@@ -36,28 +36,28 @@ method @abstractInstructionIR enterAccessibleEntities
 {
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#! @instructionListIR
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//! @instructionListIR
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @instructionListIR {
   public var @abstractInstructionIR mInstructionGeneration
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @instructionListListIR {
   public var @instructionListIR mInstructionList
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func %once llvmSeparatorLine -> @string {
   result  = ";-------------------------------------------------------------------------"
   result += "---------------------------------------------*\n"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmTitleComment ?let @string inTitle -> @string outTitle {
   outTitle  = llvmSeparatorLine ()
@@ -65,14 +65,14 @@ func llvmTitleComment ?let @string inTitle -> @string outTitle {
   outTitle += llvmSeparatorLine () + "\n"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func %once asSeparatorLine -> @string {
   result  = "@-------------------------------------------------------------------------"
   result += "---------------------------------------------*\n"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func asTitleComment ?let @string inTitle -> @string outTitle {
   outTitle  = asSeparatorLine ()
@@ -80,7 +80,7 @@ func asTitleComment ?let @string inTitle -> @string outTitle {
   outTitle += asSeparatorLine () + "\n"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc codeGeneration
   ?currentDir:let @string inCurrentDirectory
@@ -97,20 +97,20 @@ proc codeGeneration
 {
   let @timer generationTime = .start 
   let homeDir = @string.homeDirectory + "/omnibus-products/"
-#--- Create source directory (if does not exist)
+//--- Create source directory (if does not exist)
   let productDirectory = homeDir
     + if [option omnibus_options.noPanicGeneration value] then "no-panic" else "" end
     + [[inSourceFileName deletingPathExtension] stringByReplacingStringByString !"/" !"+"]
   let sourceDirectory = productDirectory + "/sources"
   [sourceDirectory makeDirectory] ;
-#--- Generate target files
+//--- Generate target files
   generateTarget (
     !currentDir:inCurrentDirectory
     !productDirectory:productDirectory
     !targetName:inTargetName
     !targetParameters:inIntermediateCodeStruct.mTargetParameters
   )
-#--- Generate code files (LLVM, C++, assembly)
+//--- Generate code files (LLVM, C++, assembly)
   generateCodeFiles (
     !currentDir:inCurrentDirectory
     !productDir:productDirectory
@@ -126,7 +126,7 @@ proc codeGeneration
   if [option omnibus_options.printPasses value] then
     print (!"** Code generation: " + [generationTime string] + "\n" )
   end
-#----------------------------------------- Run compilation script
+//----------------------------------------- Run compilation script
   if (@uint.errorCount == 0) then
     let @timer scriptTime = .start 
     let script = if [option omnibus_option_not_appearing_in_cocoa.performFlashing value] then "run" else "build" end
@@ -141,7 +141,7 @@ proc codeGeneration
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @generationContext {
   public var @omnibusType mPanicCodeLLVMType
@@ -151,7 +151,7 @@ struct @generationContext {
   public var @availableInterruptMap mAvailableInterruptMap
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 private proc generateCodeFiles
   ?currentDir:let @string inCurrentDirectory
@@ -175,7 +175,7 @@ private proc generateCodeFiles
     !inAvailableInterruptMap
   }
   let sourceDirectory = inProductDirectory + "/sources"
-#----------------------------------------- Add dynamic array extern routines
+//----------------------------------------- Add dynamic array extern routines
   if inTargetParameters.mHandleDynamicArray then
     generationAdds.mExternFunctionDeclarationSet ++= "void @arc.retain (%ptrtype %inPtr)"
     generationAdds.mExternFunctionDeclarationSet ++= "void @arc.release (%ptrtype %inPtr)"
@@ -185,7 +185,7 @@ private proc generateCodeFiles
     generationAdds.mExternFunctionDeclarationSet ++= insertFunction
     generationAdds.mExternFunctionDeclarationSet ++= "i32 @arc.length (%ptrtype %inPointer)"
   end
-#----------------------------------------- Include assembler specific file
+//----------------------------------------- Include assembler specific file
   var asCode = asTitleComment (!"Target specific code")
   var asFileContents = ""
   for (relativePath) in inTargetParameters.m_S_definitionFiles do
@@ -197,7 +197,7 @@ private proc generateCodeFiles
   let x = [asFileContents stringByReplacingStringByString !"!FUNC!" !llvmNameForFunction (!"")]
   asCode += [x stringByReplacingStringByString !"!ISR!" !llvmNameForSectionInterrupt (!"")]
   asCode += "\n"
-#----------------------------------------- Include LLVM specific file
+//----------------------------------------- Include LLVM specific file
   var llvmCode = llvmTitleComment (!"Target specific code")
   var targetLLVMcode = ""
   for (relativePath) in inTargetParameters.m_LL_definitionFiles do
@@ -208,33 +208,33 @@ private proc generateCodeFiles
   end
   llvmCode += [targetLLVMcode stringByReplacingStringByString !"!FUNC!" !llvmNameForFunction (!"")]
   llvmCode += "\n"
-#----------------------------------------- Type declarations
+//----------------------------------------- Type declarations
   declareLLVMTypes (!inUserLLVMTypeDefinitionListIR !?llvmCode)
-#----------------------------------------- Drivers
+//----------------------------------------- Drivers
   for driver in inIntermediateCodeStruct.mDriverList
     before llvmCode += llvmTitleComment (!"Driver variable definitions")
     do [driver generateLLVMDriverVariableDefinition !?llvmCode]
     after llvmCode += "\n"
   end
-#----------------------------------------- Control register group array
+//----------------------------------------- Control register group array
   [inIntermediateCodeStruct.mControlRegisterGroupArrayList generateLLVMcode !?llvmCode !inTargetParameters.mPointerSize]
-#----------------------------------------- Global sync instances
+//----------------------------------------- Global sync instances
   for globalSyncInstance in inIntermediateCodeStruct.mGlobalSyncInstanceMap
     before llvmCode += llvmTitleComment (!"Global synchronization tool instances")
     do [globalSyncInstance generateLLVM !?llvmCode]
     after llvmCode += "\n"
   end
-#----------------------------------------- Static array type declaration
+//----------------------------------------- Static array type declaration
   [inStaticListValueMap generateLLVMForStaticLists !inIntermediateCodeStruct.mStaticArrayMapForIntermediate !?llvmCode]
-#----------------------------------------- Driver Code
+//----------------------------------------- Driver Code
   [inIntermediateCodeStruct.mDriverList generateLLVMDriverCode !?llvmCode]
-#----------------------------------------- Routines
+//----------------------------------------- Routines
   [inIntermediateCodeStruct.mRoutineListIR llvmRoutineGeneration
     !?llvmCode
     !generationContext
     !?generationAdds
   ]
-#----------------------------------------- Interrupts
+//----------------------------------------- Interrupts
   let undefinedInterruptString = getTargetTextFile (
     !currentDir:inCurrentDirectory
     !from:inTargetName.string + "/" + inTargetParameters.mUndefinedInterruptHandler
@@ -251,20 +251,20 @@ private proc generateCodeFiles
     !generationContext
     !?generationAdds
   ]
-#----------------------------------------- Extern procedures
+//----------------------------------------- Extern procedures
   [inIntermediateCodeStruct.mExternProcedureMapIR llvmPrototypeGeneration !?llvmCode]
   var @primitiveAndServiceIRlist primitiveAndServiceList = @[]
-#----------------------------------------- Use guards ?
+//----------------------------------------- Use guards ?
   if generationAdds.mUsesGuards then
     let waitForGuardChange = waitForGuardChangeFunctionName ()
     primitiveAndServiceList +=
       !llvmNameForServiceCall (!waitForGuardChange)
       !llvmNameForServiceImplementation (!waitForGuardChange)
-      !true # A (boolean) value is returned
+      !true // A (boolean) value is returned
     generationAdds.mExternFunctionDeclarationSet ++=
       "i1 @" + llvmNameForServiceCall (!waitForGuardChange) + " ()"
   end
-#----------------------------------------- Routine list
+//----------------------------------------- Routine list
   var @sectionIRlist sectionIRlist = @[]
   for routine in inIntermediateCodeStruct.mRoutineListIR do
     [routine.mRoutine svcDeclarationGeneration
@@ -273,14 +273,14 @@ private proc generateCodeFiles
       !?generationAdds
     ]
   end
-#----------------------------------------- tasks
+//----------------------------------------- tasks
   [inIntermediateCodeStruct.mTaskMapIR generateCode
     !?llvmCode
     !generationContext
     !?generationAdds
     !?primitiveAndServiceList
   ]
-#----------------------------------------- Primitive, service dispatcher
+//----------------------------------------- Primitive, service dispatcher
   generatePrimitiveAndServiceDispatcher (
     !inCurrentDirectory
     !inTargetName.string
@@ -288,7 +288,7 @@ private proc generateCodeFiles
     !primitiveAndServiceList
     !targetParameters:inTargetParameters
   )
-#----------------------------------------- Panic
+//----------------------------------------- Panic
   if not [option omnibus_options.noPanicGeneration value] then
     generatePanicCode (
       !?llvmCode
@@ -296,7 +296,7 @@ private proc generateCodeFiles
       !?generationAdds: generationAdds
     )
   end
-#----------------------------------------- Section, safe dispatcher
+//----------------------------------------- Section, safe dispatcher
   if generationAdds.mNeedsDynamicMemoryAllocation then
     sectionIRlist += 
       !llvmNameForSectionCall (!memoryAllocSectionName ())
@@ -314,13 +314,13 @@ private proc generateCodeFiles
     !?asCode
     !sectionIRlist
   )
-#----------------------------------------- Extern function declaration
+//----------------------------------------- Extern function declaration
   llvmCode += llvmTitleComment (!"LLVM extern functions")
   for (s) in generationAdds.mExternFunctionDeclarationSet do
     llvmCode += "declare " + s + "\n"
   end
   llvmCode += "\n"
-#----------------------------------------- Static Strings
+//----------------------------------------- Static Strings
   if [generationAdds.mStaticEntityMap.mStaticStringMap count] > 0 then
     llvmCode += llvmTitleComment (!"Static strings")
     for (lkey mIndex) in generationAdds.mStaticEntityMap.mStaticStringMap do
@@ -332,7 +332,7 @@ private proc generateCodeFiles
       llvmCode += literalCharacterArrayName (!mIndex) + ", i32 0, i32 0), align 4\n\n"
     end
   end
-#----------------------------------------- Global structured constants
+//----------------------------------------- Global structured constants
   if [generationAdds.mStaticEntityMap.mGlobalStructuredConstantList count] > 0 then
     llvmCode += llvmTitleComment (!"Global structured constants")
     for (mType mOperandIRList) in generationAdds.mStaticEntityMap.mGlobalStructuredConstantList do (idx)
@@ -346,13 +346,13 @@ private proc generateCodeFiles
     end
     llvmCode += "\n"
   end
-#----------------------------------------- Write LLVM file
+//----------------------------------------- Write LLVM file
   llvmCode += llvmSeparatorLine ()
   [llvmCode writeToFileWhenDifferentContents !sourceDirectory + "/src.ll" ?*]
-#----------------------------------------- Write assembler file
+//----------------------------------------- Write assembler file
   asCode += asSeparatorLine ()
   [asCode writeToFileWhenDifferentContents !sourceDirectory + "/src.s" ?*]
-#----------------------------------------- Build builtin C++ code (by performing substitutions)
+//----------------------------------------- Build builtin C++ code (by performing substitutions)
   var s0 = ""
   for (relativePath) in inTargetParameters.m_C_definitionFiles do
     s0 += getTargetTextFile (
@@ -367,21 +367,21 @@ private proc generateCodeFiles
   let s5 = [s4 stringByReplacingStringByString !"!SERVICECALL!" !llvmNameForServiceCall (!"")]
   let s6 = [s5 stringByReplacingStringByString !"!SECTIONIMPLEMENTATION!" !llvmNameForSectionImplementation (!"")]
   let cppCode = [s6 stringByReplacingStringByString !"!SECTIONCALL!" !llvmNameForSectionCall (!"")]
-#----------------------------------------- Add user type declarations
-#  for (userType) in inIntermediateCodeStruct.mTypeCppGenerationList do
-#    [userType generateTypeCppCode !?cppCode]
-#  end
-#----------------------------------------- Write C++ file
+//----------------------------------------- Add user type declarations
+//  for (userType) in inIntermediateCodeStruct.mTypeCppGenerationList do
+//    [userType generateTypeCppCode !?cppCode]
+//  end
+//----------------------------------------- Write C++ file
   [cppCode writeToFileWhenDifferentContents !sourceDirectory + "/src.cpp" ?*]
-#----------------------------------------- Write JSON file with stack features
+//----------------------------------------- Write JSON file with stack features
   var jsonStr = "{\n"
-#--- System stack size
+//--- System stack size
   jsonStr += "  \"system-stack-size\" : " + inIntermediateCodeStruct.mTargetParameters.mSystemStackSize.bigint + ",\n"
   jsonStr += "  \"stacked-register-size-on-user-stack\" : "
        + inIntermediateCodeStruct.mTargetParameters.mStackedUserRegisterOnInterruptByteSize.bigint + ",\n"
   jsonStr += "  \"service-stack-needs\" : " + inIntermediateCodeStruct.mTargetParameters.mServicePushedRegisterByteSize.bigint + ",\n"
   jsonStr += "  \"section-stack-needs\" : " + inIntermediateCodeStruct.mTargetParameters.mSectionPushedRegisterByteSize.bigint + ",\n"
-#--- Tasks
+//--- Tasks
   jsonStr += "  \"tasks\" : {"
   for task in inIntermediateCodeStruct.mTaskMapIR
     do jsonStr += "\n    \"" + [task.lkey assemblerRepresentation] + "\" : " + task.mStackSize
@@ -389,7 +389,7 @@ private proc generateCodeFiles
   end
   jsonStr += "\n"
   jsonStr += "  },\n"
-#--- Services
+//--- Services
   jsonStr += "  \"services\" : ["
   for (* serviceImplementation *) in primitiveAndServiceList
     do jsonStr += "\n    \"" + serviceImplementation + "\""
@@ -397,7 +397,7 @@ private proc generateCodeFiles
     after jsonStr += "\n"
   end
   jsonStr += "  ],\n"
-#--- sections
+//--- sections
   jsonStr += "  \"sections\" : ["
   for section in sectionIRlist
     do jsonStr += "\n    \"" + section.mSectionImplementationName + "\""
@@ -405,7 +405,7 @@ private proc generateCodeFiles
     after jsonStr += "\n"
   end
   jsonStr += "  ],\n"
-#--- isr
+//--- isr
   jsonStr += "  \"isr\" : ["
   var first = true
   for (interruptName 2* mMode) in inIntermediateCodeStruct.mInterruptMapIR do
@@ -438,10 +438,10 @@ private proc generateCodeFiles
     end
   end
   jsonStr += "\n  ]\n"
-#--- Write file
+//--- Write file
   jsonStr += "}\n"
   [jsonStr writeToFileWhenDifferentContents !sourceDirectory + "/provided-stacks.json" ?*]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 

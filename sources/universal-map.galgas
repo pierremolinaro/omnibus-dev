@@ -1,6 +1,6 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#! UNIVERSAL VARIABLE MAP
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//! UNIVERSAL VARIABLE MAP
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @universalValuedObjectMap {
   public var @flatValuedObjectMap mInternalPropertyAndRoutineMap = @()
@@ -8,9 +8,9 @@ struct @universalValuedObjectMap {
   public var @lstringlist mLocalObjectList = @()
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#! INSERT SETTERS
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//! INSERT SETTERS
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 setter @universalValuedObjectMap insertTask
   ?let @lstring inTaskName
@@ -24,7 +24,7 @@ setter @universalValuedObjectMap insertTask
   ]
 }
 
-#·······················································································································
+//·······················································································································
 
 setter @universalValuedObjectMap insertDriver
   ?let @lstring inDriverName
@@ -39,7 +39,7 @@ setter @universalValuedObjectMap insertDriver
   ]
 }
 
-#·······················································································································
+//·······················································································································
 
 setter @universalValuedObjectMap insertGlobalConstant
   ?let @lstring inConstantName
@@ -53,7 +53,7 @@ setter @universalValuedObjectMap insertGlobalConstant
   ]
 }
 
-#·······················································································································
+//·······················································································································
 
 setter @universalValuedObjectMap insertGlobalSyncInstance
   ?let @lstring inSyncInstanceName
@@ -67,7 +67,7 @@ setter @universalValuedObjectMap insertGlobalSyncInstance
   ]
 }
 
-#·······················································································································
+//·······················································································································
 
 setter @universalValuedObjectMap insertLocalConstant
   ?let @lstring inLocalConstantName
@@ -84,7 +84,7 @@ setter @universalValuedObjectMap insertLocalConstant
   self.mLocalObjectList += !inLocalConstantName
 }
 
-#·······················································································································
+//·······················································································································
 
 setter @universalValuedObjectMap insertUsedLocalConstant
   ?let @lstring inLocalConstantName
@@ -101,7 +101,7 @@ setter @universalValuedObjectMap insertUsedLocalConstant
   self.mLocalObjectList += !inLocalConstantName
 }
 
-#·······················································································································
+//·······················································································································
 
 setter @universalValuedObjectMap insertLocalVariable
   ?let @lstring inLocalVariableName
@@ -119,9 +119,9 @@ setter @universalValuedObjectMap insertLocalVariable
   self.mLocalObjectList += !inLocalVariableName
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#! SEARCH METHODS
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//! SEARCH METHODS
+////—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @universalValuedObjectMap searchEntity
   ?let @lstring inValuedObjectName
@@ -130,7 +130,7 @@ method @universalValuedObjectMap searchEntity
   [self.mInternalPropertyAndRoutineMap searchKey !inValuedObjectName ?2* ?outEntity]
 }
 
-#·······················································································································
+//·······················································································································
 
 method @universalValuedObjectMap searchValuedObject
   ?let @lstring inValuedObjectName
@@ -167,7 +167,7 @@ method @universalValuedObjectMap searchValuedObject
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 setter @universalValuedObjectMap readAccess
   ?let @lstring inValuedObjectName
@@ -193,7 +193,7 @@ setter @universalValuedObjectMap readAccess
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 setter @universalValuedObjectMap searchValuedObjectForReadAccess
   ?let @lstring inValuedObjectName
@@ -231,7 +231,7 @@ setter @universalValuedObjectMap searchValuedObjectForReadAccess
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 setter @universalValuedObjectMap searchValuedObjectForWriteAccess
   ?let @lstring inValuedObjectName
@@ -260,7 +260,7 @@ setter @universalValuedObjectMap searchValuedObjectForWriteAccess
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 setter @universalValuedObjectMap searchValuedObjectForReadWriteAccess
   ?let @lstring inValuedObjectName
@@ -291,7 +291,7 @@ setter @universalValuedObjectMap searchValuedObjectForReadWriteAccess
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 method @universalValuedObjectMap searchValuedObjectType
   ?context:let @semanticContext inContext
@@ -299,7 +299,7 @@ method @universalValuedObjectMap searchValuedObjectType
   ?let @LValueAST inLValue
   !@omnibusType outType
 {
-  if inLValue.mIdentifier.string == "" then # Receiver is self
+  if inLValue.mIdentifier.string == "" then // Receiver is self
     outType = inSelfType
   else
     [self.mInternalPropertyAndRoutineMap searchKey !inLValue.mIdentifier ?2* ?let property]
@@ -321,7 +321,7 @@ method @universalValuedObjectMap searchValuedObjectType
   [inLValue.mOperand getValuedObjectType !context: inContext !?outType]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @LValueOperandAST getValuedObjectType
       ?context:let @semanticContext inContext
@@ -354,9 +354,9 @@ method @LValueOperandAST getValuedObjectType
 }
 
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#! STATE HANDLING
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//! STATE HANDLING
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @universalValuedObjectMap checkLocalVariableFinalState ?!@instructionListIR ioInstructionGenerationList {
   for entry in self.mInternalPropertyAndRoutineMap do
@@ -366,9 +366,9 @@ method @universalValuedObjectMap checkLocalVariableFinalState ?!@instructionList
     case globalSyncInstance (2*) :
     case globalConstant (*) :
     case localConstant (@omnibusType type @lstring omnibusName @bool isFormalInputArg) :
-#      if entry.mObjectState == .hasUnreadValue then
-#        warning entry.lkey : "'" + entry.lkey + "' is never read"
-#      end
+//      if entry.mObjectState == .hasUnreadValue then
+//        warning entry.lkey : "'" + entry.lkey + "' is never read"
+//      end
       if not isFormalInputArg then
         [!?ioInstructionGenerationList generateRelease !type !omnibusName]
       end
@@ -381,7 +381,7 @@ method @universalValuedObjectMap checkLocalVariableFinalState ?!@instructionList
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 setter @universalValuedObjectMap openOverrideForSelectBlock {
   var @referenceStateMap initialStateMap = @()
@@ -401,7 +401,7 @@ setter @universalValuedObjectMap openOverrideForSelectBlock {
   self.mLocalObjectList = @()
 }
 
-#·······················································································································
+//·······················································································································
 
 setter @universalValuedObjectMap openOverrideForRepeatBlock {
   var @referenceStateMap initialStateMap = @()
@@ -421,7 +421,7 @@ setter @universalValuedObjectMap openOverrideForRepeatBlock {
   self.mLocalObjectList = @()
 }
 
-#·······················································································································
+//·······················································································································
 
 setter @universalValuedObjectMap openBranch {
   [self.mScopeStack last ?* ?* ?let initialStateMap ?2*]
@@ -430,7 +430,7 @@ setter @universalValuedObjectMap openBranch {
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 setter @universalValuedObjectMap closeBranch ?let @location inErrorLocation {
   [!?self.mScopeStack popLast ?let scopeKind ?let firstBranch ?let initialStateMap ?var referenceStateMap ?let localObjectList]
@@ -454,9 +454,9 @@ setter @universalValuedObjectMap closeBranch ?let @location inErrorLocation {
     case selectScope :
       for (lkey referenceState) in referenceStateMap do
         [self.mInternalPropertyAndRoutineMap searchKey !lkey ?let currentObjectState ?2*]
-        if referenceState == currentObjectState then # Ok
-        elsif (currentObjectState == .hasUnreadValue) & (referenceState == .hasReadValue) then # Ok
-        elsif (currentObjectState == .hasReadValue) & (referenceState == .hasUnreadValue) then # Ok, modify reference state
+        if referenceState == currentObjectState then // Ok
+        elsif (currentObjectState == .hasUnreadValue) & (referenceState == .hasReadValue) then // Ok
+        elsif (currentObjectState == .hasReadValue) & (referenceState == .hasUnreadValue) then // Ok, modify reference state
           [!?referenceStateMap setMStateForKey !.hasReadValue !lkey]
         else
           error inErrorLocation
@@ -477,15 +477,15 @@ setter @universalValuedObjectMap closeBranch ?let @location inErrorLocation {
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 setter @universalValuedObjectMap closeOverride ?let @location inErrorLocation {
   [!?self.mScopeStack popLast ?* ?* ?* ?let referenceStateMap ?let localObjectList]
-#--- Restore value object state
+//--- Restore value object state
   for (key objectState) in referenceStateMap do
     [!?self.mInternalPropertyAndRoutineMap setMObjectStateForKey !objectState !key]
   end
-#--- For current scope objects, check their final state
+//--- For current scope objects, check their final state
   for (lkey) in self.mLocalObjectList do
     [self.mInternalPropertyAndRoutineMap searchKey
       !lkey
@@ -508,19 +508,19 @@ setter @universalValuedObjectMap closeOverride ?let @location inErrorLocation {
       end
     end
   end
-#--- Remove current scope objets
+//--- Remove current scope objets
   for (lkey) in self.mLocalObjectList do
     [!?self.mInternalPropertyAndRoutineMap removeKey !lkey ?3*]
   end
-#--- Restore current scope objects
+//--- Restore current scope objects
   self.mLocalObjectList = localObjectList
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#! INTERNAL MAPS
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//! INTERNAL MAPS
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
-map @flatValuedObjectMap { # Key is a valued object
+map @flatValuedObjectMap { // Key is a valued object
   public var @valuedObjectState mObjectState
   public var @bool mObjectShouldBeValuedAtEndOfScope
   public var @valuedObject mValuedObject
@@ -530,14 +530,14 @@ map @flatValuedObjectMap { # Key is a valued object
   remove removeKey error message "there is no '%K' entity"
 }
 
-#·······················································································································
+//·······················································································································
 
 enum @scopeKind {
   case selectScope
   case repeatScope
 }
 
-#·······················································································································
+//·······················································································································
 
 list @scopeStack {
   public var @scopeKind mScopeKind
@@ -547,7 +547,7 @@ list @scopeStack {
   public var @lstringlist mObjectList
 }
 
-#·······················································································································
+//·······················································································································
 
 map @referenceStateMap {
   public var @valuedObjectState mState
@@ -555,9 +555,9 @@ map @referenceStateMap {
   search searchKey error message "INTERNAL ERROR"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#! VALUED OBJECT
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//! VALUED OBJECT
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @valuedObject {
   case driver (@omnibusType type @bool instancied)
@@ -568,9 +568,9 @@ enum @valuedObject {
   case globalSyncInstance (@omnibusType type @lstring omnibusName)
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#! VALUED OBJECT STATE
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//! VALUED OBJECT STATE
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @valuedObjectState %equatable {
   case noValue
@@ -578,7 +578,7 @@ enum @valuedObjectState %equatable {
   case hasReadValue
 }
 
-#·······················································································································
+//·······················································································································
 
 getter @valuedObjectState string -> @string {
   switch self
@@ -588,4 +588,4 @@ getter @valuedObjectState string -> @string {
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

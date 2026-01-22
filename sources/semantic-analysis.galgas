@@ -1,8 +1,8 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#                                                                                                                       
-#    S E M A N T I C    A N A L Y S I S                                                                                 
-#                                                                                                                       
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//                                                                                                                       
+//    S E M A N T I C    A N A L Y S I S                                                                                 
+//                                                                                                                       
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func checkAssignmentCompatibility
   ?let @assignmentOperatorMap inAssignmentOperatorMap
@@ -31,14 +31,14 @@ func checkAssignmentCompatibility
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract method @abstractDecoratedDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @semanticTemporariesStruct {
   public var @uint mTemporaryIndex = 0
@@ -48,14 +48,14 @@ struct @semanticTemporariesStruct {
   public var @stringset mInitializedDriverSet = @()
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 setter @semanticTemporariesStruct newTempLLVMVar !@string outTempLLVMVar {
   outTempLLVMVar = "%temp." + self.mTemporaryIndex
   self.mTemporaryIndex += 1
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc getNewTempValue
   ?let @omnibusType inType
@@ -70,7 +70,7 @@ proc getNewTempValue
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc getNewTempReference
   ?let @omnibusType inType
@@ -85,7 +85,7 @@ proc getNewTempReference
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc semanticAnalysis
   ?sourceFile:let @string unused inSourceFile
@@ -104,7 +104,7 @@ proc semanticAnalysis
   outIntermediateCodeStruct.mTargetParameters = inSemanticContext.mTargetParameters
   outIntermediateCodeStruct.mStaticEntityMap = inStaticEntityMap
   outIntermediateCodeStruct.mGlobalTaskVariableList = inSemanticContext.mGlobalTaskVariableList
-#---
+//---
   var @semanticTemporariesStruct temporaries = @()
   for (declaration) in inDecoratedDeclarationList do
     [declaration semanticAnalysis
@@ -113,7 +113,7 @@ proc semanticAnalysis
       !?intermediateCode:outIntermediateCodeStruct
      ]
   end
-#  log inDecoratedRoutineList
+//  log inDecoratedRoutineList
   [inDecoratedRoutineList routineSemanticAnalysis
     !context:inSemanticContext
     !?temporary:temporaries
@@ -124,12 +124,12 @@ proc semanticAnalysis
     !?temporary:temporaries
     !?intermediateCode:outIntermediateCodeStruct
   ]
-#--- Add panic routines
+//--- Add panic routines
   appendPanicRoutines (
     !allSourceFilePaths:inSourceFileAbsolutePathSet
     !?intermediateCode:outIntermediateCodeStruct
   )
-#--- Check required procedure are defined
+//--- Check required procedure are defined
   checkRequiredProcedures (
     !ast:inAST
     !context:inSemanticContext
@@ -137,4 +137,4 @@ proc semanticAnalysis
   )
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

@@ -7,12 +7,12 @@ setter @instructionListIR appendGetArrayElementReference
   !elementPtr:@objectIR outElementPtr
 {
   [!?ioTemporaries newTempLLVMVar ?let llvmName]
-#  [[inArrayIR type].kind arrayType ?elementType:let elementType ?1*]
+//  [[inArrayIR type].kind arrayType ?elementType:let elementType ?1*]
   outElementPtr = @objectIR.reference {!type:inElementType !llvmName:llvmName}
   self += !@getArrayElementReferenceIR {!outElementPtr !inArrayIR !inIndexIR}
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @getArrayElementReferenceIR : @abstractInstructionIR {
   public var @objectIR mTarget
@@ -20,7 +20,7 @@ class @getArrayElementReferenceIR : @abstractInstructionIR {
   public var @objectIR mIndex
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @getArrayElementReferenceIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -34,4 +34,4 @@ override method @getArrayElementReferenceIR llvmInstructionCode
              + " ; Element of index " + [self.mIndex llvmName] + "\n"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

@@ -12,7 +12,6 @@
                        "../build/libpm/time",
                        "../build/libpm/utilities"],
     "SOURCES"  :  [
-        "all-declarations-17.cpp",
         "all-declarations-16.cpp",
         "all-declarations-15.cpp",
         "all-declarations-14.cpp",

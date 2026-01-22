@@ -1,6 +1,6 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @systemRoutineDeclarationAST : @abstractDeclarationAST {
   public var @lstring mReceiverTypeName
@@ -14,13 +14,13 @@ class @systemRoutineDeclarationAST : @abstractDeclarationAST {
   public var @location mEndOfInstructionListLocation
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <system_routine_declaration> ?!@ast ioAST  ?receiverTypeName: let @lstring inReceiverTypeName {
     let @bool publicAccess
@@ -69,9 +69,9 @@ syntax extension omnibus_syntax {
     $}$
   }
 
-  #·····················································································································
+  //·····················································································································
 
-  # A primitive or a service accepts only input arguments and does not return any value
+  // A primitive or a service accepts only input arguments and does not return any value
 
   rule <system_routine_declaration> ?!@ast ioAST  ?receiverTypeName: let @lstring inReceiverTypeName {
     let @bool publicAccess
@@ -113,7 +113,7 @@ syntax extension omnibus_syntax {
     }
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <system_routine_declaration> ?!@ast ioAST  ?receiverTypeName: let @lstring inReceiverTypeName {
     let @bool publicAccess
@@ -155,13 +155,13 @@ syntax extension omnibus_syntax {
     }
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  NOTE TYPES IN PRECEDENCE GRAPH                                                                                       
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  NOTE TYPES IN PRECEDENCE GRAPH                                                                                       
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @systemRoutineDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   var s = ""
@@ -190,21 +190,21 @@ override method @systemRoutineDeclarationAST enterInPrecedenceGraph ?!@semanticT
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @systemRoutineDeclarationAST keyRepresentationForErrorSignaling -> @string {
   result = "system " + self.mReceiverTypeName + "." + self.mSystemRoutineName
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @systemRoutineDeclarationAST locationForErrorSignaling -> @location {
   result = self.mSystemRoutineName.location
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!   UTILITIES                                                                                                            
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!   UTILITIES                                                                                                            
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 private func systemUserMangledNameFromAST ?let @string inReceiverLLVMBaseTypeName
                                           ?let @routineKind inKind
@@ -235,7 +235,7 @@ private func systemUserMangledNameFromAST ?let @string inReceiverLLVMBaseTypeNam
   result = @{!s !inGuardName.location}
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func systemImplementationMangledNameFromAST ?let @string inReceiverLLVMBaseTypeName
                                             ?let @routineKind inKind
@@ -266,9 +266,9 @@ func systemImplementationMangledNameFromAST ?let @string inReceiverLLVMBaseTypeN
   result = @{!s !inGuardName.location}
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  ENTER IN CONTEXT                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  ENTER IN CONTEXT                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @systemRoutineDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
@@ -280,16 +280,16 @@ override method @systemRoutineDeclarationAST enterInContext
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
-#---------------------------------------- Self type proxy
+//---------------------------------------- Self type proxy
   [!?ioContext.mTypeMap makeOptionalEntry !self.mReceiverTypeName ?let selfTypeProxy]
-#  log mReceiverTypeName
+//  log mReceiverTypeName
   let receiverLLVMBaseTypeName = if [selfTypeProxy isNull] then "" else [selfTypeProxy type].llvmBaseTypeName end
-#--- Attributes
+//--- Attributes
   var @stringset attributeSet = @[]
   for attribute in self.mAttributeList do
     attributeSet ++= attribute.mValue.string
   end
-#---
+//---
   let @routineKind routineKind
   switch self.mMode
   case sectionMode, safeSectionMode :
@@ -301,7 +301,7 @@ override method @systemRoutineDeclarationAST enterInContext
   case userMode, safeUserMode, anyMode, anySafeMode, bootMode, guardMode, panicMode, safeGuardMode, startupMode :
     error self.mSystemRoutineName : "internal error" : routineKind
   end
-#--- Routine mangled names
+//--- Routine mangled names
   let userRoutineMangledName = systemUserMangledNameFromAST (
     !receiverLLVMBaseTypeName
     !routineKind
@@ -314,11 +314,11 @@ override method @systemRoutineDeclarationAST enterInContext
     !self.mSystemRoutineName
     !self.mFormalArgumentList
   )
-#--- Signature
+//--- Signature
   routineTypedSignature (!?ioContext.mTypeMap !self.mFormalArgumentList ?let signature)
-#--- Return type
+//--- Return type
   [!?ioContext.mTypeMap makeOptionalEntry  !self.mReturnTypeName ?let returnTypeProxy]
-#--- Attributes
+//--- Attributes
   var mutatingRoutine = false
   var noUnusedWarning = false
   for (attribute) in self.mAttributeList do
@@ -339,7 +339,7 @@ override method @systemRoutineDeclarationAST enterInContext
     end
   end
   let @routineAttributes attributes = .mutatingRoutine
-#--- Enter in routine map
+//--- Enter in routine map
   let @routineLLVMNameDict routineLLVMNameDict = [self.mMode routineLLVMDictionaryForSystemRoutine
     !userRoutineMangledName
     !implementationRoutineMangledName
@@ -354,7 +354,7 @@ override method @systemRoutineDeclarationAST enterInContext
     !true
     !self.mMode
   ]
-#--- Prepare semantic analysis
+//--- Prepare semantic analysis
   ioDecoratedRoutineList +=
     !receiverTypeName: self.mReceiverTypeName
     !mode: self.mMode
@@ -368,8 +368,8 @@ override method @systemRoutineDeclarationAST enterInContext
     !warningOnUnusedArgs: noUnusedWarning
     !self.mInstructionList
     !self.mEndOfInstructionListLocation
-    !returnTypeName: self.mReturnTypeName  # Empty string if no returned value
-#--- 
+    !returnTypeName: self.mReturnTypeName  // Empty string if no returned value
+//--- 
   ioRoutineListIR += !@systemUserRoutineIR {
     !userRoutineMangledName
     !isRequired:false
@@ -377,15 +377,15 @@ override method @systemRoutineDeclarationAST enterInContext
     !implementationRoutineMangledName
     !signature
     !selfTypeProxy
-    !routineKind == .section # If false, service or primitive
+    !routineKind == .section // If false, service or primitive
     !returnTypeProxy
   }
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  CODE GENERATION                                                                                                      
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  CODE GENERATION                                                                                                      
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @sectionIRlist {
   public var @string mSectionCallName
@@ -393,7 +393,7 @@ list @sectionIRlist {
   public var @bool invocationFromAnyMode %initArgLabel
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @primitiveAndServiceIRlist {
   public var @string mCallName
@@ -401,7 +401,7 @@ list @primitiveAndServiceIRlist {
   public var @bool mHasReturnValue
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmFunctionPrototype ?let @string inReturnTypeLLVMName
                            ?let @string inFunctionName
@@ -433,7 +433,7 @@ func llvmFunctionPrototype ?let @string inReturnTypeLLVMName
   result += ")" + llvmAttributeFunction ()
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc generateSectionDispatcher
   ?let @string inCurrentDirectory
@@ -486,7 +486,7 @@ proc generateSectionDispatcher
   ioAssemblerCode += "---------------------------------------------------------*\n"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc generatePrimitiveAndServiceDispatcher
   ?let @string inCurrentDirectory
@@ -495,12 +495,12 @@ proc generatePrimitiveAndServiceDispatcher
   ?let @primitiveAndServiceIRlist inServiceList
   ?targetParameters:let @targetParameters inTargetParameters
 {
-#--- Generate service handler
+//--- Generate service handler
   ioAssemblerCode += getTargetTextFile (
     !currentDir:inCurrentDirectory
     !from:inTargetName + "/" + inTargetParameters.mServiceHandler
   )
-#---
+//---
   for service in inServiceList do (idx)
     if service.mHasReturnValue then
       var s = getTargetTextFile (
@@ -536,19 +536,19 @@ proc generatePrimitiveAndServiceDispatcher
   ioAssemblerCode += "\n"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#! SYSTEM USER ROUTINE IR
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//! SYSTEM USER ROUTINE IR
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @systemUserRoutineIR : @abstractRoutineIR {
   public var @string mMangledImplementationName
   public var @routineTypedSignature mFormalArgumentList
   public var @unifiedTypeMapEntry mReceiverTypeProxy
-  public var @bool mIsSection # If false, service or primitive
+  public var @bool mIsSection // If false, service or primitive
   public var @unifiedTypeMapEntry mReturnTypeProxy
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @systemUserRoutineIR enterAccessibleEntities
    ?!@stringset ioInvokedRoutineSet
@@ -557,7 +557,7 @@ override method @systemUserRoutineIR enterAccessibleEntities
   ioInvokedRoutineSet ++= self.mMangledImplementationName
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @systemUserRoutineIR svcDeclarationGeneration
   ?!@primitiveAndServiceIRlist ioPrimitiveAndServiceList
@@ -573,7 +573,7 @@ override method @systemUserRoutineIR svcDeclarationGeneration
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @systemUserRoutineIR llvmCodeGeneration 
   ?!@string ioLLVMcode
@@ -610,4 +610,4 @@ override method @systemUserRoutineIR llvmCodeGeneration
   ioLLVMcode += ")" + llvmAttributeFunction () + "\n\n"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

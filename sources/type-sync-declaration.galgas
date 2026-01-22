@@ -1,19 +1,19 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @syncDeclarationAST : @abstractDeclarationAST {
   public var @lstring mSyncToolName
   public var @structurePropertyListAST mStructurePropertyListAST
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <declaration> ?!@ast ioAST {
     $sync$
@@ -37,18 +37,18 @@ syntax extension omnibus_syntax {
     }
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  PRECEDENCE GRAPH                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  PRECEDENCE GRAPH                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @syncDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-#--- Add structure type name as node
+//--- Add structure type name as node
   [!?ioGraph addNode !self.mSyncToolName !self]
-#--- Add property types
+//--- Add property types
   for (propertyName * visibility fieldTypeName propertyKind) in self.mStructurePropertyListAST do
     if fieldTypeName.string != "" then
       [!?ioGraph addEdge !from: self.mSyncToolName !to: fieldTypeName]
@@ -70,21 +70,21 @@ override method @syncDeclarationAST enterInPrecedenceGraph ?!@semanticTypePreced
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 override getter @syncDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = "sync " + self.mSyncToolName 
 }
 
-#·······················································································································
+//·······················································································································
 
 override getter @syncDeclarationAST locationForErrorSignaling -> @location outLocation {
   outLocation = self.mSyncToolName.location
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  ENTER IN CONTEXT                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  ENTER IN CONTEXT                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @syncDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
@@ -96,7 +96,7 @@ override method @syncDeclarationAST enterInContext
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR ioUserLLVMTypeDefinitionListIR
 {
-#---------------------------------------- Properties
+//---------------------------------------- Properties
   var @propertyList propertyList = @()
   var @sortedOperandIRList sortedOperandIRList = @()
   var @constructorSignature constructorSignature = @()
@@ -117,7 +117,7 @@ override method @syncDeclarationAST enterInContext
     ]
   end
   constructorKey += ")"
-#---------------------------------------- Constructor map
+//---------------------------------------- Constructor map
   var @constructorMap constructorMap = @()
   [!?constructorMap insertKey
     ! @{!constructorKey !self.mSyncToolName.location}
@@ -125,7 +125,7 @@ override method @syncDeclarationAST enterInContext
     !.structure {!sortedOperandList:sortedOperandIRList}
   ]
   [!?ioContext.mTypeConstructorMap insertKey !self.mSyncToolName !constructorMap]
-#---------------------------------------- Enter in type map
+//---------------------------------------- Enter in type map
   let structureType = @omnibusType {
     !subscript:.noSubscript
     !attributes:.instanciable
@@ -134,12 +134,12 @@ override method @syncDeclarationAST enterInContext
     !llvmBaseTypeName:self.mSyncToolName
   }
   [!?ioContext.mTypeMap insertType !self.mSyncToolName !type: structureType]
-#-------------------------------------------- GenerateLLVM type definitions
+//-------------------------------------------- GenerateLLVM type definitions
   ioUserLLVMTypeDefinitionListIR += !@userLLVMSructureTypeDefinitionIR {
     ![structureType llvmTypeName]
     !propertyList
   }
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 

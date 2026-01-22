@@ -1,4 +1,4 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 case . "omnibus-target"
 message "a target definition text file with the .omnibus-target extension"
@@ -6,7 +6,7 @@ grammar omnibus_target_grammar
 ?sourceFilePath:@lstring unused inSourceFile {
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 case . "omnibus-import"
 message "an imported text file with the .omnibus-import extension"
@@ -14,7 +14,7 @@ grammar omnibus_target_grammar
 ?sourceFilePath:@lstring unused inSourceFile {
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 case . "omnibus"
 message "a source text file with the .omnibus extension"
@@ -26,17 +26,17 @@ grammar omnibus_grammar
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc importFilesAndCompile ?sourceFilePath:let @lstring inSourceFile {
-#--- Parsing
+//--- Parsing
   var @ast ast = @{}
   grammar omnibus_grammar (
     !?ast
     ?importClauseList:let importedFileList
     ?endOfSourceFile:let endOfSourceFile
   ) in inSourceFile
-#--- Recursively import files
+//--- Recursively import files
   var @stringset importedFileAbsolutePathSet = .setWithString {!inSourceFile.string}
   let currentDirectory = [inSourceFile stringByDeletingLastPathComponent]
   recursiveImportFiles (
@@ -45,7 +45,7 @@ proc importFilesAndCompile ?sourceFilePath:let @lstring inSourceFile {
     !importClauseList:importedFileList
     !?importedFilePathSet:importedFileAbsolutePathSet
   )
-#--- Check target names are not duplicated
+//--- Check target names are not duplicated
   if @uint.errorCount == 0 then
     var @stringset targetNameSet = @[]
     for (targetName) in ast.mTargetListAST do
@@ -55,7 +55,7 @@ proc importFilesAndCompile ?sourceFilePath:let @lstring inSourceFile {
       targetNameSet ++= targetName.string
     end
   end
-#--- Compile project for every target
+//--- Compile project for every target
   if @uint.errorCount == 0 then
     if [ast.mTargetListAST count] == 0 then
       warning endOfSourceFile : "no target: only syntax analysis is performed"
@@ -76,7 +76,7 @@ proc importFilesAndCompile ?sourceFilePath:let @lstring inSourceFile {
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 private proc compileProject
   ?sourceFile:let @lstring inSourceFile
@@ -92,7 +92,7 @@ private proc compileProject
   end
   var @ast ast = inAST
   var @stringset sourceFileAbsolutePathSet = inImportedFileAbsolutePathSet
-#------------------------------------------------------------ Enter extensions
+//------------------------------------------------------------ Enter extensions
   ast.mDeclarationListAST = @[]
   for (declaration) in inAST.mDeclarationListAST do
     [declaration enterExtension
@@ -106,9 +106,9 @@ private proc compileProject
       error errorLocation : "'" + staticListName + "' static list is not defined"
     end
   end
-#------------------------------------------------------------ Add NOP function
+//------------------------------------------------------------ Add NOP function
   enter_NOP_function (!?ast.mDeclarationListAST)
-#------------------------------------------------------------ Add target specific files
+//------------------------------------------------------------ Add target specific files
   addTargetSpecificFiles (
     !forTarget: inTargetName
     !?toAST: ast
@@ -116,26 +116,26 @@ private proc compileProject
     !?importedFilePathSet: sourceFileAbsolutePathSet
   )
   if @uint.errorCount == 0 then
-  #------------------------------------------------------------ Add Predefined types
-  #--- Add compile time boolean type
+  //------------------------------------------------------------ Add Predefined types
+  //--- Add compile time boolean type
    ast.mDeclarationListAST += !@compiletimeBoolAST {}
-  #--- Add compile time int type
+  //--- Add compile time int type
    ast.mDeclarationListAST += !@compileTimeIntAST {}
-  #--- Bool type
+  //--- Bool type
     ast.mDeclarationListAST += !@boolTypeAST {}
-  #--- Add String type
+  //--- Add String type
     ast.mDeclarationListAST += !@literalStringDeclarationAST {}
   end
-#------------------------------------------------------------ Retain required drivers
+//------------------------------------------------------------ Retain required drivers
   if @uint.errorCount == 0 then
     retainRequiredDrivers (!?ast)
   end
-#------------------------------------------------------------ printPasses option
+//------------------------------------------------------------ printPasses option
   if [option omnibus_options.printPasses value] & (@uint.errorCount == 0) then
     print (!"    " + [ast.mDeclarationListAST count] + " declarations\n" )
     print (!"    Duration: " + [parsingTime string] + "\n")
   end
-#------------------------------------------------------------ Ordered declaration list
+//------------------------------------------------------------ Ordered declaration list
   var @declarationListAST orderedDeclarationListAST = @[]
   if @uint.errorCount == 0 then
     let @timer t = .start 
@@ -152,7 +152,7 @@ private proc compileProject
       print (!"    Duration: " + [t string] + "\n")
     end
   end
-#------------------------------------------------------------ Check "check target" declarations
+//------------------------------------------------------------ Check "check target" declarations
   if @uint.errorCount == 0 then
     for (targetLocation acceptedTargetList) in ast.mCheckTargetListAST do
       var accepted = false
@@ -164,7 +164,7 @@ private proc compileProject
       end
     end
   end
-#------------------------------------------------------------ Semantic context
+//------------------------------------------------------------ Semantic context
   var @semanticContext semanticContext = @{}
   var @staticEntityMap globalLiteralStringMap = @{}
   var @staticListInitializationMap staticListValueMap = @()
@@ -190,7 +190,7 @@ private proc compileProject
       print (!"** Context: " + [t string] + "\n")
     end
   end
-#------------------------------------------------------------ Semantic analysis
+//------------------------------------------------------------ Semantic analysis
   var @intermediateCodeStruct intermediateCodeStruct = @{}
   if @uint.errorCount == 0 then
     let @timer t = .start 
@@ -210,7 +210,7 @@ private proc compileProject
       print (!"** Semantic: " + [t string] + "\n") 
     end
   end
-#------------------------------------------------------------ Code optimization
+//------------------------------------------------------------ Code optimization
   if @uint.errorCount == 0 then
     let @timer tOpt = .start 
     codeOptimization (!inSourceFile.string !?intermediateCode:intermediateCodeStruct)
@@ -218,7 +218,7 @@ private proc compileProject
       print (!"    Duration: " + [tOpt string] + "\n")
     end
   end
-#------------------------------------------------------------ Code generation
+//------------------------------------------------------------ Code generation
   if @uint.errorCount == 0 then
     codeGeneration (
       !currentDir:inCurrentDirectory
@@ -236,7 +236,7 @@ private proc compileProject
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 private proc addTargetSpecificFiles
   ?forTarget:let @lstring inTargetName
@@ -244,7 +244,7 @@ private proc addTargetSpecificFiles
   ?currentDirectory:let @string inCurrentDirectory
   ?!importedFilePathSet:@stringset ioImportedFileAbsolutePathSet
 {
-  if [option omnibus_options.useDirAsTargetDir value] != "" then # Target is defined in files
+  if [option omnibus_options.useDirAsTargetDir value] != "" then // Target is defined in files
     let targetDirectory = [[option omnibus_options.useDirAsTargetDir value] absolutePathFromPath !inCurrentDirectory]
     if [targetDirectory directoryExists] then
       let targetDefinitionFullPath = targetDirectory + "/" + inTargetName.string + "/+config.omnibus-target"
@@ -267,8 +267,8 @@ private proc addTargetSpecificFiles
     else
       error ["" nowhere]: "the '" + [option omnibus_options.useDirAsTargetDir value] + "' directory does not exist"
     end
-  else # Target is defined in embedded files
-  #--- Parse target definition file
+  else // Target is defined in embedded files
+  //--- Parse target definition file
     let @filewrapper fw = [filewrapper targetTemplates]
     if [fw fileExistsAtPath !inTargetName.string + "/+config.omnibus-target"] then
       let source = [fw textFileContentsAtPath !inTargetName.string + "/+config.omnibus-target"]
@@ -290,7 +290,7 @@ private proc addTargetSpecificFiles
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 private proc recursiveImportFileSystemTargetFiles
   ?!ast:@ast ioAST
@@ -337,7 +337,7 @@ private proc recursiveImportFileSystemTargetFiles
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 private proc recursiveImportEmbeddedTargetFiles
   ?!ast:@ast ioAST
@@ -370,7 +370,7 @@ private proc recursiveImportEmbeddedTargetFiles
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 private proc recursiveImportFiles
   ?!ast:@ast ioAST
@@ -380,7 +380,7 @@ private proc recursiveImportFiles
 {
   for (path) in inImportedClauseList do
     let absolutePath = [path.string absolutePathFromPath !inCurrentDirectory]
-    if [absolutePath fileExists] then # Exists in file system ?
+    if [absolutePath fileExists] then // Exists in file system ?
       if not [ioImportedFileAbsolutePathSet hasKey !absolutePath] then
         ioImportedFileAbsolutePathSet ++= absolutePath
         if [absolutePath pathExtension] == "omnibus-import" then
@@ -452,4 +452,4 @@ private proc recursiveImportFiles
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

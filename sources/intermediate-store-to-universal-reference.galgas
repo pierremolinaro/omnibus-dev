@@ -1,5 +1,4 @@
-
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 setter @instructionListIR appendStoreToUniversalReference
   ?let @string inLLVMVarName
@@ -9,7 +8,7 @@ setter @instructionListIR appendStoreToUniversalReference
   self += !@storeToUniversalReferenceIR {!inLLVMVarName !inTargetVarType !inSourceValue}
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @storeToUniversalReferenceIR : @abstractInstructionIR {
   public var @string mLLVMTargetVarName
@@ -17,7 +16,7 @@ class @storeToUniversalReferenceIR : @abstractInstructionIR {
   public var @objectIR mSourceValue
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @storeToUniversalReferenceIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
@@ -47,7 +46,7 @@ override method @storeToUniversalReferenceIR enterAccessibleEntities
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @storeToUniversalReferenceIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -151,4 +150,4 @@ override method @storeToUniversalReferenceIR llvmInstructionCode
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

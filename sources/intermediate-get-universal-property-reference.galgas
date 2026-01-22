@@ -9,7 +9,7 @@ setter @instructionListIR appendGetUniversalPropertyReference
   self += !@getUniversalPropertyReferenceIR {!inType !inLLVMName !inElementLLVMName !inPropertyIndex !inPropertyName}
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @getUniversalPropertyReferenceIR : @abstractInstructionIR {
   public var @omnibusType mType
@@ -19,7 +19,7 @@ class @getUniversalPropertyReferenceIR : @abstractInstructionIR {
   public var @string mPropertyName
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @getUniversalPropertyReferenceIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -32,4 +32,4 @@ override method @getUniversalPropertyReferenceIR llvmInstructionCode
   ioLLVMcode += " ; " + self.mPropertyName + "\n"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

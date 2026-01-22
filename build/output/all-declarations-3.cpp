@@ -8,382 +8,6 @@
 #include "all-declarations-3.h"
 
 //--------------------------------------------------------------------------------------------------
-//  Enum controlRegisterBitSlice
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterBitSlice::GGS_controlRegisterBitSlice (void) :
-mAssociatedValues (),
-mEnum (Enumeration::invalid) {
-}
-
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterBitSlice GGS_controlRegisterBitSlice::class_func_unusedBits (const GGS_lbigint & inAssociatedValue0
-                                                                                COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_controlRegisterBitSlice result ;
-  result.mEnum = Enumeration::enum_unusedBits ;
-  AC_GALGAS_root * p = nullptr ;
-  macroMyNew (p, GGS_controlRegisterBitSlice_2E_unusedBits (inAssociatedValue0)) ;
-  EnumerationAssociatedValues * eav = nullptr ;
-  macroMyNew (eav, EnumerationAssociatedValues (p COMMA_HERE)) ;
-  result.mAssociatedValues.assignPointer (eav) ; // Ownership is transfered to mAssociatedValues
-  macroDetachSharedObject (eav) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterBitSlice GGS_controlRegisterBitSlice::class_func_namedBit (const GGS_lstring & inAssociatedValue0,
-                                                                              const GGS_lbigint & inAssociatedValue1
-                                                                              COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_controlRegisterBitSlice result ;
-  result.mEnum = Enumeration::enum_namedBit ;
-  AC_GALGAS_root * p = nullptr ;
-  macroMyNew (p, GGS_controlRegisterBitSlice_2E_namedBit (inAssociatedValue0, inAssociatedValue1)) ;
-  EnumerationAssociatedValues * eav = nullptr ;
-  macroMyNew (eav, EnumerationAssociatedValues (p COMMA_HERE)) ;
-  result.mAssociatedValues.assignPointer (eav) ; // Ownership is transfered to mAssociatedValues
-  macroDetachSharedObject (eav) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_controlRegisterBitSlice::method_extractUnusedBits (GGS_lbigint & outAssociatedValue_count,
-                                                            Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) const {
-  if (mEnum != Enumeration::enum_unusedBits) {
-    outAssociatedValue_count.drop () ;
-    String s ;
-    s.appendCString ("method @controlRegisterBitSlice.unusedBits invoked with an invalid enum value") ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const auto ptr = (GGS_controlRegisterBitSlice_2E_unusedBits *) mAssociatedValues.associatedValuesPointer () ;
-    outAssociatedValue_count = ptr->mProperty_count ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_controlRegisterBitSlice::method_extractNamedBit (GGS_lstring & outAssociatedValue_name,
-                                                          GGS_lbigint & outAssociatedValue_count,
-                                                          Compiler * inCompiler
-                                                          COMMA_LOCATION_ARGS) const {
-  if (mEnum != Enumeration::enum_namedBit) {
-    outAssociatedValue_name.drop () ;
-    outAssociatedValue_count.drop () ;
-    String s ;
-    s.appendCString ("method @controlRegisterBitSlice.namedBit invoked with an invalid enum value") ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const auto ptr = (GGS_controlRegisterBitSlice_2E_namedBit *) mAssociatedValues.associatedValuesPointer () ;
-    outAssociatedValue_name = ptr->mProperty_name ;
-    outAssociatedValue_count = ptr->mProperty_count ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterBitSlice_2E_unusedBits_3F_ GGS_controlRegisterBitSlice::getter_getUnusedBits (UNUSED_LOCATION_ARGS) const {
-  GGS_controlRegisterBitSlice_2E_unusedBits_3F_ result ;
-  if (mEnum == Enumeration::enum_unusedBits) {
-    const auto ptr = (const GGS_controlRegisterBitSlice_2E_unusedBits *) mAssociatedValues.associatedValuesPointer () ;
-    result = GGS_controlRegisterBitSlice_2E_unusedBits (*ptr) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_controlRegisterBitSlice::getAssociatedValuesFor_unusedBits (GGS_lbigint & out_count) const {
-  const auto ptr = (const GGS_controlRegisterBitSlice_2E_unusedBits *) mAssociatedValues.associatedValuesPointer () ;
-  out_count = ptr->mProperty_count ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterBitSlice_2E_namedBit_3F_ GGS_controlRegisterBitSlice::getter_getNamedBit (UNUSED_LOCATION_ARGS) const {
-  GGS_controlRegisterBitSlice_2E_namedBit_3F_ result ;
-  if (mEnum == Enumeration::enum_namedBit) {
-    const auto ptr = (const GGS_controlRegisterBitSlice_2E_namedBit *) mAssociatedValues.associatedValuesPointer () ;
-    result = GGS_controlRegisterBitSlice_2E_namedBit (*ptr) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_controlRegisterBitSlice::getAssociatedValuesFor_namedBit (GGS_lstring & out_name,
-                                                                   GGS_lbigint & out_count) const {
-  const auto ptr = (const GGS_controlRegisterBitSlice_2E_namedBit *) mAssociatedValues.associatedValuesPointer () ;
-  out_name = ptr->mProperty_name ;
-  out_count = ptr->mProperty_count ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-static const char * gEnumNameArrayFor_controlRegisterBitSlice [3] = {
-  "(not built)",
-  "unusedBits",
-  "namedBit"
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_bool GGS_controlRegisterBitSlice::getter_isUnusedBits (UNUSED_LOCATION_ARGS) const {
-  return GGS_bool (Enumeration::invalid != mEnum, Enumeration::enum_unusedBits == mEnum) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_bool GGS_controlRegisterBitSlice::getter_isNamedBit (UNUSED_LOCATION_ARGS) const {
-  return GGS_bool (Enumeration::invalid != mEnum, Enumeration::enum_namedBit == mEnum) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_controlRegisterBitSlice::description (String & ioString,
-                                               const int32_t inIndentation) const {
-  ioString.appendCString ("<enum @controlRegisterBitSlice: ") ;
-  ioString.appendCString (gEnumNameArrayFor_controlRegisterBitSlice [size_t (mEnum)]) ;
-  mAssociatedValues.description (ioString, inIndentation) ;
-  ioString.appendCString (">") ;
-}
-
-
-//--------------------------------------------------------------------------------------------------
-//     @controlRegisterBitSlice generic code implementation
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_controlRegisterBitSlice ("controlRegisterBitSlice",
-                                                                            nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor * GGS_controlRegisterBitSlice::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_controlRegisterBitSlice ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_controlRegisterBitSlice::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_controlRegisterBitSlice (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterBitSlice GGS_controlRegisterBitSlice::extractObject (const GGS_object & inObject,
-                                                                        Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) {
-  GGS_controlRegisterBitSlice result ;
-  const GGS_controlRegisterBitSlice * p = (const GGS_controlRegisterBitSlice *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_controlRegisterBitSlice *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("controlRegisterBitSlice", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//  Enum controlRegisterGroupKindAST
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterGroupKindAST::GGS_controlRegisterGroupKindAST (void) :
-mAssociatedValues (),
-mEnum (Enumeration::invalid) {
-}
-
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterGroupKindAST GGS_controlRegisterGroupKindAST::class_func_single (const GGS_lbigint & inAssociatedValue0
-                                                                                    COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_controlRegisterGroupKindAST result ;
-  result.mEnum = Enumeration::enum_single ;
-  AC_GALGAS_root * p = nullptr ;
-  macroMyNew (p, GGS_controlRegisterGroupKindAST_2E_single (inAssociatedValue0)) ;
-  EnumerationAssociatedValues * eav = nullptr ;
-  macroMyNew (eav, EnumerationAssociatedValues (p COMMA_HERE)) ;
-  result.mAssociatedValues.assignPointer (eav) ; // Ownership is transfered to mAssociatedValues
-  macroDetachSharedObject (eav) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterGroupKindAST GGS_controlRegisterGroupKindAST::class_func_groupArray (const GGS_expressionAST & inAssociatedValue0,
-                                                                                        const GGS_location & inAssociatedValue1,
-                                                                                        const GGS_lbigintlist & inAssociatedValue2
-                                                                                        COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_controlRegisterGroupKindAST result ;
-  result.mEnum = Enumeration::enum_groupArray ;
-  AC_GALGAS_root * p = nullptr ;
-  macroMyNew (p, GGS_controlRegisterGroupKindAST_2E_groupArray (inAssociatedValue0, inAssociatedValue1, inAssociatedValue2)) ;
-  EnumerationAssociatedValues * eav = nullptr ;
-  macroMyNew (eav, EnumerationAssociatedValues (p COMMA_HERE)) ;
-  result.mAssociatedValues.assignPointer (eav) ; // Ownership is transfered to mAssociatedValues
-  macroDetachSharedObject (eav) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_controlRegisterGroupKindAST::method_extractSingle (GGS_lbigint & outAssociatedValue_registerGroupBaseAddress,
-                                                            Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) const {
-  if (mEnum != Enumeration::enum_single) {
-    outAssociatedValue_registerGroupBaseAddress.drop () ;
-    String s ;
-    s.appendCString ("method @controlRegisterGroupKindAST.single invoked with an invalid enum value") ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const auto ptr = (GGS_controlRegisterGroupKindAST_2E_single *) mAssociatedValues.associatedValuesPointer () ;
-    outAssociatedValue_registerGroupBaseAddress = ptr->mProperty_registerGroupBaseAddress ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_controlRegisterGroupKindAST::method_extractGroupArray (GGS_expressionAST & outAssociatedValue_groupSizeExp,
-                                                                GGS_location & outAssociatedValue_groupSizeExpLocation,
-                                                                GGS_lbigintlist & outAssociatedValue_baseAddresses,
-                                                                Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) const {
-  if (mEnum != Enumeration::enum_groupArray) {
-    outAssociatedValue_groupSizeExp.drop () ;
-    outAssociatedValue_groupSizeExpLocation.drop () ;
-    outAssociatedValue_baseAddresses.drop () ;
-    String s ;
-    s.appendCString ("method @controlRegisterGroupKindAST.groupArray invoked with an invalid enum value") ;
-    inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
-  }else{
-    const auto ptr = (GGS_controlRegisterGroupKindAST_2E_groupArray *) mAssociatedValues.associatedValuesPointer () ;
-    outAssociatedValue_groupSizeExp = ptr->mProperty_groupSizeExp ;
-    outAssociatedValue_groupSizeExpLocation = ptr->mProperty_groupSizeExpLocation ;
-    outAssociatedValue_baseAddresses = ptr->mProperty_baseAddresses ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterGroupKindAST_2E_single_3F_ GGS_controlRegisterGroupKindAST::getter_getSingle (UNUSED_LOCATION_ARGS) const {
-  GGS_controlRegisterGroupKindAST_2E_single_3F_ result ;
-  if (mEnum == Enumeration::enum_single) {
-    const auto ptr = (const GGS_controlRegisterGroupKindAST_2E_single *) mAssociatedValues.associatedValuesPointer () ;
-    result = GGS_controlRegisterGroupKindAST_2E_single (*ptr) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_controlRegisterGroupKindAST::getAssociatedValuesFor_single (GGS_lbigint & out_registerGroupBaseAddress) const {
-  const auto ptr = (const GGS_controlRegisterGroupKindAST_2E_single *) mAssociatedValues.associatedValuesPointer () ;
-  out_registerGroupBaseAddress = ptr->mProperty_registerGroupBaseAddress ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterGroupKindAST_2E_groupArray_3F_ GGS_controlRegisterGroupKindAST::getter_getGroupArray (UNUSED_LOCATION_ARGS) const {
-  GGS_controlRegisterGroupKindAST_2E_groupArray_3F_ result ;
-  if (mEnum == Enumeration::enum_groupArray) {
-    const auto ptr = (const GGS_controlRegisterGroupKindAST_2E_groupArray *) mAssociatedValues.associatedValuesPointer () ;
-    result = GGS_controlRegisterGroupKindAST_2E_groupArray (*ptr) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_controlRegisterGroupKindAST::getAssociatedValuesFor_groupArray (GGS_expressionAST & out_groupSizeExp,
-                                                                         GGS_location & out_groupSizeExpLocation,
-                                                                         GGS_lbigintlist & out_baseAddresses) const {
-  const auto ptr = (const GGS_controlRegisterGroupKindAST_2E_groupArray *) mAssociatedValues.associatedValuesPointer () ;
-  out_groupSizeExp = ptr->mProperty_groupSizeExp ;
-  out_groupSizeExpLocation = ptr->mProperty_groupSizeExpLocation ;
-  out_baseAddresses = ptr->mProperty_baseAddresses ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-static const char * gEnumNameArrayFor_controlRegisterGroupKindAST [3] = {
-  "(not built)",
-  "single",
-  "groupArray"
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_bool GGS_controlRegisterGroupKindAST::getter_isSingle (UNUSED_LOCATION_ARGS) const {
-  return GGS_bool (Enumeration::invalid != mEnum, Enumeration::enum_single == mEnum) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_bool GGS_controlRegisterGroupKindAST::getter_isGroupArray (UNUSED_LOCATION_ARGS) const {
-  return GGS_bool (Enumeration::invalid != mEnum, Enumeration::enum_groupArray == mEnum) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_controlRegisterGroupKindAST::description (String & ioString,
-                                                   const int32_t inIndentation) const {
-  ioString.appendCString ("<enum @controlRegisterGroupKindAST: ") ;
-  ioString.appendCString (gEnumNameArrayFor_controlRegisterGroupKindAST [size_t (mEnum)]) ;
-  mAssociatedValues.description (ioString, inIndentation) ;
-  ioString.appendCString (">") ;
-}
-
-
-//--------------------------------------------------------------------------------------------------
-//     @controlRegisterGroupKindAST generic code implementation
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_controlRegisterGroupKindAST ("controlRegisterGroupKindAST",
-                                                                                nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor * GGS_controlRegisterGroupKindAST::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_controlRegisterGroupKindAST ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_controlRegisterGroupKindAST::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_controlRegisterGroupKindAST (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterGroupKindAST GGS_controlRegisterGroupKindAST::extractObject (const GGS_object & inObject,
-                                                                                Compiler * inCompiler
-                                                                                COMMA_LOCATION_ARGS) {
-  GGS_controlRegisterGroupKindAST result ;
-  const GGS_controlRegisterGroupKindAST * p = (const GGS_controlRegisterGroupKindAST *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_controlRegisterGroupKindAST *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("controlRegisterGroupKindAST", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
 //Class for element of '@registerGroupListAST' list
 //--------------------------------------------------------------------------------------------------
 
@@ -517,14 +141,6 @@ void GGS_registerGroupListAST::description (String & ioString,
     ioString.appendCString (" not built") ;
   }
   ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_registerGroupListAST GGS_registerGroupListAST::class_func_emptyList (UNUSED_LOCATION_ARGS) {
-  GGS_registerGroupListAST result ;
-  result.mArray.setCapacity (16) ; // Build
-  return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1057,17 +673,6 @@ GGS_abstractDeclarationAST (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GGS_controlRegisterGroupDeclarationAST GGS_controlRegisterGroupDeclarationAST::class_func_new (const GGS_registerGroupListAST & in_mRegisterGroupList,
-                                                                                               const GGS_controlRegisterDeclarationList & in_mRegisters,
-                                                                                               Compiler * inCompiler
-                                                                                               COMMA_LOCATION_ARGS) {
-  GGS_controlRegisterGroupDeclarationAST result ;
-  macroMyNew (result.mObjectPtr, cPtr_controlRegisterGroupDeclarationAST (in_mRegisterGroupList, in_mRegisters,  inCompiler COMMA_THERE)) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 GGS_registerGroupListAST GGS_controlRegisterGroupDeclarationAST::readProperty_mRegisterGroupList (void) const {
   if (nullptr == mObjectPtr) {
     return GGS_registerGroupListAST () ;
@@ -1463,14 +1068,6 @@ void GGS_controlRegisterFieldList::description (String & ioString,
     ioString.appendCString (" not built") ;
   }
   ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterFieldList GGS_controlRegisterFieldList::class_func_emptyList (UNUSED_LOCATION_ARGS) {
-  GGS_controlRegisterFieldList result ;
-  result.mArray.setCapacity (16) ; // Build
-  return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -1977,14 +1574,6 @@ GGS_controlRegisterFieldMap & GGS_controlRegisterFieldMap::operator = (const GGS
 //--------------------------------------------------------------------------------------------------
 
 GGS_controlRegisterFieldMap GGS_controlRegisterFieldMap::init (Compiler * COMMA_LOCATION_ARGS) {
-  GGS_controlRegisterFieldMap result ;
-  result.build (THERE) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterFieldMap GGS_controlRegisterFieldMap::class_func_emptyMap (LOCATION_ARGS) {
   GGS_controlRegisterFieldMap result ;
   result.build (THERE) ;
   return result ;
@@ -2533,14 +2122,6 @@ GGS_sliceMap & GGS_sliceMap::operator = (const GGS_sliceMap & inSource) {
 //--------------------------------------------------------------------------------------------------
 
 GGS_sliceMap GGS_sliceMap::init (Compiler * COMMA_LOCATION_ARGS) {
-  GGS_sliceMap result ;
-  result.build (THERE) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_sliceMap GGS_sliceMap::class_func_emptyMap (LOCATION_ARGS) {
   GGS_sliceMap result ;
   result.build (THERE) ;
   return result ;
@@ -3666,15 +3247,15 @@ void cPtr_controlRegisterGroupDeclarationAST::method_noteTypesInPrecedenceGraph 
                                                                                  Compiler * inCompiler
                                                                                  COMMA_UNUSED_LOCATION_ARGS) {
   const GGS_controlRegisterGroupDeclarationAST temp_0 = this ;
-  UpEnumerator_controlRegisterDeclarationList enumerator_11400 (temp_0.readProperty_mRegisters ()) ;
-  while (enumerator_11400.hasCurrentObject ()) {
+  UpEnumerator_controlRegisterDeclarationList enumerator_11440 (temp_0.readProperty_mRegisters ()) ;
+  while (enumerator_11440.hasCurrentObject ()) {
     {
-    ioArgument_ioGraph.setter_noteNode (enumerator_11400.current (HERE).readProperty_mRegisterTypeName () COMMA_SOURCE_FILE ("declaration-control-register.galgas", 297)) ;
+    ioArgument_ioGraph.setter_noteNode (enumerator_11440.current (HERE).readProperty_mRegisterTypeName () COMMA_SOURCE_FILE ("declaration-control-register.galgas", 297)) ;
     }
     {
-    ioArgument_ioGraph.setter_addEdge (function_compileTimeDeclarationBarrier (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 298)), enumerator_11400.current (HERE).readProperty_mRegisterTypeName () COMMA_SOURCE_FILE ("declaration-control-register.galgas", 298)) ;
+    ioArgument_ioGraph.setter_addEdge (function_compileTimeDeclarationBarrier (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 298)), enumerator_11440.current (HERE).readProperty_mRegisterTypeName () COMMA_SOURCE_FILE ("declaration-control-register.galgas", 298)) ;
     }
-    enumerator_11400.gotoNextObject () ;
+    enumerator_11440.gotoNextObject () ;
   }
 }
 
@@ -3723,14 +3304,6 @@ GGS_controlRegisterMap & GGS_controlRegisterMap::operator = (const GGS_controlRe
 //--------------------------------------------------------------------------------------------------
 
 GGS_controlRegisterMap GGS_controlRegisterMap::init (Compiler * COMMA_LOCATION_ARGS) {
-  GGS_controlRegisterMap result ;
-  result.build (THERE) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterMap GGS_controlRegisterMap::class_func_emptyMap (LOCATION_ARGS) {
   GGS_controlRegisterMap result ;
   result.build (THERE) ;
   return result ;
@@ -4953,14 +4526,6 @@ GGS_controlRegisterGroupMap GGS_controlRegisterGroupMap::init (Compiler * COMMA_
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_controlRegisterGroupMap GGS_controlRegisterGroupMap::class_func_emptyMap (LOCATION_ARGS) {
-  GGS_controlRegisterGroupMap result ;
-  result.build (THERE) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 GGS_bool GGS_controlRegisterGroupMap::getter_hasKey (const GGS_string & inKey
                                                      COMMA_UNUSED_LOCATION_ARGS) const {
   GGS_bool result ;
@@ -5729,14 +5294,6 @@ void GGS_controlRegisterGroupArrayList::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_controlRegisterGroupArrayList GGS_controlRegisterGroupArrayList::class_func_emptyList (UNUSED_LOCATION_ARGS) {
-  GGS_controlRegisterGroupArrayList result ;
-  result.mArray.setCapacity (16) ; // Build
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 GGS_controlRegisterGroupArrayList GGS_controlRegisterGroupArrayList::init (Compiler * COMMA_UNUSED_LOCATION_ARGS) {
   GGS_controlRegisterGroupArrayList result ;
   result.mArray.setCapacity (16) ; // Build
@@ -6247,14 +5804,6 @@ void GGS_controlRegisterByAddress::plusPlusAssignOperation (const GGS_controlReg
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_controlRegisterByAddress GGS_controlRegisterByAddress::class_func_emptySortedList (UNUSED_LOCATION_ARGS) {
-  GGS_controlRegisterByAddress result ;
-  result.mSharedArray.setCapacity (16) ; // Build
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 GGS_controlRegisterByAddress GGS_controlRegisterByAddress::init (Compiler * COMMA_UNUSED_LOCATION_ARGS) {
   GGS_controlRegisterByAddress result ;
   result.mSharedArray.setCapacity (16) ; // Build
@@ -6266,7 +5815,7 @@ GGS_controlRegisterByAddress GGS_controlRegisterByAddress::init (Compiler * COMM
 GGS_controlRegisterByAddress GGS_controlRegisterByAddress::class_func_sortedListWithValue (const GGS_bigint & inOperand0,
                                                                                            const GGS_string & inOperand1
                                                                                            COMMA_LOCATION_ARGS) {
-  GGS_controlRegisterByAddress result = class_func_emptySortedList (THERE) ;
+  GGS_controlRegisterByAddress result = init (nullptr COMMA_THERE) ;
   const GGS_controlRegisterByAddress_2E_element newElement (inOperand0, inOperand1) ;
   result.plusPlusAssignOperation (newElement COMMA_THERE) ;
   return result ;
@@ -6544,14 +6093,6 @@ void GGS_controlRegisterByName::plusPlusAssignOperation (const GGS_controlRegist
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_controlRegisterByName GGS_controlRegisterByName::class_func_emptySortedList (UNUSED_LOCATION_ARGS) {
-  GGS_controlRegisterByName result ;
-  result.mSharedArray.setCapacity (16) ; // Build
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 GGS_controlRegisterByName GGS_controlRegisterByName::init (Compiler * COMMA_UNUSED_LOCATION_ARGS) {
   GGS_controlRegisterByName result ;
   result.mSharedArray.setCapacity (16) ; // Build
@@ -6564,7 +6105,7 @@ GGS_controlRegisterByName GGS_controlRegisterByName::class_func_sortedListWithVa
                                                                                      const GGS_string & inOperand1,
                                                                                      const GGS_string & inOperand2
                                                                                      COMMA_LOCATION_ARGS) {
-  GGS_controlRegisterByName result = class_func_emptySortedList (THERE) ;
+  GGS_controlRegisterByName result = init (nullptr COMMA_THERE) ;
   const GGS_controlRegisterByName_2E_element newElement (inOperand0, inOperand1, inOperand2) ;
   result.plusPlusAssignOperation (newElement COMMA_THERE) ;
   return result ;
@@ -6881,16 +6422,6 @@ GGS_instructionNOP::GGS_instructionNOP (const cPtr_instructionNOP * inSourcePtr)
 GGS_instructionAST (inSourcePtr) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_instructionNOP) ;
 }
-//--------------------------------------------------------------------------------------------------
-
-GGS_instructionNOP GGS_instructionNOP::class_func_new (const GGS_location & in_mInstructionLocation,
-                                                       Compiler * inCompiler
-                                                       COMMA_LOCATION_ARGS) {
-  GGS_instructionNOP result ;
-  macroMyNew (result.mObjectPtr, cPtr_instructionNOP (in_mInstructionLocation,  inCompiler COMMA_THERE)) ;
-  return result ;
-}
-
 //--------------------------------------------------------------------------------------------------
 //Pointer class for @instructionNOP class
 //--------------------------------------------------------------------------------------------------
@@ -7227,14 +6758,6 @@ void GGS_genericFormalParameterList::description (String & ioString,
     ioString.appendCString (" not built") ;
   }
   ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_genericFormalParameterList GGS_genericFormalParameterList::class_func_emptyList (UNUSED_LOCATION_ARGS) {
-  GGS_genericFormalParameterList result ;
-  result.mArray.setCapacity (16) ; // Build
-  return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -7943,14 +7466,6 @@ GGS_assignmentOperatorMap GGS_assignmentOperatorMap::init (Compiler * COMMA_LOCA
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_assignmentOperatorMap GGS_assignmentOperatorMap::class_func_emptyMap (LOCATION_ARGS) {
-  GGS_assignmentOperatorMap result ;
-  result.build (THERE) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 GGS_bool GGS_assignmentOperatorMap::getter_hasKey (const GGS_string & inKey
                                                    COMMA_UNUSED_LOCATION_ARGS) const {
   GGS_bool result ;
@@ -8537,12 +8052,12 @@ void extensionSetter_appendAssignmentIR (GGS_instructionListIR & ioObject,
                                          const GGS_bool constinArgument_inTargetIsInitialized,
                                          Compiler * inCompiler
                                          COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_lstring var_key_15765 = function_assignmentOperatorKey (constinArgument_inTargetType, constinArgument_inErrorLocation, extensionGetter_type (constinArgument_inSourcePossibleReference, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 345)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 345)) ;
-  GGS_abstractAssignmentOperatorUsage var_operatorUsage_15907 ;
-  constinArgument_inAssignmentOperatorMap.method_searchKey (var_key_15765, var_operatorUsage_15907, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 346)) ;
-  GGS_instructionListIR var_instructions_15947 = GGS_instructionListIR::init (inCompiler COMMA_HERE) ;
-  callExtensionMethod_generateCode ((cPtr_abstractAssignmentOperatorUsage *) var_operatorUsage_15907.ptr (), ioArgument_ioTemporaries, var_instructions_15947, ioArgument_ioAllocaList, constinArgument_inTargetType, constinArgument_inTargetLLVMName, constinArgument_inSourcePossibleReference, constinArgument_inErrorLocation, constinArgument_inTargetIsInitialized, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 348)) ;
-  ioObject.plusAssignOperation(var_instructions_15947, inCompiler  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 358)) ;
+  GGS_lstring var_key_12995 = function_assignmentOperatorKey (constinArgument_inTargetType, constinArgument_inErrorLocation, extensionGetter_type (constinArgument_inSourcePossibleReference, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 281)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 281)) ;
+  GGS_abstractAssignmentOperatorUsage var_operatorUsage_13137 ;
+  constinArgument_inAssignmentOperatorMap.method_searchKey (var_key_12995, var_operatorUsage_13137, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 282)) ;
+  GGS_instructionListIR var_instructions_13177 = GGS_instructionListIR::init (inCompiler COMMA_HERE) ;
+  callExtensionMethod_generateCode ((cPtr_abstractAssignmentOperatorUsage *) var_operatorUsage_13137.ptr (), ioArgument_ioTemporaries, var_instructions_13177, ioArgument_ioAllocaList, constinArgument_inTargetType, constinArgument_inTargetLLVMName, constinArgument_inSourcePossibleReference, constinArgument_inErrorLocation, constinArgument_inTargetIsInitialized, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 284)) ;
+  ioObject.plusAssignOperation(var_instructions_13177, inCompiler  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 294)) ;
 }
 
 
@@ -8841,14 +8356,6 @@ GGS_simpleCopyAssignmentOperatorUsage::GGS_simpleCopyAssignmentOperatorUsage (co
 GGS_abstractAssignmentOperatorUsage (inSourcePtr) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_simpleCopyAssignmentOperatorUsage) ;
 }
-//--------------------------------------------------------------------------------------------------
-
-GGS_simpleCopyAssignmentOperatorUsage GGS_simpleCopyAssignmentOperatorUsage::class_func_new (Compiler * inCompiler COMMA_LOCATION_ARGS) {
-  GGS_simpleCopyAssignmentOperatorUsage result ;
-  macroMyNew (result.mObjectPtr, cPtr_simpleCopyAssignmentOperatorUsage (inCompiler COMMA_THERE)) ;
-  return result ;
-}
-
 //--------------------------------------------------------------------------------------------------
 //Pointer class for @simpleCopyAssignmentOperatorUsage class
 //--------------------------------------------------------------------------------------------------
@@ -9367,22 +8874,6 @@ GGS_bitbandInstructionIR::GGS_bitbandInstructionIR (const cPtr_bitbandInstructio
 GGS_abstractInstructionIR (inSourcePtr) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_bitbandInstructionIR) ;
 }
-//--------------------------------------------------------------------------------------------------
-
-GGS_bitbandInstructionIR GGS_bitbandInstructionIR::class_func_new (const GGS_string & in_mRegisterAddressLLVMname,
-                                                                   const GGS_objectIR & in_mBitExpressionOperand,
-                                                                   const GGS_objectIR & in_mSourceExpressionOperand,
-                                                                   const GGS_bigint & in_mBitbandRegisterBaseAddress,
-                                                                   const GGS_bigint & in_mBitbandRegisterRelocationAddress,
-                                                                   const GGS_bigint & in_mBitbandRegisterOffsetMultiplier,
-                                                                   const GGS_bigint & in_mBitbandRegisterBitMultiplier,
-                                                                   Compiler * inCompiler
-                                                                   COMMA_LOCATION_ARGS) {
-  GGS_bitbandInstructionIR result ;
-  macroMyNew (result.mObjectPtr, cPtr_bitbandInstructionIR (in_mRegisterAddressLLVMname, in_mBitExpressionOperand, in_mSourceExpressionOperand, in_mBitbandRegisterBaseAddress, in_mBitbandRegisterRelocationAddress, in_mBitbandRegisterOffsetMultiplier, in_mBitbandRegisterBitMultiplier,  inCompiler COMMA_THERE)) ;
-  return result ;
-}
-
 //--------------------------------------------------------------------------------------------------
 
 GGS_string GGS_bitbandInstructionIR::readProperty_mRegisterAddressLLVMname (void) const {
@@ -10531,14 +10022,6 @@ void GGS_sectionIRlist::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_sectionIRlist GGS_sectionIRlist::class_func_emptyList (UNUSED_LOCATION_ARGS) {
-  GGS_sectionIRlist result ;
-  result.mArray.setCapacity (16) ; // Build
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 GGS_sectionIRlist GGS_sectionIRlist::init (Compiler * COMMA_UNUSED_LOCATION_ARGS) {
   GGS_sectionIRlist result ;
   result.mArray.setCapacity (16) ; // Build
@@ -11219,14 +10702,6 @@ void GGS_primitiveAndServiceIRlist::description (String & ioString,
     ioString.appendCString (" not built") ;
   }
   ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_primitiveAndServiceIRlist GGS_primitiveAndServiceIRlist::class_func_emptyList (UNUSED_LOCATION_ARGS) {
-  GGS_primitiveAndServiceIRlist result ;
-  result.mArray.setCapacity (16) ; // Build
-  return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -11951,17 +11426,6 @@ GGS_instructionAST (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GGS_assertInstructionAST GGS_assertInstructionAST::class_func_new (const GGS_location & in_mInstructionLocation,
-                                                                   const GGS_expressionAST & in_mExpression,
-                                                                   Compiler * inCompiler
-                                                                   COMMA_LOCATION_ARGS) {
-  GGS_assertInstructionAST result ;
-  macroMyNew (result.mObjectPtr, cPtr_assertInstructionAST (in_mInstructionLocation, in_mExpression,  inCompiler COMMA_THERE)) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 GGS_expressionAST GGS_assertInstructionAST::readProperty_mExpression (void) const {
   if (nullptr == mObjectPtr) {
     return GGS_expressionAST () ;
@@ -12258,18 +11722,6 @@ GGS_assertInstructionIR::GGS_assertInstructionIR (const cPtr_assertInstructionIR
 GGS_abstractInstructionIR (inSourcePtr) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_assertInstructionIR) ;
 }
-//--------------------------------------------------------------------------------------------------
-
-GGS_assertInstructionIR GGS_assertInstructionIR::class_func_new (const GGS_location & in_mAssertInstructionLocation,
-                                                                 const GGS_instructionListIR & in_mInstructionList,
-                                                                 const GGS_objectIR & in_mExpressionValue,
-                                                                 Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) {
-  GGS_assertInstructionIR result ;
-  macroMyNew (result.mObjectPtr, cPtr_assertInstructionIR (in_mAssertInstructionLocation, in_mInstructionList, in_mExpressionValue,  inCompiler COMMA_THERE)) ;
-  return result ;
-}
-
 //--------------------------------------------------------------------------------------------------
 
 GGS_location GGS_assertInstructionIR::readProperty_mAssertInstructionLocation (void) const {
@@ -12755,18 +12207,6 @@ GGS_prefixOperatorExpressionAST::GGS_prefixOperatorExpressionAST (const cPtr_pre
 GGS_expressionAST (inSourcePtr) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_prefixOperatorExpressionAST) ;
 }
-//--------------------------------------------------------------------------------------------------
-
-GGS_prefixOperatorExpressionAST GGS_prefixOperatorExpressionAST::class_func_new (const GGS_location & in_mOperatorLocation,
-                                                                                 const GGS_prefixOperator & in_mOp,
-                                                                                 const GGS_expressionAST & in_mExpression,
-                                                                                 Compiler * inCompiler
-                                                                                 COMMA_LOCATION_ARGS) {
-  GGS_prefixOperatorExpressionAST result ;
-  macroMyNew (result.mObjectPtr, cPtr_prefixOperatorExpressionAST (in_mOperatorLocation, in_mOp, in_mExpression,  inCompiler COMMA_THERE)) ;
-  return result ;
-}
-
 //--------------------------------------------------------------------------------------------------
 
 GGS_location GGS_prefixOperatorExpressionAST::readProperty_mOperatorLocation (void) const {
@@ -13556,14 +12996,6 @@ void GGS_accessInAssignmentListAST::description (String & ioString,
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_accessInAssignmentListAST GGS_accessInAssignmentListAST::class_func_emptyList (UNUSED_LOCATION_ARGS) {
-  GGS_accessInAssignmentListAST result ;
-  result.mArray.setCapacity (16) ; // Build
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 GGS_accessInAssignmentListAST GGS_accessInAssignmentListAST::init (Compiler * COMMA_UNUSED_LOCATION_ARGS) {
   GGS_accessInAssignmentListAST result ;
   result.mArray.setCapacity (16) ; // Build
@@ -14103,22 +13535,22 @@ void extensionMethod_buildProcedureCallAccessList (const GGS_LValueOperandAST in
     break ;
   case GGS_LValueOperandAST::Enumeration::enum_property:
     {
-      GGS_lstring extractedValue_3022_name_0 ;
-      GGS_LValueOperandAST extractedValue_3045_next_1 ;
-      temp_0.getAssociatedValuesFor_property (extractedValue_3022_name_0, extractedValue_3045_next_1) ;
-      ioArgument_ioAccessList.addAssignOperation (GGS_accessInAssignmentAST::class_func_property (extractedValue_3022_name_0  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 72))  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 72)) ;
-      extensionMethod_buildProcedureCallAccessList (extractedValue_3045_next_1, ioArgument_ioAccessList, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 73)) ;
+      GGS_lstring extractedValue_3034_name_0 ;
+      GGS_LValueOperandAST extractedValue_3057_next_1 ;
+      temp_0.getAssociatedValuesFor_property (extractedValue_3034_name_0, extractedValue_3057_next_1) ;
+      ioArgument_ioAccessList.addAssignOperation (GGS_accessInAssignmentAST::class_func_property (extractedValue_3034_name_0  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 72))  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 72)) ;
+      extensionMethod_buildProcedureCallAccessList (extractedValue_3057_next_1, ioArgument_ioAccessList, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 73)) ;
     }
     break ;
   case GGS_LValueOperandAST::Enumeration::enum_arrayAccess:
     {
-      GGS_expressionAST extractedValue_3187_index_0 ;
-      GGS_location extractedValue_3203_endOfIndex_1 ;
-      GGS_bool extractedValue_3220_checkIndexExpression_2 ;
-      GGS_LValueOperandAST extractedValue_3259_next_3 ;
-      temp_0.getAssociatedValuesFor_arrayAccess (extractedValue_3187_index_0, extractedValue_3203_endOfIndex_1, extractedValue_3220_checkIndexExpression_2, extractedValue_3259_next_3) ;
-      ioArgument_ioAccessList.addAssignOperation (GGS_accessInAssignmentAST::class_func_arrayAccess (extractedValue_3187_index_0, extractedValue_3203_endOfIndex_1, extractedValue_3220_checkIndexExpression_2  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 75))  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 75)) ;
-      extensionMethod_buildProcedureCallAccessList (extractedValue_3259_next_3, ioArgument_ioAccessList, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 76)) ;
+      GGS_expressionAST extractedValue_3199_index_0 ;
+      GGS_location extractedValue_3215_endOfIndex_1 ;
+      GGS_bool extractedValue_3232_checkIndexExpression_2 ;
+      GGS_LValueOperandAST extractedValue_3271_next_3 ;
+      temp_0.getAssociatedValuesFor_arrayAccess (extractedValue_3199_index_0, extractedValue_3215_endOfIndex_1, extractedValue_3232_checkIndexExpression_2, extractedValue_3271_next_3) ;
+      ioArgument_ioAccessList.addAssignOperation (GGS_accessInAssignmentAST::class_func_arrayAccess (extractedValue_3199_index_0, extractedValue_3215_endOfIndex_1, extractedValue_3232_checkIndexExpression_2  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 75))  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 75)) ;
+      extensionMethod_buildProcedureCallAccessList (extractedValue_3271_next_3, ioArgument_ioAccessList, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas", 76)) ;
     }
     break ;
   }
@@ -14631,14 +14063,6 @@ void GGS_procEffectiveParameterList::description (String & ioString,
     ioString.appendCString (" not built") ;
   }
   ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_procEffectiveParameterList GGS_procEffectiveParameterList::class_func_emptyList (UNUSED_LOCATION_ARGS) {
-  GGS_procEffectiveParameterList result ;
-  result.mArray.setCapacity (16) ; // Build
-  return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -15309,25 +14733,25 @@ void extensionMethod_noteTypesInPrecedenceGraph (const GGS_externFunctionDeclara
                                                  Compiler * /* inCompiler */
                                                  COMMA_UNUSED_LOCATION_ARGS) {
   const GGS_externFunctionDeclarationListAST temp_0 = inObject ;
-  UpEnumerator_externFunctionDeclarationListAST enumerator_2335 (temp_0) ;
-  while (enumerator_2335.hasCurrentObject ()) {
-    UpEnumerator_routineFormalArgumentListAST enumerator_2385 (enumerator_2335.current_mProcFormalArgumentList (HERE)) ;
-    while (enumerator_2385.hasCurrentObject ()) {
+  UpEnumerator_externFunctionDeclarationListAST enumerator_2346 (temp_0) ;
+  while (enumerator_2346.hasCurrentObject ()) {
+    UpEnumerator_routineFormalArgumentListAST enumerator_2396 (enumerator_2346.current_mProcFormalArgumentList (HERE)) ;
+    while (enumerator_2396.hasCurrentObject ()) {
       {
-      ioArgument_ioGraph.setter_noteNode (enumerator_2385.current_mFormalArgumentTypeName (HERE) COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 61)) ;
+      ioArgument_ioGraph.setter_noteNode (enumerator_2396.current_mFormalArgumentTypeName (HERE) COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 61)) ;
       }
-      enumerator_2385.gotoNextObject () ;
+      enumerator_2396.gotoNextObject () ;
     }
     GalgasBool test_1 = GalgasBool::boolTrue ;
     if (GalgasBool::boolTrue == test_1) {
-      test_1 = GGS_bool (ComparisonKind::notEqual, enumerator_2335.current_mReturnTypeName (HERE).readProperty_string ().objectCompare (GGS_string::makeEmptyString ())).boolEnum () ;
+      test_1 = GGS_bool (ComparisonKind::notEqual, enumerator_2346.current_mReturnTypeName (HERE).readProperty_string ().objectCompare (GGS_string::makeEmptyString ())).boolEnum () ;
       if (GalgasBool::boolTrue == test_1) {
         {
-        ioArgument_ioGraph.setter_noteNode (enumerator_2335.current_mReturnTypeName (HERE) COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 64)) ;
+        ioArgument_ioGraph.setter_noteNode (enumerator_2346.current_mReturnTypeName (HERE) COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 64)) ;
         }
       }
     }
-    enumerator_2335.gotoNextObject () ;
+    enumerator_2346.gotoNextObject () ;
   }
 }
 
@@ -15343,10 +14767,10 @@ void extensionMethod_enterExternProcInContext (const GGS_externFunctionDeclarati
                                                Compiler * inCompiler
                                                COMMA_UNUSED_LOCATION_ARGS) {
   const GGS_externFunctionDeclarationListAST temp_0 = inObject ;
-  UpEnumerator_externFunctionDeclarationListAST enumerator_3031 (temp_0) ;
-  while (enumerator_3031.hasCurrentObject ()) {
-    extensionMethod_enterExternProcInContext (enumerator_3031.current (HERE), ioArgument_ioContext, inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 77)) ;
-    enumerator_3031.gotoNextObject () ;
+  UpEnumerator_externFunctionDeclarationListAST enumerator_3045 (temp_0) ;
+  while (enumerator_3045.hasCurrentObject ()) {
+    extensionMethod_enterExternProcInContext (enumerator_3045.current (HERE), ioArgument_ioContext, inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 77)) ;
+    enumerator_3045.gotoNextObject () ;
   }
 }
 
@@ -15364,10 +14788,10 @@ void extensionMethod_externProcedureSemanticAnalysis (const GGS_externFunctionDe
                                                       Compiler * inCompiler
                                                       COMMA_UNUSED_LOCATION_ARGS) {
   const GGS_externFunctionDeclarationListAST temp_0 = inObject ;
-  UpEnumerator_externFunctionDeclarationListAST enumerator_4552 (temp_0) ;
-  while (enumerator_4552.hasCurrentObject ()) {
-    extensionMethod_externProcedureSemanticAnalysis (enumerator_4552.current (HERE), constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 114)) ;
-    enumerator_4552.gotoNextObject () ;
+  UpEnumerator_externFunctionDeclarationListAST enumerator_4573 (temp_0) ;
+  while (enumerator_4573.hasCurrentObject ()) {
+    extensionMethod_externProcedureSemanticAnalysis (enumerator_4573.current (HERE), constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 114)) ;
+    enumerator_4573.gotoNextObject () ;
   }
 }
 
@@ -15527,14 +14951,6 @@ GGS_externProcedureMapIR & GGS_externProcedureMapIR::operator = (const GGS_exter
 //--------------------------------------------------------------------------------------------------
 
 GGS_externProcedureMapIR GGS_externProcedureMapIR::init (Compiler * COMMA_LOCATION_ARGS) {
-  GGS_externProcedureMapIR result ;
-  result.build (THERE) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_externProcedureMapIR GGS_externProcedureMapIR::class_func_emptyMap (LOCATION_ARGS) {
   GGS_externProcedureMapIR result ;
   result.build (THERE) ;
   return result ;
@@ -16321,14 +15737,6 @@ GGS_implicitConversionToBooleanMap GGS_implicitConversionToBooleanMap::init (Com
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_implicitConversionToBooleanMap GGS_implicitConversionToBooleanMap::class_func_emptyMap (LOCATION_ARGS) {
-  GGS_implicitConversionToBooleanMap result ;
-  result.build (THERE) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 GGS_bool GGS_implicitConversionToBooleanMap::getter_hasKey (const GGS_string & inKey
                                                             COMMA_UNUSED_LOCATION_ARGS) const {
   GGS_bool result ;
@@ -16969,10 +16377,10 @@ GGS_string extensionGetter_llvmName (const GGS_implicitBooleanConversionResult &
     break ;
   case GGS_implicitBooleanConversionResult::Enumeration::enum_compileTime:
     {
-      GGS_bool extractedValue_8950_value_0 ;
-      temp_0.getAssociatedValuesFor_compileTime (extractedValue_8950_value_0) ;
+      GGS_bool extractedValue_8983_value_0 ;
+      temp_0.getAssociatedValuesFor_compileTime (extractedValue_8983_value_0) ;
       GGS_bigint temp_1 ;
-      const GalgasBool test_2 = extractedValue_8950_value_0.boolEnum () ;
+      const GalgasBool test_2 = extractedValue_8983_value_0.boolEnum () ;
       if (GalgasBool::boolTrue == test_2) {
         temp_1 = GGS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("convert-to-boolean.galgas", 191)) ;
       }else if (GalgasBool::boolFalse == test_2) {
@@ -16983,9 +16391,9 @@ GGS_string extensionGetter_llvmName (const GGS_implicitBooleanConversionResult &
     break ;
   case GGS_implicitBooleanConversionResult::Enumeration::enum_llvmVariable:
     {
-      GGS_string extractedValue_9024_name_0 ;
-      temp_0.getAssociatedValuesFor_llvmVariable (extractedValue_9024_name_0) ;
-      result_result = extractedValue_9024_name_0 ;
+      GGS_string extractedValue_9057_name_0 ;
+      temp_0.getAssociatedValuesFor_llvmVariable (extractedValue_9057_name_0) ;
+      result_result = extractedValue_9057_name_0 ;
     }
     break ;
   }
@@ -17258,6 +16666,590 @@ GGS_llvmImplicitConverterToBoolean_2E_weak GGS_llvmImplicitConverterToBoolean_2E
       result = *p ;
     }else{
       inCompiler->castError ("llvmImplicitConverterToBoolean.weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//Extension method '@implicitConversionToBooleanMap generateConvertToBooleanCode'
+//
+//--------------------------------------------------------------------------------------------------
+
+void extensionMethod_generateConvertToBooleanCode (const GGS_implicitConversionToBooleanMap inObject,
+                                                   const GGS_objectIR constinArgument_inReceiverOperand,
+                                                   const GGS_location constinArgument_inErrorLocation,
+                                                   GGS_semanticTemporariesStruct & ioArgument_ioTemporaries,
+                                                   GGS_instructionListIR & ioArgument_ioInstructionGenerationList,
+                                                   GGS_allocaList & ioArgument_ioAllocaList,
+                                                   GGS_implicitBooleanConversionResult & outArgument_outResult,
+                                                   Compiler * inCompiler
+                                                   COMMA_UNUSED_LOCATION_ARGS) {
+  outArgument_outResult.drop () ; // Release 'out' argument
+  GGS_lstring var_key_12873 = GGS_lstring::init_21__21_ (extensionGetter_omnibusTypeDescriptionName (constinArgument_inReceiverOperand, inCompiler COMMA_SOURCE_FILE ("convert-to-boolean.galgas", 284)), constinArgument_inErrorLocation, inCompiler COMMA_HERE) ;
+  GGS_abstractImplicitConverterToBoolean var_converter_12983 ;
+  const GGS_implicitConversionToBooleanMap temp_0 = inObject ;
+  temp_0.method_searchKey (var_key_12873, var_converter_12983, inCompiler COMMA_SOURCE_FILE ("convert-to-boolean.galgas", 285)) ;
+  callExtensionMethod_generateConvertToBooleanCode ((cPtr_abstractImplicitConverterToBoolean *) var_converter_12983.ptr (), constinArgument_inReceiverOperand, constinArgument_inErrorLocation, ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, ioArgument_ioAllocaList, outArgument_outResult, inCompiler COMMA_SOURCE_FILE ("convert-to-boolean.galgas", 286)) ;
+}
+
+
+//--------------------------------------------------------------------------------------------------
+//
+//Extension method '@instructionListIR appendSourceLineComment'
+//
+//--------------------------------------------------------------------------------------------------
+
+void extensionSetter_appendSourceLineComment (GGS_instructionListIR & ioObject,
+                                              const GGS_location constinArgument_inSourceLocation,
+                                              Compiler * inCompiler
+                                              COMMA_UNUSED_LOCATION_ARGS) {
+  ioObject.addAssignOperation (GGS_sourceLocationIR::init_21_ (constinArgument_inSourceLocation, inCompiler COMMA_HERE)  COMMA_SOURCE_FILE ("intermediate-comment-source-line.galgas", 3)) ;
+}
+
+
+//--------------------------------------------------------------------------------------------------
+// @sourceLocationIR reference class
+//--------------------------------------------------------------------------------------------------
+
+ComparisonResult GGS_sourceLocationIR::objectCompare (const GGS_sourceLocationIR & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
+  if (isValid () && inOperand.isValid ()) {
+    const size_t myObjectPtr = size_t (mObjectPtr) ;
+    const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
+    if (myObjectPtr < operandObjectPtr) {
+      result = ComparisonResult::firstOperandLowerThanSecond ;
+    }else if (myObjectPtr > operandObjectPtr) {
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
+    }else{
+      result = ComparisonResult::operandEqual ;
+    }
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_sourceLocationIR::GGS_sourceLocationIR (void) :
+GGS_abstractInstructionIR () {
+}
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+GGS_sourceLocationIR GGS_sourceLocationIR::
+init_21_ (const GGS_location & in_mSourceLocation,
+          Compiler * inCompiler
+          COMMA_LOCATION_ARGS) {
+  cPtr_sourceLocationIR * object = nullptr ;
+  macroMyNew (object, cPtr_sourceLocationIR (inCompiler COMMA_THERE)) ;
+  object->sourceLocationIR_init_21_ (in_mSourceLocation, inCompiler) ;
+  const GGS_sourceLocationIR result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void cPtr_sourceLocationIR::
+sourceLocationIR_init_21_ (const GGS_location & in_mSourceLocation,
+                           Compiler * /* inCompiler */) {
+  mProperty_mSourceLocation = in_mSourceLocation ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_sourceLocationIR::GGS_sourceLocationIR (const cPtr_sourceLocationIR * inSourcePtr) :
+GGS_abstractInstructionIR (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_sourceLocationIR) ;
+}
+//--------------------------------------------------------------------------------------------------
+
+GGS_location GGS_sourceLocationIR::readProperty_mSourceLocation (void) const {
+  if (nullptr == mObjectPtr) {
+    return GGS_location () ;
+  }else{
+    cPtr_sourceLocationIR * p = (cPtr_sourceLocationIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_sourceLocationIR) ;
+    return p->mProperty_mSourceLocation ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_sourceLocationIR::setProperty_mSourceLocation (const GGS_location & inValue) {
+  if (nullptr != mObjectPtr) {
+    cPtr_sourceLocationIR * p = (cPtr_sourceLocationIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_sourceLocationIR) ;
+    p->mProperty_mSourceLocation = inValue ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+//Pointer class for @sourceLocationIR class
+//--------------------------------------------------------------------------------------------------
+
+cPtr_sourceLocationIR::cPtr_sourceLocationIR (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_abstractInstructionIR (inCompiler COMMA_THERE),
+mProperty_mSourceLocation () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_sourceLocationIR::cPtr_sourceLocationIR (const GGS_location & in_mSourceLocation,
+                                              Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) :
+cPtr_abstractInstructionIR (inCompiler COMMA_THERE),
+mProperty_mSourceLocation () {
+  mProperty_mSourceLocation = in_mSourceLocation ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor * cPtr_sourceLocationIR::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_sourceLocationIR ;
+}
+
+void cPtr_sourceLocationIR::description (String & ioString,
+                                         const int32_t inIndentation) const {
+  ioString.appendCString ("[@sourceLocationIR:") ;
+  mProperty_mSourceLocation.description (ioString, inIndentation+1) ;
+  ioString.appendCString ("]") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+acPtr_class * cPtr_sourceLocationIR::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
+  acPtr_class * ptr = nullptr ;
+  macroMyNew (ptr, cPtr_sourceLocationIR (mProperty_mSourceLocation, inCompiler COMMA_THERE)) ;
+  return ptr ;
+}
+
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_sourceLocationIR::printNonNullClassInstanceProperties (void) const {
+    cPtr_abstractInstructionIR::printNonNullClassInstanceProperties () ;
+    mProperty_mSourceLocation.printNonNullClassInstanceProperties ("mSourceLocation") ;
+  }
+#endif
+
+//--------------------------------------------------------------------------------------------------
+//     @sourceLocationIR generic code implementation
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_sourceLocationIR ("sourceLocationIR",
+                                                                     & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor * GGS_sourceLocationIR::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_sourceLocationIR ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_sourceLocationIR::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_sourceLocationIR (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_sourceLocationIR GGS_sourceLocationIR::extractObject (const GGS_object & inObject,
+                                                          Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) {
+  GGS_sourceLocationIR result ;
+  const GGS_sourceLocationIR * p = (const GGS_sourceLocationIR *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_sourceLocationIR *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("sourceLocationIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+ComparisonResult GGS_sourceLocationIR_2E_weak::objectCompare (const GGS_sourceLocationIR_2E_weak & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
+  if (isValid () && inOperand.isValid ()) {
+    cPtr_weakReference_proxy * myPtr = mProxyPtr ;
+    const size_t myObjectPtr = size_t (myPtr) ;
+    cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
+    const size_t operandObjectPtr = size_t (operandPtr) ;
+    if (myObjectPtr < operandObjectPtr) {
+      result = ComparisonResult::firstOperandLowerThanSecond ;
+    }else if (myObjectPtr > operandObjectPtr) {
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
+    }else{
+      result = ComparisonResult::operandEqual ;
+    }
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_sourceLocationIR_2E_weak::GGS_sourceLocationIR_2E_weak (void) :
+GGS_abstractInstructionIR_2E_weak () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_sourceLocationIR_2E_weak & GGS_sourceLocationIR_2E_weak::operator = (const GGS_sourceLocationIR & inSource) {
+  cPtr_weakReference_proxy * proxyPtr = nullptr ;
+  acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
+  if (p != nullptr) {
+    proxyPtr = p->getProxy () ;
+  }
+  macroAssignSharedObject (mProxyPtr, proxyPtr) ;
+  return *this ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_sourceLocationIR_2E_weak::GGS_sourceLocationIR_2E_weak (const GGS_sourceLocationIR & inSource) :
+GGS_abstractInstructionIR_2E_weak (inSource) {
+}
+
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_sourceLocationIR_2E_weak GGS_sourceLocationIR_2E_weak::class_func_nil (LOCATION_ARGS) {
+  GGS_sourceLocationIR_2E_weak result ;
+  macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_sourceLocationIR GGS_sourceLocationIR_2E_weak::unwrappedValue (void) const {
+  GGS_sourceLocationIR result ;
+  if (isValid ()) {
+    const cPtr_sourceLocationIR * p = (cPtr_sourceLocationIR *) ptr () ;
+    if (nullptr != p) {
+      result = GGS_sourceLocationIR (p) ;
+    }
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_sourceLocationIR GGS_sourceLocationIR_2E_weak::bang_sourceLocationIR_2E_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
+  GGS_sourceLocationIR result ;
+  if (mProxyPtr != nullptr) {
+    acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
+    if (strongPtr == nullptr) {
+      inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
+    }else{
+      macroValidSharedObject (strongPtr, cPtr_sourceLocationIR) ;
+      result = GGS_sourceLocationIR ((cPtr_sourceLocationIR *) strongPtr) ;
+    }
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//     @sourceLocationIR.weak generic code implementation
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_sourceLocationIR_2E_weak ("sourceLocationIR.weak",
+                                                                             & kTypeDescriptor_GALGAS_abstractInstructionIR_2E_weak) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor * GGS_sourceLocationIR_2E_weak::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_sourceLocationIR_2E_weak ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_sourceLocationIR_2E_weak::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_sourceLocationIR_2E_weak (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_sourceLocationIR_2E_weak GGS_sourceLocationIR_2E_weak::extractObject (const GGS_object & inObject,
+                                                                          Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) {
+  GGS_sourceLocationIR_2E_weak result ;
+  const GGS_sourceLocationIR_2E_weak * p = (const GGS_sourceLocationIR_2E_weak *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_sourceLocationIR_2E_weak *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("sourceLocationIR.weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//
+//Extension method '@instructionListIR testArrayIndex'
+//
+//--------------------------------------------------------------------------------------------------
+
+void extensionSetter_testArrayIndex (GGS_instructionListIR & ioObject,
+                                     const GGS_objectIR constinArgument_inIndex,
+                                     const GGS_location constinArgument_inErrorLocation,
+                                     const GGS_bigint constinArgument_inSize,
+                                     GGS_bool & outArgument_outGeneratePanicInstruction,
+                                     Compiler * inCompiler
+                                     COMMA_UNUSED_LOCATION_ARGS) {
+  outArgument_outGeneratePanicInstruction.drop () ; // Release 'out' argument
+  GGS_bigint var_max_212 ;
+  GGS_bool var_isUnsigned_230 ;
+  GGS_bigint joker_199_1 ; // Joker input parameter
+  GGS_uint joker_241_1 ; // Joker input parameter
+  extensionGetter_type (constinArgument_inIndex, inCompiler COMMA_SOURCE_FILE ("intermediate-test-array-index.galgas", 8)).readProperty_kind ().method_extractInteger (joker_199_1, var_max_212, var_isUnsigned_230, joker_241_1, inCompiler COMMA_SOURCE_FILE ("intermediate-test-array-index.galgas", 8)) ;
+  GGS_bool test_0 = var_isUnsigned_230.operator_not (SOURCE_FILE ("intermediate-test-array-index.galgas", 9)) ;
+  if (GalgasBool::boolTrue != test_0.boolEnum ()) {
+    test_0 = GGS_bool (ComparisonKind::greaterOrEqual, var_max_212.objectCompare (constinArgument_inSize)) ;
+  }
+  outArgument_outGeneratePanicInstruction = test_0 ;
+  ioObject.addAssignOperation (GGS_testArrayIndexIR::init_21__21__21_ (constinArgument_inIndex, constinArgument_inErrorLocation, constinArgument_inSize, inCompiler COMMA_HERE)  COMMA_SOURCE_FILE ("intermediate-test-array-index.galgas", 10)) ;
+}
+
+
+//--------------------------------------------------------------------------------------------------
+// @testArrayIndexIR reference class
+//--------------------------------------------------------------------------------------------------
+
+ComparisonResult GGS_testArrayIndexIR::objectCompare (const GGS_testArrayIndexIR & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
+  if (isValid () && inOperand.isValid ()) {
+    const size_t myObjectPtr = size_t (mObjectPtr) ;
+    const size_t operandObjectPtr = size_t (inOperand.mObjectPtr) ;
+    if (myObjectPtr < operandObjectPtr) {
+      result = ComparisonResult::firstOperandLowerThanSecond ;
+    }else if (myObjectPtr > operandObjectPtr) {
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
+    }else{
+      result = ComparisonResult::operandEqual ;
+    }
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_testArrayIndexIR::GGS_testArrayIndexIR (void) :
+GGS_abstractInstructionIR () {
+}
+
+//--- Synthetized initializer ----------------------------------------------------------------------
+
+GGS_testArrayIndexIR GGS_testArrayIndexIR::
+init_21__21__21_ (const GGS_objectIR & in_mIndex,
+                  const GGS_location & in_mErrorLocation,
+                  const GGS_bigint & in_mSize,
+                  Compiler * inCompiler
+                  COMMA_LOCATION_ARGS) {
+  cPtr_testArrayIndexIR * object = nullptr ;
+  macroMyNew (object, cPtr_testArrayIndexIR (inCompiler COMMA_THERE)) ;
+  object->testArrayIndexIR_init_21__21__21_ (in_mIndex, in_mErrorLocation, in_mSize, inCompiler) ;
+  const GGS_testArrayIndexIR result (object) ;
+  macroDetachSharedObject (object) ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void cPtr_testArrayIndexIR::
+testArrayIndexIR_init_21__21__21_ (const GGS_objectIR & in_mIndex,
+                                   const GGS_location & in_mErrorLocation,
+                                   const GGS_bigint & in_mSize,
+                                   Compiler * /* inCompiler */) {
+  mProperty_mIndex = in_mIndex ;
+  mProperty_mErrorLocation = in_mErrorLocation ;
+  mProperty_mSize = in_mSize ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_testArrayIndexIR::GGS_testArrayIndexIR (const cPtr_testArrayIndexIR * inSourcePtr) :
+GGS_abstractInstructionIR (inSourcePtr) {
+  macroNullOrValidSharedObject (inSourcePtr, cPtr_testArrayIndexIR) ;
+}
+//--------------------------------------------------------------------------------------------------
+
+GGS_objectIR GGS_testArrayIndexIR::readProperty_mIndex (void) const {
+  if (nullptr == mObjectPtr) {
+    return GGS_objectIR () ;
+  }else{
+    cPtr_testArrayIndexIR * p = (cPtr_testArrayIndexIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_testArrayIndexIR) ;
+    return p->mProperty_mIndex ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_testArrayIndexIR::setProperty_mIndex (const GGS_objectIR & inValue) {
+  if (nullptr != mObjectPtr) {
+    cPtr_testArrayIndexIR * p = (cPtr_testArrayIndexIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_testArrayIndexIR) ;
+    p->mProperty_mIndex = inValue ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_location GGS_testArrayIndexIR::readProperty_mErrorLocation (void) const {
+  if (nullptr == mObjectPtr) {
+    return GGS_location () ;
+  }else{
+    cPtr_testArrayIndexIR * p = (cPtr_testArrayIndexIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_testArrayIndexIR) ;
+    return p->mProperty_mErrorLocation ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_testArrayIndexIR::setProperty_mErrorLocation (const GGS_location & inValue) {
+  if (nullptr != mObjectPtr) {
+    cPtr_testArrayIndexIR * p = (cPtr_testArrayIndexIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_testArrayIndexIR) ;
+    p->mProperty_mErrorLocation = inValue ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_bigint GGS_testArrayIndexIR::readProperty_mSize (void) const {
+  if (nullptr == mObjectPtr) {
+    return GGS_bigint () ;
+  }else{
+    cPtr_testArrayIndexIR * p = (cPtr_testArrayIndexIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_testArrayIndexIR) ;
+    return p->mProperty_mSize ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_testArrayIndexIR::setProperty_mSize (const GGS_bigint & inValue) {
+  if (nullptr != mObjectPtr) {
+    cPtr_testArrayIndexIR * p = (cPtr_testArrayIndexIR *) mObjectPtr ;
+    macroValidSharedObject (p, cPtr_testArrayIndexIR) ;
+    p->mProperty_mSize = inValue ;
+  }
+}
+
+//--------------------------------------------------------------------------------------------------
+//Pointer class for @testArrayIndexIR class
+//--------------------------------------------------------------------------------------------------
+
+cPtr_testArrayIndexIR::cPtr_testArrayIndexIR (Compiler * inCompiler COMMA_LOCATION_ARGS) :
+cPtr_abstractInstructionIR (inCompiler COMMA_THERE),
+mProperty_mIndex (),
+mProperty_mErrorLocation (),
+mProperty_mSize () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+cPtr_testArrayIndexIR::cPtr_testArrayIndexIR (const GGS_objectIR & in_mIndex,
+                                              const GGS_location & in_mErrorLocation,
+                                              const GGS_bigint & in_mSize,
+                                              Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) :
+cPtr_abstractInstructionIR (inCompiler COMMA_THERE),
+mProperty_mIndex (),
+mProperty_mErrorLocation (),
+mProperty_mSize () {
+  mProperty_mIndex = in_mIndex ;
+  mProperty_mErrorLocation = in_mErrorLocation ;
+  mProperty_mSize = in_mSize ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor * cPtr_testArrayIndexIR::classDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_testArrayIndexIR ;
+}
+
+void cPtr_testArrayIndexIR::description (String & ioString,
+                                         const int32_t inIndentation) const {
+  ioString.appendCString ("[@testArrayIndexIR:") ;
+  mProperty_mIndex.description (ioString, inIndentation+1) ;
+  ioString.appendCString (", ") ;
+  mProperty_mErrorLocation.description (ioString, inIndentation+1) ;
+  ioString.appendCString (", ") ;
+  mProperty_mSize.description (ioString, inIndentation+1) ;
+  ioString.appendCString ("]") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+acPtr_class * cPtr_testArrayIndexIR::duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
+  acPtr_class * ptr = nullptr ;
+  macroMyNew (ptr, cPtr_testArrayIndexIR (mProperty_mIndex, mProperty_mErrorLocation, mProperty_mSize, inCompiler COMMA_THERE)) ;
+  return ptr ;
+}
+
+
+//--------------------------------------------------------------------------------------------------
+
+#ifndef DO_NOT_GENERATE_CHECKINGS
+  void cPtr_testArrayIndexIR::printNonNullClassInstanceProperties (void) const {
+    cPtr_abstractInstructionIR::printNonNullClassInstanceProperties () ;
+    mProperty_mIndex.printNonNullClassInstanceProperties ("mIndex") ;
+    mProperty_mErrorLocation.printNonNullClassInstanceProperties ("mErrorLocation") ;
+    mProperty_mSize.printNonNullClassInstanceProperties ("mSize") ;
+  }
+#endif
+
+//--------------------------------------------------------------------------------------------------
+//     @testArrayIndexIR generic code implementation
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_testArrayIndexIR ("testArrayIndexIR",
+                                                                     & kTypeDescriptor_GALGAS_abstractInstructionIR) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor * GGS_testArrayIndexIR::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_testArrayIndexIR ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_testArrayIndexIR::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_testArrayIndexIR (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_testArrayIndexIR GGS_testArrayIndexIR::extractObject (const GGS_object & inObject,
+                                                          Compiler * inCompiler
+                                                          COMMA_LOCATION_ARGS) {
+  GGS_testArrayIndexIR result ;
+  const GGS_testArrayIndexIR * p = (const GGS_testArrayIndexIR *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_testArrayIndexIR *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("testArrayIndexIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

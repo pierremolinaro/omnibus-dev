@@ -1,6 +1,6 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @whileInstructionAST : @instructionAST {
   public var @expressionAST m_while_Expression
@@ -9,16 +9,16 @@ class @whileInstructionAST : @instructionAST {
   public var @location mEndOf_while_instruction
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList  {
-#    $do$
+//    $do$
     $while$
     let instructionLocation = @location.here
     <expression> !?ioAST ?let @expressionAST testExpression
@@ -36,22 +36,22 @@ syntax extension omnibus_syntax {
     }
   }
   
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  NOTE TYPES                                                                                                           
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  NOTE TYPES                                                                                                           
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @whileInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [self.mWhileInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   [self.m_while_Expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTICS                                                                                                            
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SEMANTICS                                                                                                            
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @whileInstructionAST instructionSemanticAnalysis
   ?self:let @omnibusType inSelfType
@@ -64,7 +64,7 @@ override method @whileInstructionAST instructionSemanticAnalysis
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-#--- Analyze test expression
+//--- Analyze test expression
   var @instructionListIR testInstructionGenerationList = @[]
   [self.m_while_Expression analyzeExpression
     !self:inSelfType
@@ -83,7 +83,7 @@ override method @whileInstructionAST instructionSemanticAnalysis
     !?ioTemporaries
     !?testValue
   ]  
-#--- Check result is allowed for condition
+//--- Check result is allowed for condition
   [inContext.mImplicitConversionToBooleanMap generateConvertToBooleanCode
     !testValue
     !self.mEndOf_test_expression
@@ -98,13 +98,13 @@ override method @whileInstructionAST instructionSemanticAnalysis
   case llvmVariable (*) :
   end
 
-#--- Check inferred type
-#  if [testValue type].kind != .boolean then
-#    error mEndOf_test_expression : "test expression type is '" + [testValue omnibusTypeDescriptionName] + "', it should be boolean"
-#  elsif [testValue isStatic] then
-#    error mEndOf_test_expression : "test expression type should not be static"
-#  end
-#--- Analyze instruction list
+//--- Check inferred type
+//  if [testValue type].kind != .boolean then
+//    error mEndOf_test_expression : "test expression type is '" + [testValue omnibusTypeDescriptionName] + "', it should be boolean"
+//  elsif [testValue isStatic] then
+//    error mEndOf_test_expression : "test expression type should not be static"
+//  end
+//--- Analyze instruction list
   var @instructionListIR instructionGenerationList = @[]
   [!?ioUniversalMap openOverrideForRepeatBlock]
   [self.mWhileInstructionList analyzeBranchInstructionList
@@ -120,7 +120,7 @@ override method @whileInstructionAST instructionSemanticAnalysis
     !?instructionListIR:instructionGenerationList
   ]
   [!?ioUniversalMap closeOverride !self.mEndOf_while_instruction]
-#--- Code generation
+//--- Code generation
   ioInstructionGenerationList += !@whileInstructionIR {
     ![self.mEndOf_test_expression endLocationIndex]
     !testInstructionGenerationList
@@ -129,9 +129,9 @@ override method @whileInstructionAST instructionSemanticAnalysis
  }
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  CODE GENERATION                                                                                                      
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  CODE GENERATION                                                                                                      
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @whileInstructionIR : @abstractInstructionIR {
   public var @uint mLabelIndex
@@ -140,7 +140,7 @@ class @whileInstructionIR : @abstractInstructionIR {
   public var @instructionListIR mInstructionGenerationList
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @whileInstructionIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -160,7 +160,7 @@ override method @whileInstructionIR llvmInstructionCode
   ioLLVMcode += labelEnd + ":\n"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @whileInstructionIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
@@ -170,4 +170,4 @@ override method @whileInstructionIR enterAccessibleEntities
   [self.mInstructionGenerationList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

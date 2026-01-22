@@ -1,20 +1,20 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                                  
+//-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @registerGroupIndexAST {
   case noIndex
   case index (@expressionAST index @location endOfIndex @bool checkIndexExpression)
 }
 
-#·······················································································································
+//·······················································································································
 
 enum @registerIndexAST {
   case noIndex
   case index (@expressionAST index @location endOfIndex @bool checkIndexExpression)
 }
 
-#·······················································································································
+//·······················································································································
 
 struct @controlRegisterLValueAST {
   public var @lstring mRegisterGroupName
@@ -23,13 +23,13 @@ struct @controlRegisterLValueAST {
   public var @registerIndexAST mRegisterIndex
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <control_register_lvalue> ?!@ast ioAST !@controlRegisterLValueAST outRegisterLValue {
     $©group$ ?let registerGroupName
@@ -76,13 +76,13 @@ syntax extension omnibus_syntax {
     outRegisterLValue = @{!registerGroupName !groupIndex !registerName !registerIndex}
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  NOTE TYPES                                                                                                           
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  NOTE TYPES                                                                                                           
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @controlRegisterLValueAST noteExpressionTypesInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
@@ -99,9 +99,9 @@ method @controlRegisterLValueAST noteExpressionTypesInPrecedenceGraph
   end
 }
 
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
+//-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @controlRegisterLValueAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
@@ -120,9 +120,9 @@ method @controlRegisterLValueAST addDependenceEdgeForStaticExpression
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  SEMANTICS                                                                                                            
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  SEMANTICS                                                                                                            
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @controlRegisterLValueAST controlRegisterLValueSemanticAnalysis
   ?writeAccess:let @bool inWriteAccess
@@ -140,9 +140,9 @@ method @controlRegisterLValueAST controlRegisterLValueSemanticAnalysis
   !sliceMap:@sliceMap outSliceMap
   !llvmRegisterAddressName:@string outllvmRegisterAddressName
 {
-#-------------------- Search register group name in entity map
+//-------------------- Search register group name in entity map
   [inContext.mControlRegisterGroupMap searchKey !self.mRegisterGroupName ?let groupKind ?let controlRegisterMap]
-#-------------------- Search register name
+//-------------------- Search register name
   [controlRegisterMap searchKey
     !self.mRegisterName
     ?outRegisterType
@@ -153,17 +153,17 @@ method @controlRegisterLValueAST controlRegisterLValueSemanticAnalysis
     ?let @bigint addressOffset
     ?*
     ?outRegisterTypeBitCount
-    ?let @uint registerArraySize # 0 if not an array
-    ?let @uint registerElementSize # 0 if not an array
+    ?let @uint registerArraySize // 0 if not an array
+    ?let @uint registerElementSize // 0 if not an array
   ]
-#-------------------- Check access
+//-------------------- Check access
   if inWriteAccess & readOnly then
     error self.mRegisterName
       : "this control register cannot be modified (declared with @ro attribute)"
   elsif not userAccess && ([inMode isUserMode] || [inMode isAnyMode]) then
     error self.mRegisterName : "this control register is not accessible in user mode"
   end
-#-------------------- Group index ?
+//-------------------- Group index ?
   let @string registerAddress
   switch groupKind
   case single (@bigint baseAddress) :
@@ -210,7 +210,7 @@ method @controlRegisterLValueAST controlRegisterLValueSemanticAnalysis
       ]
     end
   end
-#-------------------- Analyze control register target
+//-------------------- Analyze control register target
   switch self.mRegisterIndex
   case noIndex :
     if registerArraySize == 0 then
@@ -246,4 +246,4 @@ method @controlRegisterLValueAST controlRegisterLValueSemanticAnalysis
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

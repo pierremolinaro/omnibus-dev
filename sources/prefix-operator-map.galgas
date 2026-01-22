@@ -1,6 +1,6 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#   PREFIX OPERATOR MAP
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//   PREFIX OPERATOR MAP
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @prefixOperatorMap {
   public var @omnibusType mReceiverType
@@ -10,11 +10,11 @@ map @prefixOperatorMap {
   search searchKey error message "there is no '%K' infix operator"
 }
 
-#·······················································································································
+//·······················································································································
 
 abstract class @prefixOperatorUsage { }
 
-#·······················································································································
+//·······················································································································
 
 abstract method @prefixOperatorUsage generateCode
   ?let @objectIR inReceiverOperand
@@ -26,7 +26,7 @@ abstract method @prefixOperatorUsage generateCode
   ?!@instructionListIR ioInstructionGenerationList
   !@objectIR outResultValue
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @prefixOperatorMap generatePrefixOperatorCode
   ?let @objectIR inReceiverOperand
@@ -38,24 +38,24 @@ method @prefixOperatorMap generatePrefixOperatorCode
   ?!@instructionListIR ioInstructionGenerationList
   !@objectIR outResultValue
 {
-##--- Is operator allowed in safe mode ?
-#  if inSafeMode then
-#    switch inPrefixOperator 
-#    case minusNoOvf, notOp, bitWiseComplement :
-#    case minusOp :
-#      error inOperatorLocation : "this operator is not allowed in safe mode"
-#    end
-#  end
-##--- Do not generate panic code ?
-#  var prefixOperator = inPrefixOperator
-#  if inDoNotGeneratePanicCode then
-#    switch inPrefixOperator 
-#    case minusNoOvf, notOp, bitWiseComplement :
-#    case minusOp :
-#      prefixOperator = .minusNoOvf
-#    end
-#  end
-#---
+////--- Is operator allowed in safe mode ?
+//  if inSafeMode then
+//    switch inPrefixOperator 
+//    case minusNoOvf, notOp, bitWiseComplement :
+//    case minusOp :
+//      error inOperatorLocation : "this operator is not allowed in safe mode"
+//    end
+//  end
+////--- Do not generate panic code ?
+//  var prefixOperator = inPrefixOperator
+//  if inDoNotGeneratePanicCode then
+//    switch inPrefixOperator 
+//    case minusNoOvf, notOp, bitWiseComplement :
+//    case minusOp :
+//      prefixOperator = .minusNoOvf
+//    end
+//  end
+//---
   let key = prefixOperatorMapKey (![inReceiverOperand type] !inPrefixOperator !inOperatorLocation)
   [self searchKey !key ?1* ?let resultType ?let operatorUsage]
   [operatorUsage generateCode
@@ -70,5 +70,5 @@ method @prefixOperatorMap generatePrefixOperatorCode
   ]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 

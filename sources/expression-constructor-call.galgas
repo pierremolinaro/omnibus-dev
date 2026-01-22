@@ -1,13 +1,13 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @functionCallEffectiveParameterListAST {
   public var @lstring mSelector
   public var @expressionAST mExpression
 }
 
-#·······················································································································
+//·······················································································································
 
 class @constructorCallAST : @expressionAST {
   public var @lstring mTypeName
@@ -15,9 +15,9 @@ class @constructorCallAST : @expressionAST {
   public var @location mErrorLocation
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
@@ -38,9 +38,9 @@ syntax extension omnibus_syntax {
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @constructorCallAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
@@ -53,9 +53,9 @@ override method @constructorCallAST addDependenceEdgeForStaticExpression
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  NOTE TYPES                                                                                                           
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  NOTE TYPES                                                                                                           
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @constructorCallAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [!?ioGraph noteNode !self.mTypeName]
@@ -64,9 +64,9 @@ override method @constructorCallAST noteExpressionTypesInPrecedenceGraph ?!@sema
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTICS                                                                                                            
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SEMANTICS                                                                                                            
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @constructorCallAST analyzeExpression
   ?self:let @omnibusType inSelfType
@@ -81,19 +81,19 @@ override method @constructorCallAST analyzeExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
 {
-#--- Analyze effective argument list
+//--- Analyze effective argument list
   var constructorKey = "("
   for (selector *) in self.mParameterList do
     constructorKey += "!" + selector
   end
   constructorKey += ")"
-#--- Analyze constructor signature and init value
+//--- Analyze constructor signature and init value
   let resultType = [[inContext.mTypeMap searchKey !self.mTypeName] type]
   let typeName = @lstring {!resultType.omnibusTypeDescriptionName !self.mErrorLocation}
   [inContext.mTypeConstructorMap searchKey !typeName ?let constructorMap]
-#  let constructorMap = resultType.constructorMap2
+//  let constructorMap = resultType.constructorMap2
   [constructorMap searchKey ! @{!constructorKey !self.mErrorLocation} ?let constructorSignature ?let initValue]
-#--- Examine init value
+//--- Examine init value
   switch initValue
   case arrayValue (elementType size) :
     if constructorKey == "(!repeated)" then
@@ -221,4 +221,4 @@ override method @constructorCallAST analyzeExpression
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

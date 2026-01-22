@@ -1,6 +1,6 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  Logical modes                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  Logical modes                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @mode %comparable {
   case userMode
@@ -22,7 +22,7 @@ enum @mode %comparable {
   case startupMode
 }
 
-#·······················································································································
+//·······················································································································
 
 getter @mode string -> @string {
   switch self
@@ -44,7 +44,7 @@ getter @mode string -> @string {
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 getter @mode isSafe -> @bool {
   switch self
@@ -66,20 +66,20 @@ getter @mode isSafe -> @bool {
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 getter @mode routineLLVMDictionaryForFunction ?let @string inRoutineNameForGeneration -> @routineLLVMNameDict {
   result = @[@(self, inRoutineNameForGeneration)]
   switch self
-  case serviceMode : # If routine is in service mode ...
-    result += !.primitiveMode !inRoutineNameForGeneration # ... it may be called from primitive mode...
-    result += !.guardMode !inRoutineNameForGeneration     # ... and guard mode...
-  case safeServiceMode : # If routine is in safe service mode ...
-    result += !.primitiveMode !inRoutineNameForGeneration # ... it may be called from primitive mode...
-    result += !.guardMode !inRoutineNameForGeneration     # ... and guard mode
-    result += !.safePrimitiveMode !inRoutineNameForGeneration # ... and safe primitive mode...
-    result += !.safeGuardMode !inRoutineNameForGeneration  # ... and safe guard mode
-    result += !.serviceMode !inRoutineNameForGeneration  # ... and service mode
+  case serviceMode : // If routine is in service mode ...
+    result += !.primitiveMode !inRoutineNameForGeneration // ... it may be called from primitive mode...
+    result += !.guardMode !inRoutineNameForGeneration     // ... and guard mode...
+  case safeServiceMode : // If routine is in safe service mode ...
+    result += !.primitiveMode !inRoutineNameForGeneration // ... it may be called from primitive mode...
+    result += !.guardMode !inRoutineNameForGeneration     // ... and guard mode
+    result += !.safePrimitiveMode !inRoutineNameForGeneration // ... and safe primitive mode...
+    result += !.safeGuardMode !inRoutineNameForGeneration  // ... and safe guard mode
+    result += !.serviceMode !inRoutineNameForGeneration  // ... and service mode
   case sectionMode :
     result += !.primitiveMode !inRoutineNameForGeneration
     result += !.serviceMode !inRoutineNameForGeneration
@@ -130,7 +130,7 @@ getter @mode routineLLVMDictionaryForFunction ?let @string inRoutineNameForGener
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 getter @mode routineLLVMDictionaryForSystemRoutine
   ?let @string inUserRoutineNameForGeneration
@@ -176,7 +176,7 @@ getter @mode routineLLVMDictionaryForSystemRoutine
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func checkModeAndReturnsRoutineLLVMName ?let @routineLLVMNameDict inCalledRoutineDictionary
                ?let @mode inCallerRoutineMode
@@ -192,4 +192,4 @@ func checkModeAndReturnsRoutineLLVMName ?let @routineLLVMNameDict inCalledRoutin
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

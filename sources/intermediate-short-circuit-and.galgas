@@ -1,4 +1,4 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 setter @instructionListIR appendShortCircuitAndOperation
   ?let @objectIR inTargetOperand
@@ -18,7 +18,7 @@ setter @instructionListIR appendShortCircuitAndOperation
   }
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @shortCircuitAndOperationIR : @abstractInstructionIR {
   public var @objectIR mTargetOperand
@@ -29,7 +29,7 @@ class @shortCircuitAndOperationIR : @abstractInstructionIR {
   public var @location mLocation
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @shortCircuitAndOperationIR enterAccessibleEntities 
   ?!@stringset ioInvokedRoutineSet
@@ -39,7 +39,7 @@ override method @shortCircuitAndOperationIR enterAccessibleEntities
   [self.mRightInstructionList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @shortCircuitAndOperationIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -61,4 +61,4 @@ override method @shortCircuitAndOperationIR llvmInstructionCode
              + " = phi i1 [" + self.mRightOperandLLVMName + ", %" + trueLabel + "], [false, %" + startLabel + "]\n"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

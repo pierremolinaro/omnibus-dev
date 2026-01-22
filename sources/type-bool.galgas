@@ -1,25 +1,25 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func %once boolTypeName -> @string {
   result = "bool"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @boolTypeAST : @abstractDeclarationAST {
 }
 
-#·······················································································································
+//·······················································································································
 
 override getter @boolTypeAST locationForErrorSignaling -> @location outLocation {
   outLocation = .nowhere
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  PRECEDENCE GRAPH                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @boolTypeAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
@@ -29,15 +29,15 @@ override method @boolTypeAST enterInPrecedenceGraph
   [!?ioGraph addEdge !from: nodeName !to: [ctBoolTypeName () nowhere]]
 }
 
-#·······················································································································
+//·······················································································································
 
 override getter @boolTypeAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = boolTypeName ()
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  ENTER IN CONTEXT                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  ENTER IN CONTEXT                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @boolTypeAST enterInContext
   ?!context:@semanticContext ioContext
@@ -52,41 +52,41 @@ override method @boolTypeAST enterInContext
   let boolTypeName = [boolTypeName () nowhere]
   let boolType = boolType ()
   let ctBoolType = compileTimeBoolType ()
- #--- Enter type
+ //--- Enter type
   [!?ioContext.mTypeMap insertType ! boolTypeName !type: boolType]
- #--- Enter not prefix operator
+ //--- Enter not prefix operator
   var key = prefixOperatorMapKey (!boolType !.notOp !.nowhere)
   [!?ioContext.mPrefixOperatorMap insertKey !key !boolType !boolType !@boolNotOperator ()]
- #--- Enter | infix operator
+ //--- Enter | infix operator
   key = infixOperatorMapKey (!boolType !.bitWiseOrOp !.nowhere !boolType)
   [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@inlineInfixOperatorUsage {!"or"}]
   key = infixOperatorMapKey (!ctBoolType !.bitWiseOrOp !.nowhere !boolType)
   [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@inlineInfixOperatorUsage {!"or"}]
   key = infixOperatorMapKey (!boolType !.bitWiseOrOp !.nowhere !ctBoolType)
   [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@inlineInfixOperatorUsage {!"or"}]
- #--- Enter ^ infix operator
+ //--- Enter ^ infix operator
   key = infixOperatorMapKey (!boolType !.bitWiseXorOp !.nowhere !boolType)
   [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@inlineInfixOperatorUsage {!"xor"}]
   key = infixOperatorMapKey (!ctBoolType !.bitWiseXorOp !.nowhere !boolType)
   [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@inlineInfixOperatorUsage {!"xor"}]
   key = infixOperatorMapKey (!boolType !.bitWiseXorOp !.nowhere !ctBoolType)
   [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@inlineInfixOperatorUsage {!"xor"}]
- #--- Enter == infix operator
+ //--- Enter == infix operator
   key = infixOperatorMapKey (!boolType !.equal !.nowhere !boolType)
   [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@inlineInfixOperatorUsage {!"icmp eq"}]
   key = infixOperatorMapKey (!ctBoolType !.equal !.nowhere !boolType)
   [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@inlineInfixOperatorUsage {!"icmp eq"}]
   key = infixOperatorMapKey (!boolType !.equal !.nowhere !ctBoolType)
   [!?ioContext.mInfixOperatorMap insertKey !key !boolType !@inlineInfixOperatorUsage {!"icmp eq"}]
-#--- Implicit conversion to i1 for test expressions
+//--- Implicit conversion to i1 for test expressions
   key = @lstring {!boolType.omnibusTypeDescriptionName !.nowhere}
   [!?ioContext.mImplicitConversionToBooleanMap insertKey !key !@boolImplicitConverterToBoolean ()]
-#--- Enter assignment operator
+//--- Enter assignment operator
   key = assignmentOperatorKey (!boolType !.nowhere !boolType)
   [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage ()]
   key = assignmentOperatorKey (!boolType !.nowhere !ctBoolType)
   [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage ()]
-#--- Copy from reference is used by dynamic arraies  
+//--- Copy from reference is used by dynamic arraies  
   let functionName = assignmentOperatorFuncName (!boolType !boolType)
   ioRoutineListIR += !@simpleAssignmentCopyRoutineIR {
     ![functionName nowhere]
@@ -96,14 +96,14 @@ override method @boolTypeAST enterInContext
   }
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  IMPLICIT CONVERSION TO i1
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  IMPLICIT CONVERSION TO i1
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @boolImplicitConverterToBoolean : @abstractImplicitConverterToBoolean {
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @boolImplicitConverterToBoolean generateConvertToBooleanCode
   ?let @objectIR inReceiverOperand
@@ -116,14 +116,14 @@ override method @boolImplicitConverterToBoolean generateConvertToBooleanCode
   outResult = .llvmVariable {!name: [inReceiverOperand llvmName]}
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  COMPILE TIME PREFIX OPERATOR
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  COMPILE TIME PREFIX OPERATOR
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @boolNotOperator : @prefixOperatorUsage {
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @boolNotOperator generateCode
   ?let @objectIR inReceiverOperand
@@ -142,5 +142,5 @@ override method @boolNotOperator generateCode
   [!?ioInstructionGenerationList appendInstructionAsFreeString !s !@[]]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 

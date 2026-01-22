@@ -27,18 +27,18 @@ enum @llvmBinaryOperation {
   case lshr
   
   case icmp_eq
-#  case icmp_ne
+//  case icmp_ne
   case icmp_ult
   case icmp_ule
-#  case icmp_ugt
-#  case icmp_uge
+//  case icmp_ugt
+//  case icmp_uge
   case icmp_slt
   case icmp_sle
-#  case icmp_sgt
-#  case icmp_sge
+//  case icmp_sgt
+//  case icmp_sge
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 setter @instructionListIR appendBinaryOperation
   ?let @objectIR inTarget
@@ -51,7 +51,7 @@ setter @instructionListIR appendBinaryOperation
   self += !@binaryOperationIR {!inTarget !inOperandType !inLeft !inOperation !inRight !inLocation}
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @binaryOperationIR : @abstractInstructionIR {
   public var @objectIR mTarget
@@ -62,7 +62,7 @@ class @binaryOperationIR : @abstractInstructionIR {
   public var @location mLocation
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @binaryOperationIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
@@ -73,7 +73,7 @@ override method @binaryOperationIR enterAccessibleEntities
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @binaryOperationIR enterCodeForOverflowOperation 
   ?let @string inOperation
@@ -100,7 +100,7 @@ method @binaryOperationIR enterCodeForOverflowOperation
      + llvmType + " (" + llvmType + " %a, " + llvmType + " %b)"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @binaryOperationIR enterCodeForDivisionWithZeroDivisorPanic 
   ?let @string inOperation
@@ -123,7 +123,7 @@ method @binaryOperationIR enterCodeForDivisionWithZeroDivisorPanic
   ioLLVMcode += "  " + [self.mTarget llvmName] + " = " + inOperation + " " + llvmType + " " + [self.mLeft llvmName] + ", " + [self.mRight llvmName] + "\n"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @binaryOperationIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -240,25 +240,25 @@ override method @binaryOperationIR llvmInstructionCode
     ioLLVMcode += "  " + [self.mTarget llvmName] + " = lshr " + llvmType + " " + [self.mLeft llvmName] + ", " + [self.mRight llvmName] + "\n"
   case icmp_eq :
     ioLLVMcode += "  " + [self.mTarget llvmName] + " = icmp eq " + llvmType + " " + [self.mLeft llvmName] + ", " + [self.mRight llvmName] + "\n"
-#  case icmp_ne :
-#    ioLLVMcode += "  " + [mTarget llvmName] + " = icmp ne " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
+//  case icmp_ne :
+//    ioLLVMcode += "  " + [mTarget llvmName] + " = icmp ne " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
   case icmp_ult :
     ioLLVMcode += "  " + [self.mTarget llvmName] + " = icmp ult " + llvmType + " " + [self.mLeft llvmName] + ", " + [self.mRight llvmName] + "\n"
   case icmp_ule :
     ioLLVMcode += "  " + [self.mTarget llvmName] + " = icmp ule " + llvmType + " " + [self.mLeft llvmName] + ", " + [self.mRight llvmName] + "\n"
-#  case icmp_ugt :
-#    ioLLVMcode += "  " + [mTarget llvmName] + " = icmp ugt " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
-#  case icmp_uge :
-#    ioLLVMcode += "  " + [mTarget llvmName] + " = icmp uge " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
+//  case icmp_ugt :
+//    ioLLVMcode += "  " + [mTarget llvmName] + " = icmp ugt " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
+//  case icmp_uge :
+//    ioLLVMcode += "  " + [mTarget llvmName] + " = icmp uge " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
   case icmp_slt :
     ioLLVMcode += "  " + [self.mTarget llvmName] + " = icmp slt " + llvmType + " " + [self.mLeft llvmName] + ", " + [self.mRight llvmName] + "\n"
   case icmp_sle :
     ioLLVMcode += "  " + [self.mTarget llvmName] + " = icmp sle " + llvmType + " " + [self.mLeft llvmName] + ", " + [self.mRight llvmName] + "\n"
-#  case icmp_sgt :
-#    ioLLVMcode += "  " + [mTarget llvmName] + " = icmp sgt " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
-#  case icmp_sge :
-#    ioLLVMcode += "  " + [mTarget llvmName] + " = icmp sge " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
+//  case icmp_sgt :
+//    ioLLVMcode += "  " + [mTarget llvmName] + " = icmp sgt " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
+//  case icmp_sge :
+//    ioLLVMcode += "  " + [mTarget llvmName] + " = icmp sge " + llvmType + " " + [mLeft llvmName] + ", " + [mRight llvmName] + "\n"
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

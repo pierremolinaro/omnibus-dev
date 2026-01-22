@@ -1,17 +1,17 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract class @expressionAST {
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <expression> ?!@ast ioAST !@expressionAST outExpression {
     <expression_logical_and> !?ioAST ?outExpression
@@ -20,7 +20,7 @@ syntax extension omnibus_syntax {
       $||$
       let operatorLocation = @location.here
       <expression_logical_and> !?ioAST ?let rightExpression
-    #--- x or y equivalent to not (not x and not y)
+    //--- x or y equivalent to not (not x and not y)
       let andExpression = @booleanShortCircuitAndOperatorExpressionAST {
         !@prefixOperatorExpressionAST {!operatorLocation !.notOp !outExpression}
         !operatorLocation
@@ -34,25 +34,25 @@ syntax extension omnibus_syntax {
     end
   }
 
-#  #·····················································································································
-#
-#  rule <expression_logical_xor> ?!@ast ioAST !@expressionAST outExpression {
-#    <expression_logical_and> !?ioAST ?outExpression
-#    repeat
-#    while
-#      $xor$
-#      let operatorLocation = @location.here
-#      <expression_logical_and> !?ioAST ?let rightExpression
-#      outExpression = @omnibusInfixOperatorExpressionAST.new {
-#        !outExpression
-#        !operatorLocation
-#        !.booleanXorOp
-#        !rightExpression
-#      }
-#    end
-#  }
-#
-  #·····················································································································
+//  //·····················································································································
+//
+//  rule <expression_logical_xor> ?!@ast ioAST !@expressionAST outExpression {
+//    <expression_logical_and> !?ioAST ?outExpression
+//    repeat
+//    while
+//      $xor$
+//      let operatorLocation = @location.here
+//      <expression_logical_and> !?ioAST ?let rightExpression
+//      outExpression = @omnibusInfixOperatorExpressionAST.new {
+//        !outExpression
+//        !operatorLocation
+//        !.booleanXorOp
+////        !rightExpression
+//      }
+//    end
+//  }
+//
+  //·····················································································································
 
   rule <expression_logical_and> ?!@ast ioAST !@expressionAST outExpression {
     <expression_bitwise_or> !?ioAST ?outExpression
@@ -69,7 +69,7 @@ syntax extension omnibus_syntax {
     end
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <expression_bitwise_or> ?!@ast ioAST !@expressionAST outExpression {
     <expression_bitwise_xor> !?ioAST ?outExpression
@@ -87,7 +87,7 @@ syntax extension omnibus_syntax {
     end
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <expression_bitwise_xor> ?!@ast ioAST !@expressionAST outExpression {
     <expression_bitwise_and> !?ioAST ?outExpression
@@ -105,7 +105,7 @@ syntax extension omnibus_syntax {
     end
    }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <expression_bitwise_and> ?!@ast ioAST !@expressionAST outExpression {
     <expression_equality> !?ioAST ?outExpression
@@ -123,7 +123,7 @@ syntax extension omnibus_syntax {
     end
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <expression_equality> ?!@ast ioAST !@expressionAST outExpression {
     <expression_comparison> !?ioAST ?outExpression
@@ -156,7 +156,7 @@ syntax extension omnibus_syntax {
     end
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <expression_comparison> ?!@ast ioAST !@expressionAST outExpression {
     <expression_shift> !?ioAST ?outExpression
@@ -214,7 +214,7 @@ syntax extension omnibus_syntax {
     end
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <expression_shift> ?!@ast ioAST !@expressionAST outExpression {
     <expression_addition> !?ioAST ?outExpression
@@ -242,7 +242,7 @@ syntax extension omnibus_syntax {
     end
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <expression_addition> ?!@ast ioAST !@expressionAST outExpression {
     <expression_product> !?ioAST ?outExpression
@@ -290,7 +290,7 @@ syntax extension omnibus_syntax {
     end
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <expression_product> ?!@ast ioAST !@expressionAST outExpression {
     <primary> !?ioAST ?outExpression
@@ -358,7 +358,7 @@ syntax extension omnibus_syntax {
     end
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     $~$
@@ -371,7 +371,7 @@ syntax extension omnibus_syntax {
     }
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     $not$
@@ -384,7 +384,7 @@ syntax extension omnibus_syntax {
     }
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     $-$
@@ -397,7 +397,7 @@ syntax extension omnibus_syntax {
     }
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     $-%$
@@ -410,7 +410,7 @@ syntax extension omnibus_syntax {
     }
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     $($
@@ -418,19 +418,19 @@ syntax extension omnibus_syntax {
     $)$
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  NOTE TYPES                                                                                                           
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  NOTE TYPES                                                                                                           
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract method @expressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTICS                                                                                                            
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SEMANTICS                                                                                                            
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract method @expressionAST analyzeExpression
   ?self:let @omnibusType inSelfType
@@ -445,4 +445,4 @@ abstract method @expressionAST analyzeExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

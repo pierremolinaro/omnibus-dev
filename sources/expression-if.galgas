@@ -1,6 +1,6 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @ifExpressionAST : @expressionAST {
   public var @expressionAST mIfExpression
@@ -11,20 +11,20 @@ class @ifExpressionAST : @expressionAST {
   public var @location mElseExpressionEndLocation
 }
 
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//  SYNTAX                                                                                                               
+//-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
   
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     <expression_if> !?ioAST ?let if_expression
     outExpression = if_expression
   }
   
-  #·····················································································································
+  //·····················································································································
   
   rule <expression_if> ?!@ast ioAST !@ifExpressionAST outExpression {
     $if$
@@ -52,13 +52,13 @@ syntax extension omnibus_syntax {
     }
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @ifExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
@@ -69,9 +69,9 @@ override method @ifExpressionAST addDependenceEdgeForStaticExpression
   [self.mElseExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  NOTE TYPES                                                                                                           
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  NOTE TYPES                                                                                                           
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @ifExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [self.mIfExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
@@ -79,9 +79,9 @@ override method @ifExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanti
   [self.mElseExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTICS                                                                                                            
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SEMANTICS                                                                                                            
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @ifExpressionAST analyzeExpression
   ?self:let @omnibusType inSelfType
@@ -96,7 +96,7 @@ override method @ifExpressionAST analyzeExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
 {
-#--- Analyze if expression
+//--- Analyze if expression
   [self.mIfExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
@@ -111,7 +111,7 @@ override method @ifExpressionAST analyzeExpression
     ?result:@objectIR ifExpressionResult 
   ]
   [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?ifExpressionResult]  
-#--- Check "if" expression type is boolean
+//--- Check "if" expression type is boolean
   [inContext.mImplicitConversionToBooleanMap generateConvertToBooleanCode
     !ifExpressionResult
     !self.mIfExpressionEndLocation
@@ -121,10 +121,10 @@ override method @ifExpressionAST analyzeExpression
     ?let ifExpressionConvertedToBoolean
   ]
 
-#  if not [[ifExpressionResult type].kind isBoolean] then
-#    error mIfExpressionEndLocation : "'if' expression should be boolean"
-#  end
-#--- Analyze 'then' expression
+//  if not [[ifExpressionResult type].kind isBoolean] then
+//    error mIfExpressionEndLocation : "'if' expression should be boolean"
+//  end
+//--- Analyze 'then' expression
   [self.mThenExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
@@ -149,7 +149,7 @@ override method @ifExpressionAST analyzeExpression
     !errorLocation:self.mThenExpressionEndLocation
     !staticTypeAllowed:true
   )
-#--- Analyze 'else' expression
+//--- Analyze 'else' expression
   [self.mElseExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
@@ -174,7 +174,7 @@ override method @ifExpressionAST analyzeExpression
     !errorLocation:self.mElseExpressionEndLocation
     !staticTypeAllowed:true
   )
-#--- 'if' expression is static ?
+//--- 'if' expression is static ?
   switch ifExpressionConvertedToBoolean
   case compileTime (boolValue) :
     outResult = if boolValue then thenExpressionResult else elseExpressionResult end
@@ -187,18 +187,18 @@ override method @ifExpressionAST analyzeExpression
       !elseExpressionResult
     ]      
   end
-#  if [ifExpressionResult isStatic] then # yes, perform 'if' statically
-#    [ifExpressionResult literalInteger ?1* ?value:let value]
-#    outResult = if value != 0 then thenExpressionResult else elseExpressionResult end
-#  else # No, generate 'select' LLVM instruction
-#    getNewTempValue (![elseExpressionResult type] !?ioTemporaries ?outResult)
-#    [!?ioInstructionGenerationList appendSelectOperation
-#      !outResult
-#      !ifExpressionResult
-#      !thenExpressionResult
-#      !elseExpressionResult
-#    ]      
-#  end
+//  if [ifExpressionResult isStatic] then // yes, perform 'if' statically
+//    [ifExpressionResult literalInteger ?1* ?value:let value]
+//    outResult = if value != 0 then thenExpressionResult else elseExpressionResult end
+//  else // No, generate 'select' LLVM instruction
+//    getNewTempValue (![elseExpressionResult type] !?ioTemporaries ?outResult)
+//    [!?ioInstructionGenerationList appendSelectOperation
+//      !outResult
+//      !ifExpressionResult
+//      !thenExpressionResult
+//      !elseExpressionResult
+//    ]      
+//  end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

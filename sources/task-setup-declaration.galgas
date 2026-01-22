@@ -1,6 +1,6 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @taskSetupDeclarationAST : @abstractDeclarationAST {
   public var @lstring mTaskName
@@ -11,13 +11,13 @@ class @taskSetupDeclarationAST : @abstractDeclarationAST {
   public var @location mEndOfTaskSetupDeclaration
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <task_event> ?!@ast ioAST
                     ?taskName: let @lstring inTaskName
@@ -44,7 +44,7 @@ syntax extension omnibus_syntax {
     let endOfInit = @location.here
     $}$
     if attribute.string == "onSetup" then
-      ioTaskSetupListAST += !name !dependenceList # !instructionList !endOfInit
+      ioTaskSetupListAST += !name !dependenceList // !instructionList !endOfInit
       ioAST.mDeclarationListAST += !@taskSetupDeclarationAST {
         !inTaskName
         !"task.setup."
@@ -54,7 +54,7 @@ syntax extension omnibus_syntax {
         !endOfInit
       }
     elsif attribute.string == "onStart" then
-      ioTaskActivateListAST += !name !dependenceList # !instructionList !endOfInit
+      ioTaskActivateListAST += !name !dependenceList // !instructionList !endOfInit
       ioAST.mDeclarationListAST += !@taskSetupDeclarationAST {
         !inTaskName
         !"task.activate."
@@ -64,7 +64,7 @@ syntax extension omnibus_syntax {
         !endOfInit
       }
     elsif attribute.string == "onTermination" then
-      ioTaskDeactivateListAST += !name !dependenceList # !instructionList !endOfInit
+      ioTaskDeactivateListAST += !name !dependenceList // !instructionList !endOfInit
       ioAST.mDeclarationListAST += !@taskSetupDeclarationAST {
         !inTaskName
         !"task.deactivate."
@@ -78,37 +78,37 @@ syntax extension omnibus_syntax {
     end
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  NOTE TYPES IN PRECEDENCE GRAPH                                                                                       
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  NOTE TYPES IN PRECEDENCE GRAPH                                                                                       
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @taskSetupDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   let s = self.mQualifier + self.mTaskName.string + "." + self.mSetupName.string + "()"
   [!?ioGraph addNode ! @{!s !self.mSetupName.location} !self]
-#---
+//---
   [!?ioGraph noteNode !self.mTaskName]
   [self.mTaskSetupInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @taskSetupDeclarationAST keyRepresentationForErrorSignaling -> @string {
   result = "task function " + self.mTaskName + "." + self.mSetupName
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @taskSetupDeclarationAST locationForErrorSignaling -> @location {
   result = self.mSetupName.location
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  ENTER IN CONTEXT                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  ENTER IN CONTEXT                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @taskSetupDeclarationAST enterInContext
   ?!context:@semanticContext unused ioContext
@@ -120,7 +120,7 @@ override method @taskSetupDeclarationAST enterInContext
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
-#  let mangledName = "task.setup." + task.mTaskName + "." + setup.mName
+//  let mangledName = "task.setup." + task.mTaskName + "." + setup.mName
   let mangledName = self.mQualifier + self.mTaskName + "." + self.mSetupName
   ioDecoratedRoutineList +=
     !receiverTypeName: self.mTaskName
@@ -135,7 +135,7 @@ override method @taskSetupDeclarationAST enterInContext
     !warningOnUnusedArgs:true
     !self.mTaskSetupInstructionList
     !self.mEndOfTaskSetupDeclaration
-    !returnTypeName: ["" nowhere] # Empty string if no returned value
+    !returnTypeName: ["" nowhere] // Empty string if no returned value
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

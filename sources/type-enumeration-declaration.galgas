@@ -1,26 +1,26 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @enumerationConstantList {
   public var @lstring mConstantName
   public var @bigint mConstantValue
 }
 
-#·······················································································································
+//·······················································································································
 
 class @enumerationDeclarationAST : @abstractDeclarationAST {
   public var @lstring mEnumerationName
   public var @enumerationConstantList mCaseNameList
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <declaration> ?!@ast ioAST {
     $enum$
@@ -39,19 +39,19 @@ syntax extension omnibus_syntax {
     ioAST.mDeclarationListAST += !@enumerationDeclarationAST {!enumerationName !enumCaseList}
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  PRECEDENCE GRAPH                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  PRECEDENCE GRAPH                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @enumerationDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   [!?ioGraph addNode !self.mEnumerationName !self]
-#--- Mark dependance from $uintN used for value property
+//--- Mark dependance from $uintN used for value property
   var @bigint maxValue = 0
   for (* value) in self.mCaseNameList do
     if maxValue < value then
@@ -66,21 +66,21 @@ override method @enumerationDeclarationAST enterInPrecedenceGraph
   [!?ioGraph addEdge !from: self.mEnumerationName !to: ["u" + representationBitCount nowhere]]
 }
 
-#·······················································································································
+//·······················································································································
 
 override getter @enumerationDeclarationAST locationForErrorSignaling -> @location outLocation {
   outLocation = self.mEnumerationName.location
 }
 
-#·······················································································································
+//·······················································································································
 
 override getter @enumerationDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = "enum " + self.mEnumerationName 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  ENTER IN CONTEXT                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  ENTER IN CONTEXT                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @enumerationDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
@@ -92,7 +92,7 @@ override method @enumerationDeclarationAST enterInContext
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
-#---------------- Build constant map
+//---------------- Build constant map
   var @constantMap enumConstantMap = @()
   var @bigint maxValue = 0
   for (name value) in self.mCaseNameList do
@@ -105,13 +105,13 @@ override method @enumerationDeclarationAST enterInContext
     !self.mEnumerationName
     !enumConstantMap
   ]
-#---------------- Compute representation bit count
+//---------------- Compute representation bit count
   var @uint representationBitCount = 0
   loop (@uint.max) while maxValue > 0 do
     representationBitCount += 1 ;
     maxValue = maxValue / 2
   end
-#---------------- Property map: add uintN() accessor
+//---------------- Property map: add uintN() accessor
   let integerTypeProxy = [ioContext.mTypeMap searchKey
     ! @{!"u" + representationBitCount !self.mEnumerationName}
   ]
@@ -128,9 +128,9 @@ override method @enumerationDeclarationAST enterInContext
     !conversionToUIntN
     !isRequired:false
     !warnsIfUnused:false
-    !"i" + representationBitCount # enumerationType llvmTypeName]
+    !"i" + representationBitCount // enumerationType llvmTypeName]
   }
-#---------------- Insert enumeration in type map
+//---------------- Insert enumeration in type map
   let enumerationType = @omnibusType {
     !subscript:.noSubscript
     !attributes:.instanciable | .copyable
@@ -139,15 +139,15 @@ override method @enumerationDeclarationAST enterInContext
     !llvmBaseTypeName: self.mEnumerationName
   }
   [!?ioContext.mTypeMap insertType !self.mEnumerationName !type:enumerationType]
-#--- Enter assignment operator
+//--- Enter assignment operator
   let key = assignmentOperatorKey (!enumerationType !self.mEnumerationName.location !enumerationType)
   [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage ()]
-#---------------- Infix operators
-#  enterEnumerationComparisonOperators (!typeName:mEnumerationName !?context:ioContext)
+//---------------- Infix operators
+//  enterEnumerationComparisonOperators (!typeName:mEnumerationName !?context:ioContext)
   let boolType = boolType ()
-#--- Enter == infix operator
+//--- Enter == infix operator
   addIntegerInfixOperator (!.equal !enumerationType !"icmp eq" !?ioContext.mInfixOperatorMap !boolType)
-#--- Enter ≤ infix operator
+//--- Enter ≤ infix operator
   addIntegerInfixOperator (
     !.infEqual
     !enumerationType
@@ -155,7 +155,7 @@ override method @enumerationDeclarationAST enterInContext
     !?ioContext.mInfixOperatorMap
     !boolType
   )
-#--- Enter < infix operator
+//--- Enter < infix operator
   addIntegerInfixOperator (
     !.lessThan
     !enumerationType
@@ -165,40 +165,40 @@ override method @enumerationDeclarationAST enterInContext
   )
 }
 
-#·······················································································································
+//·······················································································································
 
-#proc enterEnumerationComparisonOperators
-#  ?typeName:@lstring inTypeName
-#  ?!context:@semanticContext ioContext
-#{
-#  let key = combineTypeNamesForInfixOperator (!inTypeName.string !inTypeName.string)
-#  let booleanType = [ioContext booleanType !.nowhere]
-#  [!?ioContext.mEqualOperatorMap insertKey
-#    !key
-#    !booleanType
-#    !@infixObjectObjectOperatorDescription.new {!.icmp_eq}
-#  ]
-#  [!?ioContext.mStrictInfOperatorMap insertKey
-#    !key
-#    !booleanType
-#    !@infixObjectObjectOperatorDescription.new {!.icmp_ult}
-#  ]
-#  [!?ioContext.mInfEqualOperatorMap insertKey
-#    !key
-#    !booleanType
-#    !@infixObjectObjectOperatorDescription.new {!.icmp_ule}
-#  ]
-#}
+//proc enterEnumerationComparisonOperators
+//  ?typeName:@lstring inTypeName
+//  ?!context:@semanticContext ioContext
+//{
+//  let key = combineTypeNamesForInfixOperator (!inTypeName.string !inTypeName.string)
+//  let booleanType = [ioContext booleanType !.nowhere]
+//  [!?ioContext.mEqualOperatorMap insertKey
+//    !key
+//    !booleanType
+//    !@infixObjectObjectOperatorDescription.new {!.icmp_eq}
+//  ]
+//  [!?ioContext.mStrictInfOperatorMap insertKey
+//    !key
+//    !booleanType
+//    !@infixObjectObjectOperatorDescription.new {!.icmp_ult}
+//  ]
+//  [!?ioContext.mInfEqualOperatorMap insertKey
+//    !key
+//    !booleanType
+//    !@infixObjectObjectOperatorDescription.new {!.icmp_ule}
+//  ]
+//}
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  CODE GENERATION                                                                                                    
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  CODE GENERATION                                                                                                    
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @enumToUintRoutineIR : @abstractRoutineIR {
   public var @string mEnumerationLLVMTypeName
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @enumToUintRoutineIR llvmCodeGeneration 
   ?!@string ioLLVMcode
@@ -213,5 +213,5 @@ override method @enumToUintRoutineIR llvmCodeGeneration
   ioLLVMcode += "}\n\n"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 

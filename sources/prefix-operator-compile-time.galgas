@@ -1,13 +1,13 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @compileTimePrefixOperatorEnumeration  %equatable{
- case notOp   # not
- case minusOp # -
+ case notOp   // not
+ case minusOp // -
 }
 
-#·······················································································································
+//·······················································································································
 
 getter @compileTimePrefixOperatorEnumeration string -> @string {
   switch self
@@ -16,7 +16,7 @@ getter @compileTimePrefixOperatorEnumeration string -> @string {
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 getter @compileTimePrefixOperatorEnumeration prefixOperator -> @prefixOperator {
   switch self
@@ -25,7 +25,7 @@ getter @compileTimePrefixOperatorEnumeration prefixOperator -> @prefixOperator {
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 class @compiletimePrefixOperatorAST : @abstractDeclarationAST {
   public var @compileTimePrefixOperatorEnumeration mPrefixOperator
@@ -36,19 +36,19 @@ class @compiletimePrefixOperatorAST : @abstractDeclarationAST {
   public var @lstring mResultTypeName
 }
 
-#·······················································································································
+//·······················································································································
 
 override getter @compiletimePrefixOperatorAST locationForErrorSignaling -> @location outLocation {
   outLocation = self.mPrefixOperatorLocation
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <compileTimePrefixOperator> !@compileTimePrefixOperatorEnumeration outOperator {
     select
@@ -60,7 +60,7 @@ syntax extension omnibus_syntax {
     end
   }
   
-  #·····················································································································
+  //·····················································································································
 
   rule <declaration> ?!@ast ioAST {
     $compiletime$
@@ -86,13 +86,13 @@ syntax extension omnibus_syntax {
     }
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  PRECEDENCE GRAPH                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @compiletimePrefixOperatorAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
@@ -104,15 +104,15 @@ override method @compiletimePrefixOperatorAST enterInPrecedenceGraph
   [!?ioGraph addEdge !from: compileTimeDeclarationBarrier () !to: nodeName]
 }
 
-#·······················································································································
+//·······················································································································
 
 override getter @compiletimePrefixOperatorAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = [self.mPrefixOperator string] + " " + self.mReceiverTypeName
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  ENTER IN CONTEXT                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  ENTER IN CONTEXT                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @compiletimePrefixOperatorAST enterInContext
   ?!context: @semanticContext ioContext
@@ -124,18 +124,18 @@ override method @compiletimePrefixOperatorAST enterInContext
   ?!registerUserAccess: @controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
   ?!userDefinedTypes: @userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
-#--- Check types
+//--- Check types
   [!?ioContext.mTypeMap makeEntry !self.mReceiverTypeName ?let receiverTypeProxy]
   let receiverType = [receiverTypeProxy type]
   [receiverType checkIsCompileTimeType !self.mReceiverTypeName.location]
   [!?ioContext.mTypeMap makeEntry !self.mResultTypeName ?let resultTypeProxy]
   let resultType = [resultTypeProxy type]
   [resultType checkIsCompileTimeType !self.mResultTypeName.location]
-#--- Check native operator expression
+//--- Check native operator expression
   var @ctCheckMap ctCheckMap = @()
   [!?ctCheckMap insertKey !self.mReceiverName]
   [self.mExpression checkCompileTimeExpression !ctCheckMap]
-#--- Enter in infix operator map  
+//--- Enter in infix operator map  
   let key = prefixOperatorMapKey (!receiverType !self.mPrefixOperator !self.mPrefixOperatorLocation)
   let definition = @compileTimePrefixOperatorUsage {
     !self.mPrefixOperatorLocation
@@ -143,16 +143,16 @@ override method @compiletimePrefixOperatorAST enterInContext
     !self.mExpression
   }
   [!?ioContext.mPrefixOperatorMap insertKey !key !receiverType !resultType !definition]
-#--- Enter derived operators ?
+//--- Enter derived operators ?
   if self.mPrefixOperator == .minusOp then
     let minusNoOvf_key = prefixOperatorMapKey (!receiverType !.minusNoOvf !self.mPrefixOperatorLocation)
     [!?ioContext.mPrefixOperatorMap insertKey !minusNoOvf_key !receiverType !resultType !definition]
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#   PREFIX OPERATOR USAGE
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//   PREFIX OPERATOR USAGE
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @compileTimePrefixOperatorUsage : @prefixOperatorUsage {
   public var @location mPrefixOperatorLocation
@@ -160,7 +160,7 @@ class @compileTimePrefixOperatorUsage : @prefixOperatorUsage {
   public var @ctExpressionAST mExpression
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @compileTimePrefixOperatorUsage generateCode
   ?let @objectIR inReceiverOperand
@@ -179,5 +179,5 @@ override method @compileTimePrefixOperatorUsage generateCode
   outResultValue = .literalInteger {!type: inResultType !value: result}
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 

@@ -1,6 +1,6 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @forLowerUpperBoundInstructionAST : @instructionAST {
   public var @lstring mVarName
@@ -13,13 +13,13 @@ class @forLowerUpperBoundInstructionAST : @instructionAST {
   public var @location mEndOf_do_instruction
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
     $for$
@@ -54,13 +54,13 @@ syntax extension omnibus_syntax {
     }
   }
   
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  NOTE TYPES                                                                                                           
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  NOTE TYPES                                                                                                           
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @forLowerUpperBoundInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   if self.mTypeName.string != "" then
@@ -71,9 +71,9 @@ override method @forLowerUpperBoundInstructionAST noteInstructionTypesInPreceden
   [self.mUpperBoundExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTICS                                                                                                            
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SEMANTICS                                                                                                            
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @forLowerUpperBoundInstructionAST instructionSemanticAnalysis
   ?self:let @omnibusType inSelfType
@@ -86,7 +86,7 @@ override method @forLowerUpperBoundInstructionAST instructionSemanticAnalysis
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-#--- Get iterated element type
+//--- Get iterated element type
   let type = [[inContext.mTypeMap searchKey !self.mTypeName] type]
   switch type.kind
   case boolean, void :
@@ -115,7 +115,7 @@ override method @forLowerUpperBoundInstructionAST instructionSemanticAnalysis
   case function (3*) :
     error self.mTypeName : "an integer type is required here"
   case integer (@bigint unused min @bigint unused max @bool unsigned @uint unused bitCount) :
-  #--- Analyze expressions
+  //--- Analyze expressions
     [self.mLowerBoundExpression analyzeExpression
       !self:inSelfType
       !routineAttributes:inRoutineAttributes
@@ -150,7 +150,7 @@ override method @forLowerUpperBoundInstructionAST instructionSemanticAnalysis
       !?ioTemporaries
       !?upperBoundExpressionResult
     ]  
-  #--- Check expression types
+  //--- Check expression types
     let lowerBound = checkAssignmentCompatibility (
       !inContext.mAssignmentOperatorMap
       !source:lowerBoundExpressionResult
@@ -165,16 +165,16 @@ override method @forLowerUpperBoundInstructionAST instructionSemanticAnalysis
       !errorLocation:self.mEndOf_upperBoundExpression_instruction
       !staticTypeAllowed:false
     )
-  #---
+  //---
     [!?ioUniversalMap openOverrideForRepeatBlock]
-  #--- Enter iteration variable name
+  //--- Enter iteration variable name
     let enumeratedVarName = @lstring {!self.mVarName.string + "." + ioTemporaries.mTemporaryIndex !self.mVarName}
     ioTemporaries.mTemporaryIndex += 1
     ioAllocaList += !llvmNameForLocalVariable (!enumeratedVarName) !type !false
     if self.mVarName.string != "" then
      [!?ioUniversalMap insertLocalConstant !self.mVarName !false !type !enumeratedVarName]
     end
-  #--- Analyze instruction list
+  //--- Analyze instruction list
     var @instructionListIR instructionGenerationList = @[]
     [self.mDoInstructionList analyzeBranchInstructionList
       !self:inSelfType
@@ -189,7 +189,7 @@ override method @forLowerUpperBoundInstructionAST instructionSemanticAnalysis
       !?instructionListIR:instructionGenerationList
     ]
     [!?ioUniversalMap closeOverride !self.mEndOf_do_instruction]
-  #--- Code generation
+  //--- Code generation
     ioInstructionGenerationList += !@forLowerUpperBoundInstructionIR {
       !enumeratedVarName
       !type
@@ -202,9 +202,9 @@ override method @forLowerUpperBoundInstructionAST instructionSemanticAnalysis
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  CODE GENERATION                                                                                                      
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  CODE GENERATION                                                                                                      
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @forLowerUpperBoundInstructionIR : @abstractInstructionIR {
   public var @string mVarName
@@ -216,10 +216,10 @@ class @forLowerUpperBoundInstructionIR : @abstractInstructionIR {
   public var @instructionListIR mInstructionList
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#         for x in LOW ..< UP do INST end 
-#  is implemented as:
-#         x := LOW ; while x < UP do INST ; x := x + 1 end
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//         for x in LOW ..< UP do INST end 
+//  is implemented as:
+//         x := LOW ; while x < UP do INST ; x := x + 1 end
 
 override method @forLowerUpperBoundInstructionIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -235,28 +235,28 @@ override method @forLowerUpperBoundInstructionIR llvmInstructionCode
   let loadedVarName = "" + llvmNameForLocalVariable (!self.mVarName + ".loaded")
   let currentVarName = "" + llvmNameForLocalVariable (!self.mVarName + ".current")
   let nextVarName = "" + llvmNameForLocalVariable (!self.mVarName + ".next")
-#--- Store LOW in x
+//--- Store LOW in x
   ioLLVMcode += "  store " + llvmType + " " + [self.mLowerExpressionResult llvmName] + ", " + llvmType + " * " + llvmVarName + "\n"
   ioLLVMcode += "  br label %" + testLabel + "\n\n"
-#--- Test
+//--- Test
   ioLLVMcode += testLabel + ":\n"
   ioLLVMcode += "  " + loadedVarName + " = load " + llvmType + ", " + llvmType + " * " + llvmVarName + "\n"
   ioLLVMcode += "  " + testResult + " = icmp "
   ioLLVMcode += if self.mUnsigned then "ult" else "slt" end
   ioLLVMcode += " " + llvmType + " " + loadedVarName + ", " + [self.mUpperExpressionResult llvmName] + "\n"
   ioLLVMcode += "  br i1 " + testResult + ", label %" + loopLabel + ", label %" + endLabel + "\n\n"
-#--- Loop  
+//--- Loop  
   ioLLVMcode += loopLabel + ":\n"
   [self.mInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
   ioLLVMcode += "  " + currentVarName + " = load " + llvmType + ", " + llvmType + " * " + llvmVarName + "\n"
   ioLLVMcode += "  " + nextVarName + " = add " + llvmType + " " + currentVarName + ", 1\n"
   ioLLVMcode += "  store " + llvmType + " " + nextVarName + ", " + llvmType + " * " + llvmVarName + "\n"
   ioLLVMcode += "  br label %" + testLabel + "\n\n"
-#--- End
+//--- End
   ioLLVMcode += endLabel + ":\n"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @forLowerUpperBoundInstructionIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
@@ -265,4 +265,4 @@ override method @forLowerUpperBoundInstructionIR enterAccessibleEntities
   [self.mInstructionList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

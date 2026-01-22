@@ -1,6 +1,6 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                                  
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @bitbandInstructionAST : @instructionAST {
   public var @controlRegisterLValueAST mControlRegisterLValue
@@ -10,13 +10,13 @@ class @bitbandInstructionAST : @instructionAST {
   public var @location mSourceExpressionLocation
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
     <control_register_lvalue> !?ioAST ?let registerLValue
@@ -28,7 +28,7 @@ syntax extension omnibus_syntax {
     let bitExpressionLocation = @location.here
     $=$
     <expression> !?ioAST ?let sourceExpression
-  #--- AST
+  //--- AST
     ioInstructionList += !@bitbandInstructionAST {
       !registerLValue.mRegisterGroupName.location
       !registerLValue
@@ -39,13 +39,13 @@ syntax extension omnibus_syntax {
     }
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  NOTE TYPES                                                                                                           
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  NOTE TYPES                                                                                                           
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @bitbandInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [self.mControlRegisterLValue noteExpressionTypesInPrecedenceGraph !?ioGraph]
@@ -54,9 +54,9 @@ override method @bitbandInstructionAST noteInstructionTypesInPrecedenceGraph ?!@
   [self.mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTICS                                                                                                            
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SEMANTICS                                                                                                            
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @bitbandInstructionAST instructionSemanticAnalysis
   ?self:let @omnibusType inSelfType
@@ -69,13 +69,13 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-#-------------------- Source Expression
-#--- Inferred source expression type
+//-------------------- Source Expression
+//--- Inferred source expression type
   [inContext.mTypeMap searchType
     !lkey: @{!"u1" !self.mSourceExpressionLocation}
     ?type:let requiredSourceExpressionType
   ]
-#--- Compute source expression
+//--- Compute source expression
   [self.mSourceExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
@@ -89,12 +89,12 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
     !?instructionListIR:ioInstructionGenerationList
     ?result:@objectIR sourceExpressionOperand
   ]
-#--- Load from reference ?
+//--- Load from reference ?
   [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
     !?sourceExpressionOperand
   ]
-#--- If source expression operand is static type, check value and convert it to 'requiredSourceExpressionType'
+//--- If source expression operand is static type, check value and convert it to 'requiredSourceExpressionType'
   if ([sourceExpressionOperand type].omnibusTypeDescriptionName == ctIntegerTypeName ()) && [sourceExpressionOperand isLiteralInteger] then
     [sourceExpressionOperand extractLiteralInteger ?1* ?value:let @bigint value]
     if (value < 0) || (value > 1) then
@@ -105,7 +105,7 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
   elsif [sourceExpressionOperand type].omnibusTypeDescriptionName != requiredSourceExpressionType.omnibusTypeDescriptionName then
     error self.mSourceExpressionLocation : "bit expression type should be $" + requiredSourceExpressionType.omnibusTypeDescriptionName
   end
-#-------------------- Control register LValue
+//-------------------- Control register LValue
   [self.mControlRegisterLValue controlRegisterLValueSemanticAnalysis
     !writeAccess:false
     !self: inSelfType
@@ -123,13 +123,13 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
     ?llvmRegisterAddressName:let llvmRegisterAddressName
   ]
 
-#-------------------- Bit Expression
-#--- Inferred bit expression type
+//-------------------- Bit Expression
+//--- Inferred bit expression type
   [inContext.mTypeMap searchType
     !lkey: @{!"u" + [registerBitCount-1 significantBitCount] !self.mBitExpressionLocation}
     ?type:let requiredBitExpressionType
   ]
-#--- Compute bit expression
+//--- Compute bit expression
   [self.mBitExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
@@ -143,12 +143,12 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
     !?instructionListIR:ioInstructionGenerationList
     ?result:@objectIR bitExpressionOperand
   ]
-#--- Load from reference ?
+//--- Load from reference ?
   [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
     !?bitExpressionOperand
   ]
-#--- If bit expression operand is static type, check value and convert it to 'requiredBitExpressionType'
+//--- If bit expression operand is static type, check value and convert it to 'requiredBitExpressionType'
   if ([bitExpressionOperand type].omnibusTypeDescriptionName == ctIntegerTypeName ()) && [bitExpressionOperand isLiteralInteger] then
     [bitExpressionOperand extractLiteralInteger ?1* ?value:let @bigint value]
     if (value < 0) || (value >= registerBitCount) then
@@ -159,7 +159,7 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
   elsif [bitExpressionOperand type].omnibusTypeDescriptionName != requiredBitExpressionType.omnibusTypeDescriptionName then
     error self.mBitExpressionLocation : "bit expression type should be $" + requiredBitExpressionType.omnibusTypeDescriptionName
   end
-#-------------------- Generate code
+//-------------------- Generate code
   ioInstructionGenerationList += !@bitbandInstructionIR {
     !llvmRegisterAddressName
     !bitExpressionOperand
@@ -171,9 +171,9 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
   }
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  CODE GENERATION                                                                                                      
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  CODE GENERATION                                                                                                      
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @bitbandInstructionIR : @abstractInstructionIR {
   public var @string mRegisterAddressLLVMname
@@ -185,17 +185,17 @@ class @bitbandInstructionIR : @abstractInstructionIR {
   public var @bigint mBitbandRegisterBitMultiplier
 }
 
-#·······················································································································
-#void bitband (const unsigned char inBit, const unsigned inAddress, const unsigned char inValue) {
-#  const unsigned register_base = 0x4000 * 0x10000 ;
-#  const unsigned byte_offset = inAddress - register_base ;
-#  const unsigned bit_word_offset = (byte_offset * 32) + (inBit * 4) ;
-#  const unsigned bit_band_base = 0x4200 * 0x10000 ;
-#  const unsigned bit_word_addr = bit_band_base + bit_word_offset ;
-#  unsigned * ptr = (unsigned *) bit_word_addr ;
-#  *ptr = inValue ;
-#}
-#·······················································································································
+//·······················································································································
+//void bitband (const unsigned char inBit, const unsigned inAddress, const unsigned char inValue) {
+//  const unsigned register_base = 0x4000 * 0x10000 ;
+//  const unsigned byte_offset = inAddress - register_base ;
+//  const unsigned bit_word_offset = (byte_offset * 32) + (inBit * 4) ;
+//  const unsigned bit_band_base = 0x4200 * 0x10000 ;
+//  const unsigned bit_word_addr = bit_band_base + bit_word_offset ;
+//  unsigned * ptr = (unsigned *) bit_word_addr ;
+//  *ptr = inValue ;
+//}
+//·······················································································································
 
 override method @bitbandInstructionIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -215,4 +215,4 @@ override method @bitbandInstructionIR llvmInstructionCode
   ioLLVMcode += "  store i32 %value." + idx + ", i32* %ptr." + idx + "\n"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

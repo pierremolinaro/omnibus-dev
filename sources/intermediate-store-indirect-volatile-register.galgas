@@ -7,7 +7,7 @@ setter @instructionListIR appendStoreIndirectVolatileRegister
   self += !@storeIndirectVolatileIR {!inTargetVarType !inLLVMName !inSourceValue}
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @storeIndirectVolatileIR : @abstractInstructionIR {
   public var @omnibusType mTargetVarType
@@ -15,7 +15,7 @@ class @storeIndirectVolatileIR : @abstractInstructionIR {
   public var @objectIR mSourceValue
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @storeIndirectVolatileIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -30,4 +30,4 @@ override method @storeIndirectVolatileIR llvmInstructionCode
               + " * " + ptr + "\n"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

@@ -1,27 +1,27 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @integerDeclarationAST : @abstractDeclarationAST {
   public var @bool mIsSigned
   public var @uint mSize
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @integerDeclarationAST locationForErrorSignaling -> @location outLocation {
   outLocation = .nowhere
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @integerDeclarationAST typeName -> @string outName {
   outName = if self.mIsSigned then "i" else "u" end + self.mSize
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  PRECEDENCE GRAPH                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @integerDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
@@ -33,37 +33,37 @@ override method @integerDeclarationAST enterInPrecedenceGraph
   [!?ioGraph addEdge !from: nodeName !to: [ctBoolTypeName () nowhere]]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @integerDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = "integer " + [self typeName]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  UTILITIES                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  UTILITIES                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func minValueForInteger ?let @bool inIsUnsigned ?let @uint inBitCount -> @bigint {
   if inIsUnsigned then
     result = 0
-  else # Signed
+  else // Signed
     result = - (1 << (inBitCount - 1))
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 func maxValueForInteger ?let @bool inIsUnsigned ?let @uint inBitCount -> @bigint {
   if inIsUnsigned then
     result = (1 << inBitCount) - 1
-  else # Signed
+  else // Signed
     result = (1 << (inBitCount - 1)) - 1
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  ENTER IN CONTEXT                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  ENTER IN CONTEXT                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @integerDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
@@ -77,12 +77,12 @@ override method @integerDeclarationAST enterInContext
 {
   let integerTypeName = [[self typeName] nowhere]
   [!?ioContext.mTypeMap makeEntry !integerTypeName ?let selfTypeProxy]
-#--------------------------------------- Get min and max
+//--------------------------------------- Get min and max
   let min = minValueForInteger (!not self.mIsSigned !self.mSize)
   let max = maxValueForInteger (!not self.mIsSigned !self.mSize)
-#--------------------------------------- Property map
+//--------------------------------------- Property map
   let llvmTypeName = "i" + self.mSize
-#--------------------------------------- byteSwapped
+//--------------------------------------- byteSwapped
   if (self.mSize mod 16) == 0 then
     [!?ioContext addComputedPropertyGetter
       !omnibusTypeName: integerTypeName
@@ -101,24 +101,24 @@ override method @integerDeclarationAST enterInContext
       !"bswap"
     }
   end
-#--------------------------------------- bool for UInt1
-#  if mSize == 1 && not mIsSigned then # Add "bool" intrinsic function
-#    [!?propertyGetterMap addPropertyGetter
-#      !llvmBaseTypeName:integerTypeName
-#      !propertyName:[boolTypeName () nowhere]
-#      !mode:.anySafeMode
-#      !public: true
-#      !resultTypeProxy:boolTypeProxy
-#      ?routineLLVMName: let routineLLVMName
-#    ]
-#    ioRoutineListIR += !@$iXXToBoolFunctionIR.new {
-#      !routineLLVMName
-#      !isRequired:false
-#      !warnsIfUnused:false
-#      !llvmTypeName
-#    }
-#  end
-#--------------------------------------- bitreverse
+//--------------------------------------- bool for UInt1
+//  if mSize == 1 && not mIsSigned then // Add "bool" intrinsic function
+//    [!?propertyGetterMap addPropertyGetter
+//      !llvmBaseTypeName:integerTypeName
+//      !propertyName:[boolTypeName () nowhere]
+//      !mode:.anySafeMode
+//      !public: true
+//      !resultTypeProxy:boolTypeProxy
+//      ?routineLLVMName: let routineLLVMName
+//    ]
+//    ioRoutineListIR += !@$iXXToBoolFunctionIR.new {
+//      !routineLLVMName
+//      !isRequired:false
+//      !warnsIfUnused:false
+//      !llvmTypeName
+//    }
+//  end
+//--------------------------------------- bitreverse
   [!?ioContext addComputedPropertyGetter
     !omnibusTypeName: integerTypeName
     !llvmBaseTypeName:integerTypeName
@@ -135,7 +135,7 @@ override method @integerDeclarationAST enterInContext
     !llvmTypeName
     !"bitreverse"
   }
-#--------------------------------------- leadingZeroCount
+//--------------------------------------- leadingZeroCount
   [!?ioContext addComputedPropertyGetter
     !omnibusTypeName: integerTypeName
     !llvmBaseTypeName:integerTypeName
@@ -152,7 +152,7 @@ override method @integerDeclarationAST enterInContext
     !llvmTypeName
     !"ctlz"
   }
-#--------------------------------------- trainingZeroCount
+//--------------------------------------- trainingZeroCount
   [!?ioContext addComputedPropertyGetter
     !omnibusTypeName: integerTypeName
     !llvmBaseTypeName:integerTypeName
@@ -169,7 +169,7 @@ override method @integerDeclarationAST enterInContext
     !llvmTypeName
     !"cttz"
   }
-#--------------------------------------- setBitCountMethodName
+//--------------------------------------- setBitCountMethodName
   [!?ioContext addComputedPropertyGetter
     !omnibusTypeName: integerTypeName
     !llvmBaseTypeName: integerTypeName
@@ -186,7 +186,7 @@ override method @integerDeclarationAST enterInContext
     !llvmTypeName
     !"ctpop"
   }
-#--------------------------------------- Class constant map
+//--------------------------------------- Class constant map
   var @constantMap constantMap = @()
   [!?constantMap insertKey !["min" nowhere] !min !integerTypeName]
   [!?constantMap insertKey !["max" nowhere] !max !integerTypeName]
@@ -194,11 +194,11 @@ override method @integerDeclarationAST enterInContext
     !integerTypeName
     !constantMap
   ]
-#--------------------------------------- Constructor map
+//--------------------------------------- Constructor map
   var @constructorMap constructorMap = @() 
   [!?constructorMap insertKey !["()" nowhere] !@[] !.simple {!value:0}]
   [!?ioContext.mTypeConstructorMap insertKey !integerTypeName !constructorMap]
-#--------------------------------------- Enter in type map
+//--------------------------------------- Enter in type map
   let integerType = @omnibusType {
     !subscript:.noSubscript
     !attributes:.instanciable | .copyable
@@ -207,30 +207,30 @@ override method @integerDeclarationAST enterInContext
     !llvmBaseTypeName: integerTypeName
   }
   [!?ioContext.mTypeMap insertType !integerTypeName !type:integerType]
-#--------------------------------------- Enter integer <-> integer operators
-#  enter_integer_integer_operators (
-#    !integerTypeName:integerTypeName
-#    !signed:mIsSigned
-#    !?context:ioContext
-#  )
-#--------------------------------------- Enter integer <-> literal operators
-#  enter_integer_literal_operators (
-#    !integerTypeName:integerTypeName
-#    !signed:mIsSigned
-#    !?context:ioContext
-#  )
-#--------------------------------------- Enter literal <-> integer operators
-#  enter_literal_integer_operators (
-#    !integerTypeName:integerTypeName
-#    !signed:mIsSigned
-#    !?context:ioContext
-#  )
-#--------------------------------------- Assignment
+//--------------------------------------- Enter integer <-> integer operators
+//  enter_integer_integer_operators (
+//    !integerTypeName:integerTypeName
+//    !signed:mIsSigned
+//    !?context:ioContext
+//  )
+//--------------------------------------- Enter integer <-> literal operators
+//  enter_integer_literal_operators (
+//    !integerTypeName:integerTypeName
+//    !signed:mIsSigned
+//    !?context:ioContext
+//  )
+//--------------------------------------- Enter literal <-> integer operators
+//  enter_literal_integer_operators (
+//    !integerTypeName:integerTypeName
+//    !signed:mIsSigned
+//    !?context:ioContext
+//  )
+//--------------------------------------- Assignment
   var key = assignmentOperatorKey (!integerType !.nowhere !integerType)
   [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage ()]
   key = assignmentOperatorKey (!integerType !.nowhere !compileTimeIntegerType ())
   [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage ()]
-#--- Copy from reference is used by dynamic arraies  
+//--- Copy from reference is used by dynamic arraies  
   let functionName = assignmentOperatorFuncName (!integerType !integerType)
   ioRoutineListIR += !@simpleAssignmentCopyRoutineIR {
     ![functionName nowhere]
@@ -238,11 +238,11 @@ override method @integerDeclarationAST enterInContext
     !warnsIfUnused: false
     !integerType
   }
-#--------------------------------------- Infix operator between integers
+//--------------------------------------- Infix operator between integers
   let boolType = boolType ()
-#--- Enter == infix operator
+//--- Enter == infix operator
   addIntegerInfixOperator (!.equal !integerType !"icmp eq" !?ioContext.mInfixOperatorMap !boolType)
-#--- Enter ≤ infix operator
+//--- Enter ≤ infix operator
   addIntegerInfixOperator (
     !.infEqual
     !integerType
@@ -250,7 +250,7 @@ override method @integerDeclarationAST enterInContext
     !?ioContext.mInfixOperatorMap
     !boolType
   )
-#--- Enter < infix operator
+//--- Enter < infix operator
   addIntegerInfixOperator (
     !.lessThan
     !integerType
@@ -258,9 +258,9 @@ override method @integerDeclarationAST enterInContext
     !?ioContext.mInfixOperatorMap
     !boolType
   )
-#--- Enter << infix operator
+//--- Enter << infix operator
   addIntegerInfixOperator (!.leftShiftOp !integerType !"shl" !?ioContext.mInfixOperatorMap !integerType)
-#--- Enter >> infix operator
+//--- Enter >> infix operator
   addIntegerInfixOperator (
     !.rightShiftOp
     !integerType
@@ -268,21 +268,21 @@ override method @integerDeclarationAST enterInContext
     !?ioContext.mInfixOperatorMap
     !integerType
   )
-#--- Enter | infix operator
+//--- Enter | infix operator
   addIntegerInfixOperator (!.bitWiseOrOp !integerType !"or" !?ioContext.mInfixOperatorMap !integerType)
-#--- Enter & infix operator
+//--- Enter & infix operator
   addIntegerInfixOperator (!.bitWiseAndOp !integerType !"and" !?ioContext.mInfixOperatorMap !integerType)
-#--- Enter ^ infix operator
+//--- Enter ^ infix operator
   addIntegerInfixOperator (!.bitWiseXorOp !integerType !"xor" !?ioContext.mInfixOperatorMap !integerType)
-#--- Enter +% infix operator
+//--- Enter +% infix operator
   addIntegerInfixOperator (!.addOpNoOvf !integerType !"add" !?ioContext.mInfixOperatorMap !integerType)
-#--- Enter -% infix operator
+//--- Enter -% infix operator
   addIntegerInfixOperator (!.subOpNoOvf !integerType !"sub" !?ioContext.mInfixOperatorMap !integerType)
-#--- Enter *% infix operator
+//--- Enter *% infix operator
   addIntegerInfixOperator (!.mulOpNoOvf !integerType !"mul" !?ioContext.mInfixOperatorMap !integerType)
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc addIntegerInfixOperator
   ?let @omnibusInfixOperator inInfixOperator
@@ -300,15 +300,15 @@ proc addIntegerInfixOperator
   [!?ioInfixOperatorMap insertKey !key !inResultType !@inlineInfix_compileTimeInt_integer_operatorUsage {!inLLVMOp}] 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#! INFIX OPERATION BETWEEN INTEGERS object <-> ctInt
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//! INFIX OPERATION BETWEEN INTEGERS object <-> ctInt
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @inlineInfix_integer_compileTimeInt_operatorUsage : @omnibusInfixOperatorUsage {
   public var @string mLLVMOperation
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @inlineInfix_integer_compileTimeInt_operatorUsage generateCode
   ?let @objectIR inLeftOperand
@@ -320,7 +320,7 @@ override method @inlineInfix_integer_compileTimeInt_operatorUsage generateCode
   ?!@instructionListIR ioInstructionGenerationList
   !@objectIR outResultValue
 {
-#--- Check right ctInt belong to left integer range
+//--- Check right ctInt belong to left integer range
   [[inLeftOperand type].kind extractInteger ?min: let minValue ?max: let maxValue ?2*]
   [inRightOperand extractLiteralInteger ?1* ?value:let value]
   if value < minValue then
@@ -332,7 +332,7 @@ override method @inlineInfix_integer_compileTimeInt_operatorUsage generateCode
     : "right operand is a compile time integer with an invalid value, greater than $"
       + [inLeftOperand type].omnibusTypeDescriptionName + " maximum value"
   end
-#---
+//---
   var leftOperand = inLeftOperand
   [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?leftOperand]
   getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
@@ -341,15 +341,15 @@ override method @inlineInfix_integer_compileTimeInt_operatorUsage generateCode
   [!?ioInstructionGenerationList appendInstructionAsFreeString !s !@[]]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#! INFIX OPERATION BETWEEN INTEGERS ctInt <-> object
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//! INFIX OPERATION BETWEEN INTEGERS ctInt <-> object
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @inlineInfix_compileTimeInt_integer_operatorUsage : @omnibusInfixOperatorUsage {
   public var @string mLLVMOperation
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @inlineInfix_compileTimeInt_integer_operatorUsage generateCode
   ?let @objectIR inLeftOperand
@@ -361,7 +361,7 @@ override method @inlineInfix_compileTimeInt_integer_operatorUsage generateCode
   ?!@instructionListIR ioInstructionGenerationList
   !@objectIR outResultValue
 {
-#--- Check right ctInt belong to right integer range
+//--- Check right ctInt belong to right integer range
   [[inRightOperand type].kind extractInteger ?min: let minValue ?max: let maxValue ?2*]
   [inLeftOperand extractLiteralInteger ?1* ?value:let value]
   if value < minValue then
@@ -373,7 +373,7 @@ override method @inlineInfix_compileTimeInt_integer_operatorUsage generateCode
     : "left operand is a compile time integer with an invalid value, greater than $"
       + [inRightOperand type].omnibusTypeDescriptionName + " maximum value"
   end
-#---
+//---
   var rightOperand = inRightOperand
   [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?rightOperand]
   getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
@@ -382,16 +382,16 @@ override method @inlineInfix_compileTimeInt_integer_operatorUsage generateCode
   [!?ioInstructionGenerationList appendInstructionAsFreeString !s !@[]]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#! CODE GENERATION: BUILTIN FUNCTIONS
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//! CODE GENERATION: BUILTIN FUNCTIONS
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @integerBuiltinFunctionIR : @abstractRoutineIR {
   public var @string mLLVMTypeName
   public var @string mIntrinsicName
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @integerBuiltinFunctionIR llvmCodeGeneration 
   ?!@string ioLLVMcode
@@ -409,4 +409,4 @@ override method @integerBuiltinFunctionIR llvmCodeGeneration
     self.mLLVMTypeName + " @llvm." + self.mIntrinsicName + "." + self.mLLVMTypeName + " (" + self.mLLVMTypeName + ")"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

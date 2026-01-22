@@ -1,6 +1,6 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @requiredFunctionDeclarationListAST {
   public var @lstring mName
@@ -10,13 +10,13 @@ list @requiredFunctionDeclarationListAST {
   public var @location mEndOfProcLocation
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <declaration> ?!@ast ioAST {
     $required$
@@ -46,11 +46,11 @@ syntax extension omnibus_syntax {
       !.here
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc checkRequiredProcedures
   ?ast:let @ast inAST
@@ -67,39 +67,39 @@ proc checkRequiredProcedures
         ![requiredFunctionMangledName nowhere]
         ?let implementedPublic
         ?let implementedSignature
-        ?let implementedReturnTypeProxy # null if no returned value
+        ?let implementedReturnTypeProxy // null if no returned value
         ?let unused implementedModeDictionary
         ?let implementedIsExported
         ?let implementedMode
       ]
       let errorLocation = [inContext.mRoutineMap locationForKey !requiredFunctionMangledName]
-    #--- Check signatures
+    //--- Check signatures
       routineTypedSignature2 (!inContext.mTypeMap !requiredFunction.mFormalArgumentList ?let requiredTypedSignature)
       if [requiredTypedSignature typedString] != [implementedSignature typedString] then
         error errorLocation
         : "function signature should be " + [requiredTypedSignature typedString] + " (as required by required function declaration)"    
       end
-    #--- Check return type
+    //--- Check return type
       if not [implementedReturnTypeProxy isNull] then
         error errorLocation : "function should not return a value (as required by required function declaration)"    
-#      elsif requiredFunction.mIsSafe && not implementedIsSafe then
-#        error errorLocation : "function should be @safe (as required by required function declaration)"    
+//      elsif requiredFunction.mIsSafe && not implementedIsSafe then
+//        error errorLocation : "function should be @safe (as required by required function declaration)"    
       end
-#    #--- Check safety
-#      if implementedIsSafe && not requiredFunction.mIsSafe then
-#        error errorLocation : "function should not be @safe (as required by required function declaration)"    
-#      elsif requiredFunction.mIsSafe && not implementedIsSafe then
-#        error errorLocation : "function should be @safe (as required by required function declaration)"    
-#      end
-    #--- Check mode
+//    //--- Check safety
+//      if implementedIsSafe && not requiredFunction.mIsSafe then
+//        error errorLocation : "function should not be @safe (as required by required function declaration)"    
+//      elsif requiredFunction.mIsSafe && not implementedIsSafe then
+//        error errorLocation : "function should be @safe (as required by required function declaration)"    
+//      end
+    //--- Check mode
       if implementedMode != requiredFunction.mExecutionMode then
         error errorLocation : "required mode is '" + requiredFunction.mExecutionMode + "'"    
       end
-    #--- Check public
+    //--- Check public
       if not implementedPublic then
         error errorLocation : "function should be public (as required by required function declaration)"    
       end
-    #--- Check attributes
+    //--- Check attributes
       if requiredFunction.mIsExported && not implementedIsExported then
         error errorLocation
         : "missing @" + exportedAttribute () + " attribute (required function declaration names it)"
@@ -112,4 +112,4 @@ proc checkRequiredProcedures
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

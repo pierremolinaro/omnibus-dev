@@ -17,12 +17,12 @@ option omnibus_options {
 
   @stringlist pathList: '\0', "path" -> "Search pathes for source files"
 
-#---
+//---
   @bool taskStrictPriorityOrder : '\0', "task-strict-priority-order" -> "Ensure task strict priority order"
  
   @bool printPasses : '\0', "print-passes" -> "Print pass information"
  
-#--- Optimization
+//--- Optimization
   @bool noDeadCodeElimination : '\0', "no-deadcode-elimination" -> "No dead code elimination"
   @bool optimization1 : '\0', "O1" -> "Optimization level 1"
   @bool optimization2 : '\0', "O2" -> "Optimization level 2"
@@ -31,10 +31,10 @@ option omnibus_options {
   @bool optimizationZ3 : '\0', "O3" -> "Optimization level 3"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 option omnibus_option_not_appearing_in_cocoa {
   @bool performFlashing: 'f', "flash-target" -> "After successful compilation, flash target"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

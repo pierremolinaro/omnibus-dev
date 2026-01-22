@@ -1,6 +1,6 @@
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @standaloneFunctionInExpressionAST : @expressionAST {
   public var @lstring mStandaloneFunctionName
@@ -8,13 +8,13 @@ class @standaloneFunctionInExpressionAST : @expressionAST {
   public var @location mEndOfArguments
 }
 
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! SYNTAX                                                                                                               
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! SYNTAX                                                                                                               
+//-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     $identifier$ ?let standaloneFunctionName
@@ -22,13 +22,13 @@ syntax extension omnibus_syntax {
     outExpression = @standaloneFunctionInExpressionAST {!standaloneFunctionName !arguments !endOfArguments}
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
+//-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @standaloneFunctionInExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
@@ -49,9 +49,9 @@ override method @standaloneFunctionInExpressionAST addDependenceEdgeForStaticExp
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#! NOTE TYPES                                                                                                           
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//! NOTE TYPES                                                                                                           
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @standaloneFunctionInExpressionAST noteExpressionTypesInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
@@ -70,9 +70,9 @@ override method @standaloneFunctionInExpressionAST noteExpressionTypesInPreceden
   end
 }
 
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! SEMANTICS                                                                                                            
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! SEMANTICS                                                                                                            
+//-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @standaloneFunctionInExpressionAST analyzeExpression
   ?self:let @omnibusType inSelfType
@@ -87,33 +87,33 @@ override method @standaloneFunctionInExpressionAST analyzeExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outFunctionCallReturnedValue
 {
-#--- Cannot call a function in guard
+//--- Cannot call a function in guard
   if [inRoutineAttributes contains !.isGuard] then
     error self.mStandaloneFunctionName.location : "a routine cannot be called in guard"
   end
-#--- Get function name and map containing the function definition
+//--- Get function name and map containing the function definition
   let routineLLVMName = routineMangledNameFromCall (!"" !self.mStandaloneFunctionName !self.mArguments)
-#--- Get called function signature
+//--- Get called function signature
   let signature = [self.mArguments routineSignature !self.mStandaloneFunctionName.location]
-#--- Search function in map
+//--- Search function in map
   let requiredFunctionMangledName = @lstring {!self.mStandaloneFunctionName.string + signature !self.mStandaloneFunctionName}
-#--- Cannot call a function in guard
+//--- Cannot call a function in guard
   [inContext.mRoutineMap searchKey
     !requiredFunctionMangledName
     ?let unused implementedPublic
     ?let formalSignature
-    ?let formalReturnTypeProxy # null if no returned value
+    ?let formalReturnTypeProxy // null if no returned value
     ?let implementedModeDictionary
     ?let unused isExported
     ?let unused implementedMode
   ]
-#--- Check routine is actually a function
+//--- Check routine is actually a function
   if [formalReturnTypeProxy isNull] then
     error requiredFunctionMangledName : "this function does not return any value" : outFunctionCallReturnedValue
   else
-  #--- Check modes
+  //--- Check modes
     let functionLLVMName = checkModeAndReturnsRoutineLLVMName (!implementedModeDictionary !inMode !requiredFunctionMangledName)
-  #--- Analyze effective parameters
+  //--- Analyze effective parameters
     var @procCallEffectiveParameterListIR effectiveParameterListIR = @[]
     analyzeEffectiveParameters (
       !self:inSelfType
@@ -130,9 +130,9 @@ override method @standaloneFunctionInExpressionAST analyzeExpression
       !?instructionListIR:ioInstructionGenerationList
       !?effectiveIR:effectiveParameterListIR
     )
-  #--- New LLVM variable for function call result
+  //--- New LLVM variable for function call result
     getNewTempValue (![formalReturnTypeProxy type] !?ioTemporaries ?outFunctionCallReturnedValue)
-  #--- Code generation
+  //--- Code generation
     ioInstructionGenerationList += !@standaloneRoutineCallIR {
       !outFunctionCallReturnedValue
       !routineLLVMName
@@ -142,4 +142,4 @@ override method @standaloneFunctionInExpressionAST analyzeExpression
   end
 }
 
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

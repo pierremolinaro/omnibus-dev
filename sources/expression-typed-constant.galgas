@@ -1,6 +1,6 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @typedConstantCallAST : @expressionAST {
   public var @lstring mOptionalTypeName
@@ -8,13 +8,13 @@ class @typedConstantCallAST : @expressionAST {
   public var @primaryInExpressionAccessListAST mAccessList
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     let @lstring optionalTypeName
@@ -25,18 +25,18 @@ syntax extension omnibus_syntax {
     end
     $.$
     $identifier$ ?let constantName
-  #--- Properties and access
+  //--- Properties and access
     <expression_access_list> !?ioAST ?let accessList
-  #---
+  //---
     outExpression = @typedConstantCallAST {!optionalTypeName !constantName !accessList}
   }
 
-  #·····················································································································
+  //·····················································································································
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @typedConstantCallAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
@@ -68,9 +68,9 @@ override method @typedConstantCallAST addDependenceEdgeForStaticExpression
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  NOTE TYPES                                                                                                           
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  NOTE TYPES                                                                                                           
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @typedConstantCallAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   if self.mOptionalTypeName.string != "" then
@@ -99,9 +99,9 @@ override method @typedConstantCallAST noteExpressionTypesInPrecedenceGraph ?!@se
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTICS                                                                                                            
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SEMANTICS                                                                                                            
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @typedConstantCallAST analyzeExpression
   ?self:let @omnibusType inSelfType
@@ -116,7 +116,7 @@ override method @typedConstantCallAST analyzeExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
 {
-#--- Analyze constructor source type
+//--- Analyze constructor source type
   let @omnibusType inferredResultType
   if self.mOptionalTypeName.string == "" then
     inferredResultType = inOptionalTargetType
@@ -128,26 +128,26 @@ override method @typedConstantCallAST analyzeExpression
   else
     let typeName = @lstring {!inferredResultType.omnibusTypeDescriptionName !self.mConstructorName.location}
     [inContext.mTypeConstantMap searchKey !typeName ?let classConstantMap]
-#    let classConstantMap = inferredResultType.classConstantMap
+//    let classConstantMap = inferredResultType.classConstantMap
     [classConstantMap searchKey !self.mConstructorName ?let @bigint value ?let classTypeName]
     let resultType = [[inContext.mTypeMap searchKey !classTypeName] type]
     outResult = .literalInteger {!type:resultType !value:value}
   end
-#--- Analyze access list
+//--- Analyze access list
   if [self.mAccessList count] > 0 then
-  #--- procAnalyzeAccesListInExpression works on reference, not value
-  #    So we create articially a temporary reference for resulting value
+  //--- procAnalyzeAccesListInExpression works on reference, not value
+  //    So we create articially a temporary reference for resulting value
     getNewTempReference (![outResult type] !?ioTemporaries ?let newTemporaryReference)
-  #--- ... add it into alloc list...
+  //--- ... add it into alloc list...
     ioAllocaList += ![newTemporaryReference llvmName] ![newTemporaryReference type] !false
-  #--- ... and store resulting value into it
+  //--- ... and store resulting value into it
     [!?ioInstructionGenerationList appendStoreTemporaryReference
       ![newTemporaryReference type]
       ![newTemporaryReference llvmName]
       !outResult
     ]
     outResult = newTemporaryReference
-  #---
+  //---
     procAnalyzeAccesListInExpression (
       !self: inSelfType
       !routineAttributes:inRoutineAttributes
@@ -165,4 +165,4 @@ override method @typedConstantCallAST analyzeExpression
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

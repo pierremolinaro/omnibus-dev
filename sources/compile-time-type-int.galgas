@@ -1,19 +1,19 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @compileTimeIntAST : @abstractDeclarationAST {
 }
 
-#·······················································································································
+//·······················································································································
 
 override getter @compileTimeIntAST locationForErrorSignaling -> @location outLocation {
   outLocation = .nowhere
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  PRECEDENCE GRAPH                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @compileTimeIntAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
@@ -23,21 +23,21 @@ override method @compileTimeIntAST enterInPrecedenceGraph
   [!?ioGraph addEdge !from: nodeName !to: [ctBoolTypeName () nowhere]]
 }
 
-#·······················································································································
+//·······················································································································
 
 override getter @compileTimeIntAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = ctIntegerTypeName ()
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  ENTER IN CONTEXT                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+////////  ENTER IN CONTEXT                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func %once ctIntegerTypeName ->@string {
   result = "ctInt"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @compileTimeIntAST enterInContext
   ?!context:@semanticContext ioContext
@@ -51,79 +51,79 @@ override method @compileTimeIntAST enterInContext
 {
   let ctIntegerTypeName = [ctIntegerTypeName () nowhere]
   let ctInt = compileTimeIntegerType ()
- #--- Enter type
+ //--- Enter type
   [!?ioContext.mTypeMap insertType ! ctIntegerTypeName !type: ctInt]
- #--- Enter ~ prefix operator
+ //--- Enter ~ prefix operator
   var key = prefixOperatorMapKey (!ctInt !.bitWiseComplement !.nowhere)
   [!?ioContext.mPrefixOperatorMap insertKey !key !ctInt !ctInt !@compileTimeIntComplementOperator ()]
- #--- Enter - prefix operator
+ //--- Enter - prefix operator
   key = prefixOperatorMapKey (!ctInt !.minusOp !.nowhere)
   [!?ioContext.mPrefixOperatorMap insertKey !key !ctInt !ctInt !@compileTimeIntMinusOperator ()]
- #--- Enter -% prefix operator
+ //--- Enter -% prefix operator
   key = prefixOperatorMapKey (!ctInt !.minusNoOvf !.nowhere)
   [!?ioContext.mPrefixOperatorMap insertKey !key !ctInt !ctInt !@compileTimeIntMinusOperator ()]
- #--- Enter & infix operator
+ //--- Enter & infix operator
   key = infixOperatorMapKey (!ctInt !.bitWiseAndOp !.nowhere !ctInt)
   [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntBitWiseAndOperator ()]
- #--- Enter | infix operator
+ //--- Enter | infix operator
   key = infixOperatorMapKey (!ctInt !.bitWiseOrOp !.nowhere !ctInt)
   [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntBitWiseOrOperator ()]
- #--- Enter ^ infix operator
+ //--- Enter ^ infix operator
   key = infixOperatorMapKey (!ctInt !.bitWiseXorOp !.nowhere !ctInt)
   [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntXorOperator ()]
- #--- Enter + infix operator
+ //--- Enter + infix operator
   key = infixOperatorMapKey (!ctInt !.addOp !.nowhere !ctInt)
   [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntAddOperator ()]
- #--- Enter +% infix operator
+ //--- Enter +% infix operator
   key = infixOperatorMapKey (!ctInt !.addOpNoOvf !.nowhere !ctInt)
   [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntAddOperator ()]
- #--- Enter - infix operator
+ //--- Enter - infix operator
   key = infixOperatorMapKey (!ctInt !.subOp !.nowhere !ctInt)
   [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntSubtractOperator ()]
- #--- Enter -% infix operator
+ //--- Enter -% infix operator
   key = infixOperatorMapKey (!ctInt !.subOpNoOvf !.nowhere !ctInt)
   [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntSubtractOperator ()]
- #--- Enter * infix operator
+ //////--- Enter * infix operator
   key = infixOperatorMapKey (!ctInt !.mulOp !.nowhere !ctInt)
   [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntMultiplyOperator ()]
- #--- Enter / infix operator
+ //--- Enter / infix operator
   key = infixOperatorMapKey (!ctInt !.divOp !.nowhere !ctInt)
   [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntDivideOperator ()]
- #--- Enter !/ infix operator
+ ////--- Enter !/ infix operator
   key = infixOperatorMapKey (!ctInt !.divOpNoOvf !.nowhere !ctInt)
   [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntDivideZeroOperator ()]
- #--- Enter % infix operator
+ //--- Enter % infix operator
   key = infixOperatorMapKey (!ctInt !.modOp !.nowhere !ctInt)
   [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntModuloOperator ()]
- #--- Enter !% infix operator
+ ////--- Enter !% infix operator
   key = infixOperatorMapKey (!ctInt !.modOpNoOvf !.nowhere !ctInt)
   [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntModuloZeroOperator ()]
- #--- Enter == infix operator
+ //--- Enter == infix operator
   let ctBoolType = compileTimeBoolType ()
   key = infixOperatorMapKey (!ctInt !.equal !.nowhere !ctInt)
   [!?ioContext.mInfixOperatorMap insertKey !key !ctBoolType !@compileTimeIntEqualOperator ()]
- #--- Enter < infix operator
+ //--- Enter < infix operator
   key = infixOperatorMapKey (!ctInt !.lessThan !.nowhere !ctInt)
   [!?ioContext.mInfixOperatorMap insertKey !key !ctBoolType !@compileTimeIntLessThanOperator ()]
- #--- Enter ≤ infix operator
+ //--- Enter ≤ infix operator
   key = infixOperatorMapKey (!ctInt !.infEqual !.nowhere !ctInt)
   [!?ioContext.mInfixOperatorMap insertKey !key !ctBoolType !@compileTimeIntLowerOrEqualOperator ()]
- #--- Enter << infix operator
+ //--- Enter << infix operator
   key = infixOperatorMapKey (!ctInt !.leftShiftOp !.nowhere !ctInt)
   [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntShiftLeftOperator ()]
- #--- Enter >> infix operator
+ //--- Enter >> infix operator
   key = infixOperatorMapKey (!ctInt !.rightShiftOp !.nowhere !ctInt)
   [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntShiftRightOperator ()]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  COMPILE TIME INFIX OPERATORS
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  COMPILE TIME INFIX OPERATORS
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @compileTimeIntModuloOperator : @omnibusInfixOperatorUsage {
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @compileTimeIntModuloOperator generateCode
   ?let @objectIR inLeftOperand
@@ -144,12 +144,12 @@ override method @compileTimeIntModuloOperator generateCode
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @compileTimeIntModuloZeroOperator : @omnibusInfixOperatorUsage {
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @compileTimeIntModuloZeroOperator generateCode
   ?let @objectIR inLeftOperand
@@ -170,12 +170,12 @@ override method @compileTimeIntModuloZeroOperator generateCode
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @compileTimeIntDivideOperator : @omnibusInfixOperatorUsage {
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @compileTimeIntDivideOperator generateCode
   ?let @objectIR inLeftOperand
@@ -196,12 +196,12 @@ override method @compileTimeIntDivideOperator generateCode
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @compileTimeIntDivideZeroOperator : @omnibusInfixOperatorUsage {
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @compileTimeIntDivideZeroOperator generateCode
   ?let @objectIR inLeftOperand
@@ -222,12 +222,12 @@ override method @compileTimeIntDivideZeroOperator generateCode
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @compileTimeIntMultiplyOperator : @omnibusInfixOperatorUsage {
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @compileTimeIntMultiplyOperator generateCode
   ?let @objectIR inLeftOperand
@@ -244,12 +244,12 @@ override method @compileTimeIntMultiplyOperator generateCode
   outResultValue = .literalInteger {!type: inResultType !value: leftValue * rightValue}
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @compileTimeIntSubtractOperator : @omnibusInfixOperatorUsage {
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @compileTimeIntSubtractOperator generateCode
   ?let @objectIR inLeftOperand
@@ -266,12 +266,12 @@ override method @compileTimeIntSubtractOperator generateCode
   outResultValue = .literalInteger {!type: inResultType !value: leftValue - rightValue}
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @compileTimeIntEqualOperator : @omnibusInfixOperatorUsage {
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @compileTimeIntEqualOperator generateCode
   ?let @objectIR inLeftOperand
@@ -288,12 +288,12 @@ override method @compileTimeIntEqualOperator generateCode
   outResultValue = .literalInteger {!type: inResultType !value: leftValue == rightValue}
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @compileTimeIntAddOperator : @omnibusInfixOperatorUsage {
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @compileTimeIntAddOperator generateCode
   ?let @objectIR inLeftOperand
@@ -310,12 +310,12 @@ override method @compileTimeIntAddOperator generateCode
   outResultValue = .literalInteger {!type: inResultType !value: leftValue + rightValue}
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @compileTimeIntBitWiseAndOperator : @omnibusInfixOperatorUsage {
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @compileTimeIntBitWiseAndOperator generateCode
   ?let @objectIR inLeftOperand
@@ -332,12 +332,12 @@ override method @compileTimeIntBitWiseAndOperator generateCode
   outResultValue = .literalInteger {!type: inResultType !value: leftValue & rightValue}
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @compileTimeIntShiftLeftOperator : @omnibusInfixOperatorUsage {
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @compileTimeIntShiftLeftOperator generateCode
   ?let @objectIR inLeftOperand
@@ -358,12 +358,12 @@ override method @compileTimeIntShiftLeftOperator generateCode
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @compileTimeIntShiftRightOperator : @omnibusInfixOperatorUsage {
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @compileTimeIntShiftRightOperator generateCode
   ?let @objectIR inLeftOperand
@@ -384,12 +384,12 @@ override method @compileTimeIntShiftRightOperator generateCode
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @compileTimeIntLessThanOperator : @omnibusInfixOperatorUsage {
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @compileTimeIntLessThanOperator generateCode
   ?let @objectIR inLeftOperand
@@ -406,12 +406,12 @@ override method @compileTimeIntLessThanOperator generateCode
   outResultValue = .literalInteger {!type: inResultType !value: leftValue < rightValue}
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @compileTimeIntLowerOrEqualOperator : @omnibusInfixOperatorUsage {
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @compileTimeIntLowerOrEqualOperator generateCode
   ?let @objectIR inLeftOperand
@@ -428,12 +428,12 @@ override method @compileTimeIntLowerOrEqualOperator generateCode
   outResultValue = .literalInteger {!type: inResultType !value: leftValue <= rightValue}
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @compileTimeIntXorOperator : @omnibusInfixOperatorUsage {
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @compileTimeIntXorOperator generateCode
   ?let @objectIR inLeftOperand
@@ -450,12 +450,12 @@ override method @compileTimeIntXorOperator generateCode
   outResultValue = .literalInteger {!type: inResultType !value: leftValue ^ rightValue}
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @compileTimeIntBitWiseOrOperator : @omnibusInfixOperatorUsage {
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @compileTimeIntBitWiseOrOperator generateCode
   ?let @objectIR inLeftOperand
@@ -472,14 +472,14 @@ override method @compileTimeIntBitWiseOrOperator generateCode
   outResultValue = .literalInteger {!type: inResultType !value: leftValue | rightValue}
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  COMPILE TIME PREFIX OPERATOR
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  COMPILE TIME PREFIX OPERATOR
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @compileTimeIntMinusOperator : @prefixOperatorUsage {
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @compileTimeIntMinusOperator generateCode
   ?let @objectIR inReceiverOperand
@@ -495,12 +495,12 @@ override method @compileTimeIntMinusOperator generateCode
   outResultValue = .literalInteger {!type: inResultType !value: - receiverValue}
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @compileTimeIntComplementOperator : @prefixOperatorUsage {
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @compileTimeIntComplementOperator generateCode
   ?let @objectIR inReceiverOperand
@@ -516,4 +516,4 @@ override method @compileTimeIntComplementOperator generateCode
   outResultValue = .literalInteger {!type: inResultType !value: ~ receiverValue}
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

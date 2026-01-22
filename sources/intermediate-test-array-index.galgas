@@ -10,7 +10,7 @@ setter @instructionListIR testArrayIndex
   self += !@testArrayIndexIR {!inIndex !inErrorLocation !inSize}
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @testArrayIndexIR : @abstractInstructionIR {
   public var @objectIR mIndex
@@ -18,7 +18,7 @@ class @testArrayIndexIR : @abstractInstructionIR {
   public var @bigint mSize
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @testArrayIndexIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -26,7 +26,7 @@ override method @testArrayIndexIR llvmInstructionCode
   ?!@generationAdds ioGenerationAdds
 {
   [[self.mIndex type].kind extractInteger ?1* ?max:let max ?unsigned:let isUnsigned ?1*]
-#--- Test index >= 0 (for signed index)
+//--- Test index >= 0 (for signed index)
   if not isUnsigned then
     let testToZero = "%test.index.zero." + ioGenerationAdds.mUniqueIndex
     let testToZeroOk = "test.index.zero.ok." + ioGenerationAdds.mUniqueIndex
@@ -43,7 +43,7 @@ override method @testArrayIndexIR llvmInstructionCode
   
     ioLLVMcode += testToZeroOk + ":\n"
   end
-#--- Test index < size (only if index max value is >= size)
+//--- Test index < size (only if index max value is >= size)
   if max >= self.mSize then
     let testToSize = "%test.index.size." + ioGenerationAdds.mUniqueIndex
     let testToSizeOk = "test.index.size.ok." + ioGenerationAdds.mUniqueIndex
@@ -61,11 +61,11 @@ override method @testArrayIndexIR llvmInstructionCode
   
     ioLLVMcode += testToSizeOk + ":\n"
   end
-#---
+//---
   ioGenerationAdds.mUniqueIndex += 1
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @testArrayIndexIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
@@ -76,4 +76,4 @@ override method @testArrayIndexIR enterAccessibleEntities
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

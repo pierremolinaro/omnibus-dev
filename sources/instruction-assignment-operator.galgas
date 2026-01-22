@@ -1,10 +1,10 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <assignment_combined_with_operator> !@omnibusInfixOperator outInfixOperator !@location outOperatorLocation {
     select
@@ -44,27 +44,27 @@ syntax extension omnibus_syntax {
     outOperatorLocation = .here
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
-  #--- LValue
+  //--- LValue
     <lvalue> !?ioAST ?let lvalue
     let instructionLocation = @location.here
-  #--- Assignment operator
+  //--- Assignment operator
     <assignment_combined_with_operator> ?let infixOperator ?let operatorLocation
-  #--- Right expression
+  //--- Right expression
     <expression> !?ioAST ?let @expressionAST rightExpression
-  #--- Build source expression
+  //--- Build source expression
     var @primaryInExpressionAccessListAST expressionAccessList = @[]
     [lvalue.mOperand buildExpressionAccessList !?expressionAccessList]
-#    for (access) in lvalue.mAccessList do
-#      switch access
-#      case property (@lstring name) :
-#        expressionAccessList += !.property {!name:name}
-#      case arrayAccess (@expressionAST index @location endOfIndex checkIndexExpression) :
-#        expressionAccessList += !.arrayAccess {!index:index !endOfIndex:endOfIndex !checkIndexExpression:checkIndexExpression}
-#      end
-#    end
+//    for (access) in lvalue.mAccessList do
+//      switch access
+//      case property (@lstring name) :
+//        expressionAccessList += !.property {!name:name}
+//      case arrayAccess (@expressionAST index @location endOfIndex checkIndexExpression) :
+//        expressionAccessList += !.arrayAccess {!index:index !endOfIndex:endOfIndex !checkIndexExpression:checkIndexExpression}
+//      end
+//    end
     let leftExpression = @primaryInExpressionAST {!lvalue.mIdentifier !expressionAccessList}
     let expression = @omnibusInfixOperatorExpressionAST {
       !leftExpression
@@ -72,7 +72,7 @@ syntax extension omnibus_syntax {
       !infixOperator
       !rightExpression
     }
-  #--- Build assignment instruction
+  //--- Build assignment instruction
     ioInstructionList += !@assignmentInstructionAST {
       !instructionLocation
       !lvalue
@@ -80,11 +80,11 @@ syntax extension omnibus_syntax {
     }
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @LValueOperandAST buildExpressionAccessList ?!@primaryInExpressionAccessListAST ioExpressionAccessList {
   switch self
@@ -98,5 +98,5 @@ method @LValueOperandAST buildExpressionAccessList ?!@primaryInExpressionAccessL
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 

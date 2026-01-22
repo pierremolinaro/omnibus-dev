@@ -1,53 +1,53 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract class @instructionAST {
   public var @location mInstructionLocation
 }
 
-#·······················································································································
+//·······················································································································
 
 list @instructionListAST {
   public var @instructionAST mInstruction
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <instructionList> ?!@ast ioAST !@instructionListAST outInstructionList {
     outInstructionList = @[]
     repeat
     while
       <instruction> !?ioAST !?outInstructionList
-#      $;$
-#     select
-#        $;$
-#      or
-#        let s = @string.separatorString 
-#        if not [s containsCharacter !'\n'] then
-#          error .here : "instruction should be terminated by an end of line or a ';'"
-#        end
-#      end
+//      $;$
+//     select
+//        $;$
+//      or
+//        let s = @string.separatorString 
+//        if not [s containsCharacter !'\n'] then
+//          error .here : "instruction should be terminated by an end of line or a ';'"
+//        end
+//      end
     end
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  NOTE TYPES                                                                                                           
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  NOTE TYPES                                                                                                           
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract method @instructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph
 
-#·······················································································································
+//·······················································································································
 
 method @instructionListAST noteInstructionListTypesInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
@@ -57,16 +57,16 @@ method @instructionListAST noteInstructionListTypesInPrecedenceGraph
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  SEMANTICS                                                                                                            
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  SEMANTICS                                                                                                            
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 boolset @routineAttributes {
   case mutatingRoutine
   case isGuard
 }
 
-#·······················································································································
+//·······················································································································
 
 abstract method @instructionAST instructionSemanticAnalysis
   ?self:let @omnibusType inSelfType
@@ -79,7 +79,7 @@ abstract method @instructionAST instructionSemanticAnalysis
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 
-#·······················································································································
+//·······················································································································
 
 method @instructionListAST analyzeBranchInstructionList
   ?self:let @omnibusType inSelfType
@@ -93,7 +93,7 @@ method @instructionListAST analyzeBranchInstructionList
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-#--- Begin branch
+//--- Begin branch
   [!?ioUniversalMap openBranch]
   for (mInstruction) in self do
     [!?ioInstructionGenerationList appendSourceLineComment !mInstruction.mInstructionLocation]
@@ -109,11 +109,11 @@ method @instructionListAST analyzeBranchInstructionList
       !?instructionListIR:ioInstructionGenerationList
     ]
   end
-#--- End branch
+//--- End branch
   [!?ioUniversalMap closeBranch !inEndOfInstructionList]
 }
 
-#·······················································································································
+//·······················································································································
 
 method @instructionListAST analyzeRoutineInstructionList
   ?self:let @omnibusType inSelfType
@@ -142,9 +142,9 @@ method @instructionListAST analyzeRoutineInstructionList
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  CODE GENERATION                                                                                                      
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  CODE GENERATION                                                                                                      
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @instructionListIR instructionListLLVMCode
   ?!@string ioLLVMcode
@@ -160,4 +160,4 @@ method @instructionListIR instructionListLLVMCode
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

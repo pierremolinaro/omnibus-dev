@@ -7,7 +7,7 @@ setter @instructionListIR appendShiftLeft
   self += !@leftShiftIR {!inResult !inSource !inShiftAmount}
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @leftShiftIR : @abstractInstructionIR {
   public var @objectIR mResult
@@ -15,7 +15,7 @@ class @leftShiftIR : @abstractInstructionIR {
   public var @uint mShiftAmount
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @leftShiftIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -27,4 +27,4 @@ override method @leftShiftIR llvmInstructionCode
              + ", " + self.mShiftAmount + "\n"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

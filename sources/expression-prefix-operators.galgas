@@ -1,6 +1,6 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @prefixOperator {
   case notOp
@@ -9,7 +9,7 @@ enum @prefixOperator {
   case minusNoOvf
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @prefixOperatorExpressionAST : @expressionAST {
   public var @location mOperatorLocation
@@ -17,9 +17,9 @@ class @prefixOperatorExpressionAST : @expressionAST {
   public var @expressionAST mExpression
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @prefixOperatorExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
@@ -28,17 +28,17 @@ override method @prefixOperatorExpressionAST addDependenceEdgeForStaticExpressio
   [self.mExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  NOTE TYPES                                                                                                           
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  NOTE TYPES                                                                                                           
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @prefixOperatorExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [self.mExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTICS                                                                                                            
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SEMANTICS                                                                                                            
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @prefixOperatorExpressionAST analyzeExpression
   ?self:let @omnibusType inSelfType
@@ -53,7 +53,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
 {
-#--- Analyze expression
+//--- Analyze expression
   [self.mExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
@@ -67,7 +67,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
     !?instructionListIR:ioInstructionGenerationList
     ?result: let @objectIR expressionResult
   ]
-#--- Generate code
+//--- Generate code
   let currentlyInSafeMode = [inMode isSafe]
   let @bool noPanicGeneration = [option omnibus_options.noPanicGeneration value]
   [inContext.mPrefixOperatorMap generatePrefixOperatorCode
@@ -82,4 +82,4 @@ override method @prefixOperatorExpressionAST analyzeExpression
   ]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

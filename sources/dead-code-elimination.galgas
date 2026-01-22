@@ -1,8 +1,8 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#                                                                                                                       
-#    C O D E    O P T I M I Z A T I O N                                                                                 
-#                                                                                                                       
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//                                                                                                                       
+//    C O D E    O P T I M I Z A T I O N                                                                                 
+//                                                                                                                       
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @instructionListIR enterAccessibleEntities ?!@stringset ioInvokedRoutineSet
                          ?!@uint ioMaxBranchOfOnInstructions {
@@ -11,21 +11,21 @@ method @instructionListIR enterAccessibleEntities ?!@stringset ioInvokedRoutineS
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 list @routineAccessibilityIR {
   public var @abstractRoutineIR mRoutine
   public var @stringset mAccessibleRoutineSet
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc codeOptimization
  ?let @string inSourceFile
  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   var @routineAccessibilityIR routineAccessibilityIR = @[]
-#----------------------------------------------- Compute accessiblity graph
+//----------------------------------------------- Compute accessiblity graph
   var @stringset exploreRoutineSet = @[]
   var @stringset allRoutineSet = @[]
   var @stringset definedRoutineSet = @[]
@@ -45,7 +45,7 @@ proc codeOptimization
     m += [[exploreRoutineSet count] string] + " root routines.\n"
     print (!m)
   end
-#----------------------------------------------- Check all invoked routines are defined
+//----------------------------------------------- Check all invoked routines are defined
   let undefinedRoutineSet = allRoutineSet - definedRoutineSet
   if [undefinedRoutineSet count] > 0 then
     var m = "undefined routine(s):"
@@ -54,7 +54,7 @@ proc codeOptimization
     end
     error .nowhere : m
   end
-#----------------------------------------------- Compute useful routines
+//----------------------------------------------- Compute useful routines
   if [option omnibus_options.noDeadCodeElimination value] then
     print (!"    No dead code elimination (option --" + [option omnibus_options.noDeadCodeElimination string] + ")\n")
   else
@@ -70,22 +70,22 @@ proc codeOptimization
         end
       end
     end
-  #----------------------------------------------- Warn unused routines
+  //----------------------------------------------- Warn unused routines
     for routine in routineAccessibilityIR do
       let routineMangledName = routine.mRoutine.mRoutineMangledName
       if routine.mRoutine.warnsIfUnused & not [usefulRoutineSet hasKey !routineMangledName] then
         warning routineMangledName : "unused routine"
       end
     end
-  #-----------------------------------------------
+  //-----------------------------------------------
     if [option omnibus_options.printPasses value] then
       let m = "    " + [[usefulRoutineSet count] string] + " useful routines.\n"
-  #    for (r) in usefulRoutineSet do
-  #      m += "    - " + r + "\n"
-  #    end
+  //    for (r) in usefulRoutineSet do
+  //      m += "    - " + r + "\n"
+  //    end
       print (!m)
     end
-  #----------------------------------------------- Eliminate useless routines
+  //----------------------------------------------- Eliminate useless routines
     ioIntermediateCodeStruct.mRoutineListIR = @[]
     for (routine *) in routineAccessibilityIR do
       if [usefulRoutineSet hasKey !routine.mRoutineMangledName] then
@@ -93,7 +93,7 @@ proc codeOptimization
       end
     end
   end
-#--- Display invocation graph
+//--- Display invocation graph
   let filePath = inSourceFile + ".routineInvocation.dot"
   if [option omnibus_options.emitRoutineInvocationGraphFile value] then
     displayInvocationGraph (!ioIntermediateCodeStruct.mRoutineListIR !filePath)
@@ -102,14 +102,14 @@ proc codeOptimization
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 private proc displayInvocationGraph
   ?let @routineListIR inRoutineListIR
   ?let @string inFilePath
 {
   var s = "digraph G {\n"
-#--- Build graph
+//--- Build graph
   var @stringset definedRoutines = @[]
   var @stringset allRoutines = @[]
   for (routine) in inRoutineListIR do
@@ -120,14 +120,14 @@ private proc displayInvocationGraph
     allRoutines += accessibleRoutineSet
     s += "  \"" + routine.mRoutineMangledName + "\" [shape=rectangle"
     if routine.isRequired then
-      s += ", color=blue" # Required routines are blue
+      s += ", color=blue" // Required routines are blue
     end
     s += "] ;\n"
     for accessible in accessibleRoutineSet do
       s += "  \"" + routine.mRoutineMangledName + "\" -> \"" + accessible + "\" ;\n"
     end
   end
-#--- For undefined routines, create red nodes
+//--- For undefined routines, create red nodes
   let undefinedRoutineSet = allRoutines - definedRoutines
   for undefined in undefinedRoutineSet do
     s += "  \"" + undefined + "\" [shape=rectangle, color=red] ;\n"  
@@ -143,4 +143,4 @@ private proc displayInvocationGraph
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

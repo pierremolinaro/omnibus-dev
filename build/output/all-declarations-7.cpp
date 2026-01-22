@@ -9,1534 +9,6 @@
 
 //--------------------------------------------------------------------------------------------------
 //
-//Abstract extension method '@abstractDeclarationAST enterInContext'
-//
-//--------------------------------------------------------------------------------------------------
-
-void callExtensionMethod_enterInContext (cPtr_abstractDeclarationAST * inObject,
-                                         GGS_semanticContext & io_ioContext,
-                                         GGS_declarationDecorationList & io_ioDecoratedDeclarationList,
-                                         GGS_decoratedRegularRoutineList & io_ioDecoratedRoutineList,
-                                         GGS_routineListIR & io_ioRoutineListIR,
-                                         GGS_staticListInitializationMap & io_ioStaticListValueMap,
-                                         GGS_staticEntityMap & io_ioStaticEntityMap,
-                                         GGS_controlRegisterUserAccesMapAST & io_ioControlRegisterUserAccesMapAST,
-                                         GGS_userLLVMTypeDefinitionListIR & io_ioUserLLVMTypeDefinitionListIR,
-                                         Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) {
-//--- Drop output arguments
-//--- Find method
-  if (nullptr != inObject) {
-    macroValidSharedObject (inObject, cPtr_abstractDeclarationAST) ;
-    inObject->method_enterInContext (io_ioContext, io_ioDecoratedDeclarationList, io_ioDecoratedRoutineList, io_ioRoutineListIR, io_ioStaticListValueMap, io_ioStaticEntityMap, io_ioControlRegisterUserAccesMapAST, io_ioUserLLVMTypeDefinitionListIR, inCompiler COMMA_THERE) ;
-  }
-}
-//--------------------------------------------------------------------------------------------------
-//Class for element of '@routineListIR' list
-//--------------------------------------------------------------------------------------------------
-
-class cCollectionElement_routineListIR : public cCollectionElement {
-  public: GGS_routineListIR_2E_element mObject ;
-
-//--- Class functions
-  public: cCollectionElement_routineListIR (const GGS_abstractRoutineIR & in_mRoutine
-                                            COMMA_LOCATION_ARGS) ;
-  public: cCollectionElement_routineListIR (const GGS_routineListIR_2E_element & inElement COMMA_LOCATION_ARGS) ;
-
-//--- Virtual method that checks that all attributes are valid
-  public: virtual bool isValid (void) const ;
-
-//--- Virtual method that returns a copy of current object
-  public: virtual cCollectionElement * copy (void) ;
-} ;
-
-//--------------------------------------------------------------------------------------------------
-
-cCollectionElement_routineListIR::cCollectionElement_routineListIR (const GGS_abstractRoutineIR & in_mRoutine
-                                                                    COMMA_LOCATION_ARGS) :
-cCollectionElement (THERE),
-mObject (in_mRoutine) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-cCollectionElement_routineListIR::cCollectionElement_routineListIR (const GGS_routineListIR_2E_element & inElement COMMA_LOCATION_ARGS) :
-cCollectionElement (THERE),
-mObject (inElement.mProperty_mRoutine) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool cCollectionElement_routineListIR::isValid (void) const {
-  return true ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-cCollectionElement * cCollectionElement_routineListIR::copy (void) {
-  cCollectionElement * result = nullptr ;
-  macroMyNew (result, cCollectionElement_routineListIR (mObject.mProperty_mRoutine COMMA_HERE)) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-// List type @routineListIR
-//--------------------------------------------------------------------------------------------------
-
-GGS_routineListIR::GGS_routineListIR (void) :
-mArray () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_routineListIR::GGS_routineListIR (const capCollectionElementArray & inArray) :
-mArray () {
-  mArray.setCapacity (std::max (16, int32_t (inArray.count ()))) ;
-  for (uint32_t i = 0 ; i < inArray.count () ; i++) {
-    const capCollectionElement v = inArray.objectAtIndex (i COMMA_HERE) ;
-    cCollectionElement_routineListIR * p = (cCollectionElement_routineListIR *) v.ptr () ;
-    macroValidSharedObject (p, cCollectionElement_routineListIR) ;
-    const GGS_routineListIR_2E_element element (p->mObject.mProperty_mRoutine) ;
-    mArray.appendObject (element) ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_routineListIR::makeAttributesFromObjects (capCollectionElement & outAttributes,
-                                                   const GGS_abstractRoutineIR & in_mRoutine
-                                                   COMMA_LOCATION_ARGS) {
-  cCollectionElement_routineListIR * p = nullptr ;
-  macroMyNew (p, cCollectionElement_routineListIR (in_mRoutine COMMA_THERE)) ;
-  outAttributes.setPointer (p) ;
-  macroDetachSharedObject (p) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_uint GGS_routineListIR::getter_count (UNUSED_LOCATION_ARGS) const {
-  GGS_uint result ;
-  if (isValid ()) {
-    result = GGS_uint (count ()) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_range GGS_routineListIR::getter_range (UNUSED_LOCATION_ARGS) const {
-  GGS_range result ;
-  if (isValid ()) {
-    result = GGS_range (0, count ()) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_routineListIR::description (String & ioString,
-                                     const int32_t inIndentation) const {
-  ioString.appendCString ("<list @") ;
-  ioString.appendString (staticTypeDescriptor ()->mGalgasTypeName) ;
-  ioString.appendCString (" (") ;
-  ioString.appendUnsigned (count()) ;
-  ioString.appendCString (" object") ;
-  ioString.appendString ((count() > 1) ? "s" : "") ;
-  ioString.appendCString ("):") ;
-  if (isValid ()) {
-    for (uint32_t i = 0 ; i < count () ; i++) {
-      ioString.appendNewLine () ;
-      ioString.appendStringMultiple ("| ", inIndentation) ;
-      ioString.appendString ("|-at ") ;
-      ioString.appendUnsigned (i) ;
-      ioString.appendNewLine () ;
-      ioString.appendStringMultiple ("| ", inIndentation + 1) ;
-      ioString.appendString ("mRoutine:") ;
-      mArray (int32_t (i) COMMA_HERE).mProperty_mRoutine.description (ioString, inIndentation + 1) ;
-    }
-  }else{
-    ioString.appendCString (" not built") ;
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_routineListIR GGS_routineListIR::class_func_emptyList (UNUSED_LOCATION_ARGS) {
-  GGS_routineListIR result ;
-  result.mArray.setCapacity (16) ; // Build
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_routineListIR GGS_routineListIR::init (Compiler * COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_routineListIR result ;
-  result.mArray.setCapacity (16) ; // Build
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_routineListIR::plusPlusAssignOperation (const GGS_routineListIR_2E_element & inValue
-                                                 COMMA_UNUSED_LOCATION_ARGS) {
-  if (isValid () && inValue.isValid ()) {
-    mArray.appendObject (inValue) ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_routineListIR GGS_routineListIR::class_func_listWithValue (const GGS_abstractRoutineIR & inOperand0
-                                                               COMMA_LOCATION_ARGS) {
-  const GGS_routineListIR_2E_element element (inOperand0) ;
-  GGS_routineListIR result ;
-  if (element.isValid ()) {
-    result.mArray.setCapacity (16) ; // Build
-    result.plusPlusAssignOperation (element COMMA_THERE) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_routineListIR::addAssignOperation (const GGS_abstractRoutineIR & inOperand0
-                                            COMMA_LOCATION_ARGS) {
-  const GGS_routineListIR_2E_element newElement (inOperand0) ;
-  plusPlusAssignOperation (newElement COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_routineListIR::setter_append (const GGS_abstractRoutineIR inOperand0,
-                                       Compiler * /* inCompiler */
-                                       COMMA_LOCATION_ARGS) {
-  const GGS_routineListIR_2E_element newElement (inOperand0) ;
-  if (isValid () && newElement.isValid ()) {
-    plusPlusAssignOperation (newElement COMMA_THERE) ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_routineListIR::setter_insertAtIndex (const GGS_abstractRoutineIR inOperand0,
-                                              const GGS_uint inInsertionIndex,
-                                              Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) {
-  const GGS_routineListIR_2E_element newElement (inOperand0) ;
-  if (isValid () && inInsertionIndex.isValid () && newElement.isValid ()) {
-    const int32_t idx = int32_t (inInsertionIndex.uintValue ()) ;
-    if (idx <= mArray.count ()) {
-      mArray.insertObjectAtIndex (newElement, idx COMMA_THERE) ;
-    }else{
-      String message = "cannot insert at index " ;
-      message.appendSigned (idx) ;
-      message.appendCString (", list count is ") ;
-      message.appendSigned (mArray.count ()) ;
-      inCompiler->onTheFlySemanticError (message COMMA_THERE) ;
-    }
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_routineListIR::setter_removeAtIndex (GGS_abstractRoutineIR & outOperand0,
-                                              const GGS_uint inRemoveIndex,
-                                              Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) {
-  bool removed = false ;
-  if (isValid () && inRemoveIndex.isValid ()) {
-    const int32_t idx = int32_t (inRemoveIndex.uintValue ()) ;
-    if (idx < mArray.count ()) {
-      removed = true ;
-      outOperand0 = mArray (idx COMMA_HERE).mProperty_mRoutine ;
-      mArray.removeObjectAtIndex (idx COMMA_HERE) ;
-    }else{
-      String message = "cannot remove at index " ;
-      message.appendSigned (idx) ;
-      message.appendCString (", list count is ") ;
-      message.appendSigned (mArray.count ()) ;
-      inCompiler->onTheFlySemanticError (message COMMA_THERE) ;
-    }
-  }
-  if (!removed) {
-    outOperand0.drop () ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_routineListIR::setter_popFirst (GGS_abstractRoutineIR & outOperand0,
-                                         Compiler * inCompiler
-                                         COMMA_LOCATION_ARGS) {
-  bool removed = false ;
-  if (isValid ()) {
-    if (mArray.count () > 0) {
-      removed = true ;
-      outOperand0 = mArray (0 COMMA_THERE).mProperty_mRoutine ;
-      mArray.removeObjectAtIndex (0 COMMA_HERE) ;
-    }else{
-      const String message = "cannot remove first element, list is empty" ;
-      inCompiler->onTheFlySemanticError (message COMMA_THERE) ;
-    }
-  }
-  if (!removed) {
-    outOperand0.drop () ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_routineListIR::setter_popLast (GGS_abstractRoutineIR & outOperand0,
-                                        Compiler * inCompiler
-                                        COMMA_LOCATION_ARGS) {
-  bool removed = false ;
-  if (isValid ()) {
-    if (mArray.count () > 0) {
-      removed = true ;
-      outOperand0 = mArray.lastObject (HERE).mProperty_mRoutine ;
-      mArray.removeLastObject (HERE) ;
-    }else{
-      const String message = "cannot remove last element, list is empty" ;
-      inCompiler->onTheFlySemanticError (message COMMA_THERE) ;
-    }
-  }
-  if (!removed) {
-    outOperand0.drop () ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_routineListIR::method_first (GGS_abstractRoutineIR & outOperand0,
-                                      Compiler * inCompiler
-                                      COMMA_LOCATION_ARGS) const {
-  bool found = false ;
-  if (isValid ()) {
-    if (mArray.count () > 0) {
-      found = true ;
-      outOperand0 = mArray (0 COMMA_THERE).mProperty_mRoutine ;
-    }else{
-      const String message = "cannot get first element, list is empty" ;
-      inCompiler->onTheFlySemanticError (message COMMA_THERE) ;
-    }
-  }
-  if (!found) {
-    outOperand0.drop () ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_routineListIR::method_last (GGS_abstractRoutineIR & outOperand0,
-                                     Compiler * inCompiler
-                                     COMMA_LOCATION_ARGS) const {
-  bool found = false ;
-  if (isValid ()) {
-    if (mArray.count () > 0) {
-      found = true ;
-      outOperand0 = mArray.lastObject (HERE).mProperty_mRoutine ;
-    }else{
-      const String message = "cannot get last element, list is empty" ;
-      inCompiler->onTheFlySemanticError (message COMMA_THERE) ;
-    }
-  }
-  if (!found) {
-    outOperand0.drop () ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_routineListIR GGS_routineListIR::add_operation (const GGS_routineListIR & inOperand,
-                                                    Compiler * /* inCompiler */
-                                                    COMMA_UNUSED_LOCATION_ARGS) const {
-  GGS_routineListIR result ;
-  if (isValid () && inOperand.isValid ()) {
-    result = *this ;
-    result.mArray.setCapacity (1 + result.mArray.count () + inOperand.mArray.count ()) ;
-    for (int32_t i = 0 ; i < inOperand.mArray.count () ; i++) {
-      result.mArray.appendObject (inOperand.mArray (i COMMA_HERE)) ;
-    }
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_routineListIR GGS_routineListIR::subList (const int32_t inStart,
-                                              const int32_t inLength,
-                                              Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) const {
-  GGS_routineListIR result ;
-  const bool ok = (inStart >= 0) && (inLength >= 0) && ((inStart + inLength) <= int32_t (count ())) ;
-  if (ok) {
-    result.mArray.setCapacity (std::max (16, inLength)) ;
-    for (int32_t i = inStart ; i < (inStart + inLength) ; i++) {
-      result.mArray.appendObject (mArray (i COMMA_HERE)) ;
-    }
-  }else{
-    String message = "cannot get sublist [start: " ;
-    message.appendSigned (inStart) ;
-    message.appendCString (", length: ") ;
-    message.appendSigned (inLength) ;
-    message.appendCString ("], list count is ") ;
-    message.appendSigned (mArray.count ()) ;
-    inCompiler->onTheFlySemanticError (message COMMA_THERE) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_routineListIR GGS_routineListIR::getter_subListWithRange (const GGS_range & inRange,
-                                                              Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) const {
-  GGS_routineListIR result ;
-  if (isValid () && inRange.isValid ()) {
-    const int32_t start  = int32_t (inRange.mProperty_start.uintValue ()) ;
-    const int32_t length = int32_t (inRange.mProperty_length.uintValue ()) ;
-    result = subList (start, length, inCompiler COMMA_THERE) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_routineListIR GGS_routineListIR::getter_subListFromIndex (const GGS_uint & inIndex,
-                                                              Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) const {
-  GGS_routineListIR result ;
-  if (isValid () && inIndex.isValid ()) {
-    const int32_t start  = int32_t (inIndex.uintValue ()) ;
-    const int32_t length = int32_t (count ()) - start ;
-    result = subList (start, length, inCompiler COMMA_THERE) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_routineListIR GGS_routineListIR::getter_subListToIndex (const GGS_uint & inIndex,
-                                                            Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) const {
-  GGS_routineListIR result ;
-  if (isValid () && inIndex.isValid ()) {
-    const int32_t start  = 0 ;
-    const int32_t length = int32_t (inIndex.uintValue ()) + 1 ;
-    result = subList (start, length, inCompiler COMMA_THERE) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_routineListIR::plusAssignOperation (const GGS_routineListIR inList,
-                                             Compiler * /* inCompiler */
-                                             COMMA_UNUSED_LOCATION_ARGS) {
-  if (isValid () && inList.isValid ()) {
-    mArray.setCapacity (1 + mArray.count () + inList.mArray.count ()) ;
-    for (int32_t i=0 ; i < int32_t (inList.count ()) ; i++) {
-      mArray.appendObject (inList.mArray (i COMMA_HERE)) ;
-    }
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_routineListIR::setter_setMRoutineAtIndex (GGS_abstractRoutineIR inOperand,
-                                                   GGS_uint inIndex,
-                                                   Compiler * inCompiler
-                                                   COMMA_LOCATION_ARGS) {
-  if (isValid () && inOperand.isValid () && inIndex.isValid ()) {
-    const uint32_t idx = inIndex.uintValue () ;
-    if (idx < count ()) {
-      mArray (int32_t (idx) COMMA_HERE).mProperty_mRoutine = inOperand ;
-    }else{
-      String message = "cannot access at index " ;
-      message.appendUnsigned (idx) ;
-      message.appendCString (", list count is ") ;
-      message.appendSigned (mArray.count ()) ;
-      inCompiler->onTheFlySemanticError (message COMMA_THERE) ;
-    }
-  }
-}
-//--------------------------------------------------------------------------------------------------
-  
-GGS_abstractRoutineIR GGS_routineListIR::getter_mRoutineAtIndex (const GGS_uint & inIndex,
-                                                                 Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) const {
-  GGS_abstractRoutineIR result ;
-  if (isValid () && inIndex.isValid ()) {
-    const uint32_t idx = inIndex.uintValue () ;
-    if (idx < count ()) {
-      result = mArray (int32_t (idx) COMMA_HERE).mProperty_mRoutine ;
-    }else{
-      String message = "cannot access at index " ;
-      message.appendUnsigned (idx) ;
-      message.appendCString (", list count is ") ;
-      message.appendSigned (mArray.count ()) ;
-      inCompiler->onTheFlySemanticError (message COMMA_THERE) ;
-    }
-  }
-  return result ;
-}
-//--------------------------------------------------------------------------------------------------
-// Down Enumerator for @routineListIR
-//--------------------------------------------------------------------------------------------------
-
-DownEnumerator_routineListIR::DownEnumerator_routineListIR (const GGS_routineListIR & inEnumeratedObject) :
-mArray (inEnumeratedObject.sortedElementArray ()),
-mIndex (0) {
-  mIndex = mArray.count () - 1 ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_routineListIR_2E_element DownEnumerator_routineListIR::current (LOCATION_ARGS) const {
-  return mArray (mIndex COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_abstractRoutineIR DownEnumerator_routineListIR::current_mRoutine (LOCATION_ARGS) const {
-  return mArray (mIndex COMMA_THERE).mProperty_mRoutine ;
-}
-
-
-
-//--------------------------------------------------------------------------------------------------
-// Up Enumerator for @routineListIR
-//--------------------------------------------------------------------------------------------------
-
-UpEnumerator_routineListIR::UpEnumerator_routineListIR (const GGS_routineListIR & inEnumeratedObject) :
-mArray (inEnumeratedObject.sortedElementArray ()),
-mIndex (0) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_routineListIR_2E_element UpEnumerator_routineListIR::current (LOCATION_ARGS) const {
-  return mArray (mIndex COMMA_THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_abstractRoutineIR UpEnumerator_routineListIR::current_mRoutine (LOCATION_ARGS) const {
-  return mArray (mIndex COMMA_THERE).mProperty_mRoutine ;
-}
-
-
-
-
-//--------------------------------------------------------------------------------------------------
-//     @routineListIR generic code implementation
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_routineListIR ("routineListIR",
-                                                                  nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor * GGS_routineListIR::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_routineListIR ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_routineListIR::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_routineListIR (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_routineListIR GGS_routineListIR::extractObject (const GGS_object & inObject,
-                                                    Compiler * inCompiler
-                                                    COMMA_LOCATION_ARGS) {
-  GGS_routineListIR result ;
-  const GGS_routineListIR * p = (const GGS_routineListIR *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_routineListIR *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("routineListIR", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension method '@routineListIR llvmRoutineGeneration'
-//
-//--------------------------------------------------------------------------------------------------
-
-void extensionMethod_llvmRoutineGeneration (const GGS_routineListIR inObject,
-                                            GGS_string & ioArgument_ioLLVMcode,
-                                            const GGS_generationContext constinArgument_inGenerationContext,
-                                            GGS_generationAdds & ioArgument_ioGenerationAdds,
-                                            Compiler * inCompiler
-                                            COMMA_UNUSED_LOCATION_ARGS) {
-  const GGS_routineListIR temp_0 = inObject ;
-  UpEnumerator_routineListIR enumerator_3748 (temp_0) ;
-  while (enumerator_3748.hasCurrentObject ()) {
-    ioArgument_ioLLVMcode.plusAssignOperation(function_llvmTitleComment (GGS_string ("Routine ").add_operation (enumerator_3748.current (HERE).readProperty_mRoutine ().readProperty_mRoutineMangledName ().readProperty_string (), inCompiler COMMA_SOURCE_FILE ("intermediate-code-generation.galgas", 109)), inCompiler COMMA_SOURCE_FILE ("intermediate-code-generation.galgas", 109)), inCompiler  COMMA_SOURCE_FILE ("intermediate-code-generation.galgas", 109)) ;
-    ioArgument_ioGenerationAdds.mProperty_mUniqueIndex = GGS_uint (uint32_t (0U)) ;
-    callExtensionMethod_llvmCodeGeneration ((cPtr_abstractRoutineIR *) enumerator_3748.current (HERE).readProperty_mRoutine ().ptr (), ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("intermediate-code-generation.galgas", 111)) ;
-    enumerator_3748.gotoNextObject () ;
-  }
-}
-
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension method '@instructionListIR generateRelease'
-//
-//--------------------------------------------------------------------------------------------------
-
-void extensionSetter_generateRelease (GGS_instructionListIR & ioObject,
-                                      const GGS_omnibusType constinArgument_inType,
-                                      const GGS_lstring constinArgument_in_5F_omnibusName,
-                                      Compiler * inCompiler
-                                      COMMA_UNUSED_LOCATION_ARGS) {
-  ioObject.addAssignOperation (GGS_releaseIR::init_21__21_ (constinArgument_inType, constinArgument_in_5F_omnibusName, inCompiler COMMA_HERE)  COMMA_SOURCE_FILE ("intermediate-release.galgas", 3)) ;
-}
-
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult GGS_releaseIR_2E_weak::objectCompare (const GGS_releaseIR_2E_weak & inOperand) const {
-  ComparisonResult result = ComparisonResult::invalid ;
-  if (isValid () && inOperand.isValid ()) {
-    cPtr_weakReference_proxy * myPtr = mProxyPtr ;
-    const size_t myObjectPtr = size_t (myPtr) ;
-    cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
-    const size_t operandObjectPtr = size_t (operandPtr) ;
-    if (myObjectPtr < operandObjectPtr) {
-      result = ComparisonResult::firstOperandLowerThanSecond ;
-    }else if (myObjectPtr > operandObjectPtr) {
-      result = ComparisonResult::firstOperandGreaterThanSecond ;
-    }else{
-      result = ComparisonResult::operandEqual ;
-    }
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_releaseIR_2E_weak::GGS_releaseIR_2E_weak (void) :
-GGS_abstractInstructionIR_2E_weak () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_releaseIR_2E_weak & GGS_releaseIR_2E_weak::operator = (const GGS_releaseIR & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = nullptr ;
-  acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != nullptr) {
-    proxyPtr = p->getProxy () ;
-  }
-  macroAssignSharedObject (mProxyPtr, proxyPtr) ;
-  return *this ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_releaseIR_2E_weak::GGS_releaseIR_2E_weak (const GGS_releaseIR & inSource) :
-GGS_abstractInstructionIR_2E_weak (inSource) {
-}
-
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_releaseIR_2E_weak GGS_releaseIR_2E_weak::class_func_nil (LOCATION_ARGS) {
-  GGS_releaseIR_2E_weak result ;
-  macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_releaseIR GGS_releaseIR_2E_weak::unwrappedValue (void) const {
-  GGS_releaseIR result ;
-  if (isValid ()) {
-    const cPtr_releaseIR * p = (cPtr_releaseIR *) ptr () ;
-    if (nullptr != p) {
-      result = GGS_releaseIR (p) ;
-    }
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_releaseIR GGS_releaseIR_2E_weak::bang_releaseIR_2E_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
-  GGS_releaseIR result ;
-  if (mProxyPtr != nullptr) {
-    acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == nullptr) {
-      inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
-    }else{
-      macroValidSharedObject (strongPtr, cPtr_releaseIR) ;
-      result = GGS_releaseIR ((cPtr_releaseIR *) strongPtr) ;
-    }
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//     @releaseIR.weak generic code implementation
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_releaseIR_2E_weak ("releaseIR.weak",
-                                                                      & kTypeDescriptor_GALGAS_abstractInstructionIR_2E_weak) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor * GGS_releaseIR_2E_weak::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_releaseIR_2E_weak ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_releaseIR_2E_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_releaseIR_2E_weak (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_releaseIR_2E_weak GGS_releaseIR_2E_weak::extractObject (const GGS_object & inObject,
-                                                            Compiler * inCompiler
-                                                            COMMA_LOCATION_ARGS) {
-  GGS_releaseIR_2E_weak result ;
-  const GGS_releaseIR_2E_weak * p = (const GGS_releaseIR_2E_weak *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_releaseIR_2E_weak *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("releaseIR.weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//  Extension Getter '@mode string'
-//--------------------------------------------------------------------------------------------------
-
-GGS_string extensionGetter_string (const GGS_mode & inObject,
-                                   Compiler *
-                                   COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_string result_result ; // Returned variable
-  const GGS_mode temp_0 = inObject ;
-  switch (temp_0.enumValue ()) {
-  case GGS_mode::Enumeration::invalid:
-    break ;
-  case GGS_mode::Enumeration::enum_userMode:
-    {
-      result_result = GGS_string ("user") ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_safeUserMode:
-    {
-      result_result = GGS_string ("safe user") ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_sectionMode:
-    {
-      result_result = GGS_string ("section") ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_safeSectionMode:
-    {
-      result_result = GGS_string ("safe section") ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_serviceMode:
-    {
-      result_result = GGS_string ("service") ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_safeServiceMode:
-    {
-      result_result = GGS_string ("safe service") ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_primitiveMode:
-    {
-      result_result = GGS_string ("primitive") ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_safePrimitiveMode:
-    {
-      result_result = GGS_string ("safe primitive") ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_guardMode:
-    {
-      result_result = GGS_string ("guard") ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_safeGuardMode:
-    {
-      result_result = GGS_string ("safe guard") ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_panicMode:
-    {
-      result_result = GGS_string ("panic") ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_bootMode:
-    {
-      result_result = GGS_string ("boot") ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_startupMode:
-    {
-      result_result = GGS_string ("startup") ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_anyMode:
-    {
-      result_result = GGS_string ("any") ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_anySafeMode:
-    {
-      result_result = GGS_string ("any safe") ;
-    }
-    break ;
-  }
-//---
-  return result_result ;
-}
-
-
-
-
-//--------------------------------------------------------------------------------------------------
-//  Extension Getter '@mode isSafe'
-//--------------------------------------------------------------------------------------------------
-
-GGS_bool extensionGetter_isSafe (const GGS_mode & inObject,
-                                 Compiler *
-                                 COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_bool result_result ; // Returned variable
-  const GGS_mode temp_0 = inObject ;
-  switch (temp_0.enumValue ()) {
-  case GGS_mode::Enumeration::invalid:
-    break ;
-  case GGS_mode::Enumeration::enum_userMode:
-    {
-      result_result = GGS_bool (false) ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_safeUserMode:
-    {
-      result_result = GGS_bool (true) ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_sectionMode:
-    {
-      result_result = GGS_bool (false) ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_safeSectionMode:
-    {
-      result_result = GGS_bool (true) ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_serviceMode:
-    {
-      result_result = GGS_bool (false) ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_safeServiceMode:
-    {
-      result_result = GGS_bool (true) ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_primitiveMode:
-    {
-      result_result = GGS_bool (false) ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_safePrimitiveMode:
-    {
-      result_result = GGS_bool (true) ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_guardMode:
-    {
-      result_result = GGS_bool (false) ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_safeGuardMode:
-    {
-      result_result = GGS_bool (true) ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_panicMode:
-    {
-      result_result = GGS_bool (true) ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_bootMode:
-    {
-      result_result = GGS_bool (true) ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_startupMode:
-    {
-      result_result = GGS_bool (true) ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_anyMode:
-    {
-      result_result = GGS_bool (false) ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_anySafeMode:
-    {
-      result_result = GGS_bool (true) ;
-    }
-    break ;
-  }
-//---
-  return result_result ;
-}
-
-
-
-
-//--------------------------------------------------------------------------------------------------
-//  Extension Getter '@mode routineLLVMDictionaryForFunction'
-//--------------------------------------------------------------------------------------------------
-
-GGS_routineLLVMNameDict extensionGetter_routineLLVMDictionaryForFunction (const GGS_mode & inObject,
-                                                                          const GGS_string & constinArgument_inRoutineNameForGeneration,
-                                                                          Compiler * inCompiler
-                                                                          COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_routineLLVMNameDict result_result ; // Returned variable
-  GGS_routineLLVMNameDict temp_0 = GGS_routineLLVMNameDict::init (inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 72)) ;
-  const GGS_mode temp_1 = inObject ;
-  temp_0.plusPlusAssignOperation (GGS_routineLLVMNameDict_2E_element::init_21__21_ (temp_1, constinArgument_inRoutineNameForGeneration, inCompiler COMMA_HERE)  COMMA_SOURCE_FILE ("logical-modes.galgas", 72)) ;
-  result_result = temp_0 ;
-  const GGS_mode temp_2 = inObject ;
-  switch (temp_2.enumValue ()) {
-  case GGS_mode::Enumeration::invalid:
-    break ;
-  case GGS_mode::Enumeration::enum_serviceMode:
-    {
-      result_result.addAssignOperation (GGS_mode::class_func_primitiveMode (SOURCE_FILE ("logical-modes.galgas", 75)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 75)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_guardMode (SOURCE_FILE ("logical-modes.galgas", 76)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 76)) ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_safeServiceMode:
-    {
-      result_result.addAssignOperation (GGS_mode::class_func_primitiveMode (SOURCE_FILE ("logical-modes.galgas", 78)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 78)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_guardMode (SOURCE_FILE ("logical-modes.galgas", 79)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 79)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_safePrimitiveMode (SOURCE_FILE ("logical-modes.galgas", 80)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 80)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_safeGuardMode (SOURCE_FILE ("logical-modes.galgas", 81)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 81)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_serviceMode (SOURCE_FILE ("logical-modes.galgas", 82)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 82)) ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_sectionMode:
-    {
-      result_result.addAssignOperation (GGS_mode::class_func_primitiveMode (SOURCE_FILE ("logical-modes.galgas", 84)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 84)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_serviceMode (SOURCE_FILE ("logical-modes.galgas", 85)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 85)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_guardMode (SOURCE_FILE ("logical-modes.galgas", 86)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 86)) ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_safeSectionMode:
-    {
-      result_result.addAssignOperation (GGS_mode::class_func_sectionMode (SOURCE_FILE ("logical-modes.galgas", 88)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 88)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_primitiveMode (SOURCE_FILE ("logical-modes.galgas", 89)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 89)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_serviceMode (SOURCE_FILE ("logical-modes.galgas", 90)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 90)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_guardMode (SOURCE_FILE ("logical-modes.galgas", 91)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 91)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_safePrimitiveMode (SOURCE_FILE ("logical-modes.galgas", 92)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 92)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_safeServiceMode (SOURCE_FILE ("logical-modes.galgas", 93)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 93)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_safeGuardMode (SOURCE_FILE ("logical-modes.galgas", 94)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 94)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_startupMode (SOURCE_FILE ("logical-modes.galgas", 95)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 95)) ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_guardMode:
-    {
-      result_result.addAssignOperation (GGS_mode::class_func_serviceMode (SOURCE_FILE ("logical-modes.galgas", 97)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 97)) ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_safeGuardMode:
-    {
-      result_result.addAssignOperation (GGS_mode::class_func_safeServiceMode (SOURCE_FILE ("logical-modes.galgas", 99)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 99)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_guardMode (SOURCE_FILE ("logical-modes.galgas", 100)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 100)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_safeServiceMode (SOURCE_FILE ("logical-modes.galgas", 101)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 101)) ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_safePrimitiveMode:
-    {
-      result_result.addAssignOperation (GGS_mode::class_func_primitiveMode (SOURCE_FILE ("logical-modes.galgas", 103)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 103)) ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_safeUserMode:
-    {
-      result_result.addAssignOperation (GGS_mode::class_func_userMode (SOURCE_FILE ("logical-modes.galgas", 105)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 105)) ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_anySafeMode:
-    {
-      result_result.addAssignOperation (GGS_mode::class_func_anyMode (SOURCE_FILE ("logical-modes.galgas", 107)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 107)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_sectionMode (SOURCE_FILE ("logical-modes.galgas", 108)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 108)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_safeSectionMode (SOURCE_FILE ("logical-modes.galgas", 109)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 109)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_primitiveMode (SOURCE_FILE ("logical-modes.galgas", 110)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 110)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_safePrimitiveMode (SOURCE_FILE ("logical-modes.galgas", 111)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 111)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_serviceMode (SOURCE_FILE ("logical-modes.galgas", 112)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 112)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_safeServiceMode (SOURCE_FILE ("logical-modes.galgas", 113)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 113)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_guardMode (SOURCE_FILE ("logical-modes.galgas", 114)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 114)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_safeGuardMode (SOURCE_FILE ("logical-modes.galgas", 115)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 115)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_panicMode (SOURCE_FILE ("logical-modes.galgas", 116)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 116)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_startupMode (SOURCE_FILE ("logical-modes.galgas", 117)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 117)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_safeUserMode (SOURCE_FILE ("logical-modes.galgas", 118)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 118)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_userMode (SOURCE_FILE ("logical-modes.galgas", 119)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 119)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_bootMode (SOURCE_FILE ("logical-modes.galgas", 120)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 120)) ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_anyMode:
-    {
-      result_result.addAssignOperation (GGS_mode::class_func_sectionMode (SOURCE_FILE ("logical-modes.galgas", 122)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 122)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_primitiveMode (SOURCE_FILE ("logical-modes.galgas", 123)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 123)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_serviceMode (SOURCE_FILE ("logical-modes.galgas", 124)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 124)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_guardMode (SOURCE_FILE ("logical-modes.galgas", 125)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 125)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_userMode (SOURCE_FILE ("logical-modes.galgas", 126)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 126)) ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_userMode:
-    {
-      result_result.addAssignOperation (GGS_mode::class_func_anyMode (SOURCE_FILE ("logical-modes.galgas", 128)), constinArgument_inRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 128)) ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_bootMode:
-  case GGS_mode::Enumeration::enum_panicMode:
-  case GGS_mode::Enumeration::enum_primitiveMode:
-  case GGS_mode::Enumeration::enum_startupMode:
-    break ;
-  }
-//---
-  return result_result ;
-}
-
-
-
-
-//--------------------------------------------------------------------------------------------------
-//  Extension Getter '@mode routineLLVMDictionaryForSystemRoutine'
-//--------------------------------------------------------------------------------------------------
-
-GGS_routineLLVMNameDict extensionGetter_routineLLVMDictionaryForSystemRoutine (const GGS_mode & inObject,
-                                                                               const GGS_string & constinArgument_inUserRoutineNameForGeneration,
-                                                                               const GGS_string & constinArgument_inImplementationRoutineNameForGeneration,
-                                                                               Compiler * inCompiler
-                                                                               COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_routineLLVMNameDict result_result ; // Returned variable
-  GGS_routineLLVMNameDict temp_0 = GGS_routineLLVMNameDict::init (inCompiler COMMA_SOURCE_FILE ("logical-modes.galgas", 140)) ;
-  const GGS_mode temp_1 = inObject ;
-  temp_0.plusPlusAssignOperation (GGS_routineLLVMNameDict_2E_element::init_21__21_ (temp_1, constinArgument_inImplementationRoutineNameForGeneration, inCompiler COMMA_HERE)  COMMA_SOURCE_FILE ("logical-modes.galgas", 140)) ;
-  result_result = temp_0 ;
-  result_result.addAssignOperation (GGS_mode::class_func_userMode (SOURCE_FILE ("logical-modes.galgas", 141)), constinArgument_inUserRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 141)) ;
-  const GGS_mode temp_2 = inObject ;
-  switch (temp_2.enumValue ()) {
-  case GGS_mode::Enumeration::invalid:
-    break ;
-  case GGS_mode::Enumeration::enum_serviceMode:
-    {
-      result_result.addAssignOperation (GGS_mode::class_func_primitiveMode (SOURCE_FILE ("logical-modes.galgas", 144)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 144)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_guardMode (SOURCE_FILE ("logical-modes.galgas", 145)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 145)) ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_safeServiceMode:
-    {
-      result_result.addAssignOperation (GGS_mode::class_func_serviceMode (SOURCE_FILE ("logical-modes.galgas", 147)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 147)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_safePrimitiveMode (SOURCE_FILE ("logical-modes.galgas", 148)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 148)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_safeGuardMode (SOURCE_FILE ("logical-modes.galgas", 149)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 149)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_primitiveMode (SOURCE_FILE ("logical-modes.galgas", 150)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 150)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_guardMode (SOURCE_FILE ("logical-modes.galgas", 151)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 151)) ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_sectionMode:
-    {
-      result_result.addAssignOperation (GGS_mode::class_func_primitiveMode (SOURCE_FILE ("logical-modes.galgas", 153)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 153)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_serviceMode (SOURCE_FILE ("logical-modes.galgas", 154)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 154)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_guardMode (SOURCE_FILE ("logical-modes.galgas", 155)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 155)) ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_safeSectionMode:
-    {
-      result_result.addAssignOperation (GGS_mode::class_func_sectionMode (SOURCE_FILE ("logical-modes.galgas", 157)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 157)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_primitiveMode (SOURCE_FILE ("logical-modes.galgas", 158)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 158)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_serviceMode (SOURCE_FILE ("logical-modes.galgas", 159)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 159)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_guardMode (SOURCE_FILE ("logical-modes.galgas", 160)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 160)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_safePrimitiveMode (SOURCE_FILE ("logical-modes.galgas", 161)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 161)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_safeServiceMode (SOURCE_FILE ("logical-modes.galgas", 162)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 162)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_safeGuardMode (SOURCE_FILE ("logical-modes.galgas", 163)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 163)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_startupMode (SOURCE_FILE ("logical-modes.galgas", 164)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 164)) ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_guardMode:
-    {
-      result_result.addAssignOperation (GGS_mode::class_func_safeServiceMode (SOURCE_FILE ("logical-modes.galgas", 166)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 166)) ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_safeGuardMode:
-    {
-      result_result.addAssignOperation (GGS_mode::class_func_guardMode (SOURCE_FILE ("logical-modes.galgas", 168)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 168)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_serviceMode (SOURCE_FILE ("logical-modes.galgas", 169)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 169)) ;
-      result_result.addAssignOperation (GGS_mode::class_func_safeServiceMode (SOURCE_FILE ("logical-modes.galgas", 170)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 170)) ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_safePrimitiveMode:
-    {
-      result_result.addAssignOperation (GGS_mode::class_func_primitiveMode (SOURCE_FILE ("logical-modes.galgas", 172)), constinArgument_inImplementationRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 172)) ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_safeUserMode:
-    {
-      result_result.addAssignOperation (GGS_mode::class_func_userMode (SOURCE_FILE ("logical-modes.galgas", 174)), constinArgument_inUserRoutineNameForGeneration, inCompiler  COMMA_SOURCE_FILE ("logical-modes.galgas", 174)) ;
-    }
-    break ;
-  case GGS_mode::Enumeration::enum_anyMode:
-  case GGS_mode::Enumeration::enum_anySafeMode:
-  case GGS_mode::Enumeration::enum_bootMode:
-  case GGS_mode::Enumeration::enum_panicMode:
-  case GGS_mode::Enumeration::enum_primitiveMode:
-  case GGS_mode::Enumeration::enum_startupMode:
-  case GGS_mode::Enumeration::enum_userMode:
-    break ;
-  }
-//---
-  return result_result ;
-}
-
-
-
-
-//--------------------------------------------------------------------------------------------------
-
-ComparisonResult GGS_functionDeclarationAST_2E_weak::objectCompare (const GGS_functionDeclarationAST_2E_weak & inOperand) const {
-  ComparisonResult result = ComparisonResult::invalid ;
-  if (isValid () && inOperand.isValid ()) {
-    cPtr_weakReference_proxy * myPtr = mProxyPtr ;
-    const size_t myObjectPtr = size_t (myPtr) ;
-    cPtr_weakReference_proxy * operandPtr = inOperand.mProxyPtr ;
-    const size_t operandObjectPtr = size_t (operandPtr) ;
-    if (myObjectPtr < operandObjectPtr) {
-      result = ComparisonResult::firstOperandLowerThanSecond ;
-    }else if (myObjectPtr > operandObjectPtr) {
-      result = ComparisonResult::firstOperandGreaterThanSecond ;
-    }else{
-      result = ComparisonResult::operandEqual ;
-    }
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_functionDeclarationAST_2E_weak::GGS_functionDeclarationAST_2E_weak (void) :
-GGS_abstractDeclarationAST_2E_weak () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_functionDeclarationAST_2E_weak & GGS_functionDeclarationAST_2E_weak::operator = (const GGS_functionDeclarationAST & inSource) {
-  cPtr_weakReference_proxy * proxyPtr = nullptr ;
-  acStrongPtr_class * p = (acStrongPtr_class *) inSource.ptr () ;
-  if (p != nullptr) {
-    proxyPtr = p->getProxy () ;
-  }
-  macroAssignSharedObject (mProxyPtr, proxyPtr) ;
-  return *this ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_functionDeclarationAST_2E_weak::GGS_functionDeclarationAST_2E_weak (const GGS_functionDeclarationAST & inSource) :
-GGS_abstractDeclarationAST_2E_weak (inSource) {
-}
-
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_functionDeclarationAST_2E_weak GGS_functionDeclarationAST_2E_weak::class_func_nil (LOCATION_ARGS) {
-  GGS_functionDeclarationAST_2E_weak result ;
-  macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (THERE)) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_functionDeclarationAST GGS_functionDeclarationAST_2E_weak::unwrappedValue (void) const {
-  GGS_functionDeclarationAST result ;
-  if (isValid ()) {
-    const cPtr_functionDeclarationAST * p = (cPtr_functionDeclarationAST *) ptr () ;
-    if (nullptr != p) {
-      result = GGS_functionDeclarationAST (p) ;
-    }
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_functionDeclarationAST GGS_functionDeclarationAST_2E_weak::bang_functionDeclarationAST_2E_weak (Compiler * inCompiler COMMA_LOCATION_ARGS) const {
-  GGS_functionDeclarationAST result ;
-  if (mProxyPtr != nullptr) {
-    acStrongPtr_class * strongPtr = mProxyPtr->strongObject () ;
-    if (strongPtr == nullptr) {
-      inCompiler->onTheFlySemanticError ("weak reference is nil" COMMA_THERE) ;
-    }else{
-      macroValidSharedObject (strongPtr, cPtr_functionDeclarationAST) ;
-      result = GGS_functionDeclarationAST ((cPtr_functionDeclarationAST *) strongPtr) ;
-    }
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//     @functionDeclarationAST.weak generic code implementation
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_functionDeclarationAST_2E_weak ("functionDeclarationAST.weak",
-                                                                                   & kTypeDescriptor_GALGAS_abstractDeclarationAST_2E_weak) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor * GGS_functionDeclarationAST_2E_weak::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_functionDeclarationAST_2E_weak ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_functionDeclarationAST_2E_weak::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_functionDeclarationAST_2E_weak (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_functionDeclarationAST_2E_weak GGS_functionDeclarationAST_2E_weak::extractObject (const GGS_object & inObject,
-                                                                                      Compiler * inCompiler
-                                                                                      COMMA_LOCATION_ARGS) {
-  GGS_functionDeclarationAST_2E_weak result ;
-  const GGS_functionDeclarationAST_2E_weak * p = (const GGS_functionDeclarationAST_2E_weak *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_functionDeclarationAST_2E_weak *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("functionDeclarationAST.weak", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_routineLLVMNameDict GGS_routineLLVMNameDict::builtDictionary (LOCATION_ARGS) {
-  GGS_routineLLVMNameDict result ;
-  result.build (THERE) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_routineLLVMNameDict GGS_routineLLVMNameDict::class_func_emptyDict (LOCATION_ARGS) {
-  return GGS_routineLLVMNameDict::builtDictionary (THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_routineLLVMNameDict GGS_routineLLVMNameDict::init (Compiler * COMMA_LOCATION_ARGS) {
-  return GGS_routineLLVMNameDict::builtDictionary (THERE) ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_routineLLVMNameDict::description (String & ioString,
-                                          const int32_t /* inIndentation */) const {
-  ioString.appendCString ("<dict @") ;
-  ioString.appendCString (staticTypeDescriptor ()->mGalgasTypeName) ;
-  ioString.appendCString (": ") ;
-  if (isValid ()) {
-    ioString.appendSigned (count ()) ;
-    ioString.appendCString (" node(s)") ;
-  }else{
-    ioString.appendCString ("not built") ;
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_uint GGS_routineLLVMNameDict::getter_count (UNUSED_LOCATION_ARGS) const {
-  GGS_uint result ;
-  if (isValid ()) {
-    result = GGS_uint (uint32_t (count ())) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_routineLLVMNameDict_2E_element_3F_ GGS_routineLLVMNameDict::
-readSubscript__3F_ (const class GGS_mode & inKey,
-                    Compiler * /* inCompiler */
-                    COMMA_UNUSED_LOCATION_ARGS) const {
-  if (isValid () && inKey.isValid ()) {
-    const SharedGenericPtrWithValueSemantics <GGS_routineLLVMNameDict_2E_element> object = infoForKey (inKey) ;
-    if (object.isNotNil ()) {
-      return GGS_routineLLVMNameDict_2E_element_3F_ (object.value ()) ;
-    }else{
-      return GGS_routineLLVMNameDict_2E_element_3F_::init_nil () ;
-    }
-  }else{
-    return GGS_routineLLVMNameDict_2E_element_3F_ () ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_routineLLVMNameDict::plusPlusAssignOperation (const GGS_routineLLVMNameDict_2E_element & inValue
-                                                       COMMA_LOCATION_ARGS) {
-  if (isValid () && inValue.mProperty_key.isValid ()) {
-    insertOrReplace (inValue.mProperty_key, inValue COMMA_THERE) ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_routineLLVMNameDict::addAssignOperation (const GGS_mode & inKey,
-                                                  const GGS_string & inArgument0,
-                                                  Compiler * /* inCompiler */
-                                                  COMMA_LOCATION_ARGS) {
-  GGS_routineLLVMNameDict_2E_element newElement (inKey, inArgument0) ;
-  if (isValid () && inKey.isValid ()) {
-    insertOrReplace (inKey, newElement COMMA_THERE) ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_routineLLVMNameDict::setter_insert (const GGS_mode inKey,
-                                             const GGS_string inArgument0,
-                                             Compiler * /* inCompiler */
-                                             COMMA_LOCATION_ARGS) {
-  GGS_routineLLVMNameDict_2E_element newElement (inKey, inArgument0) ;
-  if (isValid () && inKey.isValid ()) {
-    insertOrReplace (inKey, newElement COMMA_THERE) ;
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_bool GGS_routineLLVMNameDict::getter_hasKey (const GGS_mode & inKey
-                                                 COMMA_UNUSED_LOCATION_ARGS) const {
-  GGS_bool result ;
-  if (isValid () && inKey.isValid ()) {
-    result = GGS_bool (hasKey (inKey)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_routineLLVMNameDict::method_searchKey (GGS_mode inKey,
-                                                GGS_string & outArgument0,
-                                                Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) const {
-  if (isValid () && inKey.isValid ()) {
-    const SharedGenericPtrWithValueSemantics <GGS_routineLLVMNameDict_2E_element> object = infoForKey (inKey) ;
-    if (object.isNil ()) {
-    //--- Build error message
-      const String message = "cannot search in dict: the key does not exist" ;
-    //--- Emit error message
-      inCompiler->onTheFlySemanticError (message COMMA_THERE) ;
-    //--- Drop out arguments
-      outArgument0.drop () ;
-    }else{
-      outArgument0 = object->mProperty_llvmName ;
-    }
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_routineLLVMNameDict::setter_removeKey (GGS_mode inKey,
-                                                GGS_string & outArgument0,
-                                                Compiler * inCompiler
-                                                COMMA_LOCATION_ARGS) {
-  if (isValid () && inKey.isValid ()) {
-    const SharedGenericPtrWithValueSemantics <GGS_routineLLVMNameDict_2E_element> removedObject
-                    = removeAndReturnRemovedInfo (inKey COMMA_THERE) ;
-    if (removedObject.isNil ()) { // Not found
-    //--- Build error message
-      const String message = "cannot remove in dict: the key does not exist" ;
-    //--- Emit error message
-      inCompiler->onTheFlySemanticError (message COMMA_THERE) ;
-    //--- Drop output arguments
-      outArgument0.drop () ;
-    }else{
-    //--- Assign output arguments
-      outArgument0 = removedObject->mProperty_llvmName ;
-    }
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_string GGS_routineLLVMNameDict::getter_llvmNameForKey (const GGS_mode & inKey,
-                                                           Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) const {
-  GGS_string result ;
-  if (isValid () && inKey.isValid ()) {
-    const SharedGenericPtrWithValueSemantics <GGS_routineLLVMNameDict_2E_element> object = infoForKey (inKey) ;
-    if (object.isNil ()) { // Not found
-    //--- Build error message
-      const String message = "cannot get llvmName ForKey in dict: the key does not exist" ;
-    //--- Emit error message
-      inCompiler->onTheFlySemanticError (message COMMA_THERE) ;
-    }else{
-      result = object->mProperty_llvmName ;
-    }
-  }
-  return result ;
-}
-//--------------------------------------------------------------------------------------------------
-
-void GGS_routineLLVMNameDict::setter_setLlvmNameForKey (GGS_string inPropertyValue,
-                                                        GGS_mode inKey,
-                                                        Compiler * inCompiler
-                                                        COMMA_LOCATION_ARGS) {
-  if (isValid () && inKey.isValid ()) {
-    OptionalSharedRef <GenericDictionaryNode <GGS_mode, GGS_routineLLVMNameDict_2E_element>> modifiedNode = nodeForKey (inKey) ;
-    if (modifiedNode.isNil ()) { // Not found
-    //--- Build error message
-     const String message = "cannot setLlvmNameForKey in dict: the key does not exist" ;
-    //--- Emit error message
-      inCompiler->onTheFlySemanticError (message COMMA_THERE) ;
-    }else{
-      modifiedNode->mSharedInfo->mProperty_llvmName = inPropertyValue ;
-    }
-  }
-}
-
-//--------------------------------------------------------------------------------------------------
-// Up Enumerator for @routineLLVMNameDict
-//--------------------------------------------------------------------------------------------------
-
-UpEnumerator_routineLLVMNameDict::UpEnumerator_routineLLVMNameDict (const GGS_routineLLVMNameDict & inOperand) :
-mInfoArray (inOperand.sortedInfoArray ()),
-mIndex (0) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_mode UpEnumerator_routineLLVMNameDict::current_key (UNUSED_LOCATION_ARGS) const {
-  return mInfoArray (mIndex COMMA_HERE)->mProperty_key ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_string UpEnumerator_routineLLVMNameDict::current_llvmName (UNUSED_LOCATION_ARGS) const {
-  return mInfoArray (mIndex COMMA_HERE)->mProperty_llvmName ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_routineLLVMNameDict_2E_element UpEnumerator_routineLLVMNameDict::current (UNUSED_LOCATION_ARGS) const {
-  return mInfoArray (mIndex COMMA_HERE).value () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-// Down Enumerator for @routineLLVMNameDict
-//--------------------------------------------------------------------------------------------------
-
-DownEnumerator_routineLLVMNameDict::DownEnumerator_routineLLVMNameDict (const GGS_routineLLVMNameDict & inOperand) :
-mInfoArray (inOperand.sortedInfoArray ()),
-mIndex () {
-  mIndex = mInfoArray.count () - 1 ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_mode DownEnumerator_routineLLVMNameDict::current_key (UNUSED_LOCATION_ARGS) const {
-  return mInfoArray (mIndex COMMA_HERE)->mProperty_key ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_string DownEnumerator_routineLLVMNameDict::current_llvmName (UNUSED_LOCATION_ARGS) const {
-  return mInfoArray (mIndex COMMA_HERE)->mProperty_llvmName ;
-}
-
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_routineLLVMNameDict_2E_element DownEnumerator_routineLLVMNameDict::current (UNUSED_LOCATION_ARGS) const {
-  return mInfoArray (mIndex COMMA_HERE).value () ;
-}
-//--------------------------------------------------------------------------------------------------
-//     @routineLLVMNameDict generic code implementation
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_routineLLVMNameDict ("routineLLVMNameDict",
-                                                                        nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor * GGS_routineLLVMNameDict::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_routineLLVMNameDict ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_routineLLVMNameDict::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_routineLLVMNameDict (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_routineLLVMNameDict GGS_routineLLVMNameDict::extractObject (const GGS_object & inObject,
-                                                                Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) {
-  GGS_routineLLVMNameDict result ;
-  const GGS_routineLLVMNameDict * p = (const GGS_routineLLVMNameDict *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_routineLLVMNameDict *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("routineLLVMNameDict", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//
 //Extension method '@routineMapForContext addFunctionWithoutArgument'
 //
 //--------------------------------------------------------------------------------------------------
@@ -1552,13 +24,13 @@ void extensionSetter_addFunctionWithoutArgument (GGS_routineMapForContext & ioOb
                                                  COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outRoutineLLVMName.drop () ; // Release 'out' argument
   GGS_routineFormalArgumentListAST temp_0 = GGS_routineFormalArgumentListAST::init (inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 299)) ;
-  GGS_routineFormalArgumentListAST var_formalArguments_10831 = temp_0 ;
-  GGS_lstring var_routineMangledName_10859 = GGS_lstring::init_21__21_ (constinArgument_inOmnibusTypeDescriptionName.add_operation (GGS_string ("."), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 301)).add_operation (constinArgument_inMethodName.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 301)).add_operation (extensionGetter_routineSignature (var_formalArguments_10831, constinArgument_inMethodName.readProperty_location (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 301)).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 301)), constinArgument_inMethodName.readProperty_location (), inCompiler COMMA_HERE) ;
-  outArgument_outRoutineLLVMName = function_routineMangledNameFromAST (constinArgument_inLLVMBaseTypeName, constinArgument_inMethodName, var_formalArguments_10831, inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 304)) ;
-  GGS_routineLLVMNameDict var_modeDictionary_11134 = extensionGetter_routineLLVMDictionaryForFunction (constinArgument_inMode, outArgument_outRoutineLLVMName.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 305)) ;
+  GGS_routineFormalArgumentListAST var_formalArguments_10867 = temp_0 ;
+  GGS_lstring var_routineMangledName_10895 = GGS_lstring::init_21__21_ (constinArgument_inOmnibusTypeDescriptionName.add_operation (GGS_string ("."), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 301)).add_operation (constinArgument_inMethodName.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 301)).add_operation (extensionGetter_routineSignature (var_formalArguments_10867, constinArgument_inMethodName.readProperty_location (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 301)).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 301)), constinArgument_inMethodName.readProperty_location (), inCompiler COMMA_HERE) ;
+  outArgument_outRoutineLLVMName = function_routineMangledNameFromAST (constinArgument_inLLVMBaseTypeName, constinArgument_inMethodName, var_formalArguments_10867, inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 304)) ;
+  GGS_routineLLVMNameDict var_modeDictionary_11170 = extensionGetter_routineLLVMDictionaryForFunction (constinArgument_inMode, outArgument_outRoutineLLVMName.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 305)) ;
   {
   GGS_routineTypedSignature temp_1 = GGS_routineTypedSignature::init (inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 309)) ;
-  ioObject.setter_insertKey (var_routineMangledName_10859, GGS_bool (true), temp_1, constinArgument_inResultType, var_modeDictionary_11134, GGS_bool (false), constinArgument_inMode, inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 306)) ;
+  ioObject.setter_insertKey (var_routineMangledName_10895, GGS_bool (true), temp_1, constinArgument_inResultType, var_modeDictionary_11170, GGS_bool (false), constinArgument_inMode, inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 306)) ;
   }
 }
 
@@ -1585,16 +57,16 @@ void extensionSetter_addFunctionWithInputArgument (GGS_routineMapForContext & io
   outArgument_outRoutineLLVMName.drop () ; // Release 'out' argument
   GGS_routineFormalArgumentListAST temp_0 = GGS_routineFormalArgumentListAST::init (inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 337)) ;
   temp_0.plusPlusAssignOperation (GGS_routineFormalArgumentListAST_2E_element::init_21__21__21__21_ (GGS_procFormalArgumentPassingMode::class_func_input (SOURCE_FILE ("declaration-function.galgas", 333)), constinArgument_inInputSelector.getter_nowhere (SOURCE_FILE ("declaration-function.galgas", 334)), extensionGetter_key (constinArgument_inInputArgumentTypeProxy, inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 335)).getter_nowhere (SOURCE_FILE ("declaration-function.galgas", 335)), constinArgument_inInputArgumentName.getter_nowhere (SOURCE_FILE ("declaration-function.galgas", 336)), inCompiler COMMA_HERE)  COMMA_SOURCE_FILE ("declaration-function.galgas", 337)) ;
-  GGS_routineFormalArgumentListAST var_argumentList_12046 = temp_0 ;
-  GGS_routineTypedSignature var_signature_12307 ;
+  GGS_routineFormalArgumentListAST var_argumentList_12083 = temp_0 ;
+  GGS_routineTypedSignature var_signature_12344 ;
   {
-  routine_routineTypedSignature_26__3F__21_ (ioArgument_ioContext.mProperty_mTypeMap, var_argumentList_12046, var_signature_12307, inCompiler  COMMA_SOURCE_FILE ("declaration-function.galgas", 339)) ;
+  routine_routineTypedSignature_26__3F__21_ (ioArgument_ioContext.mProperty_mTypeMap, var_argumentList_12083, var_signature_12344, inCompiler  COMMA_SOURCE_FILE ("declaration-function.galgas", 339)) ;
   }
-  GGS_lstring var_routineMangledName_12324 = GGS_lstring::init_21__21_ (constinArgument_inOmnibusTypeDescriptionName.add_operation (GGS_string ("."), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 341)).add_operation (constinArgument_inMethodName.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 341)).add_operation (extensionGetter_routineSignature (var_argumentList_12046, constinArgument_inMethodName.readProperty_location (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 341)).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 341)), constinArgument_inMethodName.readProperty_location (), inCompiler COMMA_HERE) ;
-  outArgument_outRoutineLLVMName = function_routineMangledNameFromAST (constinArgument_inLLVMBaseTypeName, constinArgument_inMethodName, var_argumentList_12046, inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 344)) ;
-  GGS_routineLLVMNameDict var_modeDictionary_12593 = extensionGetter_routineLLVMDictionaryForFunction (constinArgument_inMode, outArgument_outRoutineLLVMName.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 345)) ;
+  GGS_lstring var_routineMangledName_12361 = GGS_lstring::init_21__21_ (constinArgument_inOmnibusTypeDescriptionName.add_operation (GGS_string ("."), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 341)).add_operation (constinArgument_inMethodName.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 341)).add_operation (extensionGetter_routineSignature (var_argumentList_12083, constinArgument_inMethodName.readProperty_location (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 341)).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 341)), constinArgument_inMethodName.readProperty_location (), inCompiler COMMA_HERE) ;
+  outArgument_outRoutineLLVMName = function_routineMangledNameFromAST (constinArgument_inLLVMBaseTypeName, constinArgument_inMethodName, var_argumentList_12083, inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 344)) ;
+  GGS_routineLLVMNameDict var_modeDictionary_12630 = extensionGetter_routineLLVMDictionaryForFunction (constinArgument_inMode, outArgument_outRoutineLLVMName.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 345)) ;
   {
-  ioObject.setter_insertKey (var_routineMangledName_12324, GGS_bool (true), var_signature_12307, constinArgument_inResultType, var_modeDictionary_12593, GGS_bool (false), constinArgument_inMode, inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 346)) ;
+  ioObject.setter_insertKey (var_routineMangledName_12361, GGS_bool (true), var_signature_12344, constinArgument_inResultType, var_modeDictionary_12630, GGS_bool (false), constinArgument_inMode, inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 346)) ;
   }
 }
 
@@ -1625,16 +97,16 @@ void extensionSetter_addFunctionWithTwoInputArguments (GGS_routineMapForContext 
   GGS_routineFormalArgumentListAST temp_0 = GGS_routineFormalArgumentListAST::init (inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 386)) ;
   temp_0.plusPlusAssignOperation (GGS_routineFormalArgumentListAST_2E_element::init_21__21__21__21_ (GGS_procFormalArgumentPassingMode::class_func_input (SOURCE_FILE ("declaration-function.galgas", 376)), constinArgument_inInputSelector_31_.getter_nowhere (SOURCE_FILE ("declaration-function.galgas", 377)), extensionGetter_key (constinArgument_inInputArgumentTypeProxy_31_, inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 378)).getter_nowhere (SOURCE_FILE ("declaration-function.galgas", 378)), constinArgument_inInputArgumentName_31_.getter_nowhere (SOURCE_FILE ("declaration-function.galgas", 379)), inCompiler COMMA_HERE)  COMMA_SOURCE_FILE ("declaration-function.galgas", 380)) ;
   temp_0.plusPlusAssignOperation (GGS_routineFormalArgumentListAST_2E_element::init_21__21__21__21_ (GGS_procFormalArgumentPassingMode::class_func_input (SOURCE_FILE ("declaration-function.galgas", 382)), constinArgument_inInputSelector_32_.getter_nowhere (SOURCE_FILE ("declaration-function.galgas", 383)), extensionGetter_key (constinArgument_inInputArgumentTypeProxy_32_, inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 384)).getter_nowhere (SOURCE_FILE ("declaration-function.galgas", 384)), constinArgument_inInputArgumentName_32_.getter_nowhere (SOURCE_FILE ("declaration-function.galgas", 385)), inCompiler COMMA_HERE)  COMMA_SOURCE_FILE ("declaration-function.galgas", 386)) ;
-  GGS_routineFormalArgumentListAST var_argumentList_13710 = temp_0 ;
-  outArgument_outRoutineLLVMName = function_routineMangledNameFromAST (constinArgument_inLLVMBaseTypeName, GGS_lstring::init_21__21_ (constinArgument_inMethodName.readProperty_string (), GGS_location::class_func_nowhere (SOURCE_FILE ("declaration-function.galgas", 390)), inCompiler COMMA_HERE), var_argumentList_13710, inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 388)) ;
-  GGS_routineTypedSignature var_signature_14252 ;
+  GGS_routineFormalArgumentListAST var_argumentList_13748 = temp_0 ;
+  outArgument_outRoutineLLVMName = function_routineMangledNameFromAST (constinArgument_inLLVMBaseTypeName, GGS_lstring::init_21__21_ (constinArgument_inMethodName.readProperty_string (), GGS_location::class_func_nowhere (SOURCE_FILE ("declaration-function.galgas", 390)), inCompiler COMMA_HERE), var_argumentList_13748, inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 388)) ;
+  GGS_routineTypedSignature var_signature_14290 ;
   {
-  routine_routineTypedSignature_26__3F__21_ (ioArgument_ioContext.mProperty_mTypeMap, var_argumentList_13710, var_signature_14252, inCompiler  COMMA_SOURCE_FILE ("declaration-function.galgas", 393)) ;
+  routine_routineTypedSignature_26__3F__21_ (ioArgument_ioContext.mProperty_mTypeMap, var_argumentList_13748, var_signature_14290, inCompiler  COMMA_SOURCE_FILE ("declaration-function.galgas", 393)) ;
   }
-  GGS_lstring var_routineMangledName_14269 = GGS_lstring::init_21__21_ (constinArgument_inOmnibusTypeDescriptionName.add_operation (GGS_string ("."), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 395)).add_operation (constinArgument_inMethodName.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 395)).add_operation (extensionGetter_routineSignature (var_argumentList_13710, constinArgument_inMethodName.readProperty_location (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 395)).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 395)), constinArgument_inMethodName.readProperty_location (), inCompiler COMMA_HERE) ;
-  GGS_routineLLVMNameDict var_modeDictionary_14439 = extensionGetter_routineLLVMDictionaryForFunction (constinArgument_inMode, outArgument_outRoutineLLVMName.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 398)) ;
+  GGS_lstring var_routineMangledName_14307 = GGS_lstring::init_21__21_ (constinArgument_inOmnibusTypeDescriptionName.add_operation (GGS_string ("."), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 395)).add_operation (constinArgument_inMethodName.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 395)).add_operation (extensionGetter_routineSignature (var_argumentList_13748, constinArgument_inMethodName.readProperty_location (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 395)).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 395)), constinArgument_inMethodName.readProperty_location (), inCompiler COMMA_HERE) ;
+  GGS_routineLLVMNameDict var_modeDictionary_14477 = extensionGetter_routineLLVMDictionaryForFunction (constinArgument_inMode, outArgument_outRoutineLLVMName.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 398)) ;
   {
-  ioObject.setter_insertKey (var_routineMangledName_14269, GGS_bool (true), var_signature_14252, constinArgument_inResultType, var_modeDictionary_14439, GGS_bool (false), constinArgument_inMode, inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 399)) ;
+  ioObject.setter_insertKey (var_routineMangledName_14307, GGS_bool (true), var_signature_14290, constinArgument_inResultType, var_modeDictionary_14477, GGS_bool (false), constinArgument_inMode, inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas", 399)) ;
   }
 }
 
@@ -1696,17 +168,6 @@ GGS_integerDeclarationAST::GGS_integerDeclarationAST (const cPtr_integerDeclarat
 GGS_abstractDeclarationAST (inSourcePtr) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_integerDeclarationAST) ;
 }
-//--------------------------------------------------------------------------------------------------
-
-GGS_integerDeclarationAST GGS_integerDeclarationAST::class_func_new (const GGS_bool & in_mIsSigned,
-                                                                     const GGS_uint & in_mSize,
-                                                                     Compiler * inCompiler
-                                                                     COMMA_LOCATION_ARGS) {
-  GGS_integerDeclarationAST result ;
-  macroMyNew (result.mObjectPtr, cPtr_integerDeclarationAST (in_mIsSigned, in_mSize,  inCompiler COMMA_THERE)) ;
-  return result ;
-}
-
 //--------------------------------------------------------------------------------------------------
 
 GGS_bool GGS_integerDeclarationAST::readProperty_mIsSigned (void) const {
@@ -2063,16 +524,6 @@ GGS_omnibusInfixOperatorUsage (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GGS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage GGS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage::class_func_new (const GGS_string & in_mLLVMOperation,
-                                                                                                                                             Compiler * inCompiler
-                                                                                                                                             COMMA_LOCATION_ARGS) {
-  GGS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage result ;
-  macroMyNew (result.mObjectPtr, cPtr_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage (in_mLLVMOperation,  inCompiler COMMA_THERE)) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 GGS_string GGS_inlineInfix_5F_integer_5F_compileTimeInt_5F_operatorUsage::readProperty_mLLVMOperation (void) const {
   if (nullptr == mObjectPtr) {
     return GGS_string () ;
@@ -2359,16 +810,6 @@ GGS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage::GGS_inlineInfix_5
 GGS_omnibusInfixOperatorUsage (inSourcePtr) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage) ;
 }
-//--------------------------------------------------------------------------------------------------
-
-GGS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage GGS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage::class_func_new (const GGS_string & in_mLLVMOperation,
-                                                                                                                                             Compiler * inCompiler
-                                                                                                                                             COMMA_LOCATION_ARGS) {
-  GGS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage result ;
-  macroMyNew (result.mObjectPtr, cPtr_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage (in_mLLVMOperation,  inCompiler COMMA_THERE)) ;
-  return result ;
-}
-
 //--------------------------------------------------------------------------------------------------
 
 GGS_string GGS_inlineInfix_5F_compileTimeInt_5F_integer_5F_operatorUsage::readProperty_mLLVMOperation (void) const {
@@ -2737,117 +1178,117 @@ void extensionSetter_referenceFromPossibleValue (GGS_instructionListIR & ioObjec
                                                  GGS_objectIR & ioArgument_ioObjectIR,
                                                  Compiler * inCompiler
                                                  COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_bool var_performStore_296 ;
+  GGS_bool var_performStore_298 ;
   switch (ioArgument_ioObjectIR.enumValue ()) {
   case GGS_objectIR::Enumeration::invalid:
     break ;
   case GGS_objectIR::Enumeration::enum_void:
     {
-      var_performStore_296 = GGS_bool (false) ;
+      var_performStore_298 = GGS_bool (false) ;
     }
     break ;
   case GGS_objectIR::Enumeration::enum_reference:
     {
-      GGS_omnibusType extractedValue_399__0 ;
-      GGS_string extractedValue_401__1 ;
-      ioArgument_ioObjectIR.getAssociatedValuesFor_reference (extractedValue_399__0, extractedValue_401__1) ;
-      var_performStore_296 = GGS_bool (false) ;
+      GGS_omnibusType extractedValue_402__0 ;
+      GGS_string extractedValue_404__1 ;
+      ioArgument_ioObjectIR.getAssociatedValuesFor_reference (extractedValue_402__0, extractedValue_404__1) ;
+      var_performStore_298 = GGS_bool (false) ;
     }
     break ;
   case GGS_objectIR::Enumeration::enum_llvmNamedValue:
     {
-      GGS_omnibusType extractedValue_488__0 ;
-      GGS_string extractedValue_490__1 ;
-      ioArgument_ioObjectIR.getAssociatedValuesFor_llvmNamedValue (extractedValue_488__0, extractedValue_490__1) ;
-      var_performStore_296 = GGS_bool (true) ;
+      GGS_omnibusType extractedValue_492__0 ;
+      GGS_string extractedValue_494__1 ;
+      ioArgument_ioObjectIR.getAssociatedValuesFor_llvmNamedValue (extractedValue_492__0, extractedValue_494__1) ;
+      var_performStore_298 = GGS_bool (true) ;
     }
     break ;
   case GGS_objectIR::Enumeration::enum_literalInteger:
     {
-      GGS_omnibusType extractedValue_543__0 ;
-      GGS_bigint extractedValue_545__1 ;
-      ioArgument_ioObjectIR.getAssociatedValuesFor_literalInteger (extractedValue_543__0, extractedValue_545__1) ;
-      var_performStore_296 = GGS_bool (true) ;
+      GGS_omnibusType extractedValue_547__0 ;
+      GGS_bigint extractedValue_549__1 ;
+      ioArgument_ioObjectIR.getAssociatedValuesFor_literalInteger (extractedValue_547__0, extractedValue_549__1) ;
+      var_performStore_298 = GGS_bool (true) ;
     }
     break ;
   case GGS_objectIR::Enumeration::enum_null:
     {
-      GGS_omnibusType extractedValue_587__0 ;
-      ioArgument_ioObjectIR.getAssociatedValuesFor_null (extractedValue_587__0) ;
-      var_performStore_296 = GGS_bool (true) ;
+      GGS_omnibusType extractedValue_591__0 ;
+      ioArgument_ioObjectIR.getAssociatedValuesFor_null (extractedValue_591__0) ;
+      var_performStore_298 = GGS_bool (true) ;
     }
     break ;
   case GGS_objectIR::Enumeration::enum_llvmStructureValue:
     {
-      GGS_omnibusType extractedValue_643__0 ;
-      GGS_sortedOperandIRList extractedValue_645__1 ;
-      ioArgument_ioObjectIR.getAssociatedValuesFor_llvmStructureValue (extractedValue_643__0, extractedValue_645__1) ;
-      var_performStore_296 = GGS_bool (true) ;
+      GGS_omnibusType extractedValue_647__0 ;
+      GGS_sortedOperandIRList extractedValue_649__1 ;
+      ioArgument_ioObjectIR.getAssociatedValuesFor_llvmStructureValue (extractedValue_647__0, extractedValue_649__1) ;
+      var_performStore_298 = GGS_bool (true) ;
     }
     break ;
   case GGS_objectIR::Enumeration::enum_llvmArrayStaticValues:
     {
-      GGS_omnibusType extractedValue_705__0 ;
-      GGS_operandIRList extractedValue_705__1 ;
-      GGS_uint extractedValue_705__2 ;
-      ioArgument_ioObjectIR.getAssociatedValuesFor_llvmArrayStaticValues (extractedValue_705__0, extractedValue_705__1, extractedValue_705__2) ;
-      var_performStore_296 = GGS_bool (true) ;
+      GGS_omnibusType extractedValue_709__0 ;
+      GGS_operandIRList extractedValue_709__1 ;
+      GGS_uint extractedValue_709__2 ;
+      ioArgument_ioObjectIR.getAssociatedValuesFor_llvmArrayStaticValues (extractedValue_709__0, extractedValue_709__1, extractedValue_709__2) ;
+      var_performStore_298 = GGS_bool (true) ;
     }
     break ;
   case GGS_objectIR::Enumeration::enum_literalString:
     {
-      GGS_uint extractedValue_757__0 ;
-      GGS_uint extractedValue_759__1 ;
-      ioArgument_ioObjectIR.getAssociatedValuesFor_literalString (extractedValue_757__0, extractedValue_759__1) ;
-      var_performStore_296 = GGS_bool (true) ;
+      GGS_uint extractedValue_761__0 ;
+      GGS_uint extractedValue_763__1 ;
+      ioArgument_ioObjectIR.getAssociatedValuesFor_literalString (extractedValue_761__0, extractedValue_763__1) ;
+      var_performStore_298 = GGS_bool (true) ;
     }
     break ;
   case GGS_objectIR::Enumeration::enum_zero:
     {
-      GGS_omnibusType extractedValue_801__0 ;
-      ioArgument_ioObjectIR.getAssociatedValuesFor_zero (extractedValue_801__0) ;
-      var_performStore_296 = GGS_bool (true) ;
+      GGS_omnibusType extractedValue_805__0 ;
+      ioArgument_ioObjectIR.getAssociatedValuesFor_zero (extractedValue_805__0) ;
+      var_performStore_298 = GGS_bool (true) ;
     }
     break ;
   case GGS_objectIR::Enumeration::enum_llvmArrayRepeatedStaticValue:
     {
-      GGS_omnibusType extractedValue_868__0 ;
-      GGS_uint extractedValue_868__1 ;
-      GGS_objectIR extractedValue_868__2 ;
-      GGS_uint extractedValue_868__3 ;
-      ioArgument_ioObjectIR.getAssociatedValuesFor_llvmArrayRepeatedStaticValue (extractedValue_868__0, extractedValue_868__1, extractedValue_868__2, extractedValue_868__3) ;
-      var_performStore_296 = GGS_bool (true) ;
+      GGS_omnibusType extractedValue_872__0 ;
+      GGS_uint extractedValue_872__1 ;
+      GGS_objectIR extractedValue_872__2 ;
+      GGS_uint extractedValue_872__3 ;
+      ioArgument_ioObjectIR.getAssociatedValuesFor_llvmArrayRepeatedStaticValue (extractedValue_872__0, extractedValue_872__1, extractedValue_872__2, extractedValue_872__3) ;
+      var_performStore_298 = GGS_bool (true) ;
     }
     break ;
   case GGS_objectIR::Enumeration::enum_llvmArrayRepeatedDynamicValue:
     {
-      GGS_omnibusType extractedValue_936__0 ;
-      GGS_uint extractedValue_936__1 ;
-      GGS_objectIR extractedValue_936__2 ;
-      ioArgument_ioObjectIR.getAssociatedValuesFor_llvmArrayRepeatedDynamicValue (extractedValue_936__0, extractedValue_936__1, extractedValue_936__2) ;
-      var_performStore_296 = GGS_bool (true) ;
+      GGS_omnibusType extractedValue_940__0 ;
+      GGS_uint extractedValue_940__1 ;
+      GGS_objectIR extractedValue_940__2 ;
+      ioArgument_ioObjectIR.getAssociatedValuesFor_llvmArrayRepeatedDynamicValue (extractedValue_940__0, extractedValue_940__1, extractedValue_940__2) ;
+      var_performStore_298 = GGS_bool (true) ;
     }
     break ;
   case GGS_objectIR::Enumeration::enum_llvmArrayDynamicValues:
     {
-      GGS_omnibusType extractedValue_997__0 ;
-      GGS_operandIRList extractedValue_997__1 ;
-      ioArgument_ioObjectIR.getAssociatedValuesFor_llvmArrayDynamicValues (extractedValue_997__0, extractedValue_997__1) ;
-      var_performStore_296 = GGS_bool (true) ;
+      GGS_omnibusType extractedValue_1001__0 ;
+      GGS_operandIRList extractedValue_1001__1 ;
+      ioArgument_ioObjectIR.getAssociatedValuesFor_llvmArrayDynamicValues (extractedValue_1001__0, extractedValue_1001__1) ;
+      var_performStore_298 = GGS_bool (true) ;
     }
     break ;
   }
   GalgasBool test_0 = GalgasBool::boolTrue ;
   if (GalgasBool::boolTrue == test_0) {
-    test_0 = var_performStore_296.boolEnum () ;
+    test_0 = var_performStore_298.boolEnum () ;
     if (GalgasBool::boolTrue == test_0) {
-      GGS_string var_llvmTemporaryName_1123 = function_llvmNameForLocalVariable (GGS_string ("temp.").add_operation (ioArgument_ioTemporaries.readProperty_mTemporaryIndex ().getter_string (SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 38)), inCompiler COMMA_SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 38)), inCompiler COMMA_SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 38)) ;
+      GGS_string var_llvmTemporaryName_1129 = function_llvmNameForLocalVariable (GGS_string ("temp.").add_operation (ioArgument_ioTemporaries.readProperty_mTemporaryIndex ().getter_string (SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 38)), inCompiler COMMA_SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 38)), inCompiler COMMA_SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 38)) ;
       ioArgument_ioTemporaries.mProperty_mTemporaryIndex.plusAssignOperation(GGS_uint (uint32_t (1U)), inCompiler  COMMA_SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 39)) ;
-      ioArgument_ioAllocaList.addAssignOperation (var_llvmTemporaryName_1123, extensionGetter_type (ioArgument_ioObjectIR, inCompiler COMMA_SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 41)), GGS_bool (false)  COMMA_SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 41)) ;
+      ioArgument_ioAllocaList.addAssignOperation (var_llvmTemporaryName_1129, extensionGetter_type (ioArgument_ioObjectIR, inCompiler COMMA_SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 41)), GGS_bool (false)  COMMA_SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 41)) ;
       {
-      extensionSetter_appendStoreTemporaryReference (ioObject, extensionGetter_type (ioArgument_ioObjectIR, inCompiler COMMA_SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 43)), var_llvmTemporaryName_1123, ioArgument_ioObjectIR, inCompiler COMMA_SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 43)) ;
+      extensionSetter_appendStoreTemporaryReference (ioObject, extensionGetter_type (ioArgument_ioObjectIR, inCompiler COMMA_SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 43)), var_llvmTemporaryName_1129, ioArgument_ioObjectIR, inCompiler COMMA_SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 43)) ;
       }
-      ioArgument_ioObjectIR = GGS_objectIR::class_func_reference (extensionGetter_type (ioArgument_ioObjectIR, inCompiler COMMA_SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 44)), var_llvmTemporaryName_1123  COMMA_SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 44)) ;
+      ioArgument_ioObjectIR = GGS_objectIR::class_func_reference (extensionGetter_type (ioArgument_ioObjectIR, inCompiler COMMA_SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 44)), var_llvmTemporaryName_1129  COMMA_SOURCE_FILE ("intermediate-reference-from-possible-value.galgas", 44)) ;
     }
   }
 }
@@ -2921,16 +1362,6 @@ GGS_freeCommentIR::GGS_freeCommentIR (const cPtr_freeCommentIR * inSourcePtr) :
 GGS_abstractInstructionIR (inSourcePtr) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_freeCommentIR) ;
 }
-//--------------------------------------------------------------------------------------------------
-
-GGS_freeCommentIR GGS_freeCommentIR::class_func_new (const GGS_string & in_mComment,
-                                                     Compiler * inCompiler
-                                                     COMMA_LOCATION_ARGS) {
-  GGS_freeCommentIR result ;
-  macroMyNew (result.mObjectPtr, cPtr_freeCommentIR (in_mComment,  inCompiler COMMA_THERE)) ;
-  return result ;
-}
-
 //--------------------------------------------------------------------------------------------------
 
 GGS_string GGS_freeCommentIR::readProperty_mComment (void) const {
@@ -3237,17 +1668,6 @@ GGS_loadFromReferenceIR::GGS_loadFromReferenceIR (const cPtr_loadFromReferenceIR
 GGS_abstractInstructionIR (inSourcePtr) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_loadFromReferenceIR) ;
 }
-//--------------------------------------------------------------------------------------------------
-
-GGS_loadFromReferenceIR GGS_loadFromReferenceIR::class_func_new (const GGS_objectIR & in_mTargetValue,
-                                                                 const GGS_string & in_mLLVMName,
-                                                                 Compiler * inCompiler
-                                                                 COMMA_LOCATION_ARGS) {
-  GGS_loadFromReferenceIR result ;
-  macroMyNew (result.mObjectPtr, cPtr_loadFromReferenceIR (in_mTargetValue, in_mLLVMName,  inCompiler COMMA_THERE)) ;
-  return result ;
-}
-
 //--------------------------------------------------------------------------------------------------
 
 GGS_objectIR GGS_loadFromReferenceIR::readProperty_mTargetValue (void) const {
@@ -4383,29 +2803,29 @@ void extensionSetter_appendCopyFromReferences (GGS_instructionListIR & ioObject,
   if (GalgasBool::boolTrue == test_0) {
     test_0 = constinArgument_inSourcePossibleReference.getter_isReference (SOURCE_FILE ("intermediate-copy-from-references.galgas", 11)).operator_not (SOURCE_FILE ("intermediate-copy-from-references.galgas", 11)).boolEnum () ;
     if (GalgasBool::boolTrue == test_0) {
-      GGS_objectIR var_loadedResultValue_470 = constinArgument_inSourcePossibleReference ;
+      GGS_objectIR var_loadedResultValue_472 = constinArgument_inSourcePossibleReference ;
       {
-      extensionSetter_appendLoadWhenReference (ioObject, ioArgument_ioTemporaries, var_loadedResultValue_470, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 13)) ;
+      extensionSetter_appendLoadWhenReference (ioObject, ioArgument_ioTemporaries, var_loadedResultValue_472, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 13)) ;
       }
-      GGS_objectIR var_result_614 = function_checkAssignmentCompatibility (constinArgument_inAssignmentOperatorMap, var_loadedResultValue_470, constinArgument_inTargetReference.readProperty_type (), constinArgument_inErrorLocation, GGS_bool (false), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 17)) ;
+      GGS_objectIR var_result_616 = function_checkAssignmentCompatibility (constinArgument_inAssignmentOperatorMap, var_loadedResultValue_472, constinArgument_inTargetReference.readProperty_type (), constinArgument_inErrorLocation, GGS_bool (false), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 17)) ;
       {
-      extensionSetter_appendStoreToUniversalReference (ioObject, constinArgument_inTargetReference.readProperty_llvmName (), constinArgument_inTargetReference.readProperty_type (), var_result_614, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 24)) ;
+      extensionSetter_appendStoreToUniversalReference (ioObject, constinArgument_inTargetReference.readProperty_llvmName (), constinArgument_inTargetReference.readProperty_type (), var_result_616, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 24)) ;
       }
     }
   }
   if (GalgasBool::boolFalse == test_0) {
-    GGS_omnibusType var_sourceType_1034 ;
-    GGS_string var_sourceLLVMName_1059 ;
-    constinArgument_inSourcePossibleReference.method_extractReference (var_sourceType_1034, var_sourceLLVMName_1059, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 26)) ;
+    GGS_omnibusType var_sourceType_1037 ;
+    GGS_string var_sourceLLVMName_1062 ;
+    constinArgument_inSourcePossibleReference.method_extractReference (var_sourceType_1037, var_sourceLLVMName_1062, inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 26)) ;
     GalgasBool test_1 = GalgasBool::boolTrue ;
     if (GalgasBool::boolTrue == test_1) {
-      test_1 = GGS_bool (ComparisonKind::notEqual, var_sourceType_1034.readProperty_omnibusTypeDescriptionName ().objectCompare (constinArgument_inTargetReference.readProperty_type ().readProperty_omnibusTypeDescriptionName ())).boolEnum () ;
+      test_1 = GGS_bool (ComparisonKind::notEqual, var_sourceType_1037.readProperty_omnibusTypeDescriptionName ().objectCompare (constinArgument_inTargetReference.readProperty_type ().readProperty_omnibusTypeDescriptionName ())).boolEnum () ;
       if (GalgasBool::boolTrue == test_1) {
         GenericArray <FixItDescription> fixItArray2 ;
-        inCompiler->emitSemanticError (constinArgument_inErrorLocation, GGS_string ("object of type ").add_operation (constinArgument_inTargetReference.readProperty_type ().readProperty_omnibusTypeDescriptionName (), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 29)).add_operation (GGS_string (" cannot be assigned from expression of type "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 29)).add_operation (var_sourceType_1034.readProperty_omnibusTypeDescriptionName (), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 30)), fixItArray2  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 28)) ;
+        inCompiler->emitSemanticError (constinArgument_inErrorLocation, GGS_string ("object of type ").add_operation (constinArgument_inTargetReference.readProperty_type ().readProperty_omnibusTypeDescriptionName (), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 29)).add_operation (GGS_string (" cannot be assigned from expression of type "), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 29)).add_operation (var_sourceType_1037.readProperty_omnibusTypeDescriptionName (), inCompiler COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 30)), fixItArray2  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 28)) ;
       }
     }
-    ioObject.addAssignOperation (GGS_copyFromReferencesIR::init_21__21_ (constinArgument_inTargetReference, var_sourceLLVMName_1059, inCompiler COMMA_HERE)  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 32)) ;
+    ioObject.addAssignOperation (GGS_copyFromReferencesIR::init_21__21_ (constinArgument_inTargetReference, var_sourceLLVMName_1062, inCompiler COMMA_HERE)  COMMA_SOURCE_FILE ("intermediate-copy-from-references.galgas", 32)) ;
   }
 }
 
@@ -4788,14 +3208,6 @@ void GGS_propertyAttributeList::description (String & ioString,
     ioString.appendCString (" not built") ;
   }
   ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_propertyAttributeList GGS_propertyAttributeList::class_func_emptyList (UNUSED_LOCATION_ARGS) {
-  GGS_propertyAttributeList result ;
-  result.mArray.setCapacity (16) ; // Build
-  return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -5668,14 +4080,6 @@ void GGS_sortedOperandIRList::plusPlusAssignOperation (const GGS_sortedOperandIR
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_sortedOperandIRList GGS_sortedOperandIRList::class_func_emptySortedList (UNUSED_LOCATION_ARGS) {
-  GGS_sortedOperandIRList result ;
-  result.mSharedArray.setCapacity (16) ; // Build
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 GGS_sortedOperandIRList GGS_sortedOperandIRList::init (Compiler * COMMA_UNUSED_LOCATION_ARGS) {
   GGS_sortedOperandIRList result ;
   result.mSharedArray.setCapacity (16) ; // Build
@@ -5687,7 +4091,7 @@ GGS_sortedOperandIRList GGS_sortedOperandIRList::init (Compiler * COMMA_UNUSED_L
 GGS_sortedOperandIRList GGS_sortedOperandIRList::class_func_sortedListWithValue (const GGS_objectIR & inOperand0,
                                                                                  const GGS_uint & inOperand1
                                                                                  COMMA_LOCATION_ARGS) {
-  GGS_sortedOperandIRList result = class_func_emptySortedList (THERE) ;
+  GGS_sortedOperandIRList result = init (nullptr COMMA_THERE) ;
   const GGS_sortedOperandIRList_2E_element newElement (inOperand0, inOperand1) ;
   result.plusPlusAssignOperation (newElement COMMA_THERE) ;
   return result ;
@@ -5981,17 +4385,6 @@ GGS_userLLVMSructureTypeDefinitionIR::GGS_userLLVMSructureTypeDefinitionIR (cons
 GGS_userLLVMTypeDefinitionIR (inSourcePtr) {
   macroNullOrValidSharedObject (inSourcePtr, cPtr_userLLVMSructureTypeDefinitionIR) ;
 }
-//--------------------------------------------------------------------------------------------------
-
-GGS_userLLVMSructureTypeDefinitionIR GGS_userLLVMSructureTypeDefinitionIR::class_func_new (const GGS_string & in_mLLVMDefinedTypeName,
-                                                                                           const GGS_propertyList & in_mPropertyList,
-                                                                                           Compiler * inCompiler
-                                                                                           COMMA_LOCATION_ARGS) {
-  GGS_userLLVMSructureTypeDefinitionIR result ;
-  macroMyNew (result.mObjectPtr, cPtr_userLLVMSructureTypeDefinitionIR (in_mLLVMDefinedTypeName, in_mPropertyList,  inCompiler COMMA_THERE)) ;
-  return result ;
-}
-
 //--------------------------------------------------------------------------------------------------
 
 GGS_propertyList GGS_userLLVMSructureTypeDefinitionIR::readProperty_mPropertyList (void) const {
@@ -6805,19 +5198,6 @@ GGS_abstractInstructionIR (inSourcePtr) {
 }
 //--------------------------------------------------------------------------------------------------
 
-GGS_enterRegisterGroupSubscriptedAddressIR GGS_enterRegisterGroupSubscriptedAddressIR::class_func_new (const GGS_string & in_mLLVMName,
-                                                                                                       const GGS_string & in_mGroupName,
-                                                                                                       const GGS_uint & in_mGroupSize,
-                                                                                                       const GGS_objectIR & in_mIndexIR,
-                                                                                                       Compiler * inCompiler
-                                                                                                       COMMA_LOCATION_ARGS) {
-  GGS_enterRegisterGroupSubscriptedAddressIR result ;
-  macroMyNew (result.mObjectPtr, cPtr_enterRegisterGroupSubscriptedAddressIR (in_mLLVMName, in_mGroupName, in_mGroupSize, in_mIndexIR,  inCompiler COMMA_THERE)) ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 GGS_string GGS_enterRegisterGroupSubscriptedAddressIR::readProperty_mLLVMName (void) const {
   if (nullptr == mObjectPtr) {
     return GGS_string () ;
@@ -7351,31 +5731,6 @@ mProperty_mActivate (inOperand7) {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_taskSortedListIR_2E_element GGS_taskSortedListIR_2E_element::class_func_new (const GGS_string & in_mTaskName,
-                                                                                 const GGS_uint & in_mPriority,
-                                                                                 const GGS_bigint & in_mStackSize,
-                                                                                 const GGS_stringlist & in_mSetupOrderedList,
-                                                                                 const GGS_stringlist & in_mActivateOrderedList,
-                                                                                 const GGS_stringlist & in_mDeactivateOrderedList,
-                                                                                 const GGS_uint & in_mTaskNameStringIndex,
-                                                                                 const GGS_bool & in_mActivate,
-                                                                                 Compiler * inCompiler
-                                                                                 COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_taskSortedListIR_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_mTaskName = in_mTaskName ;
-  result.mProperty_mPriority = in_mPriority ;
-  result.mProperty_mStackSize = in_mStackSize ;
-  result.mProperty_mSetupOrderedList = in_mSetupOrderedList ;
-  result.mProperty_mActivateOrderedList = in_mActivateOrderedList ;
-  result.mProperty_mDeactivateOrderedList = in_mDeactivateOrderedList ;
-  result.mProperty_mTaskNameStringIndex = in_mTaskNameStringIndex ;
-  result.mProperty_mActivate = in_mActivate ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 bool GGS_taskSortedListIR_2E_element::isValid (void) const {
   return mProperty_mTaskName.isValid () && mProperty_mPriority.isValid () && mProperty_mStackSize.isValid () && mProperty_mSetupOrderedList.isValid () && mProperty_mActivateOrderedList.isValid () && mProperty_mDeactivateOrderedList.isValid () && mProperty_mTaskNameStringIndex.isValid () && mProperty_mActivate.isValid () ;
 }
@@ -7517,21 +5872,6 @@ mProperty_mInitialValue (inOperand2) {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_globalTaskVariableList_2E_element GGS_globalTaskVariableList_2E_element::class_func_new (const GGS_string & in_mTaskName,
-                                                                                             const GGS_string & in_mTaskTypeName,
-                                                                                             const GGS_objectIR & in_mInitialValue,
-                                                                                             Compiler * inCompiler
-                                                                                             COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_globalTaskVariableList_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_mTaskName = in_mTaskName ;
-  result.mProperty_mTaskTypeName = in_mTaskTypeName ;
-  result.mProperty_mInitialValue = in_mInitialValue ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 bool GGS_globalTaskVariableList_2E_element::isValid (void) const {
   return mProperty_mTaskName.isValid () && mProperty_mTaskTypeName.isValid () && mProperty_mInitialValue.isValid () ;
 }
@@ -7651,19 +5991,6 @@ mProperty_mLocation (inOperand1) {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_staticListValueListAST_2E_element GGS_staticListValueListAST_2E_element::class_func_new (const GGS_extendStaticListElementAST & in_mElement,
-                                                                                             const GGS_location & in_mLocation,
-                                                                                             Compiler * inCompiler
-                                                                                             COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_staticListValueListAST_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_mElement = in_mElement ;
-  result.mProperty_mLocation = in_mLocation ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 bool GGS_staticListValueListAST_2E_element::isValid (void) const {
   return mProperty_mElement.isValid () && mProperty_mLocation.isValid () ;
 }
@@ -7769,17 +6096,6 @@ void GGS_extendStaticListExpressionAST_2E_expression::setInitializedProperties (
 
 GGS_extendStaticListExpressionAST_2E_expression::GGS_extendStaticListExpressionAST_2E_expression (const GGS_expressionAST & inOperand0) :
 mProperty_exp (inOperand0) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_extendStaticListExpressionAST_2E_expression GGS_extendStaticListExpressionAST_2E_expression::class_func_new (const GGS_expressionAST & in_exp,
-                                                                                                                 Compiler * inCompiler
-                                                                                                                 COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_extendStaticListExpressionAST_2E_expression result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_exp = in_exp ;
-  return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -8015,19 +6331,6 @@ mProperty_mEndOfExpression (inOperand1) {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_extendStaticListElementAST_2E_element GGS_extendStaticListElementAST_2E_element::class_func_new (const GGS_extendStaticListExpressionAST & in_mExpression,
-                                                                                                     const GGS_location & in_mEndOfExpression,
-                                                                                                     Compiler * inCompiler
-                                                                                                     COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_extendStaticListElementAST_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_mExpression = in_mExpression ;
-  result.mProperty_mEndOfExpression = in_mEndOfExpression ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 bool GGS_extendStaticListElementAST_2E_element::isValid (void) const {
   return mProperty_mExpression.isValid () && mProperty_mEndOfExpression.isValid () ;
 }
@@ -8140,19 +6443,6 @@ GGS_extendStaticArrayDeclarationDictAST_2E_element::GGS_extendStaticArrayDeclara
                                                                                                         const GGS_staticListValueListAST & inOperand1) :
 mProperty_key (inOperand0),
 mProperty_mStaticList (inOperand1) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_extendStaticArrayDeclarationDictAST_2E_element GGS_extendStaticArrayDeclarationDictAST_2E_element::class_func_new (const GGS_string & in_key,
-                                                                                                                       const GGS_staticListValueListAST & in_mStaticList,
-                                                                                                                       Compiler * inCompiler
-                                                                                                                       COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_extendStaticArrayDeclarationDictAST_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_key = in_key ;
-  result.mProperty_mStaticList = in_mStaticList ;
-  return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -8412,25 +6702,6 @@ mProperty_mObjectList (inOperand4) {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_scopeStack_2E_element GGS_scopeStack_2E_element::class_func_new (const GGS_scopeKind & in_mScopeKind,
-                                                                     const GGS_bool & in_mFirstBranch,
-                                                                     const GGS_referenceStateMap & in_mInitialStateMap,
-                                                                     const GGS_referenceStateMap & in_mReferenceStateMap,
-                                                                     const GGS_lstringlist & in_mObjectList,
-                                                                     Compiler * inCompiler
-                                                                     COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_scopeStack_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_mScopeKind = in_mScopeKind ;
-  result.mProperty_mFirstBranch = in_mFirstBranch ;
-  result.mProperty_mInitialStateMap = in_mInitialStateMap ;
-  result.mProperty_mReferenceStateMap = in_mReferenceStateMap ;
-  result.mProperty_mObjectList = in_mObjectList ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 bool GGS_scopeStack_2E_element::isValid (void) const {
   return mProperty_mScopeKind.isValid () && mProperty_mFirstBranch.isValid () && mProperty_mInitialStateMap.isValid () && mProperty_mReferenceStateMap.isValid () && mProperty_mObjectList.isValid () ;
 }
@@ -8545,17 +6816,6 @@ void GGS_valuedObject_2E_globalConstant::setInitializedProperties (Compiler * /*
 
 GGS_valuedObject_2E_globalConstant::GGS_valuedObject_2E_globalConstant (const GGS_objectIR & inOperand0) :
 mProperty_objectIR (inOperand0) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_valuedObject_2E_globalConstant GGS_valuedObject_2E_globalConstant::class_func_new (const GGS_objectIR & in_objectIR,
-                                                                                       Compiler * inCompiler
-                                                                                       COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_valuedObject_2E_globalConstant result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_objectIR = in_objectIR ;
-  return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -8784,17 +7044,6 @@ mProperty_string (inOperand0) {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_llvmGenerationInstructionElement_2E_string GGS_llvmGenerationInstructionElement_2E_string::class_func_new (const GGS_string & in_string,
-                                                                                                               Compiler * inCompiler
-                                                                                                               COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_llvmGenerationInstructionElement_2E_string result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_string = in_string ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 bool GGS_llvmGenerationInstructionElement_2E_string::isValid (void) const {
   return mProperty_string.isValid () ;
 }
@@ -9019,17 +7268,6 @@ mProperty_mElement (inOperand0) {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_llvmGenerationInstructionElementList_2E_element GGS_llvmGenerationInstructionElementList_2E_element::class_func_new (const GGS_llvmGenerationInstructionElement & in_mElement,
-                                                                                                                         Compiler * inCompiler
-                                                                                                                         COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_llvmGenerationInstructionElementList_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_mElement = in_mElement ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 bool GGS_llvmGenerationInstructionElementList_2E_element::isValid (void) const {
   return mProperty_mElement.isValid () ;
 }
@@ -9136,17 +7374,6 @@ mProperty_mInstruction (inOperand0) {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_llvmGenerationInstructionList_2E_element GGS_llvmGenerationInstructionList_2E_element::class_func_new (const GGS_abstractLLVMInstruction & in_mInstruction,
-                                                                                                           Compiler * inCompiler
-                                                                                                           COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_llvmGenerationInstructionList_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_mInstruction = in_mInstruction ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 bool GGS_llvmGenerationInstructionList_2E_element::isValid (void) const {
   return mProperty_mInstruction.isValid () ;
 }
@@ -9249,17 +7476,6 @@ void GGS_typeKind_2E_enumeration::setInitializedProperties (Compiler * /* inComp
 
 GGS_typeKind_2E_enumeration::GGS_typeKind_2E_enumeration (const GGS_uint & inOperand0) :
 mProperty_bitCount (inOperand0) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_typeKind_2E_enumeration GGS_typeKind_2E_enumeration::class_func_new (const GGS_uint & in_bitCount,
-                                                                         Compiler * inCompiler
-                                                                         COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_typeKind_2E_enumeration result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_bitCount = in_bitCount ;
-  return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -9511,17 +7727,6 @@ void GGS_typeKind_2E_structure::setInitializedProperties (Compiler * /* inCompil
 
 GGS_typeKind_2E_structure::GGS_typeKind_2E_structure (const GGS_propertyList & inOperand0) :
 mProperty_propertyList (inOperand0) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_typeKind_2E_structure GGS_typeKind_2E_structure::class_func_new (const GGS_propertyList & in_propertyList,
-                                                                     Compiler * inCompiler
-                                                                     COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_typeKind_2E_structure result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_propertyList = in_propertyList ;
-  return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -9798,23 +8003,6 @@ mProperty_bitCount (inOperand3) {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_typeKind_2E_integer GGS_typeKind_2E_integer::class_func_new (const GGS_bigint & in_min,
-                                                                 const GGS_bigint & in_max,
-                                                                 const GGS_bool & in_unsigned,
-                                                                 const GGS_uint & in_bitCount,
-                                                                 Compiler * inCompiler
-                                                                 COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_typeKind_2E_integer result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_min = in_min ;
-  result.mProperty_max = in_max ;
-  result.mProperty_unsigned = in_unsigned ;
-  result.mProperty_bitCount = in_bitCount ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_typeKind_2E_integer::objectCompare (const GGS_typeKind_2E_integer & inOperand) const {
    ComparisonResult result = ComparisonResult::operandEqual ;
   if (result == ComparisonResult::operandEqual) {
@@ -10084,17 +8272,6 @@ mProperty_bitSize (inOperand0) {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_typeKind_2E_llvmType GGS_typeKind_2E_llvmType::class_func_new (const GGS_bigint & in_bitSize,
-                                                                   Compiler * inCompiler
-                                                                   COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_typeKind_2E_llvmType result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_bitSize = in_bitSize ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_typeKind_2E_llvmType::objectCompare (const GGS_typeKind_2E_llvmType & inOperand) const {
    ComparisonResult result = ComparisonResult::operandEqual ;
   if (result == ComparisonResult::operandEqual) {
@@ -10360,21 +8537,6 @@ mProperty_llvmNativeTypeNameExpression (inOperand2) {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_typeKind_2E_generic GGS_typeKind_2E_generic::class_func_new (const GGS_genericFormalParameterList & in_parameters,
-                                                                 const GGS_ctExpressionAST & in_whereClause,
-                                                                 const GGS_llvmStringDefinition & in_llvmNativeTypeNameExpression,
-                                                                 Compiler * inCompiler
-                                                                 COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_typeKind_2E_generic result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_parameters = in_parameters ;
-  result.mProperty_whereClause = in_whereClause ;
-  result.mProperty_llvmNativeTypeNameExpression = in_llvmNativeTypeNameExpression ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_typeKind_2E_generic::objectCompare (const GGS_typeKind_2E_generic & inOperand) const {
    ComparisonResult result = ComparisonResult::operandEqual ;
   if (result == ComparisonResult::operandEqual) {
@@ -10634,17 +8796,6 @@ void GGS_typeKind_2E_opaque::setInitializedProperties (Compiler * /* inCompiler 
 
 GGS_typeKind_2E_opaque::GGS_typeKind_2E_opaque (const GGS_bigint & inOperand0) :
 mProperty_bitCount (inOperand0) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_typeKind_2E_opaque GGS_typeKind_2E_opaque::class_func_new (const GGS_bigint & in_bitCount,
-                                                               Compiler * inCompiler
-                                                               COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_typeKind_2E_opaque result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_bitCount = in_bitCount ;
-  return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -10914,21 +9065,6 @@ mProperty_returnTypeProxy (inOperand2) {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_typeKind_2E_function GGS_typeKind_2E_function::class_func_new (const GGS_mode & in_mode,
-                                                                   const GGS_routineTypedSignature & in_signature,
-                                                                   const GGS_unifiedTypeMapEntry & in_returnTypeProxy,
-                                                                   Compiler * inCompiler
-                                                                   COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_typeKind_2E_function result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_mode = in_mode ;
-  result.mProperty_signature = in_signature ;
-  result.mProperty_returnTypeProxy = in_returnTypeProxy ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_typeKind_2E_function::objectCompare (const GGS_typeKind_2E_function & inOperand) const {
    ComparisonResult result = ComparisonResult::operandEqual ;
   if (result == ComparisonResult::operandEqual) {
@@ -11192,17 +9328,6 @@ mProperty_mType (inOperand0) {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_userLLVMTypeDefinitionListIR_2E_element GGS_userLLVMTypeDefinitionListIR_2E_element::class_func_new (const GGS_userLLVMTypeDefinitionIR & in_mType,
-                                                                                                         Compiler * inCompiler
-                                                                                                         COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_userLLVMTypeDefinitionListIR_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_mType = in_mType ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 bool GGS_userLLVMTypeDefinitionListIR_2E_element::isValid (void) const {
   return mProperty_mType.isValid () ;
 }
@@ -11305,17 +9430,6 @@ void GGS_panicSortedListIR_2E_element::setInitializedProperties (Compiler * /* i
 
 GGS_panicSortedListIR_2E_element::GGS_panicSortedListIR_2E_element (const GGS_bigint & inOperand0) :
 mProperty_mPriority (inOperand0) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_panicSortedListIR_2E_element GGS_panicSortedListIR_2E_element::class_func_new (const GGS_bigint & in_mPriority,
-                                                                                   Compiler * inCompiler
-                                                                                   COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_panicSortedListIR_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_mPriority = in_mPriority ;
-  return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -11436,21 +9550,6 @@ GGS_primaryInExpressionAccessAST_2E_arrayAccess::GGS_primaryInExpressionAccessAS
 mProperty_index (inOperand0),
 mProperty_endOfIndex (inOperand1),
 mProperty_checkIndexExpression (inOperand2) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_primaryInExpressionAccessAST_2E_arrayAccess GGS_primaryInExpressionAccessAST_2E_arrayAccess::class_func_new (const GGS_expressionAST & in_index,
-                                                                                                                 const GGS_location & in_endOfIndex,
-                                                                                                                 const GGS_bool & in_checkIndexExpression,
-                                                                                                                 Compiler * inCompiler
-                                                                                                                 COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_primaryInExpressionAccessAST_2E_arrayAccess result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_index = in_index ;
-  result.mProperty_endOfIndex = in_endOfIndex ;
-  result.mProperty_checkIndexExpression = in_checkIndexExpression ;
-  return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -11685,17 +9784,6 @@ mProperty_mAccess (inOperand0) {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_primaryInExpressionAccessListAST_2E_element GGS_primaryInExpressionAccessListAST_2E_element::class_func_new (const GGS_primaryInExpressionAccessAST & in_mAccess,
-                                                                                                                 Compiler * inCompiler
-                                                                                                                 COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_primaryInExpressionAccessListAST_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_mAccess = in_mAccess ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 bool GGS_primaryInExpressionAccessListAST_2E_element::isValid (void) const {
   return mProperty_mAccess.isValid () ;
 }
@@ -11798,17 +9886,6 @@ void GGS_declarationListAST_2E_element::setInitializedProperties (Compiler * /* 
 
 GGS_declarationListAST_2E_element::GGS_declarationListAST_2E_element (const GGS_abstractDeclarationAST & inOperand0) :
 mProperty_mDeclaration (inOperand0) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_declarationListAST_2E_element GGS_declarationListAST_2E_element::class_func_new (const GGS_abstractDeclarationAST & in_mDeclaration,
-                                                                                     Compiler * inCompiler
-                                                                                     COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_declarationListAST_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_mDeclaration = in_mDeclaration ;
-  return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -11926,19 +10003,6 @@ mProperty_mAcceptedTargetList (inOperand1) {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_checkTargetListAST_2E_element GGS_checkTargetListAST_2E_element::class_func_new (const GGS_location & in_mTargetConstructLocation,
-                                                                                     const GGS_lstringlist & in_mAcceptedTargetList,
-                                                                                     Compiler * inCompiler
-                                                                                     COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_checkTargetListAST_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_mTargetConstructLocation = in_mTargetConstructLocation ;
-  result.mProperty_mAcceptedTargetList = in_mAcceptedTargetList ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 bool GGS_checkTargetListAST_2E_element::isValid (void) const {
   return mProperty_mTargetConstructLocation.isValid () && mProperty_mAcceptedTargetList.isValid () ;
 }
@@ -12044,17 +10108,6 @@ void GGS_guardKind_2E_convenienceGuard::setInitializedProperties (Compiler * /* 
 
 GGS_guardKind_2E_convenienceGuard::GGS_guardKind_2E_convenienceGuard (const GGS_callInstructionAST & inOperand0) :
 mProperty_base (inOperand0) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_guardKind_2E_convenienceGuard GGS_guardKind_2E_convenienceGuard::class_func_new (const GGS_callInstructionAST & in_base,
-                                                                                     Compiler * inCompiler
-                                                                                     COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_guardKind_2E_convenienceGuard result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_base = in_base ;
-  return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -12300,23 +10353,6 @@ mProperty_baseGuardAllocaList (inOperand0),
 mProperty_baseGuardInstructionGenerationList (inOperand1),
 mProperty_baseGuardMangledName (inOperand2),
 mProperty_baseGuardEffectiveParameterList (inOperand3) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_guardKindGenerationIR_2E_convenienceGuard GGS_guardKindGenerationIR_2E_convenienceGuard::class_func_new (const GGS_allocaList & in_baseGuardAllocaList,
-                                                                                                             const GGS_instructionListIR & in_baseGuardInstructionGenerationList,
-                                                                                                             const GGS_string & in_baseGuardMangledName,
-                                                                                                             const GGS_procCallEffectiveParameterListIR & in_baseGuardEffectiveParameterList,
-                                                                                                             Compiler * inCompiler
-                                                                                                             COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_guardKindGenerationIR_2E_convenienceGuard result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_baseGuardAllocaList = in_baseGuardAllocaList ;
-  result.mProperty_baseGuardInstructionGenerationList = in_baseGuardInstructionGenerationList ;
-  result.mProperty_baseGuardMangledName = in_baseGuardMangledName ;
-  result.mProperty_baseGuardEffectiveParameterList = in_baseGuardEffectiveParameterList ;
-  return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -12575,23 +10611,6 @@ mProperty_arrayElementSizeLocation (inOperand3) {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_controlRegisterKind_2E_registerArray GGS_controlRegisterKind_2E_registerArray::class_func_new (const GGS_expressionAST & in_arraySize,
-                                                                                                   const GGS_location & in_arraySizeLocation,
-                                                                                                   const GGS_expressionAST & in_arrayElementSize,
-                                                                                                   const GGS_location & in_arrayElementSizeLocation,
-                                                                                                   Compiler * inCompiler
-                                                                                                   COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_controlRegisterKind_2E_registerArray result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_arraySize = in_arraySize ;
-  result.mProperty_arraySizeLocation = in_arraySizeLocation ;
-  result.mProperty_arrayElementSize = in_arrayElementSize ;
-  result.mProperty_arrayElementSizeLocation = in_arrayElementSizeLocation ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 bool GGS_controlRegisterKind_2E_registerArray::isValid (void) const {
   return mProperty_arraySize.isValid () && mProperty_arraySizeLocation.isValid () && mProperty_arrayElementSize.isValid () && mProperty_arrayElementSizeLocation.isValid () ;
 }
@@ -12825,17 +10844,6 @@ mProperty_mRegisterBitSlice (inOperand0) {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_controlRegisterBitSliceList_2E_element GGS_controlRegisterBitSliceList_2E_element::class_func_new (const GGS_controlRegisterBitSlice & in_mRegisterBitSlice,
-                                                                                                       Compiler * inCompiler
-                                                                                                       COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_controlRegisterBitSliceList_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_mRegisterBitSlice = in_mRegisterBitSlice ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 bool GGS_controlRegisterBitSliceList_2E_element::isValid (void) const {
   return mProperty_mRegisterBitSlice.isValid () ;
 }
@@ -12952,21 +10960,6 @@ GGS_controlRegisterGroupKindAST_2E_groupArray::GGS_controlRegisterGroupKindAST_2
 mProperty_groupSizeExp (inOperand0),
 mProperty_groupSizeExpLocation (inOperand1),
 mProperty_baseAddresses (inOperand2) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterGroupKindAST_2E_groupArray GGS_controlRegisterGroupKindAST_2E_groupArray::class_func_new (const GGS_expressionAST & in_groupSizeExp,
-                                                                                                             const GGS_location & in_groupSizeExpLocation,
-                                                                                                             const GGS_lbigintlist & in_baseAddresses,
-                                                                                                             Compiler * inCompiler
-                                                                                                             COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_controlRegisterGroupKindAST_2E_groupArray result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_groupSizeExp = in_groupSizeExp ;
-  result.mProperty_groupSizeExpLocation = in_groupSizeExpLocation ;
-  result.mProperty_baseAddresses = in_baseAddresses ;
-  return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -13208,19 +11201,6 @@ mProperty_mFieldName (inOperand1) {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_controlRegisterFieldList_2E_element GGS_controlRegisterFieldList_2E_element::class_func_new (const GGS_uint & in_mFieldBitCount,
-                                                                                                 const GGS_string & in_mFieldName,
-                                                                                                 Compiler * inCompiler
-                                                                                                 COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_controlRegisterFieldList_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_mFieldBitCount = in_mFieldBitCount ;
-  result.mProperty_mFieldName = in_mFieldName ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 bool GGS_controlRegisterFieldList_2E_element::isValid (void) const {
   return mProperty_mFieldBitCount.isValid () && mProperty_mFieldName.isValid () ;
 }
@@ -13326,17 +11306,6 @@ void GGS_registerGroupKind_2E_single::setInitializedProperties (Compiler * /* in
 
 GGS_registerGroupKind_2E_single::GGS_registerGroupKind_2E_single (const GGS_bigint & inOperand0) :
 mProperty_baseAddress (inOperand0) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_registerGroupKind_2E_single GGS_registerGroupKind_2E_single::class_func_new (const GGS_bigint & in_baseAddress,
-                                                                                 Compiler * inCompiler
-                                                                                 COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_registerGroupKind_2E_single result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_baseAddress = in_baseAddress ;
-  return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -13561,17 +11530,6 @@ void GGS_registerGroupKind_2E_arrayGroup::setInitializedProperties (Compiler * /
 
 GGS_registerGroupKind_2E_arrayGroup::GGS_registerGroupKind_2E_arrayGroup (const GGS_lbigintlist & inOperand0) :
 mProperty_baseAddresses (inOperand0) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_registerGroupKind_2E_arrayGroup GGS_registerGroupKind_2E_arrayGroup::class_func_new (const GGS_lbigintlist & in_baseAddresses,
-                                                                                         Compiler * inCompiler
-                                                                                         COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_registerGroupKind_2E_arrayGroup result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_baseAddresses = in_baseAddresses ;
-  return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -13807,19 +11765,6 @@ mProperty_mHTML (inOperand1) {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_controlRegisterByAddress_2E_element GGS_controlRegisterByAddress_2E_element::class_func_new (const GGS_bigint & in_mAddress,
-                                                                                                 const GGS_string & in_mHTML,
-                                                                                                 Compiler * inCompiler
-                                                                                                 COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_controlRegisterByAddress_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_mAddress = in_mAddress ;
-  result.mProperty_mHTML = in_mHTML ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 bool GGS_controlRegisterByAddress_2E_element::isValid (void) const {
   return mProperty_mAddress.isValid () && mProperty_mHTML.isValid () ;
 }
@@ -13939,21 +11884,6 @@ GGS_controlRegisterByName_2E_element::GGS_controlRegisterByName_2E_element (cons
 mProperty_mAddress (inOperand0),
 mProperty_mHTML (inOperand1),
 mProperty_mName (inOperand2) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterByName_2E_element GGS_controlRegisterByName_2E_element::class_func_new (const GGS_bigint & in_mAddress,
-                                                                                           const GGS_string & in_mHTML,
-                                                                                           const GGS_string & in_mName,
-                                                                                           Compiler * inCompiler
-                                                                                           COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_controlRegisterByName_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_mAddress = in_mAddress ;
-  result.mProperty_mHTML = in_mHTML ;
-  result.mProperty_mName = in_mName ;
-  return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -14084,21 +12014,6 @@ mProperty_invocationFromAnyMode (inOperand2) {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_sectionIRlist_2E_element GGS_sectionIRlist_2E_element::class_func_new (const GGS_string & in_mSectionCallName,
-                                                                           const GGS_string & in_mSectionImplementationName,
-                                                                           const GGS_bool & in_invocationFromAnyMode,
-                                                                           Compiler * inCompiler
-                                                                           COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_sectionIRlist_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_mSectionCallName = in_mSectionCallName ;
-  result.mProperty_mSectionImplementationName = in_mSectionImplementationName ;
-  result.mProperty_invocationFromAnyMode = in_invocationFromAnyMode ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 bool GGS_sectionIRlist_2E_element::isValid (void) const {
   return mProperty_mSectionCallName.isValid () && mProperty_mSectionImplementationName.isValid () && mProperty_invocationFromAnyMode.isValid () ;
 }
@@ -14225,21 +12140,6 @@ mProperty_mHasReturnValue (inOperand2) {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_primitiveAndServiceIRlist_2E_element GGS_primitiveAndServiceIRlist_2E_element::class_func_new (const GGS_string & in_mCallName,
-                                                                                                   const GGS_string & in_mImplementationName,
-                                                                                                   const GGS_bool & in_mHasReturnValue,
-                                                                                                   Compiler * inCompiler
-                                                                                                   COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_primitiveAndServiceIRlist_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_mCallName = in_mCallName ;
-  result.mProperty_mImplementationName = in_mImplementationName ;
-  result.mProperty_mHasReturnValue = in_mHasReturnValue ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 bool GGS_primitiveAndServiceIRlist_2E_element::isValid (void) const {
   return mProperty_mCallName.isValid () && mProperty_mImplementationName.isValid () && mProperty_mHasReturnValue.isValid () ;
 }
@@ -14359,19 +12259,6 @@ mProperty_mParameter (inOperand1) {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_procCallEffectiveParameterListIR_2E_element GGS_procCallEffectiveParameterListIR_2E_element::class_func_new (const GGS_procEffectiveParameterPassingModeIR & in_mEffectiveParameterPassingMode,
-                                                                                                                 const GGS_objectIR & in_mParameter,
-                                                                                                                 Compiler * inCompiler
-                                                                                                                 COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_procCallEffectiveParameterListIR_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_mEffectiveParameterPassingMode = in_mEffectiveParameterPassingMode ;
-  result.mProperty_mParameter = in_mParameter ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 bool GGS_procCallEffectiveParameterListIR_2E_element::isValid (void) const {
   return mProperty_mEffectiveParameterPassingMode.isValid () && mProperty_mParameter.isValid () ;
 }
@@ -14477,17 +12364,6 @@ void GGS_implicitBooleanConversionResult_2E_compileTime::setInitializedPropertie
 
 GGS_implicitBooleanConversionResult_2E_compileTime::GGS_implicitBooleanConversionResult_2E_compileTime (const GGS_bool & inOperand0) :
 mProperty_value (inOperand0) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_implicitBooleanConversionResult_2E_compileTime GGS_implicitBooleanConversionResult_2E_compileTime::class_func_new (const GGS_bool & in_value,
-                                                                                                                       Compiler * inCompiler
-                                                                                                                       COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_implicitBooleanConversionResult_2E_compileTime result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_value = in_value ;
-  return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -14712,17 +12588,6 @@ void GGS_implicitBooleanConversionResult_2E_llvmVariable::setInitializedProperti
 
 GGS_implicitBooleanConversionResult_2E_llvmVariable::GGS_implicitBooleanConversionResult_2E_llvmVariable (const GGS_string & inOperand0) :
 mProperty_name (inOperand0) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_implicitBooleanConversionResult_2E_llvmVariable GGS_implicitBooleanConversionResult_2E_llvmVariable::class_func_new (const GGS_string & in_name,
-                                                                                                                         Compiler * inCompiler
-                                                                                                                         COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_implicitBooleanConversionResult_2E_llvmVariable result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_name = in_name ;
-  return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -14961,21 +12826,6 @@ GGS_registerGroupIndexAST_2E_index::GGS_registerGroupIndexAST_2E_index (const GG
 mProperty_index (inOperand0),
 mProperty_endOfIndex (inOperand1),
 mProperty_checkIndexExpression (inOperand2) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_registerGroupIndexAST_2E_index GGS_registerGroupIndexAST_2E_index::class_func_new (const GGS_expressionAST & in_index,
-                                                                                       const GGS_location & in_endOfIndex,
-                                                                                       const GGS_bool & in_checkIndexExpression,
-                                                                                       Compiler * inCompiler
-                                                                                       COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_registerGroupIndexAST_2E_index result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_index = in_index ;
-  result.mProperty_endOfIndex = in_endOfIndex ;
-  result.mProperty_checkIndexExpression = in_checkIndexExpression ;
-  return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -15224,21 +13074,6 @@ mProperty_checkIndexExpression (inOperand2) {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_registerIndexAST_2E_index GGS_registerIndexAST_2E_index::class_func_new (const GGS_expressionAST & in_index,
-                                                                             const GGS_location & in_endOfIndex,
-                                                                             const GGS_bool & in_checkIndexExpression,
-                                                                             Compiler * inCompiler
-                                                                             COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_registerIndexAST_2E_index result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_index = in_index ;
-  result.mProperty_endOfIndex = in_endOfIndex ;
-  result.mProperty_checkIndexExpression = in_checkIndexExpression ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 bool GGS_registerIndexAST_2E_index::isValid (void) const {
   return mProperty_index.isValid () && mProperty_endOfIndex.isValid () && mProperty_checkIndexExpression.isValid () ;
 }
@@ -15472,19 +13307,6 @@ GGS_objectIR_2E_literalString::GGS_objectIR_2E_literalString (const GGS_uint & i
                                                               const GGS_uint & inOperand1) :
 mProperty_utf_38_Size (inOperand0),
 mProperty_index (inOperand1) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_objectIR_2E_literalString GGS_objectIR_2E_literalString::class_func_new (const GGS_uint & in_utf8Size,
-                                                                             const GGS_uint & in_index,
-                                                                             Compiler * inCompiler
-                                                                             COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_objectIR_2E_literalString result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_utf_38_Size = in_utf8Size ;
-  result.mProperty_index = in_index ;
-  return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -15753,19 +13575,6 @@ mProperty_operatorLocation (inOperand1) {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_controlRegisterAssignmentOperatorKind_2E_assignmentWithOperator GGS_controlRegisterAssignmentOperatorKind_2E_assignmentWithOperator::class_func_new (const GGS_omnibusInfixOperator & in_infixOperator,
-                                                                                                                                                         const GGS_location & in_operatorLocation,
-                                                                                                                                                         Compiler * inCompiler
-                                                                                                                                                         COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_controlRegisterAssignmentOperatorKind_2E_assignmentWithOperator result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_infixOperator = in_infixOperator ;
-  result.mProperty_operatorLocation = in_operatorLocation ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 bool GGS_controlRegisterAssignmentOperatorKind_2E_assignmentWithOperator::isValid (void) const {
   return mProperty_infixOperator.isValid () && mProperty_operatorLocation.isValid () ;
 }
@@ -15993,17 +13802,6 @@ mProperty_mParameter (inOperand0) {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_genericFormalParameterList_2E_element GGS_genericFormalParameterList_2E_element::class_func_new (const GGS_genericFormalParameter & in_mParameter,
-                                                                                                     Compiler * inCompiler
-                                                                                                     COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_genericFormalParameterList_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_mParameter = in_mParameter ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 ComparisonResult GGS_genericFormalParameterList_2E_element::objectCompare (const GGS_genericFormalParameterList_2E_element & inOperand) const {
    ComparisonResult result = ComparisonResult::operandEqual ;
   if (result == ComparisonResult::operandEqual) {
@@ -16116,17 +13914,6 @@ void GGS_llvmStringDefinition_2E_element::setInitializedProperties (Compiler * /
 
 GGS_llvmStringDefinition_2E_element::GGS_llvmStringDefinition_2E_element (const GGS_llvmStringDefinitionElement & inOperand0) :
 mProperty_mElement (inOperand0) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_llvmStringDefinition_2E_element GGS_llvmStringDefinition_2E_element::class_func_new (const GGS_llvmStringDefinitionElement & in_mElement,
-                                                                                         Compiler * inCompiler
-                                                                                         COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_llvmStringDefinition_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_mElement = in_mElement ;
-  return result ;
 }
 
 //--------------------------------------------------------------------------------------------------
@@ -16254,19 +14041,6 @@ mProperty_mCaseInstructionList (inOperand1) {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_switchCaseListAST_2E_element GGS_switchCaseListAST_2E_element::class_func_new (const GGS_lstringlist & in_mCaseIdentifiers,
-                                                                                   const GGS_instructionListAST & in_mCaseInstructionList,
-                                                                                   Compiler * inCompiler
-                                                                                   COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_switchCaseListAST_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_mCaseIdentifiers = in_mCaseIdentifiers ;
-  result.mProperty_mCaseInstructionList = in_mCaseInstructionList ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 bool GGS_switchCaseListAST_2E_element::isValid (void) const {
   return mProperty_mCaseIdentifiers.isValid () && mProperty_mCaseInstructionList.isValid () ;
 }
@@ -16383,19 +14157,6 @@ mProperty_mCaseInstructionList (inOperand1) {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_switchCaseListIR_2E_element GGS_switchCaseListIR_2E_element::class_func_new (const GGS_uintlist & in_mCaseIdentifierIndexes,
-                                                                                 const GGS_instructionListIR & in_mCaseInstructionList,
-                                                                                 Compiler * inCompiler
-                                                                                 COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_switchCaseListIR_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_mCaseIdentifierIndexes = in_mCaseIdentifierIndexes ;
-  result.mProperty_mCaseInstructionList = in_mCaseInstructionList ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 bool GGS_switchCaseListIR_2E_element::isValid (void) const {
   return mProperty_mCaseIdentifierIndexes.isValid () && mProperty_mCaseInstructionList.isValid () ;
 }
@@ -16505,17 +14266,6 @@ mProperty_mInstruction (inOperand0) {
 
 //--------------------------------------------------------------------------------------------------
 
-GGS_instructionListAST_2E_element GGS_instructionListAST_2E_element::class_func_new (const GGS_instructionAST & in_mInstruction,
-                                                                                     Compiler * inCompiler
-                                                                                     COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_instructionListAST_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_mInstruction = in_mInstruction ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
 bool GGS_instructionListAST_2E_element::isValid (void) const {
   return mProperty_mInstruction.isValid () ;
 }
@@ -16574,6 +14324,2518 @@ GGS_instructionListAST_2E_element GGS_instructionListAST_2E_element::extractObje
       result = *p ;
     }else{
       inCompiler->castError ("instructionListAST.element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_effectiveArgumentPassingModeAST_2E_output::GGS_effectiveArgumentPassingModeAST_2E_output (void) :
+mProperty_exp (),
+mProperty_endOfExp () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_effectiveArgumentPassingModeAST_2E_output::GGS_effectiveArgumentPassingModeAST_2E_output (const GGS_effectiveArgumentPassingModeAST_2E_output & inSource) :
+mProperty_exp (inSource.mProperty_exp),
+mProperty_endOfExp (inSource.mProperty_endOfExp) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_effectiveArgumentPassingModeAST_2E_output & GGS_effectiveArgumentPassingModeAST_2E_output::operator = (const GGS_effectiveArgumentPassingModeAST_2E_output & inSource) {
+  mProperty_exp = inSource.mProperty_exp ;
+  mProperty_endOfExp = inSource.mProperty_endOfExp ;
+  return *this ;
+}
+
+//---Synthetized initializer -----------------------------------------------------------------------
+
+GGS_effectiveArgumentPassingModeAST_2E_output GGS_effectiveArgumentPassingModeAST_2E_output::init_21__21_ (const GGS_expressionAST & in_exp,
+                                                                                                           const GGS_location & in_endOfExp,
+                                                                                                           Compiler * inCompiler
+                                                                                                           COMMA_UNUSED_LOCATION_ARGS) {
+  GGS_effectiveArgumentPassingModeAST_2E_output result ;
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_exp = in_exp ;
+  result.mProperty_endOfExp = in_endOfExp ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_effectiveArgumentPassingModeAST_2E_output::setInitializedProperties (Compiler * /* inCompiler */) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_effectiveArgumentPassingModeAST_2E_output::GGS_effectiveArgumentPassingModeAST_2E_output (const GGS_expressionAST & inOperand0,
+                                                                                              const GGS_location & inOperand1) :
+mProperty_exp (inOperand0),
+mProperty_endOfExp (inOperand1) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_effectiveArgumentPassingModeAST_2E_output::isValid (void) const {
+  return mProperty_exp.isValid () && mProperty_endOfExp.isValid () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_effectiveArgumentPassingModeAST_2E_output::drop (void) {
+  mProperty_exp.drop () ;
+  mProperty_endOfExp.drop () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_effectiveArgumentPassingModeAST_2E_output::description (String & ioString,
+                                                                 const int32_t inIndentation) const {
+  ioString.appendCString ("<struct @effectiveArgumentPassingModeAST.output:") ;
+  if (! isValid ()) {
+    ioString.appendCString (" not built") ;
+  }else{
+    mProperty_exp.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_endOfExp.description (ioString, inIndentation+1) ;
+  }
+  ioString.appendCString (">") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//     @effectiveArgumentPassingModeAST.output generic code implementation
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_effectiveArgumentPassingModeAST_2E_output ("effectiveArgumentPassingModeAST.output",
+                                                                                              nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor * GGS_effectiveArgumentPassingModeAST_2E_output::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_effectiveArgumentPassingModeAST_2E_output ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_effectiveArgumentPassingModeAST_2E_output::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_effectiveArgumentPassingModeAST_2E_output (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_effectiveArgumentPassingModeAST_2E_output GGS_effectiveArgumentPassingModeAST_2E_output::extractObject (const GGS_object & inObject,
+                                                                                                            Compiler * inCompiler
+                                                                                                            COMMA_LOCATION_ARGS) {
+  GGS_effectiveArgumentPassingModeAST_2E_output result ;
+  const GGS_effectiveArgumentPassingModeAST_2E_output * p = (const GGS_effectiveArgumentPassingModeAST_2E_output *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_effectiveArgumentPassingModeAST_2E_output *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("effectiveArgumentPassingModeAST.output", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//Optional @effectiveArgumentPassingModeAST_2E_output_3F_
+//--------------------------------------------------------------------------------------------------
+
+GGS_effectiveArgumentPassingModeAST_2E_output_3F_::GGS_effectiveArgumentPassingModeAST_2E_output_3F_ (void) :
+AC_GALGAS_root (),
+mValue (),
+mState (OptionalState::invalid) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_effectiveArgumentPassingModeAST_2E_output_3F_::GGS_effectiveArgumentPassingModeAST_2E_output_3F_ (const GGS_effectiveArgumentPassingModeAST_2E_output & inSource) :
+AC_GALGAS_root (),
+mValue (inSource),
+mState (OptionalState::valuated) {
+}
+
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_effectiveArgumentPassingModeAST_2E_output_3F_ GGS_effectiveArgumentPassingModeAST_2E_output_3F_::init_nil (void) {
+  GGS_effectiveArgumentPassingModeAST_2E_output_3F_ result ;
+  result.mState = OptionalState::isNil ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_effectiveArgumentPassingModeAST_2E_output_3F_::isValid (void) const {
+  bool result = false ;
+  switch (mState) {
+  case OptionalState::invalid :
+    break ;
+  case OptionalState::isNil :
+    result = true ;
+    break ;
+  case OptionalState::valuated :
+    result = mValue.isValid () ;
+    break ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_effectiveArgumentPassingModeAST_2E_output_3F_::isValuated (void) const {
+  return (mState == OptionalState::valuated) && mValue.isValid () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_effectiveArgumentPassingModeAST_2E_output_3F_::drop (void) {
+  mState = OptionalState::invalid ;
+  mValue = GGS_effectiveArgumentPassingModeAST_2E_output () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_effectiveArgumentPassingModeAST_2E_output_3F_::description (String & ioString,
+                                                                     const int32_t inIndentation) const {
+  ioString.appendCString ("<optional @") ;
+  ioString.appendString (staticTypeDescriptor ()->mGalgasTypeName) ;
+  ioString.appendCString (": ") ;
+  switch (mState) {
+  case OptionalState::invalid :
+    ioString.appendCString ("invalid") ;
+    break ;
+  case OptionalState::isNil :
+    ioString.appendCString ("nil") ;
+    break ;
+  case OptionalState::valuated :
+    mValue.description (ioString, inIndentation) ;
+    break ;
+  }
+  ioString.appendCString (">") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//     @effectiveArgumentPassingModeAST.output? generic code implementation
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_effectiveArgumentPassingModeAST_2E_output_3F_ ("effectiveArgumentPassingModeAST.output?",
+                                                                                                  nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor * GGS_effectiveArgumentPassingModeAST_2E_output_3F_::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_effectiveArgumentPassingModeAST_2E_output_3F_ ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_effectiveArgumentPassingModeAST_2E_output_3F_::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_effectiveArgumentPassingModeAST_2E_output_3F_ (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_effectiveArgumentPassingModeAST_2E_output_3F_ GGS_effectiveArgumentPassingModeAST_2E_output_3F_::extractObject (const GGS_object & inObject,
+                                                                                                                    Compiler * inCompiler
+                                                                                                                    COMMA_LOCATION_ARGS) {
+  GGS_effectiveArgumentPassingModeAST_2E_output_3F_ result ;
+  const GGS_effectiveArgumentPassingModeAST_2E_output_3F_ * p = (const GGS_effectiveArgumentPassingModeAST_2E_output_3F_ *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_effectiveArgumentPassingModeAST_2E_output_3F_ *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("effectiveArgumentPassingModeAST.output?", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_instructionListIR_2E_element::GGS_instructionListIR_2E_element (void) :
+mProperty_mInstructionGeneration () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_instructionListIR_2E_element::GGS_instructionListIR_2E_element (const GGS_instructionListIR_2E_element & inSource) :
+mProperty_mInstructionGeneration (inSource.mProperty_mInstructionGeneration) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_instructionListIR_2E_element & GGS_instructionListIR_2E_element::operator = (const GGS_instructionListIR_2E_element & inSource) {
+  mProperty_mInstructionGeneration = inSource.mProperty_mInstructionGeneration ;
+  return *this ;
+}
+
+//---Synthetized initializer -----------------------------------------------------------------------
+
+GGS_instructionListIR_2E_element GGS_instructionListIR_2E_element::init_21_ (const GGS_abstractInstructionIR & in_mInstructionGeneration,
+                                                                             Compiler * inCompiler
+                                                                             COMMA_UNUSED_LOCATION_ARGS) {
+  GGS_instructionListIR_2E_element result ;
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_mInstructionGeneration = in_mInstructionGeneration ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_instructionListIR_2E_element::setInitializedProperties (Compiler * /* inCompiler */) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_instructionListIR_2E_element::GGS_instructionListIR_2E_element (const GGS_abstractInstructionIR & inOperand0) :
+mProperty_mInstructionGeneration (inOperand0) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_instructionListIR_2E_element::isValid (void) const {
+  return mProperty_mInstructionGeneration.isValid () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_instructionListIR_2E_element::drop (void) {
+  mProperty_mInstructionGeneration.drop () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_instructionListIR_2E_element::description (String & ioString,
+                                                    const int32_t inIndentation) const {
+  ioString.appendCString ("<struct @instructionListIR.element:") ;
+  if (! isValid ()) {
+    ioString.appendCString (" not built") ;
+  }else{
+    mProperty_mInstructionGeneration.description (ioString, inIndentation+1) ;
+  }
+  ioString.appendCString (">") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//     @instructionListIR.element generic code implementation
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_instructionListIR_2E_element ("instructionListIR.element",
+                                                                                 nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor * GGS_instructionListIR_2E_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_instructionListIR_2E_element ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_instructionListIR_2E_element::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_instructionListIR_2E_element (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_instructionListIR_2E_element GGS_instructionListIR_2E_element::extractObject (const GGS_object & inObject,
+                                                                                  Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) {
+  GGS_instructionListIR_2E_element result ;
+  const GGS_instructionListIR_2E_element * p = (const GGS_instructionListIR_2E_element *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_instructionListIR_2E_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("instructionListIR.element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_instructionListListIR_2E_element::GGS_instructionListListIR_2E_element (void) :
+mProperty_mInstructionList () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_instructionListListIR_2E_element::GGS_instructionListListIR_2E_element (const GGS_instructionListListIR_2E_element & inSource) :
+mProperty_mInstructionList (inSource.mProperty_mInstructionList) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_instructionListListIR_2E_element & GGS_instructionListListIR_2E_element::operator = (const GGS_instructionListListIR_2E_element & inSource) {
+  mProperty_mInstructionList = inSource.mProperty_mInstructionList ;
+  return *this ;
+}
+
+//---Synthetized initializer -----------------------------------------------------------------------
+
+GGS_instructionListListIR_2E_element GGS_instructionListListIR_2E_element::init_21_ (const GGS_instructionListIR & in_mInstructionList,
+                                                                                     Compiler * inCompiler
+                                                                                     COMMA_UNUSED_LOCATION_ARGS) {
+  GGS_instructionListListIR_2E_element result ;
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_mInstructionList = in_mInstructionList ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_instructionListListIR_2E_element::setInitializedProperties (Compiler * /* inCompiler */) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_instructionListListIR_2E_element::GGS_instructionListListIR_2E_element (const GGS_instructionListIR & inOperand0) :
+mProperty_mInstructionList (inOperand0) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_instructionListListIR_2E_element::isValid (void) const {
+  return mProperty_mInstructionList.isValid () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_instructionListListIR_2E_element::drop (void) {
+  mProperty_mInstructionList.drop () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_instructionListListIR_2E_element::description (String & ioString,
+                                                        const int32_t inIndentation) const {
+  ioString.appendCString ("<struct @instructionListListIR.element:") ;
+  if (! isValid ()) {
+    ioString.appendCString (" not built") ;
+  }else{
+    mProperty_mInstructionList.description (ioString, inIndentation+1) ;
+  }
+  ioString.appendCString (">") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//     @instructionListListIR.element generic code implementation
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_instructionListListIR_2E_element ("instructionListListIR.element",
+                                                                                     nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor * GGS_instructionListListIR_2E_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_instructionListListIR_2E_element ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_instructionListListIR_2E_element::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_instructionListListIR_2E_element (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_instructionListListIR_2E_element GGS_instructionListListIR_2E_element::extractObject (const GGS_object & inObject,
+                                                                                          Compiler * inCompiler
+                                                                                          COMMA_LOCATION_ARGS) {
+  GGS_instructionListListIR_2E_element result ;
+  const GGS_instructionListListIR_2E_element * p = (const GGS_instructionListListIR_2E_element *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_instructionListListIR_2E_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("instructionListListIR.element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_accessInAssignmentAST_2E_arrayAccess::GGS_accessInAssignmentAST_2E_arrayAccess (void) :
+mProperty_index (),
+mProperty_endOfIndex (),
+mProperty_checkIndexExpression () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_accessInAssignmentAST_2E_arrayAccess::GGS_accessInAssignmentAST_2E_arrayAccess (const GGS_accessInAssignmentAST_2E_arrayAccess & inSource) :
+mProperty_index (inSource.mProperty_index),
+mProperty_endOfIndex (inSource.mProperty_endOfIndex),
+mProperty_checkIndexExpression (inSource.mProperty_checkIndexExpression) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_accessInAssignmentAST_2E_arrayAccess & GGS_accessInAssignmentAST_2E_arrayAccess::operator = (const GGS_accessInAssignmentAST_2E_arrayAccess & inSource) {
+  mProperty_index = inSource.mProperty_index ;
+  mProperty_endOfIndex = inSource.mProperty_endOfIndex ;
+  mProperty_checkIndexExpression = inSource.mProperty_checkIndexExpression ;
+  return *this ;
+}
+
+//---Synthetized initializer -----------------------------------------------------------------------
+
+GGS_accessInAssignmentAST_2E_arrayAccess GGS_accessInAssignmentAST_2E_arrayAccess::init_21__21__21_ (const GGS_expressionAST & in_index,
+                                                                                                     const GGS_location & in_endOfIndex,
+                                                                                                     const GGS_bool & in_checkIndexExpression,
+                                                                                                     Compiler * inCompiler
+                                                                                                     COMMA_UNUSED_LOCATION_ARGS) {
+  GGS_accessInAssignmentAST_2E_arrayAccess result ;
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_index = in_index ;
+  result.mProperty_endOfIndex = in_endOfIndex ;
+  result.mProperty_checkIndexExpression = in_checkIndexExpression ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_accessInAssignmentAST_2E_arrayAccess::setInitializedProperties (Compiler * /* inCompiler */) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_accessInAssignmentAST_2E_arrayAccess::GGS_accessInAssignmentAST_2E_arrayAccess (const GGS_expressionAST & inOperand0,
+                                                                                    const GGS_location & inOperand1,
+                                                                                    const GGS_bool & inOperand2) :
+mProperty_index (inOperand0),
+mProperty_endOfIndex (inOperand1),
+mProperty_checkIndexExpression (inOperand2) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_accessInAssignmentAST_2E_arrayAccess::isValid (void) const {
+  return mProperty_index.isValid () && mProperty_endOfIndex.isValid () && mProperty_checkIndexExpression.isValid () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_accessInAssignmentAST_2E_arrayAccess::drop (void) {
+  mProperty_index.drop () ;
+  mProperty_endOfIndex.drop () ;
+  mProperty_checkIndexExpression.drop () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_accessInAssignmentAST_2E_arrayAccess::description (String & ioString,
+                                                            const int32_t inIndentation) const {
+  ioString.appendCString ("<struct @accessInAssignmentAST.arrayAccess:") ;
+  if (! isValid ()) {
+    ioString.appendCString (" not built") ;
+  }else{
+    mProperty_index.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_endOfIndex.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_checkIndexExpression.description (ioString, inIndentation+1) ;
+  }
+  ioString.appendCString (">") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//     @accessInAssignmentAST.arrayAccess generic code implementation
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_accessInAssignmentAST_2E_arrayAccess ("accessInAssignmentAST.arrayAccess",
+                                                                                         nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor * GGS_accessInAssignmentAST_2E_arrayAccess::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_accessInAssignmentAST_2E_arrayAccess ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_accessInAssignmentAST_2E_arrayAccess::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_accessInAssignmentAST_2E_arrayAccess (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_accessInAssignmentAST_2E_arrayAccess GGS_accessInAssignmentAST_2E_arrayAccess::extractObject (const GGS_object & inObject,
+                                                                                                  Compiler * inCompiler
+                                                                                                  COMMA_LOCATION_ARGS) {
+  GGS_accessInAssignmentAST_2E_arrayAccess result ;
+  const GGS_accessInAssignmentAST_2E_arrayAccess * p = (const GGS_accessInAssignmentAST_2E_arrayAccess *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_accessInAssignmentAST_2E_arrayAccess *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("accessInAssignmentAST.arrayAccess", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//Optional @accessInAssignmentAST_2E_arrayAccess_3F_
+//--------------------------------------------------------------------------------------------------
+
+GGS_accessInAssignmentAST_2E_arrayAccess_3F_::GGS_accessInAssignmentAST_2E_arrayAccess_3F_ (void) :
+AC_GALGAS_root (),
+mValue (),
+mState (OptionalState::invalid) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_accessInAssignmentAST_2E_arrayAccess_3F_::GGS_accessInAssignmentAST_2E_arrayAccess_3F_ (const GGS_accessInAssignmentAST_2E_arrayAccess & inSource) :
+AC_GALGAS_root (),
+mValue (inSource),
+mState (OptionalState::valuated) {
+}
+
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_accessInAssignmentAST_2E_arrayAccess_3F_ GGS_accessInAssignmentAST_2E_arrayAccess_3F_::init_nil (void) {
+  GGS_accessInAssignmentAST_2E_arrayAccess_3F_ result ;
+  result.mState = OptionalState::isNil ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_accessInAssignmentAST_2E_arrayAccess_3F_::isValid (void) const {
+  bool result = false ;
+  switch (mState) {
+  case OptionalState::invalid :
+    break ;
+  case OptionalState::isNil :
+    result = true ;
+    break ;
+  case OptionalState::valuated :
+    result = mValue.isValid () ;
+    break ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_accessInAssignmentAST_2E_arrayAccess_3F_::isValuated (void) const {
+  return (mState == OptionalState::valuated) && mValue.isValid () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_accessInAssignmentAST_2E_arrayAccess_3F_::drop (void) {
+  mState = OptionalState::invalid ;
+  mValue = GGS_accessInAssignmentAST_2E_arrayAccess () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_accessInAssignmentAST_2E_arrayAccess_3F_::description (String & ioString,
+                                                                const int32_t inIndentation) const {
+  ioString.appendCString ("<optional @") ;
+  ioString.appendString (staticTypeDescriptor ()->mGalgasTypeName) ;
+  ioString.appendCString (": ") ;
+  switch (mState) {
+  case OptionalState::invalid :
+    ioString.appendCString ("invalid") ;
+    break ;
+  case OptionalState::isNil :
+    ioString.appendCString ("nil") ;
+    break ;
+  case OptionalState::valuated :
+    mValue.description (ioString, inIndentation) ;
+    break ;
+  }
+  ioString.appendCString (">") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//     @accessInAssignmentAST.arrayAccess? generic code implementation
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_accessInAssignmentAST_2E_arrayAccess_3F_ ("accessInAssignmentAST.arrayAccess?",
+                                                                                             nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor * GGS_accessInAssignmentAST_2E_arrayAccess_3F_::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_accessInAssignmentAST_2E_arrayAccess_3F_ ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_accessInAssignmentAST_2E_arrayAccess_3F_::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_accessInAssignmentAST_2E_arrayAccess_3F_ (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_accessInAssignmentAST_2E_arrayAccess_3F_ GGS_accessInAssignmentAST_2E_arrayAccess_3F_::extractObject (const GGS_object & inObject,
+                                                                                                          Compiler * inCompiler
+                                                                                                          COMMA_LOCATION_ARGS) {
+  GGS_accessInAssignmentAST_2E_arrayAccess_3F_ result ;
+  const GGS_accessInAssignmentAST_2E_arrayAccess_3F_ * p = (const GGS_accessInAssignmentAST_2E_arrayAccess_3F_ *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_accessInAssignmentAST_2E_arrayAccess_3F_ *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("accessInAssignmentAST.arrayAccess?", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_accessInAssignmentListAST_2E_element::GGS_accessInAssignmentListAST_2E_element (void) :
+mProperty_mAccess () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_accessInAssignmentListAST_2E_element::GGS_accessInAssignmentListAST_2E_element (const GGS_accessInAssignmentListAST_2E_element & inSource) :
+mProperty_mAccess (inSource.mProperty_mAccess) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_accessInAssignmentListAST_2E_element & GGS_accessInAssignmentListAST_2E_element::operator = (const GGS_accessInAssignmentListAST_2E_element & inSource) {
+  mProperty_mAccess = inSource.mProperty_mAccess ;
+  return *this ;
+}
+
+//---Synthetized initializer -----------------------------------------------------------------------
+
+GGS_accessInAssignmentListAST_2E_element GGS_accessInAssignmentListAST_2E_element::init_21_ (const GGS_accessInAssignmentAST & in_mAccess,
+                                                                                             Compiler * inCompiler
+                                                                                             COMMA_UNUSED_LOCATION_ARGS) {
+  GGS_accessInAssignmentListAST_2E_element result ;
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_mAccess = in_mAccess ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_accessInAssignmentListAST_2E_element::setInitializedProperties (Compiler * /* inCompiler */) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_accessInAssignmentListAST_2E_element::GGS_accessInAssignmentListAST_2E_element (const GGS_accessInAssignmentAST & inOperand0) :
+mProperty_mAccess (inOperand0) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_accessInAssignmentListAST_2E_element::isValid (void) const {
+  return mProperty_mAccess.isValid () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_accessInAssignmentListAST_2E_element::drop (void) {
+  mProperty_mAccess.drop () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_accessInAssignmentListAST_2E_element::description (String & ioString,
+                                                            const int32_t inIndentation) const {
+  ioString.appendCString ("<struct @accessInAssignmentListAST.element:") ;
+  if (! isValid ()) {
+    ioString.appendCString (" not built") ;
+  }else{
+    mProperty_mAccess.description (ioString, inIndentation+1) ;
+  }
+  ioString.appendCString (">") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//     @accessInAssignmentListAST.element generic code implementation
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_accessInAssignmentListAST_2E_element ("accessInAssignmentListAST.element",
+                                                                                         nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor * GGS_accessInAssignmentListAST_2E_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_accessInAssignmentListAST_2E_element ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_accessInAssignmentListAST_2E_element::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_accessInAssignmentListAST_2E_element (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_accessInAssignmentListAST_2E_element GGS_accessInAssignmentListAST_2E_element::extractObject (const GGS_object & inObject,
+                                                                                                  Compiler * inCompiler
+                                                                                                  COMMA_LOCATION_ARGS) {
+  GGS_accessInAssignmentListAST_2E_element result ;
+  const GGS_accessInAssignmentListAST_2E_element * p = (const GGS_accessInAssignmentListAST_2E_element *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_accessInAssignmentListAST_2E_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("accessInAssignmentListAST.element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_LValueOperandAST_2E_arrayAccess::GGS_LValueOperandAST_2E_arrayAccess (void) :
+mProperty_index (),
+mProperty_endOfIndex (),
+mProperty_checkIndexExpression (),
+mProperty_next () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_LValueOperandAST_2E_arrayAccess::GGS_LValueOperandAST_2E_arrayAccess (const GGS_LValueOperandAST_2E_arrayAccess & inSource) :
+mProperty_index (inSource.mProperty_index),
+mProperty_endOfIndex (inSource.mProperty_endOfIndex),
+mProperty_checkIndexExpression (inSource.mProperty_checkIndexExpression),
+mProperty_next (inSource.mProperty_next) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_LValueOperandAST_2E_arrayAccess & GGS_LValueOperandAST_2E_arrayAccess::operator = (const GGS_LValueOperandAST_2E_arrayAccess & inSource) {
+  mProperty_index = inSource.mProperty_index ;
+  mProperty_endOfIndex = inSource.mProperty_endOfIndex ;
+  mProperty_checkIndexExpression = inSource.mProperty_checkIndexExpression ;
+  mProperty_next = inSource.mProperty_next ;
+  return *this ;
+}
+
+//---Synthetized initializer -----------------------------------------------------------------------
+
+GGS_LValueOperandAST_2E_arrayAccess GGS_LValueOperandAST_2E_arrayAccess::init_21__21__21__21_ (const GGS_expressionAST & in_index,
+                                                                                               const GGS_location & in_endOfIndex,
+                                                                                               const GGS_bool & in_checkIndexExpression,
+                                                                                               const GGS_LValueOperandAST & in_next,
+                                                                                               Compiler * inCompiler
+                                                                                               COMMA_UNUSED_LOCATION_ARGS) {
+  GGS_LValueOperandAST_2E_arrayAccess result ;
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_index = in_index ;
+  result.mProperty_endOfIndex = in_endOfIndex ;
+  result.mProperty_checkIndexExpression = in_checkIndexExpression ;
+  result.mProperty_next = in_next ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_LValueOperandAST_2E_arrayAccess::setInitializedProperties (Compiler * /* inCompiler */) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_LValueOperandAST_2E_arrayAccess::GGS_LValueOperandAST_2E_arrayAccess (const GGS_expressionAST & inOperand0,
+                                                                          const GGS_location & inOperand1,
+                                                                          const GGS_bool & inOperand2,
+                                                                          const GGS_LValueOperandAST & inOperand3) :
+mProperty_index (inOperand0),
+mProperty_endOfIndex (inOperand1),
+mProperty_checkIndexExpression (inOperand2),
+mProperty_next (inOperand3) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+ComparisonResult GGS_LValueOperandAST_2E_arrayAccess::objectCompare (const GGS_LValueOperandAST_2E_arrayAccess & inOperand) const {
+   ComparisonResult result = ComparisonResult::operandEqual ;
+  if (result == ComparisonResult::operandEqual) {
+    result = mProperty_index.objectCompare (inOperand.mProperty_index) ;
+  }
+  if (result == ComparisonResult::operandEqual) {
+    result = mProperty_endOfIndex.objectCompare (inOperand.mProperty_endOfIndex) ;
+  }
+  if (result == ComparisonResult::operandEqual) {
+    result = mProperty_checkIndexExpression.objectCompare (inOperand.mProperty_checkIndexExpression) ;
+  }
+  if (result == ComparisonResult::operandEqual) {
+    result = mProperty_next.objectCompare (inOperand.mProperty_next) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_LValueOperandAST_2E_arrayAccess::isValid (void) const {
+  return mProperty_index.isValid () && mProperty_endOfIndex.isValid () && mProperty_checkIndexExpression.isValid () && mProperty_next.isValid () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_LValueOperandAST_2E_arrayAccess::drop (void) {
+  mProperty_index.drop () ;
+  mProperty_endOfIndex.drop () ;
+  mProperty_checkIndexExpression.drop () ;
+  mProperty_next.drop () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_LValueOperandAST_2E_arrayAccess::description (String & ioString,
+                                                       const int32_t inIndentation) const {
+  ioString.appendCString ("<struct @LValueOperandAST.arrayAccess:") ;
+  if (! isValid ()) {
+    ioString.appendCString (" not built") ;
+  }else{
+    mProperty_index.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_endOfIndex.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_checkIndexExpression.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_next.description (ioString, inIndentation+1) ;
+  }
+  ioString.appendCString (">") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//     @LValueOperandAST.arrayAccess generic code implementation
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_LValueOperandAST_2E_arrayAccess ("LValueOperandAST.arrayAccess",
+                                                                                    nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor * GGS_LValueOperandAST_2E_arrayAccess::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_LValueOperandAST_2E_arrayAccess ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_LValueOperandAST_2E_arrayAccess::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_LValueOperandAST_2E_arrayAccess (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_LValueOperandAST_2E_arrayAccess GGS_LValueOperandAST_2E_arrayAccess::extractObject (const GGS_object & inObject,
+                                                                                        Compiler * inCompiler
+                                                                                        COMMA_LOCATION_ARGS) {
+  GGS_LValueOperandAST_2E_arrayAccess result ;
+  const GGS_LValueOperandAST_2E_arrayAccess * p = (const GGS_LValueOperandAST_2E_arrayAccess *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_LValueOperandAST_2E_arrayAccess *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("LValueOperandAST.arrayAccess", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//Optional @LValueOperandAST_2E_arrayAccess_3F_
+//--------------------------------------------------------------------------------------------------
+
+GGS_LValueOperandAST_2E_arrayAccess_3F_::GGS_LValueOperandAST_2E_arrayAccess_3F_ (void) :
+AC_GALGAS_root (),
+mValue (),
+mState (OptionalState::invalid) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_LValueOperandAST_2E_arrayAccess_3F_::GGS_LValueOperandAST_2E_arrayAccess_3F_ (const GGS_LValueOperandAST_2E_arrayAccess & inSource) :
+AC_GALGAS_root (),
+mValue (inSource),
+mState (OptionalState::valuated) {
+}
+
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_LValueOperandAST_2E_arrayAccess_3F_ GGS_LValueOperandAST_2E_arrayAccess_3F_::init_nil (void) {
+  GGS_LValueOperandAST_2E_arrayAccess_3F_ result ;
+  result.mState = OptionalState::isNil ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_LValueOperandAST_2E_arrayAccess_3F_::isValid (void) const {
+  bool result = false ;
+  switch (mState) {
+  case OptionalState::invalid :
+    break ;
+  case OptionalState::isNil :
+    result = true ;
+    break ;
+  case OptionalState::valuated :
+    result = mValue.isValid () ;
+    break ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_LValueOperandAST_2E_arrayAccess_3F_::isValuated (void) const {
+  return (mState == OptionalState::valuated) && mValue.isValid () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_LValueOperandAST_2E_arrayAccess_3F_::drop (void) {
+  mState = OptionalState::invalid ;
+  mValue = GGS_LValueOperandAST_2E_arrayAccess () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+ComparisonResult GGS_LValueOperandAST_2E_arrayAccess_3F_::objectCompare (const GGS_LValueOperandAST_2E_arrayAccess_3F_ & inOperand) const {
+  ComparisonResult result = ComparisonResult::invalid ;
+  if (isValid () && inOperand.isValid ()) {
+    if (mState < inOperand.mState) {
+      result = ComparisonResult::firstOperandLowerThanSecond ;
+    }else if (mState > inOperand.mState) {
+      result = ComparisonResult::firstOperandGreaterThanSecond ;
+    }else if (mState == OptionalState::valuated) {
+      result = mValue.objectCompare (inOperand.mValue) ;
+    }else{
+      result = ComparisonResult::operandEqual ;
+    }
+  }
+  return result ;
+}
+//--------------------------------------------------------------------------------------------------
+
+void GGS_LValueOperandAST_2E_arrayAccess_3F_::description (String & ioString,
+                                                           const int32_t inIndentation) const {
+  ioString.appendCString ("<optional @") ;
+  ioString.appendString (staticTypeDescriptor ()->mGalgasTypeName) ;
+  ioString.appendCString (": ") ;
+  switch (mState) {
+  case OptionalState::invalid :
+    ioString.appendCString ("invalid") ;
+    break ;
+  case OptionalState::isNil :
+    ioString.appendCString ("nil") ;
+    break ;
+  case OptionalState::valuated :
+    mValue.description (ioString, inIndentation) ;
+    break ;
+  }
+  ioString.appendCString (">") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//     @LValueOperandAST.arrayAccess? generic code implementation
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_LValueOperandAST_2E_arrayAccess_3F_ ("LValueOperandAST.arrayAccess?",
+                                                                                        nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor * GGS_LValueOperandAST_2E_arrayAccess_3F_::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_LValueOperandAST_2E_arrayAccess_3F_ ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_LValueOperandAST_2E_arrayAccess_3F_::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_LValueOperandAST_2E_arrayAccess_3F_ (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_LValueOperandAST_2E_arrayAccess_3F_ GGS_LValueOperandAST_2E_arrayAccess_3F_::extractObject (const GGS_object & inObject,
+                                                                                                Compiler * inCompiler
+                                                                                                COMMA_LOCATION_ARGS) {
+  GGS_LValueOperandAST_2E_arrayAccess_3F_ result ;
+  const GGS_LValueOperandAST_2E_arrayAccess_3F_ * p = (const GGS_LValueOperandAST_2E_arrayAccess_3F_ *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_LValueOperandAST_2E_arrayAccess_3F_ *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("LValueOperandAST.arrayAccess?", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandAST_2E_boolean::GGS_guardedCommandAST_2E_boolean (void) :
+mProperty_isExitCommand (),
+mProperty_expression (),
+mProperty_endOfExpression () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandAST_2E_boolean::GGS_guardedCommandAST_2E_boolean (const GGS_guardedCommandAST_2E_boolean & inSource) :
+mProperty_isExitCommand (inSource.mProperty_isExitCommand),
+mProperty_expression (inSource.mProperty_expression),
+mProperty_endOfExpression (inSource.mProperty_endOfExpression) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandAST_2E_boolean & GGS_guardedCommandAST_2E_boolean::operator = (const GGS_guardedCommandAST_2E_boolean & inSource) {
+  mProperty_isExitCommand = inSource.mProperty_isExitCommand ;
+  mProperty_expression = inSource.mProperty_expression ;
+  mProperty_endOfExpression = inSource.mProperty_endOfExpression ;
+  return *this ;
+}
+
+//---Synthetized initializer -----------------------------------------------------------------------
+
+GGS_guardedCommandAST_2E_boolean GGS_guardedCommandAST_2E_boolean::init_21__21__21_ (const GGS_bool & in_isExitCommand,
+                                                                                     const GGS_expressionAST & in_expression,
+                                                                                     const GGS_location & in_endOfExpression,
+                                                                                     Compiler * inCompiler
+                                                                                     COMMA_UNUSED_LOCATION_ARGS) {
+  GGS_guardedCommandAST_2E_boolean result ;
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_isExitCommand = in_isExitCommand ;
+  result.mProperty_expression = in_expression ;
+  result.mProperty_endOfExpression = in_endOfExpression ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_guardedCommandAST_2E_boolean::setInitializedProperties (Compiler * /* inCompiler */) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandAST_2E_boolean::GGS_guardedCommandAST_2E_boolean (const GGS_bool & inOperand0,
+                                                                    const GGS_expressionAST & inOperand1,
+                                                                    const GGS_location & inOperand2) :
+mProperty_isExitCommand (inOperand0),
+mProperty_expression (inOperand1),
+mProperty_endOfExpression (inOperand2) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_guardedCommandAST_2E_boolean::isValid (void) const {
+  return mProperty_isExitCommand.isValid () && mProperty_expression.isValid () && mProperty_endOfExpression.isValid () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_guardedCommandAST_2E_boolean::drop (void) {
+  mProperty_isExitCommand.drop () ;
+  mProperty_expression.drop () ;
+  mProperty_endOfExpression.drop () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_guardedCommandAST_2E_boolean::description (String & ioString,
+                                                    const int32_t inIndentation) const {
+  ioString.appendCString ("<struct @guardedCommandAST.boolean:") ;
+  if (! isValid ()) {
+    ioString.appendCString (" not built") ;
+  }else{
+    mProperty_isExitCommand.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_expression.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_endOfExpression.description (ioString, inIndentation+1) ;
+  }
+  ioString.appendCString (">") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//     @guardedCommandAST.boolean generic code implementation
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_guardedCommandAST_2E_boolean ("guardedCommandAST.boolean",
+                                                                                 nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor * GGS_guardedCommandAST_2E_boolean::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_guardedCommandAST_2E_boolean ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_guardedCommandAST_2E_boolean::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_guardedCommandAST_2E_boolean (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandAST_2E_boolean GGS_guardedCommandAST_2E_boolean::extractObject (const GGS_object & inObject,
+                                                                                  Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) {
+  GGS_guardedCommandAST_2E_boolean result ;
+  const GGS_guardedCommandAST_2E_boolean * p = (const GGS_guardedCommandAST_2E_boolean *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_guardedCommandAST_2E_boolean *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("guardedCommandAST.boolean", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//Optional @guardedCommandAST_2E_boolean_3F_
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandAST_2E_boolean_3F_::GGS_guardedCommandAST_2E_boolean_3F_ (void) :
+AC_GALGAS_root (),
+mValue (),
+mState (OptionalState::invalid) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandAST_2E_boolean_3F_::GGS_guardedCommandAST_2E_boolean_3F_ (const GGS_guardedCommandAST_2E_boolean & inSource) :
+AC_GALGAS_root (),
+mValue (inSource),
+mState (OptionalState::valuated) {
+}
+
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandAST_2E_boolean_3F_ GGS_guardedCommandAST_2E_boolean_3F_::init_nil (void) {
+  GGS_guardedCommandAST_2E_boolean_3F_ result ;
+  result.mState = OptionalState::isNil ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_guardedCommandAST_2E_boolean_3F_::isValid (void) const {
+  bool result = false ;
+  switch (mState) {
+  case OptionalState::invalid :
+    break ;
+  case OptionalState::isNil :
+    result = true ;
+    break ;
+  case OptionalState::valuated :
+    result = mValue.isValid () ;
+    break ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_guardedCommandAST_2E_boolean_3F_::isValuated (void) const {
+  return (mState == OptionalState::valuated) && mValue.isValid () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_guardedCommandAST_2E_boolean_3F_::drop (void) {
+  mState = OptionalState::invalid ;
+  mValue = GGS_guardedCommandAST_2E_boolean () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_guardedCommandAST_2E_boolean_3F_::description (String & ioString,
+                                                        const int32_t inIndentation) const {
+  ioString.appendCString ("<optional @") ;
+  ioString.appendString (staticTypeDescriptor ()->mGalgasTypeName) ;
+  ioString.appendCString (": ") ;
+  switch (mState) {
+  case OptionalState::invalid :
+    ioString.appendCString ("invalid") ;
+    break ;
+  case OptionalState::isNil :
+    ioString.appendCString ("nil") ;
+    break ;
+  case OptionalState::valuated :
+    mValue.description (ioString, inIndentation) ;
+    break ;
+  }
+  ioString.appendCString (">") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//     @guardedCommandAST.boolean? generic code implementation
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_guardedCommandAST_2E_boolean_3F_ ("guardedCommandAST.boolean?",
+                                                                                     nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor * GGS_guardedCommandAST_2E_boolean_3F_::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_guardedCommandAST_2E_boolean_3F_ ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_guardedCommandAST_2E_boolean_3F_::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_guardedCommandAST_2E_boolean_3F_ (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandAST_2E_boolean_3F_ GGS_guardedCommandAST_2E_boolean_3F_::extractObject (const GGS_object & inObject,
+                                                                                          Compiler * inCompiler
+                                                                                          COMMA_LOCATION_ARGS) {
+  GGS_guardedCommandAST_2E_boolean_3F_ result ;
+  const GGS_guardedCommandAST_2E_boolean_3F_ * p = (const GGS_guardedCommandAST_2E_boolean_3F_ *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_guardedCommandAST_2E_boolean_3F_ *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("guardedCommandAST.boolean?", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandAST_2E_boolAndSync::GGS_guardedCommandAST_2E_boolAndSync (void) :
+mProperty_isExitCommand (),
+mProperty_expression (),
+mProperty_warnsOnStaticExpression (),
+mProperty_endOfExpression (),
+mProperty_usesSelf (),
+mProperty_nameList (),
+mProperty_effectiveParameterListAST () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandAST_2E_boolAndSync::GGS_guardedCommandAST_2E_boolAndSync (const GGS_guardedCommandAST_2E_boolAndSync & inSource) :
+mProperty_isExitCommand (inSource.mProperty_isExitCommand),
+mProperty_expression (inSource.mProperty_expression),
+mProperty_warnsOnStaticExpression (inSource.mProperty_warnsOnStaticExpression),
+mProperty_endOfExpression (inSource.mProperty_endOfExpression),
+mProperty_usesSelf (inSource.mProperty_usesSelf),
+mProperty_nameList (inSource.mProperty_nameList),
+mProperty_effectiveParameterListAST (inSource.mProperty_effectiveParameterListAST) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandAST_2E_boolAndSync & GGS_guardedCommandAST_2E_boolAndSync::operator = (const GGS_guardedCommandAST_2E_boolAndSync & inSource) {
+  mProperty_isExitCommand = inSource.mProperty_isExitCommand ;
+  mProperty_expression = inSource.mProperty_expression ;
+  mProperty_warnsOnStaticExpression = inSource.mProperty_warnsOnStaticExpression ;
+  mProperty_endOfExpression = inSource.mProperty_endOfExpression ;
+  mProperty_usesSelf = inSource.mProperty_usesSelf ;
+  mProperty_nameList = inSource.mProperty_nameList ;
+  mProperty_effectiveParameterListAST = inSource.mProperty_effectiveParameterListAST ;
+  return *this ;
+}
+
+//---Synthetized initializer -----------------------------------------------------------------------
+
+GGS_guardedCommandAST_2E_boolAndSync GGS_guardedCommandAST_2E_boolAndSync::init_21__21__21__21__21__21__21_ (const GGS_bool & in_isExitCommand,
+                                                                                                             const GGS_expressionAST & in_expression,
+                                                                                                             const GGS_bool & in_warnsOnStaticExpression,
+                                                                                                             const GGS_location & in_endOfExpression,
+                                                                                                             const GGS_lbool & in_usesSelf,
+                                                                                                             const GGS_lstringlist & in_nameList,
+                                                                                                             const GGS_effectiveArgumentListAST & in_effectiveParameterListAST,
+                                                                                                             Compiler * inCompiler
+                                                                                                             COMMA_UNUSED_LOCATION_ARGS) {
+  GGS_guardedCommandAST_2E_boolAndSync result ;
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_isExitCommand = in_isExitCommand ;
+  result.mProperty_expression = in_expression ;
+  result.mProperty_warnsOnStaticExpression = in_warnsOnStaticExpression ;
+  result.mProperty_endOfExpression = in_endOfExpression ;
+  result.mProperty_usesSelf = in_usesSelf ;
+  result.mProperty_nameList = in_nameList ;
+  result.mProperty_effectiveParameterListAST = in_effectiveParameterListAST ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_guardedCommandAST_2E_boolAndSync::setInitializedProperties (Compiler * /* inCompiler */) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandAST_2E_boolAndSync::GGS_guardedCommandAST_2E_boolAndSync (const GGS_bool & inOperand0,
+                                                                            const GGS_expressionAST & inOperand1,
+                                                                            const GGS_bool & inOperand2,
+                                                                            const GGS_location & inOperand3,
+                                                                            const GGS_lbool & inOperand4,
+                                                                            const GGS_lstringlist & inOperand5,
+                                                                            const GGS_effectiveArgumentListAST & inOperand6) :
+mProperty_isExitCommand (inOperand0),
+mProperty_expression (inOperand1),
+mProperty_warnsOnStaticExpression (inOperand2),
+mProperty_endOfExpression (inOperand3),
+mProperty_usesSelf (inOperand4),
+mProperty_nameList (inOperand5),
+mProperty_effectiveParameterListAST (inOperand6) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_guardedCommandAST_2E_boolAndSync::isValid (void) const {
+  return mProperty_isExitCommand.isValid () && mProperty_expression.isValid () && mProperty_warnsOnStaticExpression.isValid () && mProperty_endOfExpression.isValid () && mProperty_usesSelf.isValid () && mProperty_nameList.isValid () && mProperty_effectiveParameterListAST.isValid () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_guardedCommandAST_2E_boolAndSync::drop (void) {
+  mProperty_isExitCommand.drop () ;
+  mProperty_expression.drop () ;
+  mProperty_warnsOnStaticExpression.drop () ;
+  mProperty_endOfExpression.drop () ;
+  mProperty_usesSelf.drop () ;
+  mProperty_nameList.drop () ;
+  mProperty_effectiveParameterListAST.drop () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_guardedCommandAST_2E_boolAndSync::description (String & ioString,
+                                                        const int32_t inIndentation) const {
+  ioString.appendCString ("<struct @guardedCommandAST.boolAndSync:") ;
+  if (! isValid ()) {
+    ioString.appendCString (" not built") ;
+  }else{
+    mProperty_isExitCommand.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_expression.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_warnsOnStaticExpression.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_endOfExpression.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_usesSelf.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_nameList.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_effectiveParameterListAST.description (ioString, inIndentation+1) ;
+  }
+  ioString.appendCString (">") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//     @guardedCommandAST.boolAndSync generic code implementation
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_guardedCommandAST_2E_boolAndSync ("guardedCommandAST.boolAndSync",
+                                                                                     nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor * GGS_guardedCommandAST_2E_boolAndSync::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_guardedCommandAST_2E_boolAndSync ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_guardedCommandAST_2E_boolAndSync::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_guardedCommandAST_2E_boolAndSync (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandAST_2E_boolAndSync GGS_guardedCommandAST_2E_boolAndSync::extractObject (const GGS_object & inObject,
+                                                                                          Compiler * inCompiler
+                                                                                          COMMA_LOCATION_ARGS) {
+  GGS_guardedCommandAST_2E_boolAndSync result ;
+  const GGS_guardedCommandAST_2E_boolAndSync * p = (const GGS_guardedCommandAST_2E_boolAndSync *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_guardedCommandAST_2E_boolAndSync *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("guardedCommandAST.boolAndSync", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//Optional @guardedCommandAST_2E_boolAndSync_3F_
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandAST_2E_boolAndSync_3F_::GGS_guardedCommandAST_2E_boolAndSync_3F_ (void) :
+AC_GALGAS_root (),
+mValue (),
+mState (OptionalState::invalid) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandAST_2E_boolAndSync_3F_::GGS_guardedCommandAST_2E_boolAndSync_3F_ (const GGS_guardedCommandAST_2E_boolAndSync & inSource) :
+AC_GALGAS_root (),
+mValue (inSource),
+mState (OptionalState::valuated) {
+}
+
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandAST_2E_boolAndSync_3F_ GGS_guardedCommandAST_2E_boolAndSync_3F_::init_nil (void) {
+  GGS_guardedCommandAST_2E_boolAndSync_3F_ result ;
+  result.mState = OptionalState::isNil ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_guardedCommandAST_2E_boolAndSync_3F_::isValid (void) const {
+  bool result = false ;
+  switch (mState) {
+  case OptionalState::invalid :
+    break ;
+  case OptionalState::isNil :
+    result = true ;
+    break ;
+  case OptionalState::valuated :
+    result = mValue.isValid () ;
+    break ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_guardedCommandAST_2E_boolAndSync_3F_::isValuated (void) const {
+  return (mState == OptionalState::valuated) && mValue.isValid () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_guardedCommandAST_2E_boolAndSync_3F_::drop (void) {
+  mState = OptionalState::invalid ;
+  mValue = GGS_guardedCommandAST_2E_boolAndSync () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_guardedCommandAST_2E_boolAndSync_3F_::description (String & ioString,
+                                                            const int32_t inIndentation) const {
+  ioString.appendCString ("<optional @") ;
+  ioString.appendString (staticTypeDescriptor ()->mGalgasTypeName) ;
+  ioString.appendCString (": ") ;
+  switch (mState) {
+  case OptionalState::invalid :
+    ioString.appendCString ("invalid") ;
+    break ;
+  case OptionalState::isNil :
+    ioString.appendCString ("nil") ;
+    break ;
+  case OptionalState::valuated :
+    mValue.description (ioString, inIndentation) ;
+    break ;
+  }
+  ioString.appendCString (">") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//     @guardedCommandAST.boolAndSync? generic code implementation
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_guardedCommandAST_2E_boolAndSync_3F_ ("guardedCommandAST.boolAndSync?",
+                                                                                         nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor * GGS_guardedCommandAST_2E_boolAndSync_3F_::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_guardedCommandAST_2E_boolAndSync_3F_ ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_guardedCommandAST_2E_boolAndSync_3F_::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_guardedCommandAST_2E_boolAndSync_3F_ (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandAST_2E_boolAndSync_3F_ GGS_guardedCommandAST_2E_boolAndSync_3F_::extractObject (const GGS_object & inObject,
+                                                                                                  Compiler * inCompiler
+                                                                                                  COMMA_LOCATION_ARGS) {
+  GGS_guardedCommandAST_2E_boolAndSync_3F_ result ;
+  const GGS_guardedCommandAST_2E_boolAndSync_3F_ * p = (const GGS_guardedCommandAST_2E_boolAndSync_3F_ *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_guardedCommandAST_2E_boolAndSync_3F_ *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("guardedCommandAST.boolAndSync?", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_syncInstructionBranchListAST_2E_element::GGS_syncInstructionBranchListAST_2E_element (void) :
+mProperty_mGuardedCommand (),
+mProperty_mInstructionList (),
+mProperty_mEndOfBranch () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_syncInstructionBranchListAST_2E_element::GGS_syncInstructionBranchListAST_2E_element (const GGS_syncInstructionBranchListAST_2E_element & inSource) :
+mProperty_mGuardedCommand (inSource.mProperty_mGuardedCommand),
+mProperty_mInstructionList (inSource.mProperty_mInstructionList),
+mProperty_mEndOfBranch (inSource.mProperty_mEndOfBranch) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_syncInstructionBranchListAST_2E_element & GGS_syncInstructionBranchListAST_2E_element::operator = (const GGS_syncInstructionBranchListAST_2E_element & inSource) {
+  mProperty_mGuardedCommand = inSource.mProperty_mGuardedCommand ;
+  mProperty_mInstructionList = inSource.mProperty_mInstructionList ;
+  mProperty_mEndOfBranch = inSource.mProperty_mEndOfBranch ;
+  return *this ;
+}
+
+//---Synthetized initializer -----------------------------------------------------------------------
+
+GGS_syncInstructionBranchListAST_2E_element GGS_syncInstructionBranchListAST_2E_element::init_21__21__21_ (const GGS_guardedCommandAST & in_mGuardedCommand,
+                                                                                                           const GGS_instructionListAST & in_mInstructionList,
+                                                                                                           const GGS_location & in_mEndOfBranch,
+                                                                                                           Compiler * inCompiler
+                                                                                                           COMMA_UNUSED_LOCATION_ARGS) {
+  GGS_syncInstructionBranchListAST_2E_element result ;
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_mGuardedCommand = in_mGuardedCommand ;
+  result.mProperty_mInstructionList = in_mInstructionList ;
+  result.mProperty_mEndOfBranch = in_mEndOfBranch ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_syncInstructionBranchListAST_2E_element::setInitializedProperties (Compiler * /* inCompiler */) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_syncInstructionBranchListAST_2E_element::GGS_syncInstructionBranchListAST_2E_element (const GGS_guardedCommandAST & inOperand0,
+                                                                                          const GGS_instructionListAST & inOperand1,
+                                                                                          const GGS_location & inOperand2) :
+mProperty_mGuardedCommand (inOperand0),
+mProperty_mInstructionList (inOperand1),
+mProperty_mEndOfBranch (inOperand2) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_syncInstructionBranchListAST_2E_element::isValid (void) const {
+  return mProperty_mGuardedCommand.isValid () && mProperty_mInstructionList.isValid () && mProperty_mEndOfBranch.isValid () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_syncInstructionBranchListAST_2E_element::drop (void) {
+  mProperty_mGuardedCommand.drop () ;
+  mProperty_mInstructionList.drop () ;
+  mProperty_mEndOfBranch.drop () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_syncInstructionBranchListAST_2E_element::description (String & ioString,
+                                                               const int32_t inIndentation) const {
+  ioString.appendCString ("<struct @syncInstructionBranchListAST.element:") ;
+  if (! isValid ()) {
+    ioString.appendCString (" not built") ;
+  }else{
+    mProperty_mGuardedCommand.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_mInstructionList.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_mEndOfBranch.description (ioString, inIndentation+1) ;
+  }
+  ioString.appendCString (">") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//     @syncInstructionBranchListAST.element generic code implementation
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_syncInstructionBranchListAST_2E_element ("syncInstructionBranchListAST.element",
+                                                                                            nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor * GGS_syncInstructionBranchListAST_2E_element::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_syncInstructionBranchListAST_2E_element ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_syncInstructionBranchListAST_2E_element::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_syncInstructionBranchListAST_2E_element (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_syncInstructionBranchListAST_2E_element GGS_syncInstructionBranchListAST_2E_element::extractObject (const GGS_object & inObject,
+                                                                                                        Compiler * inCompiler
+                                                                                                        COMMA_LOCATION_ARGS) {
+  GGS_syncInstructionBranchListAST_2E_element result ;
+  const GGS_syncInstructionBranchListAST_2E_element * p = (const GGS_syncInstructionBranchListAST_2E_element *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_syncInstructionBranchListAST_2E_element *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("syncInstructionBranchListAST.element", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandIR_2E_booleanGuard::GGS_guardedCommandIR_2E_booleanGuard (void) :
+mProperty_isExitCommand (),
+mProperty_instructionGenerationList (),
+mProperty_boolGuardBoolLLVMName () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandIR_2E_booleanGuard::GGS_guardedCommandIR_2E_booleanGuard (const GGS_guardedCommandIR_2E_booleanGuard & inSource) :
+mProperty_isExitCommand (inSource.mProperty_isExitCommand),
+mProperty_instructionGenerationList (inSource.mProperty_instructionGenerationList),
+mProperty_boolGuardBoolLLVMName (inSource.mProperty_boolGuardBoolLLVMName) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandIR_2E_booleanGuard & GGS_guardedCommandIR_2E_booleanGuard::operator = (const GGS_guardedCommandIR_2E_booleanGuard & inSource) {
+  mProperty_isExitCommand = inSource.mProperty_isExitCommand ;
+  mProperty_instructionGenerationList = inSource.mProperty_instructionGenerationList ;
+  mProperty_boolGuardBoolLLVMName = inSource.mProperty_boolGuardBoolLLVMName ;
+  return *this ;
+}
+
+//---Synthetized initializer -----------------------------------------------------------------------
+
+GGS_guardedCommandIR_2E_booleanGuard GGS_guardedCommandIR_2E_booleanGuard::init_21__21__21_ (const GGS_bool & in_isExitCommand,
+                                                                                             const GGS_instructionListIR & in_instructionGenerationList,
+                                                                                             const GGS_string & in_boolGuardBoolLLVMName,
+                                                                                             Compiler * inCompiler
+                                                                                             COMMA_UNUSED_LOCATION_ARGS) {
+  GGS_guardedCommandIR_2E_booleanGuard result ;
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_isExitCommand = in_isExitCommand ;
+  result.mProperty_instructionGenerationList = in_instructionGenerationList ;
+  result.mProperty_boolGuardBoolLLVMName = in_boolGuardBoolLLVMName ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_guardedCommandIR_2E_booleanGuard::setInitializedProperties (Compiler * /* inCompiler */) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandIR_2E_booleanGuard::GGS_guardedCommandIR_2E_booleanGuard (const GGS_bool & inOperand0,
+                                                                            const GGS_instructionListIR & inOperand1,
+                                                                            const GGS_string & inOperand2) :
+mProperty_isExitCommand (inOperand0),
+mProperty_instructionGenerationList (inOperand1),
+mProperty_boolGuardBoolLLVMName (inOperand2) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_guardedCommandIR_2E_booleanGuard::isValid (void) const {
+  return mProperty_isExitCommand.isValid () && mProperty_instructionGenerationList.isValid () && mProperty_boolGuardBoolLLVMName.isValid () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_guardedCommandIR_2E_booleanGuard::drop (void) {
+  mProperty_isExitCommand.drop () ;
+  mProperty_instructionGenerationList.drop () ;
+  mProperty_boolGuardBoolLLVMName.drop () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_guardedCommandIR_2E_booleanGuard::description (String & ioString,
+                                                        const int32_t inIndentation) const {
+  ioString.appendCString ("<struct @guardedCommandIR.booleanGuard:") ;
+  if (! isValid ()) {
+    ioString.appendCString (" not built") ;
+  }else{
+    mProperty_isExitCommand.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_instructionGenerationList.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_boolGuardBoolLLVMName.description (ioString, inIndentation+1) ;
+  }
+  ioString.appendCString (">") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//     @guardedCommandIR.booleanGuard generic code implementation
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_guardedCommandIR_2E_booleanGuard ("guardedCommandIR.booleanGuard",
+                                                                                     nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor * GGS_guardedCommandIR_2E_booleanGuard::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_guardedCommandIR_2E_booleanGuard ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_guardedCommandIR_2E_booleanGuard::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_guardedCommandIR_2E_booleanGuard (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandIR_2E_booleanGuard GGS_guardedCommandIR_2E_booleanGuard::extractObject (const GGS_object & inObject,
+                                                                                          Compiler * inCompiler
+                                                                                          COMMA_LOCATION_ARGS) {
+  GGS_guardedCommandIR_2E_booleanGuard result ;
+  const GGS_guardedCommandIR_2E_booleanGuard * p = (const GGS_guardedCommandIR_2E_booleanGuard *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_guardedCommandIR_2E_booleanGuard *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("guardedCommandIR.booleanGuard", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//Optional @guardedCommandIR_2E_booleanGuard_3F_
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandIR_2E_booleanGuard_3F_::GGS_guardedCommandIR_2E_booleanGuard_3F_ (void) :
+AC_GALGAS_root (),
+mValue (),
+mState (OptionalState::invalid) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandIR_2E_booleanGuard_3F_::GGS_guardedCommandIR_2E_booleanGuard_3F_ (const GGS_guardedCommandIR_2E_booleanGuard & inSource) :
+AC_GALGAS_root (),
+mValue (inSource),
+mState (OptionalState::valuated) {
+}
+
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandIR_2E_booleanGuard_3F_ GGS_guardedCommandIR_2E_booleanGuard_3F_::init_nil (void) {
+  GGS_guardedCommandIR_2E_booleanGuard_3F_ result ;
+  result.mState = OptionalState::isNil ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_guardedCommandIR_2E_booleanGuard_3F_::isValid (void) const {
+  bool result = false ;
+  switch (mState) {
+  case OptionalState::invalid :
+    break ;
+  case OptionalState::isNil :
+    result = true ;
+    break ;
+  case OptionalState::valuated :
+    result = mValue.isValid () ;
+    break ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_guardedCommandIR_2E_booleanGuard_3F_::isValuated (void) const {
+  return (mState == OptionalState::valuated) && mValue.isValid () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_guardedCommandIR_2E_booleanGuard_3F_::drop (void) {
+  mState = OptionalState::invalid ;
+  mValue = GGS_guardedCommandIR_2E_booleanGuard () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_guardedCommandIR_2E_booleanGuard_3F_::description (String & ioString,
+                                                            const int32_t inIndentation) const {
+  ioString.appendCString ("<optional @") ;
+  ioString.appendString (staticTypeDescriptor ()->mGalgasTypeName) ;
+  ioString.appendCString (": ") ;
+  switch (mState) {
+  case OptionalState::invalid :
+    ioString.appendCString ("invalid") ;
+    break ;
+  case OptionalState::isNil :
+    ioString.appendCString ("nil") ;
+    break ;
+  case OptionalState::valuated :
+    mValue.description (ioString, inIndentation) ;
+    break ;
+  }
+  ioString.appendCString (">") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//     @guardedCommandIR.booleanGuard? generic code implementation
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_guardedCommandIR_2E_booleanGuard_3F_ ("guardedCommandIR.booleanGuard?",
+                                                                                         nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor * GGS_guardedCommandIR_2E_booleanGuard_3F_::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_guardedCommandIR_2E_booleanGuard_3F_ ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_guardedCommandIR_2E_booleanGuard_3F_::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_guardedCommandIR_2E_booleanGuard_3F_ (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandIR_2E_booleanGuard_3F_ GGS_guardedCommandIR_2E_booleanGuard_3F_::extractObject (const GGS_object & inObject,
+                                                                                                  Compiler * inCompiler
+                                                                                                  COMMA_LOCATION_ARGS) {
+  GGS_guardedCommandIR_2E_booleanGuard_3F_ result ;
+  const GGS_guardedCommandIR_2E_booleanGuard_3F_ * p = (const GGS_guardedCommandIR_2E_booleanGuard_3F_ *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_guardedCommandIR_2E_booleanGuard_3F_ *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("guardedCommandIR.booleanGuard?", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandIR_2E_sync::GGS_guardedCommandIR_2E_sync (void) :
+mProperty_isExitCommand (),
+mProperty_guardMangledName (),
+mProperty_guardInstructionGenerationList (),
+mProperty_effectiveParameterListIR () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandIR_2E_sync::GGS_guardedCommandIR_2E_sync (const GGS_guardedCommandIR_2E_sync & inSource) :
+mProperty_isExitCommand (inSource.mProperty_isExitCommand),
+mProperty_guardMangledName (inSource.mProperty_guardMangledName),
+mProperty_guardInstructionGenerationList (inSource.mProperty_guardInstructionGenerationList),
+mProperty_effectiveParameterListIR (inSource.mProperty_effectiveParameterListIR) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandIR_2E_sync & GGS_guardedCommandIR_2E_sync::operator = (const GGS_guardedCommandIR_2E_sync & inSource) {
+  mProperty_isExitCommand = inSource.mProperty_isExitCommand ;
+  mProperty_guardMangledName = inSource.mProperty_guardMangledName ;
+  mProperty_guardInstructionGenerationList = inSource.mProperty_guardInstructionGenerationList ;
+  mProperty_effectiveParameterListIR = inSource.mProperty_effectiveParameterListIR ;
+  return *this ;
+}
+
+//---Synthetized initializer -----------------------------------------------------------------------
+
+GGS_guardedCommandIR_2E_sync GGS_guardedCommandIR_2E_sync::init_21__21__21__21_ (const GGS_bool & in_isExitCommand,
+                                                                                 const GGS_string & in_guardMangledName,
+                                                                                 const GGS_instructionListIR & in_guardInstructionGenerationList,
+                                                                                 const GGS_procCallEffectiveParameterListIR & in_effectiveParameterListIR,
+                                                                                 Compiler * inCompiler
+                                                                                 COMMA_UNUSED_LOCATION_ARGS) {
+  GGS_guardedCommandIR_2E_sync result ;
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_isExitCommand = in_isExitCommand ;
+  result.mProperty_guardMangledName = in_guardMangledName ;
+  result.mProperty_guardInstructionGenerationList = in_guardInstructionGenerationList ;
+  result.mProperty_effectiveParameterListIR = in_effectiveParameterListIR ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_guardedCommandIR_2E_sync::setInitializedProperties (Compiler * /* inCompiler */) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandIR_2E_sync::GGS_guardedCommandIR_2E_sync (const GGS_bool & inOperand0,
+                                                            const GGS_string & inOperand1,
+                                                            const GGS_instructionListIR & inOperand2,
+                                                            const GGS_procCallEffectiveParameterListIR & inOperand3) :
+mProperty_isExitCommand (inOperand0),
+mProperty_guardMangledName (inOperand1),
+mProperty_guardInstructionGenerationList (inOperand2),
+mProperty_effectiveParameterListIR (inOperand3) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_guardedCommandIR_2E_sync::isValid (void) const {
+  return mProperty_isExitCommand.isValid () && mProperty_guardMangledName.isValid () && mProperty_guardInstructionGenerationList.isValid () && mProperty_effectiveParameterListIR.isValid () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_guardedCommandIR_2E_sync::drop (void) {
+  mProperty_isExitCommand.drop () ;
+  mProperty_guardMangledName.drop () ;
+  mProperty_guardInstructionGenerationList.drop () ;
+  mProperty_effectiveParameterListIR.drop () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_guardedCommandIR_2E_sync::description (String & ioString,
+                                                const int32_t inIndentation) const {
+  ioString.appendCString ("<struct @guardedCommandIR.sync:") ;
+  if (! isValid ()) {
+    ioString.appendCString (" not built") ;
+  }else{
+    mProperty_isExitCommand.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_guardMangledName.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_guardInstructionGenerationList.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_effectiveParameterListIR.description (ioString, inIndentation+1) ;
+  }
+  ioString.appendCString (">") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//     @guardedCommandIR.sync generic code implementation
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_guardedCommandIR_2E_sync ("guardedCommandIR.sync",
+                                                                             nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor * GGS_guardedCommandIR_2E_sync::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_guardedCommandIR_2E_sync ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_guardedCommandIR_2E_sync::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_guardedCommandIR_2E_sync (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandIR_2E_sync GGS_guardedCommandIR_2E_sync::extractObject (const GGS_object & inObject,
+                                                                          Compiler * inCompiler
+                                                                          COMMA_LOCATION_ARGS) {
+  GGS_guardedCommandIR_2E_sync result ;
+  const GGS_guardedCommandIR_2E_sync * p = (const GGS_guardedCommandIR_2E_sync *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_guardedCommandIR_2E_sync *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("guardedCommandIR.sync", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//Optional @guardedCommandIR_2E_sync_3F_
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandIR_2E_sync_3F_::GGS_guardedCommandIR_2E_sync_3F_ (void) :
+AC_GALGAS_root (),
+mValue (),
+mState (OptionalState::invalid) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandIR_2E_sync_3F_::GGS_guardedCommandIR_2E_sync_3F_ (const GGS_guardedCommandIR_2E_sync & inSource) :
+AC_GALGAS_root (),
+mValue (inSource),
+mState (OptionalState::valuated) {
+}
+
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandIR_2E_sync_3F_ GGS_guardedCommandIR_2E_sync_3F_::init_nil (void) {
+  GGS_guardedCommandIR_2E_sync_3F_ result ;
+  result.mState = OptionalState::isNil ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_guardedCommandIR_2E_sync_3F_::isValid (void) const {
+  bool result = false ;
+  switch (mState) {
+  case OptionalState::invalid :
+    break ;
+  case OptionalState::isNil :
+    result = true ;
+    break ;
+  case OptionalState::valuated :
+    result = mValue.isValid () ;
+    break ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_guardedCommandIR_2E_sync_3F_::isValuated (void) const {
+  return (mState == OptionalState::valuated) && mValue.isValid () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_guardedCommandIR_2E_sync_3F_::drop (void) {
+  mState = OptionalState::invalid ;
+  mValue = GGS_guardedCommandIR_2E_sync () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_guardedCommandIR_2E_sync_3F_::description (String & ioString,
+                                                    const int32_t inIndentation) const {
+  ioString.appendCString ("<optional @") ;
+  ioString.appendString (staticTypeDescriptor ()->mGalgasTypeName) ;
+  ioString.appendCString (": ") ;
+  switch (mState) {
+  case OptionalState::invalid :
+    ioString.appendCString ("invalid") ;
+    break ;
+  case OptionalState::isNil :
+    ioString.appendCString ("nil") ;
+    break ;
+  case OptionalState::valuated :
+    mValue.description (ioString, inIndentation) ;
+    break ;
+  }
+  ioString.appendCString (">") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//     @guardedCommandIR.sync? generic code implementation
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_guardedCommandIR_2E_sync_3F_ ("guardedCommandIR.sync?",
+                                                                                 nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor * GGS_guardedCommandIR_2E_sync_3F_::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_guardedCommandIR_2E_sync_3F_ ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_guardedCommandIR_2E_sync_3F_::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_guardedCommandIR_2E_sync_3F_ (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandIR_2E_sync_3F_ GGS_guardedCommandIR_2E_sync_3F_::extractObject (const GGS_object & inObject,
+                                                                                  Compiler * inCompiler
+                                                                                  COMMA_LOCATION_ARGS) {
+  GGS_guardedCommandIR_2E_sync_3F_ result ;
+  const GGS_guardedCommandIR_2E_sync_3F_ * p = (const GGS_guardedCommandIR_2E_sync_3F_ *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_guardedCommandIR_2E_sync_3F_ *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("guardedCommandIR.sync?", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandIR_2E_boolAndSync::GGS_guardedCommandIR_2E_boolAndSync (void) :
+mProperty_isExitCommand (),
+mProperty_boolExpInstructionGenerationList (),
+mProperty_boolGuardBoolLLVMName (),
+mProperty_guardMangledName (),
+mProperty_guardInstructionGenerationList (),
+mProperty_effectiveParameterListIR () {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandIR_2E_boolAndSync::GGS_guardedCommandIR_2E_boolAndSync (const GGS_guardedCommandIR_2E_boolAndSync & inSource) :
+mProperty_isExitCommand (inSource.mProperty_isExitCommand),
+mProperty_boolExpInstructionGenerationList (inSource.mProperty_boolExpInstructionGenerationList),
+mProperty_boolGuardBoolLLVMName (inSource.mProperty_boolGuardBoolLLVMName),
+mProperty_guardMangledName (inSource.mProperty_guardMangledName),
+mProperty_guardInstructionGenerationList (inSource.mProperty_guardInstructionGenerationList),
+mProperty_effectiveParameterListIR (inSource.mProperty_effectiveParameterListIR) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandIR_2E_boolAndSync & GGS_guardedCommandIR_2E_boolAndSync::operator = (const GGS_guardedCommandIR_2E_boolAndSync & inSource) {
+  mProperty_isExitCommand = inSource.mProperty_isExitCommand ;
+  mProperty_boolExpInstructionGenerationList = inSource.mProperty_boolExpInstructionGenerationList ;
+  mProperty_boolGuardBoolLLVMName = inSource.mProperty_boolGuardBoolLLVMName ;
+  mProperty_guardMangledName = inSource.mProperty_guardMangledName ;
+  mProperty_guardInstructionGenerationList = inSource.mProperty_guardInstructionGenerationList ;
+  mProperty_effectiveParameterListIR = inSource.mProperty_effectiveParameterListIR ;
+  return *this ;
+}
+
+//---Synthetized initializer -----------------------------------------------------------------------
+
+GGS_guardedCommandIR_2E_boolAndSync GGS_guardedCommandIR_2E_boolAndSync::init_21__21__21__21__21__21_ (const GGS_bool & in_isExitCommand,
+                                                                                                       const GGS_instructionListIR & in_boolExpInstructionGenerationList,
+                                                                                                       const GGS_string & in_boolGuardBoolLLVMName,
+                                                                                                       const GGS_string & in_guardMangledName,
+                                                                                                       const GGS_instructionListIR & in_guardInstructionGenerationList,
+                                                                                                       const GGS_procCallEffectiveParameterListIR & in_effectiveParameterListIR,
+                                                                                                       Compiler * inCompiler
+                                                                                                       COMMA_UNUSED_LOCATION_ARGS) {
+  GGS_guardedCommandIR_2E_boolAndSync result ;
+  result.setInitializedProperties (inCompiler) ;
+  result.mProperty_isExitCommand = in_isExitCommand ;
+  result.mProperty_boolExpInstructionGenerationList = in_boolExpInstructionGenerationList ;
+  result.mProperty_boolGuardBoolLLVMName = in_boolGuardBoolLLVMName ;
+  result.mProperty_guardMangledName = in_guardMangledName ;
+  result.mProperty_guardInstructionGenerationList = in_guardInstructionGenerationList ;
+  result.mProperty_effectiveParameterListIR = in_effectiveParameterListIR ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_guardedCommandIR_2E_boolAndSync::setInitializedProperties (Compiler * /* inCompiler */) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandIR_2E_boolAndSync::GGS_guardedCommandIR_2E_boolAndSync (const GGS_bool & inOperand0,
+                                                                          const GGS_instructionListIR & inOperand1,
+                                                                          const GGS_string & inOperand2,
+                                                                          const GGS_string & inOperand3,
+                                                                          const GGS_instructionListIR & inOperand4,
+                                                                          const GGS_procCallEffectiveParameterListIR & inOperand5) :
+mProperty_isExitCommand (inOperand0),
+mProperty_boolExpInstructionGenerationList (inOperand1),
+mProperty_boolGuardBoolLLVMName (inOperand2),
+mProperty_guardMangledName (inOperand3),
+mProperty_guardInstructionGenerationList (inOperand4),
+mProperty_effectiveParameterListIR (inOperand5) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_guardedCommandIR_2E_boolAndSync::isValid (void) const {
+  return mProperty_isExitCommand.isValid () && mProperty_boolExpInstructionGenerationList.isValid () && mProperty_boolGuardBoolLLVMName.isValid () && mProperty_guardMangledName.isValid () && mProperty_guardInstructionGenerationList.isValid () && mProperty_effectiveParameterListIR.isValid () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_guardedCommandIR_2E_boolAndSync::drop (void) {
+  mProperty_isExitCommand.drop () ;
+  mProperty_boolExpInstructionGenerationList.drop () ;
+  mProperty_boolGuardBoolLLVMName.drop () ;
+  mProperty_guardMangledName.drop () ;
+  mProperty_guardInstructionGenerationList.drop () ;
+  mProperty_effectiveParameterListIR.drop () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_guardedCommandIR_2E_boolAndSync::description (String & ioString,
+                                                       const int32_t inIndentation) const {
+  ioString.appendCString ("<struct @guardedCommandIR.boolAndSync:") ;
+  if (! isValid ()) {
+    ioString.appendCString (" not built") ;
+  }else{
+    mProperty_isExitCommand.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_boolExpInstructionGenerationList.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_boolGuardBoolLLVMName.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_guardMangledName.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_guardInstructionGenerationList.description (ioString, inIndentation+1) ;
+    ioString.appendCString (", ") ;
+    mProperty_effectiveParameterListIR.description (ioString, inIndentation+1) ;
+  }
+  ioString.appendCString (">") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//     @guardedCommandIR.boolAndSync generic code implementation
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_guardedCommandIR_2E_boolAndSync ("guardedCommandIR.boolAndSync",
+                                                                                    nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor * GGS_guardedCommandIR_2E_boolAndSync::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_guardedCommandIR_2E_boolAndSync ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_guardedCommandIR_2E_boolAndSync::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_guardedCommandIR_2E_boolAndSync (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandIR_2E_boolAndSync GGS_guardedCommandIR_2E_boolAndSync::extractObject (const GGS_object & inObject,
+                                                                                        Compiler * inCompiler
+                                                                                        COMMA_LOCATION_ARGS) {
+  GGS_guardedCommandIR_2E_boolAndSync result ;
+  const GGS_guardedCommandIR_2E_boolAndSync * p = (const GGS_guardedCommandIR_2E_boolAndSync *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_guardedCommandIR_2E_boolAndSync *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("guardedCommandIR.boolAndSync", p->dynamicTypeDescriptor () COMMA_THERE) ;
+    }  
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//Optional @guardedCommandIR_2E_boolAndSync_3F_
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandIR_2E_boolAndSync_3F_::GGS_guardedCommandIR_2E_boolAndSync_3F_ (void) :
+AC_GALGAS_root (),
+mValue (),
+mState (OptionalState::invalid) {
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandIR_2E_boolAndSync_3F_::GGS_guardedCommandIR_2E_boolAndSync_3F_ (const GGS_guardedCommandIR_2E_boolAndSync & inSource) :
+AC_GALGAS_root (),
+mValue (inSource),
+mState (OptionalState::valuated) {
+}
+
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandIR_2E_boolAndSync_3F_ GGS_guardedCommandIR_2E_boolAndSync_3F_::init_nil (void) {
+  GGS_guardedCommandIR_2E_boolAndSync_3F_ result ;
+  result.mState = OptionalState::isNil ;
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_guardedCommandIR_2E_boolAndSync_3F_::isValid (void) const {
+  bool result = false ;
+  switch (mState) {
+  case OptionalState::invalid :
+    break ;
+  case OptionalState::isNil :
+    result = true ;
+    break ;
+  case OptionalState::valuated :
+    result = mValue.isValid () ;
+    break ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+bool GGS_guardedCommandIR_2E_boolAndSync_3F_::isValuated (void) const {
+  return (mState == OptionalState::valuated) && mValue.isValid () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_guardedCommandIR_2E_boolAndSync_3F_::drop (void) {
+  mState = OptionalState::invalid ;
+  mValue = GGS_guardedCommandIR_2E_boolAndSync () ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+void GGS_guardedCommandIR_2E_boolAndSync_3F_::description (String & ioString,
+                                                           const int32_t inIndentation) const {
+  ioString.appendCString ("<optional @") ;
+  ioString.appendString (staticTypeDescriptor ()->mGalgasTypeName) ;
+  ioString.appendCString (": ") ;
+  switch (mState) {
+  case OptionalState::invalid :
+    ioString.appendCString ("invalid") ;
+    break ;
+  case OptionalState::isNil :
+    ioString.appendCString ("nil") ;
+    break ;
+  case OptionalState::valuated :
+    mValue.description (ioString, inIndentation) ;
+    break ;
+  }
+  ioString.appendCString (">") ;
+}
+
+//--------------------------------------------------------------------------------------------------
+//     @guardedCommandIR.boolAndSync? generic code implementation
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_guardedCommandIR_2E_boolAndSync_3F_ ("guardedCommandIR.boolAndSync?",
+                                                                                        nullptr) ;
+
+//--------------------------------------------------------------------------------------------------
+
+const GALGAS_TypeDescriptor * GGS_guardedCommandIR_2E_boolAndSync_3F_::staticTypeDescriptor (void) const {
+  return & kTypeDescriptor_GALGAS_guardedCommandIR_2E_boolAndSync_3F_ ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+AC_GALGAS_root * GGS_guardedCommandIR_2E_boolAndSync_3F_::clonedObject (void) const {
+  AC_GALGAS_root * result = nullptr ;
+  if (isValid ()) {
+    macroMyNew (result, GGS_guardedCommandIR_2E_boolAndSync_3F_ (*this)) ;
+  }
+  return result ;
+}
+
+//--------------------------------------------------------------------------------------------------
+
+GGS_guardedCommandIR_2E_boolAndSync_3F_ GGS_guardedCommandIR_2E_boolAndSync_3F_::extractObject (const GGS_object & inObject,
+                                                                                                Compiler * inCompiler
+                                                                                                COMMA_LOCATION_ARGS) {
+  GGS_guardedCommandIR_2E_boolAndSync_3F_ result ;
+  const GGS_guardedCommandIR_2E_boolAndSync_3F_ * p = (const GGS_guardedCommandIR_2E_boolAndSync_3F_ *) inObject.embeddedObject () ;
+  if (nullptr != p) {
+    if (nullptr != dynamic_cast <const GGS_guardedCommandIR_2E_boolAndSync_3F_ *> (p)) {
+      result = *p ;
+    }else{
+      inCompiler->castError ("guardedCommandIR.boolAndSync?", p->dynamicTypeDescriptor () COMMA_THERE) ;
     }  
   }
   return result ;

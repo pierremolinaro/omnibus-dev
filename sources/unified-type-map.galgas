@@ -1,19 +1,19 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#                                           
-#  semantics definitions for semantics component 
-#                                           
-#  Copyright (C) 2022, ..., 2022 Pierre Molinaro.
-#                                           
-#  e-mail : pierre@pcmolinaro.name          
-#                                           
-#  This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public
-#  License as published by the Free Software Foundation.
-#                                           
-#  This program is distributed in the hope it will be useful, but WITHOUT ANY WARRANTY; without even the implied
-#  warranty of MERCHANDIBILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
-#  details.                                 
-#                                           
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//                                           
+//  semantics definitions for semantics component 
+//                                           
+//  Copyright (C) 2022, ..., 2022 Pierre Molinaro.
+//                                           
+//  e-mail : pierre@pcmolinaro.name          
+//                                           
+//  This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public
+//  License as published by the Free Software Foundation.
+//                                           
+//  This program is distributed in the hope it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+//  warranty of MERCHANDIBILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+//  details.                                 
+//                                           
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @unifiedTypeMap unsolvedEntryList -> @lstringlist {
   result = @[]
@@ -24,7 +24,7 @@ getter @unifiedTypeMap unsolvedEntryList -> @lstringlist {
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 setter @unifiedTypeMap makeEntry ?let @lstring inLKey !@unifiedTypeMapEntry outEntry {
   if let node = self @[inLKey] then
@@ -36,7 +36,7 @@ setter @unifiedTypeMap makeEntry ?let @lstring inLKey !@unifiedTypeMapEntry outE
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 setter @unifiedTypeMap makeOptionalEntry ?let @lstring inLKey !@unifiedTypeMapEntry outEntry {
   if inLKey.string == "" then
@@ -50,7 +50,7 @@ setter @unifiedTypeMap makeOptionalEntry ?let @lstring inLKey !@unifiedTypeMapEn
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 setter @unifiedTypeMap makeEntryFromString ?let @string inKey !@unifiedTypeMapEntry outEntry {
   if let node = self @[inKey] then
@@ -62,7 +62,7 @@ setter @unifiedTypeMap makeEntryFromString ?let @string inKey !@unifiedTypeMapEn
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @unifiedTypeMap searchKey ?let @lstring inLKey -> @unifiedTypeMapEntry {
   if inLKey.string == "" then
@@ -74,7 +74,7 @@ getter @unifiedTypeMap searchKey ?let @lstring inLKey -> @unifiedTypeMapEntry {
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 setter @unifiedTypeMap insertType ?let @lstring inTypeName ?type: let @omnibusType inTypeDefinition {
   if let node = self @[inTypeName] then
@@ -91,7 +91,7 @@ setter @unifiedTypeMap insertType ?let @lstring inTypeName ?type: let @omnibusTy
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @unifiedTypeMap searchType ?lkey: let @lstring inLKey
                                   !type: @omnibusType outTypeDefinition {
@@ -107,39 +107,39 @@ method @unifiedTypeMap searchType ?lkey: let @lstring inLKey
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#! Types
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//! Types
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @unifiedTypeMap {
   private var @unifiedTypeMapElementClass mElement
   insert internalInsertKey error message "the '%K' key is already declared in %L"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @unifiedTypeMapElementClass {
   public var @lstring mTypeName
   public var @typeDefinition mDefinition
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @typeDefinition {
   case unsolved
   case solved (@omnibusType type)
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @unifiedTypeMapEntry %equatable {
   case null
   case element (@unifiedTypeMapElementClass? weakElement)
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-# @unifiedTypeMapElementClass getters
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+// @unifiedTypeMapElementClass getters
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @unifiedTypeMapElementClass definition -> @omnibusType {
   switch self.mDefinition
@@ -150,9 +150,9 @@ getter @unifiedTypeMapElementClass definition -> @omnibusType {
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#! @unifiedTypeMapEntry getters
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//! @unifiedTypeMapEntry getters
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @unifiedTypeMapEntry type -> @omnibusType {
   switch self
@@ -172,7 +172,7 @@ getter @unifiedTypeMapEntry type -> @omnibusType {
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @unifiedTypeMapEntry key -> @string {
   switch self
@@ -187,4 +187,4 @@ getter @unifiedTypeMapEntry key -> @string {
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

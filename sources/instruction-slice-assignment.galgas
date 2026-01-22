@@ -1,6 +1,6 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                                  
+//-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @sliceAssignmentInstructionAST : @instructionAST {
   public var @lstring mTypeName
@@ -9,14 +9,14 @@ class @sliceAssignmentInstructionAST : @instructionAST {
   public var @location mSourceExpressionLocation
 }
 
-#·······················································································································
+//·······················································································································
 
 list @sliceAssignmentListAST {
   public var @lstring mSliceWidth
   public var @sliceTargetAST mSliceKind
 }
 
-#·······················································································································
+//·······················································································································
 
 enum @sliceTargetAST {
   case discarded
@@ -25,13 +25,13 @@ enum @sliceTargetAST {
   case lValue (@LValueAST target)
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
     ${$
@@ -59,10 +59,10 @@ syntax extension omnibus_syntax {
     while
     end
     $}$
-  #--- Source expression
+  //--- Source expression
     $=$
     <expression> !?ioAST ?let sourceExpression
-  #--- AST
+  //--- AST
     ioInstructionList += !@sliceAssignmentInstructionAST {
       !typeName.location
       !typeName
@@ -72,13 +72,13 @@ syntax extension omnibus_syntax {
     }
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  NOTE TYPES                                                                                                           
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  NOTE TYPES                                                                                                           
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @sliceAssignmentInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [!?ioGraph noteNode !self.mTypeName]
@@ -94,9 +94,9 @@ override method @sliceAssignmentInstructionAST noteInstructionTypesInPrecedenceG
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTICS                                                                                                            
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SEMANTICS                                                                                                            
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
   ?self:let @omnibusType inSelfType
@@ -109,9 +109,9 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-#--- Search Type
+//--- Search Type
   let resultType = [[inContext.mTypeMap searchKey !self.mTypeName] type]
-#--- Check type is an unsigned integer type
+//--- Check type is an unsigned integer type
   var @uint bitCount
   if not [resultType.kind isInteger] then
     error self.mTypeName: "this type should be an unsigned integer type" : bitCount
@@ -121,7 +121,7 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
       error self.mTypeName: "this type should be an unsigned integer type" : bitCount
     end
   end
-#--- Analyze source expression
+//--- Analyze source expression
   [self.mSourceExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
@@ -135,9 +135,9 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
     !?instructionListIR:ioInstructionGenerationList
     ?result:@objectIR sourceOperand
   ]
-#--- Load from reference ?
+//--- Load from reference ?
   [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?sourceOperand]
-#--- If source operand is static type, check value and convert it to 'resultType'
+//--- If source operand is static type, check value and convert it to 'resultType'
   if [sourceOperand isLiteralInteger] then
     [sourceOperand extractLiteralInteger ?1* ?value:let @bigint value]
     if value >= (1 << bitCount) then
@@ -146,11 +146,11 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
       sourceOperand = .literalInteger {!type:resultType !value:value}
     end
   end
-#--- Analyze slices
+//--- Analyze slices
   var rightShiftAmount = bitCount
   for (sliceWidthStr sliceKind) in self.mSliceAssignmentList do
     var sourceOperandForSlicing = sourceOperand
-  #--- Analyze selector
+  //--- Analyze selector
     let @lstring sliceTypeName
     let @uint sliceWidth
     if sliceWidthStr.string == "" then
@@ -175,25 +175,25 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
       rightShiftAmount = 0
     end
     let sliceType = [[inContext.mTypeMap searchKey !sliceTypeName] type]
-  #--- Shift and truncate source value
+  //--- Shift and truncate source value
     [!?ioInstructionGenerationList appendLogicalShiftRight !?sourceOperandForSlicing !rightShiftAmount !?ioTemporaries]
     [!?ioInstructionGenerationList appendTrunc !sliceType !?sourceOperandForSlicing !?ioTemporaries]
-  #--- Analyze target
+  //--- Analyze target
     switch sliceKind
     case discarded :
     case varDeclaration (varName) :
-    #--- Declare local variable
+    //--- Declare local variable
       let omnibusLocalVariableName = @lstring {!varName.string + "." + ioTemporaries.mTemporaryIndex !varName}
       ioTemporaries.mTemporaryIndex += 1
       [!?ioUniversalMap insertLocalVariable !varName !sliceType !omnibusLocalVariableName !.hasUnreadValue !false]
-    #--- Code generation
+    //--- Code generation
       ioAllocaList += !llvmNameForLocalVariable (!omnibusLocalVariableName) !sliceType !false
-    #--- Target reference
+    //--- Target reference
       let targetRef = @LValueRepresentation {
         !sliceType
         !llvmNameForLocalVariable (!omnibusLocalVariableName)
       }
-   #--- Generate assignment instruction
+   //--- Generate assignment instruction
       [!?ioInstructionGenerationList appendCopyFromReferences
         !inContext.mAssignmentOperatorMap
         !?ioTemporaries
@@ -202,18 +202,18 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
         !target:targetRef
       ]
     case letDeclaration (letName) :
-    #--- Declare local constant
+    //--- Declare local constant
       let omnibusLocalVariableName = @lstring {!letName.string + "." + ioTemporaries.mTemporaryIndex !letName}
       ioTemporaries.mTemporaryIndex += 1
       [!?ioUniversalMap insertLocalConstant !letName !false !sliceType !omnibusLocalVariableName]
-    #--- Code generation
+    //--- Code generation
       ioAllocaList += !llvmNameForLocalVariable (!omnibusLocalVariableName) !sliceType !false
-    #--- Target reference
+    //--- Target reference
       let targetRef = @LValueRepresentation {
         !sliceType
         !llvmNameForLocalVariable (!omnibusLocalVariableName)
        }
-    #--- Generate assignment instruction
+    //--- Generate assignment instruction
       [!?ioInstructionGenerationList appendCopyFromReferences
         !inContext.mAssignmentOperatorMap
         !?ioTemporaries
@@ -235,7 +235,7 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
         !?instructionListIR: ioInstructionGenerationList
         ?let @LValueRepresentation lvalueIR
       ]
-    #--- Generate assignment instruction
+    //--- Generate assignment instruction
       [!?ioInstructionGenerationList appendCopyFromReferences
         !inContext.mAssignmentOperatorMap
         !?ioTemporaries
@@ -247,4 +247,4 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

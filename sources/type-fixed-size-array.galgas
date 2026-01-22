@@ -1,6 +1,6 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @fixedSizeArrayTypeDeclarationAST : @abstractDeclarationAST {
   public var @lstring mFixedSizeArrayType
@@ -9,13 +9,13 @@ class @fixedSizeArrayTypeDeclarationAST : @abstractDeclarationAST {
   public var @location mSizeExpressionLocation
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <type_definition> ?!@ast ioAST !@lstring outTypeName {
     $[$
@@ -34,13 +34,13 @@ syntax extension omnibus_syntax {
     }
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  PRECEDENCE GRAPH                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @fixedSizeArrayTypeDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [!?ioGraph addNode !self.mFixedSizeArrayType !self]
@@ -50,21 +50,21 @@ override method @fixedSizeArrayTypeDeclarationAST enterInPrecedenceGraph ?!@sema
   [!?ioGraph addEdge !from: self.mFixedSizeArrayType !to: rootNode]
 }
 
-#·······················································································································
+//·······················································································································
 
 override getter @fixedSizeArrayTypeDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = "anonymous $" + self.mFixedSizeArrayType 
 }
 
-#·······················································································································
+//·······················································································································
 
 override getter @fixedSizeArrayTypeDeclarationAST locationForErrorSignaling -> @location outLocation {
   outLocation = self.mFixedSizeArrayType.location
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  ENTER IN CONTEXT                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  ENTER IN CONTEXT                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @fixedSizeArrayTypeDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
@@ -76,7 +76,7 @@ override method @fixedSizeArrayTypeDeclarationAST enterInContext
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR ioUserLLVMTypeDefinitionListIR
 {
-#--- Get element type
+//--- Get element type
   [ioContext.mTypeMap searchType !lkey:self.mElementTypeName ?type:let elementType]
   if not [elementType copyable] then
     error self.mElementTypeName : "an array element should be copyable"
@@ -84,7 +84,7 @@ override method @fixedSizeArrayTypeDeclarationAST enterInContext
   if not [elementType instanciable] then
     error self.mElementTypeName : "an array element should be instanciable"
   end
-#--- Compute array size
+//--- Compute array size
   computeStaticExpression (
     !?context: ioContext
     !?staticEntityMap:ioStaticEntityMap
@@ -97,7 +97,7 @@ override method @fixedSizeArrayTypeDeclarationAST enterInContext
     error self.mSizeExpressionLocation : "array size expression is a literal interger expression"
   else
     [sizeExpressionIR extractLiteralInteger ?1* ?value:let arraySize]
-  #-------------------------------------------- Original type name
+  //-------------------------------------------- Original type name
     let omnibusTypeDescriptionName = @lstring {!"[" + arraySize + " • " + elementType.omnibusTypeDescriptionName + "]" !self.mFixedSizeArrayType}
     let llvmBaseTypeName = @lstring {!elementType.llvmBaseTypeName + "-" + arraySize !self.mFixedSizeArrayType}
     if [ioContext.mTypeMap hasKey !omnibusTypeDescriptionName] then
@@ -107,25 +107,25 @@ override method @fixedSizeArrayTypeDeclarationAST enterInContext
         !type:type
       ]
     else
-    #-------------------------------------------- Class method map : add "count" constructor
+    //-------------------------------------------- Class method map : add "count" constructor
       var @constantMap constantMap = @()
       [!?constantMap insertKey ! @{!"count" !self.mFixedSizeArrayType} !arraySize ![ctIntegerTypeName () nowhere]]
       [!?ioContext.mTypeConstantMap insertKey
         !omnibusTypeDescriptionName
         !constantMap
       ]
-    #-------------------------------------------- Property map
+    //-------------------------------------------- Property map
      [!?ioContext insertGetter
        !omnibusTypeName: omnibusTypeDescriptionName
        ! @{!"count" !omnibusTypeDescriptionName.location}
         !.isPublic
         !.constantProperty {!value:.literalInteger {!type: compileTimeIntegerType () !value:arraySize}}
       ]
-    #-------------------------------------------- Constructor map
+    //-------------------------------------------- Constructor map
       var @constructorMap constructorMap = @()
-    #--- Constructor (!repeated)
+    //--- Constructor (!repeated)
       [!?constructorMap insertKey !["(!repeated)" nowhere] !@() !.arrayValue {!elementType:elementType !size:arraySize}]
-    #--- Constructor (!!!!)
+    //--- Constructor (!!!!)
       var constructorName = "("
       for * in 0 ..< [arraySize uint] do
         constructorName += "!"
@@ -133,9 +133,9 @@ override method @fixedSizeArrayTypeDeclarationAST enterInContext
       constructorName += ")"
       [!?constructorMap insertKey ![constructorName nowhere] !@() !.arrayValue {!elementType:elementType !size:arraySize}]
       [!?ioContext.mTypeConstructorMap insertKey !omnibusTypeDescriptionName !constructorMap]
-    #-------------------------------------------- Type attributes
+    //-------------------------------------------- Type attributes
       let @omnibusTypeAttributes typeAttributes = .instanciable | .copyable
-    #-------------------------------------------- Enter in type map
+    //-------------------------------------------- Enter in type map
       let arrayType = @omnibusType {
         !subscript:.staticSubscript {!elementType:elementType !size:arraySize}
         !attributes:typeAttributes
@@ -151,13 +151,13 @@ override method @fixedSizeArrayTypeDeclarationAST enterInContext
         !omnibusTypeDescriptionName
         !type:arrayType
       ]
-    #-------------------------------------------- GenerateLLVM type definition
+    //-------------------------------------------- GenerateLLVM type definition
       ioUserLLVMTypeDefinitionListIR += !@userLLVMStaticArrayTypeDefinitionIR {
         ![arrayType llvmTypeName]
         !elementType
         !arraySize
       }
-    #---------- Enter assign repeated value to fixed array size function
+    //---------- Enter assign repeated value to fixed array size function
       let assignValueToElements_functionName = assignValueToFixedSizeArrayElements_functionName (!arrayType)
       ioRoutineListIR += !@assignRepeatedValueToFixedSizeArrayElementsFunctionIR {
         ![assignValueToElements_functionName nowhere]
@@ -174,37 +174,37 @@ override method @fixedSizeArrayTypeDeclarationAST enterInContext
         !warnsIfUnused: false
         !arrayType
       }
-   #--- Enter assignment operator
+   //--- Enter assignment operator
       let key = assignmentOperatorKey (!arrayType !self.mFixedSizeArrayType.location !arrayType)
       [!?ioContext.mAssignmentOperatorMap insertKey !key !@fixedSizeArrayAssignmentOperatorUsage {!elementType !arraySize !assignValueToElements_functionName}]
     end
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func assignValueToFixedSizeArrayElements_functionName ?let @omnibusType inFixedSizeArrayType -> @string {
   result = "assign.value.to.fixed.size.array." + inFixedSizeArrayType.llvmBaseTypeName
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#! USER LLVM TYPE DEFINITION
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//! USER LLVM TYPE DEFINITION
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @userLLVMStaticArrayTypeDefinitionIR : @userLLVMTypeDefinitionIR {
   public var @omnibusType mElementType
   public var @bigint mSize
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @userLLVMStaticArrayTypeDefinitionIR generateLLVMType ?!@string ioLLVMcode {
   ioLLVMcode += self.mLLVMDefinedTypeName + " = type [" + self.mSize + " x " + [self.mElementType llvmTypeName] + "]\n"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#! CODE GENERATION: STATIC ARRAY ASSIGNMENT
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//! CODE GENERATION: STATIC ARRAY ASSIGNMENT
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @fixedSizeArrayAssignmentOperatorUsage : @abstractAssignmentOperatorUsage {
   public var @omnibusType mElementType
@@ -212,7 +212,7 @@ class @fixedSizeArrayAssignmentOperatorUsage : @abstractAssignmentOperatorUsage 
   public var @string mAssignValueToElements_functionName
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @fixedSizeArrayAssignmentOperatorUsage generateCode
     ?!@semanticTemporariesStruct ioTemporaries
@@ -285,7 +285,7 @@ override method @fixedSizeArrayAssignmentOperatorUsage generateCode
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @assignRepeatedValueToFixedSizeArrayElementsFunctionIR : @abstractRoutineIR {
   public var @omnibusType mFixedSizeArrayType
@@ -293,7 +293,7 @@ class @assignRepeatedValueToFixedSizeArrayElementsFunctionIR : @abstractRoutineI
   public var @uint mArraySize
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @assignRepeatedValueToFixedSizeArrayElementsFunctionIR llvmCodeGeneration 
   ?!@string ioLLVMcode
@@ -320,13 +320,13 @@ override method @assignRepeatedValueToFixedSizeArrayElementsFunctionIR llvmCodeG
   ioLLVMcode += "}\n\n"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @staticArrayTypeAssignFunctionIR : @abstractRoutineIR {
   public var @omnibusType mFixedSizeArrayType
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @staticArrayTypeAssignFunctionIR llvmCodeGeneration 
   ?!@string ioLLVMcode
@@ -406,4 +406,4 @@ override method @staticArrayTypeAssignFunctionIR llvmCodeGeneration
   ioLLVMcode += "}\n\n"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

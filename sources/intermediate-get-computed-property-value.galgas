@@ -11,7 +11,7 @@ setter @instructionListIR appendGetComputedPropertyValue
   self += !@getComputedPropertyValueIR {!inReceiverIR !inLLVMGetterName !outResultValueIR}
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @getComputedPropertyValueIR : @abstractInstructionIR {
   public var @objectIR mReceiverIR
@@ -19,7 +19,7 @@ class @getComputedPropertyValueIR : @abstractInstructionIR {
   public var @objectIR mResultValueIR
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @getComputedPropertyValueIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -31,7 +31,7 @@ override method @getComputedPropertyValueIR llvmInstructionCode
   ioLLVMcode += " (" + [[self.mReceiverIR type] llvmTypeName] + "* " + [self.mReceiverIR llvmName] + ")\n"
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @getComputedPropertyValueIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
@@ -40,4 +40,4 @@ override method @getComputedPropertyValueIR enterAccessibleEntities
   ioInvokedRoutineSet ++= self.mLLVMGetterName
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

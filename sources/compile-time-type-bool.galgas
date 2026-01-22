@@ -1,19 +1,19 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @compiletimeBoolAST : @abstractDeclarationAST {
 }
 
-#·······················································································································
+//·······················································································································
 
 override getter @compiletimeBoolAST locationForErrorSignaling -> @location outLocation {
   outLocation = .nowhere
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  PRECEDENCE GRAPH                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @compiletimeBoolAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
@@ -22,21 +22,21 @@ override method @compiletimeBoolAST enterInPrecedenceGraph
   [!?ioGraph addNode !nodeName !self]
 }
 
-#·······················································································································
+//·······················································································································
 
 override getter @compiletimeBoolAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = ctBoolTypeName ()
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  ENTER IN CONTEXT                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  ENTER IN CONTEXT                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func %once ctBoolTypeName ->@string {
   result = "ctBool"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @compiletimeBoolAST enterInContext
   ?!context:@semanticContext ioContext
@@ -50,33 +50,33 @@ override method @compiletimeBoolAST enterInContext
 {
   let ctBoolTypeName = [ctBoolTypeName () nowhere]
   let ctBoolType = compileTimeBoolType ()
- #--- Enter type
+ //--- Enter type
   [!?ioContext.mTypeMap insertType ! ctBoolTypeName !type: ctBoolType]
- #--- Enter not prefix operator
+ //--- Enter not prefix operator
   var key = prefixOperatorMapKey (!ctBoolType !.notOp !.nowhere)
   [!?ioContext.mPrefixOperatorMap insertKey !key !ctBoolType !ctBoolType !@compileTimeBoolNotOperator ()]
- #--- Enter | infix operator
+ //--- Enter | infix operator
   key = infixOperatorMapKey (!ctBoolType !.bitWiseOrOp !.nowhere !ctBoolType)
   [!?ioContext.mInfixOperatorMap insertKey !key !ctBoolType !@compileTimeBoolOrOperator ()]
- #--- Enter ^ infix operator
+ //--- Enter ^ infix operator
   key = infixOperatorMapKey (!ctBoolType !.bitWiseXorOp !.nowhere !ctBoolType)
   [!?ioContext.mInfixOperatorMap insertKey !key !ctBoolType !@compileTimeBoolXorOperator ()]
- #--- Enter == infix operator
+ //--- Enter == infix operator
   key = infixOperatorMapKey (!ctBoolType !.equal !.nowhere !ctBoolType)
   [!?ioContext.mInfixOperatorMap insertKey !key !ctBoolType !@compileTimeBoolEqualOperator ()]
-#--- Implicit conversion to i1 for test expressions
+//--- Implicit conversion to i1 for test expressions
   key = @lstring {!ctBoolType.omnibusTypeDescriptionName !.nowhere}
   [!?ioContext.mImplicitConversionToBooleanMap insertKey !key !@compileTimeBoolImplicitConverterToBoolean ()]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  IMPLICIT CONVERSION TO i1
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  IMPLICIT CONVERSION TO i1
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @compileTimeBoolImplicitConverterToBoolean : @abstractImplicitConverterToBoolean {
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @compileTimeBoolImplicitConverterToBoolean generateConvertToBooleanCode
   ?let @objectIR inReceiverOperand
@@ -90,14 +90,14 @@ override method @compileTimeBoolImplicitConverterToBoolean generateConvertToBool
   outResult = .compileTime {!value: receiverValue != 0}
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  COMPILE TIME PREFIX OPERATOR
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  COMPILE TIME PREFIX OPERATOR
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @compileTimeBoolNotOperator : @prefixOperatorUsage {
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @compileTimeBoolNotOperator generateCode
   ?let @objectIR inReceiverOperand
@@ -113,14 +113,14 @@ override method @compileTimeBoolNotOperator generateCode
   outResultValue = .literalInteger {!type: inResultType !value: if receiverValue == 0 then 1 else 0 end}
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  COMPILE TIME INFIX OPERATORS
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  COMPILE TIME INFIX OPERATORS
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @compileTimeBoolEqualOperator : @omnibusInfixOperatorUsage {
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @compileTimeBoolEqualOperator generateCode
   ?let @objectIR inLeftOperand
@@ -137,12 +137,12 @@ override method @compileTimeBoolEqualOperator generateCode
   outResultValue = .literalInteger {!type: inResultType !value: leftValue == rightValue}
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @compileTimeBoolXorOperator : @omnibusInfixOperatorUsage {
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @compileTimeBoolXorOperator generateCode
   ?let @objectIR inLeftOperand
@@ -159,12 +159,12 @@ override method @compileTimeBoolXorOperator generateCode
   outResultValue = .literalInteger {!type: inResultType !value: leftValue ^ rightValue}
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @compileTimeBoolOrOperator : @omnibusInfixOperatorUsage {
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @compileTimeBoolOrOperator generateCode
   ?let @objectIR inLeftOperand
@@ -181,4 +181,4 @@ override method @compileTimeBoolOrOperator generateCode
   outResultValue = .literalInteger {!type: inResultType !value: leftValue | rightValue}
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

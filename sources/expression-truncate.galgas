@@ -1,6 +1,6 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @truncateExpressionAST : @expressionAST {
   public var @expressionAST mExpression
@@ -8,13 +8,13 @@ class @truncateExpressionAST : @expressionAST {
   public var @location mEndOfExpression
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     $truncate$
@@ -35,13 +35,13 @@ syntax extension omnibus_syntax {
     }
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @truncateExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
@@ -53,9 +53,9 @@ override method @truncateExpressionAST addDependenceEdgeForStaticExpression
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  NOTE TYPES                                                                                                           
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  NOTE TYPES                                                                                                           
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @truncateExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [self.mExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
@@ -64,11 +64,11 @@ override method @truncateExpressionAST noteExpressionTypesInPrecedenceGraph ?!@s
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTICS                                                                                                            
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#! @truncateExpressionAST
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SEMANTICS                                                                                                            
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//! @truncateExpressionAST
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @truncateExpressionAST analyzeExpression
   ?self:let @omnibusType inSelfType
@@ -83,7 +83,7 @@ override method @truncateExpressionAST analyzeExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
 {
-#--- Analyze expression
+//--- Analyze expression
   [self.mExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
@@ -101,12 +101,12 @@ override method @truncateExpressionAST analyzeExpression
     !?ioTemporaries
     !?expressionResult
   ]  
-#--- Analyze type
+//--- Analyze type
   let @omnibusType resultType = if self.mTypeName.string == ""
     then inOptionalTargetType
     else [[inContext.mTypeMap searchKey !self.mTypeName] type]
   end
-#--- Check types
+//--- Check types
   if not [resultType.kind isInteger] then
     error self.mTypeName : "this type is not an integer type" : outResult
   elsif not [[expressionResult type].kind isInteger] then
@@ -130,18 +130,18 @@ override method @truncateExpressionAST analyzeExpression
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  CODE GENERATION                                                                                                      
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#! @truncateInstructionIR
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  CODE GENERATION                                                                                                      
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//! @truncateInstructionIR
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @truncateInstructionIR : @abstractInstructionIR {
   public var @objectIR mTarget
   public var @objectIR mOperand
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @truncateInstructionIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -153,4 +153,4 @@ override method @truncateInstructionIR llvmInstructionCode
      + " to " + [self.mTarget llvmTypeName] + "\n"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

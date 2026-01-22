@@ -9,744 +9,33 @@
 #include "all-declarations-12.h"
 
 //--------------------------------------------------------------------------------------------------
-//
-//Extension method '@decoratedTaskList.element taskSemanticAnalysis'
-//
+//  GRAMMAR omnibus_target_grammar
 //--------------------------------------------------------------------------------------------------
 
-void extensionMethod_taskSemanticAnalysis (const class GGS_decoratedTaskList_2E_element inObject,
-                                           const class GGS_semanticContext constin_inContext,
-                                           const class GGS_uint constin_inPriority,
-                                           class GGS_semanticTemporariesStruct & io_ioTemporaries,
-                                           class GGS_intermediateCodeStruct & io_ioIntermediateCodeStruct,
-                                           class Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Routine 'analyzeOrderedTaskRoutines?!'
-//
-//--------------------------------------------------------------------------------------------------
-
-void routine_analyzeOrderedTaskRoutines_3F__21_ (const class GGS_taskSetupListAST constinArgument0,
-                                                 class GGS_stringlist & outArgument1,
-                                                 class Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension method '@driverListIR.element generateLLVMDriverVariableDefinition'
-//
-//--------------------------------------------------------------------------------------------------
-
-void extensionMethod_generateLLVMDriverVariableDefinition (const class GGS_driverListIR_2E_element inObject,
-                                                           class GGS_string & io_ioLLVMcode,
-                                                           class Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension method '@controlRegisterDeclarationList.element buildControlRegisterMapForGroup'
-//
-//--------------------------------------------------------------------------------------------------
-
-void extensionMethod_buildControlRegisterMapForGroup (const class GGS_controlRegisterDeclarationList_2E_element inObject,
-                                                      class GGS_semanticContext & io_ioContext,
-                                                      class GGS_controlRegisterMap & io_ioControlRegisterMap,
-                                                      class GGS_staticEntityMap & io_ioStaticEntityMap,
-                                                      class Compiler * inCompiler
-                                                      COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Routine 'buildControlRegisterSliceMap??&context&type?bitCount!!!'
-//
-//--------------------------------------------------------------------------------------------------
-
-void routine_buildControlRegisterSliceMap_3F__3F__26_context_26_type_3F_bitCount_21__21__21_ (const class GGS_controlRegisterBitSliceList constinArgument0,
-                                                                                              const class GGS_location constinArgument1,
-                                                                                              class GGS_semanticContext & ioArgument2,
-                                                                                              class GGS_omnibusType & ioArgument3,
-                                                                                              const class GGS_uint constinArgument4,
-                                                                                              class GGS_controlRegisterFieldMap & outArgument5,
-                                                                                              class GGS_sliceMap & outArgument6,
-                                                                                              class GGS_controlRegisterFieldList & outArgument7,
-                                                                                              class Compiler * inCompiler
-                                                                                              COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Routine 'computeStaticExpression&context&staticEntityMap?expression?errorLocation?optionalContextualTypeName!result'
-//
-//--------------------------------------------------------------------------------------------------
-
-void routine_computeStaticExpression_26_context_26_staticEntityMap_3F_expression_3F_errorLocation_3F_optionalContextualTypeName_21_result (class GGS_semanticContext & ioArgument0,
-                                                                                                                                           class GGS_staticEntityMap & ioArgument1,
-                                                                                                                                           const class GGS_expressionAST constinArgument2,
-                                                                                                                                           const class GGS_location constinArgument3,
-                                                                                                                                           const class GGS_lstring constinArgument4,
-                                                                                                                                           class GGS_objectIR & outArgument5,
-                                                                                                                                           class Compiler * inCompiler
-                                                                                                                                           COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Routine 'controlRegisterType?&context!type!bitCount'
-//
-//--------------------------------------------------------------------------------------------------
-
-void routine_controlRegisterType_3F__26_context_21_type_21_bitCount (const class GGS_lstring constinArgument0,
-                                                                     class GGS_semanticContext & ioArgument1,
-                                                                     class GGS_omnibusType & outArgument2,
-                                                                     class GGS_uint & outArgument3,
-                                                                     class Compiler * inCompiler
-                                                                     COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//  GRAMMAR omnibus_grammar
-//--------------------------------------------------------------------------------------------------
-
-class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
-//------------------------------------- 'assignment_combined_with_operator' non terminal
+class cGrammar_omnibus_5F_target_5F_grammar : public cParser_omnibus_5F_target_5F_specific_5F_syntax {
+//------------------------------------- 'configuration_key' non terminal
 //--- 'parse' label
-  public: virtual void nt_assignment_5F_combined_5F_with_5F_operator_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+  public: virtual void nt_configuration_5F_key_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
 
 //--- indexing
-  public: virtual void nt_assignment_5F_combined_5F_with_5F_operator_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+  public: virtual void nt_configuration_5F_key_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public: virtual void nt_assignment_5F_combined_5F_with_5F_operator_ (GGS_omnibusInfixOperator & outArgument0,
-                                                                       GGS_location & outArgument1,
-                                                                       Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'compileTimeInfixOperator' non terminal
-//--- 'parse' label
-  public: virtual void nt_compileTimeInfixOperator_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_compileTimeInfixOperator_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_compileTimeInfixOperator_ (GGS_compileTimeInfixOperatorEnumeration & outArgument0,
-                                                     Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'compileTimePrefixOperator' non terminal
-//--- 'parse' label
-  public: virtual void nt_compileTimePrefixOperator_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_compileTimePrefixOperator_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_compileTimePrefixOperator_ (GGS_compileTimePrefixOperatorEnumeration & outArgument0,
-                                                      Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'compile_time_expression' non terminal
-//--- 'parse' label
-  public: virtual void nt_compile_5F_time_5F_expression_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_compile_5F_time_5F_expression_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_compile_5F_time_5F_expression_ (GGS_ctExpressionAST & outArgument0,
-                                                          Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'compile_time_expression_addition' non terminal
-//--- 'parse' label
-  public: virtual void nt_compile_5F_time_5F_expression_5F_addition_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_compile_5F_time_5F_expression_5F_addition_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_compile_5F_time_5F_expression_5F_addition_ (GGS_ctExpressionAST & outArgument0,
-                                                                      Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'compile_time_expression_bitwise_and' non terminal
-//--- 'parse' label
-  public: virtual void nt_compile_5F_time_5F_expression_5F_bitwise_5F_and_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_compile_5F_time_5F_expression_5F_bitwise_5F_and_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_compile_5F_time_5F_expression_5F_bitwise_5F_and_ (GGS_ctExpressionAST & outArgument0,
-                                                                            Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'compile_time_expression_bitwise_xor' non terminal
-//--- 'parse' label
-  public: virtual void nt_compile_5F_time_5F_expression_5F_bitwise_5F_xor_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_compile_5F_time_5F_expression_5F_bitwise_5F_xor_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_compile_5F_time_5F_expression_5F_bitwise_5F_xor_ (GGS_ctExpressionAST & outArgument0,
-                                                                            Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'compile_time_expression_comparison' non terminal
-//--- 'parse' label
-  public: virtual void nt_compile_5F_time_5F_expression_5F_comparison_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_compile_5F_time_5F_expression_5F_comparison_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_compile_5F_time_5F_expression_5F_comparison_ (GGS_ctExpressionAST & outArgument0,
-                                                                        Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'compile_time_expression_equality' non terminal
-//--- 'parse' label
-  public: virtual void nt_compile_5F_time_5F_expression_5F_equality_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_compile_5F_time_5F_expression_5F_equality_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_compile_5F_time_5F_expression_5F_equality_ (GGS_ctExpressionAST & outArgument0,
-                                                                      Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'compile_time_expression_product' non terminal
-//--- 'parse' label
-  public: virtual void nt_compile_5F_time_5F_expression_5F_product_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_compile_5F_time_5F_expression_5F_product_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_compile_5F_time_5F_expression_5F_product_ (GGS_ctExpressionAST & outArgument0,
-                                                                     Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'compile_time_expression_shift' non terminal
-//--- 'parse' label
-  public: virtual void nt_compile_5F_time_5F_expression_5F_shift_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_compile_5F_time_5F_expression_5F_shift_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_compile_5F_time_5F_expression_5F_shift_ (GGS_ctExpressionAST & outArgument0,
-                                                                   Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'compile_time_primary' non terminal
-//--- 'parse' label
-  public: virtual void nt_compile_5F_time_5F_primary_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_compile_5F_time_5F_primary_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_compile_5F_time_5F_primary_ (GGS_ctExpressionAST & outArgument0,
-                                                       Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'control_register_lvalue' non terminal
-//--- 'parse' label
-  public: virtual void nt_control_5F_register_5F_lvalue_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_control_5F_register_5F_lvalue_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_control_5F_register_5F_lvalue_ (GGS_ast & ioArgument0,
-                                                          GGS_controlRegisterLValueAST & outArgument1,
-                                                          Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'declaration' non terminal
-//--- 'parse' label
-  public: virtual void nt_declaration_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_declaration_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_declaration_ (GGS_ast & ioArgument0,
-                                        Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'effective_parameters' non terminal
-//--- 'parse' label
-  public: virtual void nt_effective_5F_parameters_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_effective_5F_parameters_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_effective_5F_parameters_ (GGS_ast & ioArgument0,
-                                                    GGS_effectiveArgumentListAST & outArgument1,
-                                                    GGS_location & outArgument2,
-                                                    Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'expression' non terminal
-//--- 'parse' label
-  public: virtual void nt_expression_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_expression_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_expression_ (GGS_ast & ioArgument0,
-                                       GGS_expressionAST & outArgument1,
-                                       Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'expression_access_list' non terminal
-//--- 'parse' label
-  public: virtual void nt_expression_5F_access_5F_list_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_expression_5F_access_5F_list_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_expression_5F_access_5F_list_ (GGS_ast & ioArgument0,
-                                                         GGS_primaryInExpressionAccessListAST & outArgument1,
-                                                         Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'expression_addition' non terminal
-//--- 'parse' label
-  public: virtual void nt_expression_5F_addition_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_expression_5F_addition_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_expression_5F_addition_ (GGS_ast & ioArgument0,
-                                                   GGS_expressionAST & outArgument1,
-                                                   Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'expression_bitwise_and' non terminal
-//--- 'parse' label
-  public: virtual void nt_expression_5F_bitwise_5F_and_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_expression_5F_bitwise_5F_and_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_expression_5F_bitwise_5F_and_ (GGS_ast & ioArgument0,
-                                                         GGS_expressionAST & outArgument1,
-                                                         Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'expression_bitwise_or' non terminal
-//--- 'parse' label
-  public: virtual void nt_expression_5F_bitwise_5F_or_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_expression_5F_bitwise_5F_or_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_expression_5F_bitwise_5F_or_ (GGS_ast & ioArgument0,
-                                                        GGS_expressionAST & outArgument1,
-                                                        Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'expression_bitwise_xor' non terminal
-//--- 'parse' label
-  public: virtual void nt_expression_5F_bitwise_5F_xor_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_expression_5F_bitwise_5F_xor_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_expression_5F_bitwise_5F_xor_ (GGS_ast & ioArgument0,
-                                                         GGS_expressionAST & outArgument1,
-                                                         Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'expression_comparison' non terminal
-//--- 'parse' label
-  public: virtual void nt_expression_5F_comparison_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_expression_5F_comparison_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_expression_5F_comparison_ (GGS_ast & ioArgument0,
-                                                     GGS_expressionAST & outArgument1,
-                                                     Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'expression_equality' non terminal
-//--- 'parse' label
-  public: virtual void nt_expression_5F_equality_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_expression_5F_equality_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_expression_5F_equality_ (GGS_ast & ioArgument0,
-                                                   GGS_expressionAST & outArgument1,
-                                                   Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'expression_if' non terminal
-//--- 'parse' label
-  public: virtual void nt_expression_5F_if_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_expression_5F_if_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_expression_5F_if_ (GGS_ast & ioArgument0,
-                                             GGS_ifExpressionAST & outArgument1,
-                                             Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'expression_logical_and' non terminal
-//--- 'parse' label
-  public: virtual void nt_expression_5F_logical_5F_and_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_expression_5F_logical_5F_and_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_expression_5F_logical_5F_and_ (GGS_ast & ioArgument0,
-                                                         GGS_expressionAST & outArgument1,
-                                                         Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'expression_product' non terminal
-//--- 'parse' label
-  public: virtual void nt_expression_5F_product_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_expression_5F_product_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_expression_5F_product_ (GGS_ast & ioArgument0,
-                                                  GGS_expressionAST & outArgument1,
-                                                  Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'expression_shift' non terminal
-//--- 'parse' label
-  public: virtual void nt_expression_5F_shift_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_expression_5F_shift_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_expression_5F_shift_ (GGS_ast & ioArgument0,
-                                                GGS_expressionAST & outArgument1,
-                                                Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'function_declaration' non terminal
-//--- 'parse' label
-  public: virtual void nt_function_5F_declaration_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_function_5F_declaration_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_function_5F_declaration_ (GGS_ast & ioArgument0,
-                                                    const GGS_lstring inArgument1,
-                                                    Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'function_header' non terminal
-//--- 'parse' label
-  public: virtual void nt_function_5F_header_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_function_5F_header_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_function_5F_header_ (GGS_ast & ioArgument0,
-                                               GGS_mode & outArgument1,
-                                               GGS_lstring & outArgument2,
-                                               GGS_lstringlist & outArgument3,
-                                               GGS_routineFormalArgumentListAST & outArgument4,
-                                               Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'generic_formal_arguments' non terminal
-//--- 'parse' label
-  public: virtual void nt_generic_5F_formal_5F_arguments_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_generic_5F_formal_5F_arguments_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_generic_5F_formal_5F_arguments_ (GGS_genericFormalParameterList & outArgument0,
-                                                           Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'generic_where_clause' non terminal
-//--- 'parse' label
-  public: virtual void nt_generic_5F_where_5F_clause_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_generic_5F_where_5F_clause_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_generic_5F_where_5F_clause_ (GGS_ctExpressionAST & outArgument0,
-                                                       Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'guard' non terminal
-//--- 'parse' label
-  public: virtual void nt_guard_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_guard_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_guard_ (GGS_ast & ioArgument0,
-                                  const GGS_lstring inArgument1,
-                                  const GGS_string inArgument2,
-                                  Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'guarded_command' non terminal
-//--- 'parse' label
-  public: virtual void nt_guarded_5F_command_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_guarded_5F_command_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_guarded_5F_command_ (GGS_ast & ioArgument0,
-                                               const GGS_bool inArgument1,
-                                               GGS_guardedCommandAST & outArgument2,
-                                               Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'if_instruction' non terminal
-//--- 'parse' label
-  public: virtual void nt_if_5F_instruction_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_if_5F_instruction_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_if_5F_instruction_ (GGS_ast & ioArgument0,
-                                              GGS_ifInstructionAST & outArgument1,
-                                              Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'import_file' non terminal
-//--- 'parse' label
-  public: virtual void nt_import_5F_file_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_import_5F_file_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_import_5F_file_ (GGS_lstringlist & ioArgument0,
-                                           Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'instruction' non terminal
-//--- 'parse' label
-  public: virtual void nt_instruction_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_instruction_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_instruction_ (GGS_ast & ioArgument0,
-                                        GGS_instructionListAST & ioArgument1,
-                                        Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'instructionList' non terminal
-//--- 'parse' label
-  public: virtual void nt_instructionList_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_instructionList_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_instructionList_ (GGS_ast & ioArgument0,
-                                            GGS_instructionListAST & outArgument1,
-                                            Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'isr_in_driver' non terminal
-//--- 'parse' label
-  public: virtual void nt_isr_5F_in_5F_driver_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_isr_5F_in_5F_driver_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_isr_5F_in_5F_driver_ (GGS_ast & ioArgument0,
-                                                const GGS_lstring inArgument1,
-                                                Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'llvmPrefixOperator' non terminal
-//--- 'parse' label
-  public: virtual void nt_llvmPrefixOperator_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_llvmPrefixOperator_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_llvmPrefixOperator_ (GGS_llvmPrefixOperatorEnumeration & outArgument0,
-                                               Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'llvm_function_header' non terminal
-//--- 'parse' label
-  public: virtual void nt_llvm_5F_function_5F_header_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_llvm_5F_function_5F_header_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_llvm_5F_function_5F_header_ (GGS_lstring & outArgument0,
-                                                       GGS_lstring & outArgument1,
-                                                       GGS_genericFormalParameterList & outArgument2,
-                                                       Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'llvm_instruction' non terminal
-//--- 'parse' label
-  public: virtual void nt_llvm_5F_instruction_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_llvm_5F_instruction_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_llvm_5F_instruction_ (GGS_abstractLLVMInstruction & outArgument0,
-                                                Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'llvm_instruction_list' non terminal
-//--- 'parse' label
-  public: virtual void nt_llvm_5F_instruction_5F_list_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_llvm_5F_instruction_5F_list_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_llvm_5F_instruction_5F_list_ (GGS_llvmGenerationInstructionList & outArgument0,
-                                                        Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'lvalue' non terminal
-//--- 'parse' label
-  public: virtual void nt_lvalue_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_lvalue_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_lvalue_ (GGS_ast & ioArgument0,
-                                   GGS_LValueAST & outArgument1,
-                                   Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'lvalue_operand' non terminal
-//--- 'parse' label
-  public: virtual void nt_lvalue_5F_operand_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_lvalue_5F_operand_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_lvalue_5F_operand_ (GGS_ast & ioArgument0,
-                                              GGS_LValueOperandAST & outArgument1,
-                                              Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'mode' non terminal
-//--- 'parse' label
-  public: virtual void nt_mode_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_mode_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_mode_ (GGS_mode & outArgument0,
-                                 Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'primary' non terminal
-//--- 'parse' label
-  public: virtual void nt_primary_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_primary_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_primary_ (GGS_ast & ioArgument0,
-                                    GGS_expressionAST & outArgument1,
-                                    Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'private_or_public_struct_property_declaration' non terminal
-//--- 'parse' label
-  public: virtual void nt_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_ (GGS_ast & ioArgument0,
-                                                                                         GGS_structurePropertyListAST & ioArgument1,
-                                                                                         Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'private_struct_property_declaration' non terminal
-//--- 'parse' label
-  public: virtual void nt_private_5F_struct_5F_property_5F_declaration_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_private_5F_struct_5F_property_5F_declaration_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_private_5F_struct_5F_property_5F_declaration_ (GGS_ast & ioArgument0,
-                                                                         GGS_structurePropertyListAST & ioArgument1,
-                                                                         Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'procedure_call' non terminal
-//--- 'parse' label
-  public: virtual void nt_procedure_5F_call_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_procedure_5F_call_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_procedure_5F_call_ (GGS_ast & ioArgument0,
-                                              GGS_callInstructionAST & outArgument1,
-                                              Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'procedure_formal_arguments' non terminal
-//--- 'parse' label
-  public: virtual void nt_procedure_5F_formal_5F_arguments_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_procedure_5F_formal_5F_arguments_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_procedure_5F_formal_5F_arguments_ (GGS_ast & ioArgument0,
-                                                             GGS_routineFormalArgumentListAST & outArgument1,
-                                                             Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'procedure_input_formal_arguments' non terminal
-//--- 'parse' label
-  public: virtual void nt_procedure_5F_input_5F_formal_5F_arguments_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_procedure_5F_input_5F_formal_5F_arguments_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_procedure_5F_input_5F_formal_5F_arguments_ (GGS_ast & ioArgument0,
-                                                                      GGS_routineFormalArgumentListAST & outArgument1,
-                                                                      Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'propertyGetterSetter' non terminal
-//--- 'parse' label
-  public: virtual void nt_propertyGetterSetter_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_propertyGetterSetter_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_propertyGetterSetter_ (GGS_ast & ioArgument0,
-                                                 const GGS_propertyVisibility inArgument1,
-                                                 const GGS_lstring inArgument2,
-                                                 const GGS_propertyAttributeList inArgument3,
-                                                 const GGS_lstring inArgument4,
-                                                 GGS_structurePropertyListAST & ioArgument5,
+  public: virtual void nt_configuration_5F_key_ (const GGS_string inArgument0,
                                                  Lexique_omnibus_5F_lexique * inCompiler) ;
 
-//------------------------------------- 'registerDeclaration' non terminal
+//------------------------------------- 'configuration_start_symbol' non terminal
 //--- 'parse' label
-  public: virtual void nt_registerDeclaration_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+  public: virtual void nt_configuration_5F_start_5F_symbol_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
 
 //--- indexing
-  public: virtual void nt_registerDeclaration_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+  public: virtual void nt_configuration_5F_start_5F_symbol_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public: virtual void nt_registerDeclaration_ (GGS_ast & ioArgument0,
-                                                GGS_controlRegisterNameListAST & ioArgument1,
-                                                Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'start_symbol' non terminal
-//--- 'parse' label
-  public: virtual void nt_start_5F_symbol_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_start_5F_symbol_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_start_5F_symbol_ (GGS_ast & ioArgument0,
-                                            GGS_lstringlist & outArgument1,
-                                            GGS_location & outArgument2,
-                                            Lexique_omnibus_5F_lexique * inCompiler) ;
+  public: virtual void nt_configuration_5F_start_5F_symbol_ (GGS_ast & ioArgument0,
+                                                             GGS_lstringlist & outArgument1,
+                                                             GGS_location & outArgument2,
+                                                             Lexique_omnibus_5F_lexique * inCompiler) ;
 
 //--- Start symbol
   public: static void _performSourceFileParsing_ (Compiler * inCompiler,
@@ -776,365 +65,799 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
   public: static void performOnlySyntaxAnalysis (Compiler * inCompiler,
                                                  const String & inSourceFilePath) ;
 
-//------------------------------------- 'staticArrayProperty' non terminal
+//------------------------------------- 'interruptConfigList' non terminal
 //--- 'parse' label
-  public: virtual void nt_staticArrayProperty_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+  public: virtual void nt_interruptConfigList_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
 
 //--- indexing
-  public: virtual void nt_staticArrayProperty_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+  public: virtual void nt_interruptConfigList_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public: virtual void nt_staticArrayProperty_ (GGS_ast & ioArgument0,
-                                                GGS_staticListPropertyListAST & ioArgument1,
+  public: virtual void nt_interruptConfigList_ (GGS_interruptionConfigurationList & outArgument0,
+                                                GGS_enumerationConstantList & outArgument1,
                                                 Lexique_omnibus_5F_lexique * inCompiler) ;
 
-//------------------------------------- 'staticArray_exp' non terminal
+//------------------------------------- 'python_utility_tool_list' non terminal
 //--- 'parse' label
-  public: virtual void nt_staticArray_5F_exp_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+  public: virtual void nt_python_5F_utility_5F_tool_5F_list_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
 
 //--- indexing
-  public: virtual void nt_staticArray_5F_exp_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+  public: virtual void nt_python_5F_utility_5F_tool_5F_list_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
 
 //----------- '' label
-  public: virtual void nt_staticArray_5F_exp_ (GGS_ast & ioArgument0,
-                                               GGS_extendStaticListElementAST & ioArgument1,
-                                               Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//------------------------------------- 'struct_property_declaration' non terminal
-//--- 'parse' label
-  public: virtual void nt_struct_5F_property_5F_declaration_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//--- indexing
-  public: virtual void nt_struct_5F_property_5F_declaration_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
-
-//----------- '' label
-  public: virtual void nt_struct_5F_property_5F_declaration_ (GGS_ast & ioArgument0,
-                                                              const GGS_propertyVisibility inArgument1,
-                                                              GGS_structurePropertyListAST & ioArgument2,
+  public: virtual void nt_python_5F_utility_5F_tool_5F_list_ (GGS__32_lstringlist & outArgument0,
                                                               Lexique_omnibus_5F_lexique * inCompiler) ;
 
-//------------------------------------- 'system_routine_declaration' non terminal
-//--- 'parse' label
-  public: virtual void nt_system_5F_routine_5F_declaration_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+  public: virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_0 (Lexique_omnibus_5F_lexique *) ;
 
-//--- indexing
-  public: virtual void nt_system_5F_routine_5F_declaration_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+  public: virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_1 (Lexique_omnibus_5F_lexique *) ;
 
-//----------- '' label
-  public: virtual void nt_system_5F_routine_5F_declaration_ (GGS_ast & ioArgument0,
-                                                             const GGS_lstring inArgument1,
-                                                             Lexique_omnibus_5F_lexique * inCompiler) ;
+  public: virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_2 (Lexique_omnibus_5F_lexique *) ;
 
-//------------------------------------- 'task_event' non terminal
-//--- 'parse' label
-  public: virtual void nt_task_5F_event_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+  public: virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_3 (Lexique_omnibus_5F_lexique *) ;
 
-//--- indexing
-  public: virtual void nt_task_5F_event_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+  public: virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_4 (Lexique_omnibus_5F_lexique *) ;
 
-//----------- '' label
-  public: virtual void nt_task_5F_event_ (GGS_ast & ioArgument0,
-                                          const GGS_lstring inArgument1,
-                                          GGS_taskSetupListAST & ioArgument2,
-                                          GGS_taskSetupListAST & ioArgument3,
-                                          GGS_taskSetupListAST & ioArgument4,
-                                          Lexique_omnibus_5F_lexique * inCompiler) ;
+  public: virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_5 (Lexique_omnibus_5F_lexique *) ;
 
-//------------------------------------- 'type_definition' non terminal
-//--- 'parse' label
-  public: virtual void nt_type_5F_definition_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+  public: virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_6 (Lexique_omnibus_5F_lexique *) ;
 
-//--- indexing
-  public: virtual void nt_type_5F_definition_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
+  public: virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_7 (Lexique_omnibus_5F_lexique *) ;
 
-//----------- '' label
-  public: virtual void nt_type_5F_definition_ (GGS_ast & ioArgument0,
-                                               GGS_lstring & outArgument1,
-                                               Lexique_omnibus_5F_lexique * inCompiler) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_0 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_1 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_2 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_3 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_4 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_5 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_6 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_7 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_8 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_9 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_10 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_11 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_12 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_13 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_14 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_15 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_16 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_17 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_18 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_19 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_20 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_21 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_22 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_23 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_24 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_25 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_26 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_27 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_28 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_29 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_30 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_31 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_32 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_33 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_34 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_35 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_36 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_37 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_38 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_39 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_40 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_41 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_42 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_43 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_44 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_45 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_46 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_47 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_48 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_49 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_50 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_51 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_52 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_53 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_54 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_55 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_56 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_57 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_58 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_59 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_60 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_61 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_62 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_63 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_64 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_65 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_66 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_67 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_68 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_69 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_70 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_71 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_72 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_73 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_74 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_75 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_76 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_77 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_78 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_79 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_80 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_81 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_82 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_83 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_84 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_85 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_86 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_87 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_88 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_89 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_90 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_91 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_92 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_93 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_94 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_95 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_96 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_97 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_98 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_99 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_100 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_101 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_102 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_103 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_104 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_105 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_106 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_107 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_108 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_109 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_110 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_111 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_112 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_113 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_114 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_115 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_116 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_117 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_118 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_119 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_120 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_121 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_122 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_123 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_124 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_125 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_126 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_127 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_128 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_129 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_130 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_131 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_132 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_133 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_134 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_135 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_136 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_137 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_138 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_139 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_140 (Lexique_omnibus_5F_lexique *) ;
-
-  public: virtual int32_t select_omnibus_5F_syntax_141 (Lexique_omnibus_5F_lexique *) ;
+  public: virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_8 (Lexique_omnibus_5F_lexique *) ;
 } ;
 
 //--------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------
+//
+//Extension method '@externProcedureMapIR.element llvmPrototypeGeneration'
+//
+//--------------------------------------------------------------------------------------------------
+
+void extensionMethod_llvmPrototypeGeneration (const class GGS_externProcedureMapIR_2E_element inObject,
+                                              class GGS_string & io_ioLLVMcode,
+                                              class Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Function 'functionResultVariableName'
+//
+//--------------------------------------------------------------------------------------------------
+
+class GGS_string function_functionResultVariableName (class Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Function 'voidType'
+//
+//--------------------------------------------------------------------------------------------------
+
+class GGS_omnibusType function_voidType (class Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Extension method '@globalSyncInstanceMapIR.element generateLLVM'
+//
+//--------------------------------------------------------------------------------------------------
+
+void extensionMethod_generateLLVM (const class GGS_globalSyncInstanceMapIR_2E_element inObject,
+                                   class GGS_string & io_ioLLVMcode,
+                                   class Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Extension method '@structurePropertyListAST.element enterPropertyInContext'
+//
+//--------------------------------------------------------------------------------------------------
+
+void extensionMethod_enterPropertyInContext (const class GGS_structurePropertyListAST_2E_element inObject,
+                                             class GGS_semanticContext & io_ioContext,
+                                             class GGS_staticEntityMap & io_ioStaticEntityMap,
+                                             const class GGS_lstring constin_inReceiverTypeName,
+                                             const class GGS_lstring constin_inOmnibusTypeSpecificName,
+                                             const class GGS_string constin_inReceiverLLVMBaseTypeName,
+                                             class GGS_decoratedRegularRoutineList & io_ioDecoratedRoutineList,
+                                             class GGS_propertyList & io_ioPropertyList,
+                                             class GGS_sortedOperandIRList & io_sortedOperandIRList,
+                                             class GGS_constructorSignature & io_constructorSignature,
+                                             class GGS_string & io_ioConstructorKey,
+                                             class GGS_bool & io_canBeCopied,
+                                             class Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Function 'boolType'
+//
+//--------------------------------------------------------------------------------------------------
+
+class GGS_omnibusType function_boolType (class Compiler * inCompiler
+                                         COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Function 'setterLLVMName'
+//
+//--------------------------------------------------------------------------------------------------
+
+class GGS_string function_setterLLVMName (const class GGS_string & constinArgument0,
+                                          const class GGS_string & constinArgument1,
+                                          class Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Routine 'println?'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_println_3F_ (const class GGS_string constinArgument0,
+                          class Compiler * inCompiler
+                          COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Routine 'print?'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_print_3F_ (const class GGS_string constinArgument0,
+                        class Compiler * inCompiler
+                        COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Function 'omnibusNameForStaticListType'
+//
+//--------------------------------------------------------------------------------------------------
+
+class GGS_lstring function_omnibusNameForStaticListType (const class GGS_lstring & constinArgument0,
+                                                         class Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Function 'llvmNameForStaticListType'
+//
+//--------------------------------------------------------------------------------------------------
+
+class GGS_lstring function_llvmNameForStaticListType (const class GGS_lstring & constinArgument0,
+                                                      class Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Function 'omnibusNameForStaticListElementType'
+//
+//--------------------------------------------------------------------------------------------------
+
+class GGS_lstring function_omnibusNameForStaticListElementType (const class GGS_lstring & constinArgument0,
+                                                                class Compiler * inCompiler
+                                                                COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Function 'checkModeAndReturnsRoutineLLVMName'
+//
+//--------------------------------------------------------------------------------------------------
+
+class GGS_string function_checkModeAndReturnsRoutineLLVMName (const class GGS_routineLLVMNameDict & constinArgument0,
+                                                              const class GGS_mode & constinArgument1,
+                                                              const class GGS_lstring & constinArgument2,
+                                                              class Compiler * inCompiler
+                                                              COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Function 'compileTimeIntegerType'
+//
+//--------------------------------------------------------------------------------------------------
+
+class GGS_omnibusType function_compileTimeIntegerType (class Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Routine 'importFilesAndCompile?sourceFilePath'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_importFilesAndCompile_3F_sourceFilePath (const class GGS_lstring constinArgument0,
+                                                      class Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Routine 'compileProject?sourceFile?ast?forTarget?endOfSourceFile?currentDirectory?importedFilePathSet'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_compileProject_3F_sourceFile_3F_ast_3F_forTarget_3F_endOfSourceFile_3F_currentDirectory_3F_importedFilePathSet (const class GGS_lstring constinArgument0,
+                                                                                                                             const class GGS_ast constinArgument1,
+                                                                                                                             const class GGS_lstring constinArgument2,
+                                                                                                                             const class GGS_location constinArgument3,
+                                                                                                                             const class GGS_string constinArgument4,
+                                                                                                                             const class GGS_stringset constinArgument5,
+                                                                                                                             class Compiler * inCompiler
+                                                                                                                             COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Routine 'recursiveImportFiles&ast?currentDirectory?importClauseList&importedFilePathSet'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_recursiveImportFiles_26_ast_3F_currentDirectory_3F_importClauseList_26_importedFilePathSet (class GGS_ast & ioArgument0,
+                                                                                                         const class GGS_string constinArgument1,
+                                                                                                         const class GGS_lstringlist constinArgument2,
+                                                                                                         class GGS_stringset & ioArgument3,
+                                                                                                         class Compiler * inCompiler
+                                                                                                         COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Routine 'addTargetSpecificFiles?forTarget&toAST?currentDirectory&importedFilePathSet'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_addTargetSpecificFiles_3F_forTarget_26_toAST_3F_currentDirectory_26_importedFilePathSet (const class GGS_lstring constinArgument0,
+                                                                                                      class GGS_ast & ioArgument1,
+                                                                                                      const class GGS_string constinArgument2,
+                                                                                                      class GGS_stringset & ioArgument3,
+                                                                                                      class Compiler * inCompiler
+                                                                                                      COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Routine 'buildOrderedDeclarationList?ast?sourceFile?endOfSourceFile!orderedDeclarationList'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_buildOrderedDeclarationList_3F_ast_3F_sourceFile_3F_endOfSourceFile_21_orderedDeclarationList (const class GGS_ast constinArgument0,
+                                                                                                            const class GGS_string constinArgument1,
+                                                                                                            const class GGS_location constinArgument2,
+                                                                                                            class GGS_declarationListAST & outArgument3,
+                                                                                                            class Compiler * inCompiler
+                                                                                                            COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Routine 'buildSemanticContext?sourceFile?ast&staticEntityMap&staticlistValues!context!!!!'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_buildSemanticContext_3F_sourceFile_3F_ast_26_staticEntityMap_26_staticlistValues_21_context_21__21__21__21_ (const class GGS_lstring constinArgument0,
+                                                                                                                          const class GGS_ast constinArgument1,
+                                                                                                                          class GGS_staticEntityMap & ioArgument2,
+                                                                                                                          class GGS_staticListInitializationMap & ioArgument3,
+                                                                                                                          class GGS_semanticContext & outArgument4,
+                                                                                                                          class GGS_declarationDecorationList & outArgument5,
+                                                                                                                          class GGS_decoratedRegularRoutineList & outArgument6,
+                                                                                                                          class GGS_routineListIR & outArgument7,
+                                                                                                                          class GGS_userLLVMTypeDefinitionListIR & outArgument8,
+                                                                                                                          class Compiler * inCompiler
+                                                                                                                          COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Routine 'codeGeneration?currentDir?outputFile?eof?intermediateCode?userDefinedTypes?target?panicCodeType?panicLineType?interrupts?staticlistValues?targetParameters'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_codeGeneration_3F_currentDir_3F_outputFile_3F_eof_3F_intermediateCode_3F_userDefinedTypes_3F_target_3F_panicCodeType_3F_panicLineType_3F_interrupts_3F_staticlistValues_3F_targetParameters (const class GGS_string constinArgument0,
+                                                                                                                                                                                                          const class GGS_string constinArgument1,
+                                                                                                                                                                                                          const class GGS_location constinArgument2,
+                                                                                                                                                                                                          const class GGS_intermediateCodeStruct constinArgument3,
+                                                                                                                                                                                                          const class GGS_userLLVMTypeDefinitionListIR constinArgument4,
+                                                                                                                                                                                                          const class GGS_lstring constinArgument5,
+                                                                                                                                                                                                          const class GGS_omnibusType constinArgument6,
+                                                                                                                                                                                                          const class GGS_omnibusType constinArgument7,
+                                                                                                                                                                                                          const class GGS_availableInterruptMap constinArgument8,
+                                                                                                                                                                                                          const class GGS_staticListInitializationMap constinArgument9,
+                                                                                                                                                                                                          const class GGS_targetParameters constinArgument10,
+                                                                                                                                                                                                          class Compiler * inCompiler
+                                                                                                                                                                                                          COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Routine 'codeOptimization?&intermediateCode'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_codeOptimization_3F__26_intermediateCode (const class GGS_string constinArgument0,
+                                                       class GGS_intermediateCodeStruct & ioArgument1,
+                                                       class Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Routine 'enter_NOP_function&'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_enter_5F_NOP_5F_function_26_ (class GGS_declarationListAST & ioArgument0,
+                                           class Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Routine 'retainRequiredDrivers&'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_retainRequiredDrivers_26_ (class GGS_ast & ioArgument0,
+                                        class Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Routine 'semanticAnalysis?sourceFile?ast?allSourceFilePaths?decoratedDeclarationList?decoratedRoutineList?routineListIR?context?endOfSourceFile?staticEntityMap!intermediateCode'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_semanticAnalysis_3F_sourceFile_3F_ast_3F_allSourceFilePaths_3F_decoratedDeclarationList_3F_decoratedRoutineList_3F_routineListIR_3F_context_3F_endOfSourceFile_3F_staticEntityMap_21_intermediateCode (const class GGS_string constinArgument0,
+                                                                                                                                                                                                                    const class GGS_ast constinArgument1,
+                                                                                                                                                                                                                    const class GGS_stringset constinArgument2,
+                                                                                                                                                                                                                    const class GGS_declarationDecorationList constinArgument3,
+                                                                                                                                                                                                                    const class GGS_decoratedRegularRoutineList constinArgument4,
+                                                                                                                                                                                                                    const class GGS_routineListIR constinArgument5,
+                                                                                                                                                                                                                    const class GGS_semanticContext constinArgument6,
+                                                                                                                                                                                                                    const class GGS_location constinArgument7,
+                                                                                                                                                                                                                    const class GGS_staticEntityMap constinArgument8,
+                                                                                                                                                                                                                    class GGS_intermediateCodeStruct & outArgument9,
+                                                                                                                                                                                                                    class Compiler * inCompiler
+                                                                                                                                                                                                                    COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Filewrapper 'targetTemplates'
+//
+//--------------------------------------------------------------------------------------------------
+
+extern const char * gWrapperFileContent_4_targetTemplates ;
+extern const char * gWrapperFileContent_5_targetTemplates ;
+extern const char * gWrapperFileContent_3_targetTemplates ;
+extern const char * gWrapperFileContent_10_targetTemplates ;
+extern const char * gWrapperFileContent_11_targetTemplates ;
+extern const char * gWrapperFileContent_24_targetTemplates ;
+extern const char * gWrapperFileContent_31_targetTemplates ;
+extern const char * gWrapperFileContent_9_targetTemplates ;
+extern const char * gWrapperFileContent_20_targetTemplates ;
+extern const char * gWrapperFileContent_21_targetTemplates ;
+extern const char * gWrapperFileContent_16_targetTemplates ;
+extern const char * gWrapperFileContent_17_targetTemplates ;
+extern const char * gWrapperFileContent_8_targetTemplates ;
+extern const char * gWrapperFileContent_7_targetTemplates ;
+extern const char * gWrapperFileContent_26_targetTemplates ;
+extern const char * gWrapperFileContent_6_targetTemplates ;
+extern const char * gWrapperFileContent_15_targetTemplates ;
+extern const char * gWrapperFileContent_2_targetTemplates ;
+extern const char * gWrapperFileContent_25_targetTemplates ;
+extern const char * gWrapperFileContent_23_targetTemplates ;
+extern const char * gWrapperFileContent_0_targetTemplates ;
+extern const char * gWrapperFileContent_1_targetTemplates ;
+extern const char * gWrapperFileContent_13_targetTemplates ;
+extern const char * gWrapperFileContent_32_targetTemplates ;
+extern const char * gWrapperFileContent_33_targetTemplates ;
+extern const char * gWrapperFileContent_18_targetTemplates ;
+extern const char * gWrapperFileContent_28_targetTemplates ;
+extern const char * gWrapperFileContent_22_targetTemplates ;
+extern const char * gWrapperFileContent_30_targetTemplates ;
+extern const char * gWrapperFileContent_29_targetTemplates ;
+extern const char * gWrapperFileContent_19_targetTemplates ;
+extern const char * gWrapperFileContent_27_targetTemplates ;
+extern const char * gWrapperFileContent_14_targetTemplates ;
+extern const char * gWrapperFileContent_12_targetTemplates ;
+extern const char * gWrapperFileContent_43_targetTemplates ;
+extern const char * gWrapperFileContent_54_targetTemplates ;
+extern const char * gWrapperFileContent_55_targetTemplates ;
+extern const char * gWrapperFileContent_57_targetTemplates ;
+extern const char * gWrapperFileContent_48_targetTemplates ;
+extern const char * gWrapperFileContent_56_targetTemplates ;
+extern const char * gWrapperFileContent_44_targetTemplates ;
+extern const char * gWrapperFileContent_40_targetTemplates ;
+extern const char * gWrapperFileContent_51_targetTemplates ;
+extern const char * gWrapperFileContent_36_targetTemplates ;
+extern const char * gWrapperFileContent_39_targetTemplates ;
+extern const char * gWrapperFileContent_53_targetTemplates ;
+extern const char * gWrapperFileContent_50_targetTemplates ;
+extern const char * gWrapperFileContent_35_targetTemplates ;
+extern const char * gWrapperFileContent_42_targetTemplates ;
+extern const char * gWrapperFileContent_49_targetTemplates ;
+extern const char * gWrapperFileContent_46_targetTemplates ;
+extern const char * gWrapperFileContent_47_targetTemplates ;
+extern const char * gWrapperFileContent_45_targetTemplates ;
+extern const char * gWrapperFileContent_34_targetTemplates ;
+extern const char * gWrapperFileContent_38_targetTemplates ;
+extern const char * gWrapperFileContent_37_targetTemplates ;
+extern const char * gWrapperFileContent_52_targetTemplates ;
+extern const char * gWrapperFileContent_41_targetTemplates ;
+extern const char * gWrapperFileContent_73_targetTemplates ;
+extern const char * gWrapperFileContent_61_targetTemplates ;
+extern const char * gWrapperFileContent_62_targetTemplates ;
+extern const char * gWrapperFileContent_63_targetTemplates ;
+extern const char * gWrapperFileContent_64_targetTemplates ;
+extern const char * gWrapperFileContent_68_targetTemplates ;
+extern const char * gWrapperFileContent_66_targetTemplates ;
+extern const char * gWrapperFileContent_58_targetTemplates ;
+extern const char * gWrapperFileContent_69_targetTemplates ;
+extern const char * gWrapperFileContent_71_targetTemplates ;
+extern const char * gWrapperFileContent_74_targetTemplates ;
+extern const char * gWrapperFileContent_72_targetTemplates ;
+extern const char * gWrapperFileContent_59_targetTemplates ;
+extern const char * gWrapperFileContent_65_targetTemplates ;
+extern const char * gWrapperFileContent_70_targetTemplates ;
+extern const char * gWrapperFileContent_67_targetTemplates ;
+extern const char * gWrapperFileContent_60_targetTemplates ;
+extern const char * gWrapperFileContent_82_targetTemplates ;
+extern const char * gWrapperFileContent_79_targetTemplates ;
+extern const char * gWrapperFileContent_83_targetTemplates ;
+extern const char * gWrapperFileContent_87_targetTemplates ;
+extern const char * gWrapperFileContent_76_targetTemplates ;
+extern const char * gWrapperFileContent_81_targetTemplates ;
+extern const char * gWrapperFileContent_86_targetTemplates ;
+extern const char * gWrapperFileContent_85_targetTemplates ;
+extern const char * gWrapperFileContent_84_targetTemplates ;
+extern const char * gWrapperFileContent_75_targetTemplates ;
+extern const char * gWrapperFileContent_80_targetTemplates ;
+extern const char * gWrapperFileContent_78_targetTemplates ;
+extern const char * gWrapperFileContent_77_targetTemplates ;
+extern const char * gWrapperFileContent_95_targetTemplates ;
+extern const char * gWrapperFileContent_98_targetTemplates ;
+extern const char * gWrapperFileContent_96_targetTemplates ;
+extern const char * gWrapperFileContent_105_targetTemplates ;
+extern const char * gWrapperFileContent_107_targetTemplates ;
+extern const char * gWrapperFileContent_112_targetTemplates ;
+extern const char * gWrapperFileContent_111_targetTemplates ;
+extern const char * gWrapperFileContent_90_targetTemplates ;
+extern const char * gWrapperFileContent_114_targetTemplates ;
+extern const char * gWrapperFileContent_117_targetTemplates ;
+extern const char * gWrapperFileContent_116_targetTemplates ;
+extern const char * gWrapperFileContent_115_targetTemplates ;
+extern const char * gWrapperFileContent_93_targetTemplates ;
+extern const char * gWrapperFileContent_102_targetTemplates ;
+extern const char * gWrapperFileContent_94_targetTemplates ;
+extern const char * gWrapperFileContent_109_targetTemplates ;
+extern const char * gWrapperFileContent_89_targetTemplates ;
+extern const char * gWrapperFileContent_99_targetTemplates ;
+extern const char * gWrapperFileContent_108_targetTemplates ;
+extern const char * gWrapperFileContent_104_targetTemplates ;
+extern const char * gWrapperFileContent_110_targetTemplates ;
+extern const char * gWrapperFileContent_101_targetTemplates ;
+extern const char * gWrapperFileContent_106_targetTemplates ;
+extern const char * gWrapperFileContent_113_targetTemplates ;
+extern const char * gWrapperFileContent_100_targetTemplates ;
+extern const char * gWrapperFileContent_103_targetTemplates ;
+extern const char * gWrapperFileContent_88_targetTemplates ;
+extern const char * gWrapperFileContent_97_targetTemplates ;
+extern const char * gWrapperFileContent_92_targetTemplates ;
+extern const char * gWrapperFileContent_91_targetTemplates ;
+extern const char * gWrapperFileContent_118_targetTemplates ;
+extern const char * gWrapperFileContent_119_targetTemplates ;
+
+//--------------------------------------------------------------------------------------------------
+
+
+//--------------------------------------------------------------------------------------------------
+
+extern const cRegularFileWrapper gWrapperFile_0_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_1_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_2_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_3_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_4_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_5_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_6_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_7_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_8_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_9_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_10_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_11_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_12_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_13_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_14_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_15_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_16_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_17_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_18_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_19_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_20_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_21_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_22_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_23_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_24_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_25_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_26_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_27_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_28_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_29_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_30_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_31_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_32_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_33_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_34_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_35_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_36_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_37_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_38_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_39_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_40_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_41_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_42_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_43_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_44_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_45_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_46_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_47_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_48_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_49_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_50_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_51_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_52_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_53_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_54_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_55_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_56_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_57_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_58_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_59_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_60_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_61_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_62_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_63_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_64_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_65_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_66_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_67_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_68_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_69_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_70_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_71_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_72_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_73_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_74_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_75_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_76_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_77_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_78_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_79_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_80_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_81_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_82_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_83_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_84_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_85_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_86_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_87_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_88_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_89_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_90_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_91_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_92_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_93_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_94_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_95_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_96_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_97_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_98_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_99_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_100_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_101_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_102_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_103_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_104_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_105_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_106_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_107_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_108_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_109_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_110_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_111_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_112_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_113_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_114_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_115_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_116_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_117_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_118_targetTemplates ;
+extern const cRegularFileWrapper gWrapperFile_119_targetTemplates ;
+
+//--------------------------------------------------------------------------------------------------
+
+extern const cDirectoryWrapper gWrapperDirectory_0_targetTemplates ;
+extern const cDirectoryWrapper gWrapperDirectory_1_targetTemplates ;
+extern const cDirectoryWrapper gWrapperDirectory_2_targetTemplates ;
+extern const cDirectoryWrapper gWrapperDirectory_3_targetTemplates ;
+extern const cDirectoryWrapper gWrapperDirectory_4_targetTemplates ;
+extern const cDirectoryWrapper gWrapperDirectory_5_targetTemplates ;
+extern const cDirectoryWrapper gWrapperDirectory_6_targetTemplates ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Routine 'recursiveImportEmbeddedTargetFiles&ast?currentDirectory?importClauseList&importedFilePathSet'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_recursiveImportEmbeddedTargetFiles_26_ast_3F_currentDirectory_3F_importClauseList_26_importedFilePathSet (class GGS_ast & ioArgument0,
+                                                                                                                       const class GGS_string constinArgument1,
+                                                                                                                       const class GGS_lstringlist constinArgument2,
+                                                                                                                       class GGS_stringset & ioArgument3,
+                                                                                                                       class Compiler * inCompiler
+                                                                                                                       COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Routine 'recursiveImportFileSystemTargetFiles&ast?targetDirectory?importClauseList&importedFilePathSet'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_recursiveImportFileSystemTargetFiles_26_ast_3F_targetDirectory_3F_importClauseList_26_importedFilePathSet (class GGS_ast & ioArgument0,
+                                                                                                                        const class GGS_string constinArgument1,
+                                                                                                                        const class GGS_lstringlist constinArgument2,
+                                                                                                                        class GGS_stringset & ioArgument3,
+                                                                                                                        class Compiler * inCompiler
+                                                                                                                        COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Function 'configurationNodeNameForPrecedenceGraph'
+//
+//--------------------------------------------------------------------------------------------------
+
+class GGS_string function_configurationNodeNameForPrecedenceGraph (class Compiler * inCompiler
+                                                                   COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Function 'assignmentOperatorFuncName'
+//
+//--------------------------------------------------------------------------------------------------
+
+class GGS_string function_assignmentOperatorFuncName (const class GGS_omnibusType & constinArgument0,
+                                                      const class GGS_omnibusType & constinArgument1,
+                                                      class Compiler * inCompiler
+                                                      COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Function 'ctBoolTypeName'
+//
+//--------------------------------------------------------------------------------------------------
+
+class GGS_string function_ctBoolTypeName (class Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Function 'compileTimeBoolType'
+//
+//--------------------------------------------------------------------------------------------------
+
+class GGS_omnibusType function_compileTimeBoolType (class Compiler * inCompiler
+                                                    COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Function 'staticStringTypeName'
+//
+//--------------------------------------------------------------------------------------------------
+
+class GGS_string function_staticStringTypeName (class Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Function 'ctIntegerTypeName'
+//
+//--------------------------------------------------------------------------------------------------
+
+class GGS_string function_ctIntegerTypeName (class Compiler * inCompiler
+                                             COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Routine 'buildTypeMapHTMLFile??????sourceFile'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_buildTypeMapHTMLFile_3F__3F__3F__3F__3F__3F_sourceFile (const class GGS_unifiedTypeMap constinArgument0,
+                                                                     const class GGS_routineMapForContext constinArgument1,
+                                                                     const class GGS_infixOperatorMap constinArgument2,
+                                                                     const class GGS_prefixOperatorMap constinArgument3,
+                                                                     const class GGS_assignmentOperatorMap constinArgument4,
+                                                                     const class GGS_lstring constinArgument5,
+                                                                     class Compiler * inCompiler
+                                                                     COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Filewrapper 'typeDumpGenerationTemplate'
+//
+//--------------------------------------------------------------------------------------------------
+
+
+//--------------------------------------------------------------------------------------------------
+
+
+//--------------------------------------------------------------------------------------------------
+
+
+//--------------------------------------------------------------------------------------------------
+
+extern const cDirectoryWrapper gWrapperDirectory_0_typeDumpGenerationTemplate ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Filewrapper template 'typeDumpGenerationTemplate dump'
+//
+//--------------------------------------------------------------------------------------------------
+
+GGS_string filewrapperTemplate_typeDumpGenerationTemplate_dump (class Compiler * inCompiler,
+                                                                const class GGS_string & in_PROJECT_5F_NAME,
+                                                                const class GGS_unifiedTypeMap & in_GLOBAL_5F_TYPE_5F_MAP,
+                                                                const class GGS_stringset & in_FIRST_5F_LETTER_5F_SET,
+                                                                const class GGS_string & in_TABLE_5F_OF_5F_TYPES_5F_STRING,
+                                                                const class GGS_routineMapForContext & in_ALL_5F_ROUTINE_5F_MAP,
+                                                                const class GGS_infixOperatorMap & in_INFIX_5F_OPERATOR_5F_MAP,
+                                                                const class GGS_prefixOperatorMap & in_PREFIX_5F_OPERATOR_5F_MAP,
+                                                                const class GGS_assignmentOperatorMap & in_ASSIGNMENT_5F_OPERATOR_5F_MAP
+                                                                COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Function 'linkForHTMLTypeMap'
+//
+//--------------------------------------------------------------------------------------------------
+
+class GGS_string function_linkForHTMLTypeMap (const class GGS_string & constinArgument0,
+                                              class Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Routine 'declareLLVMTypes?&'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_declareLLVMTypes_3F__26_ (const class GGS_userLLVMTypeDefinitionListIR constinArgument0,
+                                       class GGS_string & ioArgument1,
+                                       class Compiler * inCompiler
+                                       COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Function 'routineMangledNameFromCall'
+//
+//--------------------------------------------------------------------------------------------------
+
+class GGS_lstring function_routineMangledNameFromCall (const class GGS_string & constinArgument0,
+                                                       const class GGS_lstring & constinArgument1,
+                                                       const class GGS_effectiveArgumentListAST & constinArgument2,
+                                                       class Compiler * inCompiler
+                                                       COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Routine 'analyzeEffectiveParameters?self?routineAttributes?formal?effective?errorLocation?context?requiredMode&temporary&staticEntityMap&variableMap&alloca&instructionListIR&effectiveIR'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_analyzeEffectiveParameters_3F_self_3F_routineAttributes_3F_formal_3F_effective_3F_errorLocation_3F_context_3F_requiredMode_26_temporary_26_staticEntityMap_26_variableMap_26_alloca_26_instructionListIR_26_effectiveIR (const class GGS_omnibusType constinArgument0,
+                                                                                                                                                                                                                                      const class GGS_routineAttributes constinArgument1,
+                                                                                                                                                                                                                                      const class GGS_routineTypedSignature constinArgument2,
+                                                                                                                                                                                                                                      const class GGS_effectiveArgumentListAST constinArgument3,
+                                                                                                                                                                                                                                      const class GGS_location constinArgument4,
+                                                                                                                                                                                                                                      const class GGS_semanticContext constinArgument5,
+                                                                                                                                                                                                                                      const class GGS_mode constinArgument6,
+                                                                                                                                                                                                                                      class GGS_semanticTemporariesStruct & ioArgument7,
+                                                                                                                                                                                                                                      class GGS_staticEntityMap & ioArgument8,
+                                                                                                                                                                                                                                      class GGS_universalValuedObjectMap & ioArgument9,
+                                                                                                                                                                                                                                      class GGS_allocaList & ioArgument10,
+                                                                                                                                                                                                                                      class GGS_instructionListIR & ioArgument11,
+                                                                                                                                                                                                                                      class GGS_procCallEffectiveParameterListIR & ioArgument12,
+                                                                                                                                                                                                                                      class Compiler * inCompiler
+                                                                                                                                                                                                                                      COMMA_LOCATION_ARGS) ;
+

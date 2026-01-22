@@ -1,6 +1,6 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @isrDeclarationAST : @abstractDeclarationAST {
   public var @lstring mISRName
@@ -10,13 +10,13 @@ class @isrDeclarationAST : @abstractDeclarationAST {
   public var @location mEndOfISRDeclaration
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <isr_in_driver> ?!@ast ioAST ?let @lstring inDriverName {
     $interrupt$
@@ -41,41 +41,41 @@ syntax extension omnibus_syntax {
     }
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  NOTE TYPES IN PRECEDENCE GRAPH                                                                                       
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  NOTE TYPES IN PRECEDENCE GRAPH                                                                                       
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @isrDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   let receiverTypeName = omnibusTypeSpecificNameForDriver (!self.mDriverName)
   let s = receiverTypeName.string + "." + self.mISRName.string + "()"
   [!?ioGraph addNode ! @{!s !self.mISRName.location} !self]
-#---
+//---
   [self.mISRInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   if receiverTypeName.string != "" then
     [!?ioGraph noteNode !receiverTypeName]
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @isrDeclarationAST keyRepresentationForErrorSignaling -> @string {
   let receiverTypeName = omnibusTypeSpecificNameForDriver (!self.mDriverName)
   result = "function " + receiverTypeName + "." + self.mISRName
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @isrDeclarationAST locationForErrorSignaling -> @location {
   result = self.mISRName.location
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  ENTER IN CONTEXT                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  ENTER IN CONTEXT                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @isrDeclarationAST enterInContext
   ?!context:@semanticContext unused ioContext
@@ -87,9 +87,9 @@ override method @isrDeclarationAST enterInContext
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
-#---------------- Add decorated declaration (BEFORE adding isr routine in ioDecoratedDeclarationList
+//---------------- Add decorated declaration (BEFORE adding isr routine in ioDecoratedDeclarationList
   ioDecoratedDeclarationList += !@decoratedISRDeclaration {!self.mISRName !self.mMode !self.mDriverName}
-#----------------
+//----------------
   let driverLLVMBaseTypeName = llvmDriverNameFromName (!self.mDriverName)
   let isrRoutineMangledName = routineMangledNameFromAST (!driverLLVMBaseTypeName !self.mISRName !@[])
   ioDecoratedRoutineList +=
@@ -105,12 +105,12 @@ override method @isrDeclarationAST enterInContext
     !warningOnUnusedArgs: true
     ! self.mISRInstructionList
     ! self.mEndOfISRDeclaration
-    !returnTypeName: ["" nowhere]  # Empty string if no returned value
+    !returnTypeName: ["" nowhere]  // Empty string if no returned value
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTIC ANALYSIS                                                                                                    
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SEMANTIC ANALYSIS                                                                                                    
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @decoratedISRDeclaration : @abstractDecoratedDeclaration {
   public var @lstring mISRName
@@ -118,16 +118,16 @@ class @decoratedISRDeclaration : @abstractDecoratedDeclaration {
   public var @lstring mDriverName
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @decoratedISRDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-#--- Self type
+//--- Self type
   [inContext.mTypeMap searchType !lkey:omnibusTypeSpecificNameForDriver (!self.mDriverName) ?type:let selfType]
-#--- Code generation
+//--- Code generation
   [inContext.mAvailableInterruptMap searchKey !self.mISRName ?*]
   [!?ioIntermediateCodeStruct.mInterruptMapIR insertKey
     !self.mISRName
@@ -137,9 +137,9 @@ override method @decoratedISRDeclaration semanticAnalysis
   ]  
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  CODE GENERATION                                                                                                      
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  CODE GENERATION                                                                                                      
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @interruptMapIR {
   public var @omnibusType mSelfType
@@ -149,7 +149,7 @@ map @interruptMapIR {
   insert insertKey error message "interrupt '%K' is already defined"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @interruptMapIR interruptCodeGeneration
   ?!@string ioLLVMcode
@@ -159,7 +159,7 @@ method @interruptMapIR interruptCodeGeneration
   ?let @generationContext inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-#--- Generate interrupt routines
+//--- Generate interrupt routines
   var @stringset definedInterrupts = @[]
   for interrupt in self do
     definedInterrupts ++= interrupt.lkey.string
@@ -170,18 +170,18 @@ method @interruptMapIR interruptCodeGeneration
     end
     ioLLVMcode += llvmTitleComment (!interruptImplementationName)
     ioLLVMcode += "define void @" + interruptImplementationName + " ()" + llvmAttributeFunction () + " {\n"
-  #--- Define self
+  //--- Define self
     let varName = llvmNameForGlobalVariable (!interrupt.mDriverName)
     let llvmTypeName = [interrupt.mSelfType llvmTypeName]
-  #--- Call Omnibus function
+  //--- Call Omnibus function
     let driverLLVMBaseTypeName = interrupt.mSelfType.llvmBaseTypeName
     let isrRoutineMangledName = routineMangledNameFromAST (!driverLLVMBaseTypeName !interrupt.lkey !@[])
     let isrRoutineLLVMName = llvmNameForFunction (!isrRoutineMangledName)
     ioLLVMcode += "  call void @" + isrRoutineLLVMName + " (" + llvmTypeName + "* " + varName + ")\n"
-  #--- Epilog
+  //--- Epilog
     ioLLVMcode += "  ret void\n"
     ioLLVMcode += "}\n\n"
-  #---- Generate interrupt handler for XTR
+  //---- Generate interrupt handler for XTR
     if interrupt.mMode == .serviceMode then
      let interruptHandlerName = llvmNameForServiceInterrupt (!interrupt.lkey).string
      let isrName = llvmNameForSectionInterrupt (!interrupt.lkey.string)
@@ -190,7 +190,7 @@ method @interruptMapIR interruptCodeGeneration
      ioAScode += s2
     end
   end
-#--- Generate stubs for undefined interrupt entries
+//--- Generate stubs for undefined interrupt entries
   for (lkey panicCode) in inGenerationContext.mAvailableInterruptMap do
     if not [definedInterrupts hasKey !lkey.string] then
       switch panicCode
@@ -214,5 +214,5 @@ method @interruptMapIR interruptCodeGeneration
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 

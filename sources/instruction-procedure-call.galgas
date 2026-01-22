@@ -1,39 +1,39 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract class @callInstructionAST : @instructionAST {
   public var @effectiveArgumentListAST mArguments
   public var @location mEndOfArguments
 }
 
-#·······················································································································
+//·······················································································································
 
 class @standAloneProcedureCallInstructionAST : @callInstructionAST {
   public var @lstring mSandAloneRoutineName
 }
 
-#·······················································································································
+//·······················································································································
 
 class @procedureCallInstructionAST : @callInstructionAST {
   public var @lstring mIdentifier
   public var @accessInAssignmentListAST mAccessList
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
     <procedure_call> !?ioAST ?let routineCallInstruction
     ioInstructionList += !routineCallInstruction
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <procedure_call> ?!@ast ioAST !@callInstructionAST outInstruction {
     let instructionLocation = @location.here
@@ -59,11 +59,11 @@ syntax extension omnibus_syntax {
     end
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @LValueOperandAST buildProcedureCallAccessList ?!@accessInAssignmentListAST ioAccessList {
   switch self
@@ -77,14 +77,14 @@ method @LValueOperandAST buildProcedureCallAccessList ?!@accessInAssignmentListA
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  NOTE TYPES                                                                                                           
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  NOTE TYPES                                                                                                           
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @procedureCallInstructionAST noteInstructionTypesInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-#  [mOperand noteInstructionTypesInPrecedenceGraph !?ioGraph]
+//  [mOperand noteInstructionTypesInPrecedenceGraph !?ioGraph]
   for (access) in self.mAccessList do
     switch access
     case property (*) :
@@ -106,7 +106,7 @@ override method @procedureCallInstructionAST noteInstructionTypesInPrecedenceGra
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @standAloneProcedureCallInstructionAST noteInstructionTypesInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
@@ -125,9 +125,9 @@ override method @standAloneProcedureCallInstructionAST noteInstructionTypesInPre
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  SEMANTICS                                                                                                            
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  SEMANTICS                                                                                                            
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 getter @effectiveArgumentPassingModeAST passingModeForActualSelector ?let @lstring inSelector -> @string {
   switch self
@@ -142,7 +142,7 @@ getter @effectiveArgumentPassingModeAST passingModeForActualSelector ?let @lstri
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 list @procEffectiveParameterList {
   public var @effectiveArgumentPassingModeAST mEffectiveParameterPassingMode
@@ -150,7 +150,7 @@ list @procEffectiveParameterList {
   public var @omnibusType mParameterType
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @standAloneProcedureCallInstructionAST instructionSemanticAnalysis
   ?self:let @omnibusType inSelfType
@@ -163,27 +163,27 @@ override method @standAloneProcedureCallInstructionAST instructionSemanticAnalys
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-#--- Called routine signature
+//--- Called routine signature
   let calledRoutineSignature = [self.mArguments routineSignature !self.mSandAloneRoutineName.location]
-#--- Search routine in map
+//--- Search routine in map
   let requiredFunctionMangledName = self.mSandAloneRoutineName.string + calledRoutineSignature
-#   log "keys " : [inContext.mRoutineMap keyList]
+//   log "keys " : [inContext.mRoutineMap keyList]
   [inContext.mRoutineMap searchKey
     ! @{!requiredFunctionMangledName !self.mSandAloneRoutineName}
     ?let unused implementedPublic
     ?let formalSignature
-    ?let formalReturnTypeProxy # null if no returned value
+    ?let formalReturnTypeProxy // null if no returned value
     ?let implementedModeDictionary
     ?let unused implementedIsExported
     ?let unused implementedMode
   ]
-#--- Check return type proxy is null
+//--- Check return type proxy is null
   if not [formalReturnTypeProxy isNull] then
     error self.mSandAloneRoutineName : "this function returns a value, cannot be used as a procedure"
   end
-#--- Check modes
+//--- Check modes
     let functionLLVMName = checkModeAndReturnsRoutineLLVMName (!implementedModeDictionary !inMode !self.mSandAloneRoutineName)
-#--- Analyze effective parameters
+//--- Analyze effective parameters
   var @procCallEffectiveParameterListIR effectiveParameterListIR = @[]
   analyzeEffectiveParameters (
     !self:inSelfType
@@ -201,13 +201,13 @@ override method @standAloneProcedureCallInstructionAST instructionSemanticAnalys
     !?effectiveIR:effectiveParameterListIR
   )
 
-#--- Routine name for invocation graph
+//--- Routine name for invocation graph
   let routineMangledName = routineMangledNameFromCall (
     !""
     !self.mSandAloneRoutineName
     !self.mArguments
   )
-#--- Code generation
+//--- Code generation
   ioInstructionGenerationList += !@standaloneRoutineCallIR {
     !.void
     !routineMangledName
@@ -216,7 +216,7 @@ override method @standAloneProcedureCallInstructionAST instructionSemanticAnalys
   }
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @procedureCallInstructionAST instructionSemanticAnalysis
   ?self:let @omnibusType inSelfType
@@ -229,12 +229,12 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-#--- Analyze header identifier : it is a variable, as a standalone procedure call is handled in an other place
-#    If identifier is empty string, the receiver is "self"
+//--- Analyze header identifier : it is a variable, as a standalone procedure call is handled in an other place
+//    If identifier is empty string, the receiver is "self"
   var receiverIsSelf = false
   var @omnibusType currentType
   var @string currentLLVMAddressVar
-  if self.mIdentifier.string == "" then # Receiver is self
+  if self.mIdentifier.string == "" then // Receiver is self
     receiverIsSelf = true
     if inSelfType.kind == .void then
       error self.mIdentifier : "self is not available in this context" : currentType, currentLLVMAddressVar
@@ -270,12 +270,12 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
       currentLLVMAddressVar = llvmNameForGlobalSyncInstance (!omnibusName)
     end
   end
-#--- Get current object property map
+//--- Get current object property map
   var currentObjectPropertyMap = [inContext propertyGetterMap !currentType]
-#--- Insulate last access (should be a "property", used as routine name
+//--- Insulate last access (should be a "property", used as routine name
   var accessList = self.mAccessList
   [!?accessList popLast ?let lastAccess]
-#--- loop on access list
+//--- loop on access list
   for (access) in accessList do
     switch access
     case property (@lstring propertyName) :
@@ -326,7 +326,7 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
       error endOfIndex : "not handled yet" : currentType, currentLLVMAddressVar
     end
   end
-#--- Handle last access
+//--- Handle last access
   switch lastAccess
   case arrayAccess (* @location endOfIndex *) :
     error endOfIndex : "a property is required here"
@@ -336,22 +336,22 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
       !methodMangledName
       ?let unused implementedPublic
       ?let formalSignature
-      ?let formalReturnTypeProxy # null if no returned value
+      ?let formalReturnTypeProxy // null if no returned value
       ?let implementedModeDictionary
       ?let unused implementedIsExported
       ?let unused implementedMode
     ]
-  #--- Check modes
+  //--- Check modes
     let functionLLVMName = checkModeAndReturnsRoutineLLVMName (!implementedModeDictionary !inMode !methodName)
-  #--- Check routine does not return any value
+  //--- Check routine does not return any value
     if not [formalReturnTypeProxy isNull] then
       error methodName : "cannot be called in instruction, returns a value"
     end
-  #--- Add receiver as first parameter
+  //--- Add receiver as first parameter
     var @procCallEffectiveParameterListIR effectiveParameterListIR = @[
       @(.outputInput, .reference {!type:currentType !llvmName:currentLLVMAddressVar})
     ]
-  #--- Analyze effective parameters
+  //--- Analyze effective parameters
     analyzeEffectiveParameters (
       !self:inSelfType
       !routineAttributes:inRoutineAttributes
@@ -367,7 +367,7 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
       !?instructionListIR:ioInstructionGenerationList
       !?effectiveIR:effectiveParameterListIR
     )
-  #--- Generate call
+  //--- Generate call
     ioInstructionGenerationList += !@standaloneRoutineCallIR {
       !.void
       !methodMangledName
@@ -377,9 +377,9 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#! CODE GENERATION
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//! CODE GENERATION
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @procEffectiveParameterPassingModeIR {
   case input
@@ -387,11 +387,11 @@ enum @procEffectiveParameterPassingModeIR {
   case outputInput
 }
 
-#·······················································································································
+//·······················································································································
 
 list @procCallEffectiveParameterListIR {
   public var @procEffectiveParameterPassingModeIR mEffectiveParameterPassingMode
   public var @objectIR mParameter
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

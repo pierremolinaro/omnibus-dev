@@ -1,6 +1,6 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @letInstructionWithAssignmentAST : @instructionAST {
   public var @lstring mConstantName
@@ -8,13 +8,13 @@ class @letInstructionWithAssignmentAST : @instructionAST {
   public var @expressionAST mSourceExpression
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
     $let$
@@ -35,13 +35,13 @@ syntax extension omnibus_syntax {
     }
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  NOTE TYPES                                                                                                           
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  NOTE TYPES                                                                                                           
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @letInstructionWithAssignmentAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   if self.mOptionalTypeName.string != "" then
@@ -50,9 +50,9 @@ override method @letInstructionWithAssignmentAST noteInstructionTypesInPrecedenc
   [self.mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTICS                                                                                                            
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SEMANTICS                                                                                                            
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @letInstructionWithAssignmentAST instructionSemanticAnalysis
   ?self:let @omnibusType inSelfType
@@ -69,7 +69,7 @@ override method @letInstructionWithAssignmentAST instructionSemanticAnalysis
     then voidType ()
     else [[inContext.mTypeMap searchKey !self.mOptionalTypeName] type]
   end
-#--- Analyze source expression
+//--- Analyze source expression
   [self.mSourceExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
@@ -87,7 +87,7 @@ override method @letInstructionWithAssignmentAST instructionSemanticAnalysis
     !?ioTemporaries
     !?expressionResult
   ]  
-#--- Declare local constant
+//--- Declare local constant
   var result = checkAssignmentCompatibility (
     !inContext.mAssignmentOperatorMap
     !source:expressionResult
@@ -95,11 +95,11 @@ override method @letInstructionWithAssignmentAST instructionSemanticAnalysis
     !errorLocation:self.mConstantName.location
     !staticTypeAllowed:true
   )
-#---
+//---
   if not [[result type] instanciable] then
     error self.mConstantName : [result omnibusTypeDescriptionName] + " type is not instanciable" : result
   end
-#--- Declare local constant
+//--- Declare local constant
   let omnibusName = @lstring {!self.mConstantName.string + "." + ioTemporaries.mTemporaryIndex !self.mConstantName}
   ioTemporaries.mTemporaryIndex += 1
   if [result omnibusTypeDescriptionName] != ctIntegerTypeName () then
@@ -113,4 +113,4 @@ override method @letInstructionWithAssignmentAST instructionSemanticAnalysis
   [!?ioUniversalMap insertLocalConstant !self.mConstantName !false ![result type] !omnibusName]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

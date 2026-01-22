@@ -1,21 +1,21 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @panicAST : @abstractDeclarationAST {
-  public var @bool mIsSetup # true: setup, false: loop
+  public var @bool mIsSetup // true: setup, false: loop
   public var @instructionListAST mPanicInstructionList
   public var @location mEndOfPanicInstructions
   public var @lbigint mPriority
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <declaration> ?!@ast ioAST {
     $panic$
@@ -41,19 +41,19 @@ syntax extension omnibus_syntax {
     }
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  PRECEDENCE GRAPH                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  PRECEDENCE GRAPH                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @panicAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [self.mPanicInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @panicAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
  let nodeName = @lstring {
@@ -65,21 +65,21 @@ override method @panicAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph 
  [!?ioGraph addEdge !from: nodeName !to: configNode]
 }
 
-#·······················································································································
+//·······················································································································
 
 override getter @panicAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = "panic " + if self.mIsSetup then "setup" else "loop" end + " " + self.mPriority.bigint
 }
 
-#·······················································································································
+//·······················································································································
 
 override getter @panicAST locationForErrorSignaling -> @location outLocation {
   outLocation = self.mPriority.location
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#! UTILITY                                                                                                    
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//! UTILITY                                                                                                    
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func panicRoutineNameForLocationFile ?let @location inLocation -> @string {
   if [inLocation isNowhere] then
@@ -89,7 +89,7 @@ func panicRoutineNameForLocationFile ?let @location inLocation -> @string {
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 func panicRoutineNameForFilePath ?let @string inFilePath -> @string {
   if inFilePath == "" then
@@ -99,9 +99,9 @@ func panicRoutineNameForFilePath ?let @string inFilePath -> @string {
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  ENTER IN CONTEXT                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  ENTER IN CONTEXT                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @panicRoutinePriorityMap {
   insert insertSetupKey error message "a panic setup routine with priority %K has been already declared"
@@ -110,7 +110,7 @@ map @panicRoutinePriorityMap {
   search searchLoopKey error message "there is no panic loop routine with priority %K"
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @panicAST enterInContext
   ?!context:@semanticContext ioContext
@@ -127,12 +127,12 @@ override method @panicAST enterInContext
   else
     [!?ioContext.mPanicLoopRoutinePriorityMap insertLoopKey !@{![self.mPriority string] !self.mPriority.location}]
   end
-#---------------- Add decorated declaration
+//---------------- Add decorated declaration
   ioDecoratedDeclarationList += !@decoratedPanicRoutine {
     !self.mIsSetup
     !self.mPriority
   }
-#--- Insert predefined input arguments
+//--- Insert predefined input arguments
   var @routineFormalArgumentListAST arguments = @[]
   arguments +=
     !.input
@@ -154,7 +154,7 @@ override method @panicAST enterInContext
     !self.mPriority.location
   }
   ioDecoratedRoutineList +=
-    !receiverTypeName: ["" nowhere] # Empty string if standalone function
+    !receiverTypeName: ["" nowhere] // Empty string if standalone function
     !mode:.panicMode
     !isRequired:false
     !routineKind: .function
@@ -166,12 +166,12 @@ override method @panicAST enterInContext
     !warningOnUnusedArgs: false
     ! self.mPanicInstructionList
     !self.mEndOfPanicInstructions
-    !returnTypeName: ["" nowhere]  # Empty string if no returned value
+    !returnTypeName: ["" nowhere]  // Empty string if no returned value
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  SEMANTIC ANALYSIS                                                                                                    
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  SEMANTIC ANALYSIS                                                                                                    
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc appendPanicRoutines
   ?allSourceFilePaths:let @stringset inSourceFileAbsolutePathSet
@@ -182,7 +182,7 @@ proc appendPanicRoutines
     !isRequired:false
     !warnsIfUnused:false
   }
-#--- Section panic routine
+//--- Section panic routine
   ioIntermediateCodeStruct.mRoutineListIR += !@sectionModePanicRoutineIR {
     !["section.implementation.handle.panic" nowhere]
     !isRequired:false
@@ -190,7 +190,7 @@ proc appendPanicRoutines
     !ioIntermediateCodeStruct.mPanicSetupListIR
     !ioIntermediateCodeStruct.mPanicLoopListIR
   }
-#--- Panic routines, specific to every source file
+//--- Panic routines, specific to every source file
   for (sourceFilePath) in inSourceFileAbsolutePathSet do
     ioIntermediateCodeStruct.mRoutineListIR += !@fileSpecificPanicRoutineIR {
       ![panicRoutineNameForFilePath (!sourceFilePath) nowhere]
@@ -207,29 +207,29 @@ proc appendPanicRoutines
   }
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  SEMANTIC ANALYSIS                                                                                                    
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  SEMANTIC ANALYSIS                                                                                                    
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func %once panicModeName -> @string {
   result = "panic"
 }
 
-#·······················································································································
+//·······················································································································
 
 class @decoratedPanicRoutine : @abstractDecoratedDeclaration {
-  public var @bool mIsSetup # true: setup, false: loop
+  public var @bool mIsSetup // true: setup, false: loop
   public var @lbigint mPriority
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @decoratedPanicRoutine semanticAnalysis
   ?context:let @semanticContext unused inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-#--- Code generation
+//--- Code generation
   if self.mIsSetup then
     [!?ioTemporaries.mPanicSetupRoutinePriorityMap insertSetupKey !@{![self.mPriority string] !self.mPriority.location}]
     ioIntermediateCodeStruct.mPanicSetupListIR += !self.mPriority.bigint
@@ -239,9 +239,9 @@ override method @decoratedPanicRoutine semanticAnalysis
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  CODE GENERATION                                                                                                    
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  CODE GENERATION                                                                                                    
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 sortedlist @panicSortedListIR {
   public var @bigint mPriority
@@ -249,14 +249,14 @@ sortedlist @panicSortedListIR {
   mPriority <
 }
 
-#·······················································································································
+//·······················································································································
 
 proc generatePanicCode
   ?!@string ioLLVMcode
   ?generationContext:let @generationContext inGenerationContext
   ?!generationAdds:@generationAdds ioGenerationAdds
 {
-#--- Panic for isr
+//--- Panic for isr
   [!?ioGenerationAdds.mStaticEntityMap findOrAddStaticString !"" ?let emptyStringIndex]
   ioLLVMcode += llvmTitleComment (!"Panic for ISR")
   ioLLVMcode += "define internal void @panic.isr (" + [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " %in.CODE) " + llvmAttributeFunction () + "noreturn {\n"
@@ -270,15 +270,15 @@ proc generatePanicCode
   ioLLVMcode += "}\n\n"    
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#! CODE GENERATION: Panic routine, specific to a source file 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//! CODE GENERATION: Panic routine, specific to a source file 
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @fileSpecificPanicRoutineIR : @abstractRoutineIR {
   public var @string inFilePath
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @fileSpecificPanicRoutineIR llvmCodeGeneration 
   ?!@string ioLLVMcode
@@ -305,7 +305,7 @@ override method @fileSpecificPanicRoutineIR llvmCodeGeneration
   ioLLVMcode += "}\n\n"
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @fileSpecificPanicRoutineIR enterAccessibleEntities
    ?!@stringset ioInvokedRoutineSet
@@ -314,14 +314,14 @@ override method @fileSpecificPanicRoutineIR enterAccessibleEntities
   ioInvokedRoutineSet ++= llvmNameForSectionCall (!panicRoutineName ())
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#! CODE GENERATION: Panic routine, in universal mode 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//! CODE GENERATION: Panic routine, in universal mode 
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @universalModePanicRoutineIR : @abstractRoutineIR {
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @universalModePanicRoutineIR llvmCodeGeneration 
   ?!@string ioLLVMcode
@@ -339,7 +339,7 @@ override method @universalModePanicRoutineIR llvmCodeGeneration
   ioLLVMcode += llvmAttributeFunction () + "noreturn\n\n"
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @universalModePanicRoutineIR svcDeclarationGeneration
   ?!@primitiveAndServiceIRlist unused ioPrimitiveAndServiceList
@@ -352,7 +352,7 @@ override method @universalModePanicRoutineIR svcDeclarationGeneration
     !invocationFromAnyMode: true
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @universalModePanicRoutineIR enterAccessibleEntities
    ?!@stringset ioInvokedRoutineSet
@@ -361,16 +361,16 @@ override method @universalModePanicRoutineIR enterAccessibleEntities
   ioInvokedRoutineSet ++= llvmNameForSectionImplementation (!panicRoutineName ())
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#! CODE GENERATION: Panic routine, in section mode 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//! CODE GENERATION: Panic routine, in section mode 
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @sectionModePanicRoutineIR : @abstractRoutineIR {
   public var @panicSortedListIR mPanicSetupListIR
   public var @panicSortedListIR mPanicLoopListIR
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @sectionModePanicRoutineIR llvmCodeGeneration 
   ?!@string ioLLVMcode
@@ -386,7 +386,7 @@ override method @sectionModePanicRoutineIR llvmCodeGeneration
   
   ioLLVMcode += "define void @" + llvmNameForSectionImplementation (!panicRoutineName ())
   ioLLVMcode += arguments + llvmAttributeFunction () + "noreturn {\n"
-#---
+//---
   for (priority) in self.mPanicSetupListIR do
     ioLLVMcode += "  call void @panic.setup." + priority + arguments + "\n"
   end
@@ -399,7 +399,7 @@ override method @sectionModePanicRoutineIR llvmCodeGeneration
   ioLLVMcode += "}\n\n"
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @sectionModePanicRoutineIR enterAccessibleEntities
    ?!@stringset ioInvokedRoutineSet
@@ -413,4 +413,4 @@ override method @sectionModePanicRoutineIR enterAccessibleEntities
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

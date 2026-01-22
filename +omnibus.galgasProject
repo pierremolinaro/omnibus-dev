@@ -1,5 +1,4 @@
 project (1:0:0) -> "omnibus" {
-#--- Targets
   %makefile-unix
   %MacSwiftApp 
   %applicationBundleBase : "pierre.molinaro.name"

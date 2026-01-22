@@ -1,16 +1,16 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @controlRegisterKind {
   case scalar
-  case registerArray (@expressionAST arraySize # a power of 2 >= 2
+  case registerArray (@expressionAST arraySize // a power of 2 >= 2
                       @location arraySizeLocation
                       @expressionAST arrayElementSize
                       @location arrayElementSizeLocation)
 }  
 
-#·······················································································································
+//·······················································································································
 
 list @controlRegisterNameListAST {
   public var @lstring mRegisterName
@@ -20,7 +20,7 @@ list @controlRegisterNameListAST {
   public var @location mRegisterOffsetLocation
 }
 
-#·······················································································································
+//·······················································································································
 
 list @controlRegisterDeclarationList {
   public var @controlRegisterNameListAST mRegisterArrayList
@@ -29,56 +29,56 @@ list @controlRegisterDeclarationList {
   public var @location mRegisterBitSliceListLocation
 }
 
-#·······················································································································
+//·······················································································································
 
 list @controlRegisterBitSliceList {
   public var @controlRegisterBitSlice mRegisterBitSlice
 }
 
-#·······················································································································
+//·······················································································································
 
 enum @controlRegisterBitSlice {
   case unusedBits (@lbigint count)
   case namedBit (@lstring name @lbigint count)
 }
 
-#·······················································································································
+//·······················································································································
 
 enum @controlRegisterGroupKindAST {
   case single (@lbigint registerGroupBaseAddress)
   case groupArray (@expressionAST groupSizeExp @location groupSizeExpLocation @lbigintlist baseAddresses)
 }
 
-#·······················································································································
+//·······················································································································
 
 list @registerGroupListAST {
   public var @lstring mRegisterGroupName
   public var @controlRegisterGroupKindAST mControlRegisterGroupKind
 }
 
-#·······················································································································
+//·······················································································································
 
 class @controlRegisterGroupDeclarationAST  : @abstractDeclarationAST {
   public var @registerGroupListAST mRegisterGroupList
   public var @controlRegisterDeclarationList mRegisters
 }
 
-#·······················································································································
+//·······················································································································
 
 map @controlRegisterUserAccesMapAST {
   insert insertKey error message "the '%K' register is already marked as @user in %L"
   remove removeKey error message "-- INTERNAL ERROR ('%K') --"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
-  #   register group declaration
-  #·····················································································································
+  //·····················································································································
+  //   register group declaration
+  //·····················································································································
 
   rule <declaration> ?!@ast ioAST {
     $registers$
@@ -106,7 +106,7 @@ syntax extension omnibus_syntax {
           $integer$ ?let @lbigint baseAddress
           groupBaseAddresses += !baseAddress
         while
-#          $,$
+//          $,$
         end
         $]$
         let groupKind = @controlRegisterGroupKindAST.groupArray {
@@ -117,7 +117,7 @@ syntax extension omnibus_syntax {
         registerGroupListAST += !registerGroupName !groupKind
       end
     while
-#      $,$
+//      $,$
     end
     ${$
     var @controlRegisterDeclarationList controlRegisterDeclarationList = @[]
@@ -126,7 +126,7 @@ syntax extension omnibus_syntax {
       repeat
         <registerDeclaration> !?ioAST !?registerDeclarationList
       while
-#        $,$
+//        $,$
       end
       $\$type$ ?let registerTypeName
       var @controlRegisterBitSliceList registerBitSliceList = @[]
@@ -150,7 +150,7 @@ syntax extension omnibus_syntax {
           end
           registerBitSliceList += !registerBitSlice
         while
-#          $,$
+//          $,$
         end
         $}$
       end
@@ -165,9 +165,9 @@ syntax extension omnibus_syntax {
     $}$
   }
 
-  #·····················································································································
-  #   register declaration
-  #·····················································································································
+  //·····················································································································
+  //   register declaration
+  //·····················································································································
 
   rule <registerDeclaration> ?!@ast ioAST ?!@controlRegisterNameListAST ioRegisterDeclarationList {
     $identifier$ ?let registerName
@@ -234,9 +234,9 @@ syntax extension omnibus_syntax {
     end
   }
 
-  #·····················································································································
-  #   registers @user #GROUP (register, ...)
-  #·····················································································································
+  //·····················································································································
+  //   registers @user #GROUP (register, ...)
+  //·····················································································································
 
   rule <declaration> ?!@ast ioAST {
     $registers$
@@ -248,7 +248,7 @@ syntax extension omnibus_syntax {
     $($
     repeat
       $identifier$ ?let registerName
-      let key = @lstring {!"#" + registerGroupName + ":" + registerName !registerName.location}
+      let key = @lstring {!"//" + registerGroupName + ":" + registerName !registerName.location}
       [!?ioAST.mControlRegisterUserAccesMapAST insertKey !key]
     while
       $,$
@@ -256,20 +256,20 @@ syntax extension omnibus_syntax {
     $)$      
   }
   
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  ENTER IN CONTEXT                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  ENTER IN CONTEXT                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
-list @controlRegisterFieldList { # Used for displaying in HTML file
+list @controlRegisterFieldList { // Used for displaying in HTML file
   public var @uint mFieldBitCount
-  public var @string mFieldName # "—" if unused
+  public var @string mFieldName // "—" if unused
 }
 
-#·······················································································································
+//·······················································································································
 
 map @controlRegisterFieldMap {
   public var @uint mBitIndex
@@ -278,7 +278,7 @@ map @controlRegisterFieldMap {
   search searchKey error message "the '%K' slice is not declared"
 }
 
-#·······················································································································
+//·······················································································································
 
 map @sliceMap {
   public var @llvmBinaryOperation mAccessOperator
@@ -288,9 +288,9 @@ map @sliceMap {
   search searchKey error message "the '%K' slice is not declared"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!   PRECEDENCE GRAPH
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!   PRECEDENCE GRAPH
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @controlRegisterGroupDeclarationAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for reg in self.mRegisters do
@@ -299,30 +299,30 @@ method @controlRegisterGroupDeclarationAST noteTypesInPrecedenceGraph ?!@semanti
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 override getter @controlRegisterGroupDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = registerGroupNameFromOmnibusName (![self.mRegisterGroupList mRegisterGroupNameAtIndex !0])
 }
 
-#·······················································································································
+//////·······················································································································
 
 override getter @controlRegisterGroupDeclarationAST locationForErrorSignaling -> @location {
   result = [self.mRegisterGroupList mRegisterGroupNameAtIndex !0]
 }
 
-#·······················································································································
+////·······················································································································
 
 override method @controlRegisterGroupDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   let nodeName = registerGroupNameFromOmnibusName (![self.mRegisterGroupList mRegisterGroupNameAtIndex !0])
-#--- Add node
+//--- Add node
   [!?ioGraph addNode !nodeName !self]
-#--- Add dependence definitions
+////--- Add dependence definitions
   for reg in self.mRegisters do
-  #--- Add dependency from type name
+  //--- Add dependency from type name
     [!?ioGraph addEdge !from: nodeName !to: reg.mRegisterTypeName]
     [!?ioGraph addEdge !from: nodeName !to: compileTimeDeclarationBarrier ()]
-  #--- Add dependency from the number of integer type name (i.e. $u32 --> $u5)
+  //--- Add dependency from the number of integer type name (i.e. $u32 --> $u5)
     let split = [reg.mRegisterTypeName componentsSeparatedByString !"u"]
     if ([split count] == 2) && ([split mValueAtIndex !0] == "") && [[split mValueAtIndex !1] isDecimalUnsignedNumber] then
       let n = [[split mValueAtIndex !1] decimalUnsignedNumber]
@@ -331,7 +331,7 @@ override method @controlRegisterGroupDeclarationAST enterInPrecedenceGraph ?!@se
         [!?ioGraph addEdge !from: nodeName !to: bitSizeTypeName]
       end
     end
-  #--- Add integer type corresponding to slices
+  //--- Add integer type corresponding to slices
     for (slice) in reg.mRegisterBitSliceList do
       switch slice
       case unusedBits (*) :
@@ -341,10 +341,10 @@ override method @controlRegisterGroupDeclarationAST enterInPrecedenceGraph ?!@se
         end
       end
     end
-  #--- Add dependency from config node
+  //--- Add dependency from config node
     let rootNode =  @lstring {!configurationNodeNameForPrecedenceGraph () !nodeName.location}
     [!?ioGraph addEdge !from: nodeName !to: rootNode]
-  #--- Add dependency from source expression
+  //--- Add dependency from source expression
     for register in reg.mRegisterArrayList do
       switch register.mControlRegisterKind
       case scalar :
@@ -356,9 +356,9 @@ override method @controlRegisterGroupDeclarationAST enterInPrecedenceGraph ?!@se
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!   CONTEXT
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+////!   CONTEXT
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @controlRegisterMap {
   public var @omnibusType mType
@@ -367,22 +367,22 @@ map @controlRegisterMap {
   public var @sliceMap mRegisterFieldAccessMap
   public var @controlRegisterFieldMap mRegisterFieldMap
   public var @bigint mAddressOffset
-  public var @controlRegisterFieldList mControlRegisterFieldList # Used for HTML file
+  public var @controlRegisterFieldList mControlRegisterFieldList // Used for HTML file
   public var @uint mRegisterBitCount
-  public var @uint mArraySize # 0 if not an array
-  public var @uint mElementArraySize # 0 if not an array
+  public var @uint mArraySize // 0 if not an array
+  public var @uint mElementArraySize // 0 if not an array
   insert insertKey error message "the '%K' control register has been already declared in %L"
   search searchKey error message "the '%K' control register is not declared"
 }
 
-#·······················································································································
+//·······················································································································
 
 enum @registerGroupKind {
   case single (@bigint baseAddress)
   case arrayGroup (@lbigintlist baseAddresses)
 }
 
-#·······················································································································
+//·······················································································································
 
 map @controlRegisterGroupMap {
   public var @registerGroupKind mGroupKind
@@ -391,7 +391,7 @@ map @controlRegisterGroupMap {
   search searchKey error message "** internal error **"
 }
 
-#·······················································································································
+//·······················································································································
 
 private proc controlRegisterType
   ?let @lstring inRegisterTypeName
@@ -432,7 +432,7 @@ private proc controlRegisterType
   end
 }
 
-#·······················································································································
+//////·······················································································································
 
 private proc buildControlRegisterSliceMap
   ?let @controlRegisterBitSliceList inRegisterBitSliceList
@@ -444,10 +444,10 @@ private proc buildControlRegisterSliceMap
   !@sliceMap outRegisterBitSliceMap
   !@controlRegisterFieldList outControlRegisterFieldList
 {
-#--- Build bit slice map
+//--- Build bit slice map
   outRegisterFieldMap = @()
   outRegisterBitSliceMap = @()
-  outControlRegisterFieldList = @[] # Used for HTML file
+  outControlRegisterFieldList = @[] ////////// Used for HTML file
   if [inRegisterBitSliceList count] > 0 then
     var @uint shiftCount = 0
     for > (mRegisterBitSlice) in inRegisterBitSliceList do
@@ -463,7 +463,7 @@ private proc buildControlRegisterSliceMap
           !shiftCount
           !bitCount
         ]
-       #--- property name
+       //--- property name
         let mask = ((1 << bitCount) - 1) << shiftCount
         [!?outRegisterBitSliceMap insertKey
           !name
@@ -474,7 +474,7 @@ private proc buildControlRegisterSliceMap
         shiftCount = shiftCount + bitCount
       end
     end
-  #--- Check slice bit count is correct
+  //--- Check slice bit count is correct
     if inRegisterBitCount != shiftCount then
       error inEndOfBitSliceLocation
        : "total bit slice count is " + shiftCount + " (should be " + inRegisterBitCount + ")"
@@ -482,7 +482,7 @@ private proc buildControlRegisterSliceMap
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 method @controlRegisterDeclarationList.@element buildControlRegisterMapForGroup
   ?!context:@semanticContext ioContext
@@ -490,7 +490,7 @@ method @controlRegisterDeclarationList.@element buildControlRegisterMapForGroup
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
 {
   controlRegisterType (!self.mRegisterTypeName !?context:ioContext ?type:var registerType ?bitCount:let registerBitCount)
-#--- Build bit slice map
+//--- Build bit slice map
   buildControlRegisterSliceMap (
     !self.mRegisterBitSliceList
     !self.mRegisterBitSliceListLocation
@@ -499,11 +499,11 @@ method @controlRegisterDeclarationList.@element buildControlRegisterMapForGroup
     !bitCount:registerBitCount
     ?let registerFieldMap
     ?let registerBitSliceMap
-    ?let controlRegisterFieldList  # Used for HTML file
+    ?let controlRegisterFieldList  // Used for HTML file
   )
-#---  
+//---  
   for register in self.mRegisterArrayList do
-  #--- Analyse register address expression
+  //--- Analyse register address expression
     computeStaticExpression (
       !?context: ioContext
       !?staticEntityMap:ioStaticEntityMap
@@ -528,7 +528,7 @@ method @controlRegisterDeclarationList.@element buildControlRegisterMapForGroup
       elementArraySize = 0
     case registerArray (@expressionAST arraySizeExpression @location arraySizeLocation
                         @expressionAST arrayElementSizeExpression @location arrayElementSizeLocation) :
-    #--- Analyse register array size expression
+    ////--- Analyse register array size expression
       computeStaticExpression (
         !?context: ioContext
         !?staticEntityMap:ioStaticEntityMap
@@ -547,7 +547,7 @@ method @controlRegisterDeclarationList.@element buildControlRegisterMapForGroup
             : arraySize
         end
       end
-    #--- Analyse element array size expression
+    //--- Analyse element array size expression
       computeStaticExpression (
         !?context: ioContext
         !?staticEntityMap:ioStaticEntityMap
@@ -569,7 +569,7 @@ method @controlRegisterDeclarationList.@element buildControlRegisterMapForGroup
       !register.mRegisterName
       !registerType
       !register.mIsReadOnly
-      !false # user access is false by default
+      !false //// user access is false by default
       !registerBitSliceMap
       !registerFieldMap
       !registerAddressOffset
@@ -581,7 +581,7 @@ method @controlRegisterDeclarationList.@element buildControlRegisterMapForGroup
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @controlRegisterGroupDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
@@ -602,8 +602,8 @@ override method @controlRegisterGroupDeclarationAST enterInContext
     ]
   end
   for group in self.mRegisterGroupList do
-    var @controlRegisterMap registerMap = regMap # @[]
-  #--- Check for user access
+    var @controlRegisterMap registerMap = regMap // @[]
+  //--- Check for user access
     for aRegister in regMap do
       let key = "#" + group.mRegisterGroupName + ":" + aRegister.lkey
       if [ioControlRegisterUserAccesMapAST hasKey !key] then
@@ -611,7 +611,7 @@ override method @controlRegisterGroupDeclarationAST enterInContext
         [!?ioControlRegisterUserAccesMapAST removeKey ![key nowhere]]
       end
     end
-  #---
+  //---
     switch group.mControlRegisterGroupKind
     case single (baseAddress) :
       let groupKind = @registerGroupKind.single {!baseAddress:baseAddress}
@@ -647,16 +647,16 @@ override method @controlRegisterGroupDeclarationAST enterInContext
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  SEMANTIC ANALYSIS                                                                                                    
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  SEMANTIC ANALYSIS                                                                                                    
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @decoratedControlRegisterArrayGroupDeclaration : @abstractDecoratedDeclaration {
   public var @lstring mGroupName
   public var @lbigintlist mBaseAddresses
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @decoratedControlRegisterArrayGroupDeclaration semanticAnalysis
   ?context:let @semanticContext unused inContext
@@ -666,9 +666,9 @@ override method @decoratedControlRegisterArrayGroupDeclaration semanticAnalysis
   ioIntermediateCodeStruct.mControlRegisterGroupArrayList += !self.mGroupName !self.mBaseAddresses
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  CODE GENERATION                                                                                                   
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  CODE GENERATION                                                                                                   
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @controlRegisterGroupArrayList generateLLVMcode ?!@string ioLLVMcode ?let @uint inPointerSize {
   if [self count] > 0 then
@@ -696,9 +696,9 @@ method @controlRegisterGroupArrayList generateLLVMcode ?!@string ioLLVMcode ?let
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  BUILD HTML FILE                                                                                                      
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  BUILD HTML FILE                                                                                                      
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 sortedlist @controlRegisterByAddress {
   public var @bigint mAddress
@@ -707,7 +707,7 @@ sortedlist @controlRegisterByAddress {
   mAddress <
 }
 
-#·······················································································································
+//·······················································································································
 
 sortedlist @controlRegisterByName {
   public var @bigint mAddress
@@ -717,13 +717,13 @@ sortedlist @controlRegisterByName {
   mName <
 }
 
-#·······················································································································
+//·······················································································································
 
 proc buildControlRegisterMapHTMLFile
   ?let @controlRegisterGroupMap inControlRegisterGroupMap
   ?sourceFile:let @lstring inSourceFile
 {
-#------------------------------- Build an HTML file that contains all declared control registers, ordered by address
+//------------------------------- Build an HTML file that contains all declared control registers, ordered by address
   let byAddressFilePath = inSourceFile.string + ".control-registers-sorted-by-address.html"
   let byNameFilePath = inSourceFile.string + ".control-registers-sorted-by-name.html"
   if [option omnibus_options.emitControlRegisterHTMLDumpFile value] then
@@ -772,7 +772,7 @@ proc buildControlRegisterMapHTMLFile
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 private proc buildControlRegisterMaps
   ?let @controlRegisterMap inControlRegisterMap
@@ -829,7 +829,7 @@ private proc buildControlRegisterMaps
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 filewrapper controlRegisterDumpGenerationTemplate in "../generation-templates/" {
 }{
@@ -845,7 +845,7 @@ filewrapper controlRegisterDumpGenerationTemplate in "../generation-templates/" 
     ?@controlRegisterByAddress CONTROL_REGISTER_SORTED_BY_ADDRESS
 }
 
-#·······················································································································
+//·······················································································································
 
 func fieldIndexColumns ?let @uint inBitCount -> @string  {
   result = ""
@@ -854,7 +854,7 @@ func fieldIndexColumns ?let @uint inBitCount -> @string  {
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 func arrayIndexListFor ?size:let @uint inSize -> @uintlist {
   result = @[]
@@ -863,5 +863,5 @@ func arrayIndexListFor ?size:let @uint inSize -> @uintlist {
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 

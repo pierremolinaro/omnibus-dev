@@ -1,18 +1,18 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @panicInstructionAST : @instructionAST {
   public var @expressionAST mCodeExpression
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
     $panic$
@@ -21,21 +21,21 @@ syntax extension omnibus_syntax {
     ioInstructionList += !@panicInstructionAST {!loc !codeExpression}
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  NOTE TYPES                                                                                                           
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  NOTE TYPES                                                                                                           
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @panicInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [self.mCodeExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTICS                                                                                                            
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SEMANTICS                                                                                                            
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @panicInstructionAST instructionSemanticAnalysis
   ?self:let @omnibusType inSelfType
@@ -48,11 +48,11 @@ override method @panicInstructionAST instructionSemanticAnalysis
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-#--- Panic allowed ?
+//--- Panic allowed ?
   if inMode == .panicMode then
     error self.mInstructionLocation : "operations that can generate panic are not allowed in " + panicModeName () + " mode"
   end
-#--- Analyze expression
+//--- Analyze expression
   var @instructionListIR unusedInstructionListIR = @[]
   [self.mCodeExpression analyzeExpression
     !self:inSelfType
@@ -67,8 +67,8 @@ override method @panicInstructionAST instructionSemanticAnalysis
     !?instructionListIR:unusedInstructionListIR
     ?result:let @objectIR result
   ]
-#--- Expression type check
-#--- Expression is static ?
+//--- Expression type check
+//--- Expression is static ?
   if ([unusedInstructionListIR count] > 0)
      || not [result isLiteralInteger]
      || ([result omnibusTypeDescriptionName] != ctIntegerTypeName ()) then
@@ -88,16 +88,16 @@ override method @panicInstructionAST instructionSemanticAnalysis
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  CODE GENERATION                                                                                                      
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  CODE GENERATION                                                                                                      
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @panicInstructionIR : @abstractInstructionIR {
   public var @location mThrowLocation
   public var @bigint mPanicCode
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @panicInstructionIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -109,7 +109,7 @@ override method @panicInstructionIR llvmInstructionCode
   ioLLVMcode += [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " " + self.mPanicCode + ")\n"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @panicInstructionIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
@@ -118,4 +118,4 @@ override method @panicInstructionIR enterAccessibleEntities
   ioInvokedRoutineSet ++= panicRoutineNameForLocationFile (!self.mThrowLocation)
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

@@ -1,20 +1,20 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  AST                                                                                                                  
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  AST                                                                                                                  
+//-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @accessInAssignmentAST {
   case property (@lstring name)
   case arrayAccess (@expressionAST index @location endOfIndex @bool checkIndexExpression)
 }
 
-#·······················································································································
+//·······················································································································
 
 list @accessInAssignmentListAST {
   public var @accessInAssignmentAST mAccess
 }
 
 
-#·······················································································································
+//·······················································································································
 
 enum @LValueOperandAST %equatable {
   case noOperand
@@ -22,20 +22,20 @@ enum @LValueOperandAST %equatable {
   case arrayAccess (@expressionAST index @location endOfIndex @bool checkIndexExpression @LValueOperandAST next)
 }
 
-#·······················································································································
+//·······················································································································
 
 struct @LValueAST {
-  public var @lstring mIdentifier # self is represented by an empty string, with actual "self" location
+  public var @lstring mIdentifier // self is represented by an empty string, with actual "self" location
   public var @LValueOperandAST mOperand
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <lvalue> ?!@ast ioAST !@LValueAST outAssignmentTargetAST {
     let @lstring receiver
@@ -49,13 +49,13 @@ syntax extension omnibus_syntax {
     outAssignmentTargetAST = @{!receiver !operand}
   }
   
-  #·····················································································································
+  //·····················································································································
 
   rule <lvalue_operand> ?!@ast unused ioAST !@LValueOperandAST outOperand {
     outOperand = .noOperand
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <lvalue_operand> ?!@ast ioAST !@LValueOperandAST outOperand {
     $.$
@@ -64,7 +64,7 @@ syntax extension omnibus_syntax {
     outOperand = .property {!name:propertyName !next:operand}
   }
   
-  #·····················································································································
+  //·····················································································································
 
   rule <lvalue_operand> ?!@ast ioAST !@LValueOperandAST outOperand {
     $[$
@@ -87,19 +87,19 @@ syntax extension omnibus_syntax {
     }
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  NOTE TYPES                                                                                                           
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  NOTE TYPES                                                                                                           
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @LValueAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [self.mOperand noteInstructionTypesInPrecedenceGraph !?ioGraph]
 }
 
-#·······················································································································
+//·······················································································································
 
 method @LValueOperandAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   switch self
@@ -112,16 +112,16 @@ method @LValueOperandAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePr
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  SEMANTICS                                                                                                            
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  SEMANTICS                                                                                                            
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @LValueRepresentation {
   public var @omnibusType type
   public var @string llvmName
 }
 
-#·······················································································································
+//·······················································································································
 
 method @LValueAST analyzeLValue
   ?self:let @omnibusType inSelfType
@@ -136,7 +136,7 @@ method @LValueAST analyzeLValue
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !@LValueRepresentation outInternalRepresentation
 {
-  if self.mIdentifier.string == "" then # Receiver is "self"
+  if self.mIdentifier.string == "" then // Receiver is "self"
     if inSelfType.kind == .void then
       error self.mIdentifier : "self is not available in this context" : outInternalRepresentation
     elsif not [inRoutineAttributes contains !.mutatingRoutine] && not inIsAddressOf then
@@ -193,11 +193,11 @@ method @LValueAST analyzeLValue
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 private proc analyzeVariableInLValue
   ?self:let @omnibusType inSelfType
-  ?readAccess:let @bool inIsReadAccess # If false, write access
+  ?readAccess:let @bool inIsReadAccess // If false, write access
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
   ?mode:let @mode inMode
@@ -269,7 +269,7 @@ private proc analyzeVariableInLValue
   outInternalRepresentation = @{!currentType !currentLLVMName}
 }
 
-#·······················································································································
+//·······················································································································
 
 private proc handlePropertyAccess
   ?self:let @omnibusType inSelfType
@@ -286,7 +286,7 @@ private proc handlePropertyAccess
   ?let @lstring inPropertyName
   ?let @LValueOperandAST inNextOperand
 {
-#  let typeName = @lstring.new {!ioCurrentType.omnibusTypeDescriptionName !.here}
+//  let typeName = @lstring.new {!ioCurrentType.omnibusTypeDescriptionName !.here}
   let propertySetterMap = [inContext propertySetterMap !ioCurrentType]
   [propertySetterMap searchKey !inPropertyName ?* ?let @propertySetterKind propertyAccess]
   switch propertyAccess
@@ -320,7 +320,7 @@ private proc handlePropertyAccess
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 private proc handleArrayAccess
   ?self:let @omnibusType inSelfType
@@ -392,7 +392,7 @@ private proc handleArrayAccess
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 private proc analyzeSelfLValue
   ?self:let @omnibusType inSelfType
@@ -449,7 +449,7 @@ private proc analyzeSelfLValue
   outInternalRepresentation = @{!currentType !currentLLVMName}
 }
 
-#·······················································································································
+//·······················································································································
 
 private proc handleNextOperand
   ?self:let @omnibusType inSelfType
@@ -504,4 +504,4 @@ private proc handleNextOperand
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

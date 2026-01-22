@@ -1,6 +1,6 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @procFormalArgumentPassingMode %equatable {
   case input
@@ -8,7 +8,7 @@ enum @procFormalArgumentPassingMode %equatable {
   case inputOutput
 }
 
-#·······················································································································
+//·······················································································································
 
 list @routineFormalArgumentListAST {
   public var @procFormalArgumentPassingMode mFormalArgumentPassingMode
@@ -17,7 +17,7 @@ list @routineFormalArgumentListAST {
   public var @lstring mFormalArgumentName
 }
 
-#·······················································································································
+//·······················································································································
 
 getter @procFormalArgumentPassingMode formalPassingModeString -> @string {
   switch self
@@ -27,7 +27,7 @@ getter @procFormalArgumentPassingMode formalPassingModeString -> @string {
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 getter @procFormalArgumentPassingMode requiredActualPassingModeForSelector ?let @string inSelector -> @string {
   switch self
@@ -40,13 +40,13 @@ getter @procFormalArgumentPassingMode requiredActualPassingModeForSelector ?let 
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <procedure_formal_arguments> ?!@ast ioAST !@routineFormalArgumentListAST outProcFormalArgumentList {
     outProcFormalArgumentList = @[]
@@ -95,7 +95,7 @@ syntax extension omnibus_syntax {
     $)$
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <procedure_input_formal_arguments> ?!@ast ioAST !@routineFormalArgumentListAST outProcFormalArgumentList {
     outProcFormalArgumentList = @[]
@@ -114,23 +114,23 @@ syntax extension omnibus_syntax {
     $)$
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#! ROUTINE TYPED SIGNATURE
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-# La signature typée d'une routine est la liste du mode de passage, du sélecteur, du type de ses arguments formels.
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//! ROUTINE TYPED SIGNATURE
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+// La signature typée d'une routine est la liste du mode de passage, du sélecteur, du type de ses arguments formels.
 
 list @routineTypedSignature %equatable {
   public var @procFormalArgumentPassingMode mFormalArgumentPassingMode
   public var @lstring mSelector
-  public var @unifiedTypeMapEntry mTypeProxy # Nécessaire car le type n'est pas forcément résolu au moment de la construction
+  public var @unifiedTypeMapEntry mTypeProxy // Nécessaire car le type n'est pas forcément résolu au moment de la construction
   public var @lstring mFormalArgumentName
 }
 
-#·······················································································································
+//·······················································································································
 
 getter @routineTypedSignature typedString -> @string {
   result = "("
@@ -140,7 +140,7 @@ getter @routineTypedSignature typedString -> @string {
   result += ")"
 }
 
-#·······················································································································
+//·······················································································································
 
 getter @routineTypedSignature mangledName
      ?receiverTypeName: let @string inReceiverTypeName
@@ -158,7 +158,7 @@ getter @routineTypedSignature mangledName
   result = @{!s !inFunctionName.location}
 }
 
-#·······················································································································
+//·······················································································································
 
 proc routineTypedSignature ?!@unifiedTypeMap ioTypeMap
                            ?let @routineFormalArgumentListAST inFormalArgumentList
@@ -171,7 +171,7 @@ proc routineTypedSignature ?!@unifiedTypeMap ioTypeMap
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 proc routineTypedSignature2 ?@unifiedTypeMap inTypeMap
                             ?let @routineFormalArgumentListAST inFormalArgumentList
@@ -184,21 +184,21 @@ proc routineTypedSignature2 ?@unifiedTypeMap inTypeMap
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#! ROUTINE SIGNATURE
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-# La signature d'une routine est une chaîne de caractères constituée :
-#   - du caractère "(" ;
-#   - pour chaque argument :
-#       * du mode de passage de l'argument formel ("?", "?!" ou "!"),
-#       * du sélecteur,
-#       * du caractère ":"
-#   - du caractère ")".
-# Le couple (nom de routine, signature) est unique. Pour un nom de routine donné, la signature identifie la routine.
-# La signature est facilement calculable à partir de la liste des paramètres formels ou de la liste des arguments
-# effectifs d'un appel.
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//! ROUTINE SIGNATURE
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+// La signature d'une routine est une chaîne de caractères constituée :
+//   - du caractère "(" ;
+//   - pour chaque argument :
+//       * du mode de passage de l'argument formel ("?", "?!" ou "!"),
+//       * du sélecteur,
+//       * du caractère ":"
+//   - du caractère ")".
+// Le couple (nom de routine, signature) est unique. Pour un nom de routine donné, la signature identifie la routine.
+// La signature est facilement calculable à partir de la liste des paramètres formels ou de la liste des arguments
+// effectifs d'un appel.
 
-#·······················································································································
+//·······················································································································
 
 getter @routineFormalArgumentListAST routineSignature ?let @location inRoutineNameLocation -> @lstring {
   var key = "("
@@ -209,7 +209,7 @@ getter @routineFormalArgumentListAST routineSignature ?let @location inRoutineNa
   result = @{!key !inRoutineNameLocation}
 }
 
-#·······················································································································
+//·······················································································································
 
 getter @effectiveArgumentListAST routineSignature ?let @location inRoutineNameLocation -> @lstring {
   var key = "("
@@ -220,7 +220,7 @@ getter @effectiveArgumentListAST routineSignature ?let @location inRoutineNameLo
   result = @{!key !inRoutineNameLocation}
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @routineFormalArgumentListIR {
   public var @procFormalArgumentPassingMode mFormalArgumentKind
@@ -228,7 +228,7 @@ list @routineFormalArgumentListIR {
   public var @string mFormalArgumentName
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc enterFormalArguments
   ?context:let @semanticContext inContext
@@ -263,4 +263,4 @@ proc enterFormalArguments
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

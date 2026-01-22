@@ -1,6 +1,6 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @externFunctionDeclarationListAST {
   public var @lstring mExternProcedureName
@@ -12,13 +12,13 @@ list @externFunctionDeclarationListAST {
   public var @location mEndOfProcLocation
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <declaration> ?!@ast ioAST {
     $extern$
@@ -47,13 +47,13 @@ syntax extension omnibus_syntax {
       !.here
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  PRECEDENCE GRAPH                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @externFunctionDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for (* * * mProcFormalArgumentList mReturnTypeName * *) in self do
@@ -66,9 +66,9 @@ method @externFunctionDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticT
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#   ENTER IN CONTEXT                                                                                                    
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//   ENTER IN CONTEXT                                                                                                    
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @externFunctionDeclarationListAST enterExternProcInContext
   ?!context:@semanticContext ioContext
@@ -78,16 +78,16 @@ method @externFunctionDeclarationListAST enterExternProcInContext
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @externFunctionDeclarationListAST.@element enterExternProcInContext
   ?!context:@semanticContext ioContext
 {
-#--- Signature
+//--- Signature
   routineTypedSignature (!?ioContext.mTypeMap !self.mProcFormalArgumentList ?let signature)
-#--- Return type
+//--- Return type
   [!?ioContext.mTypeMap makeOptionalEntry !self.mReturnTypeName ?let returnTypeProxy]
-#--- Enter in context
+//--- Enter in context
   let @routineLLVMNameDict routineLLVMNameDict = [self.mMode routineLLVMDictionaryForFunction !self.mRoutineNameForGeneration]
   let routineMangledName = [signature mangledName !receiverTypeName: "" !functionName: self.mExternProcedureName]
   [!?ioContext.mRoutineMap insertKey
@@ -101,9 +101,9 @@ method @externFunctionDeclarationListAST.@element enterExternProcInContext
   ]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTIC ANALYSIS                                                                                                    
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SEMANTIC ANALYSIS                                                                                                    
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @externFunctionDeclarationListAST externProcedureSemanticAnalysis
   ?context:let @semanticContext inContext
@@ -119,14 +119,14 @@ method @externFunctionDeclarationListAST externProcedureSemanticAnalysis
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @externFunctionDeclarationListAST.@element externProcedureSemanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-#--- Analyse formal arguments
+//--- Analyse formal arguments
   var @routineFormalArgumentListIR formalArguments = @[]
   enterFormalArguments (
     !context:inContext
@@ -135,13 +135,13 @@ method @externFunctionDeclarationListAST.@element externProcedureSemanticAnalysi
     !?formalArguments
     !warningOnUnusedArgs: true
   )
-#--- Return type
+//--- Return type
   let returnType = if self.mReturnTypeName.string == "" then
     @unifiedTypeMapEntry.null
   else
     [inContext.mTypeMap searchKey !self.mReturnTypeName]
   end
-#--- Routine name for generation
+//--- Routine name for generation
   [!?ioIntermediateCodeStruct.mExternProcedureMapIR insertKey
     !self.mRoutineNameForGeneration
     !formalArguments
@@ -149,23 +149,23 @@ method @externFunctionDeclarationListAST.@element externProcedureSemanticAnalysi
   ]  
   ioIntermediateCodeStruct.mRoutineListIR += !@externRoutineIR {
     !self.mRoutineNameForGeneration
-    !isRequired:false # Is not root
+    !isRequired:false // Is not root
     !warnsIfUnused:false
     !formalArguments
     !returnType
   }
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  CODE GENERATION                                                                                                      
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  CODE GENERATION                                                                                                      
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @externRoutineIR : @abstractRoutineIR {
   public var @routineFormalArgumentListIR mFormalArgumentListForGeneration
   public var @unifiedTypeMapEntry mReturnType
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @externRoutineIR llvmCodeGeneration 
   ?!@string ioLLVMcode
@@ -195,7 +195,7 @@ override method @externRoutineIR llvmCodeGeneration
   ioLLVMcode += ")" + llvmAttributeFunction () + "; declared by extern Omnibus function declaration\n\n"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @externProcedureMapIR {
   public var @routineFormalArgumentListIR mFormalArgumentListForGeneration
@@ -203,12 +203,12 @@ map @externProcedureMapIR {
   insert insertKey error message "extern procedure %K is already declared"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @externProcedureMapIR llvmPrototypeGeneration  ?!@string unused ioLLVMcode {
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @externProcedureMapIR.@element llvmPrototypeGeneration  ?!@string ioLLVMcode {
   let procName = llvmNameForFunction (!self.lkey.string)
@@ -235,4 +235,4 @@ method @externProcedureMapIR.@element llvmPrototypeGeneration  ?!@string ioLLVMc
   ioLLVMcode += ")" + llvmAttributeFunction () + "; declared by extern Omnibus function declaration\n\n"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

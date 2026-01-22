@@ -1,8 +1,8 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#                                                                                                                       
-#    S E M A N T I C    C O N T E X T                                                                      
-#                                                                                                                       
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//                                                                                                                       
+//    S E M A N T I C    C O N T E X T                                                                      
+//                                                                                                                       
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @semanticContext {
   public var @targetParameters mTargetParameters = @{
@@ -66,45 +66,45 @@ struct @semanticContext {
 
   public var @stringset mRequiredRoutineSet = @()
 
-#--- Types
+//--- Types
   public var @unifiedTypeMap mTypeMap = @()
   public var @typeConstantMap mTypeConstantMap = @()
   public var @typeConstructorMap mTypeConstructorMap = @()
   private var @typePropertySetterMap mTypePropertySetterMap = @()
   private var @typePropertyGetterMap mTypePropertyGetterMap = @()
 
-#--- Interrupts
+//--- Interrupts
   public var @availableInterruptMap mAvailableInterruptMap = @()
 
-#--- Operator maps  
+//--- Operator maps  
   public var @infixOperatorMap mInfixOperatorMap = @()
   public var @prefixOperatorMap mPrefixOperatorMap = @()
   public var @assignmentOperatorMap mAssignmentOperatorMap = @()
   
   public var @implicitConversionToBooleanMap mImplicitConversionToBooleanMap = @()
 
-#--- Tasks
+//--- Tasks
   public var @taskMap mTaskMap = @()
   public var @globalTaskVariableList mGlobalTaskVariableList = @()
 
-#--- Entity map
+//--- Entity map
   public var @universalValuedObjectMap mValuedObjectMap = @()
 }
 
-#·······················································································································
+//·······················································································································
 
 abstract class @abstractDecoratedDeclaration {
 }
 
-#·······················································································································
+//·······················································································································
 
 list @declarationDecorationList {
   public var @abstractDecoratedDeclaration mDeclaration
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  TYPE CONSTANT MAP                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  TYPE CONSTANT MAP                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @typeConstantMap {
   public var @constantMap mConstantMap
@@ -112,7 +112,7 @@ map @typeConstantMap {
   search searchKey error message "there is no $%K type"
 }
 
-#·······················································································································
+//·······················································································································
 
 map @constantMap {
   public var @bigint mIndex
@@ -121,9 +121,9 @@ map @constantMap {
   search searchKey error message "there is no '%K' constant"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  TYPE CONSTRUCTOR MAP                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  TYPE CONSTRUCTOR MAP                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @typeConstructorMap {
   public var @constructorMap mConstructorMap
@@ -131,7 +131,7 @@ map @typeConstructorMap {
   search searchKey error message "there is no $%K type"
 }
 
-#·······················································································································
+////·······················································································································
 
 enum @constructorValue {
   case null
@@ -140,7 +140,7 @@ enum @constructorValue {
   case arrayValue (@omnibusType elementType @uint size)
 }
 
-#·······················································································································
+//·······················································································································
 
 list @constructorSignature {
   public var @string mSelector
@@ -148,18 +148,18 @@ list @constructorSignature {
   public var @uint mFieldIndex
 }
 
-#·······················································································································
+//·······················································································································
 
-map @constructorMap { # Key is (!selector!selector)
+map @constructorMap { // Key is (!selector!selector)
   public var @constructorSignature mSignature
   public var @constructorValue mInitValue
   insert insertKey error message "-- internal error --"
   search searchKey error message "constructor is not defined"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-# PROPERTY GETTER MAP
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+// PROPERTY GETTER MAP
+//////—————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @typePropertyGetterMap {
   public var @propertyGetterMap mGetterMap
@@ -169,7 +169,7 @@ map @typePropertyGetterMap {
   insert or replace
 }
 
-#·······················································································································
+//·······················································································································
 
 setter @semanticContext insertGetter ?omnibusTypeName: let @lstring inTypeName
                                      ?let @lstring inGetterName
@@ -192,7 +192,7 @@ setter @semanticContext insertGetter ?omnibusTypeName: let @lstring inTypeName
 //  end
 }
 
-#·······················································································································
+//·······················································································································
 
 getter @semanticContext propertyGetterMap ?let @omnibusType inType-> @propertyGetterMap {
   if let entry = self.mTypePropertyGetterMap @[inType.omnibusTypeDescriptionName] then
@@ -202,7 +202,7 @@ getter @semanticContext propertyGetterMap ?let @omnibusType inType-> @propertyGe
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 setter @semanticContext addComputedPropertyGetter
   ?omnibusTypeName: let @lstring inTypeName
@@ -229,7 +229,7 @@ setter @semanticContext addComputedPropertyGetter
   [!?self.mTypePropertyGetterMap insertOrReplace !inTypeName !getterMap]
 }
 
-#·······················································································································
+//·······················································································································
 
 enum @propertyGetterKind {
   case storedProperty (@omnibusType type @uint index)
@@ -237,14 +237,14 @@ enum @propertyGetterKind {
   case constantProperty (@objectIR value)
 }
 
-#·······················································································································
+//·······················································································································
 
 enum @propertyVisibility %equatable {
   case isPublic
   case isPrivate
 }
 
-#·······················································································································
+//·······················································································································
 
 map @propertyGetterMap {
   public var @propertyVisibility mVisibility
@@ -254,9 +254,9 @@ map @propertyGetterMap {
   replace replaceKey error message "there is no '%K' property"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-# PROPERTY SETTER MAP
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+// PROPERTY SETTER MAP
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @typePropertySetterMap {
   public var @propertySetterMap mSetterMap
@@ -266,7 +266,7 @@ map @typePropertySetterMap {
   insert or replace
 }
 
-#·······················································································································
+//·······················································································································
 
 setter @semanticContext insertPropertySetter ?let @lstring inTypeName
                                              ?let @lstring inSetterName
@@ -289,7 +289,7 @@ setter @semanticContext insertPropertySetter ?let @lstring inTypeName
 //  end
 }
 
-#·······················································································································
+//·······················································································································
 
 getter @semanticContext propertySetterMap ?let @omnibusType inType-> @propertySetterMap {
   if let entry = self.mTypePropertySetterMap @[inType.omnibusTypeDescriptionName] then
@@ -299,7 +299,7 @@ getter @semanticContext propertySetterMap ?let @omnibusType inType-> @propertySe
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 map @propertySetterMap {
   public var @propertyVisibility mVisibility
@@ -308,7 +308,7 @@ map @propertySetterMap {
   search searchKey error message "there is no '%K' property"
 }
 
-#·······················································································································
+//·······················································································································
 
 enum @propertySetterKind {
   case storedProperty (@omnibusType type @uint index)
@@ -317,23 +317,23 @@ enum @propertySetterKind {
                          @routineLLVMNameDict setterModeDictionary)
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#! @staticEntityMap
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//! @staticEntityMap
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @staticEntityMap {
   public var @staticStringMap mStaticStringMap = @()
   public var @globalStructuredConstantList mGlobalStructuredConstantList = @()
 }
 
-#·······················································································································
+//·······················································································································
 
 list @globalStructuredConstantList {
   public var @omnibusType mType
   public var @operandIRList mOperandIRList
 }
 
-#·······················································································································
+//·······················································································································
 
 map @staticStringMap {
   public var @uint mIndex
@@ -341,7 +341,7 @@ map @staticStringMap {
   search searchKey error message "-- internal error --"
 }
 
-#·······················································································································
+//·······················································································································
 
 setter @staticEntityMap findOrAddStaticString ?@string inString !@uint outIndex {
   if [self.mStaticStringMap hasKey !inString]  then
@@ -352,7 +352,7 @@ setter @staticEntityMap findOrAddStaticString ?@string inString !@uint outIndex 
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 map @globalConstantMap {
   public var @objectIR mValue
@@ -360,13 +360,13 @@ map @globalConstantMap {
   search searchKey error message "there is no '%K' constant"
 }
 
-#·······················································································································
+//·······················································································································
 
 list @operandIRList %equatable {
   public var @objectIR mOperand
 }
 
-#·······················································································································
+//·······················································································································
 
 map @availableInterruptMap {
   public var @interruptionPanicCode mInterruptionPanicCode
@@ -374,13 +374,13 @@ map @availableInterruptMap {
   search searchKey error message "interrupt '%K' is not defined"
 }
 
-#·······················································································································
+//·······················································································································
 
 getter @semanticContext booleanType ?let @location unused inErrorLocation -> @omnibusType {
   [self.mTypeMap searchType !lkey:[boolTypeName () nowhere] ?type:result]
 }
 
-#·······················································································································
+//·······················································································································
 
 abstract method @abstractDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
@@ -392,7 +392,7 @@ abstract method @abstractDeclarationAST enterInContext
   ?!registerUserAccess:@controlRegisterUserAccesMapAST ioControlRegisterUserAccesMapAST
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR ioUserLLVMTypeDefinitionListIR
 
-#·······················································································································
+//·······················································································································
 
 proc buildSemanticContext
   ?sourceFile:let @lstring inSourceFile
@@ -410,7 +410,7 @@ proc buildSemanticContext
   outDecoratedRoutineList = @()
   outRoutineListIR = @()
   outUserLLVMTypeDefinitionListIR = @()
-#--- Enter required routines
+//--- Enter required routines
   for requiredProc in inAST.mRequiredFunctionListAST do
     let procedureMangledName = routineMangledNameFromAST (
       !""
@@ -422,7 +422,7 @@ proc buildSemanticContext
   [inAST.mExternFunctionListAST enterExternProcInContext
     !?context: outSemanticContext
   ]
-#---
+//---
   var controlRegisterUserAccesMapAST = inAST.mControlRegisterUserAccesMapAST
   for (declaration) in inAST.mDeclarationListAST do
     [declaration enterInContext
@@ -436,16 +436,16 @@ proc buildSemanticContext
       !?userDefinedTypes: outUserLLVMTypeDefinitionListIR
     ]
   end
-#--- Check all registers declared as @user are actually defined
+//--- Check all registers declared as @user are actually defined
   for (lkey) in controlRegisterUserAccesMapAST do
     error lkey : "this control register is not defined"
   end
-#--- Build an HTML containing all global constants
+//--- Build an HTML containing all global constants
   buildGlobalConstantMapHTMLFile (
     !outSemanticContext.mGlobalConstantMap
     !sourceFile:inSourceFile
   )
-#--- Build an HTML containing all types
+//--- Build an HTML containing all types
   buildTypeMapHTMLFile (
     !outSemanticContext.mTypeMap
     !outSemanticContext.mRoutineMap
@@ -454,12 +454,12 @@ proc buildSemanticContext
     !outSemanticContext.mAssignmentOperatorMap
     !sourceFile:inSourceFile
   )
-#--- Enter control registers in context
+//--- Enter control registers in context
   buildControlRegisterMapHTMLFile (
     !outSemanticContext.mControlRegisterGroupMap
     !sourceFile:inSourceFile
   )
-#--- Enter tasks
+//--- Enter tasks
   [inAST.mTaskListAST enterInContext
      !?context: outSemanticContext
      !?outDecoratedDeclarationList
@@ -470,10 +470,10 @@ proc buildSemanticContext
    ]
 }
 
-#·······················································································································
+//·······················································································································
 
-#func combineTypeNamesForInfixOperator ?let @string inLeftTypeName ?let @string inRightTypeName -> @lstring {
-#  result = [inLeftTypeName + "," + inRightTypeName nowhere]
-#}
+//func combineTypeNamesForInfixOperator ?let @string inLeftTypeName ?let @string inRightTypeName -> @lstring {
+//  result = [inLeftTypeName + "," + inRightTypeName nowhere]
+//}
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

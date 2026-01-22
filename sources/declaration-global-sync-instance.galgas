@@ -1,6 +1,6 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @syncToolInstanceDeclarationAST : @abstractDeclarationAST {
   public var @lstring mSyncTypeName
@@ -8,13 +8,13 @@ class @syncToolInstanceDeclarationAST : @abstractDeclarationAST {
   public var @expressionAST mSourceExpression
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <declaration> ?!@ast ioAST {
     $sync$
@@ -34,13 +34,13 @@ syntax extension omnibus_syntax {
     }
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  ENTER IN PRECEDENCE GRAPH                                                                                       
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  ENTER IN PRECEDENCE GRAPH                                                                                       
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @syncToolInstanceDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [!?ioGraph addNode !self.mSyncInstanceName !self]
@@ -50,21 +50,21 @@ override method @syncToolInstanceDeclarationAST enterInPrecedenceGraph ?!@semant
   [self.mSourceExpression addDependenceEdgeForStaticExpression !self.mSyncInstanceName !?ioGraph]
 }
 
-#·······················································································································
+//·······················································································································
 
 override getter @syncToolInstanceDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = "sync " + self.mSyncInstanceName 
 }
 
-#·······················································································································
+//·······················································································································
 
 override getter @syncToolInstanceDeclarationAST locationForErrorSignaling -> @location outLocation {
   outLocation = self.mSyncInstanceName.location
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  ENTER IN CONTEXT                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  ENTER IN CONTEXT                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @globalSyncInstanceMap {
   public var @omnibusType type
@@ -74,7 +74,7 @@ map @globalSyncInstanceMap {
   search searchKey error message "there is no '%K' global variable"
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @syncToolInstanceDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
@@ -86,14 +86,14 @@ override method @syncToolInstanceDeclarationAST enterInContext
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
-#--- Get sync type
+//--- Get sync type
   let @omnibusType optionalSyncType
   if self.mSyncTypeName.string == "" then
     optionalSyncType = voidType ()
   else
     [ioContext.mTypeMap searchType !lkey:self.mSyncTypeName ?type:optionalSyncType]
   end
-#--- Analyze source expression
+//--- Analyze source expression
   computeStaticExpression (
     !?context: ioContext
     !?staticEntityMap:ioStaticEntityMap
@@ -102,7 +102,7 @@ override method @syncToolInstanceDeclarationAST enterInContext
     !optionalContextualTypeName:["" nowhere]
     ?result:let @objectIR expressionResult
   )
-#--- Check variable type and expression type
+//--- Check variable type and expression type
   let result = checkAssignmentCompatibility (
     !ioContext.mAssignmentOperatorMap
     !source:expressionResult
@@ -110,32 +110,32 @@ override method @syncToolInstanceDeclarationAST enterInContext
     !errorLocation:self.mSyncInstanceName.location
     !staticTypeAllowed:false
   )
-#---------------- Enter variable in global variable map
+//---------------- Enter variable in global variable map
   [!?ioContext.mGlobalSyncInstanceMap insertKey
     !self.mSyncInstanceName
     ![result type]
     !result
   ]
-#---------------- Check type is a sync tool type
+//---------------- Check type is a sync tool type
   if not [[result type].kind isSyncTool] then
     error self.mSyncInstanceName : "the type is not a synchronization tool type"
   end
-#---------------- Enter in valuated object map
+//---------------- Enter in valuated object map
   [!?ioContext.mValuedObjectMap insertGlobalSyncInstance !self.mSyncInstanceName ![result type]]
-#---------------- Add decorated declaration
+//---------------- Add decorated declaration
   ioDecoratedDeclarationList += !@decoratedSyncInstance {!self.mSyncInstanceName !result}
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTIC ANALYSIS                                                                                                    
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SEMANTIC ANALYSIS                                                                                                    
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @decoratedSyncInstance : @abstractDecoratedDeclaration {
   public var @lstring mSyncInstanceName
   public var @objectIR mExpressionGeneratedCode
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @decoratedSyncInstance semanticAnalysis
   ?context:let @semanticContext unused inContext
@@ -148,20 +148,20 @@ override method @decoratedSyncInstance semanticAnalysis
   ]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  CODE GENERATION                                                                                                      
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  CODE GENERATION                                                                                                      
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @globalSyncInstanceMapIR {
   public var @objectIR mInitialValue
   insert insertKey error message "** internal error **"
 }
 
-#·······················································································································
+//·······················································································································
 
 method @globalSyncInstanceMapIR.@element generateLLVM ?!@string ioLLVMcode {
   ioLLVMcode += llvmNameForGlobalSyncInstance (!self.lkey.string) + " = internal global "
   ioLLVMcode += [[self.mInitialValue type] llvmTypeName] + " " + [self.mInitialValue llvmValue] + "\n"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

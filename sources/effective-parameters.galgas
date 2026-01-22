@@ -1,6 +1,6 @@
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @effectiveArgumentPassingModeAST {
   case input (@lstring name)
@@ -10,7 +10,7 @@ enum @effectiveArgumentPassingModeAST {
   case outputInputSelfVariable (@lstring name)
 }
 
-#·······················································································································
+//·······················································································································
 
 getter @effectiveArgumentPassingModeAST matchingFormalArgument -> @string {
   switch self 
@@ -22,14 +22,14 @@ getter @effectiveArgumentPassingModeAST matchingFormalArgument -> @string {
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 list @effectiveArgumentListAST {
   public var @effectiveArgumentPassingModeAST mEffectiveParameterKind
   public var @lstring mSelector
 }
 
-#·······················································································································
+//·······················································································································
 
 getter @effectiveArgumentListAST mangledName
     ?receiverTypeName: let @string inReceiverTypeName
@@ -47,13 +47,13 @@ getter @effectiveArgumentListAST mangledName
   result = @{!s !inFunctionName.location}
 }
 
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! SYNTAX                                                                                                               
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! SYNTAX                                                                                                               
+//-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <effective_parameters> ?!@ast ioAST !@effectiveArgumentListAST outEffectiveParameterList !@location outEndOfArgs {
     outEffectiveParameterList = @[]
@@ -102,13 +102,13 @@ syntax extension omnibus_syntax {
     $)$
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! SEMANTICS                                                                                                            
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! SEMANTICS                                                                                                            
+//-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc analyzeEffectiveParameters
   ?self:let @omnibusType inSelfType
@@ -125,7 +125,7 @@ proc analyzeEffectiveParameters
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   ?!effectiveIR:@procCallEffectiveParameterListIR ioEffectiveParameterListIR
 {
-#--- Analyze effective parameters
+//--- Analyze effective parameters
   var @procEffectiveParameterList parameterList = @[]
   for (* * formal_mTypeProxy *) in inFormalSignature, (effective_mEffectiveParameterKind effective_mSelector) in inEffectiveParameterList do
     switch effective_mEffectiveParameterKind 
@@ -147,15 +147,15 @@ proc analyzeEffectiveParameters
         !.reference {!type:type !llvmName:llvmNameForLocalVariable (!name)}
     case input (@lstring name) :
       [!?ioUniversalMap searchValuedObjectForWriteAccess !name ?let objectIR]
-#      if not accessIsAllowed then
-#        error name : "routine has no access right on the this variable"
-#      end
-#      if not canBeUsedAsInputParameter then
-#        error name : "this variable cannot be used as input parameter"
-#      end
-#      if not isCopyable then
-#        error name : "an $" + [type key] + " instance is not copyable"
-#      end
+//      if not accessIsAllowed then
+//        error name : "routine has no access right on the this variable"
+//      end
+//      if not canBeUsedAsInputParameter then
+//        error name : "this variable cannot be used as input parameter"
+//      end
+//      if not isCopyable then
+//        error name : "an $" + [type key] + " instance is not copyable"
+//      end
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector ![objectIR type]
       ioEffectiveParameterListIR +=
         !.input
@@ -199,9 +199,9 @@ proc analyzeEffectiveParameters
       }
       ioEffectiveParameterListIR += !.outputInput !argumentIR
     case outputInputSelfVariable (@lstring name) :
-#      let typeOmnibusName = @lstring.new {!inSelfType.omnibusTypeDescriptionName !name.location}
+//      let typeOmnibusName = @lstring.new {!inSelfType.omnibusTypeDescriptionName !name.location}
       let propertyGetterMap = [inContext propertyGetterMap !inSelfType]
-#      [inContext.mTypePropertyGetterMap searchKey !typeOmnibusName ?let propertyGetterMap]
+//      [inContext.mTypePropertyGetterMap searchKey !typeOmnibusName ?let propertyGetterMap]
       [propertyGetterMap searchKey !name ?* ?let @propertyGetterKind propertyAccess]
       switch propertyAccess
       case constantProperty (*) :
@@ -222,7 +222,7 @@ proc analyzeEffectiveParameters
       end    
     end
   end
-#--- Check parameters
+//--- Check parameters
   if [inFormalSignature count] != [inEffectiveParameterList count] then
     error inErrorLocation: "this routine requires " + [inFormalSignature count] + " argument(s), this call names "
       + [inEffectiveParameterList count] + " argument(s)"
@@ -241,4 +241,4 @@ proc analyzeEffectiveParameters
   end
 }
 
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

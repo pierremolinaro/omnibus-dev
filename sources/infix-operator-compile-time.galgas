@@ -1,28 +1,28 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @compileTimeInfixOperatorEnumeration %equatable {
- case equal          # ==
- case lessThan       # <
+ case equal          // ==
+ case lessThan       // <
 
- case bitWiseAndOp      # &
- case bitWiseOrOp       # |
- case bitWiseXorOp      # ^
+ case bitWiseAndOp      // &
+ case bitWiseOrOp       // |
+ case bitWiseXorOp      // ^
 
- case addOp             # +
- case subOp            # -
- case mulOp            # *
- case divOp             # /
- case modOp          # mod
+ case addOp             // +
+ case subOp            // -
+ case mulOp            // *
+ case divOp             // /
+ case modOp          // mod
 
- case divNoOvf        # &/
- case moduloNoOvf     # &%
- case leftShift       # <<
- case rightShift      # >>
+ case divNoOvf        // &/
+ case moduloNoOvf     // &%
+ case leftShift       // <<
+ case rightShift      // >>
 }
 
-#·······················································································································
+//·······················································································································
 
 getter @compileTimeInfixOperatorEnumeration string -> @string {
  switch self
@@ -43,7 +43,7 @@ getter @compileTimeInfixOperatorEnumeration string -> @string {
  end
 }
 
-#·······················································································································
+//·······················································································································
 
 getter @compileTimeInfixOperatorEnumeration omnibusInfixOperator -> @omnibusInfixOperator {
  switch self
@@ -64,7 +64,7 @@ getter @compileTimeInfixOperatorEnumeration omnibusInfixOperator -> @omnibusInfi
  end
 }
 
-#·······················································································································
+//·······················································································································
 
 class @compileTimeInfixOperatorAST : @abstractDeclarationAST {
   public var @compileTimeInfixOperatorEnumeration mInfixOperator
@@ -77,19 +77,19 @@ class @compileTimeInfixOperatorAST : @abstractDeclarationAST {
   public var @lstring mResultTypeName
 }
 
-#·······················································································································
+//·······················································································································
 
 override getter @compileTimeInfixOperatorAST locationForErrorSignaling -> @location outLocation {
   outLocation = self.mInfixOperatorLocation
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <compileTimeInfixOperator> !@compileTimeInfixOperatorEnumeration outOperator {
     select
@@ -137,7 +137,7 @@ syntax extension omnibus_syntax {
     end
   }
   
-  #·····················································································································
+  //·····················································································································
 
   rule <declaration> ?!@ast ioAST {
     $compiletime$
@@ -169,13 +169,13 @@ syntax extension omnibus_syntax {
     }
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  PRECEDENCE GRAPH                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @compileTimeInfixOperatorAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
@@ -188,15 +188,15 @@ override method @compileTimeInfixOperatorAST enterInPrecedenceGraph
   [!?ioGraph addEdge !from: compileTimeDeclarationBarrier () !to: nodeName]
 }
 
-#·······················································································································
+//·······················································································································
 
 override getter @compileTimeInfixOperatorAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = self.mLeftTypeName.string + " " + self.mInfixOperator + " " + self.mRightTypeName
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  ENTER IN CONTEXT                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  ENTER IN CONTEXT                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @compileTimeInfixOperatorAST enterInContext
   ?!context:@semanticContext ioContext
@@ -208,7 +208,7 @@ override method @compileTimeInfixOperatorAST enterInContext
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
-#--- Check types
+//--- Check types
   [!?ioContext.mTypeMap makeEntry !self.mLeftTypeName ?let leftTypeProxy]
   let leftType = [leftTypeProxy type]
   [leftType checkIsCompileTimeType !self.mLeftTypeName.location]
@@ -218,12 +218,12 @@ override method @compileTimeInfixOperatorAST enterInContext
   [!?ioContext.mTypeMap makeEntry !self.mResultTypeName ?let resultTypeProxy]
   let resultType = [resultTypeProxy type]
   [resultType checkIsCompileTimeType !self.mResultTypeName.location]
-#--- Check native operator expression
+//--- Check native operator expression
   var @ctCheckMap ctCheckMap = @()
   [!?ctCheckMap insertKey !self.mLeftOperandName]
   [!?ctCheckMap insertKey !self.mRightOperandName]
   [self.mExpression checkCompileTimeExpression !ctCheckMap]
-#--- Enter in infix operator map  
+//--- Enter in infix operator map  
   let key = infixOperatorMapKey (!leftType !self.mInfixOperator !self.mInfixOperatorLocation !rightType)
   let definition = @compileTimeInfixOperatorUsage {
     !self.mLeftOperandName
@@ -231,7 +231,7 @@ override method @compileTimeInfixOperatorAST enterInContext
     !self.mExpression
   }
   [!?ioContext.mInfixOperatorMap insertKey !key !resultType !definition]
-#--- Define '≤' operator ?
+//--- Define '≤' operator ?
   if (self.mInfixOperator == .equal) || (self.mInfixOperator == .lessThan) then
     let equal_key = infixOperatorMapKey (!leftType !.equal !self.mInfixOperatorLocation !rightType)
     let lessThan_key = infixOperatorMapKey (!leftType !.lessThan !self.mInfixOperatorLocation !rightType)
@@ -246,16 +246,16 @@ override method @compileTimeInfixOperatorAST enterInContext
       end  
     end
   end
-#--- Define '+%' operator ?
+//--- Define '+%' operator ?
   if self.mInfixOperator == .addOp then
     let addOpNoOVF_key = infixOperatorMapKey (!leftType !.addOpNoOvf !self.mInfixOperatorLocation !rightType)
     [!?ioContext.mInfixOperatorMap insertKey !addOpNoOVF_key !resultType !definition] 
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  GENERATE CODE                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  GENERATE CODE                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @compileTimeInfixOperatorUsage : @omnibusInfixOperatorUsage {
   public var @lstring mLeftOperandName
@@ -263,7 +263,7 @@ class @compileTimeInfixOperatorUsage : @omnibusInfixOperatorUsage {
   public var @ctExpressionAST mExpression
 }
 
-#·······················································································································
+//·······················································································································
 
 method @compileTimeInfixOperatorUsage eval
   ?let @objectIR inLeftOperand
@@ -278,7 +278,7 @@ method @compileTimeInfixOperatorUsage eval
   [self.mExpression computeCompileTimeExpression !varMap ?result: outResult]
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @compileTimeInfixOperatorUsage generateCode
   ?let @objectIR inLeftOperand
@@ -294,14 +294,14 @@ override method @compileTimeInfixOperatorUsage generateCode
   outResultValue = .literalInteger {!type: inResultType !value: result}
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @compileTimeInfixInfEqualOperatorUsage : @omnibusInfixOperatorUsage {
   public var @compileTimeInfixOperatorUsage mEqualOperatorUsage
   public var @compileTimeInfixOperatorUsage mLessThanOperatorUsage
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @compileTimeInfixInfEqualOperatorUsage generateCode
   ?let @objectIR inLeftOperand
@@ -320,4 +320,4 @@ override method @compileTimeInfixInfEqualOperatorUsage generateCode
   outResultValue = .literalInteger {!type: inResultType !value: result}
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

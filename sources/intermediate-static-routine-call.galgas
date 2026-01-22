@@ -1,4 +1,4 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @standaloneRoutineCallIR : @abstractInstructionIR {
   public var @objectIR mResult
@@ -7,7 +7,7 @@ class @standaloneRoutineCallIR : @abstractInstructionIR {
   public var @procCallEffectiveParameterListIR mArgumentList
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @standaloneRoutineCallIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -36,7 +36,7 @@ override method @standaloneRoutineCallIR llvmInstructionCode
   ioLLVMcode += ")\n"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @standaloneRoutineCallIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
@@ -45,4 +45,4 @@ override method @standaloneRoutineCallIR enterAccessibleEntities
   ioInvokedRoutineSet ++= self.mFunctionNameForGeneration
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

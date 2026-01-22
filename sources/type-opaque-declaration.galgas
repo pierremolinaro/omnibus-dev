@@ -1,6 +1,6 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @typeOpaqueDeclarationAST : @abstractDeclarationAST {
   public var @lstring mOpaqueTypeName
@@ -9,13 +9,13 @@ class @typeOpaqueDeclarationAST : @abstractDeclarationAST {
   public var @lstringlist mAttributeList
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <declaration> ?!@ast ioAST {
     $opaque$
@@ -38,43 +38,43 @@ syntax extension omnibus_syntax {
     }
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @typeOpaqueDeclarationAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [!?ioGraph noteNode !self.mOpaqueTypeName]
   [self.mSizeExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @typeOpaqueDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-#--- Add structure type name as node
+//--- Add structure type name as node
   [!?ioGraph addNode !self.mOpaqueTypeName !self]
-#--- Add size expression
+//--- Add size expression
   [self.mSizeExpression addDependenceEdgeForStaticExpression !self.mOpaqueTypeName !?ioGraph]
 }
 
-#·······················································································································
+//·······················································································································
 
 override getter @typeOpaqueDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = "opaque " + self.mOpaqueTypeName 
 }
 
-#·······················································································································
+//·······················································································································
 
 override getter @typeOpaqueDeclarationAST locationForErrorSignaling -> @location outLocation {
   outLocation = self.mOpaqueTypeName.location
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  ENTER IN CONTEXT                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  ENTER IN CONTEXT                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @typeOpaqueDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
@@ -108,7 +108,7 @@ override method @typeOpaqueDeclarationAST enterInContext
         + " attributes are allowed here"
     end
   end
-#--- Compute opaque type size
+//--- Compute opaque type size
   computeStaticExpression (
     !?context: ioContext
     !?staticEntityMap:ioStaticEntityMap
@@ -135,10 +135,10 @@ override method @typeOpaqueDeclarationAST enterInContext
     }
     [!?ioContext.mTypeMap insertType !self.mOpaqueTypeName !type:opaqueType]
   end
-#--- Add Assignment ?
+//--- Add Assignment ?
   if copyable then
     print (!"OPAQUE " + self.mOpaqueTypeName + " is copyable\n")
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

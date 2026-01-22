@@ -1,10 +1,10 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <declaration> ?!@ast ioAST {
     $target$
@@ -12,16 +12,16 @@ syntax extension omnibus_syntax {
     ioAST.mTargetListAST += !targetName
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#    TARGET LIST OPTION                                                                                                 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//    TARGET LIST OPTION                                                                                                 
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 before {
-#--- List targets
+//--- List targets
   let @filewrapper fw = [filewrapper targetTemplates]
   if [option omnibus_options.listTargets value] then
     let targetDirectoryOption = [option omnibus_options.useDirAsTargetDir value]
@@ -45,7 +45,7 @@ before {
       end
     end
   end
-#--- Extract embedded targets
+//--- Extract embedded targets
   let path = [option omnibus_options.extractEmbeddedTargets value]
   if path != "" then
     let embeddedFiles = [fw allTextFilePathes]
@@ -60,9 +60,9 @@ before {
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#    TARGET GENERATION                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//    TARGET GENERATION                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 filewrapper targetTemplates in "../embedded-sources/targets" {
   "py", "ld", "cpp", "s", "omnibus", "omnibus-target", "omnibus-import", "ll", "txt"
@@ -70,7 +70,7 @@ filewrapper targetTemplates in "../embedded-sources/targets" {
 }{
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc generateTarget
   ?currentDir:let @string inCurrentDirectory
@@ -78,7 +78,7 @@ proc generateTarget
   ?targetName:let @lstring inTargetName
   ?targetParameters:let @targetParameters inTargetParameters
 {
-#--- Copy python utility scripts
+//--- Copy python utility scripts
   for (relativePath destinationFile) in inTargetParameters.mPython_utilityToolList do
     copyExecutableFile (
       !currentDir:inCurrentDirectory
@@ -86,14 +86,14 @@ proc generateTarget
       !to:inProductDirectory + "/" + destinationFile
     )
   end
-#--- Copy linker.ld
+//--- Copy linker.ld
   copyFileWithSubstitutions (
     !currentDir:inCurrentDirectory
     !from:inTargetName.string + "/" + inTargetParameters.mLinkerScript
     !to:inProductDirectory + "/sources/linker.ld"
     !@[@("!SYSTEMSTACKSIZE!", [inTargetParameters.mSystemStackSize.bigint string])]
   )
-#--- Copy build.py
+//--- Copy build.py
   var opt_optimizationOption = "disable-opt"
   var llc_optimizationOption = "O0"
   var optimizationOptionCount = 0
@@ -133,14 +133,14 @@ proc generateTarget
   )
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 private proc copyExecutableFile
   ?currentDir:let @string inCurrentDirectory
   ?from:let @string inSourceFileNamePath
   ?to:let @string inDestinationAbsoluteFilePath
 {
-  if [option omnibus_options.useDirAsTargetDir value] == "" then # From embedded file
+  if [option omnibus_options.useDirAsTargetDir value] == "" then // From embedded file
     let fw = [filewrapper targetTemplates]
     let s = [fw textFileContentsAtPath !inSourceFileNamePath]
     [s writeToExecutableFileWhenDifferentContents !inDestinationAbsoluteFilePath ?*]
@@ -151,7 +151,7 @@ private proc copyExecutableFile
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 private proc copyExecutableFileWithSubstitutions
   ?currentDir:let @string inCurrentDirectory
@@ -160,7 +160,7 @@ private proc copyExecutableFileWithSubstitutions
   ?let @2stringlist inSubstitutions
 {
   var @string s
-  if [option omnibus_options.useDirAsTargetDir value] == "" then # From embedded file
+  if [option omnibus_options.useDirAsTargetDir value] == "" then // From embedded file
     let fw = [filewrapper targetTemplates]
     s = [fw textFileContentsAtPath !inSourceFileNamePath]
   else
@@ -173,7 +173,7 @@ private proc copyExecutableFileWithSubstitutions
   [s writeToExecutableFileWhenDifferentContents !inDestinationAbsoluteFilePath ?*]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 private proc copyFileWithSubstitutions
   ?currentDir:let @string inCurrentDirectory
@@ -182,7 +182,7 @@ private proc copyFileWithSubstitutions
   ?let @2stringlist inSubstitutions
 {
   var @string s
-  if [option omnibus_options.useDirAsTargetDir value] == "" then # From embedded file
+  if [option omnibus_options.useDirAsTargetDir value] == "" then // From embedded file
     let fw = [filewrapper targetTemplates]
     s = [fw textFileContentsAtPath !inSourceFileNamePath]
   else
@@ -195,14 +195,14 @@ private proc copyFileWithSubstitutions
   [s writeToFileWhenDifferentContents !inDestinationAbsoluteFilePath ?*]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func getTargetTextFile
   ?currentDir:let @string inCurrentDirectory
   ?from:let @string inTargetFile
   -> @string outContents
 {
-  if [option omnibus_options.useDirAsTargetDir value] == "" then # From embedded file
+  if [option omnibus_options.useDirAsTargetDir value] == "" then // From embedded file
     let fw = [filewrapper targetTemplates]
     outContents = [fw textFileContentsAtPath !inTargetFile]
   else
@@ -211,5 +211,5 @@ func getTargetTextFile
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 

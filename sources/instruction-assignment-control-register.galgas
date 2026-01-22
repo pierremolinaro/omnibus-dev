@@ -1,13 +1,13 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                                  
+//-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @controlRegisterAssignmentOperatorKind {
   case assignment
   case assignmentWithOperator (@omnibusInfixOperator infixOperator @location operatorLocation)
 }
 
-#·······················································································································
+//·······················································································································
 
 class @controlRegisterAssignmentInstructionAST : @instructionAST {
   public var @controlRegisterLValueAST mControlRegisterLValue
@@ -15,17 +15,17 @@ class @controlRegisterAssignmentInstructionAST : @instructionAST {
   public var @expressionAST mSourceExpression
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
     <control_register_lvalue> !?ioAST ?let registerLValue
-  #--- Assignment or assignment operator
+  //--- Assignment or assignment operator
     let @controlRegisterAssignmentOperatorKind assignmentKind
     select
       $=$
@@ -34,9 +34,9 @@ syntax extension omnibus_syntax {
       <assignment_combined_with_operator> ?let infixOperator ?let operatorLocation
       assignmentKind = .assignmentWithOperator {!infixOperator:infixOperator !operatorLocation:operatorLocation}
     end
-  #--- Source expression
+  //--- Source expression
     <expression> !?ioAST ?let sourceExpression
-  #---
+  //---
     ioInstructionList += !@controlRegisterAssignmentInstructionAST {
       !registerLValue.mRegisterGroupName.location
       !registerLValue
@@ -45,13 +45,13 @@ syntax extension omnibus_syntax {
     }
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  NOTE TYPES                                                                                                           
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  NOTE TYPES                                                                                                           
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @controlRegisterAssignmentInstructionAST noteInstructionTypesInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
@@ -60,9 +60,9 @@ override method @controlRegisterAssignmentInstructionAST noteInstructionTypesInP
   [self.mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  SEMANTICS                                                                                                            
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  SEMANTICS                                                                                                            
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @controlRegisterAssignmentInstructionAST instructionSemanticAnalysis
   ?self:let @omnibusType inSelfType
@@ -75,7 +75,7 @@ override method @controlRegisterAssignmentInstructionAST instructionSemanticAnal
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-#-------------------- Analyze control register LValue
+//-------------------- Analyze control register LValue
   [self.mControlRegisterLValue controlRegisterLValueSemanticAnalysis
     !writeAccess:true
     !self: inSelfType
@@ -92,7 +92,7 @@ override method @controlRegisterAssignmentInstructionAST instructionSemanticAnal
     ?sliceMap:*
     ?llvmRegisterAddressName:let llvmRegAddressName
   ]
-#-------------------- Analyze source expression
+//-------------------- Analyze source expression
   [self.mSourceExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
@@ -106,12 +106,12 @@ override method @controlRegisterAssignmentInstructionAST instructionSemanticAnal
     !?instructionListIR:ioInstructionGenerationList
     ?result:@objectIR sourceIR
   ]
-#-------------------- Load source expression
+//-------------------- Load source expression
   [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
     !?sourceIR
   ]
-#-------------------- Perform assignment
+//-------------------- Perform assignment
   let t = [sourceIR type]
   if not [t copyable] then
     error self.mControlRegisterLValue.mRegisterGroupName : "source expression is not copyable"
@@ -120,10 +120,10 @@ override method @controlRegisterAssignmentInstructionAST instructionSemanticAnal
     case assignment :
       [!?ioInstructionGenerationList appendStoreIndirectVolatileRegister !registerType !llvmRegAddressName !sourceIR]
     case assignmentWithOperator (infixOperator operatorLocation) :
-    #--- Load register
+    //--- Load register
       getNewTempValue (!registerType !?ioTemporaries ?let registerValueIR)
       [!?ioInstructionGenerationList appendLoadIndirectVolatileRegister !registerValueIR !llvmRegAddressName]
-    #--- Perform operation
+    //--- Perform operation
       let key = infixOperatorMapKey (!registerType !infixOperator !operatorLocation ![sourceIR type])
       [inContext.mInfixOperatorMap searchKey !key ?let resultType ?let operatorUsage]
       [operatorUsage generateCode
@@ -137,27 +137,27 @@ override method @controlRegisterAssignmentInstructionAST instructionSemanticAnal
          ?let operationResult
       ]
       
-#      let operatorMap = getInfixOperatorMap (!infixOperator !context:inContext !mode:inMode !operatorLocation)
-#      [operatorMap checkBinaryOperationWith
-#        !leftType:[registerValueIR type]
-#        !rightType:[sourceIR type]
-#        !operatorLocation:operatorLocation
-#        ?resultType:let resultType
-#        ?op:let @omnibusInfixOperatorDescription binaryOperator
-#      ]
-#      [binaryOperator generateInfixOperatorCode
-#        !?ioTemporaries
-#        !?ioInstructionGenerationList
-#        !registerValueIR
-#        !operatorLocation
-#        !sourceIR
-#        !resultType
-#        ?let operationResult
-#      ]
-    #--- Store register
+//      let operatorMap = getInfixOperatorMap (!infixOperator !context:inContext !mode:inMode !operatorLocation)
+//      [operatorMap checkBinaryOperationWith
+//        !leftType:[registerValueIR type]
+//        !rightType:[sourceIR type]
+//        !operatorLocation:operatorLocation
+//        ?resultType:let resultType
+//        ?op:let @omnibusInfixOperatorDescription binaryOperator
+//      ]
+//      [binaryOperator generateInfixOperatorCode
+//        !?ioTemporaries
+//        !?ioInstructionGenerationList
+//        !registerValueIR
+//        !operatorLocation
+//        !sourceIR
+//        !resultType
+//        ?let operationResult
+//      ]
+    //--- Store register
       [!?ioInstructionGenerationList appendStoreIndirectVolatileRegister !registerType !llvmRegAddressName !operationResult]
     end
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

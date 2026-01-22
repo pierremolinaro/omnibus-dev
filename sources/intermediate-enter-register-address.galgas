@@ -10,7 +10,7 @@ setter @instructionListIR appendEnterRegisterAddress
   self += !@enterRegisterAddressIR {!out_llvmName !inBaseAddress !inAddressOffset !inRegisterName}
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @enterRegisterAddressIR : @abstractInstructionIR {
   public var @string mLLVMName
@@ -19,7 +19,7 @@ class @enterRegisterAddressIR : @abstractInstructionIR {
   public var @string mRegisterName
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @enterRegisterAddressIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -31,4 +31,4 @@ override method @enterRegisterAddressIR llvmInstructionCode
              + " at " + [self.mBaseAddress hexString] + " = " + [self.mAddressOffset hexString] + "\n"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

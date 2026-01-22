@@ -1,13 +1,13 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @switchCaseListAST {
   public var @lstringlist mCaseIdentifiers
   public var @instructionListAST mCaseInstructionList
 }
 
-#·······················································································································
+//·······················································································································
 
 class @switchInstructionAST : @instructionAST {
   public var @expressionAST mSwitchExpression
@@ -16,13 +16,13 @@ class @switchInstructionAST : @instructionAST {
   public var @location mEndOf_switch_instruction
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList  {
     $switch$
@@ -56,13 +56,13 @@ syntax extension omnibus_syntax {
     }
   }
   
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  NOTE TYPES                                                                                                           
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  NOTE TYPES                                                                                                           
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @switchInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [self.mSwitchExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
@@ -71,9 +71,9 @@ override method @switchInstructionAST noteInstructionTypesInPrecedenceGraph ?!@s
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTICS                                                                                                            
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SEMANTICS                                                                                                            
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @switchInstructionAST instructionSemanticAnalysis
   ?self:let @omnibusType inSelfType
@@ -86,7 +86,7 @@ override method @switchInstructionAST instructionSemanticAnalysis
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-#--- Analyze test expression
+//--- Analyze test expression
   var @instructionListIR switchExpressionGenerationList = @[]
   [self.mSwitchExpression analyzeExpression
     !self:inSelfType
@@ -105,10 +105,10 @@ override method @switchInstructionAST instructionSemanticAnalysis
     !?ioTemporaries
     !?switchValueIR
   ]  
-#--- Check inferred type
+//--- Check inferred type
   let switchTypeName = @lstring {![switchValueIR type].omnibusTypeDescriptionName !self.mEndOf_test_expression}
   [inContext.mTypeConstantMap searchKey !switchTypeName ?let enumConstantMap]
-#  let enumConstantMap = [switchValueIR type].classConstantMap
+//  let enumConstantMap = [switchValueIR type].classConstantMap
   if not [[switchValueIR type].kind isEnumeration] then
     error self.mEndOf_test_expression
       : "test expression type is '" + [switchValueIR omnibusTypeDescriptionName] + "', it should be boolean"
@@ -116,7 +116,7 @@ override method @switchInstructionAST instructionSemanticAnalysis
   if [switchValueIR isStatic] then
     error self.mEndOf_test_expression : "test expression type should not be static"
   end
-#--- Analyse case list
+//--- Analyse case list
   [!?ioUniversalMap openOverrideForSelectBlock]
   var @stringset usedEnumerationValues = @[]
   var @switchCaseListIR switchCaseListIR = @[]
@@ -146,13 +146,13 @@ override method @switchInstructionAST instructionSemanticAnalysis
     switchCaseListIR += !caseIdentifierIndexList !instructionGenerationList
   end  
   [!?ioUniversalMap closeOverride !self.mEndOf_switch_instruction]
-#--- Check all enumeration values are named in switch instructions
+//--- Check all enumeration values are named in switch instructions
   for (lkey 2*) in enumConstantMap do
     if not [usedEnumerationValues hasKey !lkey] then
       error self.mEndOf_test_expression : "missing '" + lkey + "' enumeration constant"
     end  
   end 
-#--- Code generation
+//--- Code generation
   ioInstructionGenerationList += !@switchInstructionIR {
     ![self.mEndOf_test_expression endLocationIndex]
     !switchExpressionGenerationList
@@ -161,16 +161,16 @@ override method @switchInstructionAST instructionSemanticAnalysis
   }
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  CODE GENERATION                                                                                                      
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  CODE GENERATION                                                                                                      
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @switchCaseListIR {
   public var @uintlist mCaseIdentifierIndexes
   public var @instructionListIR mCaseInstructionList
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @switchInstructionIR : @abstractInstructionIR {
   public var @uint mLabelIndex
@@ -179,16 +179,16 @@ class @switchInstructionIR : @abstractInstructionIR {
   public var @switchCaseListIR mCaseGenerationList
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @switchInstructionIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-#--- Generate instructions that compute switch expression
+//--- Generate instructions that compute switch expression
   [self.mSwitchExpressionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-#--- Generate switch instruction
+//--- Generate switch instruction
   let labelOtherwise = "switch." + self.mLabelIndex + ".otherwise"
   ioLLVMcode += "  switch " + [self.mSwitchExpression llvmTypeName] + " " + [self.mSwitchExpression llvmName]
   ioLLVMcode += ", label %" + labelOtherwise + " [\n"
@@ -199,17 +199,17 @@ override method @switchInstructionIR llvmInstructionCode
     end
   end
   ioLLVMcode += "  ]\n\n"
-#--- Generate branches
+//--- Generate branches
   for (* instructionList) in self.mCaseGenerationList do (branchIdx)
     ioLLVMcode += "switch." + self.mLabelIndex + ".branch." + branchIdx + ":\n"
     [instructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
     ioLLVMcode += "  br label %" + labelOtherwise + "\n\n"
   end
-#--- Otherwise label
+//--- Otherwise label
   ioLLVMcode += labelOtherwise + ":\n"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @switchInstructionIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
@@ -221,4 +221,4 @@ override method @switchInstructionIR enterAccessibleEntities
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

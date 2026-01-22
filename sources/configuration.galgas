@@ -1,20 +1,20 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @interruptionPanicCode {
   case noCode
   case code (@lbigint value)
 }
 
-#·······················································································································
+//·······················································································································
 
 list @interruptionConfigurationList {
   public var @lstring mInterruptName
   public var @interruptionPanicCode mInterruptionPanicCode
 }
 
-#·······················································································································
+//·······················································································································
 
 struct @targetParameters {
   public var @location mConfigurationLocation
@@ -61,7 +61,7 @@ struct @targetParameters {
   public var @lstring mServiceEntryWithReturnValue
 }
 
-#·······················································································································
+//·······················································································································
 
 class @configurationDeclarationAST : @abstractDeclarationAST {
   public var @lstring mPanicCodeTypeName
@@ -70,13 +70,13 @@ class @configurationDeclarationAST : @abstractDeclarationAST {
   public var @interruptionConfigurationList mInterruptionConfigurationList
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_target_specific_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <configuration_key> ?let @string inKey {
     $identifier$ ?let key
@@ -86,7 +86,7 @@ syntax extension omnibus_target_specific_syntax {
     $:$
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <python_utility_tool_list> !@2lstringlist outPythonUtilityToolList {
     <configuration_key> !"PYTHON_UTILITIES"
@@ -100,7 +100,7 @@ syntax extension omnibus_target_specific_syntax {
     end
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <configuration_start_symbol>
     ?!@ast ioAST
@@ -263,7 +263,7 @@ syntax extension omnibus_target_specific_syntax {
     }
   }
 
- #·····················································································································
+ //·····················································································································
 
   rule <interruptConfigList>
     !@interruptionConfigurationList interruptionConfigurationList
@@ -288,25 +288,25 @@ syntax extension omnibus_target_specific_syntax {
     end
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  PRECEDENCE GRAPH                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  PRECEDENCE GRAPH                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func %once configurationNodeNameForPrecedenceGraph -> @string {
   result = "config"
 }
 
-#·······················································································································
+//·······················································································································
 
 func %once isrSlotTypeName -> @string {
   result = "ISRSlot"
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @configurationDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   let rootNode =  @lstring {!configurationNodeNameForPrecedenceGraph () !self.mPanicCodeTypeName.location}
@@ -316,22 +316,22 @@ override method @configurationDeclarationAST enterInPrecedenceGraph ?!@semanticT
   [!?ioGraph addEdge !from: rootNode !to: [ctBoolTypeName () nowhere]]
 }
 
-#·······················································································································
+//·······················································································································
 
 override getter @configurationDeclarationAST locationForErrorSignaling -> @location outLocation {
   outLocation = self.mPanicCodeTypeName.location
 }
 
-#·······················································································································
+//·······················································································································
 
 override getter @configurationDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = configurationNodeNameForPrecedenceGraph ()
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  ENTER IN CONTEXT                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-# Duplicate configuration is detected in noteTypesInPrecedenceGraph
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  ENTER IN CONTEXT                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+// Duplicate configuration is detected in noteTypesInPrecedenceGraph
 
 override method @configurationDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
@@ -343,12 +343,12 @@ override method @configurationDeclarationAST enterInContext
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
-#---
+//---
   if ioContext.mTargetParameters.mPointerSize != 0 then
     error self.mTargetParameters.mConfigurationLocation : "duplicate configuration"
   end
   ioContext.mTargetParameters = self.mTargetParameters
-#--- Panic code type
+//--- Panic code type
   [ioContext.mTypeMap searchType
     !lkey:self.mPanicCodeTypeName
     ?type:let panicCodeType
@@ -362,7 +362,7 @@ override method @configurationDeclarationAST enterInContext
   else
     error self.mPanicCodeTypeName : "this type should be an unsigned integer type"
   end
-#--- Panic line type
+//--- Panic line type
   [ioContext.mTypeMap searchType
     !lkey:self.mPanicLineTypeName
     ?type:let panicLineType
@@ -376,7 +376,7 @@ override method @configurationDeclarationAST enterInContext
   else
     error self.mPanicLineTypeName : "this type should be an unsigned integer type"
   end
-#--------------------------------- Interrupt panic codes
+//--------------------------------- Interrupt panic codes
   var @stringset panicCodeSet = @[]
   for (name panicCode) in self.mInterruptionConfigurationList do
     [!?ioContext.mAvailableInterruptMap insertKey !name !panicCode]
@@ -392,4 +392,4 @@ override method @configurationDeclarationAST enterInContext
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

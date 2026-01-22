@@ -42,12 +42,6 @@ class GGS_syncDeclarationAST : public GGS_abstractDeclarationAST {
                                                        Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) ;
 
-//--------------------------------- GALGAS class functions
-  public: static class GGS_syncDeclarationAST class_func_new (const class GGS_lstring & inOperand0,
-                                                              const class GGS_structurePropertyListAST & inOperand1,
-                                                              class Compiler * inCompiler
-                                                              COMMA_LOCATION_ARGS) ;
-
 //--------------------------------- Comparison
   public: ComparisonResult objectCompare (const GGS_syncDeclarationAST & inOperand) const ;
 
@@ -405,12 +399,6 @@ class GGS_dynamicArrayTypeAssignUsage : public GGS_abstractAssignmentOperatorUsa
                                                                 Compiler * inCompiler
                                                                 COMMA_LOCATION_ARGS) ;
 
-//--------------------------------- GALGAS class functions
-  public: static class GGS_dynamicArrayTypeAssignUsage class_func_new (const class GGS_omnibusType & inOperand0,
-                                                                       const class GGS_string & inOperand1,
-                                                                       class Compiler * inCompiler
-                                                                       COMMA_LOCATION_ARGS) ;
-
 //--------------------------------- Comparison
   public: ComparisonResult objectCompare (const GGS_dynamicArrayTypeAssignUsage & inOperand) const ;
 
@@ -592,10 +580,6 @@ class GGS_boolImplicitConverterToBoolean : public GGS_abstractImplicitConverterT
                                                                    Compiler * inCompiler
                                                                    COMMA_LOCATION_ARGS) ;
 
-//--------------------------------- GALGAS class functions
-  public: static class GGS_boolImplicitConverterToBoolean class_func_new (Compiler * inCompiler
-                                                                          COMMA_LOCATION_ARGS) ;
-
 //--------------------------------- Comparison
   public: ComparisonResult objectCompare (const GGS_boolImplicitConverterToBoolean & inOperand) const ;
 
@@ -766,10 +750,6 @@ class GGS_boolNotOperator : public GGS_prefixOperatorUsage {
   public: static GGS_boolNotOperator extractObject (const GGS_object & inObject,
                                                     Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GGS_boolNotOperator class_func_new (Compiler * inCompiler
-                                                           COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public: ComparisonResult objectCompare (const GGS_boolNotOperator & inOperand) const ;
@@ -1338,14 +1318,6 @@ class GGS_selectInstructionIR : public GGS_abstractInstructionIR {
                                                         Compiler * inCompiler
                                                         COMMA_LOCATION_ARGS) ;
 
-//--------------------------------- GALGAS class functions
-  public: static class GGS_selectInstructionIR class_func_new (const class GGS_objectIR & inOperand0,
-                                                               const class GGS_string & inOperand1,
-                                                               const class GGS_objectIR & inOperand2,
-                                                               const class GGS_objectIR & inOperand3,
-                                                               class Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) ;
-
 //--------------------------------- Comparison
   public: ComparisonResult objectCompare (const GGS_selectInstructionIR & inOperand) const ;
 
@@ -1544,15 +1516,6 @@ class GGS_sliceAssignmentInstructionAST : public GGS_instructionAST {
   public: static GGS_sliceAssignmentInstructionAST extractObject (const GGS_object & inObject,
                                                                   Compiler * inCompiler
                                                                   COMMA_LOCATION_ARGS) ;
-
-//--------------------------------- GALGAS class functions
-  public: static class GGS_sliceAssignmentInstructionAST class_func_new (const class GGS_location & inOperand0,
-                                                                         const class GGS_lstring & inOperand1,
-                                                                         const class GGS_sliceAssignmentListAST & inOperand2,
-                                                                         const class GGS_expressionAST & inOperand3,
-                                                                         const class GGS_location & inOperand4,
-                                                                         class Compiler * inCompiler
-                                                                         COMMA_LOCATION_ARGS) ;
 
 //--------------------------------- Comparison
   public: ComparisonResult objectCompare (const GGS_sliceAssignmentInstructionAST & inOperand) const ;
@@ -1760,13 +1723,6 @@ class GGS_standaloneFunctionInExpressionAST : public GGS_expressionAST {
                                                                       Compiler * inCompiler
                                                                       COMMA_LOCATION_ARGS) ;
 
-//--------------------------------- GALGAS class functions
-  public: static class GGS_standaloneFunctionInExpressionAST class_func_new (const class GGS_lstring & inOperand0,
-                                                                             const class GGS_effectiveArgumentListAST & inOperand1,
-                                                                             const class GGS_location & inOperand2,
-                                                                             class Compiler * inCompiler
-                                                                             COMMA_LOCATION_ARGS) ;
-
 //--------------------------------- Comparison
   public: ComparisonResult objectCompare (const GGS_standaloneFunctionInExpressionAST & inOperand) const ;
 
@@ -1947,4 +1903,314 @@ void callExtensionMethod_noteTypesInPrecedenceGraph (class cPtr_panicAST * inObj
                                                      class GGS_semanticTypePrecedenceGraph & io_ioGraph,
                                                      Compiler * inCompiler
                                                      COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Extension method '@primaryInExpressionAST analyzePrimaryExpressionNoSelf'
+//
+//--------------------------------------------------------------------------------------------------
+
+void callExtensionMethod_analyzePrimaryExpressionNoSelf (class cPtr_primaryInExpressionAST * inObject,
+                                                         const class GGS_omnibusType constin_inSelfType,
+                                                         const class GGS_routineAttributes constin_inRoutineAttributes,
+                                                         const class GGS_omnibusType constin_inOptionalTargetType,
+                                                         const class GGS_semanticContext constin_inContext,
+                                                         const class GGS_mode constin_inMode,
+                                                         class GGS_semanticTemporariesStruct & io_ioTemporaries,
+                                                         class GGS_staticEntityMap & io_ioStaticEntityMap,
+                                                         class GGS_universalValuedObjectMap & io_ioUniversalMap,
+                                                         class GGS_allocaList & io_ioAllocaList,
+                                                         class GGS_instructionListIR & io_ioInstructionGenerationList,
+                                                         class GGS_objectIR & out_outResult,
+                                                         Compiler * inCompiler
+                                                         COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Routine 'procAnalyzeAccesListInExpression?self?routineAttributes?optionalTargetType?context?mode&temporary&staticEntityMap&variableMap&alloca&instructionListIR?&result'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_procAnalyzeAccesListInExpression_3F_self_3F_routineAttributes_3F_optionalTargetType_3F_context_3F_mode_26_temporary_26_staticEntityMap_26_variableMap_26_alloca_26_instructionListIR_3F__26_result (const class GGS_omnibusType constinArgument0,
+                                                                                                                                                                                                                 const class GGS_routineAttributes constinArgument1,
+                                                                                                                                                                                                                 const class GGS_omnibusType constinArgument2,
+                                                                                                                                                                                                                 const class GGS_semanticContext constinArgument3,
+                                                                                                                                                                                                                 const class GGS_mode constinArgument4,
+                                                                                                                                                                                                                 class GGS_semanticTemporariesStruct & ioArgument5,
+                                                                                                                                                                                                                 class GGS_staticEntityMap & ioArgument6,
+                                                                                                                                                                                                                 class GGS_universalValuedObjectMap & ioArgument7,
+                                                                                                                                                                                                                 class GGS_allocaList & ioArgument8,
+                                                                                                                                                                                                                 class GGS_instructionListIR & ioArgument9,
+                                                                                                                                                                                                                 const class GGS_primaryInExpressionAccessListAST constinArgument10,
+                                                                                                                                                                                                                 class GGS_objectIR & ioArgument11,
+                                                                                                                                                                                                                 class Compiler * inCompiler
+                                                                                                                                                                                                                 COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Extension method '@primaryInExpressionAST analyzePrimaryExpressionWithSelf'
+//
+//--------------------------------------------------------------------------------------------------
+
+void callExtensionMethod_analyzePrimaryExpressionWithSelf (class cPtr_primaryInExpressionAST * inObject,
+                                                           const class GGS_omnibusType constin_inSelfType,
+                                                           const class GGS_routineAttributes constin_inRoutineAttributes,
+                                                           const class GGS_omnibusType constin_inOptionalTargetType,
+                                                           const class GGS_semanticContext constin_inContext,
+                                                           const class GGS_mode constin_inMode,
+                                                           class GGS_semanticTemporariesStruct & io_ioTemporaries,
+                                                           class GGS_staticEntityMap & io_ioStaticEntityMap,
+                                                           class GGS_universalValuedObjectMap & io_ioUniversalMap,
+                                                           class GGS_allocaList & io_ioAllocaList,
+                                                           class GGS_instructionListIR & io_ioInstructionGenerationList,
+                                                           class GGS_objectIR & out_outResult,
+                                                           Compiler * inCompiler
+                                                           COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Routine 'handleArrayAccessInExpression&????self?routineAttributes?optionalTargetType?context?mode&temporary&staticEntityMap&variableMap&alloca&instructionListIR'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_handleArrayAccessInExpression_26__3F__3F__3F__3F_self_3F_routineAttributes_3F_optionalTargetType_3F_context_3F_mode_26_temporary_26_staticEntityMap_26_variableMap_26_alloca_26_instructionListIR (class GGS_objectIR & ioArgument0,
+                                                                                                                                                                                                                const class GGS_expressionAST constinArgument1,
+                                                                                                                                                                                                                const class GGS_location constinArgument2,
+                                                                                                                                                                                                                const class GGS_bool constinArgument3,
+                                                                                                                                                                                                                const class GGS_omnibusType constinArgument4,
+                                                                                                                                                                                                                const class GGS_routineAttributes constinArgument5,
+                                                                                                                                                                                                                const class GGS_omnibusType constinArgument6,
+                                                                                                                                                                                                                const class GGS_semanticContext constinArgument7,
+                                                                                                                                                                                                                const class GGS_mode constinArgument8,
+                                                                                                                                                                                                                class GGS_semanticTemporariesStruct & ioArgument9,
+                                                                                                                                                                                                                class GGS_staticEntityMap & ioArgument10,
+                                                                                                                                                                                                                class GGS_universalValuedObjectMap & ioArgument11,
+                                                                                                                                                                                                                class GGS_allocaList & ioArgument12,
+                                                                                                                                                                                                                class GGS_instructionListIR & ioArgument13,
+                                                                                                                                                                                                                class Compiler * inCompiler
+                                                                                                                                                                                                                COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Routine 'handleFunctionCallInExpression?&?self?context?mode?routineAttributes&temporary&staticEntityMap&variableMap&alloca?&'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_handleFunctionCallInExpression_3F__26__3F_self_3F_context_3F_mode_3F_routineAttributes_26_temporary_26_staticEntityMap_26_variableMap_26_alloca_3F__26_ (const class GGS_lstring constinArgument0,
+                                                                                                                                                                      class GGS_objectIR & ioArgument1,
+                                                                                                                                                                      const class GGS_omnibusType constinArgument2,
+                                                                                                                                                                      const class GGS_semanticContext constinArgument3,
+                                                                                                                                                                      const class GGS_mode constinArgument4,
+                                                                                                                                                                      const class GGS_routineAttributes constinArgument5,
+                                                                                                                                                                      class GGS_semanticTemporariesStruct & ioArgument6,
+                                                                                                                                                                      class GGS_staticEntityMap & ioArgument7,
+                                                                                                                                                                      class GGS_universalValuedObjectMap & ioArgument8,
+                                                                                                                                                                      class GGS_allocaList & ioArgument9,
+                                                                                                                                                                      const class GGS_effectiveArgumentListAST constinArgument10,
+                                                                                                                                                                      class GGS_instructionListIR & ioArgument11,
+                                                                                                                                                                      class Compiler * inCompiler
+                                                                                                                                                                      COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Routine 'handlePropertyAccessInExpression?context&??&temporary&alloca&instructionListIR'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_handlePropertyAccessInExpression_3F_context_26__3F__3F__26_temporary_26_alloca_26_instructionListIR (const class GGS_semanticContext constinArgument0,
+                                                                                                                  class GGS_objectIR & ioArgument1,
+                                                                                                                  const class GGS_lstring constinArgument2,
+                                                                                                                  const class GGS_mode constinArgument3,
+                                                                                                                  class GGS_semanticTemporariesStruct & ioArgument4,
+                                                                                                                  class GGS_allocaList & ioArgument5,
+                                                                                                                  class GGS_instructionListIR & ioArgument6,
+                                                                                                                  class Compiler * inCompiler
+                                                                                                                  COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Routine 'handleSliceInExpression?context&??&temporary&instructionListIR'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_handleSliceInExpression_3F_context_26__3F__3F__26_temporary_26_instructionListIR (const class GGS_semanticContext constinArgument0,
+                                                                                               class GGS_objectIR & ioArgument1,
+                                                                                               const class GGS_lbigint constinArgument2,
+                                                                                               const class GGS_lbigint constinArgument3,
+                                                                                               class GGS_semanticTemporariesStruct & ioArgument4,
+                                                                                               class GGS_instructionListIR & ioArgument5,
+                                                                                               class Compiler * inCompiler
+                                                                                               COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+// Phase 1: @ast struct
+//--------------------------------------------------------------------------------------------------
+
+class GGS_ast : public AC_GALGAS_root {
+//--------------------------------- Properties
+  public: GGS_declarationListAST mProperty_mDeclarationListAST ;
+  public: inline GGS_declarationListAST readProperty_mDeclarationListAST (void) const {
+    return mProperty_mDeclarationListAST ;
+  }
+
+  public: GGS_extendStaticArrayDeclarationDictAST mProperty_mExtendStaticArrayDeclarationAST ;
+  public: inline GGS_extendStaticArrayDeclarationDictAST readProperty_mExtendStaticArrayDeclarationAST (void) const {
+    return mProperty_mExtendStaticArrayDeclarationAST ;
+  }
+
+  public: GGS_requiredFunctionDeclarationListAST mProperty_mRequiredFunctionListAST ;
+  public: inline GGS_requiredFunctionDeclarationListAST readProperty_mRequiredFunctionListAST (void) const {
+    return mProperty_mRequiredFunctionListAST ;
+  }
+
+  public: GGS_externFunctionDeclarationListAST mProperty_mExternFunctionListAST ;
+  public: inline GGS_externFunctionDeclarationListAST readProperty_mExternFunctionListAST (void) const {
+    return mProperty_mExternFunctionListAST ;
+  }
+
+  public: GGS_lstringlist mProperty_mTargetListAST ;
+  public: inline GGS_lstringlist readProperty_mTargetListAST (void) const {
+    return mProperty_mTargetListAST ;
+  }
+
+  public: GGS_taskListAST mProperty_mTaskListAST ;
+  public: inline GGS_taskListAST readProperty_mTaskListAST (void) const {
+    return mProperty_mTaskListAST ;
+  }
+
+  public: GGS_checkTargetListAST mProperty_mCheckTargetListAST ;
+  public: inline GGS_checkTargetListAST readProperty_mCheckTargetListAST (void) const {
+    return mProperty_mCheckTargetListAST ;
+  }
+
+  public: GGS_driverDeclarationListAST mProperty_mDriverDeclarationListAST ;
+  public: inline GGS_driverDeclarationListAST readProperty_mDriverDeclarationListAST (void) const {
+    return mProperty_mDriverDeclarationListAST ;
+  }
+
+  public: GGS_driverInstanciationListAST mProperty_mRequiredDriverListAST ;
+  public: inline GGS_driverInstanciationListAST readProperty_mRequiredDriverListAST (void) const {
+    return mProperty_mRequiredDriverListAST ;
+  }
+
+  public: GGS_uint mProperty_mTypeDeclarationIndex ;
+  public: inline GGS_uint readProperty_mTypeDeclarationIndex (void) const {
+    return mProperty_mTypeDeclarationIndex ;
+  }
+
+  public: GGS_controlRegisterUserAccesMapAST mProperty_mControlRegisterUserAccesMapAST ;
+  public: inline GGS_controlRegisterUserAccesMapAST readProperty_mControlRegisterUserAccesMapAST (void) const {
+    return mProperty_mControlRegisterUserAccesMapAST ;
+  }
+
+//--------------------------------- Accessors
+  public: VIRTUAL_IN_DEBUG bool isValid (void) const override ;
+  public: VIRTUAL_IN_DEBUG void drop (void) override ;
+
+//--------------------------------- Default constructor
+  public: GGS_ast (void) ;
+
+//--------------------------------- Property setters
+  public: inline void setter_setMDeclarationListAST (const GGS_declarationListAST & inValue COMMA_UNUSED_LOCATION_ARGS) {
+    mProperty_mDeclarationListAST = inValue ;
+  }
+
+  public: inline void setter_setMExtendStaticArrayDeclarationAST (const GGS_extendStaticArrayDeclarationDictAST & inValue COMMA_UNUSED_LOCATION_ARGS) {
+    mProperty_mExtendStaticArrayDeclarationAST = inValue ;
+  }
+
+  public: inline void setter_setMRequiredFunctionListAST (const GGS_requiredFunctionDeclarationListAST & inValue COMMA_UNUSED_LOCATION_ARGS) {
+    mProperty_mRequiredFunctionListAST = inValue ;
+  }
+
+  public: inline void setter_setMExternFunctionListAST (const GGS_externFunctionDeclarationListAST & inValue COMMA_UNUSED_LOCATION_ARGS) {
+    mProperty_mExternFunctionListAST = inValue ;
+  }
+
+  public: inline void setter_setMTargetListAST (const GGS_lstringlist & inValue COMMA_UNUSED_LOCATION_ARGS) {
+    mProperty_mTargetListAST = inValue ;
+  }
+
+  public: inline void setter_setMTaskListAST (const GGS_taskListAST & inValue COMMA_UNUSED_LOCATION_ARGS) {
+    mProperty_mTaskListAST = inValue ;
+  }
+
+  public: inline void setter_setMCheckTargetListAST (const GGS_checkTargetListAST & inValue COMMA_UNUSED_LOCATION_ARGS) {
+    mProperty_mCheckTargetListAST = inValue ;
+  }
+
+  public: inline void setter_setMDriverDeclarationListAST (const GGS_driverDeclarationListAST & inValue COMMA_UNUSED_LOCATION_ARGS) {
+    mProperty_mDriverDeclarationListAST = inValue ;
+  }
+
+  public: inline void setter_setMRequiredDriverListAST (const GGS_driverInstanciationListAST & inValue COMMA_UNUSED_LOCATION_ARGS) {
+    mProperty_mRequiredDriverListAST = inValue ;
+  }
+
+  public: inline void setter_setMTypeDeclarationIndex (const GGS_uint & inValue COMMA_UNUSED_LOCATION_ARGS) {
+    mProperty_mTypeDeclarationIndex = inValue ;
+  }
+
+  public: inline void setter_setMControlRegisterUserAccesMapAST (const GGS_controlRegisterUserAccesMapAST & inValue COMMA_UNUSED_LOCATION_ARGS) {
+    mProperty_mControlRegisterUserAccesMapAST = inValue ;
+  }
+
+//--------------------------------- Set initialized properties
+  private: void setInitializedProperties (Compiler * inCompiler) ;
+
+//--------------------------------- Native constructor
+  public: GGS_ast (const GGS_declarationListAST & in_mDeclarationListAST,
+                   const GGS_extendStaticArrayDeclarationDictAST & in_mExtendStaticArrayDeclarationAST,
+                   const GGS_requiredFunctionDeclarationListAST & in_mRequiredFunctionListAST,
+                   const GGS_externFunctionDeclarationListAST & in_mExternFunctionListAST,
+                   const GGS_lstringlist & in_mTargetListAST,
+                   const GGS_taskListAST & in_mTaskListAST,
+                   const GGS_checkTargetListAST & in_mCheckTargetListAST,
+                   const GGS_driverDeclarationListAST & in_mDriverDeclarationListAST,
+                   const GGS_driverInstanciationListAST & in_mRequiredDriverListAST,
+                   const GGS_uint & in_mTypeDeclarationIndex,
+                   const GGS_controlRegisterUserAccesMapAST & in_mControlRegisterUserAccesMapAST) ;
+
+//--------------------------------- Copy constructor
+  public: GGS_ast (const GGS_ast & inSource) ;
+
+//--------------------------------- Assignment operator
+  public: GGS_ast & operator = (const GGS_ast & inSource) ;
+
+//-- Start of type generic part
+
+//--------------------------------- Initializers
+  public: static GGS_ast init (Compiler * inCompiler
+                               COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Object cloning
+  protected: virtual AC_GALGAS_root * clonedObject (void) const override ;
+
+//--------------------------------- Object extraction
+  public: static GGS_ast extractObject (const GGS_object & inObject,
+                                        Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) ;
+
+//--------------------------------- Implementation of getter 'description'
+  public: VIRTUAL_IN_DEBUG void description (String & ioString,
+                                             const int32_t inIndentation) const override ;
+
+//--------------------------------- Setters
+
+//--------------------------------- Instance Methods
+//--------------------------------- Class Methods
+
+//--------------------------------- Getters
+
+//--------------------------------- Read subscripts
+
+
+//--------------------------------- Introspection
+  public: VIRTUAL_IN_DEBUG const GALGAS_TypeDescriptor * staticTypeDescriptor (void) const override ;
+ 
+} ;
+
+//--------------------------------------------------------------------------------------------------
+
+extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_ast ;
 

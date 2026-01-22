@@ -1,19 +1,19 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @checkInstructionAST : @instructionAST {
   public var @lstring mCheckMessage
   public var @expressionAST mExpression
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
     $ctAssert$
@@ -29,21 +29,21 @@ syntax extension omnibus_syntax {
     $)$
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  NOTE TYPES                                                                                                           
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  NOTE TYPES                                                                                                           
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @checkInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [self.mExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTICS                                                                                                            
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SEMANTICS                                                                                                            
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @checkInstructionAST instructionSemanticAnalysis
   ?self:let @omnibusType inSelfType
@@ -56,7 +56,7 @@ override method @checkInstructionAST instructionSemanticAnalysis
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
 {
-#--- Analyze expression
+//--- Analyze expression
   var @instructionListIR instructionGenerationList = @[]
   [self.mExpression analyzeExpression
     !self:inSelfType
@@ -79,7 +79,7 @@ override method @checkInstructionAST instructionSemanticAnalysis
     !?alloca: ioAllocaList
     ?let booleanOperand
   ]
-#--- 
+//--- 
   switch booleanOperand 
   case compileTime (boolValue) :
     if not boolValue then
@@ -92,23 +92,23 @@ override method @checkInstructionAST instructionSemanticAnalysis
   case llvmVariable (*) :
     error self.mInstructionLocation : "expression is not static: use assert instruction"
   end
-#--- Check inferred type
-#  if not [[expressionResult type].kind isBoolean] then
-#    error mInstructionLocation : "expression is not boolean"
-#  end
-##--- Check expression is static, and true
-#  if not [expressionResult isStatic] then
-#    error mInstructionLocation : "expression is not static: use assert instruction"
-#  else
-#    [expressionResult literalInteger ?1* ?value:@bigint value]
-#    if value != 1 then
-#      if mCheckMessage.string != "" then
-#        error mCheckMessage : "check failure: " + mCheckMessage
-#      else
-#        error mCheckMessage : "check failure"
-#      end
-#    end
-#  end
+//--- Check inferred type
+//  if not [[expressionResult type].kind isBoolean] then
+//    error mInstructionLocation : "expression is not boolean"
+//  end
+////--- Check expression is static, and true
+//  if not [expressionResult isStatic] then
+//    error mInstructionLocation : "expression is not static: use assert instruction"
+//  else
+//    [expressionResult literalInteger ?1* ?value:@bigint value]
+//    if value != 1 then
+//      if mCheckMessage.string != "" then
+//        error mCheckMessage : "check failure: " + mCheckMessage
+//      else
+//        error mCheckMessage : "check failure"
+//      end
+//    end
+//  end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

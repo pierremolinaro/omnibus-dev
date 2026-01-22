@@ -1,6 +1,6 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @booleanShortCircuitAndOperatorExpressionAST : @expressionAST {
   public var @expressionAST mLeftExpression
@@ -8,9 +8,9 @@ class @booleanShortCircuitAndOperatorExpressionAST : @expressionAST {
   public var @expressionAST mRightExpression
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @booleanShortCircuitAndOperatorExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
@@ -20,18 +20,18 @@ override method @booleanShortCircuitAndOperatorExpressionAST addDependenceEdgeFo
   [self.mRightExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  NOTE TYPES                                                                                                           
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  NOTE TYPES                                                                                                           
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @booleanShortCircuitAndOperatorExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [self.mLeftExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
   [self.mRightExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTICS                                                                                                            
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SEMANTICS                                                                                                            
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
   ?self:let @omnibusType inSelfType
@@ -46,7 +46,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
 {
-#--- Analyze left expression
+//--- Analyze left expression
   var @instructionListIR leftInstructionGenerationList = @[]
   [self.mLeftExpression analyzeExpression
     !self:inSelfType
@@ -73,7 +73,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     !?alloca: ioAllocaList
     ?let @implicitBooleanConversionResult leftBooleanOperand
   ]
-#--- Analyze right expression
+//--- Analyze right expression
   var @instructionListIR rightInstructionGenerationList = @[]
   [self.mRightExpression analyzeExpression
     !self:inSelfType
@@ -100,15 +100,15 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     !?alloca: ioAllocaList
     ?let rightBooleanOperand
   ]
-#--- Static operation, or dynamic operation
+//--- Static operation, or dynamic operation
   if [leftBooleanOperand isCompileTime] && [rightBooleanOperand isCompileTime] then
     [leftBooleanOperand extractCompileTime ?value:let @bool leftStaticValue]
     [rightBooleanOperand extractCompileTime ?value:let @bool rightStaticValue]
     outResult = .literalInteger {!type: [leftOperand type] !value: leftStaticValue & rightStaticValue}
   else
-  #--- Result type : bool 
+  //--- Result type : bool 
     getNewTempValue (![inContext booleanType !self.mOperatorLocation] !?ioTemporaries ?outResult)
-  #--- Generate code
+  //--- Generate code
     [!?ioInstructionGenerationList appendShortCircuitAndOperation
       !outResult
       ![leftBooleanOperand llvmName]
@@ -120,4 +120,4 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

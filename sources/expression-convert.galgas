@@ -1,6 +1,6 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @convertExpressionAST : @expressionAST {
   public var @expressionAST mExpression
@@ -8,13 +8,13 @@ class @convertExpressionAST : @expressionAST {
   public var @location mEndOfExpression
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     $convert$
@@ -35,13 +35,13 @@ syntax extension omnibus_syntax {
     }
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @convertExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
@@ -53,9 +53,9 @@ override method @convertExpressionAST addDependenceEdgeForStaticExpression
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  NOTE TYPES                                                                                                           
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  NOTE TYPES                                                                                                           
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @convertExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [self.mExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
@@ -64,11 +64,11 @@ override method @convertExpressionAST noteExpressionTypesInPrecedenceGraph ?!@se
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTICS                                                                                                            
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#! @convertExpressionAST
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SEMANTICS                                                                                                            
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//! @convertExpressionAST
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @convertExpressionAST analyzeExpression
   ?self:let @omnibusType inSelfType
@@ -83,7 +83,7 @@ override method @convertExpressionAST analyzeExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
 {
-#--- Analyze expression
+//--- Analyze expression
   [self.mExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
@@ -101,16 +101,16 @@ override method @convertExpressionAST analyzeExpression
     !?ioTemporaries
     !?expressionResult
   ]  
-#--- 
+//--- 
   if [inMode isSafe] then
     error self.mTypeName : "operations that can generate panic are not allowed in " + panicModeName () + " mode"
   end
-#--- Analyze type
+//--- Analyze type
   let @omnibusType resultType = if self.mTypeName.string == ""
     then inOptionalTargetType
     else [[inContext.mTypeMap searchKey !self.mTypeName] type]
   end
-#--- Check types
+//--- Check types
   if not [resultType.kind isInteger] then
     error self.mTypeName : "this type is not an integer type" : outResult
   elsif not [[expressionResult type].kind isInteger] then
@@ -138,11 +138,11 @@ override method @convertExpressionAST analyzeExpression
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  CODE GENERATION                                                                                                      
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#! @convertInstructionIR
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  CODE GENERATION                                                                                                      
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//! @convertInstructionIR
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @convertInstructionIR : @abstractInstructionIR {
   public var @objectIR mTarget
@@ -150,7 +150,7 @@ class @convertInstructionIR : @abstractInstructionIR {
   public var @location mLocation
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @convertInstructionIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
@@ -159,7 +159,7 @@ override method @convertInstructionIR enterAccessibleEntities
   ioInvokedRoutineSet ++= panicRoutineNameForLocationFile (!self.mLocation)
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @convertInstructionIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -195,4 +195,4 @@ override method @convertInstructionIR llvmInstructionCode
   ioLLVMcode += "  " + [self.mTarget llvmName] + " = trunc " + operandType + " " + [self.mOperand llvmName] + " to " + [self.mTarget llvmTypeName] + "\n"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

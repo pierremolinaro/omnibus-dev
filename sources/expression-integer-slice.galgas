@@ -1,6 +1,6 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @integerSliceFieldListAST {
   public var @lstring mSliceWidth
@@ -8,7 +8,7 @@ list @integerSliceFieldListAST {
   public var @location mExpressionLocation
 }
 
-#·······················································································································
+//·······················································································································
 
 class @integerSliceExpressionAST : @expressionAST {
   public var @lstring mTypeName
@@ -16,13 +16,13 @@ class @integerSliceExpressionAST : @expressionAST {
   public var @location mLocation
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     ${$
@@ -42,13 +42,13 @@ syntax extension omnibus_syntax {
     $}$
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @integerSliceExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
@@ -59,9 +59,9 @@ override method @integerSliceExpressionAST addDependenceEdgeForStaticExpression
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  NOTE TYPES                                                                                                           
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  NOTE TYPES                                                                                                           
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @integerSliceExpressionAST noteExpressionTypesInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
@@ -82,9 +82,9 @@ override method @integerSliceExpressionAST noteExpressionTypesInPrecedenceGraph
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTICS                                                                                                            
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SEMANTICS                                                                                                            
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @integerSliceExpressionAST analyzeExpression
   ?self:let @omnibusType inSelfType
@@ -99,9 +99,9 @@ override method @integerSliceExpressionAST analyzeExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
 {
-#--- Search Type
+//--- Search Type
   let resultType = [[inContext.mTypeMap searchKey !self.mTypeName] type]
-#--- Check type is an unsigned integer type
+//--- Check type is an unsigned integer type
   if not [resultType.kind isInteger] then
     error self.mTypeName: "this type should be an unsigned integer type" :outResult
   else
@@ -109,7 +109,7 @@ override method @integerSliceExpressionAST analyzeExpression
     if not unsigned then
       error self.mTypeName: "this type should be an unsigned integer type" :outResult
     else
-    #------------------------------------------------------ Valuated fields
+    //------------------------------------------------------ Valuated fields
       var leftShiftAmount = bitCount
       var @bigint accumulatedFieldStaticValues = 0
       var @operandIRList operandList = @[]
@@ -137,7 +137,7 @@ override method @integerSliceExpressionAST analyzeExpression
           error sliceWidthStr : "bit slice overflow: " + specifiedBitCount + " bits, should be " + bitCount
           leftShiftAmount = 0
         end
-      #--- Analyze expression
+      //--- Analyze expression
         let expressionTargetType = [[inContext.mTypeMap searchKey !expressionTypeName] type]
         [expression analyzeExpression
           !self:inSelfType
@@ -156,7 +156,7 @@ override method @integerSliceExpressionAST analyzeExpression
           !?ioTemporaries
           !?expressionResult
         ]  
-      #--- Check expression type
+      //--- Check expression type
         switch [expressionResult type].kind
         case staticArrayType (* *) :
           error expressionLocation: "an unsigned integer expression is required here"
@@ -180,13 +180,13 @@ override method @integerSliceExpressionAST analyzeExpression
             [expressionResult extractLiteralInteger ?1* ?value:let @bigint value]
             accumulatedFieldStaticValues = accumulatedFieldStaticValues | (value << leftShiftAmount)
           else
-          #--- Perform an bit extend to register type or a trunc
+          //--- Perform an bit extend to register type or a trunc
             getNewTempValue (!resultType !?ioTemporaries ?let extendedResult)
             [!?ioInstructionGenerationList appendBoolToUInt !extendedResult !expressionResult]
-          #--- Perform left shift
+          //--- Perform left shift
             getNewTempValue (!resultType !?ioTemporaries ?let shiftedResult)
             [!?ioInstructionGenerationList appendShiftLeft !shiftedResult !extendedResult !leftShiftAmount]
-          #---- Accumulate 
+          //---- Accumulate 
             operandList += !shiftedResult
           end
         case void :
@@ -216,13 +216,13 @@ override method @integerSliceExpressionAST analyzeExpression
           elsif expressionBitCount != sliceWidth then
             error expressionLocation: "an $uint" + sliceWidth + " expression is required here"
           else
-          #--- Perform an bit extend to result type
+          //--- Perform an bit extend to result type
             getNewTempValue (!resultType !?ioTemporaries ?let extendedResult)
             [!?ioInstructionGenerationList appendExtend !extendedResult !expressionResult]
-          #--- Perform left shift
+          //--- Perform left shift
             getNewTempValue (!resultType !?ioTemporaries ?let shiftedResult)
             [!?ioInstructionGenerationList appendShiftLeft !shiftedResult !extendedResult !leftShiftAmount]
-          #---- Accumulate 
+          //---- Accumulate 
             operandList += !shiftedResult
           end
         end
@@ -230,7 +230,7 @@ override method @integerSliceExpressionAST analyzeExpression
       if leftShiftAmount != 0 then
         error self.mLocation : [bitCount string] + " bits required, " + (bitCount - leftShiftAmount) + " bits defined"
       end
-    #------------------------------------------------------ Result
+    //------------------------------------------------------ Result
       outResult = .literalInteger {!type: resultType!value:accumulatedFieldStaticValues}
       for (operand) in operandList do
         getNewTempValue (!resultType !?ioTemporaries ?let newResult)
@@ -248,4 +248,4 @@ override method @integerSliceExpressionAST analyzeExpression
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

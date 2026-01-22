@@ -1,4 +1,4 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 setter @instructionListIR appendLoadWhenReference
   ?!@semanticTemporariesStruct ioTemporaries
@@ -11,7 +11,7 @@ setter @instructionListIR appendLoadWhenReference
     getNewTempValue (!type !?ioTemporaries ?let resultingValue)
     [!?self appendLoadFromReference !resultingValue !llvmName]
     ioObject = resultingValue
-#--- Values
+//--- Values
   case literalInteger (**) :
   case null (*) :
   case llvmNamedValue (**) :
@@ -25,4 +25,4 @@ setter @instructionListIR appendLoadWhenReference
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

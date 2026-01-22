@@ -1,13 +1,13 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @guardedCommandAST {
-  case boolean (@bool isExitCommand # if false, it is an "exit" command
+  case boolean (@bool isExitCommand // if false, it is an "exit" command
                 @expressionAST expression
                 @location endOfExpression)
 
-  case boolAndSync (@bool isExitCommand # if false, it is an "exit" command
+  case boolAndSync (@bool isExitCommand // if false, it is an "exit" command
                     @expressionAST expression
                     @bool warnsOnStaticExpression
                     @location endOfExpression
@@ -16,7 +16,7 @@ enum @guardedCommandAST {
                     @effectiveArgumentListAST effectiveParameterListAST)
 }
 
-#·······················································································································
+//·······················································································································
 
 list @syncInstructionBranchListAST {
   public var @guardedCommandAST mGuardedCommand
@@ -24,20 +24,20 @@ list @syncInstructionBranchListAST {
   public var @location mEndOfBranch
 }
 
-#·······················································································································
+//·······················································································································
 
 class @syncInstructionAST : @instructionAST {
   public var @syncInstructionBranchListAST mBranchList
   public var @location mEndOf_on_instruction
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <guarded_command> ?!@ast ioAST ?let @bool inIsExitCommand !@guardedCommandAST outGuardedCommand {
     let endOfExp = @location.here
@@ -69,7 +69,7 @@ syntax extension omnibus_syntax {
     }
   }
   
-  #·····················································································································
+  //·····················································································································
 
   rule <guarded_command> ?!@ast ioAST ?let @bool inIsExitCommand !@guardedCommandAST outGuardedCommand {
     <expression> !?ioAST ?let expression
@@ -110,7 +110,7 @@ syntax extension omnibus_syntax {
     end
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
     $sync$
@@ -124,24 +124,24 @@ syntax extension omnibus_syntax {
       $:$
       <instructionList> !?ioAST ?let instructionList
       instructionBranchList += !guardedCommand !instructionList !.here
-#    while
-#      $until$
-#      <guarded_command> !?ioAST !true ?let @guardedCommandAST guardedCommand
-#      $:$
-#      <instructionList> !?ioAST ?let instructionList
-#      instructionBranchList += !guardedCommand !instructionList !.here
+//    while
+//      $until$
+//      <guarded_command> !?ioAST !true ?let @guardedCommandAST guardedCommand
+//      $:$
+//      <instructionList> !?ioAST ?let instructionList
+//      instructionBranchList += !guardedCommand !instructionList !.here
     end
     $}$
     ioInstructionList += !@syncInstructionAST {!startLocation !instructionBranchList !.here}
   }
   
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  NOTE TYPES                                                                                                           
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//  NOTE TYPES                                                                                                           
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @syncInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for (* instructionList *) in self.mBranchList do
@@ -149,9 +149,9 @@ override method @syncInstructionAST noteInstructionTypesInPrecedenceGraph ?!@sem
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#  SEMANTICS                                                                                                            
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+////  SEMANTICS                                                                                                            
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @syncInstructionAST instructionSemanticAnalysis
   ?self:let @omnibusType inSelfType
@@ -164,7 +164,7 @@ override method @syncInstructionAST instructionSemanticAnalysis
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-#-------------------- Guards
+//-------------------- Guards
   var @guardedCommandIRList guardedCommandIRList = @[]
   for (guardedCommand * *) in self.mBranchList do
     switch guardedCommand
@@ -204,7 +204,7 @@ override method @syncInstructionAST instructionSemanticAnalysis
       }
     case boolAndSync (isContinue exp warnsOnStaticExpression endOfExp usesSelf nameList parameterList) :
       var @instructionListIR boolExpInstructionGenerationList = @[]
-    #--- Analyze guard boolean expression
+    //--- Analyze guard boolean expression
       [exp analyzeExpression
         !self:inSelfType
         !routineAttributes:.isGuard
@@ -235,20 +235,20 @@ override method @syncInstructionAST instructionSemanticAnalysis
       case llvmVariable (*) :
       end
  
-#      if [boolExpressionResult omnibusTypeDescriptionName] != boolTypeName () then
-#        error endOfExp : "guarded expression should be boolean"
-#      elsif warnsOnStaticExpression && [boolExpressionResult isStatic] then
-#        warning endOfExp : "guarded expression is static"
-#      end
-#      [!?boolExpInstructionGenerationList appendLoadWhenReference
-#        !?ioTemporaries
-#        !?boolExpressionResult
-#      ]
-    #--- Analyze synchronization
+//      if [boolExpressionResult omnibusTypeDescriptionName] != boolTypeName () then
+//        error endOfExp : "guarded expression should be boolean"
+//      elsif warnsOnStaticExpression && [boolExpressionResult isStatic] then
+////        warning endOfExp : "guarded expression is static"
+//      end
+//      [!?boolExpInstructionGenerationList appendLoadWhenReference
+//        !?ioTemporaries
+//        !?boolExpressionResult
+//      ]
+    //--- Analyze synchronization
       var @instructionListIR guardInstructionGenerationList = @[]
       let @procCallEffectiveParameterListIR guardEffectiveParameterListIR
       let @lstring guardMangledName
-      if usesSelf.bool then # self.p1.p2. … (…)
+      if usesSelf.bool then // self.p1.p2. … (…)
         if [inSelfType.kind isVoid] then
           error usesSelf : "'self' is not available in this context" : guardEffectiveParameterListIR, guardMangledName
         else
@@ -283,11 +283,11 @@ override method @syncInstructionAST instructionSemanticAnalysis
             ?guardMangledName: guardMangledName
           )
         end
-      elsif [nameList count] == 1 then # Standalone guard: g (…)
+      elsif [nameList count] == 1 then // Standalone guard: g (…)
         error [nameList mValueAtIndex !0]
         : "Standalone guard are not handled"
         : guardMangledName, guardEffectiveParameterListIR
-      else # Global variable method, or driver method: g.h. … (…)
+      else // Global variable method, or driver method: g.h. … (…)
         var propertyList = nameList
         [!?propertyList popFirst ?let globalReceiverName]
         [!?propertyList popLast ?let guardName]
@@ -349,31 +349,31 @@ override method @syncInstructionAST instructionSemanticAnalysis
       end
 
 
-#      if [boolExpressionResult isLiteralInteger] then
-#        [boolExpressionResult literalInteger ?1* ?value:let @bigint value]
-#        if value == 1 then
-#          guardedCommandIRList += !.sync {
-#            !isExitCommand:isContinue
-#            !guardMangledName:guardMangledName.string
-#            !guardInstructionGenerationList:guardInstructionGenerationList
-#            !effectiveParameterListIR:guardEffectiveParameterListIR
-#          }
-#        else
-#          error guardMangledName : "false guard not handled yet"
-#        end
-#      else
-#        guardedCommandIRList += !.boolAndSync {
-#          !isExitCommand:isContinue
-#          !boolExpInstructionGenerationList:boolExpInstructionGenerationList
-#          !boolExpResult:boolExpressionResult
-#          !guardMangledName:guardMangledName.string
-#          !guardInstructionGenerationList:guardInstructionGenerationList
-#          !effectiveParameterListIR:guardEffectiveParameterListIR
-#        }
-#      end
+//      if [boolExpressionResult isLiteralInteger] then
+//        [boolExpressionResult literalInteger ?1* ?value:let @bigint value]
+//        if value == 1 then
+//          guardedCommandIRList += !.sync {
+//            !isExitCommand:isContinue
+//            !guardMangledName:guardMangledName.string
+//            !guardInstructionGenerationList:guardInstructionGenerationList
+//            !effectiveParameterListIR:guardEffectiveParameterListIR
+//          }
+//        else
+//          error guardMangledName : "false guard not handled yet"
+//        end
+//      else
+//        guardedCommandIRList += !.boolAndSync {
+//          !isExitCommand:isContinue
+//          !boolExpInstructionGenerationList:boolExpInstructionGenerationList
+//          !boolExpResult:boolExpressionResult
+//          !guardMangledName:guardMangledName.string
+//          !guardInstructionGenerationList:guardInstructionGenerationList
+//          !effectiveParameterListIR:guardEffectiveParameterListIR
+//        }
+//      end
     end
   end
-#-------------------- Instruction lists
+//-------------------- Instruction lists
   [!?ioUniversalMap openOverrideForSelectBlock]
   var @syncInstructionBranchListIR syncInstructionBranchListIR = @[]
   for (* instructionList endOfBranch) in self.mBranchList, (guardedCommandIR) in guardedCommandIRList do
@@ -393,11 +393,11 @@ override method @syncInstructionAST instructionSemanticAnalysis
     syncInstructionBranchListIR += !guardedCommandIR !branchInstructionGenerationList
   end
   [!?ioUniversalMap closeOverride !self.mEndOf_on_instruction]
-#-------------------- Code generation
+//-------------------- Code generation
   ioInstructionGenerationList += !@syncInstructionIR {!self.mInstructionLocation !syncInstructionBranchListIR}
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc analyzeGuardCall
   ?self:let @omnibusType inSelfType
@@ -416,14 +416,14 @@ proc analyzeGuardCall
   !guardMangledName:@lstring outGuardMangledName
 {
   let guardMangledName = [inEffectiveParameterList mangledName !receiverTypeName: [inReceiver type].omnibusTypeDescriptionName !functionName: inGuardName]
-#  let guardMap = [[inReceiver type] guardMap]
+//  let guardMap = [[inReceiver type] guardMap]
   [inContext.mGuardMap searchKey !guardMangledName ?let isPublic ?let @routineTypedSignature formalSignature ?let guardRoutineUserLLVMName ?*]
-#--- Check accessibility
+//--- Check accessibility
   if not isPublic then
     error inGuardName : "this guard is not public": outGuardMangledName, outEffectiveParameterListIR
   else  
     outGuardMangledName = guardRoutineUserLLVMName
-  #--- Analyze effective parameters
+  //--- Analyze effective parameters
     outEffectiveParameterListIR = @[@(.outputInput, inReceiver)]
     analyzeEffectiveParameters (
       !self:inSelfType
@@ -443,21 +443,21 @@ proc analyzeGuardCall
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  CODE GENERATION                                                                                                      
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  CODE GENERATION                                                                                                      
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @guardedCommandIR {
-  case booleanGuard (@bool isExitCommand # if false, it is an "exit" command
+  case booleanGuard (@bool isExitCommand // if false, it is an "exit" command
                      @instructionListIR instructionGenerationList
                      @string boolGuardBoolLLVMName)
 
-  case sync        (@bool isExitCommand # if false, it is an "exit" command
+  case sync        (@bool isExitCommand // if false, it is an "exit" command
                     @string guardMangledName
                     @instructionListIR guardInstructionGenerationList
                     @procCallEffectiveParameterListIR effectiveParameterListIR)
 
-  case boolAndSync (@bool isExitCommand # if false, it is an "exit" command
+  case boolAndSync (@bool isExitCommand // if false, it is an "exit" command
                     @instructionListIR boolExpInstructionGenerationList
                     @string boolGuardBoolLLVMName
                     @string guardMangledName
@@ -465,27 +465,27 @@ enum @guardedCommandIR {
                     @procCallEffectiveParameterListIR effectiveParameterListIR)
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @syncInstructionBranchListIR {
   public var @guardedCommandIR mGuardedCommand
   public var @instructionListIR mInstructionGenerationList
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @guardedCommandIRList {
   public var @guardedCommandIR mGuardedCommand
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @syncInstructionIR : @abstractInstructionIR {
   public var @location mSelectInstructionLocation
   public var @syncInstructionBranchListIR mOnInstructionBranchListIR
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @syncInstructionIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -495,7 +495,7 @@ override method @syncInstructionIR llvmInstructionCode
   ioGenerationAdds.mUsesGuards = true
   let startLabel = "select." + ioGenerationAdds.mUniqueIndex
   ioGenerationAdds.mUniqueIndex += 1
-#---
+//---
   ioLLVMcode += "  br label %" + startLabel + ".start\n\n"
   let startLabelName = startLabel + ".start" 
   ioLLVMcode += startLabelName + ":\n"
@@ -577,9 +577,9 @@ override method @syncInstructionIR llvmInstructionCode
   end
   ioLLVMcode += "  %" + selectLabelName + " = call i1 @" + llvmNameForServiceCall (!waitForGuardChangeFunctionName ()) + " ()\n"
   ioLLVMcode += "  br i1 %" + selectLabelName + ", label %" + startLabelName + ", label %" + errorLabelName + "\n\n"
-  ioLLVMcode += errorLabelName + ":\n" # Error, all guards are closed
+  ioLLVMcode += errorLabelName + ":\n" // Error, all guards are closed
   if [option omnibus_options.noPanicGeneration value] then
-    ioLLVMcode += "  br label %" + exitLabelName + "\n\n" # No panic generation, pass instruction
+    ioLLVMcode += "  br label %" + exitLabelName + "\n\n" // No panic generation, pass instruction
   else
     ioLLVMcode += "  call void @" + [panicRoutineNameForLocationFile (!self.mSelectInstructionLocation) assemblerRepresentation] + " ("
     ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " " + [self.mSelectInstructionLocation endLine] + ", "
@@ -589,7 +589,7 @@ override method @syncInstructionIR llvmInstructionCode
   ioLLVMcode += exitLabelName + ":\n"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @syncInstructionIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
@@ -618,4 +618,4 @@ override method @syncInstructionIR enterAccessibleEntities
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

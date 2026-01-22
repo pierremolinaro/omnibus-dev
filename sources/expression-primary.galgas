@@ -1,6 +1,6 @@
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @primaryInExpressionAccessAST {
   case property (@lstring name)
@@ -9,47 +9,47 @@ enum @primaryInExpressionAccessAST {
   case funcCall (@lstring methodName @effectiveArgumentListAST arguments @location endOfArguments)
 }
 
-#·······················································································································
+//·······················································································································
 
 list @primaryInExpressionAccessListAST {
   public var @primaryInExpressionAccessAST mAccess
 }
 
-#·······················································································································
+//·······················································································································
 
 class @primaryInExpressionAST : @expressionAST {
   public var @lstring mReceiverName
   public var @primaryInExpressionAccessListAST mAccessList
 }
 
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! SYNTAX                                                                                                               
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! SYNTAX                                                                                                               
+//-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     $identifier$ ?let receiver
-  #--- Properties and access
+  //--- Properties and access
     <expression_access_list> !?ioAST ?let accessList
-  #--- AST
+  //--- AST
     outExpression = @primaryInExpressionAST {!receiver !accessList}
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     $self$
     let receiver = ["" here]
-  #--- Properties and access
+  //--- Properties and access
     <expression_access_list> !?ioAST ?let accessList
-  #--- AST
+  //--- AST
     outExpression = @primaryInExpressionAST {!receiver !accessList}
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <expression_access_list> ?!@ast ioAST !@primaryInExpressionAccessListAST outAccessList {
      outAccessList = @[]
@@ -90,13 +90,13 @@ syntax extension omnibus_syntax {
     end
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
+//////-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @primaryInExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
@@ -128,9 +128,9 @@ override method @primaryInExpressionAST addDependenceEdgeForStaticExpression
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#! NOTE TYPES                                                                                                           
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//! NOTE TYPES                                                                                                           
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @primaryInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for (access) in self.mAccessList do
@@ -159,9 +159,9 @@ override method @primaryInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@
   end
 }
 
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! SEMANTICS                                                                                                            
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! SEMANTICS                                                                                                            
+//-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @primaryInExpressionAST analyzeExpression
   ?self:let @omnibusType inSelfType
@@ -176,7 +176,7 @@ override method @primaryInExpressionAST analyzeExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
 {
-#--- object access, with ou without self
+//--- object access, with ou without self
   if self.mReceiverName.string != "" then
     if [inRoutineAttributes contains !.isGuard] then
       error self.mReceiverName : "in guard, only 'self' properties may be accessed" : outResult
@@ -214,7 +214,7 @@ override method @primaryInExpressionAST analyzeExpression
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
   ?self:let @omnibusType inSelfType
@@ -335,7 +335,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 proc procAnalyzeAccesListInExpression
   ?self:let @omnibusType inSelfType
@@ -351,7 +351,7 @@ proc procAnalyzeAccesListInExpression
   ?let @primaryInExpressionAccessListAST inAccessList
   ?!result:@objectIR ioResult
 {
-#--- Access list
+//--- Access list
   for (access) in inAccessList do
     switch access
     case integerSlice (@lbigint low @lbigint high) :
@@ -413,7 +413,7 @@ proc procAnalyzeAccesListInExpression
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
   ?self:let @omnibusType inSelfType
@@ -428,9 +428,9 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
   !result:@objectIR outResult
 {
-#--- object access, with self
+//--- object access, with self
   outResult = .reference {!type:inSelfType !llvmName:llvmNameForSelf ()}
-#--- Access list
+//--- Access list
   for (access) in self.mAccessList do
     switch access
     case integerSlice (@lbigint low @lbigint high) :
@@ -492,7 +492,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 proc handleSliceInExpression
   ?context:let @semanticContext inContext
@@ -507,16 +507,16 @@ proc handleSliceInExpression
   elsif not ([[ioResult type].kind isInteger] || [[ioResult type].kind isCompileTimeInteger]) then
     error inLow : "Invalid, receiver is not an integer" : ioResult
   else
-  #--- Shift source value
+  //--- Shift source value
     [!?ioInstructionGenerationList appendLogicalShiftRight !?ioResult ![inLow.bigint uint] !?ioTemporaries]
-  #--- Truncate source value
+  //--- Truncate source value
     let resultIntegerName = @lstring {!"u" + (inHigh.bigint - inLow.bigint + 1) !inLow.location}
     [inContext.mTypeMap searchType !lkey:resultIntegerName ?type:let sliceType]
     [!?ioInstructionGenerationList appendTrunc !sliceType !?ioResult !?ioTemporaries]
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 proc handlePropertyAccessInExpression
   ?context:let @semanticContext inContext
@@ -528,7 +528,7 @@ proc handlePropertyAccessInExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
   let type = [ioResult type]
-#  let typeOmnibusName = @lstring.new {!type.omnibusTypeDescriptionName !inPropertyName.location}
+//  let typeOmnibusName = @lstring.new {!type.omnibusTypeDescriptionName !inPropertyName.location}
   let propertyGetterMap = [inContext propertyGetterMap !type]
   [propertyGetterMap searchKey !inPropertyName ?* ?let @propertyGetterKind accessKind]
   switch accessKind
@@ -558,7 +558,7 @@ proc handlePropertyAccessInExpression
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 private proc handleArrayAccessInExpression
   ?!@objectIR ioResult
@@ -576,7 +576,7 @@ private proc handleArrayAccessInExpression
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-#--- Check current object is an array
+//--- Check current object is an array
   switch [ioResult type].subscript
   case noSubscript :
     error inEndOfIndex : "the receiver type is " + [ioResult type].omnibusTypeDescriptionName + " and does not accept subscripting"
@@ -612,7 +612,7 @@ private proc handleArrayAccessInExpression
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 private proc handleFunctionCallInExpression
   ?let @lstring inMethodName
@@ -629,31 +629,31 @@ private proc handleFunctionCallInExpression
   ?!@instructionListIR ioInstructionGenerationList
 {
   let receiverType = [ioObjectIR type]
-#--- Search routine in receiver type routine map
+//--- Search routine in receiver type routine map
   let methodMangledName = [inArguments mangledName !receiverTypeName: receiverType.omnibusTypeDescriptionName !functionName: inMethodName]
-#  log routineMap
-#  log methodMangledName
+//  log routineMap
+//  log methodMangledName
   [inContext.mRoutineMap searchKey
     !methodMangledName
     ?let unused implementedPublic
     ?let formalSignature
-    ?let formalReturnTypeProxy # null if no returned value
+    ?let formalReturnTypeProxy // null if no returned value
     ?let implementedModeDictionary
     ?let unused implementedIsExported
     ?let unused implementedMode
   ]
-#--- Check modes
+//--- Check modes
   let functionLLVMName = checkModeAndReturnsRoutineLLVMName (!implementedModeDictionary !inMode !inMethodName)
-#--- Check routine is actually a function
+//--- Check routine is actually a function
   if [formalReturnTypeProxy type].kind == .void then
     error inMethodName : "not a function (returns no value)" : ioObjectIR
   else
-  #--- If receiver is a value, create a reference
+  //--- If receiver is a value, create a reference
     [!?ioInstructionGenerationList referenceFromPossibleValue !?ioTemporaries !?ioAllocaList !?ioObjectIR]
-  #--- Add receiver as first parameter
+  //--- Add receiver as first parameter
     var @procCallEffectiveParameterListIR effectiveParameterListIR = @[]
-    effectiveParameterListIR += !.outputInput !ioObjectIR # Add receiver as first argument
-  #--- Analyze effective parameters
+    effectiveParameterListIR += !.outputInput !ioObjectIR // Add receiver as first argument
+  //--- Analyze effective parameters
     analyzeEffectiveParameters (
       !self:inSelfType
       !routineAttributes:inRoutineAttributes
@@ -669,9 +669,9 @@ private proc handleFunctionCallInExpression
       !?instructionListIR:ioInstructionGenerationList
       !?effectiveIR:effectiveParameterListIR
     )
-  #--- New LLVM variable for function call result
+  //--- New LLVM variable for function call result
     getNewTempValue (![formalReturnTypeProxy type] !?ioTemporaries ?let callReturnedResult)
-  #--- Generate call
+  //--- Generate call
     let routineMangledName = routineMangledNameFromCall (![ioObjectIR type].llvmBaseTypeName !inMethodName !inArguments)
     ioInstructionGenerationList += !@standaloneRoutineCallIR {
       !callReturnedResult
@@ -679,9 +679,9 @@ private proc handleFunctionCallInExpression
       !functionLLVMName
       !effectiveParameterListIR
     }
-  #---
+  //---
     ioObjectIR = callReturnedResult
   end
 }
 
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

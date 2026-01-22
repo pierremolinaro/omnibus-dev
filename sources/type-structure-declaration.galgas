@@ -1,6 +1,6 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @structureDeclarationAST : @abstractDeclarationAST {
   public var @lstring mReceiverTypeName
@@ -12,25 +12,25 @@ class @structureDeclarationAST : @abstractDeclarationAST {
   public var @bool mMayImplementDeinit
 }
 
-#·······················································································································
+////·······················································································································
 
 list @propertyAttributeList {
   public var @lstring mAttributeName
   public var @lbigint mAttributeValue
 }
 
-#·······················································································································
+//·······················································································································
 
 enum @propertyKindAST {
-  case initializedStoredProperty (@expressionAST initExpression) # declared by "var = ···"
-  case uninitializedStoredProperty # declared by "var", no initialization
-  case initializedConstantProperty (@expressionAST initExpression) # declared by "let"
-  case uninitializedConstantProperty # declared by "let", no initialization
+  case initializedStoredProperty (@expressionAST initExpression) // declared by "var = ···"
+  case uninitializedStoredProperty // declared by "var", no initialization
+  case initializedConstantProperty (@expressionAST initExpression) // declared by "let"
+  case uninitializedConstantProperty // declared by "let", no initialization
   case readOnlyComputedProperty (@instructionListAST instructionList @location endOfInstructionList)
   case writeComputedProperty (@instructionListAST instructionList @location endOfInstructionList)
 }
 
-#·······················································································································
+//·······················································································································
 
 list @structurePropertyListAST {
   public var @lstring mPropertyName
@@ -40,13 +40,13 @@ list @structurePropertyListAST {
   public var @propertyKindAST mPropertyKind
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  SYNTAX                                                                                                               
+////—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  ////·····················································································································
 
   rule <private_or_public_struct_property_declaration>
     ?!@ast ioAST
@@ -62,7 +62,7 @@ syntax extension omnibus_syntax {
     <struct_property_declaration> !?ioAST !visibility !?ioPropertyListAST
   }
   
-  #·····················································································································
+  //·····················································································································
 
   rule <private_struct_property_declaration>
     ?!@ast ioAST
@@ -71,7 +71,7 @@ syntax extension omnibus_syntax {
     <struct_property_declaration> !?ioAST !.isPrivate !?ioPropertyListAST
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <struct_property_declaration>
     ?!@ast ioAST
@@ -105,7 +105,7 @@ syntax extension omnibus_syntax {
     end
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <struct_property_declaration>
     ?!@ast ioAST
@@ -155,7 +155,7 @@ syntax extension omnibus_syntax {
     end
   }
 
-  #·····················································································································
+  //·····················································································································
 
   rule <propertyGetterSetter>
     ?!@ast ioAST
@@ -213,7 +213,7 @@ syntax extension omnibus_syntax {
       elsif not setterDefined && not getterDefined then
         error .here : "a getter should be defined, and optionaly a setter"
       end
-    or # getter only
+    or // getter only
       <instructionList> !?ioAST ?let readInstructionList
       let endOfReadInstructionList = @location.here
       ioPropertyListAST +=
@@ -229,7 +229,7 @@ syntax extension omnibus_syntax {
     $}$
   }
   
-  #·····················································································································
+  //·····················································································································
 
   rule <declaration> ?!@ast ioAST {
     $struct$
@@ -254,24 +254,24 @@ syntax extension omnibus_syntax {
       !structureName
       !structureName
       !attributeList
-      !true # Generate assignment routine
+      !true // Generate assignment routine
       !fieldList
       !true
     }
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  PRECEDENCE GRAPH                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  PRECEDENCE GRAPH                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @structureDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-#--- Add structure type name as node
+//--- Add structure type name as node
   [!?ioGraph addNode !self.mReceiverTypeName !self]
-#--- Add property types
+//--- Add property types
   for (3* fieldTypeName propertyKind) in self.mStructurePropertyListAST do
     if fieldTypeName.string != "" then
       [!?ioGraph addEdge !from: self.mReceiverTypeName !to: fieldTypeName]
@@ -290,28 +290,28 @@ override method @structureDeclarationAST enterInPrecedenceGraph ?!@semanticTypeP
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 override getter @structureDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = self.mReceiverTypeName 
 }
 
-#·······················································································································
+//·······················································································································
 
 override getter @structureDeclarationAST locationForErrorSignaling -> @location outLocation {
   outLocation = self.mReceiverTypeName.location
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  ENTER IN CONTEXT                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  ENTER IN CONTEXT                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @propertyList %equatable {
   public var @string mPropertyName
   public var @omnibusType mType
 }
 
-#·······················································································································
+////·······················································································································
 
 sortedlist @sortedOperandIRList %equatable {
   public var @objectIR mOperand
@@ -320,7 +320,7 @@ sortedlist @sortedOperandIRList %equatable {
   mIndex <
 }
 
-#·······················································································································
+//·······················································································································
 
 method @structurePropertyListAST.@element enterPropertyInContext
   ?!context:@semanticContext ioContext
@@ -335,7 +335,7 @@ method @structurePropertyListAST.@element enterPropertyInContext
   ?!@string ioConstructorKey
   ?!@bool canBeCopied
 {
-#---------- Attributes
+//---------- Attributes
   var @lbigint explicitAlignment = @{!0 !.nowhere}
   var alignmentDefined = false
   for (attribute align) in self.mPropertyAttributeList do
@@ -344,7 +344,7 @@ method @structurePropertyListAST.@element enterPropertyInContext
     elsif alignmentDefined then
       error attribute : "@align attribute already defined"
     else
-    #--- Check alignment is a power of 2
+    //--- Check alignment is a power of 2
       if align.bigint != (1 << [align.bigint - 1 bitCountForUnsignedRepresentation]) then
         error align : "alignment should be a power of 2"
       else
@@ -353,12 +353,12 @@ method @structurePropertyListAST.@element enterPropertyInContext
       end
     end
   end
-#---------- Property type
+//---------- Property type
   let @omnibusType optionalPropertyType = if self.mPropertyTypeName.string == ""
     then voidType ()
     else [[ioContext.mTypeMap searchKey !self.mPropertyTypeName] type]
   end
-#---------- Init expression
+//---------- Init expression
   switch self.mPropertyKind
   case initializedConstantProperty (initExpression) :
     computeStaticExpression (
@@ -542,7 +542,7 @@ method @structurePropertyListAST.@element enterPropertyInContext
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @structureDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
@@ -554,9 +554,9 @@ override method @structureDeclarationAST enterInContext
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR ioUserLLVMTypeDefinitionListIR
 {
-#---------------------------------------- Properties
+//---------------------------------------- Properties
   var @propertyList propertyList = @[]
-#  @propertyGetterMap propertyGetterMap = @[]
+//  @propertyGetterMap propertyGetterMap = @[]
   var @sortedOperandIRList sortedOperandIRList = @[]
   var @constructorSignature constructorSignature = @[]
   var @string constructorKey = "("
@@ -570,7 +570,7 @@ override method @structureDeclarationAST enterInContext
       !receiverLLVMBaseTypeName: self.mLLVMBaseTypeName
       !?ioDecoratedRoutineList
       !?propertyList
-#      !?propertyGetterMap
+//      !?propertyGetterMap
       !?sortedOperandIRList
       !?constructorSignature
       !?constructorKey
@@ -578,7 +578,7 @@ override method @structureDeclarationAST enterInContext
     ]
   end
   constructorKey += ")"
-#---------------------------------------- Constructor map
+//---------------------------------------- Constructor map
   var @constructorMap constructorMap = @()
   [!?constructorMap insertKey
     ! @{!constructorKey !self.mReceiverTypeName.location}
@@ -586,9 +586,9 @@ override method @structureDeclarationAST enterInContext
     !.structure {!sortedOperandList:sortedOperandIRList}
   ]
   [!?ioContext.mTypeConstructorMap insertKey !self.mOmnibusTypeSpecificName !constructorMap]
-#---------------------------------------- Attribute instanciable, copyable
+//---------------------------------------- Attribute instanciable, copyable
   var typeAttributes = @omnibusTypeAttributes.instanciable
-#---------------------------------------- Check structure is copyable
+//---------------------------------------- Check structure is copyable
   for (s) in self.mAttributeListAST do
     if s.string == copyableAttribute () then
       if [typeAttributes contains !.copyable] then
@@ -603,7 +603,7 @@ override method @structureDeclarationAST enterInContext
   if self.mGenerateAssignmentRoutine & canBeCopied then
     typeAttributes = typeAttributes | .copyable
   end
-#---------------------------------------- Enter in type map
+//---------------------------------------- Enter in type map
   let structureType = @omnibusType {
     !subscript:.noSubscript
     !attributes:typeAttributes
@@ -615,13 +615,13 @@ override method @structureDeclarationAST enterInContext
     !self.mReceiverTypeName
     !type:structureType
   ]
-#-------------------------------------------- GenerateLLVM type definition
+//-------------------------------------------- GenerateLLVM type definition
   ioUserLLVMTypeDefinitionListIR += !@userLLVMSructureTypeDefinitionIR {
     ![structureType llvmTypeName]
     !propertyList
   }
-#----------------- Assignment
-#--- Enter assignment function from references
+//----------------- Assignment
+//--- Enter assignment function from references
   let assignmentFunctionLLVMName = assignmentOperatorFuncName (!structureType !structureType)
   ioRoutineListIR += !@structureTypeAssignFunctionIR {
     ![assignmentFunctionLLVMName nowhere]
@@ -629,21 +629,21 @@ override method @structureDeclarationAST enterInContext
     !warnsIfUnused: false
     !structureType
   }
-#--- Enter assignment operator
+//--- Enter assignment operator
   let key = assignmentOperatorKey (!structureType !.nowhere !structureType)
   let operatorUsage = @structureAssignmentOperatorUsage {!structureType}
   [!?ioContext.mAssignmentOperatorMap insertKey !key !operatorUsage]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#! USER LLVM TYPE DEFINITION
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//! USER LLVM TYPE DEFINITION
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @userLLVMSructureTypeDefinitionIR : @userLLVMTypeDefinitionIR {
   public var @propertyList mPropertyList
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @userLLVMSructureTypeDefinitionIR generateLLVMType ?!@string ioLLVMcode {
   ioLLVMcode += self.mLLVMDefinedTypeName + " = type {"
@@ -654,14 +654,14 @@ override method @userLLVMSructureTypeDefinitionIR generateLLVMType ?!@string ioL
   ioLLVMcode += "}\n"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#! CODE GENERATION: ASSIGNMENT
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//! CODE GENERATION: ASSIGNMENT
 
 class @structureAssignmentOperatorUsage : @abstractAssignmentOperatorUsage {
   public var @omnibusType mStructureType
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @structureAssignmentOperatorUsage generateCode
     ?!@semanticTemporariesStruct ioTemporaries
@@ -733,13 +733,13 @@ override method @structureAssignmentOperatorUsage generateCode
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @structureTypeAssignFunctionIR : @abstractRoutineIR {
   public var @omnibusType mStructureType
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @structureTypeAssignFunctionIR llvmCodeGeneration 
   ?!@string ioLLVMcode
@@ -821,4 +821,4 @@ override method @structureTypeAssignFunctionIR llvmCodeGeneration
   ioLLVMcode += "}\n\n"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

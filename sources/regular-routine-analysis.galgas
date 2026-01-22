@@ -1,9 +1,9 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#   SEMANTICS                                                                                                           
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//   SEMANTICS                                                                                                           
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @decoratedRegularRoutineList {
-  public var @lstring receiverTypeName %initArgLabel # Empty string if standalone function
+  public var @lstring receiverTypeName %initArgLabel // Empty string if standalone function
   public var @mode mode %initArgLabel
   public var @bool isRequired %initArgLabel
   public var @routineKind routineKind %initArgLabel
@@ -15,10 +15,10 @@ list @decoratedRegularRoutineList {
   public var @bool warningOnUnusedArgs %initArgLabel
   public var @instructionListAST mInstructionList
   public var @location mEndOfRoutineDeclaration
-  public var @lstring returnTypeName %initArgLabel # Empty string if no returned value
+  public var @lstring returnTypeName %initArgLabel // Empty string if no returned value
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @decoratedRegularRoutineList routineSemanticAnalysis
   ?context:let @semanticContext inContext
@@ -34,31 +34,31 @@ method @decoratedRegularRoutineList routineSemanticAnalysis
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @decoratedRegularRoutineList.@element semanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
-#--- Reset temporaries index
+//--- Reset temporaries index
   ioTemporaries.mTemporaryIndex = 0
-#--- Receiver type
+//--- Receiver type
   let receiverType = if self.receiverTypeName.string == ""
     then voidType ()
     else [[inContext.mTypeMap searchKey !self.receiverTypeName] type]
     end
-#--- Variable map
+//--- Variable map
   var universalMap = inContext.mValuedObjectMap
   [!?universalMap openOverrideForSelectBlock]
   [!?universalMap openBranch]
-#--- Return value ?
+//--- Return value ?
   if self.returnTypeName.string != "" then
     let resultVarName = @lstring {!functionResultVariableName () !self.returnTypeName.location}
     let resultType = [[inContext.mTypeMap searchKey !self.returnTypeName] type]
     [!?universalMap insertLocalVariable !resultVarName !resultType !resultVarName !.noValue !true]
   end
-#--- Analyse formal arguments
+//--- Analyse formal arguments
   var @routineFormalArgumentListIR formalArguments = @[]
   enterFormalArguments (
     !context:inContext
@@ -67,7 +67,7 @@ method @decoratedRegularRoutineList.@element semanticAnalysis
     !?formalArguments
     !warningOnUnusedArgs: self.warningOnUnusedArgs
   )
-#--- Analyze instruction list
+//--- Analyze instruction list
   var @allocaList allocaList = @[]
   var @instructionListIR instructionGenerationList = @[]
   [self.mInstructionList analyzeRoutineInstructionList
@@ -81,11 +81,11 @@ method @decoratedRegularRoutineList.@element semanticAnalysis
     !?alloca:allocaList
     !?generatedCode:instructionGenerationList
   ]
-#--- End of variableMap
+//--- End of variableMap
   [universalMap checkLocalVariableFinalState !?instructionGenerationList]
   [!?universalMap closeBranch !self.mEndOfRoutineDeclaration]
   [!?universalMap closeOverride !self.mEndOfRoutineDeclaration]
-#--- Code generation
+//--- Code generation
   let returnType = if self.returnTypeName.string == "" then
     voidType ()
   else
@@ -106,7 +106,7 @@ method @decoratedRegularRoutineList.@element semanticAnalysis
   }
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @allocaList {
   public var @string mVarLLVMName
@@ -114,13 +114,13 @@ list @allocaList {
   public var @bool mFormalInputArgument
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @allocaList generateAllocaList ?!@string ioLLVMcode {
   for (variable type *) in self do
     ioLLVMcode += "  " + variable + " = alloca " + [type llvmTypeName] + "\n"
   end
-#--- Init ARC variables
+//--- Init ARC variables
   for (variable type formalInputArgument) in self do
     if [type.kind isDynamicArrayType] && not formalInputArgument then
       ioLLVMcode += ";--- init dynamic array type '" + variable + "'\n"
@@ -129,22 +129,22 @@ method @allocaList generateAllocaList ?!@string ioLLVMcode {
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#! CODE GENERATION
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//! CODE GENERATION
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @regularRoutineIR : @abstractRoutineIR {
-  public var @omnibusType mReceiverType # .void if standalone function
+  public var @omnibusType mReceiverType // .void if standalone function
   public var @routineFormalArgumentListIR mFormalArgumentListForGeneration
   public var @allocaList mAllocaList
   public var @instructionListIR mInstructionGenerationList
-  public var @bool mExportedFunction # Function is not tagged with internal
+  public var @bool mExportedFunction // Function is not tagged with internal
   public var @routineKind mKind
-  public var @omnibusType mReturnType # .void if no return value
+  public var @omnibusType mReturnType // .void if no return value
   public var @bool mAppendFileAndLineArgumentForPanicLocation
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @regularRoutineIR enterAccessibleEntities
    ?!@stringset ioInvokedRoutineSet
@@ -158,7 +158,7 @@ override method @regularRoutineIR enterAccessibleEntities
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 override method @regularRoutineIR llvmCodeGeneration 
   ?!@string ioLLVMcode
@@ -202,12 +202,12 @@ override method @regularRoutineIR llvmCodeGeneration
     ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " %LINE, i8* %FILE"
   end
   ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
-#--- Add result variable ?
+//--- Add result variable ?
   var allocaList = self.mAllocaList
   if self.mReturnType.kind != .void then
     allocaList += !llvmNameForLocalVariable (!functionResultVariableName ()) !self.mReturnType !false
   end
-#--- Store input arguments in memory
+//--- Store input arguments in memory
   for (mFormalArgumentKind mFormalArgumentType mFormalArgumentName) in self.mFormalArgumentListForGeneration do
     switch mFormalArgumentKind
     case input :
@@ -216,8 +216,8 @@ override method @regularRoutineIR llvmCodeGeneration
     end
   end
   [allocaList generateAllocaList !?ioLLVMcode]
-#--- Copy input arguments and generate retain instructions for input arguments
-#    Insulate input and input/output arguments
+//--- Copy input arguments and generate retain instructions for input arguments
+//    Insulate input and input/output arguments
   for (mFormalArgumentKind mFormalArgumentType mFormalArgumentName) in self.mFormalArgumentListForGeneration do
     switch mFormalArgumentKind
     case input :
@@ -237,11 +237,11 @@ override method @regularRoutineIR llvmCodeGeneration
     case output :
     end
   end
-#--- Instruction list
+//--- Instruction list
   ioLLVMcode += ";--------- Function instruction list\n"
   [self.mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-#--- Generate release instructions for input arguments
-#    Insulate output and input/output arguments
+//--- Generate release instructions for input arguments
+//    Insulate output and input/output arguments
   for (mFormalArgumentKind mFormalArgumentType mFormalArgumentName) in self.mFormalArgumentListForGeneration do
     switch mFormalArgumentKind
     case input :
@@ -259,7 +259,7 @@ override method @regularRoutineIR llvmCodeGeneration
       end
     end
   end
-#--- Epilog
+//--- Epilog
   ioLLVMcode += ";--------- Return\n"
   if self.mReturnType.kind == .void then
     ioLLVMcode += "  ret void\n"
@@ -271,4 +271,4 @@ override method @regularRoutineIR llvmCodeGeneration
   ioLLVMcode += "}\n\n"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

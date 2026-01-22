@@ -1,27 +1,27 @@
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @globalConstantDeclarationAST : @abstractDeclarationAST {
   public var @lstring mConstantName
   public var @lstringlist mAttributeList
-  public var @lstring mConstantTypeName # Empty string if no type annotation
+  public var @lstring mConstantTypeName // Empty string if no type annotation
   public var @expressionAST mSourceExpression
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @globalConstantDeclarationAST locationForErrorSignaling -> @location outLocation {
   outLocation = self.mConstantName.location
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  SYNTAX                                                                                                               
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  SYNTAX                                                                                                               
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <declaration> ?!@ast ioAST {
     $let$
@@ -48,41 +48,41 @@ syntax extension omnibus_syntax {
     }
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  PRECEDENCE GRAPH                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  PRECEDENCE GRAPH                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract method @expressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 
-#·······················································································································
+//·······················································································································
 
 override method @globalConstantDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-#--- Add 'constant name' node
+//--- Add 'constant name' node
   [!?ioGraph addNode !self.mConstantName !self]
-#--- Add dependency from constant type name
+//--- Add dependency from constant type name
   if self.mConstantTypeName.string != "" then
     [!?ioGraph addEdge !from: self.mConstantName !to: self.mConstantTypeName]
   end
-#--- Add dependency from source expression
+//--- Add dependency from source expression
   [self.mSourceExpression addDependenceEdgeForStaticExpression !self.mConstantName !?ioGraph]
   [!?ioGraph addEdge !from: self.mConstantName !to: compileTimeDeclarationBarrier ()]
 }
 
-#·······················································································································
+//·······················································································································
 
 override getter @globalConstantDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = "global constant " + self.mConstantName 
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  ENTER IN CONTEXT                                                                                                     
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  ENTER IN CONTEXT                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @globalConstantDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
@@ -104,7 +104,7 @@ override method @globalConstantDeclarationAST enterInContext
       displayValue = true
     end
   end
-#--- Analyze source expression
+//--- Analyze source expression
   computeStaticExpression (
     !?context: ioContext
     !?staticEntityMap:ioStaticEntityMap
@@ -113,24 +113,24 @@ override method @globalConstantDeclarationAST enterInContext
     !optionalContextualTypeName:self.mConstantTypeName
     ?result:let @objectIR expressionResult
   )
-#--- Enter in context
+//--- Enter in context
   [!?ioContext.mGlobalConstantMap insertKey !self.mConstantName !expressionResult]
   [!?ioContext.mValuedObjectMap insertGlobalConstant !self.mConstantName !expressionResult]
-#--- Display ?
+//--- Display ?
   if displayValue then
     print (!"Global constant '" + self.mConstantName + "' = " + [expressionResult llvmValue] + "\n")
   end
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#!  BUILD CONSTANT MAP HTML FILE                                                                                                      
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  BUILD CONSTANT MAP HTML FILE                                                                                                      
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc buildGlobalConstantMapHTMLFile
   ?@globalConstantMap inGlobalConstantMap
   ?sourceFile:let @lstring inSourceFile
 {
-#------------------------------------ Build an HTML file that contains all declared constants
+//------------------------------------ Build an HTML file that contains all declared constants
   let @string typeDumpFilePath = inSourceFile.string + ".global-constants.html"
   if [option omnibus_options.emitGlobalConstantHTMLDumpFile value] then
     var @stringset firstLetterSet = @[]
@@ -158,7 +158,7 @@ proc buildGlobalConstantMapHTMLFile
   end
 }
 
-#·······················································································································
+//·······················································································································
 
 filewrapper constantDumpGenerationTemplate in "../generation-templates/" {
 }{
@@ -170,10 +170,10 @@ filewrapper constantDumpGenerationTemplate in "../generation-templates/" {
     ?@string TABLE_OF_TYPES_STRING
 }
 
-#·······················································································································
+//·······················································································································
 
 func linkForGlobalConstant ?let @string inConstantName -> @string {
   result = "<a class=\"header_link\" href=\"#" + inConstantName + "\">" + inConstantName + "</a>"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

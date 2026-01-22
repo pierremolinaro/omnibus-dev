@@ -6,14 +6,14 @@ setter @instructionListIR appendExtend
   self += !@extendIR {!inResult !inSource}
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @extendIR : @abstractInstructionIR {
   public var @objectIR mResult
   public var @objectIR mSource
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @extendIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -31,4 +31,4 @@ override method @extendIR llvmInstructionCode
   ioLLVMcode += " " + [self.mSource  llvmTypeName] + " " + [self.mSource llvmName] + " to " + [self.mResult llvmTypeName] + "\n"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

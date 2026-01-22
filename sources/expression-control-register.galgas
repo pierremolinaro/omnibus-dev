@@ -1,19 +1,19 @@
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! AST                                                                                                                  
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+////-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! AST                                                                                                                  
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @registerInExpressionAST : @expressionAST {
   public var @controlRegisterLValueAST mControlRegisterLValue
-  public var @lstring mFieldName # Empty string if no field access
+  public var @lstring mFieldName // Empty string if no field access
 }
 
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! SYNTAX                                                                                                               
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! SYNTAX                                                                                                               
+//-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
-  #·····················································································································
+  //·····················································································································
 
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     <control_register_lvalue> !?ioAST ?let registerLValue
@@ -24,18 +24,18 @@ syntax extension omnibus_syntax {
       $.$
       $identifier$ ?fieldName
     end
-#    $)$
-  #--- AST
+//    $)$
+  //--- AST
     outExpression = @registerInExpressionAST {!registerLValue !fieldName}
   }
 
-  #·····················································································································
+  //·····················································································································
 
 }
 
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
+//-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @registerInExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
@@ -45,17 +45,17 @@ override method @registerInExpressionAST addDependenceEdgeForStaticExpression
   [self.mControlRegisterLValue addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
-#! NOTE TYPES                                                                                                           
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//! NOTE TYPES                                                                                                           
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @registerInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [self.mControlRegisterLValue noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-#! SEMANTICS                                                                                                            
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//! SEMANTICS                                                                                                            
+//-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @registerInExpressionAST analyzeExpression
   ?self:let @omnibusType inSelfType
@@ -86,10 +86,10 @@ override method @registerInExpressionAST analyzeExpression
     ?sliceMap:let sliceMap
     ?llvmRegisterAddressName:let llvmRegisterAddressName
   ]
-#-------------------- Load register
+//-------------------- Load register
   getNewTempValue (!registerType !?ioTemporaries ?outResult)
   [!?ioInstructionGenerationList appendLoadIndirectVolatileRegister !outResult !llvmRegisterAddressName]
-#-------------------- Field access
+//-------------------- Field access
   if self.mFieldName.string != "" then
     [sliceMap searchKey
       !self.mFieldName
@@ -110,4 +110,4 @@ override method @registerInExpressionAST analyzeExpression
   end
 }
 
-#-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+//-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————

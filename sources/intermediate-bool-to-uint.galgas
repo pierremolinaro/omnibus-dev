@@ -6,14 +6,14 @@ setter @instructionListIR appendBoolToUInt
   self += !@boolToUIntIR {!inUIntResult !inBoolSource}
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @boolToUIntIR : @abstractInstructionIR {
   public var @objectIR mUIntResult
   public var @objectIR mBoolSource
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @boolToUIntIR llvmInstructionCode
   ?!@string ioLLVMcode
@@ -25,4 +25,4 @@ override method @boolToUIntIR llvmInstructionCode
              + " to " + [self.mUIntResult llvmTypeName] + "\n"
 }
 
-#—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
