@@ -74,84 +74,60 @@ class cParser_omnibus_5F_syntax {
                                                                           class GGS_location & outArgument1,
                                                                           class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
-  protected: virtual void nt_assignment_5F_combined_5F_with_5F_operator_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
   protected: virtual void nt_assignment_5F_combined_5F_with_5F_operator_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_compileTimeInfixOperator_ (class GGS_compileTimeInfixOperatorEnumeration & outArgument0,
                                                         class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-  protected: virtual void nt_compileTimeInfixOperator_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_compileTimeInfixOperator_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_compileTimePrefixOperator_ (class GGS_compileTimePrefixOperatorEnumeration & outArgument0,
                                                          class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
-  protected: virtual void nt_compileTimePrefixOperator_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
   protected: virtual void nt_compileTimePrefixOperator_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_compile_5F_time_5F_expression_ (class GGS_ctExpressionAST & outArgument0,
                                                              class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-  protected: virtual void nt_compile_5F_time_5F_expression_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_compile_5F_time_5F_expression_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_compile_5F_time_5F_expression_5F_addition_ (class GGS_ctExpressionAST & outArgument0,
                                                                          class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
-  protected: virtual void nt_compile_5F_time_5F_expression_5F_addition_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
   protected: virtual void nt_compile_5F_time_5F_expression_5F_addition_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_compile_5F_time_5F_expression_5F_bitwise_5F_and_ (class GGS_ctExpressionAST & outArgument0,
                                                                                class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-  protected: virtual void nt_compile_5F_time_5F_expression_5F_bitwise_5F_and_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_compile_5F_time_5F_expression_5F_bitwise_5F_and_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_compile_5F_time_5F_expression_5F_bitwise_5F_xor_ (class GGS_ctExpressionAST & outArgument0,
                                                                                class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
-  protected: virtual void nt_compile_5F_time_5F_expression_5F_bitwise_5F_xor_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
   protected: virtual void nt_compile_5F_time_5F_expression_5F_bitwise_5F_xor_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_compile_5F_time_5F_expression_5F_comparison_ (class GGS_ctExpressionAST & outArgument0,
                                                                            class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-  protected: virtual void nt_compile_5F_time_5F_expression_5F_comparison_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_compile_5F_time_5F_expression_5F_comparison_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_compile_5F_time_5F_expression_5F_equality_ (class GGS_ctExpressionAST & outArgument0,
                                                                          class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
-  protected: virtual void nt_compile_5F_time_5F_expression_5F_equality_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
   protected: virtual void nt_compile_5F_time_5F_expression_5F_equality_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_compile_5F_time_5F_expression_5F_product_ (class GGS_ctExpressionAST & outArgument0,
                                                                         class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-  protected: virtual void nt_compile_5F_time_5F_expression_5F_product_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_compile_5F_time_5F_expression_5F_product_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_compile_5F_time_5F_expression_5F_shift_ (class GGS_ctExpressionAST & outArgument0,
                                                                       class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
-  protected: virtual void nt_compile_5F_time_5F_expression_5F_shift_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
   protected: virtual void nt_compile_5F_time_5F_expression_5F_shift_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_compile_5F_time_5F_primary_ (class GGS_ctExpressionAST & outArgument0,
                                                           class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-  protected: virtual void nt_compile_5F_time_5F_primary_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_compile_5F_time_5F_primary_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
@@ -159,14 +135,10 @@ class cParser_omnibus_5F_syntax {
                                                              class GGS_controlRegisterLValueAST & outArgument1,
                                                              class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
-  protected: virtual void nt_control_5F_register_5F_lvalue_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
   protected: virtual void nt_control_5F_register_5F_lvalue_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_declaration_ (class GGS_ast & ioArgument0,
                                            class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-  protected: virtual void nt_declaration_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_declaration_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
@@ -175,15 +147,11 @@ class cParser_omnibus_5F_syntax {
                                                        class GGS_location & outArgument2,
                                                        class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
-  protected: virtual void nt_effective_5F_parameters_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
   protected: virtual void nt_effective_5F_parameters_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_expression_ (class GGS_ast & ioArgument0,
                                           class GGS_expressionAST & outArgument1,
                                           class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-  protected: virtual void nt_expression_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_expression_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
@@ -191,15 +159,11 @@ class cParser_omnibus_5F_syntax {
                                                             class GGS_primaryInExpressionAccessListAST & outArgument1,
                                                             class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
-  protected: virtual void nt_expression_5F_access_5F_list_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
   protected: virtual void nt_expression_5F_access_5F_list_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_expression_5F_addition_ (class GGS_ast & ioArgument0,
                                                       class GGS_expressionAST & outArgument1,
                                                       class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-  protected: virtual void nt_expression_5F_addition_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_expression_5F_addition_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
@@ -207,15 +171,11 @@ class cParser_omnibus_5F_syntax {
                                                             class GGS_expressionAST & outArgument1,
                                                             class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
-  protected: virtual void nt_expression_5F_bitwise_5F_and_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
   protected: virtual void nt_expression_5F_bitwise_5F_and_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_expression_5F_bitwise_5F_or_ (class GGS_ast & ioArgument0,
                                                            class GGS_expressionAST & outArgument1,
                                                            class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-  protected: virtual void nt_expression_5F_bitwise_5F_or_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_expression_5F_bitwise_5F_or_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
@@ -223,15 +183,11 @@ class cParser_omnibus_5F_syntax {
                                                             class GGS_expressionAST & outArgument1,
                                                             class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
-  protected: virtual void nt_expression_5F_bitwise_5F_xor_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
   protected: virtual void nt_expression_5F_bitwise_5F_xor_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_expression_5F_comparison_ (class GGS_ast & ioArgument0,
                                                         class GGS_expressionAST & outArgument1,
                                                         class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-  protected: virtual void nt_expression_5F_comparison_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_expression_5F_comparison_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
@@ -239,15 +195,11 @@ class cParser_omnibus_5F_syntax {
                                                       class GGS_expressionAST & outArgument1,
                                                       class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
-  protected: virtual void nt_expression_5F_equality_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
   protected: virtual void nt_expression_5F_equality_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_expression_5F_if_ (class GGS_ast & ioArgument0,
                                                 class GGS_ifExpressionAST & outArgument1,
                                                 class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-  protected: virtual void nt_expression_5F_if_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_expression_5F_if_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
@@ -255,15 +207,11 @@ class cParser_omnibus_5F_syntax {
                                                             class GGS_expressionAST & outArgument1,
                                                             class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
-  protected: virtual void nt_expression_5F_logical_5F_and_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
   protected: virtual void nt_expression_5F_logical_5F_and_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_expression_5F_product_ (class GGS_ast & ioArgument0,
                                                      class GGS_expressionAST & outArgument1,
                                                      class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-  protected: virtual void nt_expression_5F_product_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_expression_5F_product_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
@@ -271,15 +219,11 @@ class cParser_omnibus_5F_syntax {
                                                    class GGS_expressionAST & outArgument1,
                                                    class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
-  protected: virtual void nt_expression_5F_shift_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
   protected: virtual void nt_expression_5F_shift_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_function_5F_declaration_ (class GGS_ast & ioArgument0,
                                                        const class GGS_lstring constinArgument1,
                                                        class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-  protected: virtual void nt_function_5F_declaration_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_function_5F_declaration_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
@@ -290,21 +234,15 @@ class cParser_omnibus_5F_syntax {
                                                   class GGS_routineFormalArgumentListAST & outArgument4,
                                                   class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
-  protected: virtual void nt_function_5F_header_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
   protected: virtual void nt_function_5F_header_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_generic_5F_formal_5F_arguments_ (class GGS_genericFormalParameterList & outArgument0,
                                                               class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
-  protected: virtual void nt_generic_5F_formal_5F_arguments_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
   protected: virtual void nt_generic_5F_formal_5F_arguments_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_generic_5F_where_5F_clause_ (class GGS_ctExpressionAST & outArgument0,
                                                           class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-  protected: virtual void nt_generic_5F_where_5F_clause_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_generic_5F_where_5F_clause_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
@@ -313,8 +251,6 @@ class cParser_omnibus_5F_syntax {
                                      const class GGS_string constinArgument2,
                                      class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
-  protected: virtual void nt_guard_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
   protected: virtual void nt_guard_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_guarded_5F_command_ (class GGS_ast & ioArgument0,
@@ -322,22 +258,16 @@ class cParser_omnibus_5F_syntax {
                                                   class GGS_guardedCommandAST & outArgument2,
                                                   class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
-  protected: virtual void nt_guarded_5F_command_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
   protected: virtual void nt_guarded_5F_command_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_if_5F_instruction_ (class GGS_ast & ioArgument0,
                                                  class GGS_ifInstructionAST & outArgument1,
                                                  class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
-  protected: virtual void nt_if_5F_instruction_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
   protected: virtual void nt_if_5F_instruction_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_import_5F_file_ (class GGS_lstringlist & ioArgument0,
                                               class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-  protected: virtual void nt_import_5F_file_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_import_5F_file_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
@@ -345,15 +275,11 @@ class cParser_omnibus_5F_syntax {
                                            class GGS_instructionListAST & ioArgument1,
                                            class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
-  protected: virtual void nt_instruction_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
   protected: virtual void nt_instruction_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_instructionList_ (class GGS_ast & ioArgument0,
                                                class GGS_instructionListAST & outArgument1,
                                                class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-  protected: virtual void nt_instructionList_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_instructionList_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
@@ -361,14 +287,10 @@ class cParser_omnibus_5F_syntax {
                                                    const class GGS_lstring constinArgument1,
                                                    class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
-  protected: virtual void nt_isr_5F_in_5F_driver_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
   protected: virtual void nt_isr_5F_in_5F_driver_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_llvmPrefixOperator_ (class GGS_llvmPrefixOperatorEnumeration & outArgument0,
                                                   class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-  protected: virtual void nt_llvmPrefixOperator_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_llvmPrefixOperator_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
@@ -377,21 +299,15 @@ class cParser_omnibus_5F_syntax {
                                                           class GGS_genericFormalParameterList & outArgument2,
                                                           class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
-  protected: virtual void nt_llvm_5F_function_5F_header_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
   protected: virtual void nt_llvm_5F_function_5F_header_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_llvm_5F_instruction_ (class GGS_abstractLLVMInstruction & outArgument0,
                                                    class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
-  protected: virtual void nt_llvm_5F_instruction_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
   protected: virtual void nt_llvm_5F_instruction_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_llvm_5F_instruction_5F_list_ (class GGS_llvmGenerationInstructionList & outArgument0,
                                                            class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-  protected: virtual void nt_llvm_5F_instruction_5F_list_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_llvm_5F_instruction_5F_list_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
@@ -399,22 +315,16 @@ class cParser_omnibus_5F_syntax {
                                       class GGS_LValueAST & outArgument1,
                                       class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
-  protected: virtual void nt_lvalue_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
   protected: virtual void nt_lvalue_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_lvalue_5F_operand_ (class GGS_ast & ioArgument0,
                                                  class GGS_LValueOperandAST & outArgument1,
                                                  class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
-  protected: virtual void nt_lvalue_5F_operand_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
   protected: virtual void nt_lvalue_5F_operand_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_mode_ (class GGS_mode & outArgument0,
                                     class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-  protected: virtual void nt_mode_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_mode_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
@@ -422,15 +332,11 @@ class cParser_omnibus_5F_syntax {
                                        class GGS_expressionAST & outArgument1,
                                        class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
-  protected: virtual void nt_primary_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
   protected: virtual void nt_primary_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_ (class GGS_ast & ioArgument0,
                                                                                             class GGS_structurePropertyListAST & ioArgument1,
                                                                                             class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-  protected: virtual void nt_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
@@ -438,15 +344,11 @@ class cParser_omnibus_5F_syntax {
                                                                             class GGS_structurePropertyListAST & ioArgument1,
                                                                             class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
-  protected: virtual void nt_private_5F_struct_5F_property_5F_declaration_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
   protected: virtual void nt_private_5F_struct_5F_property_5F_declaration_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_procedure_5F_call_ (class GGS_ast & ioArgument0,
                                                  class GGS_callInstructionAST & outArgument1,
                                                  class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-  protected: virtual void nt_procedure_5F_call_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_procedure_5F_call_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
@@ -454,15 +356,11 @@ class cParser_omnibus_5F_syntax {
                                                                 class GGS_routineFormalArgumentListAST & outArgument1,
                                                                 class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
-  protected: virtual void nt_procedure_5F_formal_5F_arguments_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
   protected: virtual void nt_procedure_5F_formal_5F_arguments_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_procedure_5F_input_5F_formal_5F_arguments_ (class GGS_ast & ioArgument0,
                                                                          class GGS_routineFormalArgumentListAST & outArgument1,
                                                                          class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-  protected: virtual void nt_procedure_5F_input_5F_formal_5F_arguments_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_procedure_5F_input_5F_formal_5F_arguments_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
@@ -474,15 +372,11 @@ class cParser_omnibus_5F_syntax {
                                                     class GGS_structurePropertyListAST & ioArgument5,
                                                     class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
-  protected: virtual void nt_propertyGetterSetter_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
   protected: virtual void nt_propertyGetterSetter_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_registerDeclaration_ (class GGS_ast & ioArgument0,
                                                    class GGS_controlRegisterNameListAST & ioArgument1,
                                                    class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-  protected: virtual void nt_registerDeclaration_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_registerDeclaration_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
@@ -491,23 +385,17 @@ class cParser_omnibus_5F_syntax {
                                                class GGS_location & outArgument2,
                                                class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
-  protected: virtual void nt_start_5F_symbol_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
   protected: virtual void nt_start_5F_symbol_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_staticArrayProperty_ (class GGS_ast & ioArgument0,
                                                    class GGS_staticListPropertyListAST & ioArgument1,
                                                    class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
-  protected: virtual void nt_staticArrayProperty_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
   protected: virtual void nt_staticArrayProperty_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_staticArray_5F_exp_ (class GGS_ast & ioArgument0,
                                                   class GGS_extendStaticListElementAST & ioArgument1,
                                                   class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-  protected: virtual void nt_staticArray_5F_exp_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_staticArray_5F_exp_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
@@ -516,15 +404,11 @@ class cParser_omnibus_5F_syntax {
                                                                  class GGS_structurePropertyListAST & ioArgument2,
                                                                  class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
-  protected: virtual void nt_struct_5F_property_5F_declaration_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
   protected: virtual void nt_struct_5F_property_5F_declaration_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_system_5F_routine_5F_declaration_ (class GGS_ast & ioArgument0,
                                                                 const class GGS_lstring constinArgument1,
                                                                 class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-  protected: virtual void nt_system_5F_routine_5F_declaration_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_system_5F_routine_5F_declaration_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
@@ -535,15 +419,11 @@ class cParser_omnibus_5F_syntax {
                                              class GGS_taskSetupListAST & ioArgument4,
                                              class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
-  protected: virtual void nt_task_5F_event_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
   protected: virtual void nt_task_5F_event_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_type_5F_definition_ (class GGS_ast & ioArgument0,
                                                   class GGS_lstring & outArgument1,
                                                   class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-  protected: virtual void nt_type_5F_definition_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
   protected: virtual void nt_type_5F_definition_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
 
@@ -552,7 +432,7 @@ class cParser_omnibus_5F_syntax {
   protected: void rule_omnibus_5F_syntax_import_5F_file_i0_ (GGS_lstringlist & ioArgument0,
                                                              Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_import_5F_file_i0_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_import_5F_file_i0_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_import_5F_file_i0_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -561,21 +441,21 @@ class cParser_omnibus_5F_syntax {
                                                               GGS_location & outArgument2,
                                                               Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_start_5F_symbol_i1_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_start_5F_symbol_i1_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_start_5F_symbol_i1_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_declaration_i2_ (GGS_ast & ioArgument0,
                                                           Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_declaration_i2_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_declaration_i2_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_declaration_i2_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_declaration_i3_ (GGS_ast & ioArgument0,
                                                           Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_declaration_i3_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_declaration_i3_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_declaration_i3_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -586,14 +466,14 @@ class cParser_omnibus_5F_syntax {
                                                             GGS_taskSetupListAST & ioArgument4,
                                                             Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_task_5F_event_i4_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_task_5F_event_i4_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_task_5F_event_i4_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_declaration_i5_ (GGS_ast & ioArgument0,
                                                           Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_declaration_i5_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_declaration_i5_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_declaration_i5_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -601,14 +481,14 @@ class cParser_omnibus_5F_syntax {
                                                                   GGS_staticListPropertyListAST & ioArgument1,
                                                                   Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_staticArrayProperty_i6_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_staticArrayProperty_i6_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_staticArrayProperty_i6_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_declaration_i7_ (GGS_ast & ioArgument0,
                                                           Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_declaration_i7_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_declaration_i7_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_declaration_i7_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -616,21 +496,21 @@ class cParser_omnibus_5F_syntax {
                                                                  GGS_extendStaticListElementAST & ioArgument1,
                                                                  Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_staticArray_5F_exp_i8_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_staticArray_5F_exp_i8_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_staticArray_5F_exp_i8_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_declaration_i9_ (GGS_ast & ioArgument0,
                                                           Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_declaration_i9_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_declaration_i9_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_declaration_i9_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_declaration_i10_ (GGS_ast & ioArgument0,
                                                            Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_declaration_i10_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_declaration_i10_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_declaration_i10_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -638,28 +518,28 @@ class cParser_omnibus_5F_syntax {
                                                                   GGS_lstring & outArgument1,
                                                                   Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_type_5F_definition_i11_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_type_5F_definition_i11_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_type_5F_definition_i11_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_llvm_5F_instruction_5F_list_i12_ (GGS_llvmGenerationInstructionList & outArgument0,
                                                                            Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_llvm_5F_instruction_5F_list_i12_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_llvm_5F_instruction_5F_list_i12_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_llvm_5F_instruction_5F_list_i12_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_llvm_5F_instruction_i13_ (GGS_abstractLLVMInstruction & outArgument0,
                                                                    Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_llvm_5F_instruction_i13_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_llvm_5F_instruction_i13_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_llvm_5F_instruction_i13_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_llvm_5F_instruction_i14_ (GGS_abstractLLVMInstruction & outArgument0,
                                                                    Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_llvm_5F_instruction_i14_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_llvm_5F_instruction_i14_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_llvm_5F_instruction_i14_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -667,7 +547,7 @@ class cParser_omnibus_5F_syntax {
                                                            GGS_instructionListAST & ioArgument1,
                                                            Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_instruction_i15_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_instruction_i15_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_instruction_i15_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -675,21 +555,21 @@ class cParser_omnibus_5F_syntax {
                                                        GGS_expressionAST & outArgument1,
                                                        Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_primary_i16_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_primary_i16_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_primary_i16_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_declaration_i17_ (GGS_ast & ioArgument0,
                                                            Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_declaration_i17_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_declaration_i17_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_declaration_i17_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_declaration_i18_ (GGS_ast & ioArgument0,
                                                            Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_declaration_i18_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_declaration_i18_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_declaration_i18_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -697,7 +577,7 @@ class cParser_omnibus_5F_syntax {
                                                        GGS_expressionAST & outArgument1,
                                                        Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_primary_i19_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_primary_i19_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_primary_i19_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -705,7 +585,7 @@ class cParser_omnibus_5F_syntax {
                                                        GGS_expressionAST & outArgument1,
                                                        Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_primary_i20_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_primary_i20_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_primary_i20_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -713,7 +593,7 @@ class cParser_omnibus_5F_syntax {
                                                                             GGS_primaryInExpressionAccessListAST & outArgument1,
                                                                             Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_expression_5F_access_5F_list_i21_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_expression_5F_access_5F_list_i21_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_expression_5F_access_5F_list_i21_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -721,21 +601,21 @@ class cParser_omnibus_5F_syntax {
                                                        GGS_expressionAST & outArgument1,
                                                        Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_primary_i22_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_primary_i22_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_primary_i22_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_llvmPrefixOperator_i23_ (GGS_llvmPrefixOperatorEnumeration & outArgument0,
                                                                   Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_llvmPrefixOperator_i23_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_llvmPrefixOperator_i23_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_llvmPrefixOperator_i23_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_declaration_i24_ (GGS_ast & ioArgument0,
                                                            Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_declaration_i24_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_declaration_i24_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_declaration_i24_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -744,7 +624,7 @@ class cParser_omnibus_5F_syntax {
                                                      const GGS_string constinArgument2,
                                                      Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_guard_i25_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_guard_i25_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_guard_i25_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -752,14 +632,14 @@ class cParser_omnibus_5F_syntax {
                                                        GGS_expressionAST & outArgument1,
                                                        Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_primary_i26_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_primary_i26_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_primary_i26_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_declaration_i27_ (GGS_ast & ioArgument0,
                                                            Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_declaration_i27_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_declaration_i27_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_declaration_i27_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -767,14 +647,14 @@ class cParser_omnibus_5F_syntax {
                                                                    GGS_controlRegisterNameListAST & ioArgument1,
                                                                    Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_registerDeclaration_i28_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_registerDeclaration_i28_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_registerDeclaration_i28_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_declaration_i29_ (GGS_ast & ioArgument0,
                                                            Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_declaration_i29_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_declaration_i29_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_declaration_i29_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -783,21 +663,21 @@ class cParser_omnibus_5F_syntax {
                                                                           GGS_genericFormalParameterList & outArgument2,
                                                                           Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_llvm_5F_function_5F_header_i30_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_llvm_5F_function_5F_header_i30_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_llvm_5F_function_5F_header_i30_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_declaration_i31_ (GGS_ast & ioArgument0,
                                                            Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_declaration_i31_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_declaration_i31_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_declaration_i31_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_declaration_i32_ (GGS_ast & ioArgument0,
                                                            Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_declaration_i32_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_declaration_i32_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_declaration_i32_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -805,7 +685,7 @@ class cParser_omnibus_5F_syntax {
                                                            GGS_instructionListAST & ioArgument1,
                                                            Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_instruction_i33_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_instruction_i33_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_instruction_i33_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -813,7 +693,7 @@ class cParser_omnibus_5F_syntax {
                                                                                 const GGS_lstring constinArgument1,
                                                                                 Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_system_5F_routine_5F_declaration_i34_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_system_5F_routine_5F_declaration_i34_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_system_5F_routine_5F_declaration_i34_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -821,7 +701,7 @@ class cParser_omnibus_5F_syntax {
                                                                                 const GGS_lstring constinArgument1,
                                                                                 Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_system_5F_routine_5F_declaration_i35_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_system_5F_routine_5F_declaration_i35_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_system_5F_routine_5F_declaration_i35_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -829,7 +709,7 @@ class cParser_omnibus_5F_syntax {
                                                                                 const GGS_lstring constinArgument1,
                                                                                 Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_system_5F_routine_5F_declaration_i36_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_system_5F_routine_5F_declaration_i36_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_system_5F_routine_5F_declaration_i36_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -837,14 +717,14 @@ class cParser_omnibus_5F_syntax {
                                                            GGS_instructionListAST & ioArgument1,
                                                            Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_instruction_i37_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_instruction_i37_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_instruction_i37_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_declaration_i38_ (GGS_ast & ioArgument0,
                                                            Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_declaration_i38_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_declaration_i38_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_declaration_i38_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -852,7 +732,7 @@ class cParser_omnibus_5F_syntax {
                                                                   GGS_lstring & outArgument1,
                                                                   Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_type_5F_definition_i39_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_type_5F_definition_i39_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_type_5F_definition_i39_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -860,7 +740,7 @@ class cParser_omnibus_5F_syntax {
                                                            GGS_instructionListAST & ioArgument1,
                                                            Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_instruction_i40_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_instruction_i40_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_instruction_i40_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -868,28 +748,28 @@ class cParser_omnibus_5F_syntax {
                                                                  GGS_callInstructionAST & outArgument1,
                                                                  Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_procedure_5F_call_i41_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_procedure_5F_call_i41_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_procedure_5F_call_i41_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_declaration_i42_ (GGS_ast & ioArgument0,
                                                            Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_declaration_i42_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_declaration_i42_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_declaration_i42_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_declaration_i43_ (GGS_ast & ioArgument0,
                                                            Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_declaration_i43_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_declaration_i43_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_declaration_i43_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_declaration_i44_ (GGS_ast & ioArgument0,
                                                            Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_declaration_i44_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_declaration_i44_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_declaration_i44_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -897,7 +777,7 @@ class cParser_omnibus_5F_syntax {
                                                            GGS_instructionListAST & ioArgument1,
                                                            Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_instruction_i45_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_instruction_i45_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_instruction_i45_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -905,7 +785,7 @@ class cParser_omnibus_5F_syntax {
                                                        GGS_expressionAST & outArgument1,
                                                        Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_primary_i46_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_primary_i46_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_primary_i46_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -913,7 +793,7 @@ class cParser_omnibus_5F_syntax {
                                                        GGS_expressionAST & outArgument1,
                                                        Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_primary_i47_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_primary_i47_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_primary_i47_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -921,7 +801,7 @@ class cParser_omnibus_5F_syntax {
                                                           GGS_expressionAST & outArgument1,
                                                           Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_expression_i48_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_expression_i48_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_expression_i48_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -929,7 +809,7 @@ class cParser_omnibus_5F_syntax {
                                                                             GGS_expressionAST & outArgument1,
                                                                             Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_expression_5F_logical_5F_and_i49_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_expression_5F_logical_5F_and_i49_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_expression_5F_logical_5F_and_i49_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -937,7 +817,7 @@ class cParser_omnibus_5F_syntax {
                                                                            GGS_expressionAST & outArgument1,
                                                                            Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_expression_5F_bitwise_5F_or_i50_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_expression_5F_bitwise_5F_or_i50_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_expression_5F_bitwise_5F_or_i50_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -945,7 +825,7 @@ class cParser_omnibus_5F_syntax {
                                                                             GGS_expressionAST & outArgument1,
                                                                             Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_expression_5F_bitwise_5F_xor_i51_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_expression_5F_bitwise_5F_xor_i51_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_expression_5F_bitwise_5F_xor_i51_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -953,7 +833,7 @@ class cParser_omnibus_5F_syntax {
                                                                             GGS_expressionAST & outArgument1,
                                                                             Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_expression_5F_bitwise_5F_and_i52_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_expression_5F_bitwise_5F_and_i52_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_expression_5F_bitwise_5F_and_i52_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -961,7 +841,7 @@ class cParser_omnibus_5F_syntax {
                                                                       GGS_expressionAST & outArgument1,
                                                                       Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_expression_5F_equality_i53_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_expression_5F_equality_i53_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_expression_5F_equality_i53_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -969,7 +849,7 @@ class cParser_omnibus_5F_syntax {
                                                                         GGS_expressionAST & outArgument1,
                                                                         Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_expression_5F_comparison_i54_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_expression_5F_comparison_i54_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_expression_5F_comparison_i54_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -977,7 +857,7 @@ class cParser_omnibus_5F_syntax {
                                                                    GGS_expressionAST & outArgument1,
                                                                    Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_expression_5F_shift_i55_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_expression_5F_shift_i55_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_expression_5F_shift_i55_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -985,7 +865,7 @@ class cParser_omnibus_5F_syntax {
                                                                       GGS_expressionAST & outArgument1,
                                                                       Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_expression_5F_addition_i56_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_expression_5F_addition_i56_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_expression_5F_addition_i56_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -993,7 +873,7 @@ class cParser_omnibus_5F_syntax {
                                                                      GGS_expressionAST & outArgument1,
                                                                      Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_expression_5F_product_i57_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_expression_5F_product_i57_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_expression_5F_product_i57_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1001,7 +881,7 @@ class cParser_omnibus_5F_syntax {
                                                        GGS_expressionAST & outArgument1,
                                                        Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_primary_i58_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_primary_i58_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_primary_i58_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1009,7 +889,7 @@ class cParser_omnibus_5F_syntax {
                                                        GGS_expressionAST & outArgument1,
                                                        Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_primary_i59_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_primary_i59_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_primary_i59_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1017,7 +897,7 @@ class cParser_omnibus_5F_syntax {
                                                        GGS_expressionAST & outArgument1,
                                                        Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_primary_i60_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_primary_i60_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_primary_i60_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1025,7 +905,7 @@ class cParser_omnibus_5F_syntax {
                                                        GGS_expressionAST & outArgument1,
                                                        Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_primary_i61_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_primary_i61_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_primary_i61_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1033,14 +913,14 @@ class cParser_omnibus_5F_syntax {
                                                        GGS_expressionAST & outArgument1,
                                                        Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_primary_i62_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_primary_i62_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_primary_i62_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_declaration_i63_ (GGS_ast & ioArgument0,
                                                            Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_declaration_i63_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_declaration_i63_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_declaration_i63_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1048,119 +928,119 @@ class cParser_omnibus_5F_syntax {
                                                                              GGS_controlRegisterLValueAST & outArgument1,
                                                                              Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_control_5F_register_5F_lvalue_i64_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_control_5F_register_5F_lvalue_i64_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_control_5F_register_5F_lvalue_i64_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_expression_i65_ (GGS_ctExpressionAST & outArgument0,
                                                                              Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_expression_i65_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_expression_i65_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_expression_i65_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_bitwise_5F_xor_i66_ (GGS_ctExpressionAST & outArgument0,
                                                                                                Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_bitwise_5F_xor_i66_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_bitwise_5F_xor_i66_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_bitwise_5F_xor_i66_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_bitwise_5F_and_i67_ (GGS_ctExpressionAST & outArgument0,
                                                                                                Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_bitwise_5F_and_i67_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_bitwise_5F_and_i67_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_bitwise_5F_and_i67_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_equality_i68_ (GGS_ctExpressionAST & outArgument0,
                                                                                          Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_equality_i68_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_equality_i68_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_equality_i68_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_comparison_i69_ (GGS_ctExpressionAST & outArgument0,
                                                                                            Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_comparison_i69_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_comparison_i69_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_comparison_i69_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_shift_i70_ (GGS_ctExpressionAST & outArgument0,
                                                                                       Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_shift_i70_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_shift_i70_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_shift_i70_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_addition_i71_ (GGS_ctExpressionAST & outArgument0,
                                                                                          Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_addition_i71_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_addition_i71_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_addition_i71_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_product_i72_ (GGS_ctExpressionAST & outArgument0,
                                                                                         Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_product_i72_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_product_i72_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_product_i72_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i73_ (GGS_ctExpressionAST & outArgument0,
                                                                           Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i73_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i73_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i73_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i74_ (GGS_ctExpressionAST & outArgument0,
                                                                           Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i74_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i74_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i74_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i75_ (GGS_ctExpressionAST & outArgument0,
                                                                           Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i75_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i75_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i75_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i76_ (GGS_ctExpressionAST & outArgument0,
                                                                           Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i76_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i76_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i76_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i77_ (GGS_ctExpressionAST & outArgument0,
                                                                           Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i77_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i77_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i77_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i78_ (GGS_ctExpressionAST & outArgument0,
                                                                           Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i78_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i78_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i78_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i79_ (GGS_ctExpressionAST & outArgument0,
                                                                           Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i79_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i79_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i79_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_declaration_i80_ (GGS_ast & ioArgument0,
                                                            Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_declaration_i80_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_declaration_i80_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_declaration_i80_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1168,7 +1048,7 @@ class cParser_omnibus_5F_syntax {
                                                        GGS_expressionAST & outArgument1,
                                                        Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_primary_i81_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_primary_i81_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_primary_i81_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1176,7 +1056,7 @@ class cParser_omnibus_5F_syntax {
                                                        GGS_expressionAST & outArgument1,
                                                        Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_primary_i82_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_primary_i82_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_primary_i82_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1184,7 +1064,7 @@ class cParser_omnibus_5F_syntax {
                                                                 GGS_ifExpressionAST & outArgument1,
                                                                 Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_expression_5F_if_i83_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_expression_5F_if_i83_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_expression_5F_if_i83_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1192,7 +1072,7 @@ class cParser_omnibus_5F_syntax {
                                                            GGS_instructionListAST & ioArgument1,
                                                            Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_instruction_i84_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_instruction_i84_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_instruction_i84_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1200,7 +1080,7 @@ class cParser_omnibus_5F_syntax {
                                                                  GGS_ifInstructionAST & outArgument1,
                                                                  Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_if_5F_instruction_i85_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_if_5F_instruction_i85_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_if_5F_instruction_i85_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1208,7 +1088,7 @@ class cParser_omnibus_5F_syntax {
                                                            GGS_instructionListAST & ioArgument1,
                                                            Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_instruction_i86_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_instruction_i86_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_instruction_i86_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1216,7 +1096,7 @@ class cParser_omnibus_5F_syntax {
                                                            GGS_instructionListAST & ioArgument1,
                                                            Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_instruction_i87_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_instruction_i87_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_instruction_i87_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1224,28 +1104,28 @@ class cParser_omnibus_5F_syntax {
                                                            GGS_instructionListAST & ioArgument1,
                                                            Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_instruction_i88_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_instruction_i88_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_instruction_i88_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_generic_5F_formal_5F_arguments_i89_ (GGS_genericFormalParameterList & outArgument0,
                                                                               Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_generic_5F_formal_5F_arguments_i89_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_generic_5F_formal_5F_arguments_i89_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_generic_5F_formal_5F_arguments_i89_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_generic_5F_where_5F_clause_i90_ (GGS_ctExpressionAST & outArgument0,
                                                                           Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_generic_5F_where_5F_clause_i90_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_generic_5F_where_5F_clause_i90_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_generic_5F_where_5F_clause_i90_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_declaration_i91_ (GGS_ast & ioArgument0,
                                                            Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_declaration_i91_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_declaration_i91_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_declaration_i91_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1253,7 +1133,7 @@ class cParser_omnibus_5F_syntax {
                                                            GGS_instructionListAST & ioArgument1,
                                                            Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_instruction_i92_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_instruction_i92_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_instruction_i92_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1261,28 +1141,28 @@ class cParser_omnibus_5F_syntax {
                                                            GGS_instructionListAST & ioArgument1,
                                                            Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_instruction_i93_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_instruction_i93_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_instruction_i93_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_declaration_i94_ (GGS_ast & ioArgument0,
                                                            Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_declaration_i94_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_declaration_i94_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_declaration_i94_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_compileTimePrefixOperator_i95_ (GGS_compileTimePrefixOperatorEnumeration & outArgument0,
                                                                          Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_compileTimePrefixOperator_i95_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_compileTimePrefixOperator_i95_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_compileTimePrefixOperator_i95_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_declaration_i96_ (GGS_ast & ioArgument0,
                                                            Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_declaration_i96_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_declaration_i96_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_declaration_i96_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1290,7 +1170,7 @@ class cParser_omnibus_5F_syntax {
                                                            GGS_instructionListAST & ioArgument1,
                                                            Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_instruction_i97_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_instruction_i97_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_instruction_i97_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1298,7 +1178,7 @@ class cParser_omnibus_5F_syntax {
                                                        GGS_expressionAST & outArgument1,
                                                        Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_primary_i98_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_primary_i98_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_primary_i98_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1306,14 +1186,14 @@ class cParser_omnibus_5F_syntax {
                                                                GGS_instructionListAST & outArgument1,
                                                                Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_instructionList_i99_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_instructionList_i99_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_instructionList_i99_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_declaration_i100_ (GGS_ast & ioArgument0,
                                                             Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_declaration_i100_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_declaration_i100_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_declaration_i100_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1321,7 +1201,7 @@ class cParser_omnibus_5F_syntax {
                                                         GGS_expressionAST & outArgument1,
                                                         Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_primary_i101_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_primary_i101_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_primary_i101_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1329,7 +1209,7 @@ class cParser_omnibus_5F_syntax {
                                                             GGS_instructionListAST & ioArgument1,
                                                             Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_instruction_i102_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_instruction_i102_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_instruction_i102_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1337,28 +1217,28 @@ class cParser_omnibus_5F_syntax {
                                                             GGS_instructionListAST & ioArgument1,
                                                             Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_instruction_i103_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_instruction_i103_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_instruction_i103_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_declaration_i104_ (GGS_ast & ioArgument0,
                                                             Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_declaration_i104_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_declaration_i104_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_declaration_i104_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_compileTimeInfixOperator_i105_ (GGS_compileTimeInfixOperatorEnumeration & outArgument0,
                                                                          Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_compileTimeInfixOperator_i105_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_compileTimeInfixOperator_i105_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_compileTimeInfixOperator_i105_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_declaration_i106_ (GGS_ast & ioArgument0,
                                                             Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_declaration_i106_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_declaration_i106_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_declaration_i106_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1366,7 +1246,7 @@ class cParser_omnibus_5F_syntax {
                                                                     const GGS_lstring constinArgument1,
                                                                     Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_isr_5F_in_5F_driver_i107_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_isr_5F_in_5F_driver_i107_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_isr_5F_in_5F_driver_i107_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1374,7 +1254,7 @@ class cParser_omnibus_5F_syntax {
                                                         GGS_expressionAST & outArgument1,
                                                         Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_primary_i108_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_primary_i108_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_primary_i108_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1383,7 +1263,7 @@ class cParser_omnibus_5F_syntax {
                                                                         GGS_location & outArgument2,
                                                                         Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_effective_5F_parameters_i109_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_effective_5F_parameters_i109_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_effective_5F_parameters_i109_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1391,7 +1271,7 @@ class cParser_omnibus_5F_syntax {
                                                         GGS_expressionAST & outArgument1,
                                                         Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_primary_i110_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_primary_i110_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_primary_i110_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1399,7 +1279,7 @@ class cParser_omnibus_5F_syntax {
                                                                    GGS_lstring & outArgument1,
                                                                    Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_type_5F_definition_i111_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_type_5F_definition_i111_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_type_5F_definition_i111_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1407,7 +1287,7 @@ class cParser_omnibus_5F_syntax {
                                                                                            GGS_location & outArgument1,
                                                                                            Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_assignment_5F_combined_5F_with_5F_operator_i112_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_assignment_5F_combined_5F_with_5F_operator_i112_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_assignment_5F_combined_5F_with_5F_operator_i112_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1415,7 +1295,7 @@ class cParser_omnibus_5F_syntax {
                                                             GGS_instructionListAST & ioArgument1,
                                                             Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_instruction_i113_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_instruction_i113_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_instruction_i113_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1423,7 +1303,7 @@ class cParser_omnibus_5F_syntax {
                                                        GGS_LValueAST & outArgument1,
                                                        Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_lvalue_i114_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_lvalue_i114_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_lvalue_i114_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1431,7 +1311,7 @@ class cParser_omnibus_5F_syntax {
                                                                   GGS_LValueOperandAST & outArgument1,
                                                                   Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_lvalue_5F_operand_i115_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_lvalue_5F_operand_i115_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_lvalue_5F_operand_i115_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1439,7 +1319,7 @@ class cParser_omnibus_5F_syntax {
                                                                   GGS_LValueOperandAST & outArgument1,
                                                                   Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_lvalue_5F_operand_i116_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_lvalue_5F_operand_i116_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_lvalue_5F_operand_i116_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1447,7 +1327,7 @@ class cParser_omnibus_5F_syntax {
                                                                   GGS_LValueOperandAST & outArgument1,
                                                                   Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_lvalue_5F_operand_i117_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_lvalue_5F_operand_i117_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_lvalue_5F_operand_i117_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1455,7 +1335,7 @@ class cParser_omnibus_5F_syntax {
                                                         GGS_expressionAST & outArgument1,
                                                         Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_primary_i118_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_primary_i118_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_primary_i118_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1463,7 +1343,7 @@ class cParser_omnibus_5F_syntax {
                                                             GGS_instructionListAST & ioArgument1,
                                                             Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_instruction_i119_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_instruction_i119_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_instruction_i119_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1471,7 +1351,7 @@ class cParser_omnibus_5F_syntax {
                                                         GGS_expressionAST & outArgument1,
                                                         Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_primary_i120_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_primary_i120_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_primary_i120_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1479,7 +1359,7 @@ class cParser_omnibus_5F_syntax {
                                                         GGS_expressionAST & outArgument1,
                                                         Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_primary_i121_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_primary_i121_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_primary_i121_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1487,7 +1367,7 @@ class cParser_omnibus_5F_syntax {
                                                         GGS_expressionAST & outArgument1,
                                                         Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_primary_i122_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_primary_i122_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_primary_i122_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1495,7 +1375,7 @@ class cParser_omnibus_5F_syntax {
                                                                                  GGS_routineFormalArgumentListAST & outArgument1,
                                                                                  Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_procedure_5F_formal_5F_arguments_i123_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_procedure_5F_formal_5F_arguments_i123_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_procedure_5F_formal_5F_arguments_i123_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1503,7 +1383,7 @@ class cParser_omnibus_5F_syntax {
                                                                                           GGS_routineFormalArgumentListAST & outArgument1,
                                                                                           Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_procedure_5F_input_5F_formal_5F_arguments_i124_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_procedure_5F_input_5F_formal_5F_arguments_i124_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_procedure_5F_input_5F_formal_5F_arguments_i124_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1512,7 +1392,7 @@ class cParser_omnibus_5F_syntax {
                                                                    GGS_guardedCommandAST & outArgument2,
                                                                    Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_guarded_5F_command_i125_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_guarded_5F_command_i125_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_guarded_5F_command_i125_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1521,7 +1401,7 @@ class cParser_omnibus_5F_syntax {
                                                                    GGS_guardedCommandAST & outArgument2,
                                                                    Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_guarded_5F_command_i126_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_guarded_5F_command_i126_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_guarded_5F_command_i126_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1529,21 +1409,21 @@ class cParser_omnibus_5F_syntax {
                                                             GGS_instructionListAST & ioArgument1,
                                                             Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_instruction_i127_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_instruction_i127_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_instruction_i127_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_declaration_i128_ (GGS_ast & ioArgument0,
                                                             Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_declaration_i128_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_declaration_i128_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_declaration_i128_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_declaration_i129_ (GGS_ast & ioArgument0,
                                                             Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_declaration_i129_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_declaration_i129_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_declaration_i129_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1551,14 +1431,14 @@ class cParser_omnibus_5F_syntax {
                                                                         const GGS_lstring constinArgument1,
                                                                         Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_function_5F_declaration_i130_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_function_5F_declaration_i130_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_function_5F_declaration_i130_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_mode_i131_ (GGS_mode & outArgument0,
                                                      Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_mode_i131_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_mode_i131_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_mode_i131_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1569,7 +1449,7 @@ class cParser_omnibus_5F_syntax {
                                                                    GGS_routineFormalArgumentListAST & outArgument4,
                                                                    Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_function_5F_header_i132_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_function_5F_header_i132_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_function_5F_header_i132_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1577,7 +1457,7 @@ class cParser_omnibus_5F_syntax {
                                                         GGS_expressionAST & outArgument1,
                                                         Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_primary_i133_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_primary_i133_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_primary_i133_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1585,14 +1465,14 @@ class cParser_omnibus_5F_syntax {
                                                         GGS_expressionAST & outArgument1,
                                                         Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_primary_i134_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_primary_i134_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_primary_i134_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_declaration_i135_ (GGS_ast & ioArgument0,
                                                             Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_declaration_i135_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_declaration_i135_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_declaration_i135_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1600,7 +1480,7 @@ class cParser_omnibus_5F_syntax {
                                                                                                              GGS_structurePropertyListAST & ioArgument1,
                                                                                                              Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_i136_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_i136_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_i136_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1608,7 +1488,7 @@ class cParser_omnibus_5F_syntax {
                                                                                              GGS_structurePropertyListAST & ioArgument1,
                                                                                              Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_private_5F_struct_5F_property_5F_declaration_i137_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_private_5F_struct_5F_property_5F_declaration_i137_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_private_5F_struct_5F_property_5F_declaration_i137_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1617,7 +1497,7 @@ class cParser_omnibus_5F_syntax {
                                                                                   GGS_structurePropertyListAST & ioArgument2,
                                                                                   Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_struct_5F_property_5F_declaration_i138_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_struct_5F_property_5F_declaration_i138_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_struct_5F_property_5F_declaration_i138_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1626,7 +1506,7 @@ class cParser_omnibus_5F_syntax {
                                                                                   GGS_structurePropertyListAST & ioArgument2,
                                                                                   Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_struct_5F_property_5F_declaration_i139_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_struct_5F_property_5F_declaration_i139_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_struct_5F_property_5F_declaration_i139_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1638,14 +1518,14 @@ class cParser_omnibus_5F_syntax {
                                                                      GGS_structurePropertyListAST & ioArgument5,
                                                                      Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_propertyGetterSetter_i140_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_propertyGetterSetter_i140_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_propertyGetterSetter_i140_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
   protected: void rule_omnibus_5F_syntax_declaration_i141_ (GGS_ast & ioArgument0,
                                                             Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_declaration_i141_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_declaration_i141_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_declaration_i141_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1653,7 +1533,7 @@ class cParser_omnibus_5F_syntax {
                                                             GGS_instructionListAST & ioArgument1,
                                                             Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_instruction_i142_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_instruction_i142_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_instruction_i142_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -1661,7 +1541,7 @@ class cParser_omnibus_5F_syntax {
                                                         GGS_expressionAST & outArgument1,
                                                         Lexique_omnibus_5F_lexique * inLexique) ;
 
-  protected: void rule_omnibus_5F_syntax_primary_i143_parse (Lexique_omnibus_5F_lexique * inLexique) ;
+/*  protected: void rule_omnibus_5F_syntax_primary_i143_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
 
   protected: void rule_omnibus_5F_syntax_primary_i143_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
 
@@ -2001,4 +1881,129 @@ class GGS_string function_staticAttribute (class Compiler * inCompiler
 
 class GGS_string function_userAttributeForRegister (class Compiler * inCompiler
                                                     COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Parser class 'omnibus_target_specific_syntax' declaration
+//
+//--------------------------------------------------------------------------------------------------
+
+class cParser_omnibus_5F_target_5F_specific_5F_syntax {
+//--- Virtual destructor
+  public: virtual ~ cParser_omnibus_5F_target_5F_specific_5F_syntax (void) { }
+
+//--- Non terminal declarations
+  protected: virtual void nt_configuration_5F_key_ (const class GGS_string constinArgument0,
+                                                    class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
+
+  protected: virtual void nt_configuration_5F_key_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
+
+  protected: virtual void nt_configuration_5F_start_5F_symbol_ (class GGS_ast & ioArgument0,
+                                                                class GGS_lstringlist & outArgument1,
+                                                                class GGS_location & outArgument2,
+                                                                class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
+
+  protected: virtual void nt_configuration_5F_start_5F_symbol_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
+
+  protected: virtual void nt_interruptConfigList_ (class GGS_interruptionConfigurationList & outArgument0,
+                                                   class GGS_enumerationConstantList & outArgument1,
+                                                   class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
+
+  protected: virtual void nt_interruptConfigList_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
+
+  protected: virtual void nt_python_5F_utility_5F_tool_5F_list_ (class GGS__32_lstringlist & outArgument0,
+                                                                 class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
+
+  protected: virtual void nt_python_5F_utility_5F_tool_5F_list_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
+
+
+//--- Rule declarations
+  protected: void rule_omnibus_5F_target_5F_specific_5F_syntax_configuration_5F_key_i0_ (const GGS_string constinArgument0,
+                                                                                         Lexique_omnibus_5F_lexique * inLexique) ;
+
+/*  protected: void rule_omnibus_5F_target_5F_specific_5F_syntax_configuration_5F_key_i0_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
+
+  protected: void rule_omnibus_5F_target_5F_specific_5F_syntax_configuration_5F_key_i0_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
+
+  protected: void rule_omnibus_5F_target_5F_specific_5F_syntax_python_5F_utility_5F_tool_5F_list_i1_ (GGS__32_lstringlist & outArgument0,
+                                                                                                      Lexique_omnibus_5F_lexique * inLexique) ;
+
+/*  protected: void rule_omnibus_5F_target_5F_specific_5F_syntax_python_5F_utility_5F_tool_5F_list_i1_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
+
+  protected: void rule_omnibus_5F_target_5F_specific_5F_syntax_python_5F_utility_5F_tool_5F_list_i1_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
+
+  protected: void rule_omnibus_5F_target_5F_specific_5F_syntax_configuration_5F_start_5F_symbol_i2_ (GGS_ast & ioArgument0,
+                                                                                                     GGS_lstringlist & outArgument1,
+                                                                                                     GGS_location & outArgument2,
+                                                                                                     Lexique_omnibus_5F_lexique * inLexique) ;
+
+/*  protected: void rule_omnibus_5F_target_5F_specific_5F_syntax_configuration_5F_start_5F_symbol_i2_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
+
+  protected: void rule_omnibus_5F_target_5F_specific_5F_syntax_configuration_5F_start_5F_symbol_i2_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
+
+  protected: void rule_omnibus_5F_target_5F_specific_5F_syntax_interruptConfigList_i3_ (GGS_interruptionConfigurationList & outArgument0,
+                                                                                        GGS_enumerationConstantList & outArgument1,
+                                                                                        Lexique_omnibus_5F_lexique * inLexique) ;
+
+/*  protected: void rule_omnibus_5F_target_5F_specific_5F_syntax_interruptConfigList_i3_parse (Lexique_omnibus_5F_lexique * inLexique) ; */
+
+  protected: void rule_omnibus_5F_target_5F_specific_5F_syntax_interruptConfigList_i3_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
+
+
+
+//--- Select methods
+  protected: virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_0 (Lexique_omnibus_5F_lexique *) = 0 ;
+
+  protected: virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_1 (Lexique_omnibus_5F_lexique *) = 0 ;
+
+  protected: virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_2 (Lexique_omnibus_5F_lexique *) = 0 ;
+
+  protected: virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_3 (Lexique_omnibus_5F_lexique *) = 0 ;
+
+  protected: virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_4 (Lexique_omnibus_5F_lexique *) = 0 ;
+
+  protected: virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_5 (Lexique_omnibus_5F_lexique *) = 0 ;
+
+  protected: virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_6 (Lexique_omnibus_5F_lexique *) = 0 ;
+
+  protected: virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_7 (Lexique_omnibus_5F_lexique *) = 0 ;
+
+  protected: virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_8 (Lexique_omnibus_5F_lexique *) = 0 ;
+
+
+} ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Function 'isrSlotTypeName'
+//
+//--------------------------------------------------------------------------------------------------
+
+class GGS_string function_isrSlotTypeName (class Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Extension getter '@effectiveArgumentPassingModeAST passingModeForActualSelector' (as function)
+//
+//--------------------------------------------------------------------------------------------------
+
+class GGS_string extensionGetter_passingModeForActualSelector (const class GGS_effectiveArgumentPassingModeAST & inObject,
+                                                               const class GGS_lstring & constinArgument0,
+                                                               class Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Routine 'enterFormalArguments?context?&&?warningOnUnusedArgs'
+//
+//--------------------------------------------------------------------------------------------------
+
+void routine_enterFormalArguments_3F_context_3F__26__26__3F_warningOnUnusedArgs (const class GGS_semanticContext constinArgument0,
+                                                                                 const class GGS_routineFormalArgumentListAST constinArgument1,
+                                                                                 class GGS_universalValuedObjectMap & ioArgument2,
+                                                                                 class GGS_routineFormalArgumentListIR & ioArgument3,
+                                                                                 const class GGS_bool constinArgument4,
+                                                                                 class Compiler * inCompiler
+                                                                                 COMMA_LOCATION_ARGS) ;
 

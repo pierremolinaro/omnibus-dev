@@ -24,4 +24,4 @@ override method @loadFromReferenceIR llvmInstructionCode
   ioLLVMcode += "  " + [self.mTargetValue llvmName] + " = load " + llvmType + ", " + llvmType + " * " + self.mLLVMName + "\n"
 }
 
-////—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————

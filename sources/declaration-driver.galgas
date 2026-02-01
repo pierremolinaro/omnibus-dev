@@ -157,8 +157,8 @@ syntax extension omnibus_syntax {
 
 }
 
-////—————————————————————————————————————————————————————————————————————————————————————————————————
-////!  PRECEDENCE GRAPH                                                                                                     
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+//!  PRECEDENCE GRAPH                                                                                                     
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @implementedDriverAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {

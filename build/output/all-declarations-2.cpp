@@ -3595,13 +3595,13 @@ void extensionMethod_generatePrefixOperatorCode (const GGS_prefixOperatorMap inO
                                                  Compiler * inCompiler
                                                  COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outResultValue.drop () ; // Release 'out' argument
-  GGS_lstring var_key_2205 = function_prefixOperatorMapKey (extensionGetter_type (constinArgument_inReceiverOperand, inCompiler COMMA_SOURCE_FILE ("prefix-operator-map.galgas", 59)), constinArgument_inPrefixOperator, constinArgument_inOperatorLocation, inCompiler COMMA_SOURCE_FILE ("prefix-operator-map.galgas", 59)) ;
-  GGS_omnibusType var_resultType_2330 ;
-  GGS_prefixOperatorUsage var_operatorUsage_2346 ;
+  GGS_lstring var_key_1661 = function_prefixOperatorMapKey (extensionGetter_type (constinArgument_inReceiverOperand, inCompiler COMMA_SOURCE_FILE ("prefix-operator-map.galgas", 41)), constinArgument_inPrefixOperator, constinArgument_inOperatorLocation, inCompiler COMMA_SOURCE_FILE ("prefix-operator-map.galgas", 41)) ;
+  GGS_omnibusType var_resultType_1786 ;
+  GGS_prefixOperatorUsage var_operatorUsage_1802 ;
   const GGS_prefixOperatorMap temp_0 = inObject ;
-  GGS_omnibusType joker_2321_1 ; // Joker input parameter
-  temp_0.method_searchKey (var_key_2205, joker_2321_1, var_resultType_2330, var_operatorUsage_2346, inCompiler COMMA_SOURCE_FILE ("prefix-operator-map.galgas", 60)) ;
-  callExtensionMethod_generateCode ((cPtr_prefixOperatorUsage *) var_operatorUsage_2346.ptr (), constinArgument_inReceiverOperand, constinArgument_inOperatorLocation, var_resultType_2330, constinArgument_inDoNotGeneratePanicCode, constinArgument_inSafeMode, ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, outArgument_outResultValue, inCompiler COMMA_SOURCE_FILE ("prefix-operator-map.galgas", 61)) ;
+  GGS_omnibusType joker_1777_1 ; // Joker input parameter
+  temp_0.method_searchKey (var_key_1661, joker_1777_1, var_resultType_1786, var_operatorUsage_1802, inCompiler COMMA_SOURCE_FILE ("prefix-operator-map.galgas", 42)) ;
+  callExtensionMethod_generateCode ((cPtr_prefixOperatorUsage *) var_operatorUsage_1802.ptr (), constinArgument_inReceiverOperand, constinArgument_inOperatorLocation, var_resultType_1786, constinArgument_inDoNotGeneratePanicCode, constinArgument_inSafeMode, ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, outArgument_outResultValue, inCompiler COMMA_SOURCE_FILE ("prefix-operator-map.galgas", 43)) ;
 }
 
 

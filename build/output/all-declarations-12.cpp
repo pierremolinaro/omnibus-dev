@@ -8,2230 +8,6 @@
 #include "all-declarations-12.h"
 
 //--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterFieldMap_2E_element::GGS_controlRegisterFieldMap_2E_element (void) :
-mProperty_lkey (),
-mProperty_mBitIndex (),
-mProperty_mBitCount () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterFieldMap_2E_element::GGS_controlRegisterFieldMap_2E_element (const GGS_controlRegisterFieldMap_2E_element & inSource) :
-mProperty_lkey (inSource.mProperty_lkey),
-mProperty_mBitIndex (inSource.mProperty_mBitIndex),
-mProperty_mBitCount (inSource.mProperty_mBitCount) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterFieldMap_2E_element & GGS_controlRegisterFieldMap_2E_element::operator = (const GGS_controlRegisterFieldMap_2E_element & inSource) {
-  mProperty_lkey = inSource.mProperty_lkey ;
-  mProperty_mBitIndex = inSource.mProperty_mBitIndex ;
-  mProperty_mBitCount = inSource.mProperty_mBitCount ;
-  return *this ;
-}
-
-//---Synthetized initializer -----------------------------------------------------------------------
-
-GGS_controlRegisterFieldMap_2E_element GGS_controlRegisterFieldMap_2E_element::init_21__21__21_ (const GGS_lstring & in_lkey,
-                                                                                                 const GGS_uint & in_mBitIndex,
-                                                                                                 const GGS_uint & in_mBitCount,
-                                                                                                 Compiler * inCompiler
-                                                                                                 COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_controlRegisterFieldMap_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_lkey = in_lkey ;
-  result.mProperty_mBitIndex = in_mBitIndex ;
-  result.mProperty_mBitCount = in_mBitCount ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_controlRegisterFieldMap_2E_element::setInitializedProperties (Compiler * /* inCompiler */) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterFieldMap_2E_element::GGS_controlRegisterFieldMap_2E_element (const GGS_lstring & inOperand0,
-                                                                                const GGS_uint & inOperand1,
-                                                                                const GGS_uint & inOperand2) :
-mProperty_lkey (inOperand0),
-mProperty_mBitIndex (inOperand1),
-mProperty_mBitCount (inOperand2) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_controlRegisterFieldMap_2E_element::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mBitIndex.isValid () && mProperty_mBitCount.isValid () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_controlRegisterFieldMap_2E_element::drop (void) {
-  mProperty_lkey.drop () ;
-  mProperty_mBitIndex.drop () ;
-  mProperty_mBitCount.drop () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_controlRegisterFieldMap_2E_element::description (String & ioString,
-                                                          const int32_t inIndentation) const {
-  ioString.appendCString ("<struct @controlRegisterFieldMap.element:") ;
-  if (! isValid ()) {
-    ioString.appendCString (" not built") ;
-  }else{
-    mProperty_lkey.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mBitIndex.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mBitCount.description (ioString, inIndentation+1) ;
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//     @controlRegisterFieldMap.element generic code implementation
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_controlRegisterFieldMap_2E_element ("controlRegisterFieldMap.element",
-                                                                                       nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor * GGS_controlRegisterFieldMap_2E_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_controlRegisterFieldMap_2E_element ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_controlRegisterFieldMap_2E_element::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_controlRegisterFieldMap_2E_element (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterFieldMap_2E_element GGS_controlRegisterFieldMap_2E_element::extractObject (const GGS_object & inObject,
-                                                                                              Compiler * inCompiler
-                                                                                              COMMA_LOCATION_ARGS) {
-  GGS_controlRegisterFieldMap_2E_element result ;
-  const GGS_controlRegisterFieldMap_2E_element * p = (const GGS_controlRegisterFieldMap_2E_element *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_controlRegisterFieldMap_2E_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("controlRegisterFieldMap.element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//Optional @controlRegisterFieldMap_2E_element_3F_
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterFieldMap_2E_element_3F_::GGS_controlRegisterFieldMap_2E_element_3F_ (void) :
-AC_GALGAS_root (),
-mValue (),
-mState (OptionalState::invalid) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterFieldMap_2E_element_3F_::GGS_controlRegisterFieldMap_2E_element_3F_ (const GGS_controlRegisterFieldMap_2E_element & inSource) :
-AC_GALGAS_root (),
-mValue (inSource),
-mState (OptionalState::valuated) {
-}
-
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterFieldMap_2E_element_3F_ GGS_controlRegisterFieldMap_2E_element_3F_::init_nil (void) {
-  GGS_controlRegisterFieldMap_2E_element_3F_ result ;
-  result.mState = OptionalState::isNil ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_controlRegisterFieldMap_2E_element_3F_::isValid (void) const {
-  bool result = false ;
-  switch (mState) {
-  case OptionalState::invalid :
-    break ;
-  case OptionalState::isNil :
-    result = true ;
-    break ;
-  case OptionalState::valuated :
-    result = mValue.isValid () ;
-    break ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_controlRegisterFieldMap_2E_element_3F_::isValuated (void) const {
-  return (mState == OptionalState::valuated) && mValue.isValid () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_controlRegisterFieldMap_2E_element_3F_::drop (void) {
-  mState = OptionalState::invalid ;
-  mValue = GGS_controlRegisterFieldMap_2E_element () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_controlRegisterFieldMap_2E_element_3F_::description (String & ioString,
-                                                              const int32_t inIndentation) const {
-  ioString.appendCString ("<optional @") ;
-  ioString.appendString (staticTypeDescriptor ()->mGalgasTypeName) ;
-  ioString.appendCString (": ") ;
-  switch (mState) {
-  case OptionalState::invalid :
-    ioString.appendCString ("invalid") ;
-    break ;
-  case OptionalState::isNil :
-    ioString.appendCString ("nil") ;
-    break ;
-  case OptionalState::valuated :
-    mValue.description (ioString, inIndentation) ;
-    break ;
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//     @controlRegisterFieldMap.element? generic code implementation
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_controlRegisterFieldMap_2E_element_3F_ ("controlRegisterFieldMap.element?",
-                                                                                           nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor * GGS_controlRegisterFieldMap_2E_element_3F_::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_controlRegisterFieldMap_2E_element_3F_ ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_controlRegisterFieldMap_2E_element_3F_::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_controlRegisterFieldMap_2E_element_3F_ (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterFieldMap_2E_element_3F_ GGS_controlRegisterFieldMap_2E_element_3F_::extractObject (const GGS_object & inObject,
-                                                                                                      Compiler * inCompiler
-                                                                                                      COMMA_LOCATION_ARGS) {
-  GGS_controlRegisterFieldMap_2E_element_3F_ result ;
-  const GGS_controlRegisterFieldMap_2E_element_3F_ * p = (const GGS_controlRegisterFieldMap_2E_element_3F_ *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_controlRegisterFieldMap_2E_element_3F_ *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("controlRegisterFieldMap.element?", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_sliceMap_2E_element::GGS_sliceMap_2E_element (void) :
-mProperty_lkey (),
-mProperty_mAccessOperator (),
-mProperty_mAccessRightOperand (),
-mProperty_mResultType () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_sliceMap_2E_element::GGS_sliceMap_2E_element (const GGS_sliceMap_2E_element & inSource) :
-mProperty_lkey (inSource.mProperty_lkey),
-mProperty_mAccessOperator (inSource.mProperty_mAccessOperator),
-mProperty_mAccessRightOperand (inSource.mProperty_mAccessRightOperand),
-mProperty_mResultType (inSource.mProperty_mResultType) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_sliceMap_2E_element & GGS_sliceMap_2E_element::operator = (const GGS_sliceMap_2E_element & inSource) {
-  mProperty_lkey = inSource.mProperty_lkey ;
-  mProperty_mAccessOperator = inSource.mProperty_mAccessOperator ;
-  mProperty_mAccessRightOperand = inSource.mProperty_mAccessRightOperand ;
-  mProperty_mResultType = inSource.mProperty_mResultType ;
-  return *this ;
-}
-
-//---Synthetized initializer -----------------------------------------------------------------------
-
-GGS_sliceMap_2E_element GGS_sliceMap_2E_element::init_21__21__21__21_ (const GGS_lstring & in_lkey,
-                                                                       const GGS_llvmBinaryOperation & in_mAccessOperator,
-                                                                       const GGS_bigint & in_mAccessRightOperand,
-                                                                       const GGS_omnibusType & in_mResultType,
-                                                                       Compiler * inCompiler
-                                                                       COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_sliceMap_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_lkey = in_lkey ;
-  result.mProperty_mAccessOperator = in_mAccessOperator ;
-  result.mProperty_mAccessRightOperand = in_mAccessRightOperand ;
-  result.mProperty_mResultType = in_mResultType ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_sliceMap_2E_element::setInitializedProperties (Compiler * /* inCompiler */) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_sliceMap_2E_element::GGS_sliceMap_2E_element (const GGS_lstring & inOperand0,
-                                                  const GGS_llvmBinaryOperation & inOperand1,
-                                                  const GGS_bigint & inOperand2,
-                                                  const GGS_omnibusType & inOperand3) :
-mProperty_lkey (inOperand0),
-mProperty_mAccessOperator (inOperand1),
-mProperty_mAccessRightOperand (inOperand2),
-mProperty_mResultType (inOperand3) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_sliceMap_2E_element::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mAccessOperator.isValid () && mProperty_mAccessRightOperand.isValid () && mProperty_mResultType.isValid () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_sliceMap_2E_element::drop (void) {
-  mProperty_lkey.drop () ;
-  mProperty_mAccessOperator.drop () ;
-  mProperty_mAccessRightOperand.drop () ;
-  mProperty_mResultType.drop () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_sliceMap_2E_element::description (String & ioString,
-                                           const int32_t inIndentation) const {
-  ioString.appendCString ("<struct @sliceMap.element:") ;
-  if (! isValid ()) {
-    ioString.appendCString (" not built") ;
-  }else{
-    mProperty_lkey.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mAccessOperator.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mAccessRightOperand.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mResultType.description (ioString, inIndentation+1) ;
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//     @sliceMap.element generic code implementation
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_sliceMap_2E_element ("sliceMap.element",
-                                                                        nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor * GGS_sliceMap_2E_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_sliceMap_2E_element ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_sliceMap_2E_element::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_sliceMap_2E_element (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_sliceMap_2E_element GGS_sliceMap_2E_element::extractObject (const GGS_object & inObject,
-                                                                Compiler * inCompiler
-                                                                COMMA_LOCATION_ARGS) {
-  GGS_sliceMap_2E_element result ;
-  const GGS_sliceMap_2E_element * p = (const GGS_sliceMap_2E_element *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_sliceMap_2E_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("sliceMap.element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//Optional @sliceMap_2E_element_3F_
-//--------------------------------------------------------------------------------------------------
-
-GGS_sliceMap_2E_element_3F_::GGS_sliceMap_2E_element_3F_ (void) :
-AC_GALGAS_root (),
-mValue (),
-mState (OptionalState::invalid) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_sliceMap_2E_element_3F_::GGS_sliceMap_2E_element_3F_ (const GGS_sliceMap_2E_element & inSource) :
-AC_GALGAS_root (),
-mValue (inSource),
-mState (OptionalState::valuated) {
-}
-
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_sliceMap_2E_element_3F_ GGS_sliceMap_2E_element_3F_::init_nil (void) {
-  GGS_sliceMap_2E_element_3F_ result ;
-  result.mState = OptionalState::isNil ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_sliceMap_2E_element_3F_::isValid (void) const {
-  bool result = false ;
-  switch (mState) {
-  case OptionalState::invalid :
-    break ;
-  case OptionalState::isNil :
-    result = true ;
-    break ;
-  case OptionalState::valuated :
-    result = mValue.isValid () ;
-    break ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_sliceMap_2E_element_3F_::isValuated (void) const {
-  return (mState == OptionalState::valuated) && mValue.isValid () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_sliceMap_2E_element_3F_::drop (void) {
-  mState = OptionalState::invalid ;
-  mValue = GGS_sliceMap_2E_element () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_sliceMap_2E_element_3F_::description (String & ioString,
-                                               const int32_t inIndentation) const {
-  ioString.appendCString ("<optional @") ;
-  ioString.appendString (staticTypeDescriptor ()->mGalgasTypeName) ;
-  ioString.appendCString (": ") ;
-  switch (mState) {
-  case OptionalState::invalid :
-    ioString.appendCString ("invalid") ;
-    break ;
-  case OptionalState::isNil :
-    ioString.appendCString ("nil") ;
-    break ;
-  case OptionalState::valuated :
-    mValue.description (ioString, inIndentation) ;
-    break ;
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//     @sliceMap.element? generic code implementation
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_sliceMap_2E_element_3F_ ("sliceMap.element?",
-                                                                            nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor * GGS_sliceMap_2E_element_3F_::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_sliceMap_2E_element_3F_ ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_sliceMap_2E_element_3F_::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_sliceMap_2E_element_3F_ (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_sliceMap_2E_element_3F_ GGS_sliceMap_2E_element_3F_::extractObject (const GGS_object & inObject,
-                                                                        Compiler * inCompiler
-                                                                        COMMA_LOCATION_ARGS) {
-  GGS_sliceMap_2E_element_3F_ result ;
-  const GGS_sliceMap_2E_element_3F_ * p = (const GGS_sliceMap_2E_element_3F_ *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_sliceMap_2E_element_3F_ *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("sliceMap.element?", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterMap_2E_element::GGS_controlRegisterMap_2E_element (void) :
-mProperty_lkey (),
-mProperty_mType (),
-mProperty_mIsReadOnly (),
-mProperty_mUserAccess (),
-mProperty_mRegisterFieldAccessMap (),
-mProperty_mRegisterFieldMap (),
-mProperty_mAddressOffset (),
-mProperty_mControlRegisterFieldList (),
-mProperty_mRegisterBitCount (),
-mProperty_mArraySize (),
-mProperty_mElementArraySize () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterMap_2E_element::GGS_controlRegisterMap_2E_element (const GGS_controlRegisterMap_2E_element & inSource) :
-mProperty_lkey (inSource.mProperty_lkey),
-mProperty_mType (inSource.mProperty_mType),
-mProperty_mIsReadOnly (inSource.mProperty_mIsReadOnly),
-mProperty_mUserAccess (inSource.mProperty_mUserAccess),
-mProperty_mRegisterFieldAccessMap (inSource.mProperty_mRegisterFieldAccessMap),
-mProperty_mRegisterFieldMap (inSource.mProperty_mRegisterFieldMap),
-mProperty_mAddressOffset (inSource.mProperty_mAddressOffset),
-mProperty_mControlRegisterFieldList (inSource.mProperty_mControlRegisterFieldList),
-mProperty_mRegisterBitCount (inSource.mProperty_mRegisterBitCount),
-mProperty_mArraySize (inSource.mProperty_mArraySize),
-mProperty_mElementArraySize (inSource.mProperty_mElementArraySize) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterMap_2E_element & GGS_controlRegisterMap_2E_element::operator = (const GGS_controlRegisterMap_2E_element & inSource) {
-  mProperty_lkey = inSource.mProperty_lkey ;
-  mProperty_mType = inSource.mProperty_mType ;
-  mProperty_mIsReadOnly = inSource.mProperty_mIsReadOnly ;
-  mProperty_mUserAccess = inSource.mProperty_mUserAccess ;
-  mProperty_mRegisterFieldAccessMap = inSource.mProperty_mRegisterFieldAccessMap ;
-  mProperty_mRegisterFieldMap = inSource.mProperty_mRegisterFieldMap ;
-  mProperty_mAddressOffset = inSource.mProperty_mAddressOffset ;
-  mProperty_mControlRegisterFieldList = inSource.mProperty_mControlRegisterFieldList ;
-  mProperty_mRegisterBitCount = inSource.mProperty_mRegisterBitCount ;
-  mProperty_mArraySize = inSource.mProperty_mArraySize ;
-  mProperty_mElementArraySize = inSource.mProperty_mElementArraySize ;
-  return *this ;
-}
-
-//---Synthetized initializer -----------------------------------------------------------------------
-
-GGS_controlRegisterMap_2E_element GGS_controlRegisterMap_2E_element::init_21__21__21__21__21__21__21__21__21__21__21_ (const GGS_lstring & in_lkey,
-                                                                                                                       const GGS_omnibusType & in_mType,
-                                                                                                                       const GGS_bool & in_mIsReadOnly,
-                                                                                                                       const GGS_bool & in_mUserAccess,
-                                                                                                                       const GGS_sliceMap & in_mRegisterFieldAccessMap,
-                                                                                                                       const GGS_controlRegisterFieldMap & in_mRegisterFieldMap,
-                                                                                                                       const GGS_bigint & in_mAddressOffset,
-                                                                                                                       const GGS_controlRegisterFieldList & in_mControlRegisterFieldList,
-                                                                                                                       const GGS_uint & in_mRegisterBitCount,
-                                                                                                                       const GGS_uint & in_mArraySize,
-                                                                                                                       const GGS_uint & in_mElementArraySize,
-                                                                                                                       Compiler * inCompiler
-                                                                                                                       COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_controlRegisterMap_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_lkey = in_lkey ;
-  result.mProperty_mType = in_mType ;
-  result.mProperty_mIsReadOnly = in_mIsReadOnly ;
-  result.mProperty_mUserAccess = in_mUserAccess ;
-  result.mProperty_mRegisterFieldAccessMap = in_mRegisterFieldAccessMap ;
-  result.mProperty_mRegisterFieldMap = in_mRegisterFieldMap ;
-  result.mProperty_mAddressOffset = in_mAddressOffset ;
-  result.mProperty_mControlRegisterFieldList = in_mControlRegisterFieldList ;
-  result.mProperty_mRegisterBitCount = in_mRegisterBitCount ;
-  result.mProperty_mArraySize = in_mArraySize ;
-  result.mProperty_mElementArraySize = in_mElementArraySize ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_controlRegisterMap_2E_element::setInitializedProperties (Compiler * /* inCompiler */) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterMap_2E_element::GGS_controlRegisterMap_2E_element (const GGS_lstring & inOperand0,
-                                                                      const GGS_omnibusType & inOperand1,
-                                                                      const GGS_bool & inOperand2,
-                                                                      const GGS_bool & inOperand3,
-                                                                      const GGS_sliceMap & inOperand4,
-                                                                      const GGS_controlRegisterFieldMap & inOperand5,
-                                                                      const GGS_bigint & inOperand6,
-                                                                      const GGS_controlRegisterFieldList & inOperand7,
-                                                                      const GGS_uint & inOperand8,
-                                                                      const GGS_uint & inOperand9,
-                                                                      const GGS_uint & inOperand10) :
-mProperty_lkey (inOperand0),
-mProperty_mType (inOperand1),
-mProperty_mIsReadOnly (inOperand2),
-mProperty_mUserAccess (inOperand3),
-mProperty_mRegisterFieldAccessMap (inOperand4),
-mProperty_mRegisterFieldMap (inOperand5),
-mProperty_mAddressOffset (inOperand6),
-mProperty_mControlRegisterFieldList (inOperand7),
-mProperty_mRegisterBitCount (inOperand8),
-mProperty_mArraySize (inOperand9),
-mProperty_mElementArraySize (inOperand10) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_controlRegisterMap_2E_element::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mType.isValid () && mProperty_mIsReadOnly.isValid () && mProperty_mUserAccess.isValid () && mProperty_mRegisterFieldAccessMap.isValid () && mProperty_mRegisterFieldMap.isValid () && mProperty_mAddressOffset.isValid () && mProperty_mControlRegisterFieldList.isValid () && mProperty_mRegisterBitCount.isValid () && mProperty_mArraySize.isValid () && mProperty_mElementArraySize.isValid () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_controlRegisterMap_2E_element::drop (void) {
-  mProperty_lkey.drop () ;
-  mProperty_mType.drop () ;
-  mProperty_mIsReadOnly.drop () ;
-  mProperty_mUserAccess.drop () ;
-  mProperty_mRegisterFieldAccessMap.drop () ;
-  mProperty_mRegisterFieldMap.drop () ;
-  mProperty_mAddressOffset.drop () ;
-  mProperty_mControlRegisterFieldList.drop () ;
-  mProperty_mRegisterBitCount.drop () ;
-  mProperty_mArraySize.drop () ;
-  mProperty_mElementArraySize.drop () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_controlRegisterMap_2E_element::description (String & ioString,
-                                                     const int32_t inIndentation) const {
-  ioString.appendCString ("<struct @controlRegisterMap.element:") ;
-  if (! isValid ()) {
-    ioString.appendCString (" not built") ;
-  }else{
-    mProperty_lkey.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mType.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mIsReadOnly.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mUserAccess.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mRegisterFieldAccessMap.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mRegisterFieldMap.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mAddressOffset.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mControlRegisterFieldList.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mRegisterBitCount.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mArraySize.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mElementArraySize.description (ioString, inIndentation+1) ;
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//     @controlRegisterMap.element generic code implementation
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_controlRegisterMap_2E_element ("controlRegisterMap.element",
-                                                                                  nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor * GGS_controlRegisterMap_2E_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_controlRegisterMap_2E_element ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_controlRegisterMap_2E_element::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_controlRegisterMap_2E_element (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterMap_2E_element GGS_controlRegisterMap_2E_element::extractObject (const GGS_object & inObject,
-                                                                                    Compiler * inCompiler
-                                                                                    COMMA_LOCATION_ARGS) {
-  GGS_controlRegisterMap_2E_element result ;
-  const GGS_controlRegisterMap_2E_element * p = (const GGS_controlRegisterMap_2E_element *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_controlRegisterMap_2E_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("controlRegisterMap.element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//Optional @controlRegisterMap_2E_element_3F_
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterMap_2E_element_3F_::GGS_controlRegisterMap_2E_element_3F_ (void) :
-AC_GALGAS_root (),
-mValue (),
-mState (OptionalState::invalid) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterMap_2E_element_3F_::GGS_controlRegisterMap_2E_element_3F_ (const GGS_controlRegisterMap_2E_element & inSource) :
-AC_GALGAS_root (),
-mValue (inSource),
-mState (OptionalState::valuated) {
-}
-
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterMap_2E_element_3F_ GGS_controlRegisterMap_2E_element_3F_::init_nil (void) {
-  GGS_controlRegisterMap_2E_element_3F_ result ;
-  result.mState = OptionalState::isNil ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_controlRegisterMap_2E_element_3F_::isValid (void) const {
-  bool result = false ;
-  switch (mState) {
-  case OptionalState::invalid :
-    break ;
-  case OptionalState::isNil :
-    result = true ;
-    break ;
-  case OptionalState::valuated :
-    result = mValue.isValid () ;
-    break ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_controlRegisterMap_2E_element_3F_::isValuated (void) const {
-  return (mState == OptionalState::valuated) && mValue.isValid () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_controlRegisterMap_2E_element_3F_::drop (void) {
-  mState = OptionalState::invalid ;
-  mValue = GGS_controlRegisterMap_2E_element () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_controlRegisterMap_2E_element_3F_::description (String & ioString,
-                                                         const int32_t inIndentation) const {
-  ioString.appendCString ("<optional @") ;
-  ioString.appendString (staticTypeDescriptor ()->mGalgasTypeName) ;
-  ioString.appendCString (": ") ;
-  switch (mState) {
-  case OptionalState::invalid :
-    ioString.appendCString ("invalid") ;
-    break ;
-  case OptionalState::isNil :
-    ioString.appendCString ("nil") ;
-    break ;
-  case OptionalState::valuated :
-    mValue.description (ioString, inIndentation) ;
-    break ;
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//     @controlRegisterMap.element? generic code implementation
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_controlRegisterMap_2E_element_3F_ ("controlRegisterMap.element?",
-                                                                                      nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor * GGS_controlRegisterMap_2E_element_3F_::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_controlRegisterMap_2E_element_3F_ ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_controlRegisterMap_2E_element_3F_::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_controlRegisterMap_2E_element_3F_ (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterMap_2E_element_3F_ GGS_controlRegisterMap_2E_element_3F_::extractObject (const GGS_object & inObject,
-                                                                                            Compiler * inCompiler
-                                                                                            COMMA_LOCATION_ARGS) {
-  GGS_controlRegisterMap_2E_element_3F_ result ;
-  const GGS_controlRegisterMap_2E_element_3F_ * p = (const GGS_controlRegisterMap_2E_element_3F_ *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_controlRegisterMap_2E_element_3F_ *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("controlRegisterMap.element?", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterGroupMap_2E_element::GGS_controlRegisterGroupMap_2E_element (void) :
-mProperty_lkey (),
-mProperty_mGroupKind (),
-mProperty_mControlRegisterMap () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterGroupMap_2E_element::GGS_controlRegisterGroupMap_2E_element (const GGS_controlRegisterGroupMap_2E_element & inSource) :
-mProperty_lkey (inSource.mProperty_lkey),
-mProperty_mGroupKind (inSource.mProperty_mGroupKind),
-mProperty_mControlRegisterMap (inSource.mProperty_mControlRegisterMap) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterGroupMap_2E_element & GGS_controlRegisterGroupMap_2E_element::operator = (const GGS_controlRegisterGroupMap_2E_element & inSource) {
-  mProperty_lkey = inSource.mProperty_lkey ;
-  mProperty_mGroupKind = inSource.mProperty_mGroupKind ;
-  mProperty_mControlRegisterMap = inSource.mProperty_mControlRegisterMap ;
-  return *this ;
-}
-
-//---Synthetized initializer -----------------------------------------------------------------------
-
-GGS_controlRegisterGroupMap_2E_element GGS_controlRegisterGroupMap_2E_element::init_21__21__21_ (const GGS_lstring & in_lkey,
-                                                                                                 const GGS_registerGroupKind & in_mGroupKind,
-                                                                                                 const GGS_controlRegisterMap & in_mControlRegisterMap,
-                                                                                                 Compiler * inCompiler
-                                                                                                 COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_controlRegisterGroupMap_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_lkey = in_lkey ;
-  result.mProperty_mGroupKind = in_mGroupKind ;
-  result.mProperty_mControlRegisterMap = in_mControlRegisterMap ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_controlRegisterGroupMap_2E_element::setInitializedProperties (Compiler * /* inCompiler */) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterGroupMap_2E_element::GGS_controlRegisterGroupMap_2E_element (const GGS_lstring & inOperand0,
-                                                                                const GGS_registerGroupKind & inOperand1,
-                                                                                const GGS_controlRegisterMap & inOperand2) :
-mProperty_lkey (inOperand0),
-mProperty_mGroupKind (inOperand1),
-mProperty_mControlRegisterMap (inOperand2) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_controlRegisterGroupMap_2E_element::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mGroupKind.isValid () && mProperty_mControlRegisterMap.isValid () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_controlRegisterGroupMap_2E_element::drop (void) {
-  mProperty_lkey.drop () ;
-  mProperty_mGroupKind.drop () ;
-  mProperty_mControlRegisterMap.drop () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_controlRegisterGroupMap_2E_element::description (String & ioString,
-                                                          const int32_t inIndentation) const {
-  ioString.appendCString ("<struct @controlRegisterGroupMap.element:") ;
-  if (! isValid ()) {
-    ioString.appendCString (" not built") ;
-  }else{
-    mProperty_lkey.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mGroupKind.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mControlRegisterMap.description (ioString, inIndentation+1) ;
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//     @controlRegisterGroupMap.element generic code implementation
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_controlRegisterGroupMap_2E_element ("controlRegisterGroupMap.element",
-                                                                                       nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor * GGS_controlRegisterGroupMap_2E_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_controlRegisterGroupMap_2E_element ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_controlRegisterGroupMap_2E_element::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_controlRegisterGroupMap_2E_element (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterGroupMap_2E_element GGS_controlRegisterGroupMap_2E_element::extractObject (const GGS_object & inObject,
-                                                                                              Compiler * inCompiler
-                                                                                              COMMA_LOCATION_ARGS) {
-  GGS_controlRegisterGroupMap_2E_element result ;
-  const GGS_controlRegisterGroupMap_2E_element * p = (const GGS_controlRegisterGroupMap_2E_element *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_controlRegisterGroupMap_2E_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("controlRegisterGroupMap.element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//Optional @controlRegisterGroupMap_2E_element_3F_
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterGroupMap_2E_element_3F_::GGS_controlRegisterGroupMap_2E_element_3F_ (void) :
-AC_GALGAS_root (),
-mValue (),
-mState (OptionalState::invalid) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterGroupMap_2E_element_3F_::GGS_controlRegisterGroupMap_2E_element_3F_ (const GGS_controlRegisterGroupMap_2E_element & inSource) :
-AC_GALGAS_root (),
-mValue (inSource),
-mState (OptionalState::valuated) {
-}
-
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterGroupMap_2E_element_3F_ GGS_controlRegisterGroupMap_2E_element_3F_::init_nil (void) {
-  GGS_controlRegisterGroupMap_2E_element_3F_ result ;
-  result.mState = OptionalState::isNil ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_controlRegisterGroupMap_2E_element_3F_::isValid (void) const {
-  bool result = false ;
-  switch (mState) {
-  case OptionalState::invalid :
-    break ;
-  case OptionalState::isNil :
-    result = true ;
-    break ;
-  case OptionalState::valuated :
-    result = mValue.isValid () ;
-    break ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_controlRegisterGroupMap_2E_element_3F_::isValuated (void) const {
-  return (mState == OptionalState::valuated) && mValue.isValid () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_controlRegisterGroupMap_2E_element_3F_::drop (void) {
-  mState = OptionalState::invalid ;
-  mValue = GGS_controlRegisterGroupMap_2E_element () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_controlRegisterGroupMap_2E_element_3F_::description (String & ioString,
-                                                              const int32_t inIndentation) const {
-  ioString.appendCString ("<optional @") ;
-  ioString.appendString (staticTypeDescriptor ()->mGalgasTypeName) ;
-  ioString.appendCString (": ") ;
-  switch (mState) {
-  case OptionalState::invalid :
-    ioString.appendCString ("invalid") ;
-    break ;
-  case OptionalState::isNil :
-    ioString.appendCString ("nil") ;
-    break ;
-  case OptionalState::valuated :
-    mValue.description (ioString, inIndentation) ;
-    break ;
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//     @controlRegisterGroupMap.element? generic code implementation
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_controlRegisterGroupMap_2E_element_3F_ ("controlRegisterGroupMap.element?",
-                                                                                           nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor * GGS_controlRegisterGroupMap_2E_element_3F_::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_controlRegisterGroupMap_2E_element_3F_ ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_controlRegisterGroupMap_2E_element_3F_::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_controlRegisterGroupMap_2E_element_3F_ (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_controlRegisterGroupMap_2E_element_3F_ GGS_controlRegisterGroupMap_2E_element_3F_::extractObject (const GGS_object & inObject,
-                                                                                                      Compiler * inCompiler
-                                                                                                      COMMA_LOCATION_ARGS) {
-  GGS_controlRegisterGroupMap_2E_element_3F_ result ;
-  const GGS_controlRegisterGroupMap_2E_element_3F_ * p = (const GGS_controlRegisterGroupMap_2E_element_3F_ *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_controlRegisterGroupMap_2E_element_3F_ *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("controlRegisterGroupMap.element?", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_assignmentOperatorMap_2E_element::GGS_assignmentOperatorMap_2E_element (void) :
-mProperty_lkey (),
-mProperty_mOperatorUsage () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_assignmentOperatorMap_2E_element::GGS_assignmentOperatorMap_2E_element (const GGS_assignmentOperatorMap_2E_element & inSource) :
-mProperty_lkey (inSource.mProperty_lkey),
-mProperty_mOperatorUsage (inSource.mProperty_mOperatorUsage) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_assignmentOperatorMap_2E_element & GGS_assignmentOperatorMap_2E_element::operator = (const GGS_assignmentOperatorMap_2E_element & inSource) {
-  mProperty_lkey = inSource.mProperty_lkey ;
-  mProperty_mOperatorUsage = inSource.mProperty_mOperatorUsage ;
-  return *this ;
-}
-
-//---Synthetized initializer -----------------------------------------------------------------------
-
-GGS_assignmentOperatorMap_2E_element GGS_assignmentOperatorMap_2E_element::init_21__21_ (const GGS_lstring & in_lkey,
-                                                                                         const GGS_abstractAssignmentOperatorUsage & in_mOperatorUsage,
-                                                                                         Compiler * inCompiler
-                                                                                         COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_assignmentOperatorMap_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_lkey = in_lkey ;
-  result.mProperty_mOperatorUsage = in_mOperatorUsage ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_assignmentOperatorMap_2E_element::setInitializedProperties (Compiler * /* inCompiler */) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_assignmentOperatorMap_2E_element::GGS_assignmentOperatorMap_2E_element (const GGS_lstring & inOperand0,
-                                                                            const GGS_abstractAssignmentOperatorUsage & inOperand1) :
-mProperty_lkey (inOperand0),
-mProperty_mOperatorUsage (inOperand1) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_assignmentOperatorMap_2E_element::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mOperatorUsage.isValid () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_assignmentOperatorMap_2E_element::drop (void) {
-  mProperty_lkey.drop () ;
-  mProperty_mOperatorUsage.drop () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_assignmentOperatorMap_2E_element::description (String & ioString,
-                                                        const int32_t inIndentation) const {
-  ioString.appendCString ("<struct @assignmentOperatorMap.element:") ;
-  if (! isValid ()) {
-    ioString.appendCString (" not built") ;
-  }else{
-    mProperty_lkey.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mOperatorUsage.description (ioString, inIndentation+1) ;
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//     @assignmentOperatorMap.element generic code implementation
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_assignmentOperatorMap_2E_element ("assignmentOperatorMap.element",
-                                                                                     nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor * GGS_assignmentOperatorMap_2E_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_assignmentOperatorMap_2E_element ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_assignmentOperatorMap_2E_element::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_assignmentOperatorMap_2E_element (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_assignmentOperatorMap_2E_element GGS_assignmentOperatorMap_2E_element::extractObject (const GGS_object & inObject,
-                                                                                          Compiler * inCompiler
-                                                                                          COMMA_LOCATION_ARGS) {
-  GGS_assignmentOperatorMap_2E_element result ;
-  const GGS_assignmentOperatorMap_2E_element * p = (const GGS_assignmentOperatorMap_2E_element *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_assignmentOperatorMap_2E_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("assignmentOperatorMap.element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//Optional @assignmentOperatorMap_2E_element_3F_
-//--------------------------------------------------------------------------------------------------
-
-GGS_assignmentOperatorMap_2E_element_3F_::GGS_assignmentOperatorMap_2E_element_3F_ (void) :
-AC_GALGAS_root (),
-mValue (),
-mState (OptionalState::invalid) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_assignmentOperatorMap_2E_element_3F_::GGS_assignmentOperatorMap_2E_element_3F_ (const GGS_assignmentOperatorMap_2E_element & inSource) :
-AC_GALGAS_root (),
-mValue (inSource),
-mState (OptionalState::valuated) {
-}
-
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_assignmentOperatorMap_2E_element_3F_ GGS_assignmentOperatorMap_2E_element_3F_::init_nil (void) {
-  GGS_assignmentOperatorMap_2E_element_3F_ result ;
-  result.mState = OptionalState::isNil ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_assignmentOperatorMap_2E_element_3F_::isValid (void) const {
-  bool result = false ;
-  switch (mState) {
-  case OptionalState::invalid :
-    break ;
-  case OptionalState::isNil :
-    result = true ;
-    break ;
-  case OptionalState::valuated :
-    result = mValue.isValid () ;
-    break ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_assignmentOperatorMap_2E_element_3F_::isValuated (void) const {
-  return (mState == OptionalState::valuated) && mValue.isValid () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_assignmentOperatorMap_2E_element_3F_::drop (void) {
-  mState = OptionalState::invalid ;
-  mValue = GGS_assignmentOperatorMap_2E_element () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_assignmentOperatorMap_2E_element_3F_::description (String & ioString,
-                                                            const int32_t inIndentation) const {
-  ioString.appendCString ("<optional @") ;
-  ioString.appendString (staticTypeDescriptor ()->mGalgasTypeName) ;
-  ioString.appendCString (": ") ;
-  switch (mState) {
-  case OptionalState::invalid :
-    ioString.appendCString ("invalid") ;
-    break ;
-  case OptionalState::isNil :
-    ioString.appendCString ("nil") ;
-    break ;
-  case OptionalState::valuated :
-    mValue.description (ioString, inIndentation) ;
-    break ;
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//     @assignmentOperatorMap.element? generic code implementation
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_assignmentOperatorMap_2E_element_3F_ ("assignmentOperatorMap.element?",
-                                                                                         nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor * GGS_assignmentOperatorMap_2E_element_3F_::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_assignmentOperatorMap_2E_element_3F_ ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_assignmentOperatorMap_2E_element_3F_::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_assignmentOperatorMap_2E_element_3F_ (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_assignmentOperatorMap_2E_element_3F_ GGS_assignmentOperatorMap_2E_element_3F_::extractObject (const GGS_object & inObject,
-                                                                                                  Compiler * inCompiler
-                                                                                                  COMMA_LOCATION_ARGS) {
-  GGS_assignmentOperatorMap_2E_element_3F_ result ;
-  const GGS_assignmentOperatorMap_2E_element_3F_ * p = (const GGS_assignmentOperatorMap_2E_element_3F_ *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_assignmentOperatorMap_2E_element_3F_ *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("assignmentOperatorMap.element?", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_procEffectiveParameterList_2E_element::GGS_procEffectiveParameterList_2E_element (void) :
-mProperty_mEffectiveParameterPassingMode (),
-mProperty_mSelector (),
-mProperty_mParameterType () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_procEffectiveParameterList_2E_element::GGS_procEffectiveParameterList_2E_element (const GGS_procEffectiveParameterList_2E_element & inSource) :
-mProperty_mEffectiveParameterPassingMode (inSource.mProperty_mEffectiveParameterPassingMode),
-mProperty_mSelector (inSource.mProperty_mSelector),
-mProperty_mParameterType (inSource.mProperty_mParameterType) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_procEffectiveParameterList_2E_element & GGS_procEffectiveParameterList_2E_element::operator = (const GGS_procEffectiveParameterList_2E_element & inSource) {
-  mProperty_mEffectiveParameterPassingMode = inSource.mProperty_mEffectiveParameterPassingMode ;
-  mProperty_mSelector = inSource.mProperty_mSelector ;
-  mProperty_mParameterType = inSource.mProperty_mParameterType ;
-  return *this ;
-}
-
-//---Synthetized initializer -----------------------------------------------------------------------
-
-GGS_procEffectiveParameterList_2E_element GGS_procEffectiveParameterList_2E_element::init_21__21__21_ (const GGS_effectiveArgumentPassingModeAST & in_mEffectiveParameterPassingMode,
-                                                                                                       const GGS_lstring & in_mSelector,
-                                                                                                       const GGS_omnibusType & in_mParameterType,
-                                                                                                       Compiler * inCompiler
-                                                                                                       COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_procEffectiveParameterList_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_mEffectiveParameterPassingMode = in_mEffectiveParameterPassingMode ;
-  result.mProperty_mSelector = in_mSelector ;
-  result.mProperty_mParameterType = in_mParameterType ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_procEffectiveParameterList_2E_element::setInitializedProperties (Compiler * /* inCompiler */) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_procEffectiveParameterList_2E_element::GGS_procEffectiveParameterList_2E_element (const GGS_effectiveArgumentPassingModeAST & inOperand0,
-                                                                                      const GGS_lstring & inOperand1,
-                                                                                      const GGS_omnibusType & inOperand2) :
-mProperty_mEffectiveParameterPassingMode (inOperand0),
-mProperty_mSelector (inOperand1),
-mProperty_mParameterType (inOperand2) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_procEffectiveParameterList_2E_element::isValid (void) const {
-  return mProperty_mEffectiveParameterPassingMode.isValid () && mProperty_mSelector.isValid () && mProperty_mParameterType.isValid () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_procEffectiveParameterList_2E_element::drop (void) {
-  mProperty_mEffectiveParameterPassingMode.drop () ;
-  mProperty_mSelector.drop () ;
-  mProperty_mParameterType.drop () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_procEffectiveParameterList_2E_element::description (String & ioString,
-                                                             const int32_t inIndentation) const {
-  ioString.appendCString ("<struct @procEffectiveParameterList.element:") ;
-  if (! isValid ()) {
-    ioString.appendCString (" not built") ;
-  }else{
-    mProperty_mEffectiveParameterPassingMode.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mSelector.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mParameterType.description (ioString, inIndentation+1) ;
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//     @procEffectiveParameterList.element generic code implementation
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_procEffectiveParameterList_2E_element ("procEffectiveParameterList.element",
-                                                                                          nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor * GGS_procEffectiveParameterList_2E_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_procEffectiveParameterList_2E_element ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_procEffectiveParameterList_2E_element::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_procEffectiveParameterList_2E_element (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_procEffectiveParameterList_2E_element GGS_procEffectiveParameterList_2E_element::extractObject (const GGS_object & inObject,
-                                                                                                    Compiler * inCompiler
-                                                                                                    COMMA_LOCATION_ARGS) {
-  GGS_procEffectiveParameterList_2E_element result ;
-  const GGS_procEffectiveParameterList_2E_element * p = (const GGS_procEffectiveParameterList_2E_element *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_procEffectiveParameterList_2E_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("procEffectiveParameterList.element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//Optional @externProcedureMapIR_2E_element_3F_
-//--------------------------------------------------------------------------------------------------
-
-GGS_externProcedureMapIR_2E_element_3F_::GGS_externProcedureMapIR_2E_element_3F_ (void) :
-AC_GALGAS_root (),
-mValue (),
-mState (OptionalState::invalid) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_externProcedureMapIR_2E_element_3F_::GGS_externProcedureMapIR_2E_element_3F_ (const GGS_externProcedureMapIR_2E_element & inSource) :
-AC_GALGAS_root (),
-mValue (inSource),
-mState (OptionalState::valuated) {
-}
-
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_externProcedureMapIR_2E_element_3F_ GGS_externProcedureMapIR_2E_element_3F_::init_nil (void) {
-  GGS_externProcedureMapIR_2E_element_3F_ result ;
-  result.mState = OptionalState::isNil ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_externProcedureMapIR_2E_element_3F_::isValid (void) const {
-  bool result = false ;
-  switch (mState) {
-  case OptionalState::invalid :
-    break ;
-  case OptionalState::isNil :
-    result = true ;
-    break ;
-  case OptionalState::valuated :
-    result = mValue.isValid () ;
-    break ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_externProcedureMapIR_2E_element_3F_::isValuated (void) const {
-  return (mState == OptionalState::valuated) && mValue.isValid () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_externProcedureMapIR_2E_element_3F_::drop (void) {
-  mState = OptionalState::invalid ;
-  mValue = GGS_externProcedureMapIR_2E_element () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_externProcedureMapIR_2E_element_3F_::description (String & ioString,
-                                                           const int32_t inIndentation) const {
-  ioString.appendCString ("<optional @") ;
-  ioString.appendString (staticTypeDescriptor ()->mGalgasTypeName) ;
-  ioString.appendCString (": ") ;
-  switch (mState) {
-  case OptionalState::invalid :
-    ioString.appendCString ("invalid") ;
-    break ;
-  case OptionalState::isNil :
-    ioString.appendCString ("nil") ;
-    break ;
-  case OptionalState::valuated :
-    mValue.description (ioString, inIndentation) ;
-    break ;
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//     @externProcedureMapIR.element? generic code implementation
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_externProcedureMapIR_2E_element_3F_ ("externProcedureMapIR.element?",
-                                                                                        nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor * GGS_externProcedureMapIR_2E_element_3F_::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_externProcedureMapIR_2E_element_3F_ ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_externProcedureMapIR_2E_element_3F_::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_externProcedureMapIR_2E_element_3F_ (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_externProcedureMapIR_2E_element_3F_ GGS_externProcedureMapIR_2E_element_3F_::extractObject (const GGS_object & inObject,
-                                                                                                Compiler * inCompiler
-                                                                                                COMMA_LOCATION_ARGS) {
-  GGS_externProcedureMapIR_2E_element_3F_ result ;
-  const GGS_externProcedureMapIR_2E_element_3F_ * p = (const GGS_externProcedureMapIR_2E_element_3F_ *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_externProcedureMapIR_2E_element_3F_ *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("externProcedureMapIR.element?", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_implicitConversionToBooleanMap_2E_element::GGS_implicitConversionToBooleanMap_2E_element (void) :
-mProperty_lkey (),
-mProperty_mConverter () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_implicitConversionToBooleanMap_2E_element::GGS_implicitConversionToBooleanMap_2E_element (const GGS_implicitConversionToBooleanMap_2E_element & inSource) :
-mProperty_lkey (inSource.mProperty_lkey),
-mProperty_mConverter (inSource.mProperty_mConverter) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_implicitConversionToBooleanMap_2E_element & GGS_implicitConversionToBooleanMap_2E_element::operator = (const GGS_implicitConversionToBooleanMap_2E_element & inSource) {
-  mProperty_lkey = inSource.mProperty_lkey ;
-  mProperty_mConverter = inSource.mProperty_mConverter ;
-  return *this ;
-}
-
-//---Synthetized initializer -----------------------------------------------------------------------
-
-GGS_implicitConversionToBooleanMap_2E_element GGS_implicitConversionToBooleanMap_2E_element::init_21__21_ (const GGS_lstring & in_lkey,
-                                                                                                           const GGS_abstractImplicitConverterToBoolean & in_mConverter,
-                                                                                                           Compiler * inCompiler
-                                                                                                           COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_implicitConversionToBooleanMap_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_lkey = in_lkey ;
-  result.mProperty_mConverter = in_mConverter ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_implicitConversionToBooleanMap_2E_element::setInitializedProperties (Compiler * /* inCompiler */) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_implicitConversionToBooleanMap_2E_element::GGS_implicitConversionToBooleanMap_2E_element (const GGS_lstring & inOperand0,
-                                                                                              const GGS_abstractImplicitConverterToBoolean & inOperand1) :
-mProperty_lkey (inOperand0),
-mProperty_mConverter (inOperand1) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_implicitConversionToBooleanMap_2E_element::isValid (void) const {
-  return mProperty_lkey.isValid () && mProperty_mConverter.isValid () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_implicitConversionToBooleanMap_2E_element::drop (void) {
-  mProperty_lkey.drop () ;
-  mProperty_mConverter.drop () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_implicitConversionToBooleanMap_2E_element::description (String & ioString,
-                                                                 const int32_t inIndentation) const {
-  ioString.appendCString ("<struct @implicitConversionToBooleanMap.element:") ;
-  if (! isValid ()) {
-    ioString.appendCString (" not built") ;
-  }else{
-    mProperty_lkey.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mConverter.description (ioString, inIndentation+1) ;
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//     @implicitConversionToBooleanMap.element generic code implementation
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_implicitConversionToBooleanMap_2E_element ("implicitConversionToBooleanMap.element",
-                                                                                              nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor * GGS_implicitConversionToBooleanMap_2E_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_implicitConversionToBooleanMap_2E_element ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_implicitConversionToBooleanMap_2E_element::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_implicitConversionToBooleanMap_2E_element (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_implicitConversionToBooleanMap_2E_element GGS_implicitConversionToBooleanMap_2E_element::extractObject (const GGS_object & inObject,
-                                                                                                            Compiler * inCompiler
-                                                                                                            COMMA_LOCATION_ARGS) {
-  GGS_implicitConversionToBooleanMap_2E_element result ;
-  const GGS_implicitConversionToBooleanMap_2E_element * p = (const GGS_implicitConversionToBooleanMap_2E_element *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_implicitConversionToBooleanMap_2E_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("implicitConversionToBooleanMap.element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//Optional @implicitConversionToBooleanMap_2E_element_3F_
-//--------------------------------------------------------------------------------------------------
-
-GGS_implicitConversionToBooleanMap_2E_element_3F_::GGS_implicitConversionToBooleanMap_2E_element_3F_ (void) :
-AC_GALGAS_root (),
-mValue (),
-mState (OptionalState::invalid) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_implicitConversionToBooleanMap_2E_element_3F_::GGS_implicitConversionToBooleanMap_2E_element_3F_ (const GGS_implicitConversionToBooleanMap_2E_element & inSource) :
-AC_GALGAS_root (),
-mValue (inSource),
-mState (OptionalState::valuated) {
-}
-
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_implicitConversionToBooleanMap_2E_element_3F_ GGS_implicitConversionToBooleanMap_2E_element_3F_::init_nil (void) {
-  GGS_implicitConversionToBooleanMap_2E_element_3F_ result ;
-  result.mState = OptionalState::isNil ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_implicitConversionToBooleanMap_2E_element_3F_::isValid (void) const {
-  bool result = false ;
-  switch (mState) {
-  case OptionalState::invalid :
-    break ;
-  case OptionalState::isNil :
-    result = true ;
-    break ;
-  case OptionalState::valuated :
-    result = mValue.isValid () ;
-    break ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_implicitConversionToBooleanMap_2E_element_3F_::isValuated (void) const {
-  return (mState == OptionalState::valuated) && mValue.isValid () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_implicitConversionToBooleanMap_2E_element_3F_::drop (void) {
-  mState = OptionalState::invalid ;
-  mValue = GGS_implicitConversionToBooleanMap_2E_element () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_implicitConversionToBooleanMap_2E_element_3F_::description (String & ioString,
-                                                                     const int32_t inIndentation) const {
-  ioString.appendCString ("<optional @") ;
-  ioString.appendString (staticTypeDescriptor ()->mGalgasTypeName) ;
-  ioString.appendCString (": ") ;
-  switch (mState) {
-  case OptionalState::invalid :
-    ioString.appendCString ("invalid") ;
-    break ;
-  case OptionalState::isNil :
-    ioString.appendCString ("nil") ;
-    break ;
-  case OptionalState::valuated :
-    mValue.description (ioString, inIndentation) ;
-    break ;
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//     @implicitConversionToBooleanMap.element? generic code implementation
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_implicitConversionToBooleanMap_2E_element_3F_ ("implicitConversionToBooleanMap.element?",
-                                                                                                  nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor * GGS_implicitConversionToBooleanMap_2E_element_3F_::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_implicitConversionToBooleanMap_2E_element_3F_ ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_implicitConversionToBooleanMap_2E_element_3F_::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_implicitConversionToBooleanMap_2E_element_3F_ (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_implicitConversionToBooleanMap_2E_element_3F_ GGS_implicitConversionToBooleanMap_2E_element_3F_::extractObject (const GGS_object & inObject,
-                                                                                                                    Compiler * inCompiler
-                                                                                                                    COMMA_LOCATION_ARGS) {
-  GGS_implicitConversionToBooleanMap_2E_element_3F_ result ;
-  const GGS_implicitConversionToBooleanMap_2E_element_3F_ * p = (const GGS_implicitConversionToBooleanMap_2E_element_3F_ *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_implicitConversionToBooleanMap_2E_element_3F_ *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("implicitConversionToBooleanMap.element?", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_interruptionPanicCode_2E_code::GGS_interruptionPanicCode_2E_code (void) :
-mProperty_value () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_interruptionPanicCode_2E_code::GGS_interruptionPanicCode_2E_code (const GGS_interruptionPanicCode_2E_code & inSource) :
-mProperty_value (inSource.mProperty_value) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_interruptionPanicCode_2E_code & GGS_interruptionPanicCode_2E_code::operator = (const GGS_interruptionPanicCode_2E_code & inSource) {
-  mProperty_value = inSource.mProperty_value ;
-  return *this ;
-}
-
-//---Synthetized initializer -----------------------------------------------------------------------
-
-GGS_interruptionPanicCode_2E_code GGS_interruptionPanicCode_2E_code::init_21_ (const GGS_lbigint & in_value,
-                                                                               Compiler * inCompiler
-                                                                               COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_interruptionPanicCode_2E_code result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_value = in_value ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_interruptionPanicCode_2E_code::setInitializedProperties (Compiler * /* inCompiler */) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_interruptionPanicCode_2E_code::GGS_interruptionPanicCode_2E_code (const GGS_lbigint & inOperand0) :
-mProperty_value (inOperand0) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_interruptionPanicCode_2E_code::isValid (void) const {
-  return mProperty_value.isValid () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_interruptionPanicCode_2E_code::drop (void) {
-  mProperty_value.drop () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_interruptionPanicCode_2E_code::description (String & ioString,
-                                                     const int32_t inIndentation) const {
-  ioString.appendCString ("<struct @interruptionPanicCode.code:") ;
-  if (! isValid ()) {
-    ioString.appendCString (" not built") ;
-  }else{
-    mProperty_value.description (ioString, inIndentation+1) ;
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//     @interruptionPanicCode.code generic code implementation
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_interruptionPanicCode_2E_code ("interruptionPanicCode.code",
-                                                                                  nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor * GGS_interruptionPanicCode_2E_code::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_interruptionPanicCode_2E_code ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_interruptionPanicCode_2E_code::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_interruptionPanicCode_2E_code (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_interruptionPanicCode_2E_code GGS_interruptionPanicCode_2E_code::extractObject (const GGS_object & inObject,
-                                                                                    Compiler * inCompiler
-                                                                                    COMMA_LOCATION_ARGS) {
-  GGS_interruptionPanicCode_2E_code result ;
-  const GGS_interruptionPanicCode_2E_code * p = (const GGS_interruptionPanicCode_2E_code *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_interruptionPanicCode_2E_code *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("interruptionPanicCode.code", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//Optional @interruptionPanicCode_2E_code_3F_
-//--------------------------------------------------------------------------------------------------
-
-GGS_interruptionPanicCode_2E_code_3F_::GGS_interruptionPanicCode_2E_code_3F_ (void) :
-AC_GALGAS_root (),
-mValue (),
-mState (OptionalState::invalid) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_interruptionPanicCode_2E_code_3F_::GGS_interruptionPanicCode_2E_code_3F_ (const GGS_interruptionPanicCode_2E_code & inSource) :
-AC_GALGAS_root (),
-mValue (inSource),
-mState (OptionalState::valuated) {
-}
-
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_interruptionPanicCode_2E_code_3F_ GGS_interruptionPanicCode_2E_code_3F_::init_nil (void) {
-  GGS_interruptionPanicCode_2E_code_3F_ result ;
-  result.mState = OptionalState::isNil ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_interruptionPanicCode_2E_code_3F_::isValid (void) const {
-  bool result = false ;
-  switch (mState) {
-  case OptionalState::invalid :
-    break ;
-  case OptionalState::isNil :
-    result = true ;
-    break ;
-  case OptionalState::valuated :
-    result = mValue.isValid () ;
-    break ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_interruptionPanicCode_2E_code_3F_::isValuated (void) const {
-  return (mState == OptionalState::valuated) && mValue.isValid () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_interruptionPanicCode_2E_code_3F_::drop (void) {
-  mState = OptionalState::invalid ;
-  mValue = GGS_interruptionPanicCode_2E_code () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_interruptionPanicCode_2E_code_3F_::description (String & ioString,
-                                                         const int32_t inIndentation) const {
-  ioString.appendCString ("<optional @") ;
-  ioString.appendString (staticTypeDescriptor ()->mGalgasTypeName) ;
-  ioString.appendCString (": ") ;
-  switch (mState) {
-  case OptionalState::invalid :
-    ioString.appendCString ("invalid") ;
-    break ;
-  case OptionalState::isNil :
-    ioString.appendCString ("nil") ;
-    break ;
-  case OptionalState::valuated :
-    mValue.description (ioString, inIndentation) ;
-    break ;
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//     @interruptionPanicCode.code? generic code implementation
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_interruptionPanicCode_2E_code_3F_ ("interruptionPanicCode.code?",
-                                                                                      nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor * GGS_interruptionPanicCode_2E_code_3F_::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_interruptionPanicCode_2E_code_3F_ ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_interruptionPanicCode_2E_code_3F_::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_interruptionPanicCode_2E_code_3F_ (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_interruptionPanicCode_2E_code_3F_ GGS_interruptionPanicCode_2E_code_3F_::extractObject (const GGS_object & inObject,
-                                                                                            Compiler * inCompiler
-                                                                                            COMMA_LOCATION_ARGS) {
-  GGS_interruptionPanicCode_2E_code_3F_ result ;
-  const GGS_interruptionPanicCode_2E_code_3F_ * p = (const GGS_interruptionPanicCode_2E_code_3F_ *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_interruptionPanicCode_2E_code_3F_ *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("interruptionPanicCode.code?", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_interruptionConfigurationList_2E_element::GGS_interruptionConfigurationList_2E_element (void) :
-mProperty_mInterruptName (),
-mProperty_mInterruptionPanicCode () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_interruptionConfigurationList_2E_element::GGS_interruptionConfigurationList_2E_element (const GGS_interruptionConfigurationList_2E_element & inSource) :
-mProperty_mInterruptName (inSource.mProperty_mInterruptName),
-mProperty_mInterruptionPanicCode (inSource.mProperty_mInterruptionPanicCode) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_interruptionConfigurationList_2E_element & GGS_interruptionConfigurationList_2E_element::operator = (const GGS_interruptionConfigurationList_2E_element & inSource) {
-  mProperty_mInterruptName = inSource.mProperty_mInterruptName ;
-  mProperty_mInterruptionPanicCode = inSource.mProperty_mInterruptionPanicCode ;
-  return *this ;
-}
-
-//---Synthetized initializer -----------------------------------------------------------------------
-
-GGS_interruptionConfigurationList_2E_element GGS_interruptionConfigurationList_2E_element::init_21__21_ (const GGS_lstring & in_mInterruptName,
-                                                                                                         const GGS_interruptionPanicCode & in_mInterruptionPanicCode,
-                                                                                                         Compiler * inCompiler
-                                                                                                         COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_interruptionConfigurationList_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_mInterruptName = in_mInterruptName ;
-  result.mProperty_mInterruptionPanicCode = in_mInterruptionPanicCode ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_interruptionConfigurationList_2E_element::setInitializedProperties (Compiler * /* inCompiler */) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_interruptionConfigurationList_2E_element::GGS_interruptionConfigurationList_2E_element (const GGS_lstring & inOperand0,
-                                                                                            const GGS_interruptionPanicCode & inOperand1) :
-mProperty_mInterruptName (inOperand0),
-mProperty_mInterruptionPanicCode (inOperand1) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_interruptionConfigurationList_2E_element::isValid (void) const {
-  return mProperty_mInterruptName.isValid () && mProperty_mInterruptionPanicCode.isValid () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_interruptionConfigurationList_2E_element::drop (void) {
-  mProperty_mInterruptName.drop () ;
-  mProperty_mInterruptionPanicCode.drop () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_interruptionConfigurationList_2E_element::description (String & ioString,
-                                                                const int32_t inIndentation) const {
-  ioString.appendCString ("<struct @interruptionConfigurationList.element:") ;
-  if (! isValid ()) {
-    ioString.appendCString (" not built") ;
-  }else{
-    mProperty_mInterruptName.description (ioString, inIndentation+1) ;
-    ioString.appendCString (", ") ;
-    mProperty_mInterruptionPanicCode.description (ioString, inIndentation+1) ;
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//     @interruptionConfigurationList.element generic code implementation
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_interruptionConfigurationList_2E_element ("interruptionConfigurationList.element",
-                                                                                             nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor * GGS_interruptionConfigurationList_2E_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_interruptionConfigurationList_2E_element ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_interruptionConfigurationList_2E_element::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_interruptionConfigurationList_2E_element (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_interruptionConfigurationList_2E_element GGS_interruptionConfigurationList_2E_element::extractObject (const GGS_object & inObject,
-                                                                                                          Compiler * inCompiler
-                                                                                                          COMMA_LOCATION_ARGS) {
-  GGS_interruptionConfigurationList_2E_element result ;
-  const GGS_interruptionConfigurationList_2E_element * p = (const GGS_interruptionConfigurationList_2E_element *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_interruptionConfigurationList_2E_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("interruptionConfigurationList.element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_ctCheckMap_2E_element::GGS_ctCheckMap_2E_element (void) :
-mProperty_lkey () {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_ctCheckMap_2E_element::GGS_ctCheckMap_2E_element (const GGS_ctCheckMap_2E_element & inSource) :
-mProperty_lkey (inSource.mProperty_lkey) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_ctCheckMap_2E_element & GGS_ctCheckMap_2E_element::operator = (const GGS_ctCheckMap_2E_element & inSource) {
-  mProperty_lkey = inSource.mProperty_lkey ;
-  return *this ;
-}
-
-//---Synthetized initializer -----------------------------------------------------------------------
-
-GGS_ctCheckMap_2E_element GGS_ctCheckMap_2E_element::init_21_ (const GGS_lstring & in_lkey,
-                                                               Compiler * inCompiler
-                                                               COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_ctCheckMap_2E_element result ;
-  result.setInitializedProperties (inCompiler) ;
-  result.mProperty_lkey = in_lkey ;
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_ctCheckMap_2E_element::setInitializedProperties (Compiler * /* inCompiler */) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_ctCheckMap_2E_element::GGS_ctCheckMap_2E_element (const GGS_lstring & inOperand0) :
-mProperty_lkey (inOperand0) {
-}
-
-//--------------------------------------------------------------------------------------------------
-
-bool GGS_ctCheckMap_2E_element::isValid (void) const {
-  return mProperty_lkey.isValid () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_ctCheckMap_2E_element::drop (void) {
-  mProperty_lkey.drop () ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-void GGS_ctCheckMap_2E_element::description (String & ioString,
-                                             const int32_t inIndentation) const {
-  ioString.appendCString ("<struct @ctCheckMap.element:") ;
-  if (! isValid ()) {
-    ioString.appendCString (" not built") ;
-  }else{
-    mProperty_lkey.description (ioString, inIndentation+1) ;
-  }
-  ioString.appendCString (">") ;
-}
-
-//--------------------------------------------------------------------------------------------------
-//     @ctCheckMap.element generic code implementation
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_ctCheckMap_2E_element ("ctCheckMap.element",
-                                                                          nullptr) ;
-
-//--------------------------------------------------------------------------------------------------
-
-const GALGAS_TypeDescriptor * GGS_ctCheckMap_2E_element::staticTypeDescriptor (void) const {
-  return & kTypeDescriptor_GALGAS_ctCheckMap_2E_element ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-AC_GALGAS_root * GGS_ctCheckMap_2E_element::clonedObject (void) const {
-  AC_GALGAS_root * result = nullptr ;
-  if (isValid ()) {
-    macroMyNew (result, GGS_ctCheckMap_2E_element (*this)) ;
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
-
-GGS_ctCheckMap_2E_element GGS_ctCheckMap_2E_element::extractObject (const GGS_object & inObject,
-                                                                    Compiler * inCompiler
-                                                                    COMMA_LOCATION_ARGS) {
-  GGS_ctCheckMap_2E_element result ;
-  const GGS_ctCheckMap_2E_element * p = (const GGS_ctCheckMap_2E_element *) inObject.embeddedObject () ;
-  if (nullptr != p) {
-    if (nullptr != dynamic_cast <const GGS_ctCheckMap_2E_element *> (p)) {
-      result = *p ;
-    }else{
-      inCompiler->castError ("ctCheckMap.element", p->dynamicTypeDescriptor () COMMA_THERE) ;
-    }  
-  }
-  return result ;
-}
-
-//--------------------------------------------------------------------------------------------------
 //Optional @ctCheckMap_2E_element_3F_
 //--------------------------------------------------------------------------------------------------
 
@@ -14709,16 +12485,16 @@ void extensionMethod_taskSemanticAnalysis (const GGS_decoratedTaskList_2E_elemen
                                            GGS_intermediateCodeStruct & ioArgument_ioIntermediateCodeStruct,
                                            Compiler * inCompiler
                                            COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_omnibusType var_taskType_14787 ;
+  GGS_omnibusType var_taskType_14783 ;
   const GGS_decoratedTaskList_2E_element temp_0 = inObject ;
-  extensionMethod_searchType (constinArgument_inContext.readProperty_mTypeMap (), temp_0.readProperty_mTaskName (), var_taskType_14787, inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 392)) ;
+  extensionMethod_searchType (constinArgument_inContext.readProperty_mTypeMap (), temp_0.readProperty_mTaskName (), var_taskType_14783, inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 392)) ;
   const GGS_decoratedTaskList_2E_element temp_1 = inObject ;
-  GGS_bigint var_stackSize_14896 = temp_1.readProperty_mStackSize ().readProperty_bigint () ;
+  GGS_bigint var_stackSize_14892 = temp_1.readProperty_mStackSize ().readProperty_bigint () ;
   GalgasBool test_2 = GalgasBool::boolTrue ;
   if (GalgasBool::boolTrue == test_2) {
-    GGS_bool test_3 = GGS_bool (ComparisonKind::lowerThan, var_stackSize_14896.objectCompare (GGS_bigint ("64", inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 395)))) ;
+    GGS_bool test_3 = GGS_bool (ComparisonKind::lowerThan, var_stackSize_14892.objectCompare (GGS_bigint ("64", inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 395)))) ;
     if (GalgasBool::boolTrue != test_3.boolEnum ()) {
-      test_3 = GGS_bool (ComparisonKind::notEqual, var_stackSize_14896.modulo_operation (GGS_bigint ("8", inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 395)), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 395)).objectCompare (GGS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 395)))) ;
+      test_3 = GGS_bool (ComparisonKind::notEqual, var_stackSize_14892.modulo_operation (GGS_bigint ("8", inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 395)), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 395)).objectCompare (GGS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 395)))) ;
     }
     test_2 = test_3.boolEnum () ;
     if (GalgasBool::boolTrue == test_2) {
@@ -14727,31 +12503,31 @@ void extensionMethod_taskSemanticAnalysis (const GGS_decoratedTaskList_2E_elemen
       inCompiler->emitSemanticError (temp_4.readProperty_mStackSize ().readProperty_location (), GGS_string ("stack size should be a multiple of 8, and >= 64"), fixItArray5  COMMA_SOURCE_FILE ("task-declaration.galgas", 396)) ;
     }
   }
-  GGS_stringlist var_setupOrderedList_15212 ;
+  GGS_stringlist var_setupOrderedList_15208 ;
   {
   const GGS_decoratedTaskList_2E_element temp_6 = inObject ;
-  routine_analyzeOrderedTaskRoutines_3F__21_ (temp_6.readProperty_mTaskSetupListAST (), var_setupOrderedList_15212, inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 399)) ;
+  routine_analyzeOrderedTaskRoutines_3F__21_ (temp_6.readProperty_mTaskSetupListAST (), var_setupOrderedList_15208, inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 399)) ;
   }
-  GGS_stringlist var_activateOrderedList_15381 ;
+  GGS_stringlist var_activateOrderedList_15377 ;
   {
   const GGS_decoratedTaskList_2E_element temp_7 = inObject ;
-  routine_analyzeOrderedTaskRoutines_3F__21_ (temp_7.readProperty_mTaskActivateListAST (), var_activateOrderedList_15381, inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 404)) ;
+  routine_analyzeOrderedTaskRoutines_3F__21_ (temp_7.readProperty_mTaskActivateListAST (), var_activateOrderedList_15377, inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 404)) ;
   }
-  GGS_stringlist var_deactivateOrderedList_15557 ;
+  GGS_stringlist var_deactivateOrderedList_15553 ;
   {
   const GGS_decoratedTaskList_2E_element temp_8 = inObject ;
-  routine_analyzeOrderedTaskRoutines_3F__21_ (temp_8.readProperty_mTaskDeactivateListAST (), var_deactivateOrderedList_15557, inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 409)) ;
+  routine_analyzeOrderedTaskRoutines_3F__21_ (temp_8.readProperty_mTaskDeactivateListAST (), var_deactivateOrderedList_15553, inCompiler  COMMA_SOURCE_FILE ("task-declaration.galgas", 409)) ;
   }
-  GGS_uint var_taskNameStringIndex_15758 ;
+  GGS_uint var_taskNameStringIndex_15754 ;
   {
   const GGS_decoratedTaskList_2E_element temp_9 = inObject ;
-  extensionSetter_findOrAddStaticString (ioArgument_ioIntermediateCodeStruct.mProperty_mStaticEntityMap, temp_9.readProperty_mTaskName ().readProperty_string (), var_taskNameStringIndex_15758, inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 414)) ;
+  extensionSetter_findOrAddStaticString (ioArgument_ioIntermediateCodeStruct.mProperty_mStaticEntityMap, temp_9.readProperty_mTaskName ().readProperty_string (), var_taskNameStringIndex_15754, inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 414)) ;
   }
   {
   const GGS_decoratedTaskList_2E_element temp_10 = inObject ;
   const GGS_decoratedTaskList_2E_element temp_11 = inObject ;
   const GGS_decoratedTaskList_2E_element temp_12 = inObject ;
-  ioArgument_ioIntermediateCodeStruct.mProperty_mTaskMapIR.setter_insertKey (temp_10.readProperty_mTaskName (), var_taskType_14787, constinArgument_inPriority, temp_11.readProperty_mStackSize ().readProperty_bigint (), var_setupOrderedList_15212, var_activateOrderedList_15381, var_deactivateOrderedList_15557, var_taskNameStringIndex_15758, temp_12.readProperty_mAutoStart (), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 416)) ;
+  ioArgument_ioIntermediateCodeStruct.mProperty_mTaskMapIR.setter_insertKey (temp_10.readProperty_mTaskName (), var_taskType_14783, constinArgument_inPriority, temp_11.readProperty_mStackSize ().readProperty_bigint (), var_setupOrderedList_15208, var_activateOrderedList_15377, var_deactivateOrderedList_15553, var_taskNameStringIndex_15754, temp_12.readProperty_mAutoStart (), inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas", 416)) ;
   }
 }
 
@@ -15022,11 +12798,11 @@ void extensionMethod_generateLLVMDriverVariableDefinition (const GGS_driverListI
   const GGS_driverListIR_2E_element temp_1 = inObject ;
   ioArgument_ioLLVMcode.plusAssignOperation(callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) temp_1.readProperty_mType ().ptr (), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 427)).add_operation (GGS_string (" {"), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 427)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 427)) ;
   const GGS_driverListIR_2E_element temp_2 = inObject ;
-  UpEnumerator_operandIRList enumerator_18064 (temp_2.readProperty_mInitialValueList ()) ;
-  while (enumerator_18064.hasCurrentObject ()) {
-    ioArgument_ioLLVMcode.plusAssignOperation(extensionGetter_llvmTypeName (enumerator_18064.current_mOperand (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 429)).add_operation (GGS_string (" "), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 429)).add_operation (extensionGetter_llvmValue (enumerator_18064.current_mOperand (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 429)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 429)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 429)) ;
-    enumerator_18064.gotoNextObject () ;
-    if (enumerator_18064.hasCurrentObject ()) {
+  UpEnumerator_operandIRList enumerator_18060 (temp_2.readProperty_mInitialValueList ()) ;
+  while (enumerator_18060.hasCurrentObject ()) {
+    ioArgument_ioLLVMcode.plusAssignOperation(extensionGetter_llvmTypeName (enumerator_18060.current_mOperand (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 429)).add_operation (GGS_string (" "), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 429)).add_operation (extensionGetter_llvmValue (enumerator_18060.current_mOperand (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 429)), inCompiler COMMA_SOURCE_FILE ("declaration-driver.galgas", 429)), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 429)) ;
+    enumerator_18060.gotoNextObject () ;
+    if (enumerator_18060.hasCurrentObject ()) {
       ioArgument_ioLLVMcode.plusAssignOperation(GGS_string (", "), inCompiler  COMMA_SOURCE_FILE ("declaration-driver.galgas", 430)) ;
     }
   }
@@ -15410,111 +13186,111 @@ void extensionMethod_buildControlRegisterMapForGroup (const GGS_controlRegisterD
                                                       GGS_staticEntityMap & ioArgument_ioStaticEntityMap,
                                                       Compiler * inCompiler
                                                       COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_omnibusType var_registerType_20140 ;
-  GGS_uint var_registerBitCount_20167 ;
+  GGS_omnibusType var_registerType_20118 ;
+  GGS_uint var_registerBitCount_20145 ;
   {
   const GGS_controlRegisterDeclarationList_2E_element temp_0 = inObject ;
-  routine_controlRegisterType_3F__26_context_21_type_21_bitCount (temp_0.readProperty_mRegisterTypeName (), ioArgument_ioContext, var_registerType_20140, var_registerBitCount_20167, inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 492)) ;
+  routine_controlRegisterType_3F__26_context_21_type_21_bitCount (temp_0.readProperty_mRegisterTypeName (), ioArgument_ioContext, var_registerType_20118, var_registerBitCount_20145, inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 492)) ;
   }
-  GGS_controlRegisterFieldMap var_registerFieldMap_20404 ;
-  GGS_sliceMap var_registerBitSliceMap_20430 ;
-  GGS_controlRegisterFieldList var_controlRegisterFieldList_20459 ;
+  GGS_controlRegisterFieldMap var_registerFieldMap_20382 ;
+  GGS_sliceMap var_registerBitSliceMap_20408 ;
+  GGS_controlRegisterFieldList var_controlRegisterFieldList_20437 ;
   {
   const GGS_controlRegisterDeclarationList_2E_element temp_1 = inObject ;
   const GGS_controlRegisterDeclarationList_2E_element temp_2 = inObject ;
-  routine_buildControlRegisterSliceMap_3F__3F__26_context_26_type_3F_bitCount_21__21__21_ (temp_1.readProperty_mRegisterBitSliceList (), temp_2.readProperty_mRegisterBitSliceListLocation (), ioArgument_ioContext, var_registerType_20140, var_registerBitCount_20167, var_registerFieldMap_20404, var_registerBitSliceMap_20430, var_controlRegisterFieldList_20459, inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 494)) ;
+  routine_buildControlRegisterSliceMap_3F__3F__26_context_26_type_3F_bitCount_21__21__21_ (temp_1.readProperty_mRegisterBitSliceList (), temp_2.readProperty_mRegisterBitSliceListLocation (), ioArgument_ioContext, var_registerType_20118, var_registerBitCount_20145, var_registerFieldMap_20382, var_registerBitSliceMap_20408, var_controlRegisterFieldList_20437, inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 494)) ;
   }
   const GGS_controlRegisterDeclarationList_2E_element temp_3 = inObject ;
-  UpEnumerator_controlRegisterNameListAST enumerator_20542 (temp_3.readProperty_mRegisterArrayList ()) ;
-  while (enumerator_20542.hasCurrentObject ()) {
-    GGS_objectIR var_addressOffsetExpressionResult_20880 ;
+  UpEnumerator_controlRegisterNameListAST enumerator_20520 (temp_3.readProperty_mRegisterArrayList ()) ;
+  while (enumerator_20520.hasCurrentObject ()) {
+    GGS_objectIR var_addressOffsetExpressionResult_20858 ;
     {
-    routine_computeStaticExpression_26_context_26_staticEntityMap_3F_expression_3F_errorLocation_3F_optionalContextualTypeName_21_result (ioArgument_ioContext, ioArgument_ioStaticEntityMap, enumerator_20542.current (HERE).readProperty_mRegisterOffset (), enumerator_20542.current (HERE).readProperty_mRegisterOffsetLocation (), GGS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("declaration-control-register.galgas", 512)), var_addressOffsetExpressionResult_20880, inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 507)) ;
+    routine_computeStaticExpression_26_context_26_staticEntityMap_3F_expression_3F_errorLocation_3F_optionalContextualTypeName_21_result (ioArgument_ioContext, ioArgument_ioStaticEntityMap, enumerator_20520.current (HERE).readProperty_mRegisterOffset (), enumerator_20520.current (HERE).readProperty_mRegisterOffsetLocation (), GGS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("declaration-control-register.galgas", 512)), var_addressOffsetExpressionResult_20858, inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 507)) ;
     }
-    GGS_bigint var_registerAddressOffset_20932 ;
+    GGS_bigint var_registerAddressOffset_20910 ;
     GalgasBool test_4 = GalgasBool::boolTrue ;
     if (GalgasBool::boolTrue == test_4) {
-      test_4 = var_addressOffsetExpressionResult_20880.getter_isLiteralInteger (SOURCE_FILE ("declaration-control-register.galgas", 516)).operator_not (SOURCE_FILE ("declaration-control-register.galgas", 516)).boolEnum () ;
+      test_4 = var_addressOffsetExpressionResult_20858.getter_isLiteralInteger (SOURCE_FILE ("declaration-control-register.galgas", 516)).operator_not (SOURCE_FILE ("declaration-control-register.galgas", 516)).boolEnum () ;
       if (GalgasBool::boolTrue == test_4) {
         GenericArray <FixItDescription> fixItArray5 ;
-        inCompiler->emitSemanticError (enumerator_20542.current (HERE).readProperty_mRegisterOffsetLocation (), GGS_string ("control register address offset is not a static integer expression"), fixItArray5  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 517)) ;
-        var_registerAddressOffset_20932.drop () ; // Release error dropped variable
+        inCompiler->emitSemanticError (enumerator_20520.current (HERE).readProperty_mRegisterOffsetLocation (), GGS_string ("control register address offset is not a static integer expression"), fixItArray5  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 517)) ;
+        var_registerAddressOffset_20910.drop () ; // Release error dropped variable
       }
     }
     if (GalgasBool::boolFalse == test_4) {
-      GGS_omnibusType joker_21243_1 ; // Joker input parameter
-      var_addressOffsetExpressionResult_20880.method_extractLiteralInteger (joker_21243_1, var_registerAddressOffset_20932, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 521)) ;
+      GGS_omnibusType joker_21221_1 ; // Joker input parameter
+      var_addressOffsetExpressionResult_20858.method_extractLiteralInteger (joker_21221_1, var_registerAddressOffset_20910, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 521)) ;
     }
-    GGS_bigint var_arraySize_21301 ;
-    GGS_uint var_elementArraySize_21325 ;
-    switch (enumerator_20542.current (HERE).readProperty_mControlRegisterKind ().enumValue ()) {
+    GGS_bigint var_arraySize_21279 ;
+    GGS_uint var_elementArraySize_21303 ;
+    switch (enumerator_20520.current (HERE).readProperty_mControlRegisterKind ().enumValue ()) {
     case GGS_controlRegisterKind::Enumeration::invalid:
       break ;
     case GGS_controlRegisterKind::Enumeration::enum_scalar:
       {
-        var_arraySize_21301 = GGS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 527)) ;
-        var_elementArraySize_21325 = GGS_uint (uint32_t (0U)) ;
+        var_arraySize_21279 = GGS_bigint ("0", inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 527)) ;
+        var_elementArraySize_21303 = GGS_uint (uint32_t (0U)) ;
       }
       break ;
     case GGS_controlRegisterKind::Enumeration::enum_registerArray:
       {
-        GGS_expressionAST extractedValue_21487_arraySizeExpression_0 ;
-        GGS_location extractedValue_21517_arraySizeLocation_1 ;
-        GGS_expressionAST extractedValue_21574_arrayElementSizeExpression_2 ;
-        GGS_location extractedValue_21611_arrayElementSizeLocation_3 ;
-        enumerator_20542.current (HERE).readProperty_mControlRegisterKind ().getAssociatedValuesFor_registerArray (extractedValue_21487_arraySizeExpression_0, extractedValue_21517_arraySizeLocation_1, extractedValue_21574_arrayElementSizeExpression_2, extractedValue_21611_arrayElementSizeLocation_3) ;
-        GGS_objectIR var_sizeExpressionResult_21955 ;
+        GGS_expressionAST extractedValue_21465_arraySizeExpression_0 ;
+        GGS_location extractedValue_21495_arraySizeLocation_1 ;
+        GGS_expressionAST extractedValue_21552_arrayElementSizeExpression_2 ;
+        GGS_location extractedValue_21589_arrayElementSizeLocation_3 ;
+        enumerator_20520.current (HERE).readProperty_mControlRegisterKind ().getAssociatedValuesFor_registerArray (extractedValue_21465_arraySizeExpression_0, extractedValue_21495_arraySizeLocation_1, extractedValue_21552_arrayElementSizeExpression_2, extractedValue_21589_arrayElementSizeLocation_3) ;
+        GGS_objectIR var_sizeExpressionResult_21931 ;
         {
-        routine_computeStaticExpression_26_context_26_staticEntityMap_3F_expression_3F_errorLocation_3F_optionalContextualTypeName_21_result (ioArgument_ioContext, ioArgument_ioStaticEntityMap, extractedValue_21487_arraySizeExpression_0, extractedValue_21517_arraySizeLocation_1, GGS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("declaration-control-register.galgas", 537)), var_sizeExpressionResult_21955, inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 532)) ;
+        routine_computeStaticExpression_26_context_26_staticEntityMap_3F_expression_3F_errorLocation_3F_optionalContextualTypeName_21_result (ioArgument_ioContext, ioArgument_ioStaticEntityMap, extractedValue_21465_arraySizeExpression_0, extractedValue_21495_arraySizeLocation_1, GGS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("declaration-control-register.galgas", 537)), var_sizeExpressionResult_21931, inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 532)) ;
         }
         GalgasBool test_6 = GalgasBool::boolTrue ;
         if (GalgasBool::boolTrue == test_6) {
-          test_6 = var_sizeExpressionResult_21955.getter_isLiteralInteger (SOURCE_FILE ("declaration-control-register.galgas", 540)).operator_not (SOURCE_FILE ("declaration-control-register.galgas", 540)).boolEnum () ;
+          test_6 = var_sizeExpressionResult_21931.getter_isLiteralInteger (SOURCE_FILE ("declaration-control-register.galgas", 540)).operator_not (SOURCE_FILE ("declaration-control-register.galgas", 540)).boolEnum () ;
           if (GalgasBool::boolTrue == test_6) {
             GenericArray <FixItDescription> fixItArray7 ;
-            inCompiler->emitSemanticError (extractedValue_21517_arraySizeLocation_1, GGS_string ("control register address is not a static integer expression"), fixItArray7  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 541)) ;
-            var_arraySize_21301.drop () ; // Release error dropped variable
+            inCompiler->emitSemanticError (extractedValue_21495_arraySizeLocation_1, GGS_string ("control register address is not a static integer expression"), fixItArray7  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 541)) ;
+            var_arraySize_21279.drop () ; // Release error dropped variable
           }
         }
         if (GalgasBool::boolFalse == test_6) {
-          GGS_omnibusType joker_22213_1 ; // Joker input parameter
-          var_sizeExpressionResult_21955.method_extractLiteralInteger (joker_22213_1, var_arraySize_21301, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 543)) ;
+          GGS_omnibusType joker_22189_1 ; // Joker input parameter
+          var_sizeExpressionResult_21931.method_extractLiteralInteger (joker_22189_1, var_arraySize_21279, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 543)) ;
           GalgasBool test_8 = GalgasBool::boolTrue ;
           if (GalgasBool::boolTrue == test_8) {
-            test_8 = GGS_bool (ComparisonKind::lowerThan, var_arraySize_21301.objectCompare (GGS_bigint ("2", inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 544)))).boolEnum () ;
+            test_8 = GGS_bool (ComparisonKind::lowerThan, var_arraySize_21279.objectCompare (GGS_bigint ("2", inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 544)))).boolEnum () ;
             if (GalgasBool::boolTrue == test_8) {
               GenericArray <FixItDescription> fixItArray9 ;
-              inCompiler->emitSemanticError (extractedValue_21517_arraySizeLocation_1, GGS_string ("control register array size should be a static integer expression >= 2, equal to a power of 2"), fixItArray9  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 545)) ;
-              var_arraySize_21301.drop () ; // Release error dropped variable
+              inCompiler->emitSemanticError (extractedValue_21495_arraySizeLocation_1, GGS_string ("control register array size should be a static integer expression >= 2, equal to a power of 2"), fixItArray9  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 545)) ;
+              var_arraySize_21279.drop () ; // Release error dropped variable
             }
           }
         }
-        GGS_objectIR var_elementArraySizeExpressionResult_22782 ;
+        GGS_objectIR var_elementArraySizeExpressionResult_22758 ;
         {
-        routine_computeStaticExpression_26_context_26_staticEntityMap_3F_expression_3F_errorLocation_3F_optionalContextualTypeName_21_result (ioArgument_ioContext, ioArgument_ioStaticEntityMap, extractedValue_21574_arrayElementSizeExpression_2, extractedValue_21611_arrayElementSizeLocation_3, GGS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("declaration-control-register.galgas", 556)), var_elementArraySizeExpressionResult_22782, inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 551)) ;
+        routine_computeStaticExpression_26_context_26_staticEntityMap_3F_expression_3F_errorLocation_3F_optionalContextualTypeName_21_result (ioArgument_ioContext, ioArgument_ioStaticEntityMap, extractedValue_21552_arrayElementSizeExpression_2, extractedValue_21589_arrayElementSizeLocation_3, GGS_string::makeEmptyString ().getter_nowhere (SOURCE_FILE ("declaration-control-register.galgas", 556)), var_elementArraySizeExpressionResult_22758, inCompiler  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 551)) ;
         }
         GalgasBool test_10 = GalgasBool::boolTrue ;
         if (GalgasBool::boolTrue == test_10) {
-          test_10 = var_elementArraySizeExpressionResult_22782.getter_isLiteralInteger (SOURCE_FILE ("declaration-control-register.galgas", 559)).operator_not (SOURCE_FILE ("declaration-control-register.galgas", 559)).boolEnum () ;
+          test_10 = var_elementArraySizeExpressionResult_22758.getter_isLiteralInteger (SOURCE_FILE ("declaration-control-register.galgas", 559)).operator_not (SOURCE_FILE ("declaration-control-register.galgas", 559)).boolEnum () ;
           if (GalgasBool::boolTrue == test_10) {
             GenericArray <FixItDescription> fixItArray11 ;
-            inCompiler->emitSemanticError (extractedValue_21611_arrayElementSizeLocation_3, GGS_string ("element size is not a static integer expression"), fixItArray11  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 560)) ;
-            var_elementArraySize_21325.drop () ; // Release error dropped variable
+            inCompiler->emitSemanticError (extractedValue_21589_arrayElementSizeLocation_3, GGS_string ("element size is not a static integer expression"), fixItArray11  COMMA_SOURCE_FILE ("declaration-control-register.galgas", 560)) ;
+            var_elementArraySize_21303.drop () ; // Release error dropped variable
           }
         }
         if (GalgasBool::boolFalse == test_10) {
-          GGS_bigint var_elementArraySizeAsBigInt_23113 ;
-          GGS_omnibusType joker_23098_1 ; // Joker input parameter
-          var_elementArraySizeExpressionResult_22782.method_extractLiteralInteger (joker_23098_1, var_elementArraySizeAsBigInt_23113, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 564)) ;
-          var_elementArraySize_21325 = var_elementArraySizeAsBigInt_23113.getter_uint (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 565)) ;
+          GGS_bigint var_elementArraySizeAsBigInt_23089 ;
+          GGS_omnibusType joker_23074_1 ; // Joker input parameter
+          var_elementArraySizeExpressionResult_22758.method_extractLiteralInteger (joker_23074_1, var_elementArraySizeAsBigInt_23089, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 564)) ;
+          var_elementArraySize_21303 = var_elementArraySizeAsBigInt_23089.getter_uint (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 565)) ;
         }
       }
       break ;
     }
     {
-    ioArgument_ioControlRegisterMap.setter_insertKey (enumerator_20542.current (HERE).readProperty_mRegisterName (), var_registerType_20140, enumerator_20542.current (HERE).readProperty_mIsReadOnly (), GGS_bool (false), var_registerBitSliceMap_20430, var_registerFieldMap_20404, var_registerAddressOffset_20932, var_controlRegisterFieldList_20459, var_registerBitCount_20167, var_arraySize_21301.getter_uint (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 578)), var_elementArraySize_21325, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 568)) ;
+    ioArgument_ioControlRegisterMap.setter_insertKey (enumerator_20520.current (HERE).readProperty_mRegisterName (), var_registerType_20118, enumerator_20520.current (HERE).readProperty_mIsReadOnly (), GGS_bool (false), var_registerBitSliceMap_20408, var_registerFieldMap_20382, var_registerAddressOffset_20910, var_controlRegisterFieldList_20437, var_registerBitCount_20145, var_arraySize_21279.getter_uint (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 578)), var_elementArraySize_21303, inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas", 568)) ;
     }
-    enumerator_20542.gotoNextObject () ;
+    enumerator_20520.gotoNextObject () ;
   }
 }
 
@@ -37402,14 +35178,6 @@ static const int32_t gProductionsTable_omnibus_grammar [516 * 2] = {
 //
 //--------------------------------------------------------------------------------------------------
 
-void cGrammar_omnibus_5F_grammar::nt_import_5F_file_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 0) {
-  rule_omnibus_5F_syntax_import_5F_file_i0_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
-
 void cGrammar_omnibus_5F_grammar::nt_import_5F_file_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 0) {
   rule_omnibus_5F_syntax_import_5F_file_i0_indexing(inLexique) ;
@@ -37432,14 +35200,6 @@ void cGrammar_omnibus_5F_grammar::nt_import_5F_file_ (GGS_lstringlist &  paramet
 //                           'start_symbol' non terminal implementation                             
 //
 //--------------------------------------------------------------------------------------------------
-
-void cGrammar_omnibus_5F_grammar::nt_start_5F_symbol_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 1) {
-  rule_omnibus_5F_syntax_start_5F_symbol_i1_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
 
 void cGrammar_omnibus_5F_grammar::nt_start_5F_symbol_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 1) {
@@ -37581,101 +35341,6 @@ void cGrammar_omnibus_5F_grammar::_performSourceStringParsing_ (Compiler * inCom
 //                           'declaration' non terminal implementation                              
 //
 //--------------------------------------------------------------------------------------------------
-
-void cGrammar_omnibus_5F_grammar::nt_declaration_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 2 :
-      rule_omnibus_5F_syntax_declaration_i2_parse(inLexique) ;
-    break ;
-  case 3 :
-      rule_omnibus_5F_syntax_declaration_i3_parse(inLexique) ;
-    break ;
-  case 5 :
-      rule_omnibus_5F_syntax_declaration_i5_parse(inLexique) ;
-    break ;
-  case 7 :
-      rule_omnibus_5F_syntax_declaration_i7_parse(inLexique) ;
-    break ;
-  case 9 :
-      rule_omnibus_5F_syntax_declaration_i9_parse(inLexique) ;
-    break ;
-  case 10 :
-      rule_omnibus_5F_syntax_declaration_i10_parse(inLexique) ;
-    break ;
-  case 17 :
-      rule_omnibus_5F_syntax_declaration_i17_parse(inLexique) ;
-    break ;
-  case 18 :
-      rule_omnibus_5F_syntax_declaration_i18_parse(inLexique) ;
-    break ;
-  case 24 :
-      rule_omnibus_5F_syntax_declaration_i24_parse(inLexique) ;
-    break ;
-  case 27 :
-      rule_omnibus_5F_syntax_declaration_i27_parse(inLexique) ;
-    break ;
-  case 29 :
-      rule_omnibus_5F_syntax_declaration_i29_parse(inLexique) ;
-    break ;
-  case 31 :
-      rule_omnibus_5F_syntax_declaration_i31_parse(inLexique) ;
-    break ;
-  case 32 :
-      rule_omnibus_5F_syntax_declaration_i32_parse(inLexique) ;
-    break ;
-  case 38 :
-      rule_omnibus_5F_syntax_declaration_i38_parse(inLexique) ;
-    break ;
-  case 42 :
-      rule_omnibus_5F_syntax_declaration_i42_parse(inLexique) ;
-    break ;
-  case 43 :
-      rule_omnibus_5F_syntax_declaration_i43_parse(inLexique) ;
-    break ;
-  case 44 :
-      rule_omnibus_5F_syntax_declaration_i44_parse(inLexique) ;
-    break ;
-  case 63 :
-      rule_omnibus_5F_syntax_declaration_i63_parse(inLexique) ;
-    break ;
-  case 80 :
-      rule_omnibus_5F_syntax_declaration_i80_parse(inLexique) ;
-    break ;
-  case 91 :
-      rule_omnibus_5F_syntax_declaration_i91_parse(inLexique) ;
-    break ;
-  case 94 :
-      rule_omnibus_5F_syntax_declaration_i94_parse(inLexique) ;
-    break ;
-  case 96 :
-      rule_omnibus_5F_syntax_declaration_i96_parse(inLexique) ;
-    break ;
-  case 100 :
-      rule_omnibus_5F_syntax_declaration_i100_parse(inLexique) ;
-    break ;
-  case 104 :
-      rule_omnibus_5F_syntax_declaration_i104_parse(inLexique) ;
-    break ;
-  case 106 :
-      rule_omnibus_5F_syntax_declaration_i106_parse(inLexique) ;
-    break ;
-  case 128 :
-      rule_omnibus_5F_syntax_declaration_i128_parse(inLexique) ;
-    break ;
-  case 129 :
-      rule_omnibus_5F_syntax_declaration_i129_parse(inLexique) ;
-    break ;
-  case 135 :
-      rule_omnibus_5F_syntax_declaration_i135_parse(inLexique) ;
-    break ;
-  case 141 :
-      rule_omnibus_5F_syntax_declaration_i141_parse(inLexique) ;
-    break ;
-  default :
-    inLexique->internalBottomUpParserError (HERE) ;
-    break ;
-  }
-}
 
 void cGrammar_omnibus_5F_grammar::nt_declaration_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   switch (inLexique->nextProductionIndex ()) {
@@ -37874,14 +35539,6 @@ void cGrammar_omnibus_5F_grammar::nt_declaration_ (GGS_ast &  parameter_1,
 //
 //--------------------------------------------------------------------------------------------------
 
-void cGrammar_omnibus_5F_grammar::nt_task_5F_event_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 4) {
-  rule_omnibus_5F_syntax_task_5F_event_i4_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
-
 void cGrammar_omnibus_5F_grammar::nt_task_5F_event_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 4) {
   rule_omnibus_5F_syntax_task_5F_event_i4_indexing(inLexique) ;
@@ -37909,14 +35566,6 @@ void cGrammar_omnibus_5F_grammar::nt_task_5F_event_ (GGS_ast &  parameter_1,
 //
 //--------------------------------------------------------------------------------------------------
 
-void cGrammar_omnibus_5F_grammar::nt_staticArrayProperty_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 6) {
-  rule_omnibus_5F_syntax_staticArrayProperty_i6_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
-
 void cGrammar_omnibus_5F_grammar::nt_staticArrayProperty_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 6) {
   rule_omnibus_5F_syntax_staticArrayProperty_i6_indexing(inLexique) ;
@@ -37941,14 +35590,6 @@ void cGrammar_omnibus_5F_grammar::nt_staticArrayProperty_ (GGS_ast &  parameter_
 //
 //--------------------------------------------------------------------------------------------------
 
-void cGrammar_omnibus_5F_grammar::nt_staticArray_5F_exp_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 8) {
-  rule_omnibus_5F_syntax_staticArray_5F_exp_i8_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
-
 void cGrammar_omnibus_5F_grammar::nt_staticArray_5F_exp_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 8) {
   rule_omnibus_5F_syntax_staticArray_5F_exp_i8_indexing(inLexique) ;
@@ -37972,23 +35613,6 @@ void cGrammar_omnibus_5F_grammar::nt_staticArray_5F_exp_ (GGS_ast &  parameter_1
 //                         'type_definition' non terminal implementation                            
 //
 //--------------------------------------------------------------------------------------------------
-
-void cGrammar_omnibus_5F_grammar::nt_type_5F_definition_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 11 :
-      rule_omnibus_5F_syntax_type_5F_definition_i11_parse(inLexique) ;
-    break ;
-  case 39 :
-      rule_omnibus_5F_syntax_type_5F_definition_i39_parse(inLexique) ;
-    break ;
-  case 111 :
-      rule_omnibus_5F_syntax_type_5F_definition_i111_parse(inLexique) ;
-    break ;
-  default :
-    inLexique->internalBottomUpParserError (HERE) ;
-    break ;
-  }
-}
 
 void cGrammar_omnibus_5F_grammar::nt_type_5F_definition_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   switch (inLexique->nextProductionIndex ()) {
@@ -38032,14 +35656,6 @@ void cGrammar_omnibus_5F_grammar::nt_type_5F_definition_ (GGS_ast &  parameter_1
 //
 //--------------------------------------------------------------------------------------------------
 
-void cGrammar_omnibus_5F_grammar::nt_llvm_5F_instruction_5F_list_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 12) {
-  rule_omnibus_5F_syntax_llvm_5F_instruction_5F_list_i12_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
-
 void cGrammar_omnibus_5F_grammar::nt_llvm_5F_instruction_5F_list_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 12) {
   rule_omnibus_5F_syntax_llvm_5F_instruction_5F_list_i12_indexing(inLexique) ;
@@ -38062,20 +35678,6 @@ void cGrammar_omnibus_5F_grammar::nt_llvm_5F_instruction_5F_list_ (GGS_llvmGener
 //                         'llvm_instruction' non terminal implementation                           
 //
 //--------------------------------------------------------------------------------------------------
-
-void cGrammar_omnibus_5F_grammar::nt_llvm_5F_instruction_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 13 :
-      rule_omnibus_5F_syntax_llvm_5F_instruction_i13_parse(inLexique) ;
-    break ;
-  case 14 :
-      rule_omnibus_5F_syntax_llvm_5F_instruction_i14_parse(inLexique) ;
-    break ;
-  default :
-    inLexique->internalBottomUpParserError (HERE) ;
-    break ;
-  }
-}
 
 void cGrammar_omnibus_5F_grammar::nt_llvm_5F_instruction_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   switch (inLexique->nextProductionIndex ()) {
@@ -38111,68 +35713,6 @@ void cGrammar_omnibus_5F_grammar::nt_llvm_5F_instruction_ (GGS_abstractLLVMInstr
 //                           'instruction' non terminal implementation                              
 //
 //--------------------------------------------------------------------------------------------------
-
-void cGrammar_omnibus_5F_grammar::nt_instruction_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 15 :
-      rule_omnibus_5F_syntax_instruction_i15_parse(inLexique) ;
-    break ;
-  case 33 :
-      rule_omnibus_5F_syntax_instruction_i33_parse(inLexique) ;
-    break ;
-  case 37 :
-      rule_omnibus_5F_syntax_instruction_i37_parse(inLexique) ;
-    break ;
-  case 40 :
-      rule_omnibus_5F_syntax_instruction_i40_parse(inLexique) ;
-    break ;
-  case 45 :
-      rule_omnibus_5F_syntax_instruction_i45_parse(inLexique) ;
-    break ;
-  case 84 :
-      rule_omnibus_5F_syntax_instruction_i84_parse(inLexique) ;
-    break ;
-  case 86 :
-      rule_omnibus_5F_syntax_instruction_i86_parse(inLexique) ;
-    break ;
-  case 87 :
-      rule_omnibus_5F_syntax_instruction_i87_parse(inLexique) ;
-    break ;
-  case 88 :
-      rule_omnibus_5F_syntax_instruction_i88_parse(inLexique) ;
-    break ;
-  case 92 :
-      rule_omnibus_5F_syntax_instruction_i92_parse(inLexique) ;
-    break ;
-  case 93 :
-      rule_omnibus_5F_syntax_instruction_i93_parse(inLexique) ;
-    break ;
-  case 97 :
-      rule_omnibus_5F_syntax_instruction_i97_parse(inLexique) ;
-    break ;
-  case 102 :
-      rule_omnibus_5F_syntax_instruction_i102_parse(inLexique) ;
-    break ;
-  case 103 :
-      rule_omnibus_5F_syntax_instruction_i103_parse(inLexique) ;
-    break ;
-  case 113 :
-      rule_omnibus_5F_syntax_instruction_i113_parse(inLexique) ;
-    break ;
-  case 119 :
-      rule_omnibus_5F_syntax_instruction_i119_parse(inLexique) ;
-    break ;
-  case 127 :
-      rule_omnibus_5F_syntax_instruction_i127_parse(inLexique) ;
-    break ;
-  case 142 :
-      rule_omnibus_5F_syntax_instruction_i142_parse(inLexique) ;
-    break ;
-  default :
-    inLexique->internalBottomUpParserError (HERE) ;
-    break ;
-  }
-}
 
 void cGrammar_omnibus_5F_grammar::nt_instruction_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   switch (inLexique->nextProductionIndex ()) {
@@ -38305,89 +35845,6 @@ void cGrammar_omnibus_5F_grammar::nt_instruction_ (GGS_ast &  parameter_1,
 //                             'primary' non terminal implementation                                
 //
 //--------------------------------------------------------------------------------------------------
-
-void cGrammar_omnibus_5F_grammar::nt_primary_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 16 :
-      rule_omnibus_5F_syntax_primary_i16_parse(inLexique) ;
-    break ;
-  case 19 :
-      rule_omnibus_5F_syntax_primary_i19_parse(inLexique) ;
-    break ;
-  case 20 :
-      rule_omnibus_5F_syntax_primary_i20_parse(inLexique) ;
-    break ;
-  case 22 :
-      rule_omnibus_5F_syntax_primary_i22_parse(inLexique) ;
-    break ;
-  case 26 :
-      rule_omnibus_5F_syntax_primary_i26_parse(inLexique) ;
-    break ;
-  case 46 :
-      rule_omnibus_5F_syntax_primary_i46_parse(inLexique) ;
-    break ;
-  case 47 :
-      rule_omnibus_5F_syntax_primary_i47_parse(inLexique) ;
-    break ;
-  case 58 :
-      rule_omnibus_5F_syntax_primary_i58_parse(inLexique) ;
-    break ;
-  case 59 :
-      rule_omnibus_5F_syntax_primary_i59_parse(inLexique) ;
-    break ;
-  case 60 :
-      rule_omnibus_5F_syntax_primary_i60_parse(inLexique) ;
-    break ;
-  case 61 :
-      rule_omnibus_5F_syntax_primary_i61_parse(inLexique) ;
-    break ;
-  case 62 :
-      rule_omnibus_5F_syntax_primary_i62_parse(inLexique) ;
-    break ;
-  case 81 :
-      rule_omnibus_5F_syntax_primary_i81_parse(inLexique) ;
-    break ;
-  case 82 :
-      rule_omnibus_5F_syntax_primary_i82_parse(inLexique) ;
-    break ;
-  case 98 :
-      rule_omnibus_5F_syntax_primary_i98_parse(inLexique) ;
-    break ;
-  case 101 :
-      rule_omnibus_5F_syntax_primary_i101_parse(inLexique) ;
-    break ;
-  case 108 :
-      rule_omnibus_5F_syntax_primary_i108_parse(inLexique) ;
-    break ;
-  case 110 :
-      rule_omnibus_5F_syntax_primary_i110_parse(inLexique) ;
-    break ;
-  case 118 :
-      rule_omnibus_5F_syntax_primary_i118_parse(inLexique) ;
-    break ;
-  case 120 :
-      rule_omnibus_5F_syntax_primary_i120_parse(inLexique) ;
-    break ;
-  case 121 :
-      rule_omnibus_5F_syntax_primary_i121_parse(inLexique) ;
-    break ;
-  case 122 :
-      rule_omnibus_5F_syntax_primary_i122_parse(inLexique) ;
-    break ;
-  case 133 :
-      rule_omnibus_5F_syntax_primary_i133_parse(inLexique) ;
-    break ;
-  case 134 :
-      rule_omnibus_5F_syntax_primary_i134_parse(inLexique) ;
-    break ;
-  case 143 :
-      rule_omnibus_5F_syntax_primary_i143_parse(inLexique) ;
-    break ;
-  default :
-    inLexique->internalBottomUpParserError (HERE) ;
-    break ;
-  }
-}
 
 void cGrammar_omnibus_5F_grammar::nt_primary_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   switch (inLexique->nextProductionIndex ()) {
@@ -38563,14 +36020,6 @@ void cGrammar_omnibus_5F_grammar::nt_primary_ (GGS_ast &  parameter_1,
 //
 //--------------------------------------------------------------------------------------------------
 
-void cGrammar_omnibus_5F_grammar::nt_expression_5F_access_5F_list_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 21) {
-  rule_omnibus_5F_syntax_expression_5F_access_5F_list_i21_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
-
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_access_5F_list_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 21) {
   rule_omnibus_5F_syntax_expression_5F_access_5F_list_i21_indexing(inLexique) ;
@@ -38595,14 +36044,6 @@ void cGrammar_omnibus_5F_grammar::nt_expression_5F_access_5F_list_ (GGS_ast &  p
 //
 //--------------------------------------------------------------------------------------------------
 
-void cGrammar_omnibus_5F_grammar::nt_llvmPrefixOperator_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 23) {
-  rule_omnibus_5F_syntax_llvmPrefixOperator_i23_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
-
 void cGrammar_omnibus_5F_grammar::nt_llvmPrefixOperator_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 23) {
   rule_omnibus_5F_syntax_llvmPrefixOperator_i23_indexing(inLexique) ;
@@ -38625,14 +36066,6 @@ void cGrammar_omnibus_5F_grammar::nt_llvmPrefixOperator_ (GGS_llvmPrefixOperator
 //                              'guard' non terminal implementation                                 
 //
 //--------------------------------------------------------------------------------------------------
-
-void cGrammar_omnibus_5F_grammar::nt_guard_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 25) {
-  rule_omnibus_5F_syntax_guard_i25_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
 
 void cGrammar_omnibus_5F_grammar::nt_guard_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 25) {
@@ -38659,14 +36092,6 @@ void cGrammar_omnibus_5F_grammar::nt_guard_ (GGS_ast &  parameter_1,
 //
 //--------------------------------------------------------------------------------------------------
 
-void cGrammar_omnibus_5F_grammar::nt_registerDeclaration_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 28) {
-  rule_omnibus_5F_syntax_registerDeclaration_i28_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
-
 void cGrammar_omnibus_5F_grammar::nt_registerDeclaration_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 28) {
   rule_omnibus_5F_syntax_registerDeclaration_i28_indexing(inLexique) ;
@@ -38690,14 +36115,6 @@ void cGrammar_omnibus_5F_grammar::nt_registerDeclaration_ (GGS_ast &  parameter_
 //                       'llvm_function_header' non terminal implementation                         
 //
 //--------------------------------------------------------------------------------------------------
-
-void cGrammar_omnibus_5F_grammar::nt_llvm_5F_function_5F_header_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 30) {
-  rule_omnibus_5F_syntax_llvm_5F_function_5F_header_i30_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
 
 void cGrammar_omnibus_5F_grammar::nt_llvm_5F_function_5F_header_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 30) {
@@ -38723,23 +36140,6 @@ void cGrammar_omnibus_5F_grammar::nt_llvm_5F_function_5F_header_ (GGS_lstring & 
 //                    'system_routine_declaration' non terminal implementation                      
 //
 //--------------------------------------------------------------------------------------------------
-
-void cGrammar_omnibus_5F_grammar::nt_system_5F_routine_5F_declaration_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 34 :
-      rule_omnibus_5F_syntax_system_5F_routine_5F_declaration_i34_parse(inLexique) ;
-    break ;
-  case 35 :
-      rule_omnibus_5F_syntax_system_5F_routine_5F_declaration_i35_parse(inLexique) ;
-    break ;
-  case 36 :
-      rule_omnibus_5F_syntax_system_5F_routine_5F_declaration_i36_parse(inLexique) ;
-    break ;
-  default :
-    inLexique->internalBottomUpParserError (HERE) ;
-    break ;
-  }
-}
 
 void cGrammar_omnibus_5F_grammar::nt_system_5F_routine_5F_declaration_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   switch (inLexique->nextProductionIndex ()) {
@@ -38783,14 +36183,6 @@ void cGrammar_omnibus_5F_grammar::nt_system_5F_routine_5F_declaration_ (GGS_ast 
 //
 //--------------------------------------------------------------------------------------------------
 
-void cGrammar_omnibus_5F_grammar::nt_procedure_5F_call_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 41) {
-  rule_omnibus_5F_syntax_procedure_5F_call_i41_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
-
 void cGrammar_omnibus_5F_grammar::nt_procedure_5F_call_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 41) {
   rule_omnibus_5F_syntax_procedure_5F_call_i41_indexing(inLexique) ;
@@ -38814,14 +36206,6 @@ void cGrammar_omnibus_5F_grammar::nt_procedure_5F_call_ (GGS_ast &  parameter_1,
 //                            'expression' non terminal implementation                              
 //
 //--------------------------------------------------------------------------------------------------
-
-void cGrammar_omnibus_5F_grammar::nt_expression_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 48) {
-  rule_omnibus_5F_syntax_expression_i48_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
 
 void cGrammar_omnibus_5F_grammar::nt_expression_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 48) {
@@ -38847,14 +36231,6 @@ void cGrammar_omnibus_5F_grammar::nt_expression_ (GGS_ast &  parameter_1,
 //
 //--------------------------------------------------------------------------------------------------
 
-void cGrammar_omnibus_5F_grammar::nt_expression_5F_logical_5F_and_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 49) {
-  rule_omnibus_5F_syntax_expression_5F_logical_5F_and_i49_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
-
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_logical_5F_and_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 49) {
   rule_omnibus_5F_syntax_expression_5F_logical_5F_and_i49_indexing(inLexique) ;
@@ -38878,14 +36254,6 @@ void cGrammar_omnibus_5F_grammar::nt_expression_5F_logical_5F_and_ (GGS_ast &  p
 //                      'expression_bitwise_or' non terminal implementation                         
 //
 //--------------------------------------------------------------------------------------------------
-
-void cGrammar_omnibus_5F_grammar::nt_expression_5F_bitwise_5F_or_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 50) {
-  rule_omnibus_5F_syntax_expression_5F_bitwise_5F_or_i50_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
 
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_bitwise_5F_or_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 50) {
@@ -38911,14 +36279,6 @@ void cGrammar_omnibus_5F_grammar::nt_expression_5F_bitwise_5F_or_ (GGS_ast &  pa
 //
 //--------------------------------------------------------------------------------------------------
 
-void cGrammar_omnibus_5F_grammar::nt_expression_5F_bitwise_5F_xor_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 51) {
-  rule_omnibus_5F_syntax_expression_5F_bitwise_5F_xor_i51_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
-
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_bitwise_5F_xor_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 51) {
   rule_omnibus_5F_syntax_expression_5F_bitwise_5F_xor_i51_indexing(inLexique) ;
@@ -38942,14 +36302,6 @@ void cGrammar_omnibus_5F_grammar::nt_expression_5F_bitwise_5F_xor_ (GGS_ast &  p
 //                      'expression_bitwise_and' non terminal implementation                        
 //
 //--------------------------------------------------------------------------------------------------
-
-void cGrammar_omnibus_5F_grammar::nt_expression_5F_bitwise_5F_and_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 52) {
-  rule_omnibus_5F_syntax_expression_5F_bitwise_5F_and_i52_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
 
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_bitwise_5F_and_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 52) {
@@ -38975,14 +36327,6 @@ void cGrammar_omnibus_5F_grammar::nt_expression_5F_bitwise_5F_and_ (GGS_ast &  p
 //
 //--------------------------------------------------------------------------------------------------
 
-void cGrammar_omnibus_5F_grammar::nt_expression_5F_equality_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 53) {
-  rule_omnibus_5F_syntax_expression_5F_equality_i53_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
-
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_equality_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 53) {
   rule_omnibus_5F_syntax_expression_5F_equality_i53_indexing(inLexique) ;
@@ -39006,14 +36350,6 @@ void cGrammar_omnibus_5F_grammar::nt_expression_5F_equality_ (GGS_ast &  paramet
 //                      'expression_comparison' non terminal implementation                         
 //
 //--------------------------------------------------------------------------------------------------
-
-void cGrammar_omnibus_5F_grammar::nt_expression_5F_comparison_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 54) {
-  rule_omnibus_5F_syntax_expression_5F_comparison_i54_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
 
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_comparison_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 54) {
@@ -39039,14 +36375,6 @@ void cGrammar_omnibus_5F_grammar::nt_expression_5F_comparison_ (GGS_ast &  param
 //
 //--------------------------------------------------------------------------------------------------
 
-void cGrammar_omnibus_5F_grammar::nt_expression_5F_shift_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 55) {
-  rule_omnibus_5F_syntax_expression_5F_shift_i55_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
-
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_shift_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 55) {
   rule_omnibus_5F_syntax_expression_5F_shift_i55_indexing(inLexique) ;
@@ -39070,14 +36398,6 @@ void cGrammar_omnibus_5F_grammar::nt_expression_5F_shift_ (GGS_ast &  parameter_
 //                       'expression_addition' non terminal implementation                          
 //
 //--------------------------------------------------------------------------------------------------
-
-void cGrammar_omnibus_5F_grammar::nt_expression_5F_addition_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 56) {
-  rule_omnibus_5F_syntax_expression_5F_addition_i56_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
 
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_addition_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 56) {
@@ -39103,14 +36423,6 @@ void cGrammar_omnibus_5F_grammar::nt_expression_5F_addition_ (GGS_ast &  paramet
 //
 //--------------------------------------------------------------------------------------------------
 
-void cGrammar_omnibus_5F_grammar::nt_expression_5F_product_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 57) {
-  rule_omnibus_5F_syntax_expression_5F_product_i57_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
-
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_product_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 57) {
   rule_omnibus_5F_syntax_expression_5F_product_i57_indexing(inLexique) ;
@@ -39134,14 +36446,6 @@ void cGrammar_omnibus_5F_grammar::nt_expression_5F_product_ (GGS_ast &  paramete
 //                     'control_register_lvalue' non terminal implementation                        
 //
 //--------------------------------------------------------------------------------------------------
-
-void cGrammar_omnibus_5F_grammar::nt_control_5F_register_5F_lvalue_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 64) {
-  rule_omnibus_5F_syntax_control_5F_register_5F_lvalue_i64_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
 
 void cGrammar_omnibus_5F_grammar::nt_control_5F_register_5F_lvalue_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 64) {
@@ -39167,14 +36471,6 @@ void cGrammar_omnibus_5F_grammar::nt_control_5F_register_5F_lvalue_ (GGS_ast &  
 //
 //--------------------------------------------------------------------------------------------------
 
-void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 65) {
-  rule_omnibus_5F_syntax_compile_5F_time_5F_expression_i65_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
-
 void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 65) {
   rule_omnibus_5F_syntax_compile_5F_time_5F_expression_i65_indexing(inLexique) ;
@@ -39197,14 +36493,6 @@ void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_ (GGS_ctExpre
 //               'compile_time_expression_bitwise_xor' non terminal implementation                  
 //
 //--------------------------------------------------------------------------------------------------
-
-void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_bitwise_5F_xor_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 66) {
-  rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_bitwise_5F_xor_i66_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
 
 void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_bitwise_5F_xor_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 66) {
@@ -39229,14 +36517,6 @@ void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_bitwise_5F
 //
 //--------------------------------------------------------------------------------------------------
 
-void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_bitwise_5F_and_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 67) {
-  rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_bitwise_5F_and_i67_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
-
 void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_bitwise_5F_and_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 67) {
   rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_bitwise_5F_and_i67_indexing(inLexique) ;
@@ -39259,14 +36539,6 @@ void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_bitwise_5F
 //                 'compile_time_expression_equality' non terminal implementation                   
 //
 //--------------------------------------------------------------------------------------------------
-
-void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_equality_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 68) {
-  rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_equality_i68_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
 
 void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_equality_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 68) {
@@ -39291,14 +36563,6 @@ void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_equality_ 
 //
 //--------------------------------------------------------------------------------------------------
 
-void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_comparison_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 69) {
-  rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_comparison_i69_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
-
 void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_comparison_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 69) {
   rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_comparison_i69_indexing(inLexique) ;
@@ -39321,14 +36585,6 @@ void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_comparison
 //                  'compile_time_expression_shift' non terminal implementation                     
 //
 //--------------------------------------------------------------------------------------------------
-
-void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_shift_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 70) {
-  rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_shift_i70_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
 
 void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_shift_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 70) {
@@ -39353,14 +36609,6 @@ void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_shift_ (GG
 //
 //--------------------------------------------------------------------------------------------------
 
-void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_addition_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 71) {
-  rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_addition_i71_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
-
 void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_addition_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 71) {
   rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_addition_i71_indexing(inLexique) ;
@@ -39384,14 +36632,6 @@ void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_addition_ 
 //
 //--------------------------------------------------------------------------------------------------
 
-void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_product_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 72) {
-  rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_product_i72_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
-
 void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_product_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 72) {
   rule_omnibus_5F_syntax_compile_5F_time_5F_expression_5F_product_i72_indexing(inLexique) ;
@@ -39414,35 +36654,6 @@ void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_expression_5F_product_ (
 //                       'compile_time_primary' non terminal implementation                         
 //
 //--------------------------------------------------------------------------------------------------
-
-void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_primary_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 73 :
-      rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i73_parse(inLexique) ;
-    break ;
-  case 74 :
-      rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i74_parse(inLexique) ;
-    break ;
-  case 75 :
-      rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i75_parse(inLexique) ;
-    break ;
-  case 76 :
-      rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i76_parse(inLexique) ;
-    break ;
-  case 77 :
-      rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i77_parse(inLexique) ;
-    break ;
-  case 78 :
-      rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i78_parse(inLexique) ;
-    break ;
-  case 79 :
-      rule_omnibus_5F_syntax_compile_5F_time_5F_primary_i79_parse(inLexique) ;
-    break ;
-  default :
-    inLexique->internalBottomUpParserError (HERE) ;
-    break ;
-  }
-}
 
 void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_primary_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   switch (inLexique->nextProductionIndex ()) {
@@ -39509,14 +36720,6 @@ void cGrammar_omnibus_5F_grammar::nt_compile_5F_time_5F_primary_ (GGS_ctExpressi
 //
 //--------------------------------------------------------------------------------------------------
 
-void cGrammar_omnibus_5F_grammar::nt_expression_5F_if_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 83) {
-  rule_omnibus_5F_syntax_expression_5F_if_i83_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
-
 void cGrammar_omnibus_5F_grammar::nt_expression_5F_if_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 83) {
   rule_omnibus_5F_syntax_expression_5F_if_i83_indexing(inLexique) ;
@@ -39540,14 +36743,6 @@ void cGrammar_omnibus_5F_grammar::nt_expression_5F_if_ (GGS_ast &  parameter_1,
 //                          'if_instruction' non terminal implementation                            
 //
 //--------------------------------------------------------------------------------------------------
-
-void cGrammar_omnibus_5F_grammar::nt_if_5F_instruction_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 85) {
-  rule_omnibus_5F_syntax_if_5F_instruction_i85_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
 
 void cGrammar_omnibus_5F_grammar::nt_if_5F_instruction_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 85) {
@@ -39573,14 +36768,6 @@ void cGrammar_omnibus_5F_grammar::nt_if_5F_instruction_ (GGS_ast &  parameter_1,
 //
 //--------------------------------------------------------------------------------------------------
 
-void cGrammar_omnibus_5F_grammar::nt_generic_5F_formal_5F_arguments_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 89) {
-  rule_omnibus_5F_syntax_generic_5F_formal_5F_arguments_i89_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
-
 void cGrammar_omnibus_5F_grammar::nt_generic_5F_formal_5F_arguments_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 89) {
   rule_omnibus_5F_syntax_generic_5F_formal_5F_arguments_i89_indexing(inLexique) ;
@@ -39603,14 +36790,6 @@ void cGrammar_omnibus_5F_grammar::nt_generic_5F_formal_5F_arguments_ (GGS_generi
 //                       'generic_where_clause' non terminal implementation                         
 //
 //--------------------------------------------------------------------------------------------------
-
-void cGrammar_omnibus_5F_grammar::nt_generic_5F_where_5F_clause_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 90) {
-  rule_omnibus_5F_syntax_generic_5F_where_5F_clause_i90_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
 
 void cGrammar_omnibus_5F_grammar::nt_generic_5F_where_5F_clause_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 90) {
@@ -39635,14 +36814,6 @@ void cGrammar_omnibus_5F_grammar::nt_generic_5F_where_5F_clause_ (GGS_ctExpressi
 //
 //--------------------------------------------------------------------------------------------------
 
-void cGrammar_omnibus_5F_grammar::nt_compileTimePrefixOperator_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 95) {
-  rule_omnibus_5F_syntax_compileTimePrefixOperator_i95_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
-
 void cGrammar_omnibus_5F_grammar::nt_compileTimePrefixOperator_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 95) {
   rule_omnibus_5F_syntax_compileTimePrefixOperator_i95_indexing(inLexique) ;
@@ -39665,14 +36836,6 @@ void cGrammar_omnibus_5F_grammar::nt_compileTimePrefixOperator_ (GGS_compileTime
 //                         'instructionList' non terminal implementation                            
 //
 //--------------------------------------------------------------------------------------------------
-
-void cGrammar_omnibus_5F_grammar::nt_instructionList_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 99) {
-  rule_omnibus_5F_syntax_instructionList_i99_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
 
 void cGrammar_omnibus_5F_grammar::nt_instructionList_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 99) {
@@ -39698,14 +36861,6 @@ void cGrammar_omnibus_5F_grammar::nt_instructionList_ (GGS_ast &  parameter_1,
 //
 //--------------------------------------------------------------------------------------------------
 
-void cGrammar_omnibus_5F_grammar::nt_compileTimeInfixOperator_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 105) {
-  rule_omnibus_5F_syntax_compileTimeInfixOperator_i105_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
-
 void cGrammar_omnibus_5F_grammar::nt_compileTimeInfixOperator_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 105) {
   rule_omnibus_5F_syntax_compileTimeInfixOperator_i105_indexing(inLexique) ;
@@ -39728,14 +36883,6 @@ void cGrammar_omnibus_5F_grammar::nt_compileTimeInfixOperator_ (GGS_compileTimeI
 //                          'isr_in_driver' non terminal implementation                             
 //
 //--------------------------------------------------------------------------------------------------
-
-void cGrammar_omnibus_5F_grammar::nt_isr_5F_in_5F_driver_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 107) {
-  rule_omnibus_5F_syntax_isr_5F_in_5F_driver_i107_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
 
 void cGrammar_omnibus_5F_grammar::nt_isr_5F_in_5F_driver_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 107) {
@@ -39760,14 +36907,6 @@ void cGrammar_omnibus_5F_grammar::nt_isr_5F_in_5F_driver_ (GGS_ast &  parameter_
 //                       'effective_parameters' non terminal implementation                         
 //
 //--------------------------------------------------------------------------------------------------
-
-void cGrammar_omnibus_5F_grammar::nt_effective_5F_parameters_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 109) {
-  rule_omnibus_5F_syntax_effective_5F_parameters_i109_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
 
 void cGrammar_omnibus_5F_grammar::nt_effective_5F_parameters_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 109) {
@@ -39794,14 +36933,6 @@ void cGrammar_omnibus_5F_grammar::nt_effective_5F_parameters_ (GGS_ast &  parame
 //
 //--------------------------------------------------------------------------------------------------
 
-void cGrammar_omnibus_5F_grammar::nt_assignment_5F_combined_5F_with_5F_operator_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 112) {
-  rule_omnibus_5F_syntax_assignment_5F_combined_5F_with_5F_operator_i112_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
-
 void cGrammar_omnibus_5F_grammar::nt_assignment_5F_combined_5F_with_5F_operator_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 112) {
   rule_omnibus_5F_syntax_assignment_5F_combined_5F_with_5F_operator_i112_indexing(inLexique) ;
@@ -39826,14 +36957,6 @@ void cGrammar_omnibus_5F_grammar::nt_assignment_5F_combined_5F_with_5F_operator_
 //
 //--------------------------------------------------------------------------------------------------
 
-void cGrammar_omnibus_5F_grammar::nt_lvalue_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 114) {
-  rule_omnibus_5F_syntax_lvalue_i114_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
-
 void cGrammar_omnibus_5F_grammar::nt_lvalue_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 114) {
   rule_omnibus_5F_syntax_lvalue_i114_indexing(inLexique) ;
@@ -39857,23 +36980,6 @@ void cGrammar_omnibus_5F_grammar::nt_lvalue_ (GGS_ast &  parameter_1,
 //                          'lvalue_operand' non terminal implementation                            
 //
 //--------------------------------------------------------------------------------------------------
-
-void cGrammar_omnibus_5F_grammar::nt_lvalue_5F_operand_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 115 :
-      rule_omnibus_5F_syntax_lvalue_5F_operand_i115_parse(inLexique) ;
-    break ;
-  case 116 :
-      rule_omnibus_5F_syntax_lvalue_5F_operand_i116_parse(inLexique) ;
-    break ;
-  case 117 :
-      rule_omnibus_5F_syntax_lvalue_5F_operand_i117_parse(inLexique) ;
-    break ;
-  default :
-    inLexique->internalBottomUpParserError (HERE) ;
-    break ;
-  }
-}
 
 void cGrammar_omnibus_5F_grammar::nt_lvalue_5F_operand_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   switch (inLexique->nextProductionIndex ()) {
@@ -39917,14 +37023,6 @@ void cGrammar_omnibus_5F_grammar::nt_lvalue_5F_operand_ (GGS_ast &  parameter_1,
 //
 //--------------------------------------------------------------------------------------------------
 
-void cGrammar_omnibus_5F_grammar::nt_procedure_5F_formal_5F_arguments_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 123) {
-  rule_omnibus_5F_syntax_procedure_5F_formal_5F_arguments_i123_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
-
 void cGrammar_omnibus_5F_grammar::nt_procedure_5F_formal_5F_arguments_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 123) {
   rule_omnibus_5F_syntax_procedure_5F_formal_5F_arguments_i123_indexing(inLexique) ;
@@ -39949,14 +37047,6 @@ void cGrammar_omnibus_5F_grammar::nt_procedure_5F_formal_5F_arguments_ (GGS_ast 
 //
 //--------------------------------------------------------------------------------------------------
 
-void cGrammar_omnibus_5F_grammar::nt_procedure_5F_input_5F_formal_5F_arguments_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 124) {
-  rule_omnibus_5F_syntax_procedure_5F_input_5F_formal_5F_arguments_i124_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
-
 void cGrammar_omnibus_5F_grammar::nt_procedure_5F_input_5F_formal_5F_arguments_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 124) {
   rule_omnibus_5F_syntax_procedure_5F_input_5F_formal_5F_arguments_i124_indexing(inLexique) ;
@@ -39980,20 +37070,6 @@ void cGrammar_omnibus_5F_grammar::nt_procedure_5F_input_5F_formal_5F_arguments_ 
 //                         'guarded_command' non terminal implementation                            
 //
 //--------------------------------------------------------------------------------------------------
-
-void cGrammar_omnibus_5F_grammar::nt_guarded_5F_command_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 125 :
-      rule_omnibus_5F_syntax_guarded_5F_command_i125_parse(inLexique) ;
-    break ;
-  case 126 :
-      rule_omnibus_5F_syntax_guarded_5F_command_i126_parse(inLexique) ;
-    break ;
-  default :
-    inLexique->internalBottomUpParserError (HERE) ;
-    break ;
-  }
-}
 
 void cGrammar_omnibus_5F_grammar::nt_guarded_5F_command_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   switch (inLexique->nextProductionIndex ()) {
@@ -40032,14 +37108,6 @@ void cGrammar_omnibus_5F_grammar::nt_guarded_5F_command_ (GGS_ast &  parameter_1
 //
 //--------------------------------------------------------------------------------------------------
 
-void cGrammar_omnibus_5F_grammar::nt_function_5F_declaration_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 130) {
-  rule_omnibus_5F_syntax_function_5F_declaration_i130_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
-
 void cGrammar_omnibus_5F_grammar::nt_function_5F_declaration_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 130) {
   rule_omnibus_5F_syntax_function_5F_declaration_i130_indexing(inLexique) ;
@@ -40064,14 +37132,6 @@ void cGrammar_omnibus_5F_grammar::nt_function_5F_declaration_ (GGS_ast &  parame
 //
 //--------------------------------------------------------------------------------------------------
 
-void cGrammar_omnibus_5F_grammar::nt_mode_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 131) {
-  rule_omnibus_5F_syntax_mode_i131_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
-
 void cGrammar_omnibus_5F_grammar::nt_mode_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 131) {
   rule_omnibus_5F_syntax_mode_i131_indexing(inLexique) ;
@@ -40094,14 +37154,6 @@ void cGrammar_omnibus_5F_grammar::nt_mode_ (GGS_mode &  parameter_1,
 //                         'function_header' non terminal implementation                            
 //
 //--------------------------------------------------------------------------------------------------
-
-void cGrammar_omnibus_5F_grammar::nt_function_5F_header_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 132) {
-  rule_omnibus_5F_syntax_function_5F_header_i132_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
 
 void cGrammar_omnibus_5F_grammar::nt_function_5F_header_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 132) {
@@ -40130,14 +37182,6 @@ void cGrammar_omnibus_5F_grammar::nt_function_5F_header_ (GGS_ast &  parameter_1
 //
 //--------------------------------------------------------------------------------------------------
 
-void cGrammar_omnibus_5F_grammar::nt_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 136) {
-  rule_omnibus_5F_syntax_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_i136_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
-
 void cGrammar_omnibus_5F_grammar::nt_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 136) {
   rule_omnibus_5F_syntax_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_i136_indexing(inLexique) ;
@@ -40162,14 +37206,6 @@ void cGrammar_omnibus_5F_grammar::nt_private_5F_or_5F_public_5F_struct_5F_proper
 //
 //--------------------------------------------------------------------------------------------------
 
-void cGrammar_omnibus_5F_grammar::nt_private_5F_struct_5F_property_5F_declaration_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 137) {
-  rule_omnibus_5F_syntax_private_5F_struct_5F_property_5F_declaration_i137_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
-
 void cGrammar_omnibus_5F_grammar::nt_private_5F_struct_5F_property_5F_declaration_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 137) {
   rule_omnibus_5F_syntax_private_5F_struct_5F_property_5F_declaration_i137_indexing(inLexique) ;
@@ -40193,20 +37229,6 @@ void cGrammar_omnibus_5F_grammar::nt_private_5F_struct_5F_property_5F_declaratio
 //                   'struct_property_declaration' non terminal implementation                      
 //
 //--------------------------------------------------------------------------------------------------
-
-void cGrammar_omnibus_5F_grammar::nt_struct_5F_property_5F_declaration_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  switch (inLexique->nextProductionIndex ()) {
-  case 138 :
-      rule_omnibus_5F_syntax_struct_5F_property_5F_declaration_i138_parse(inLexique) ;
-    break ;
-  case 139 :
-      rule_omnibus_5F_syntax_struct_5F_property_5F_declaration_i139_parse(inLexique) ;
-    break ;
-  default :
-    inLexique->internalBottomUpParserError (HERE) ;
-    break ;
-  }
-}
 
 void cGrammar_omnibus_5F_grammar::nt_struct_5F_property_5F_declaration_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   switch (inLexique->nextProductionIndex ()) {
@@ -40244,14 +37266,6 @@ void cGrammar_omnibus_5F_grammar::nt_struct_5F_property_5F_declaration_ (GGS_ast
 //                       'propertyGetterSetter' non terminal implementation                         
 //
 //--------------------------------------------------------------------------------------------------
-
-void cGrammar_omnibus_5F_grammar::nt_propertyGetterSetter_parse (Lexique_omnibus_5F_lexique * inLexique) {
-  if (inLexique->nextProductionIndex () == 140) {
-  rule_omnibus_5F_syntax_propertyGetterSetter_i140_parse(inLexique) ;
-  }else{
-    inLexique->internalBottomUpParserError (HERE) ;
-  }
-}
 
 void cGrammar_omnibus_5F_grammar::nt_propertyGetterSetter_indexing (Lexique_omnibus_5F_lexique * inLexique) {
   if (inLexique->nextProductionIndex () == 140) {

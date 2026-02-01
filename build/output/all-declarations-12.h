@@ -109,7 +109,7 @@ void routine_controlRegisterType_3F__26_context_21_type_21_bitCount (const class
 class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 //------------------------------------- 'assignment_combined_with_operator' non terminal
 //--- 'parse' label
-  public: virtual void nt_assignment_5F_combined_5F_with_5F_operator_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_assignment_5F_combined_5F_with_5F_operator_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_assignment_5F_combined_5F_with_5F_operator_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -121,7 +121,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'compileTimeInfixOperator' non terminal
 //--- 'parse' label
-  public: virtual void nt_compileTimeInfixOperator_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_compileTimeInfixOperator_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_compileTimeInfixOperator_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -132,7 +132,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'compileTimePrefixOperator' non terminal
 //--- 'parse' label
-  public: virtual void nt_compileTimePrefixOperator_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_compileTimePrefixOperator_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_compileTimePrefixOperator_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -143,7 +143,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'compile_time_expression' non terminal
 //--- 'parse' label
-  public: virtual void nt_compile_5F_time_5F_expression_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_compile_5F_time_5F_expression_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_compile_5F_time_5F_expression_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -154,7 +154,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'compile_time_expression_addition' non terminal
 //--- 'parse' label
-  public: virtual void nt_compile_5F_time_5F_expression_5F_addition_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_compile_5F_time_5F_expression_5F_addition_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_compile_5F_time_5F_expression_5F_addition_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -165,7 +165,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'compile_time_expression_bitwise_and' non terminal
 //--- 'parse' label
-  public: virtual void nt_compile_5F_time_5F_expression_5F_bitwise_5F_and_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_compile_5F_time_5F_expression_5F_bitwise_5F_and_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_compile_5F_time_5F_expression_5F_bitwise_5F_and_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -176,7 +176,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'compile_time_expression_bitwise_xor' non terminal
 //--- 'parse' label
-  public: virtual void nt_compile_5F_time_5F_expression_5F_bitwise_5F_xor_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_compile_5F_time_5F_expression_5F_bitwise_5F_xor_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_compile_5F_time_5F_expression_5F_bitwise_5F_xor_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -187,7 +187,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'compile_time_expression_comparison' non terminal
 //--- 'parse' label
-  public: virtual void nt_compile_5F_time_5F_expression_5F_comparison_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_compile_5F_time_5F_expression_5F_comparison_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_compile_5F_time_5F_expression_5F_comparison_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -198,7 +198,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'compile_time_expression_equality' non terminal
 //--- 'parse' label
-  public: virtual void nt_compile_5F_time_5F_expression_5F_equality_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_compile_5F_time_5F_expression_5F_equality_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_compile_5F_time_5F_expression_5F_equality_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -209,7 +209,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'compile_time_expression_product' non terminal
 //--- 'parse' label
-  public: virtual void nt_compile_5F_time_5F_expression_5F_product_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_compile_5F_time_5F_expression_5F_product_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_compile_5F_time_5F_expression_5F_product_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -220,7 +220,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'compile_time_expression_shift' non terminal
 //--- 'parse' label
-  public: virtual void nt_compile_5F_time_5F_expression_5F_shift_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_compile_5F_time_5F_expression_5F_shift_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_compile_5F_time_5F_expression_5F_shift_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -231,7 +231,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'compile_time_primary' non terminal
 //--- 'parse' label
-  public: virtual void nt_compile_5F_time_5F_primary_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_compile_5F_time_5F_primary_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_compile_5F_time_5F_primary_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -242,7 +242,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'control_register_lvalue' non terminal
 //--- 'parse' label
-  public: virtual void nt_control_5F_register_5F_lvalue_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_control_5F_register_5F_lvalue_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_control_5F_register_5F_lvalue_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -254,7 +254,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'declaration' non terminal
 //--- 'parse' label
-  public: virtual void nt_declaration_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_declaration_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_declaration_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -265,7 +265,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'effective_parameters' non terminal
 //--- 'parse' label
-  public: virtual void nt_effective_5F_parameters_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_effective_5F_parameters_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_effective_5F_parameters_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -278,7 +278,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'expression' non terminal
 //--- 'parse' label
-  public: virtual void nt_expression_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_expression_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_expression_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -290,7 +290,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'expression_access_list' non terminal
 //--- 'parse' label
-  public: virtual void nt_expression_5F_access_5F_list_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_expression_5F_access_5F_list_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_expression_5F_access_5F_list_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -302,7 +302,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'expression_addition' non terminal
 //--- 'parse' label
-  public: virtual void nt_expression_5F_addition_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_expression_5F_addition_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_expression_5F_addition_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -314,7 +314,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'expression_bitwise_and' non terminal
 //--- 'parse' label
-  public: virtual void nt_expression_5F_bitwise_5F_and_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_expression_5F_bitwise_5F_and_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_expression_5F_bitwise_5F_and_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -326,7 +326,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'expression_bitwise_or' non terminal
 //--- 'parse' label
-  public: virtual void nt_expression_5F_bitwise_5F_or_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_expression_5F_bitwise_5F_or_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_expression_5F_bitwise_5F_or_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -338,7 +338,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'expression_bitwise_xor' non terminal
 //--- 'parse' label
-  public: virtual void nt_expression_5F_bitwise_5F_xor_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_expression_5F_bitwise_5F_xor_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_expression_5F_bitwise_5F_xor_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -350,7 +350,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'expression_comparison' non terminal
 //--- 'parse' label
-  public: virtual void nt_expression_5F_comparison_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_expression_5F_comparison_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_expression_5F_comparison_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -362,7 +362,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'expression_equality' non terminal
 //--- 'parse' label
-  public: virtual void nt_expression_5F_equality_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_expression_5F_equality_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_expression_5F_equality_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -374,7 +374,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'expression_if' non terminal
 //--- 'parse' label
-  public: virtual void nt_expression_5F_if_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_expression_5F_if_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_expression_5F_if_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -386,7 +386,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'expression_logical_and' non terminal
 //--- 'parse' label
-  public: virtual void nt_expression_5F_logical_5F_and_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_expression_5F_logical_5F_and_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_expression_5F_logical_5F_and_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -398,7 +398,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'expression_product' non terminal
 //--- 'parse' label
-  public: virtual void nt_expression_5F_product_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_expression_5F_product_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_expression_5F_product_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -410,7 +410,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'expression_shift' non terminal
 //--- 'parse' label
-  public: virtual void nt_expression_5F_shift_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_expression_5F_shift_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_expression_5F_shift_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -422,7 +422,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'function_declaration' non terminal
 //--- 'parse' label
-  public: virtual void nt_function_5F_declaration_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_function_5F_declaration_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_function_5F_declaration_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -434,7 +434,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'function_header' non terminal
 //--- 'parse' label
-  public: virtual void nt_function_5F_header_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_function_5F_header_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_function_5F_header_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -449,7 +449,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'generic_formal_arguments' non terminal
 //--- 'parse' label
-  public: virtual void nt_generic_5F_formal_5F_arguments_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_generic_5F_formal_5F_arguments_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_generic_5F_formal_5F_arguments_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -460,7 +460,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'generic_where_clause' non terminal
 //--- 'parse' label
-  public: virtual void nt_generic_5F_where_5F_clause_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_generic_5F_where_5F_clause_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_generic_5F_where_5F_clause_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -471,7 +471,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'guard' non terminal
 //--- 'parse' label
-  public: virtual void nt_guard_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_guard_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_guard_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -484,7 +484,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'guarded_command' non terminal
 //--- 'parse' label
-  public: virtual void nt_guarded_5F_command_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_guarded_5F_command_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_guarded_5F_command_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -497,7 +497,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'if_instruction' non terminal
 //--- 'parse' label
-  public: virtual void nt_if_5F_instruction_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_if_5F_instruction_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_if_5F_instruction_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -509,7 +509,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'import_file' non terminal
 //--- 'parse' label
-  public: virtual void nt_import_5F_file_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_import_5F_file_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_import_5F_file_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -520,7 +520,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'instruction' non terminal
 //--- 'parse' label
-  public: virtual void nt_instruction_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_instruction_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_instruction_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -532,7 +532,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'instructionList' non terminal
 //--- 'parse' label
-  public: virtual void nt_instructionList_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_instructionList_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_instructionList_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -544,7 +544,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'isr_in_driver' non terminal
 //--- 'parse' label
-  public: virtual void nt_isr_5F_in_5F_driver_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_isr_5F_in_5F_driver_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_isr_5F_in_5F_driver_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -556,7 +556,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'llvmPrefixOperator' non terminal
 //--- 'parse' label
-  public: virtual void nt_llvmPrefixOperator_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_llvmPrefixOperator_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_llvmPrefixOperator_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -567,7 +567,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'llvm_function_header' non terminal
 //--- 'parse' label
-  public: virtual void nt_llvm_5F_function_5F_header_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_llvm_5F_function_5F_header_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_llvm_5F_function_5F_header_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -580,7 +580,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'llvm_instruction' non terminal
 //--- 'parse' label
-  public: virtual void nt_llvm_5F_instruction_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_llvm_5F_instruction_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_llvm_5F_instruction_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -591,7 +591,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'llvm_instruction_list' non terminal
 //--- 'parse' label
-  public: virtual void nt_llvm_5F_instruction_5F_list_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_llvm_5F_instruction_5F_list_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_llvm_5F_instruction_5F_list_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -602,7 +602,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'lvalue' non terminal
 //--- 'parse' label
-  public: virtual void nt_lvalue_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_lvalue_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_lvalue_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -614,7 +614,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'lvalue_operand' non terminal
 //--- 'parse' label
-  public: virtual void nt_lvalue_5F_operand_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_lvalue_5F_operand_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_lvalue_5F_operand_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -626,7 +626,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'mode' non terminal
 //--- 'parse' label
-  public: virtual void nt_mode_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_mode_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_mode_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -637,7 +637,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'primary' non terminal
 //--- 'parse' label
-  public: virtual void nt_primary_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_primary_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_primary_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -649,7 +649,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'private_or_public_struct_property_declaration' non terminal
 //--- 'parse' label
-  public: virtual void nt_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_private_5F_or_5F_public_5F_struct_5F_property_5F_declaration_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -661,7 +661,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'private_struct_property_declaration' non terminal
 //--- 'parse' label
-  public: virtual void nt_private_5F_struct_5F_property_5F_declaration_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_private_5F_struct_5F_property_5F_declaration_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_private_5F_struct_5F_property_5F_declaration_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -673,7 +673,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'procedure_call' non terminal
 //--- 'parse' label
-  public: virtual void nt_procedure_5F_call_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_procedure_5F_call_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_procedure_5F_call_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -685,7 +685,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'procedure_formal_arguments' non terminal
 //--- 'parse' label
-  public: virtual void nt_procedure_5F_formal_5F_arguments_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_procedure_5F_formal_5F_arguments_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_procedure_5F_formal_5F_arguments_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -697,7 +697,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'procedure_input_formal_arguments' non terminal
 //--- 'parse' label
-  public: virtual void nt_procedure_5F_input_5F_formal_5F_arguments_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_procedure_5F_input_5F_formal_5F_arguments_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_procedure_5F_input_5F_formal_5F_arguments_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -709,7 +709,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'propertyGetterSetter' non terminal
 //--- 'parse' label
-  public: virtual void nt_propertyGetterSetter_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_propertyGetterSetter_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_propertyGetterSetter_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -725,7 +725,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'registerDeclaration' non terminal
 //--- 'parse' label
-  public: virtual void nt_registerDeclaration_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_registerDeclaration_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_registerDeclaration_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -737,7 +737,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'start_symbol' non terminal
 //--- 'parse' label
-  public: virtual void nt_start_5F_symbol_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_start_5F_symbol_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_start_5F_symbol_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -778,7 +778,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'staticArrayProperty' non terminal
 //--- 'parse' label
-  public: virtual void nt_staticArrayProperty_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_staticArrayProperty_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_staticArrayProperty_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -790,7 +790,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'staticArray_exp' non terminal
 //--- 'parse' label
-  public: virtual void nt_staticArray_5F_exp_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_staticArray_5F_exp_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_staticArray_5F_exp_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -802,7 +802,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'struct_property_declaration' non terminal
 //--- 'parse' label
-  public: virtual void nt_struct_5F_property_5F_declaration_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_struct_5F_property_5F_declaration_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_struct_5F_property_5F_declaration_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -815,7 +815,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'system_routine_declaration' non terminal
 //--- 'parse' label
-  public: virtual void nt_system_5F_routine_5F_declaration_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_system_5F_routine_5F_declaration_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_system_5F_routine_5F_declaration_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -827,7 +827,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'task_event' non terminal
 //--- 'parse' label
-  public: virtual void nt_task_5F_event_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_task_5F_event_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_task_5F_event_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;
@@ -842,7 +842,7 @@ class cGrammar_omnibus_5F_grammar : public cParser_omnibus_5F_syntax {
 
 //------------------------------------- 'type_definition' non terminal
 //--- 'parse' label
-  public: virtual void nt_type_5F_definition_parse (Lexique_omnibus_5F_lexique * inCompiler) ;
+ /*  public: virtual void nt_type_5F_definition_parse (Lexique_omnibus_5F_lexique * inCompiler) ; */
 
 //--- indexing
   public: virtual void nt_type_5F_definition_indexing (Lexique_omnibus_5F_lexique * inCompiler) ;

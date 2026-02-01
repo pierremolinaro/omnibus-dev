@@ -150,7 +150,7 @@ override method @syncInstructionAST noteInstructionTypesInPrecedenceGraph ?!@sem
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-////  SEMANTICS                                                                                                            
+//  SEMANTICS                                                                                                            
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @syncInstructionAST instructionSemanticAnalysis
@@ -234,16 +234,6 @@ override method @syncInstructionAST instructionSemanticAnalysis
         end
       case llvmVariable (*) :
       end
- 
-//      if [boolExpressionResult omnibusTypeDescriptionName] != boolTypeName () then
-//        error endOfExp : "guarded expression should be boolean"
-//      elsif warnsOnStaticExpression && [boolExpressionResult isStatic] then
-////        warning endOfExp : "guarded expression is static"
-//      end
-//      [!?boolExpInstructionGenerationList appendLoadWhenReference
-//        !?ioTemporaries
-//        !?boolExpressionResult
-//      ]
     //--- Analyze synchronization
       var @instructionListIR guardInstructionGenerationList = @[]
       let @procCallEffectiveParameterListIR guardEffectiveParameterListIR

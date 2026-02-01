@@ -30,7 +30,7 @@ override getter @compileTimeIntAST keyRepresentationForErrorSignaling -> @string
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-////////  ENTER IN CONTEXT                                                                                                     
+//  ENTER IN CONTEXT                                                                                                     
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func %once ctIntegerTypeName ->@string {
@@ -83,19 +83,19 @@ override method @compileTimeIntAST enterInContext
  //--- Enter -% infix operator
   key = infixOperatorMapKey (!ctInt !.subOpNoOvf !.nowhere !ctInt)
   [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntSubtractOperator ()]
- //////--- Enter * infix operator
+ //--- Enter * infix operator
   key = infixOperatorMapKey (!ctInt !.mulOp !.nowhere !ctInt)
   [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntMultiplyOperator ()]
  //--- Enter / infix operator
   key = infixOperatorMapKey (!ctInt !.divOp !.nowhere !ctInt)
   [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntDivideOperator ()]
- ////--- Enter !/ infix operator
+ //--- Enter !/ infix operator
   key = infixOperatorMapKey (!ctInt !.divOpNoOvf !.nowhere !ctInt)
   [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntDivideZeroOperator ()]
  //--- Enter % infix operator
   key = infixOperatorMapKey (!ctInt !.modOp !.nowhere !ctInt)
   [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntModuloOperator ()]
- ////--- Enter !% infix operator
+ //--- Enter !% infix operator
   key = infixOperatorMapKey (!ctInt !.modOpNoOvf !.nowhere !ctInt)
   [!?ioContext.mInfixOperatorMap insertKey !key !ctInt !@compileTimeIntModuloZeroOperator ()]
  //--- Enter == infix operator

@@ -15,7 +15,7 @@ option omnibus_options {
   @string extractEmbeddedTargets : 'X', "extract-embedded-targets" -> "Extract embedded targets"
   @string useDirAsTargetDir : 'T', "use-target-dir" -> "Use directory as target definition directory, instead of using embedded targets"
 
-  @stringlist pathList: '\0', "path" -> "Search pathes for source files"
+  @stringlist pathList: '\0', "path" -> "Search paths for source files"
 
 //---
   @bool taskStrictPriorityOrder : '\0', "task-strict-priority-order" -> "Ensure task strict priority order"

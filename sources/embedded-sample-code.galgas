@@ -13,7 +13,7 @@ filewrapper embeddedSampleCode in "../embedded-sources/sample-code" {
 before {
   let @filewrapper fw = [filewrapper embeddedSampleCode]
   if [option omnibus_options.listEmbeddedSampleFiles value] then
-    let files = [fw allTextFilePathes]
+    let files = [fw allTextFilePaths]
     print (!"Embedded sample code:\n")
     for (f) in files do
       print (!"  " + [f subStringFromIndex !1] + '\n')

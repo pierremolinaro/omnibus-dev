@@ -10,139 +10,6 @@
 
 //--------------------------------------------------------------------------------------------------
 //
-//Parser class 'omnibus_target_specific_syntax' declaration
-//
-//--------------------------------------------------------------------------------------------------
-
-class cParser_omnibus_5F_target_5F_specific_5F_syntax {
-//--- Virtual destructor
-  public: virtual ~ cParser_omnibus_5F_target_5F_specific_5F_syntax (void) { }
-
-//--- Non terminal declarations
-  protected: virtual void nt_configuration_5F_key_ (const class GGS_string constinArgument0,
-                                                    class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-  protected: virtual void nt_configuration_5F_key_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-  protected: virtual void nt_configuration_5F_key_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-  protected: virtual void nt_configuration_5F_start_5F_symbol_ (class GGS_ast & ioArgument0,
-                                                                class GGS_lstringlist & outArgument1,
-                                                                class GGS_location & outArgument2,
-                                                                class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-  protected: virtual void nt_configuration_5F_start_5F_symbol_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-  protected: virtual void nt_configuration_5F_start_5F_symbol_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-  protected: virtual void nt_interruptConfigList_ (class GGS_interruptionConfigurationList & outArgument0,
-                                                   class GGS_enumerationConstantList & outArgument1,
-                                                   class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-  protected: virtual void nt_interruptConfigList_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-  protected: virtual void nt_interruptConfigList_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-  protected: virtual void nt_python_5F_utility_5F_tool_5F_list_ (class GGS__32_lstringlist & outArgument0,
-                                                                 class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-  protected: virtual void nt_python_5F_utility_5F_tool_5F_list_parse (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-  protected: virtual void nt_python_5F_utility_5F_tool_5F_list_indexing (class Lexique_omnibus_5F_lexique * inLexique) = 0 ;
-
-
-//--- Rule declarations
-  protected: void rule_omnibus_5F_target_5F_specific_5F_syntax_configuration_5F_key_i0_ (const GGS_string constinArgument0,
-                                                                                         Lexique_omnibus_5F_lexique * inLexique) ;
-
-  protected: void rule_omnibus_5F_target_5F_specific_5F_syntax_configuration_5F_key_i0_parse (Lexique_omnibus_5F_lexique * inLexique) ;
-
-  protected: void rule_omnibus_5F_target_5F_specific_5F_syntax_configuration_5F_key_i0_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
-
-  protected: void rule_omnibus_5F_target_5F_specific_5F_syntax_python_5F_utility_5F_tool_5F_list_i1_ (GGS__32_lstringlist & outArgument0,
-                                                                                                      Lexique_omnibus_5F_lexique * inLexique) ;
-
-  protected: void rule_omnibus_5F_target_5F_specific_5F_syntax_python_5F_utility_5F_tool_5F_list_i1_parse (Lexique_omnibus_5F_lexique * inLexique) ;
-
-  protected: void rule_omnibus_5F_target_5F_specific_5F_syntax_python_5F_utility_5F_tool_5F_list_i1_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
-
-  protected: void rule_omnibus_5F_target_5F_specific_5F_syntax_configuration_5F_start_5F_symbol_i2_ (GGS_ast & ioArgument0,
-                                                                                                     GGS_lstringlist & outArgument1,
-                                                                                                     GGS_location & outArgument2,
-                                                                                                     Lexique_omnibus_5F_lexique * inLexique) ;
-
-  protected: void rule_omnibus_5F_target_5F_specific_5F_syntax_configuration_5F_start_5F_symbol_i2_parse (Lexique_omnibus_5F_lexique * inLexique) ;
-
-  protected: void rule_omnibus_5F_target_5F_specific_5F_syntax_configuration_5F_start_5F_symbol_i2_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
-
-  protected: void rule_omnibus_5F_target_5F_specific_5F_syntax_interruptConfigList_i3_ (GGS_interruptionConfigurationList & outArgument0,
-                                                                                        GGS_enumerationConstantList & outArgument1,
-                                                                                        Lexique_omnibus_5F_lexique * inLexique) ;
-
-  protected: void rule_omnibus_5F_target_5F_specific_5F_syntax_interruptConfigList_i3_parse (Lexique_omnibus_5F_lexique * inLexique) ;
-
-  protected: void rule_omnibus_5F_target_5F_specific_5F_syntax_interruptConfigList_i3_indexing (Lexique_omnibus_5F_lexique * inLexique) ;
-
-
-
-//--- Select methods
-  protected: virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_0 (Lexique_omnibus_5F_lexique *) = 0 ;
-
-  protected: virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_1 (Lexique_omnibus_5F_lexique *) = 0 ;
-
-  protected: virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_2 (Lexique_omnibus_5F_lexique *) = 0 ;
-
-  protected: virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_3 (Lexique_omnibus_5F_lexique *) = 0 ;
-
-  protected: virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_4 (Lexique_omnibus_5F_lexique *) = 0 ;
-
-  protected: virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_5 (Lexique_omnibus_5F_lexique *) = 0 ;
-
-  protected: virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_6 (Lexique_omnibus_5F_lexique *) = 0 ;
-
-  protected: virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_7 (Lexique_omnibus_5F_lexique *) = 0 ;
-
-  protected: virtual int32_t select_omnibus_5F_target_5F_specific_5F_syntax_8 (Lexique_omnibus_5F_lexique *) = 0 ;
-
-
-} ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Function 'isrSlotTypeName'
-//
-//--------------------------------------------------------------------------------------------------
-
-class GGS_string function_isrSlotTypeName (class Compiler * inCompiler
-                                           COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension getter '@effectiveArgumentPassingModeAST passingModeForActualSelector' (as function)
-//
-//--------------------------------------------------------------------------------------------------
-
-class GGS_string extensionGetter_passingModeForActualSelector (const class GGS_effectiveArgumentPassingModeAST & inObject,
-                                                               const class GGS_lstring & constinArgument0,
-                                                               class Compiler * inCompiler
-                                                               COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Routine 'enterFormalArguments?context?&&?warningOnUnusedArgs'
-//
-//--------------------------------------------------------------------------------------------------
-
-void routine_enterFormalArguments_3F_context_3F__26__26__3F_warningOnUnusedArgs (const class GGS_semanticContext constinArgument0,
-                                                                                 const class GGS_routineFormalArgumentListAST constinArgument1,
-                                                                                 class GGS_universalValuedObjectMap & ioArgument2,
-                                                                                 class GGS_routineFormalArgumentListIR & ioArgument3,
-                                                                                 const class GGS_bool constinArgument4,
-                                                                                 class Compiler * inCompiler
-                                                                                 COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
 //Extension method '@controlRegisterLValueAST noteExpressionTypesInPrecedenceGraph'
 //
 //--------------------------------------------------------------------------------------------------
@@ -435,4 +302,103 @@ void routine_analyzeVariableInLValue_3F_self_3F_readAccess_3F_routineAttributes_
                                                                                                                                                                                                                               class GGS_LValueRepresentation & outArgument14,
                                                                                                                                                                                                                               class Compiler * inCompiler
                                                                                                                                                                                                                               COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Extension setter '@semanticContext insertGetter'
+//
+//--------------------------------------------------------------------------------------------------
+
+void extensionSetter_insertGetter (class GGS_semanticContext & ioObject,
+                                   const class GGS_lstring constin_inTypeName,
+                                   const class GGS_lstring constin_inGetterName,
+                                   const class GGS_propertyVisibility constin_inVisibility,
+                                   const class GGS_propertyGetterKind constin_inAccess,
+                                   class Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Extension setter '@semanticContext addComputedPropertyGetter'
+//
+//--------------------------------------------------------------------------------------------------
+
+void extensionSetter_addComputedPropertyGetter (class GGS_semanticContext & ioObject,
+                                                const class GGS_lstring constin_inTypeName,
+                                                const class GGS_string constin_inLLVMBaseTypeName,
+                                                const class GGS_lstring constin_inPropertyName,
+                                                const class GGS_mode constin_inMode,
+                                                const class GGS_propertyVisibility constin_inVisibility,
+                                                const class GGS_unifiedTypeMapEntry constin_inResultTypeProxy,
+                                                class GGS_lstring & out_outRoutineLLVMName,
+                                                class Compiler * inCompiler
+                                                COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Function 'getterLLVMName'
+//
+//--------------------------------------------------------------------------------------------------
+
+class GGS_string function_getterLLVMName (const class GGS_string & constinArgument0,
+                                          const class GGS_string & constinArgument1,
+                                          class Compiler * inCompiler
+                                          COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Extension setter '@semanticContext insertPropertySetter'
+//
+//--------------------------------------------------------------------------------------------------
+
+void extensionSetter_insertPropertySetter (class GGS_semanticContext & ioObject,
+                                           const class GGS_lstring constin_inTypeName,
+                                           const class GGS_lstring constin_inSetterName,
+                                           const class GGS_propertyVisibility constin_inVisibility,
+                                           const class GGS_propertySetterKind constin_inAccess,
+                                           class Compiler * inCompiler
+                                           COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Extension getter '@semanticContext propertySetterMap' (as function)
+//
+//--------------------------------------------------------------------------------------------------
+
+class GGS_propertySetterMap extensionGetter_propertySetterMap (const class GGS_semanticContext & inObject,
+                                                               const class GGS_omnibusType & constinArgument0,
+                                                               class Compiler * inCompiler
+                                                               COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Extension setter '@staticEntityMap findOrAddStaticString'
+//
+//--------------------------------------------------------------------------------------------------
+
+void extensionSetter_findOrAddStaticString (class GGS_staticEntityMap & ioObject,
+                                            const class GGS_string constin_inString,
+                                            class GGS_uint & out_outIndex,
+                                            class Compiler * inCompiler
+                                            COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Extension getter '@semanticContext booleanType' (as function)
+//
+//--------------------------------------------------------------------------------------------------
+
+class GGS_omnibusType extensionGetter_booleanType (const class GGS_semanticContext & inObject,
+                                                   const class GGS_location & constinArgument0,
+                                                   class Compiler * inCompiler
+                                                   COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Function 'boolTypeName'
+//
+//--------------------------------------------------------------------------------------------------
+
+class GGS_string function_boolTypeName (class Compiler * inCompiler
+                                        COMMA_LOCATION_ARGS) ;
 

@@ -239,8 +239,8 @@ class ScannerFor_omnibus_lexique : AbstractScanner {
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-  final override func blockComment () -> String? {
-    return gBlockComment_omnibus_lexique
+  final override func lineComment () -> String? {
+    return gLineComment_omnibus_lexique
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

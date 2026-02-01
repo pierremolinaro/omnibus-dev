@@ -305,19 +305,19 @@ override getter @controlRegisterGroupDeclarationAST keyRepresentationForErrorSig
   outRepresentation = registerGroupNameFromOmnibusName (![self.mRegisterGroupList mRegisterGroupNameAtIndex !0])
 }
 
-//////·······················································································································
+//·······················································································································
 
 override getter @controlRegisterGroupDeclarationAST locationForErrorSignaling -> @location {
   result = [self.mRegisterGroupList mRegisterGroupNameAtIndex !0]
 }
 
-////·······················································································································
+//·······················································································································
 
 override method @controlRegisterGroupDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   let nodeName = registerGroupNameFromOmnibusName (![self.mRegisterGroupList mRegisterGroupNameAtIndex !0])
 //--- Add node
   [!?ioGraph addNode !nodeName !self]
-////--- Add dependence definitions
+//--- Add dependence definitions
   for reg in self.mRegisters do
   //--- Add dependency from type name
     [!?ioGraph addEdge !from: nodeName !to: reg.mRegisterTypeName]
@@ -357,7 +357,7 @@ override method @controlRegisterGroupDeclarationAST enterInPrecedenceGraph ?!@se
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-////!   CONTEXT
+//!   CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @controlRegisterMap {
@@ -432,7 +432,7 @@ private proc controlRegisterType
   end
 }
 
-//////·······················································································································
+//·······················································································································
 
 private proc buildControlRegisterSliceMap
   ?let @controlRegisterBitSliceList inRegisterBitSliceList
@@ -447,7 +447,7 @@ private proc buildControlRegisterSliceMap
 //--- Build bit slice map
   outRegisterFieldMap = @()
   outRegisterBitSliceMap = @()
-  outControlRegisterFieldList = @[] ////////// Used for HTML file
+  outControlRegisterFieldList = @[] // Used for HTML file
   if [inRegisterBitSliceList count] > 0 then
     var @uint shiftCount = 0
     for > (mRegisterBitSlice) in inRegisterBitSliceList do
@@ -528,7 +528,7 @@ method @controlRegisterDeclarationList.@element buildControlRegisterMapForGroup
       elementArraySize = 0
     case registerArray (@expressionAST arraySizeExpression @location arraySizeLocation
                         @expressionAST arrayElementSizeExpression @location arrayElementSizeLocation) :
-    ////--- Analyse register array size expression
+    //--- Analyse register array size expression
       computeStaticExpression (
         !?context: ioContext
         !?staticEntityMap:ioStaticEntityMap
@@ -569,7 +569,7 @@ method @controlRegisterDeclarationList.@element buildControlRegisterMapForGroup
       !register.mRegisterName
       !registerType
       !register.mIsReadOnly
-      !false //// user access is false by default
+      !false // user access is false by default
       !registerBitSliceMap
       !registerFieldMap
       !registerAddressOffset

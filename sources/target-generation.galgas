@@ -26,7 +26,7 @@ before {
   if [option omnibus_options.listTargets value] then
     let targetDirectoryOption = [option omnibus_options.useDirAsTargetDir value]
     if targetDirectoryOption == "" then
-      let embeddedFiles = [fw allTextFilePathes]
+      let embeddedFiles = [fw allTextFilePaths]
       print (!"Embedded targets:\n")
       for (f) in embeddedFiles do
         if [f lastPathComponent] == "+config.omnibus-target" then
@@ -48,7 +48,7 @@ before {
 //--- Extract embedded targets
   let path = [option omnibus_options.extractEmbeddedTargets value]
   if path != "" then
-    let embeddedFiles = [fw allTextFilePathes]
+    let embeddedFiles = [fw allTextFilePaths]
     for (f) in embeddedFiles do
       let filePath = path + f
       print (!"  " + filePath + '\n')

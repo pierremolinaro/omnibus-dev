@@ -218,7 +218,7 @@ method @taskListAST enterInContext
   for (name 8*) in taskList do
     error name : "this task is out of priority order"
   end
-////---
+//---
   var @decoratedTaskList decoratedTaskList = @[]
   for task in sortedTaskList do (taskIndex)
   //---- Add activate function
@@ -240,7 +240,7 @@ method @taskListAST enterInContext
       !activateTaskCallName
       !taskIndex
     }
-  ////------------------------------------------- Analyze task guarded command
+  //------------------------------------------- Analyze task guarded command
   //  Build a "task.loop" function that contains a sync instruction
     var @instructionListAST taskListInstructionList = @[]
     if [task.mGuardedCommandList count] > 0 then

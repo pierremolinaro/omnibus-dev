@@ -153,7 +153,7 @@ syntax extension omnibus_syntax {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //!  ENTER EXTENSIONS                                                                                                     
-//////////—————————————————————————————————————————————————————————————————————————————————————————————————
+//—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @staticListAST enterExtension
   ?!@extendStaticArrayDeclarationDictAST ioExtendStaticArrayDeclarationAST
@@ -172,7 +172,7 @@ override method @staticListAST enterExtension
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//////!  PRECEDENCE GRAPH                                                                                                     
+//!  PRECEDENCE GRAPH                                                                                                     
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @staticListAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {

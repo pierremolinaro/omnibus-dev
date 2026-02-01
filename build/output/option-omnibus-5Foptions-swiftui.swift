@@ -42,10 +42,6 @@ struct OptionView : View {
 
   private let mCompilerTools : [CompilerTool] = compilerTools ()
   @AppStorage(SELECTED_COMPILER_TOOL_INDEX_PREFKEY) private var mSelectedCompilerIndex = 0
-
-  // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  @AppStorage("prefix.by.time.utility") private var mPrefixByTimeUtility = false
   @State private var mCommandLine = compilerCommandExplained ()
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -101,7 +97,6 @@ struct OptionView : View {
             Text (tool.url.lastPathComponent).tag (tool.id)
           }
         }.pickerStyle (.automatic)
-        Toggle ("Prefix by 'time' utility", isOn: self.$mPrefixByTimeUtility)
         Spacer ()
       }
       ScrollView {
@@ -126,7 +121,7 @@ struct OptionView : View {
           HStack { Text ("Extract an embedded sample file") ; TextField ("", text: self.$extractEmbeddedSampleFile) }
           HStack { Text ("Extract embedded targets") ; TextField ("", text: self.$extractEmbeddedTargets) }
           HStack { Text ("Use directory as target definition directory, instead of using embedded targets") ; TextField ("", text: self.$useDirAsTargetDir) }
-          HStack { Text ("Search pathes for source files") ; TextField ("", text: self.$pathList)
+          HStack { Text ("Search paths for source files") ; TextField ("", text: self.$pathList)
         }.padding ()
       }.background (.white)
       HStack { Text ("Build Command") ; Spacer () }

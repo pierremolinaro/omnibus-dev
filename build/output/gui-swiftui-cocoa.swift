@@ -97,7 +97,7 @@ let gPopUpData_omnibus_lexique : [[UInt16]] = [
 //   Block Comment for 'omnibus_lexique' lexique
 //--------------------------------------------------------------------------------------------------
 
-let gBlockComment_omnibus_lexique : String? = "//"
+let gLineComment_omnibus_lexique : String? = "//"
 
 
 //--------------------------------------------------------------------------------------------------
