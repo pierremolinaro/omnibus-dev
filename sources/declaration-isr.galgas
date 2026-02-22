@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @isrDeclarationAST : @abstractDeclarationAST {
@@ -11,7 +11,7 @@ class @isrDeclarationAST : @abstractDeclarationAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SYNTAX                                                                                                               
+//  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -27,7 +27,7 @@ syntax extension omnibus_syntax {
     or
       $section$
       mode = .sectionMode
-    end 
+    end
     $identifier$ ?let isrName
     ${$
     <instructionList> !?ioAST ?let instructionList
@@ -46,7 +46,7 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  NOTE TYPES IN PRECEDENCE GRAPH                                                                                       
+//  NOTE TYPES IN PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @isrDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
@@ -74,7 +74,7 @@ override getter @isrDeclarationAST locationForErrorSignaling -> @location {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  ENTER IN CONTEXT                                                                                                     
+//  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @isrDeclarationAST enterInContext
@@ -109,7 +109,7 @@ override method @isrDeclarationAST enterInContext
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SEMANTIC ANALYSIS                                                                                                    
+//  SEMANTIC ANALYSIS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @decoratedISRDeclaration : @abstractDecoratedDeclaration {
@@ -134,16 +134,16 @@ override method @decoratedISRDeclaration semanticAnalysis
     !selfType
     !self.mDriverName
     !self.mMode
-  ]  
+  ]
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  CODE GENERATION                                                                                                      
+//  CODE GENERATION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @interruptMapIR {
   public var @omnibusType mSelfType
-  public var @string mDriverName 
+  public var @string mDriverName
   public var @mode mMode
 
   insert insertKey error message "interrupt '%K' is already defined"
@@ -185,8 +185,8 @@ method @interruptMapIR interruptCodeGeneration
     if interrupt.mMode == .serviceMode then
      let interruptHandlerName = llvmNameForServiceInterrupt (!interrupt.lkey).string
      let isrName = llvmNameForSectionInterrupt (!interrupt.lkey.string)
-     let s1 = [inXTRInterruptHandlerString stringByReplacingStringByString !"!ISR!" !isrName]
-     let s2 = [s1 stringByReplacingStringByString !"!HANDLER!" !interruptHandlerName]
+     let s1 = [inXTRInterruptHandlerString replacing !"!ISR!" !by: isrName]
+     let s2 = [s1 replacing !"!HANDLER!" !by: interruptHandlerName]
      ioAScode += s2
     end
   end
@@ -195,11 +195,11 @@ method @interruptMapIR interruptCodeGeneration
     if not [definedInterrupts hasKey !lkey.string] then
       switch panicCode
       case noCode :
-        let s = [inUndefinedInterruptString stringByReplacingStringByString !"!ISR!" !llvmNameForSectionInterrupt (!lkey.string)]
+        let s = [inUndefinedInterruptString replacing !"!ISR!" !by: llvmNameForSectionInterrupt (!lkey.string)]
         ioAScode += s
       case code (@lbigint value) :
         if [option omnibus_options.noPanicGeneration value] then
-          let s = [inUndefinedInterruptString stringByReplacingStringByString !"!ISR!" !llvmNameForSectionInterrupt (!lkey.string)]
+          let s = [inUndefinedInterruptString replacing !"!ISR!" !by: llvmNameForSectionInterrupt (!lkey.string)]
           ioAScode += s
         else
           let name = llvmNameForSectionInterrupt (!lkey.string)

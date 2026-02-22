@@ -38,7 +38,7 @@ proc importFilesAndCompile ?sourceFilePath:let @lstring inSourceFile {
   ) in inSourceFile
 //--- Recursively import files
   var @stringset importedFileAbsolutePathSet = .setWithString {!inSourceFile.string}
-  let currentDirectory = [inSourceFile stringByDeletingLastPathComponent]
+  let currentDirectory = [inSourceFile deletingLastPathComponent]
   recursiveImportFiles (
     !?ast:ast
     !currentDirectory:currentDirectory
@@ -86,7 +86,7 @@ private proc compileProject
   ?currentDirectory:let @string inCurrentDirectory
   ?importedFilePathSet:let @stringset inImportedFileAbsolutePathSet
 {
-  let @timer parsingTime = .start 
+  let @timer parsingTime = .start
   if [option omnibus_options.printPasses value] then
     print (!"** Parsing\n")
   end
@@ -138,7 +138,7 @@ private proc compileProject
 //------------------------------------------------------------ Ordered declaration list
   var @declarationListAST orderedDeclarationListAST = @[]
   if @uint.errorCount == 0 then
-    let @timer t = .start 
+    let @timer t = .start
     if [option omnibus_options.printPasses value] then
       print (!"** Declaration sorting\n")
     end
@@ -174,7 +174,7 @@ private proc compileProject
   var @routineListIR routineListIR = @[]
   var @userLLVMTypeDefinitionListIR userLLVMTypeDefinitionListIR = @[]
   if @uint.errorCount == 0 then
-    let @timer t = .start 
+    let @timer t = .start
     buildSemanticContext (
       !sourceFile:inSourceFile
       !ast:ast
@@ -193,7 +193,7 @@ private proc compileProject
 //------------------------------------------------------------ Semantic analysis
   var @intermediateCodeStruct intermediateCodeStruct = @{}
   if @uint.errorCount == 0 then
-    let @timer t = .start 
+    let @timer t = .start
     semanticAnalysis (
       !sourceFile:inSourceFile.string
       !ast:ast
@@ -207,12 +207,12 @@ private proc compileProject
       ?intermediateCode:intermediateCodeStruct
     )
     if [option omnibus_options.printPasses value] then
-      print (!"** Semantic: " + [t string] + "\n") 
+      print (!"** Semantic: " + [t string] + "\n")
     end
   end
 //------------------------------------------------------------ Code optimization
   if @uint.errorCount == 0 then
-    let @timer tOpt = .start 
+    let @timer tOpt = .start
     codeOptimization (!inSourceFile.string !?intermediateCode:intermediateCodeStruct)
     if [option omnibus_options.printPasses value] then
       print (!"    Duration: " + [tOpt string] + "\n")
@@ -359,7 +359,7 @@ private proc recursiveImportEmbeddedTargetFiles
         ) on [fw textFileContentsAtPath !fullPath]:path.string
         recursiveImportEmbeddedTargetFiles (
           !?ast:ioAST
-          !currentDirectory:[fullPath stringByDeletingLastPathComponent]
+          !currentDirectory:[fullPath deletingLastPathComponent]
           !importClauseList:importedFileList
           !?importedFilePathSet:ioImportedFileAbsolutePathSet
         )

@@ -1,7 +1,7 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//                                                                                                                       
-//    C O D E    G E N E R A T I O N                                                                                     
-//                                                                                                                       
+//
+//    C O D E    G E N E R A T I O N
+//
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //! @generationAdds
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -61,7 +61,7 @@ func %once llvmSeparatorLine -> @string {
 
 func llvmTitleComment ?let @string inTitle -> @string outTitle {
   outTitle  = llvmSeparatorLine ()
-  outTitle += ";    " + [inTitle stringByRightPadding !114!' '] + "*\n"
+  outTitle += ";    " + [inTitle rightPadding !114!' '] + "*\n"
   outTitle += llvmSeparatorLine () + "\n"
 }
 
@@ -76,7 +76,7 @@ func %once asSeparatorLine -> @string {
 
 func asTitleComment ?let @string inTitle -> @string outTitle {
   outTitle  = asSeparatorLine ()
-  outTitle += "@    " + [inTitle stringByRightPadding !114!' '] + "*\n"
+  outTitle += "@    " + [inTitle rightPadding !114!' '] + "*\n"
   outTitle += asSeparatorLine () + "\n"
 }
 
@@ -95,12 +95,12 @@ proc codeGeneration
   ?staticlistValues:let @staticListInitializationMap inStaticListValueMap
   ?targetParameters:let @targetParameters inTargetParameters
 {
-  let @timer generationTime = .start 
+  let @timer generationTime = .start
   let homeDir = @string.homeDirectory + "/omnibus-products/"
 //--- Create source directory (if does not exist)
   let productDirectory = homeDir
     + if [option omnibus_options.noPanicGeneration value] then "no-panic" else "" end
-    + [[inSourceFileName deletingPathExtension] stringByReplacingStringByString !"/" !"+"]
+    + [[inSourceFileName deletingPathExtension] replacing !"/" !by: "+"]
   let sourceDirectory = productDirectory + "/sources"
   [sourceDirectory makeDirectory] ;
 //--- Generate target files
@@ -128,7 +128,7 @@ proc codeGeneration
   end
 //----------------------------------------- Run compilation script
   if (@uint.errorCount == 0) then
-    let @timer scriptTime = .start 
+    let @timer scriptTime = .start
     let script = if [option omnibus_option_not_appearing_in_cocoa.performFlashing value] then "run" else "build" end
     let fullScript = "python3 " + productDirectory + "/" + script + ".py"
     let @sint result = [fullScript system]
@@ -194,8 +194,8 @@ private proc generateCodeFiles
       !from:inTargetName.string + "/" + relativePath
     )
   end
-  let x = [asFileContents stringByReplacingStringByString !"!FUNC!" !llvmNameForFunction (!"")]
-  asCode += [x stringByReplacingStringByString !"!ISR!" !llvmNameForSectionInterrupt (!"")]
+  let x = [asFileContents replacing !"!FUNC!" !by: llvmNameForFunction (!"")]
+  asCode += [x replacing !"!ISR!" !by: llvmNameForSectionInterrupt (!"")]
   asCode += "\n"
 //----------------------------------------- Include LLVM specific file
   var llvmCode = llvmTitleComment (!"Target specific code")
@@ -206,7 +206,7 @@ private proc generateCodeFiles
       !from:inTargetName.string + "/" + relativePath
     )
   end
-  llvmCode += [targetLLVMcode stringByReplacingStringByString !"!FUNC!" !llvmNameForFunction (!"")]
+  llvmCode += [targetLLVMcode replacing !"!FUNC!" !by: llvmNameForFunction (!"")]
   llvmCode += "\n"
 //----------------------------------------- Type declarations
   declareLLVMTypes (!inUserLLVMTypeDefinitionListIR !?llvmCode)
@@ -298,11 +298,11 @@ private proc generateCodeFiles
   end
 //----------------------------------------- Section, safe dispatcher
   if generationAdds.mNeedsDynamicMemoryAllocation then
-    sectionIRlist += 
+    sectionIRlist +=
       !llvmNameForSectionCall (!memoryAllocSectionName ())
       !llvmNameForSectionImplementation (!memoryAllocSectionName ())
       !invocationFromAnyMode: true
-    sectionIRlist += 
+    sectionIRlist +=
       !llvmNameForSectionCall (!memoryFreeSectionName ())
       !llvmNameForSectionImplementation (!memoryFreeSectionName ())
       !invocationFromAnyMode: true
@@ -360,13 +360,13 @@ private proc generateCodeFiles
       !from:inTargetName.string + "/" + relativePath
     )
   end
-  let s1 = [s0 stringByReplacingStringByString !"!TASKCOUNT!" ![[inIntermediateCodeStruct.mTaskMapIR count] string]]
-  let s2 = [s1 stringByReplacingStringByString !"!GUARDCOUNT!" ![inIntermediateCodeStruct.mMaxBranchOfOnInstructions string]]
-  let s3 = [s2 stringByReplacingStringByString !"!FUNC!" !llvmNameForFunction (!"")]
-  let s4 = [s3 stringByReplacingStringByString !"!SERVICEIMPLEMENTATION!" !llvmNameForServiceImplementation (!"")]
-  let s5 = [s4 stringByReplacingStringByString !"!SERVICECALL!" !llvmNameForServiceCall (!"")]
-  let s6 = [s5 stringByReplacingStringByString !"!SECTIONIMPLEMENTATION!" !llvmNameForSectionImplementation (!"")]
-  let cppCode = [s6 stringByReplacingStringByString !"!SECTIONCALL!" !llvmNameForSectionCall (!"")]
+  let s1 = [s0 replacing !"!TASKCOUNT!" !by: [[inIntermediateCodeStruct.mTaskMapIR count] string]]
+  let s2 = [s1 replacing !"!GUARDCOUNT!" !by: [inIntermediateCodeStruct.mMaxBranchOfOnInstructions string]]
+  let s3 = [s2 replacing !"!FUNC!" !by: llvmNameForFunction (!"")]
+  let s4 = [s3 replacing !"!SERVICEIMPLEMENTATION!" !by: llvmNameForServiceImplementation (!"")]
+  let s5 = [s4 replacing !"!SERVICECALL!" !by: llvmNameForServiceCall (!"")]
+  let s6 = [s5 replacing !"!SECTIONIMPLEMENTATION!" !by: llvmNameForSectionImplementation (!"")]
+  let cppCode = [s6 replacing !"!SECTIONCALL!" !by: llvmNameForSectionCall (!"")]
 //----------------------------------------- Add user type declarations
 //  for (userType) in inIntermediateCodeStruct.mTypeCppGenerationList do
 //    [userType generateTypeCppCode !?cppCode]

@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SYNTAX                                                                                                               
+//  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -17,7 +17,7 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//    TARGET LIST OPTION                                                                                                 
+//    TARGET LIST OPTION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 before {
@@ -30,7 +30,7 @@ before {
       print (!"Embedded targets:\n")
       for (f) in embeddedFiles do
         if [f lastPathComponent] == "+config.omnibus-target" then
-          let targetName = [[f stringByDeletingLastPathComponent] subStringFromIndex !1]
+          let targetName = [[f deletingLastPathComponent] subStringFromIndex !1]
           print (!"  " + targetName + '\n')
         end
       end
@@ -40,7 +40,7 @@ before {
       let allConfigFiles = [targetDirectory regularFilesWithExtensions !true !@[@("omnibus-target")]]
       for (f) in allConfigFiles do
         if [f lastPathComponent] == "+config.omnibus-target" then
-          print (!"  " + [f stringByDeletingLastPathComponent] + '\n')
+          print (!"  " + [f deletingLastPathComponent] + '\n')
         end
       end
     end
@@ -52,7 +52,7 @@ before {
     for (f) in embeddedFiles do
       let filePath = path + f
       print (!"  " + filePath + '\n')
-      let dir = [filePath stringByDeletingLastPathComponent]
+      let dir = [filePath deletingLastPathComponent]
       [dir makeDirectory]
       let text = [fw textFileContentsAtPath !f]
       [text writeToFileWhenDifferentContents !filePath ?*]
@@ -61,7 +61,7 @@ before {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//    TARGET GENERATION                                                                                                  
+//    TARGET GENERATION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 filewrapper targetTemplates in "../embedded-sources/targets" {
@@ -124,7 +124,7 @@ proc generateTarget
   end
   if optimizationOptionCount > 1 then
     warning .nowhere : "several optimization options: --" + opt_optimizationOption + " is used"
-  end 
+  end
   copyExecutableFileWithSubstitutions (
     !currentDir:inCurrentDirectory
     !from:inTargetName.string + "/" + inTargetParameters.mPython_build
@@ -168,7 +168,7 @@ private proc copyExecutableFileWithSubstitutions
     s = @string.stringWithContentsOfFile {!targetDefinitionDir + "/" + inSourceFileNamePath}
   end
   for (templateString replacementString) in inSubstitutions do
-    s = [s stringByReplacingStringByString !templateString !replacementString]
+    s = [s replacing !templateString !by: replacementString]
   end
   [s writeToExecutableFileWhenDifferentContents !inDestinationAbsoluteFilePath ?*]
 }
@@ -190,7 +190,7 @@ private proc copyFileWithSubstitutions
     s = @string.stringWithContentsOfFile {!targetDefinitionDir + "/" + inSourceFileNamePath}
   end
   for (templateString replacementString) in inSubstitutions do
-    s = [s stringByReplacingStringByString !templateString !replacementString]
+    s = [s replacing !templateString !by: replacementString]
   end
   [s writeToFileWhenDifferentContents !inDestinationAbsoluteFilePath ?*]
 }
