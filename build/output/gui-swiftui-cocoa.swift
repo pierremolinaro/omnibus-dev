@@ -54,6 +54,7 @@ struct SettingsView : View {
   enum SidebarItem {
     case commandLineOptions
     case omnibus_lexique_0
+    case allocationDebugView
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -68,12 +69,14 @@ struct SettingsView : View {
         Text ("Options").tag (SidebarItem.commandLineOptions)
 
         Text ("Source").tag (SidebarItem.omnibus_lexique_0)
+        Text ("Allocation Debug").tag (SidebarItem.allocationDebugView)
       }
       .toolbar (removing: .sidebarToggle)
     } detail: {
       switch self.mSelection {
         case .commandLineOptions : OptionView ()
         case .omnibus_lexique_0 : SettingViewFor_omnibus_lexique ()
+        case .allocationDebugView : AllocationDebugView ()
       }
     }
   }
