@@ -135,7 +135,7 @@ override method @taskSetupDeclarationAST enterInContext
     !warningOnUnusedArgs:true
     !self.mTaskSetupInstructionList
     !self.mEndOfTaskSetupDeclaration
-    !returnTypeName: ["" nowhere] // Empty string if no returned value
+    !returnTypeName: "".nowhere // Empty string if no returned value
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————

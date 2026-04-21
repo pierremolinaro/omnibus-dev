@@ -6,8 +6,7 @@ setter @instructionListIR appendGetArrayElementReference
   ?index:let @objectIR inIndexIR
   !elementPtr:@objectIR outElementPtr
 {
-  [!?ioTemporaries newTempLLVMVar ?let llvmName]
-//  [[inArrayIR type].kind arrayType ?elementType:let elementType ?1*]
+  [!?ioTemporaries newTempLLVMVar ?let llvmName ]
   outElementPtr = @objectIR.reference {!type:inElementType !llvmName:llvmName}
   self += !@getArrayElementReferenceIR {!outElementPtr !inArrayIR !inIndexIR}
 }
@@ -27,11 +26,11 @@ override method @getArrayElementReferenceIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  let llvmType = [[self.mArray type] llvmTypeName]
-  ioLLVMcode += "  " + [self.mTarget llvmName] + " = getelementptr inbounds "
-  ioLLVMcode += llvmType + ", " + llvmType + " * " + [self.mArray llvmName] + ", i32 0, " + [self.mIndex llvmTypeName]
-             + " " + [self.mIndex llvmName]
-             + " ; Element of index " + [self.mIndex llvmName] + "\n"
+  let llvmType = self.mArray.type.llvmTypeName
+  ioLLVMcode += "  " + self.mTarget.llvmName + " = getelementptr inbounds "
+  ioLLVMcode += llvmType + ", " + llvmType + " * " + self.mArray.llvmName + ", i32 0, " + self.mIndex.llvmTypeName
+             + " " + self.mIndex.llvmName
+             + " ; Element of index " + self.mIndex.llvmName + "\n"
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————

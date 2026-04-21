@@ -39,7 +39,7 @@ override method @literalStringInExpressionAST addDependenceEdgeForStaticExpressi
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override method @literalStringInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [!?ioGraph noteNode ![ctIntegerTypeName () nowhere]]
+  [!?ioGraph noteNode !ctIntegerTypeName ().nowhere]
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -60,7 +60,7 @@ override method @literalStringInExpressionAST analyzeExpression
   !result:@objectIR outResult
 {
   [!?ioStaticEntityMap findOrAddStaticString !self.mLiteralString.string ?let staticStringIndex]
-  outResult = .literalString {!utf8Size:[self.mLiteralString.string utf8Length] + 1 !index:staticStringIndex}
+  outResult = .literalString {!utf8Size:self.mLiteralString.string.utf8Length + 1 !index:staticStringIndex}
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————

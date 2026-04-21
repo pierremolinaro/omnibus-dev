@@ -8,7 +8,7 @@ setter @instructionListIR appendCopyFromReferences
   ?target:let @LValueRepresentation inTargetReference
 {
 //---
-  if not [inSourcePossibleReference isReference] then
+  if not inSourcePossibleReference.isReference then
     var loadedResultValue = inSourcePossibleReference
     [!?self appendLoadWhenReference
       !?ioTemporaries
@@ -48,8 +48,8 @@ override method @copyFromReferencesIR llvmInstructionCode
   ?!@generationAdds unused ioGenerationAdds
 {
   let assignmentFunctionLLVMName = assignmentOperatorFuncName (!self.mTarget.type !self.mTarget.type)
-  let llvmTypeName = [self.mTarget.type llvmTypeName]
-  ioLLVMcode += "  call void @" + [assignmentFunctionLLVMName assemblerRepresentation]
+  let llvmTypeName = self.mTarget.type.llvmTypeName
+  ioLLVMcode += "  call void @" + assignmentFunctionLLVMName.assemblerRepresentation
   ioLLVMcode += " (" + llvmTypeName + "* " + self.mTarget.llvmName + ", " + llvmTypeName + "* " + self.mSourceLLVMName + ")\n"
 }
 

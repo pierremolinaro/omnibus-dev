@@ -26,17 +26,17 @@ getter @integerDeclarationAST typeName -> @string outName {
 override method @integerDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let nodeName = [[self typeName] nowhere]
+  let nodeName = self.typeName.nowhere
   [!?ioGraph addNode !nodeName !self]
-  [!?ioGraph addEdge !from: nodeName !to: [ctIntegerTypeName () nowhere]]
-  [!?ioGraph addEdge !from: nodeName !to: [boolTypeName () nowhere]]
-  [!?ioGraph addEdge !from: nodeName !to: [ctBoolTypeName () nowhere]]
+  [!?ioGraph addEdge !from: nodeName !to: ctIntegerTypeName ().nowhere]
+  [!?ioGraph addEdge !from: nodeName !to: boolTypeName ().nowhere]
+  [!?ioGraph addEdge !from: nodeName !to: ctBoolTypeName ().nowhere]
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 override getter @integerDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "integer " + [self typeName]
+  outRepresentation = "integer " + self.typeName
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -75,7 +75,7 @@ override method @integerDeclarationAST enterInContext
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
-  let integerTypeName = [[self typeName] nowhere]
+  let integerTypeName = self.typeName.nowhere
   [!?ioContext.mTypeMap makeEntry !integerTypeName ?let selfTypeProxy]
 //--------------------------------------- Get min and max
   let min = minValueForInteger (!not self.mIsSigned !self.mSize)
@@ -87,7 +87,7 @@ override method @integerDeclarationAST enterInContext
     [!?ioContext addComputedPropertyGetter
       !omnibusTypeName: integerTypeName
       !llvmBaseTypeName:integerTypeName
-      !propertyName:["byteSwapped" nowhere]
+      !propertyName:"byteSwapped".nowhere
       !mode:.anySafeMode
       !visibility: .isPublic
       !resultTypeProxy:selfTypeProxy
@@ -101,28 +101,11 @@ override method @integerDeclarationAST enterInContext
       !"bswap"
     }
   end
-//--------------------------------------- bool for UInt1
-//  if mSize == 1 && not mIsSigned then // Add "bool" intrinsic function
-//    [!?propertyGetterMap addPropertyGetter
-//      !llvmBaseTypeName:integerTypeName
-//      !propertyName:[boolTypeName () nowhere]
-//      !mode:.anySafeMode
-//      !public: true
-//      !resultTypeProxy:boolTypeProxy
-//      ?routineLLVMName: let routineLLVMName
-//    ]
-//    ioRoutineListIR += !@$iXXToBoolFunctionIR.new {
-//      !routineLLVMName
-//      !isRequired:false
-//      !warnsIfUnused:false
-//      !llvmTypeName
-//    }
-//  end
 //--------------------------------------- bitreverse
   [!?ioContext addComputedPropertyGetter
     !omnibusTypeName: integerTypeName
     !llvmBaseTypeName:integerTypeName
-    !propertyName:["bitReversed" nowhere]
+    !propertyName:"bitReversed".nowhere
     !mode:.anySafeMode
     !visibility: .isPublic
     !resultTypeProxy:selfTypeProxy
@@ -139,7 +122,7 @@ override method @integerDeclarationAST enterInContext
   [!?ioContext addComputedPropertyGetter
     !omnibusTypeName: integerTypeName
     !llvmBaseTypeName:integerTypeName
-    !propertyName:["leadingZeroCount" nowhere]
+    !propertyName:"leadingZeroCount".nowhere
     !mode:.anySafeMode
     !visibility: .isPublic
     !resultTypeProxy:selfTypeProxy
@@ -156,7 +139,7 @@ override method @integerDeclarationAST enterInContext
   [!?ioContext addComputedPropertyGetter
     !omnibusTypeName: integerTypeName
     !llvmBaseTypeName:integerTypeName
-    !propertyName:["trainingZeroCount" nowhere]
+    !propertyName:"trainingZeroCount".nowhere
     !mode:.anySafeMode
     !visibility: .isPublic
     !resultTypeProxy:selfTypeProxy
@@ -173,7 +156,7 @@ override method @integerDeclarationAST enterInContext
   [!?ioContext addComputedPropertyGetter
     !omnibusTypeName: integerTypeName
     !llvmBaseTypeName: integerTypeName
-    !propertyName:["setBitCount" nowhere]
+    !propertyName:"setBitCount".nowhere
     !mode:.anySafeMode
     !visibility: .isPublic
     !resultTypeProxy:selfTypeProxy
@@ -188,15 +171,15 @@ override method @integerDeclarationAST enterInContext
   }
 //--------------------------------------- Class constant map
   var @constantMap constantMap = @()
-  [!?constantMap insertKey !["min" nowhere] !min !integerTypeName]
-  [!?constantMap insertKey !["max" nowhere] !max !integerTypeName]
+  [!?constantMap insertKey !"min".nowhere !min !integerTypeName]
+  [!?constantMap insertKey !"max".nowhere !max !integerTypeName]
   [!?ioContext.mTypeConstantMap insertKey
     !integerTypeName
     !constantMap
   ]
 //--------------------------------------- Constructor map
   var @constructorMap constructorMap = @() 
-  [!?constructorMap insertKey !["()" nowhere] !@[] !.simple {!value:0}]
+  [!?constructorMap insertKey !"()".nowhere !@[] !.simple {!value:0}]
   [!?ioContext.mTypeConstructorMap insertKey !integerTypeName !constructorMap]
 //--------------------------------------- Enter in type map
   let integerType = @omnibusType {
@@ -233,7 +216,7 @@ override method @integerDeclarationAST enterInContext
 //--- Copy from reference is used by dynamic arraies  
   let functionName = assignmentOperatorFuncName (!integerType !integerType)
   ioRoutineListIR += !@simpleAssignmentCopyRoutineIR {
-    ![functionName nowhere]
+    !functionName.nowhere
     !isRequired: false
     !warnsIfUnused: false
     !integerType
@@ -321,23 +304,23 @@ override method @inlineInfix_integer_compileTimeInt_operatorUsage generateCode
   !@objectIR outResultValue
 {
 //--- Check right ctInt belong to left integer range
-  [[inLeftOperand type].kind extractInteger ?min: let minValue ?max: let maxValue ?2*]
+  [inLeftOperand.type.kind extractInteger ?min: let minValue ?max: let maxValue ?2*]
   [inRightOperand extractLiteralInteger ?1* ?value:let value]
   if value < minValue then
     error inOperatorLocation
     : "right operand is a compile time integer with an invalid value, lower than $"
-      + [inLeftOperand type].omnibusTypeDescriptionName + " minimum value"
+      + inLeftOperand.type.omnibusTypeDescriptionName + " minimum value"
   elsif value > maxValue then
     error inOperatorLocation
     : "right operand is a compile time integer with an invalid value, greater than $"
-      + [inLeftOperand type].omnibusTypeDescriptionName + " maximum value"
+      + inLeftOperand.type.omnibusTypeDescriptionName + " maximum value"
   end
 //---
   var leftOperand = inLeftOperand
   [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?leftOperand]
   getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
-  let s = [outResultValue llvmName] + " = " + self.mLLVMOperation + " " + [[leftOperand type] llvmTypeName]
-        + " " + [leftOperand llvmName] + ", " + [inRightOperand llvmName]
+  let s = outResultValue.llvmName + " = " + self.mLLVMOperation + " " + leftOperand.type.llvmTypeName
+        + " " + leftOperand.llvmName + ", " + inRightOperand.llvmName
   [!?ioInstructionGenerationList appendInstructionAsFreeString !s !@[]]
 }
 
@@ -362,23 +345,23 @@ override method @inlineInfix_compileTimeInt_integer_operatorUsage generateCode
   !@objectIR outResultValue
 {
 //--- Check right ctInt belong to right integer range
-  [[inRightOperand type].kind extractInteger ?min: let minValue ?max: let maxValue ?2*]
+  [inRightOperand.type.kind extractInteger ?min: let minValue ?max: let maxValue ?2*]
   [inLeftOperand extractLiteralInteger ?1* ?value:let value]
   if value < minValue then
     error inOperatorLocation
     : "left operand is a compile time integer with an invalid value, lower than $"
-      + [inRightOperand type].omnibusTypeDescriptionName + " minimum value"
+      + inRightOperand.type.omnibusTypeDescriptionName + " minimum value"
   elsif value > maxValue then
     error inOperatorLocation
     : "left operand is a compile time integer with an invalid value, greater than $"
-      + [inRightOperand type].omnibusTypeDescriptionName + " maximum value"
+      + inRightOperand.type.omnibusTypeDescriptionName + " maximum value"
   end
 //---
   var rightOperand = inRightOperand
   [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?rightOperand]
   getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
-  let s = [outResultValue llvmName] + " = " + self.mLLVMOperation + " " + [[rightOperand type] llvmTypeName]
-        + " " + [inLeftOperand llvmName] + ", " + [rightOperand llvmName]
+  let s = outResultValue.llvmName + " = " + self.mLLVMOperation + " " + rightOperand.type.llvmTypeName
+        + " " + inLeftOperand.llvmName + ", " + rightOperand.llvmName
   [!?ioInstructionGenerationList appendInstructionAsFreeString !s !@[]]
 }
 
@@ -398,7 +381,7 @@ override method @integerBuiltinFunctionIR llvmCodeGeneration
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  ioLLVMcode += "define internal " + self.mLLVMTypeName + " @" + [self.mRoutineMangledName assemblerRepresentation]
+  ioLLVMcode += "define internal " + self.mLLVMTypeName + " @" + self.mRoutineMangledName.string.assemblerRepresentation
   ioLLVMcode += " (" + self.mLLVMTypeName + "* %inValue) {\n"
   ioLLVMcode += "  %value = load " + self.mLLVMTypeName + ", " + self.mLLVMTypeName + "* %inValue\n"
   ioLLVMcode += "  %result = call " + self.mLLVMTypeName + " @llvm." + self.mIntrinsicName + "." + self.mLLVMTypeName

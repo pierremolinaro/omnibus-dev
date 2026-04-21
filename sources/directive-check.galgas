@@ -19,7 +19,7 @@ syntax extension omnibus_syntax {
     $ctAssert$
     let @lstring checkMessage
     select
-      checkMessage = ["" here]
+      checkMessage = "".here
     or
       $"string"$ ?checkMessage
     end

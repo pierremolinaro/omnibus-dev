@@ -20,7 +20,7 @@ syntax extension omnibus_syntax {
     $extend$
     let @lstring typeName
     select
-      typeName = ["" here]
+      typeName = "".here
     or
       <type_definition> !?ioAST ?typeName
     end
@@ -102,15 +102,15 @@ override method @extendExpressionAST analyzeExpression
 //--- Analyze type
   let @omnibusType resultType = if self.mTypeName.string == ""
     then inOptionalTargetType
-    else [[inContext.mTypeMap searchKey !self.mTypeName] type]
+    else [inContext.mTypeMap searchKey !self.mTypeName].type
   end
 //--- Check types
-  if not [resultType.kind isInteger] then
-    error self.mTypeName : "this type is not an integer type" : outResult
-  elsif not [[expressionResult type].kind isInteger] then
-    error self.mEndOfExpression : "expression type is not an integer type" : outResult
+  if not resultType.kind.isInteger then
+    error self.mTypeName : "this type is not an integer type" spoil (outResult)
+  elsif not expressionResult.type.kind.isInteger then
+    error self.mEndOfExpression : "expression type is not an integer type" spoil (outResult)
   else
-    [[expressionResult type].kind extractInteger ?2* ?unsigned:let sourceIsUnsigned ?bitCount:let sourceSize]
+    [expressionResult.type.kind extractInteger ?2* ?unsigned:let sourceIsUnsigned ?bitCount:let sourceSize]
     [resultType.kind extractInteger ?2* ?unsigned:let targetIsUnsigned ?bitCount:let targetSize]
     if sourceIsUnsigned && targetIsUnsigned then // unsigned -> unsigned
       if sourceSize > targetSize then

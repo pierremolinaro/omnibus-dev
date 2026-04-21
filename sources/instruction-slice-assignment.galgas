@@ -110,15 +110,15 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 //--- Search Type
-  let resultType = [[inContext.mTypeMap searchKey !self.mTypeName] type]
+  let resultType = [inContext.mTypeMap searchKey !self.mTypeName].type
 //--- Check type is an unsigned integer type
   var @uint bitCount
-  if not [resultType.kind isInteger] then
-    error self.mTypeName: "this type should be an unsigned integer type" : bitCount
+  if not resultType.kind.isInteger then
+    error self.mTypeName: "this type should be an unsigned integer type" spoil (bitCount)
   else
     [resultType.kind extractInteger ?2* ?unsigned:let unsigned ?bitCount:bitCount]
     if not unsigned then
-      error self.mTypeName: "this type should be an unsigned integer type" : bitCount
+      error self.mTypeName: "this type should be an unsigned integer type" spoil (bitCount)
     end
   end
 //--- Analyze source expression
@@ -138,10 +138,10 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
 //--- Load from reference ?
   [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?sourceOperand]
 //--- If source operand is static type, check value and convert it to 'resultType'
-  if [sourceOperand isLiteralInteger] then
+  if sourceOperand.isLiteralInteger then
     [sourceOperand extractLiteralInteger ?1* ?value:let @bigint value]
     if value >= (1 << bitCount) then
-      error self.mSourceExpressionLocation : "static value too large" : sourceOperand
+      error self.mSourceExpressionLocation : "static value too large" spoil (sourceOperand)
     else
       sourceOperand = .literalInteger {!type:resultType !value:value}
     end
@@ -154,12 +154,12 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
     let @lstring sliceTypeName
     let @uint sliceWidth
     if sliceWidthStr.string == "" then
-      error sliceWidthStr : "anonymous selector not allowed here" : sliceWidth, sliceTypeName
+      error sliceWidthStr : "anonymous selector not allowed here" spoil (sliceWidth, sliceTypeName)
     elsif sliceWidthStr.string == "b" then
       sliceWidth = 1
       sliceTypeName = @{!boolTypeName () !self.mTypeName.location}
-    elsif not [sliceWidthStr.string isDecimalUnsignedNumber] then
-      error sliceWidthStr : "the selector should be an unsigned integer value" : sliceWidth, sliceTypeName
+    elsif not sliceWidthStr.string.isDecimalUnsignedNumber then
+      error sliceWidthStr : "the selector should be an unsigned integer value" spoil (sliceWidth, sliceTypeName)
     else
       sliceWidth = [sliceWidthStr decimalUnsignedNumber]
       sliceTypeName = @{!"u" + sliceWidth !self.mTypeName.location}
@@ -174,7 +174,7 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
       error sliceWidthStr : "bit slice overflow: " + specifiedBitCount + " bits, should be " + bitCount
       rightShiftAmount = 0
     end
-    let sliceType = [[inContext.mTypeMap searchKey !sliceTypeName] type]
+    let sliceType = [inContext.mTypeMap searchKey !sliceTypeName].type
   //--- Shift and truncate source value
     [!?ioInstructionGenerationList appendLogicalShiftRight !?sourceOperandForSlicing !rightShiftAmount !?ioTemporaries]
     [!?ioInstructionGenerationList appendTrunc !sliceType !?sourceOperandForSlicing !?ioTemporaries]

@@ -26,11 +26,11 @@ before {
   if [option omnibus_options.listTargets value] then
     let targetDirectoryOption = [option omnibus_options.useDirAsTargetDir value]
     if targetDirectoryOption == "" then
-      let embeddedFiles = [fw allTextFilePaths]
+      let embeddedFiles = fw.allTextFilePaths
       print (!"Embedded targets:\n")
       for (f) in embeddedFiles do
-        if [f lastPathComponent] == "+config.omnibus-target" then
-          let targetName = [[f deletingLastPathComponent] subStringFromIndex !1]
+        if f.lastPathComponent == "+config.omnibus-target" then
+          let targetName = [f.deletingLastPathComponent subStringFromIndex !1]
           print (!"  " + targetName + '\n')
         end
       end
@@ -39,8 +39,8 @@ before {
       print (!"Targets in '" + targetDirectory + "' directory\n")
       let allConfigFiles = [targetDirectory regularFilesWithExtensions !true !@[@("omnibus-target")]]
       for (f) in allConfigFiles do
-        if [f lastPathComponent] == "+config.omnibus-target" then
-          print (!"  " + [f deletingLastPathComponent] + '\n')
+        if f.lastPathComponent == "+config.omnibus-target" then
+          print (!"  " + f.deletingLastPathComponent + '\n')
         end
       end
     end
@@ -48,11 +48,11 @@ before {
 //--- Extract embedded targets
   let path = [option omnibus_options.extractEmbeddedTargets value]
   if path != "" then
-    let embeddedFiles = [fw allTextFilePaths]
+    let embeddedFiles = fw.allTextFilePaths
     for (f) in embeddedFiles do
       let filePath = path + f
       print (!"  " + filePath + '\n')
-      let dir = [filePath deletingLastPathComponent]
+      let dir = filePath.deletingLastPathComponent
       [dir makeDirectory]
       let text = [fw textFileContentsAtPath !f]
       [text writeToFileWhenDifferentContents !filePath ?*]
@@ -91,7 +91,7 @@ proc generateTarget
     !currentDir:inCurrentDirectory
     !from:inTargetName.string + "/" + inTargetParameters.mLinkerScript
     !to:inProductDirectory + "/sources/linker.ld"
-    !@[@("!SYSTEMSTACKSIZE!", [inTargetParameters.mSystemStackSize.bigint string])]
+    !@[@("!SYSTEMSTACKSIZE!", inTargetParameters.mSystemStackSize.bigint.string)]
   )
 //--- Copy build.py
   var opt_optimizationOption = "disable-opt"

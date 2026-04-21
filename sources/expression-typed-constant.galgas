@@ -121,29 +121,29 @@ override method @typedConstantCallAST analyzeExpression
   if self.mOptionalTypeName.string == "" then
     inferredResultType = inOptionalTargetType
   else
-    inferredResultType = [[inContext.mTypeMap searchKey !self.mOptionalTypeName] type]
+    inferredResultType = [inContext.mTypeMap searchKey !self.mOptionalTypeName].type
   end
   if inferredResultType.kind == .void then
-    error self.mConstructorName : "cannot infer type" : outResult
+    error self.mConstructorName : "cannot infer type" spoil (outResult)
   else
     let typeName = @lstring {!inferredResultType.omnibusTypeDescriptionName !self.mConstructorName.location}
     [inContext.mTypeConstantMap searchKey !typeName ?let classConstantMap]
 //    let classConstantMap = inferredResultType.classConstantMap
     [classConstantMap searchKey !self.mConstructorName ?let @bigint value ?let classTypeName]
-    let resultType = [[inContext.mTypeMap searchKey !classTypeName] type]
+    let resultType = [inContext.mTypeMap searchKey !classTypeName].type
     outResult = .literalInteger {!type:resultType !value:value}
   end
 //--- Analyze access list
-  if [self.mAccessList count] > 0 then
+  if self.mAccessList.count > 0 then
   //--- procAnalyzeAccesListInExpression works on reference, not value
   //    So we create articially a temporary reference for resulting value
-    getNewTempReference (![outResult type] !?ioTemporaries ?let newTemporaryReference)
+    getNewTempReference (!outResult.type !?ioTemporaries ?let newTemporaryReference)
   //--- ... add it into alloc list...
-    ioAllocaList += ![newTemporaryReference llvmName] ![newTemporaryReference type] !false
+    ioAllocaList += !newTemporaryReference.llvmName !newTemporaryReference.type !false
   //--- ... and store resulting value into it
     [!?ioInstructionGenerationList appendStoreTemporaryReference
-      ![newTemporaryReference type]
-      ![newTemporaryReference llvmName]
+      !newTemporaryReference.type
+      !newTemporaryReference.llvmName
       !outResult
     ]
     outResult = newTemporaryReference

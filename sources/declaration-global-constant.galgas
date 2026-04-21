@@ -34,7 +34,7 @@ syntax extension omnibus_syntax {
     $identifier$ ?let constantName
     let @lstring typeName
     select
-      typeName = ["" nowhere]
+      typeName = "".nowhere
     or
       <type_definition> !?ioAST ?typeName
     end
@@ -118,7 +118,7 @@ override method @globalConstantDeclarationAST enterInContext
   [!?ioContext.mValuedObjectMap insertGlobalConstant !self.mConstantName !expressionResult]
 //--- Display ?
   if displayValue then
-    print (!"Global constant '" + self.mConstantName + "' = " + [expressionResult llvmValue] + "\n")
+    print (!"Global constant '" + self.mConstantName + "' = " + expressionResult.llvmValue + "\n")
   end
 }
 
@@ -135,19 +135,19 @@ proc buildGlobalConstantMapHTMLFile
   if [option omnibus_options.emitGlobalConstantHTMLDumpFile value] then
     var @stringset firstLetterSet = @[]
     for (lkey *) in inGlobalConstantMap do
-      firstLetterSet ++= [[lkey.string characterAtIndex!0] string]
+      firstLetterSet ++= [lkey.string characterAtIndex!0].string
     end
     var @string tableOfTypeString = ""
     var @char currentFirstLetter = ' '
     for (type_lkey *) in inGlobalConstantMap do
       if currentFirstLetter != [type_lkey.string characterAtIndex !0] then
         currentFirstLetter = [type_lkey.string characterAtIndex !0]
-        tableOfTypeString += "<br><a name=\"" + [currentFirstLetter uint] + "\"><b>" + currentFirstLetter + "</b></a><br>"
+        tableOfTypeString += "<br><a name=\"" + currentFirstLetter.uint + "\"><b>" + currentFirstLetter + "</b></a><br>"
       end
       tableOfTypeString += linkForGlobalConstant (!type_lkey.string) + "<br>"
     end
     let @string typeDumpString = [filewrapper constantDumpGenerationTemplate.dump
-      ![inSourceFile lastPathComponent]
+      !inSourceFile.string.lastPathComponent
       !inGlobalConstantMap
       !firstLetterSet
       !tableOfTypeString

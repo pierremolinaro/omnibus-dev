@@ -13,7 +13,7 @@ func %once staticAttribute -> @string {
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func %once compileTimeDeclarationBarrier -> @lstring {
-  result = ["«compile time»" nowhere]
+  result = "«compile time»".nowhere
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -137,7 +137,7 @@ func %once functionResultVariableName -> @string {
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForFunction ?let @string inName -> @string {
-  result = [inName assemblerRepresentation]
+  result = inName.assemblerRepresentation
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -175,13 +175,13 @@ func llvmNameForSectionInterrupt ?let @string inName -> @string {
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForServiceCall ?let @string inName -> @string {
-  result = ["service.user." + inName assemblerRepresentation]
+  result = "service.user." + inName.assemblerRepresentation
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForServiceImplementation ?let @string inName -> @string {
-  result = ["service.implementation." + inName assemblerRepresentation]
+  result = "service.implementation." + inName.assemblerRepresentation
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -189,13 +189,13 @@ func llvmNameForServiceImplementation ?let @string inName -> @string {
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForSectionCall ?let @string inName -> @string {
-  result = ["section.user." + inName assemblerRepresentation]
+  result = "section.user." + inName.assemblerRepresentation
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForSectionImplementation ?let @string inName -> @string {
-  result = ["section.implementation." + inName assemblerRepresentation]
+  result = "section.implementation." + inName.assemblerRepresentation
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -217,7 +217,7 @@ func %once waitForGuardChangeFunctionName -> @string {
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForLocalVariable ?let @string inName -> @string {
-  result = "%" + ["var." + inName assemblerRepresentation]
+  result = "%" + "var." + inName.assemblerRepresentation
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -229,13 +229,13 @@ func %once llvmNameForSelf -> @string {
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForGlobalVariable ?let @string inName -> @string {
-  result = "@gvar." + [inName assemblerRepresentation]
+  result = "@gvar." + inName.assemblerRepresentation
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func llvmNameForGlobalSyncInstance ?let @string inName -> @string {
-  result = "@gsync." + [inName assemblerRepresentation]
+  result = "@gsync." + inName.assemblerRepresentation
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -281,13 +281,13 @@ func %once exportedAttribute -> @string {
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func stackNameForTask ?let @string inTaskName -> @string {
-  result = "@" + ["task.stack." + inTaskName assemblerRepresentation]
+  result = "@" + "task.stack." + inTaskName.assemblerRepresentation
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func setupNameForTaskType ?let @string inTaskTypeName -> @string {
-  result = "@" + ["task.setup." + inTaskTypeName assemblerRepresentation]
+  result = "@" + "task.setup." + inTaskTypeName.assemblerRepresentation
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -299,19 +299,19 @@ func activateNameForTaskType ?let @string inTaskTypeName -> @string {
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func deactivateNameForTaskType ?let @string inTaskTypeName -> @string {
-  result = "@" + ["task.deactivate." + inTaskTypeName assemblerRepresentation]
+  result = "@" + ("task.deactivate." + inTaskTypeName).assemblerRepresentation
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func stackAddressForTask ?let @string inTaskName -> @string {
-  result = "%" + ["task.stack.address." + inTaskName assemblerRepresentation]
+  result = "%" + ("task.stack.address." + inTaskName).assemblerRepresentation
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func mainRoutineNameForTask ?let @string inTaskName -> @string {
-  result = "@" + ["task.main." + inTaskName assemblerRepresentation]
+  result = "@" + ("task.main." + inTaskName).assemblerRepresentation
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -350,7 +350,7 @@ func %once memoryFreeSectionName -> @string {
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func registerGroupAddressArrayLLVMname ?let @string inGroupName -> @string {
-  result = "@register.group.array." + [inGroupName assemblerRepresentation]
+  result = "@register.group.array." + inGroupName.assemblerRepresentation
 }
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 

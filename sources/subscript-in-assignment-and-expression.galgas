@@ -35,14 +35,14 @@ proc handleArraySubscriptNew
     !?ioTemporaries
     !?indexResult
   ]  
-  if [indexResult isLiteralInteger] then // Static expression
+  if indexResult.isLiteralInteger then // Static expression
     [indexResult extractLiteralInteger ?1* ?value:let @bigint indexValue]
     if (indexValue < 0) || (indexValue >= inArraySize) then
-      error inErrorLocation : "static index should be positive and < " + inArraySize : outIndexIR
+      error inErrorLocation : "static index should be positive and < " + inArraySize spoil (outIndexIR)
     else
       outIndexIR = @objectIR.literalInteger {!type:inElementType !value:indexValue}
     end
-  elsif [[indexResult type].kind isInteger] then
+  elsif indexResult.type.kind.isInteger then
     if inCheckIndexExpression && not [option omnibus_options.noPanicGeneration value] then
       [!?ioInstructionGenerationList testArrayIndex
         !indexResult
@@ -50,13 +50,13 @@ proc handleArraySubscriptNew
         !inArraySize
         ?let @bool generatePanicInstruction
       ]
-      if generatePanicInstruction && [inMode isSafe] then
+      if generatePanicInstruction && inMode.isSafe then
         error inErrorLocation : "index computation can generate panic and routine is not safe"
       end
     end
     outIndexIR = indexResult
   else
-    error inErrorLocation : "index expression is not an integer" : outIndexIR
+    error inErrorLocation : "index expression is not an integer" spoil (outIndexIR)
   end
 }
 

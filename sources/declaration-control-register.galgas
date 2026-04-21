@@ -324,10 +324,10 @@ override method @controlRegisterGroupDeclarationAST enterInPrecedenceGraph ?!@se
     [!?ioGraph addEdge !from: nodeName !to: compileTimeDeclarationBarrier ()]
   //--- Add dependency from the number of integer type name (i.e. $u32 --> $u5)
     let split = [reg.mRegisterTypeName componentsSeparatedByString !"u"]
-    if ([split count] == 2) && ([split mValueAtIndex !0] == "") && [[split mValueAtIndex !1] isDecimalUnsignedNumber] then
-      let n = [[split mValueAtIndex !1] decimalUnsignedNumber]
+    if (split.count == 2) && ([split mValueAtIndex !0] == "") && [split mValueAtIndex !1].isDecimalUnsignedNumber then
+      let n = [split mValueAtIndex !1].decimalUnsignedNumber
       if n > 0 then
-        let bitSizeTypeName = @lstring {!"u" + [n-1 significantBitCount] !reg.mRegisterTypeName}
+        let bitSizeTypeName = @lstring {!"u" + (n-1).significantBitCount !reg.mRegisterTypeName}
         [!?ioGraph addEdge !from: nodeName !to: bitSizeTypeName]
       end
     end
@@ -337,7 +337,7 @@ override method @controlRegisterGroupDeclarationAST enterInPrecedenceGraph ?!@se
       case unusedBits (*) :
       case namedBit (* @lbigint count) :
         if count.bigint >= 0 then
-          [!?ioGraph noteUINTType ![count.bigint uint] !count.location]
+          [!?ioGraph noteUINTType !count.bigint.uint !count.location]
         end
       end
     end
@@ -404,31 +404,31 @@ private proc controlRegisterType
   case integer (* * * bitCount):
     outRegisterBitCount = bitCount
   case boolean, void :
-    error inRegisterTypeName : "a register should be an $iXXor an $uXX" : outRegisterBitCount
+    error inRegisterTypeName : "a register should be an $iXXor an $uXX" spoil (outRegisterBitCount)
   case enumeration (*) :
-    error inRegisterTypeName : "a register should be an $iXXor an $uXX" : outRegisterBitCount
+    error inRegisterTypeName : "a register should be an $iXXor an $uXX" spoil (outRegisterBitCount)
   case literalString :
-    error inRegisterTypeName : "a register should be an $iXXor an $uXX" : outRegisterBitCount
+    error inRegisterTypeName : "a register should be an $iXXor an $uXX" spoil (outRegisterBitCount)
   case compileTimeBool :
-    error inRegisterTypeName : "a register should be an $iXXor an $uXX" : outRegisterBitCount
+    error inRegisterTypeName : "a register should be an $iXXor an $uXX" spoil (outRegisterBitCount)
   case compileTimeInteger :
-    error inRegisterTypeName : "a register should be an $iXXor an $uXX" : outRegisterBitCount
+    error inRegisterTypeName : "a register should be an $iXXor an $uXX" spoil (outRegisterBitCount)
   case structure (*) :
-    error inRegisterTypeName : "a register should be an $iXXor an $uXX" : outRegisterBitCount
+    error inRegisterTypeName : "a register should be an $iXXor an $uXX" spoil (outRegisterBitCount)
   case syncTool :
-    error inRegisterTypeName : "a register should be an $iXXor an $uXX" : outRegisterBitCount
+    error inRegisterTypeName : "a register should be an $iXXor an $uXX" spoil (outRegisterBitCount)
   case opaque (*) :
-    error inRegisterTypeName : "a register should be an $iXXor an $uXX" : outRegisterBitCount
+    error inRegisterTypeName : "a register should be an $iXXor an $uXX" spoil (outRegisterBitCount)
   case staticArrayType (* *) :
-    error inRegisterTypeName : "a register should be an $iXXor an $uXX" : outRegisterBitCount
+    error inRegisterTypeName : "a register should be an $iXXor an $uXX" spoil (outRegisterBitCount)
   case dynamicArrayType (*) :
-    error inRegisterTypeName : "a register should be an $iXXor an $uXX" : outRegisterBitCount
+    error inRegisterTypeName : "a register should be an $iXXor an $uXX" spoil (outRegisterBitCount)
   case function (3*) :
-    error inRegisterTypeName : "a register should be an $iXXor an $uXX" : outRegisterBitCount
+    error inRegisterTypeName : "a register should be an $iXXor an $uXX" spoil (outRegisterBitCount)
   case generic (3*) :
-    error inRegisterTypeName : "a register should be an $iXXor an $uXX" : outRegisterBitCount
+    error inRegisterTypeName : "a register should be an $iXXor an $uXX" spoil (outRegisterBitCount)
   case llvmType (*) :
-    error inRegisterTypeName : "a register should be an $iXXor an $uXX" : outRegisterBitCount
+    error inRegisterTypeName : "a register should be an $iXXor an $uXX" spoil (outRegisterBitCount)
   end
 }
 
@@ -448,15 +448,15 @@ private proc buildControlRegisterSliceMap
   outRegisterFieldMap = @()
   outRegisterBitSliceMap = @()
   outControlRegisterFieldList = @[] // Used for HTML file
-  if [inRegisterBitSliceList count] > 0 then
+  if inRegisterBitSliceList.count > 0 then
     var @uint shiftCount = 0
     for > (mRegisterBitSlice) in inRegisterBitSliceList do
       switch mRegisterBitSlice
       case unusedBits (@lbigint count) :
-        shiftCount = shiftCount + [count.bigint uint]
-        outControlRegisterFieldList += ![count.bigint uint] ! "—"
+        shiftCount = shiftCount + count.bigint.uint
+        outControlRegisterFieldList += !count.bigint.uint ! "—"
       case namedBit (@lstring name @lbigint count) :
-        let bitCount = [count.bigint uint]
+        let bitCount = count.bigint.uint
         outControlRegisterFieldList += !bitCount !name.string
         [!?outRegisterFieldMap insertKey
           !name
@@ -509,14 +509,14 @@ method @controlRegisterDeclarationList.@element buildControlRegisterMapForGroup
       !?staticEntityMap:ioStaticEntityMap
       !expression:register.mRegisterOffset
       !errorLocation:register.mRegisterOffsetLocation
-      !optionalContextualTypeName: ["" nowhere]
+      !optionalContextualTypeName: "".nowhere
       ?result:let @objectIR addressOffsetExpressionResult
     )
     let @bigint registerAddressOffset
-    if not [addressOffsetExpressionResult isLiteralInteger] then
+    if not addressOffsetExpressionResult.isLiteralInteger then
       error register.mRegisterOffsetLocation
         : "control register address offset is not a static integer expression"
-        : registerAddressOffset
+        spoil (registerAddressOffset)
     else
       [addressOffsetExpressionResult extractLiteralInteger ?1* ?value:registerAddressOffset]
     end
@@ -534,17 +534,17 @@ method @controlRegisterDeclarationList.@element buildControlRegisterMapForGroup
         !?staticEntityMap:ioStaticEntityMap
         !expression:arraySizeExpression
         !errorLocation:arraySizeLocation
-        !optionalContextualTypeName:["" nowhere]
+        !optionalContextualTypeName: "".nowhere
         ?result:let @objectIR sizeExpressionResult
       )
-      if not [sizeExpressionResult isLiteralInteger] then
-        error arraySizeLocation : "control register address is not a static integer expression" : arraySize
+      if not sizeExpressionResult.isLiteralInteger then
+        error arraySizeLocation : "control register address is not a static integer expression" spoil (arraySize)
       else
         [sizeExpressionResult extractLiteralInteger ?1* ?value:arraySize]
         if arraySize < 2 then
           error arraySizeLocation
             : "control register array size should be a static integer expression >= 2, equal to a power of 2"
-            : arraySize
+          spoil (arraySize)
         end
       end
     //--- Analyse element array size expression
@@ -553,16 +553,16 @@ method @controlRegisterDeclarationList.@element buildControlRegisterMapForGroup
         !?staticEntityMap:ioStaticEntityMap
         !expression:arrayElementSizeExpression
         !errorLocation:arrayElementSizeLocation
-        !optionalContextualTypeName:["" nowhere]
+        !optionalContextualTypeName: "".nowhere
         ?result:let @objectIR elementArraySizeExpressionResult
       )
-      if not [elementArraySizeExpressionResult isLiteralInteger] then
+      if not elementArraySizeExpressionResult.isLiteralInteger then
         error arrayElementSizeLocation
           : "element size is not a static integer expression"
-          : elementArraySize
+          spoil (elementArraySize)
       else
         [elementArraySizeExpressionResult extractLiteralInteger ?1* ?value:let elementArraySizeAsBigInt]
-        elementArraySize = [elementArraySizeAsBigInt uint]
+        elementArraySize = elementArraySizeAsBigInt.uint
       end
     end
     [!?ioControlRegisterMap insertKey
@@ -575,7 +575,7 @@ method @controlRegisterDeclarationList.@element buildControlRegisterMapForGroup
       !registerAddressOffset
       !controlRegisterFieldList
       !registerBitCount
-      ![arraySize uint]
+      !arraySize.uint
       !elementArraySize
     ]
   end
@@ -608,7 +608,7 @@ override method @controlRegisterGroupDeclarationAST enterInContext
       let key = "#" + group.mRegisterGroupName + ":" + aRegister.lkey
       if [ioControlRegisterUserAccesMapAST hasKey !key] then
         [!?registerMap setMUserAccessForKey !true !aRegister.lkey]
-        [!?ioControlRegisterUserAccesMapAST removeKey ![key nowhere]]
+        [!?ioControlRegisterUserAccesMapAST removeKey !key.nowhere]
       end
     end
   //---
@@ -622,20 +622,20 @@ override method @controlRegisterGroupDeclarationAST enterInContext
         !?staticEntityMap:ioStaticEntityMap
         !expression:groupSizeExpression
         !errorLocation:groupSizeExpressionLocation
-        !optionalContextualTypeName:["" nowhere]
+        !optionalContextualTypeName:"".nowhere
         ?result:let @objectIR groupArraySizeExpressionResult
       )
       let @bigint groupSize
-      if not [groupArraySizeExpressionResult isLiteralInteger] then
+      if not groupArraySizeExpressionResult.isLiteralInteger then
         error groupSizeExpressionLocation
           : "control register group size is not a static integer expression"
-          : groupSize
+          spoil (groupSize)
       else
         [groupArraySizeExpressionResult extractLiteralInteger ?1* ?value:groupSize]
       end
-      if [groupSize uint] != [baseAddresses count] then
+      if groupSize.uint != baseAddresses.count then
         error groupSizeExpressionLocation
-        : "the group size is " + groupSize + ", but " + [baseAddresses count] + " base addresses are defined"
+        : "the group size is " + groupSize + ", but " + baseAddresses.count + " base addresses are defined"
       end
       let groupKind = @registerGroupKind.arrayGroup {!baseAddresses:baseAddresses}
       [!?ioContext.mControlRegisterGroupMap insertKey !group.mRegisterGroupName !groupKind !registerMap]
@@ -671,22 +671,22 @@ override method @decoratedControlRegisterArrayGroupDeclaration semanticAnalysis
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 method @controlRegisterGroupArrayList generateLLVMcode ?!@string ioLLVMcode ?let @uint inPointerSize {
-  if [self count] > 0 then
+  if self.count > 0 then
     ioLLVMcode += llvmTitleComment (!"Control Register Group Arraies")
     let int = "i" + inPointerSize
     for (groupName baseAddresses) in self do
       ioLLVMcode += registerGroupAddressArrayLLVMname (!groupName)
-                 + " = private unnamed_addr constant [" + [baseAddresses count] + " x " + int + "] ["
+                 + " = private unnamed_addr constant [" + baseAddresses.count + " x " + int + "] ["
       for (addr) in baseAddresses
       do
-        ioLLVMcode += int + " " + [addr.bigint string]
+        ioLLVMcode += int + " " + addr.bigint.string
       between
         ioLLVMcode += ", "
       end
       ioLLVMcode += "] ; "
       for (addr) in baseAddresses
       do
-        ioLLVMcode += [addr.bigint hexString]
+        ioLLVMcode += addr.bigint.hexString
       between
         ioLLVMcode += ", "
       end
@@ -755,13 +755,13 @@ proc buildControlRegisterMapHTMLFile
       end
     end
     var typeDumpString = [filewrapper controlRegisterDumpGenerationTemplate.dumpByAddress
-      ![inSourceFile lastPathComponent]
+      !inSourceFile.string.lastPathComponent
       !controlRegisterCount
       !controlRegisterByAddress
     ]
     [typeDumpString writeToFileWhenDifferentContents !byAddressFilePath ?*]
     typeDumpString = [filewrapper controlRegisterDumpGenerationTemplate.dumpByName
-      ![inSourceFile lastPathComponent]
+      !inSourceFile.string.lastPathComponent
       !controlRegisterCount
       !controlRegisterByName
     ]
@@ -791,12 +791,12 @@ private proc buildControlRegisterMaps
         + registerName
         + "</td><td class=\"type\">" + reg_mType.omnibusTypeDescriptionName + "</td><td class=\"address\">"
         + [registerAddress hexStringSeparatedBy !'_' !4] + "</td><td>"
-      if [reg_mControlRegisterFieldList count] > 0 then
+      if reg_mControlRegisterFieldList.count > 0 then
         s += "<table class=\"fields\">"
           + "<tr>" + fieldIndexColumns (!reg_mRegisterBitCount) +  "</tr>"
           + "<tr>"
         for > (mFieldBitCount mFieldName) in reg_mControlRegisterFieldList do
-          s += "<td class=\"fields\" colspan=\"" + [mFieldBitCount string] + "\">" + mFieldName + "</td>"
+          s += "<td class=\"fields\" colspan=\"" + mFieldBitCount.string + "\">" + mFieldName + "</td>"
         end
         s += "</tr></table>"
       end  
@@ -807,17 +807,17 @@ private proc buildControlRegisterMaps
       ioControlRegisterCount = ioControlRegisterCount + reg_mArraySize
       for (mValue) in arrayIndexListFor (!size:reg_mArraySize) do
         let address = registerAddress + mValue * reg_mElementArraySize
-        let registerName = inGroupName + ":" + reg_lkey + "[" + [mValue string] + "]"
+        let registerName = inGroupName + ":" + reg_lkey + "[" + mValue.string + "]"
         var s = "<tr class=\"result_line\"><td class=\"name\">"
           + registerName
           +"</td><td class=\"type\">" + reg_mType.omnibusTypeDescriptionName + "</td><td class=\"address\">"
           + [address hexStringSeparatedBy !'_' !4]
           + "</td><td>"
-        if [reg_mControlRegisterFieldList count] > 0 then
+        if reg_mControlRegisterFieldList.count > 0 then
           s += "<table class=\"fields\">"
             + "<tr>" + fieldIndexColumns (!reg_mRegisterBitCount) + "</tr><tr>"
           for > (mFieldBitCount mFieldName) in reg_mControlRegisterFieldList do
-            s += "<td class=\"fields\" colspan=\"" + [mFieldBitCount string] + "\">" + mFieldName + "</td>"
+            s += "<td class=\"fields\" colspan=\"" + mFieldBitCount.string + "\">" + mFieldName + "</td>"
           end
           s += "</tr></table>"
         end  

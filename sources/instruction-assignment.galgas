@@ -120,7 +120,7 @@ method @LValueAST analyzeLValueInAssignment
 {
   if self.mIdentifier.string == "" then // Receiver is "self"
     if inSelfType.kind == .void then
-      error self.mIdentifier : "self is not available in this context" : outInternalRepresentation
+      error self.mIdentifier : "self is not available in this context" spoil (outInternalRepresentation)
     else
       analyzeSelfLValueInAssignment (
         !self:inSelfType
@@ -141,15 +141,15 @@ method @LValueAST analyzeLValueInAssignment
     [ioUniversalMap searchEntity !self.mIdentifier ?let @valuedObject entity]
     switch entity
     case task (*) :
-      error self.mIdentifier : "a task has no value" : outInternalRepresentation
+      error self.mIdentifier : "a task has no value" spoil (outInternalRepresentation)
     case driver (* *) :
-      error self.mIdentifier : "a driver has no value" : outInternalRepresentation
+      error self.mIdentifier : "a driver has no value" spoil (outInternalRepresentation)
     case globalConstant (*) :
-      error self.mIdentifier : "a global constant cannot be written" : outInternalRepresentation
+      error self.mIdentifier : "a global constant cannot be written" spoil (outInternalRepresentation)
     case localConstant (3*) :
-      error self.mIdentifier : "a local constant cannot be written" : outInternalRepresentation
+      error self.mIdentifier : "a local constant cannot be written" spoil (outInternalRepresentation)
     case globalSyncInstance (2*) :
-      error self.mIdentifier : "a global sync instance is not allowed here" : outInternalRepresentation
+      error self.mIdentifier : "a global sync instance is not allowed here" spoil (outInternalRepresentation)
     case localVariable (@omnibusType variableType @lstring omnibusName) :
       analyzeVariableInLValueInAssignment (
         !self: inSelfType
@@ -269,7 +269,7 @@ private proc handlePropertyAccessInAssignment
       !?ioTemporaries
       !.reference {!type: ioCurrentType !llvmName: ioCurrentLLVMName}
       !getterRoutineLLVMName
-      ![computedPropertyType type]
+      !computedPropertyType.type
       ?@objectIR resultValueIR
     ]
   //--- Transform in reference
@@ -286,8 +286,8 @@ private proc handlePropertyAccessInAssignment
     ]
     ioPendingStoreComputedPropertyInstructionGenerationListList += !pendingStoreComputedPropertyInstructionGenerationList
   //---
-    ioCurrentType = [resultValueIR type]
-    ioCurrentLLVMName = [resultValueIR llvmName]
+    ioCurrentType = resultValueIR.type
+    ioCurrentLLVMName = resultValueIR.llvmName
     handleNextOperandInAssignment (
       !self: inSelfType
       !?ioCurrentType
@@ -359,7 +359,7 @@ private proc handleArrayAccessInAssignment
   case literalString :
     error inEndOfIndex
     : "the receiver type is literal string and does not accept subscripting"
-    : ioCurrentType, ioCurrentLLVMName
+    spoil (ioCurrentType, ioCurrentLLVMName)
   case staticSubscript (@omnibusType elementType @bigint arraySize) :
     handleArraySubscriptNew (
       !self: inSelfType

@@ -70,11 +70,11 @@ override method @assertInstructionAST instructionSemanticAnalysis
     ?result:let @objectIR expressionValue
   ]
 //--- Check inferred type
-  if not [[expressionValue type].kind isBoolean] then
+  if not expressionValue.type.kind.isBoolean then
     error self.mInstructionLocation : "expression is not boolean"
   end
 //--- Check expression is not static
-  if [expressionValue isStatic] then
+  if expressionValue.isStatic then
     error self.mInstructionLocation : "expression is static: use check directive"
   end
 //--- Code generation
@@ -108,11 +108,11 @@ override method @assertInstructionIR llvmInstructionCode
   let labelAssertOk = "assert.ok." + ioGenerationAdds.mUniqueIndex
   let labelAssertEr = "assert.not.ok." + ioGenerationAdds.mUniqueIndex
   ioGenerationAdds.mUniqueIndex += 1
-  ioLLVMcode += "  br i1 " + [self.mExpressionValue llvmName] + ", label %" + labelAssertOk + ", label %" + labelAssertEr + "\n\n"
+  ioLLVMcode += "  br i1 " + self.mExpressionValue.llvmName + ", label %" + labelAssertOk + ", label %" + labelAssertEr + "\n\n"
   ioLLVMcode += labelAssertEr + ":\n"
-  ioLLVMcode += "  call void @" + [panicRoutineNameForLocationFile (!self.mAssertInstructionLocation) assemblerRepresentation] + " ("
-  ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " " + [self.mAssertInstructionLocation endLine] + ", "
-  ioLLVMcode += [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " " + panicCodeForAssertViolation () + ")\n"
+  ioLLVMcode += "  call void @" + panicRoutineNameForLocationFile (!self.mAssertInstructionLocation).assemblerRepresentation + " ("
+  ioLLVMcode += inGenerationContext.mPanicLineLLVMType.llvmTypeName + " " + self.mAssertInstructionLocation.endLine + ", "
+  ioLLVMcode += inGenerationContext.mPanicCodeLLVMType.llvmTypeName + " " + panicCodeForAssertViolation () + ")\n"
   ioLLVMcode += "  unreachable\n\n"
   ioLLVMcode += labelAssertOk + ":\n"
 }

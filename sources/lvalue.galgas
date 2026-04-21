@@ -43,7 +43,7 @@ syntax extension omnibus_syntax {
       $identifier$ ?receiver
     or
       $self$
-      receiver = ["" here]
+      receiver = "".here
     end
     <lvalue_operand> !?ioAST ?let operand
     outAssignmentTargetAST = @{!receiver !operand}
@@ -138,11 +138,11 @@ method @LValueAST analyzeLValue
 {
   if self.mIdentifier.string == "" then // Receiver is "self"
     if inSelfType.kind == .void then
-      error self.mIdentifier : "self is not available in this context" : outInternalRepresentation
+      error self.mIdentifier : "self is not available in this context" spoil (outInternalRepresentation)
     elsif not [inRoutineAttributes contains !.mutatingRoutine] && not inIsAddressOf then
       error self.mIdentifier
       : "cannot mutate properties, current method is not declared with @" + mutatingAttribute () + " attribute"
-      : outInternalRepresentation
+      spoil (outInternalRepresentation)
     else
       analyzeSelfLValue (
         !self:inSelfType
@@ -162,15 +162,15 @@ method @LValueAST analyzeLValue
     [ioUniversalMap searchEntity !self.mIdentifier ?let @valuedObject entity]
     switch entity
     case task (*) :
-      error self.mIdentifier : "a task has no value" : outInternalRepresentation
+      error self.mIdentifier : "a task has no value" spoil (outInternalRepresentation)
     case driver (* *) :
-      error self.mIdentifier : "a driver has no value" : outInternalRepresentation
+      error self.mIdentifier : "a driver has no value" spoil (outInternalRepresentation)
     case globalConstant (*) :
-      error self.mIdentifier : "a global constant cannot be written" : outInternalRepresentation
+      error self.mIdentifier : "a global constant cannot be written" spoil (outInternalRepresentation)
     case localConstant (3*) :
-      error self.mIdentifier : "a local constant cannot be written" : outInternalRepresentation
+      error self.mIdentifier : "a local constant cannot be written" spoil (outInternalRepresentation)
     case globalSyncInstance (2*) :
-      error self.mIdentifier : "a global sync instance is not allowed here" : outInternalRepresentation
+      error self.mIdentifier : "a global sync instance is not allowed here" spoil (outInternalRepresentation)
     case localVariable (@omnibusType variableType @lstring omnibusName) :
       analyzeVariableInLValue (
         !self: inSelfType
@@ -291,7 +291,7 @@ private proc handlePropertyAccess
   [propertySetterMap searchKey !inPropertyName ?* ?let @propertySetterKind propertyAccess]
   switch propertyAccess
   case computedProperty (3*) :
-    error inPropertyName : "a computed property cannot be used here" : ioCurrentType, ioCurrentLLVMName
+    error inPropertyName : "a computed property cannot be used here" spoil (ioCurrentType, ioCurrentLLVMName)
   case storedProperty (@omnibusType propertyType @uint index) :
     [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
     [!?ioInstructionGenerationList appendGetUniversalPropertyReference
@@ -346,7 +346,7 @@ private proc handleArrayAccess
   case literalString :
     error inEndOfIndex
     : "the receiver type is literal string and does not accept subscripting"
-    : ioCurrentType, ioCurrentLLVMName
+    spoil (ioCurrentType, ioCurrentLLVMName)
   case staticSubscript (@omnibusType elementType @bigint arraySize) :
     handleArraySubscriptNew (
       !self: inSelfType

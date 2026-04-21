@@ -91,7 +91,7 @@ syntax extension omnibus_syntax {
       <procedure_formal_arguments> !?ioAST ?let formalArgs
       let @lstring returnType
       select
-        returnType = ["" here]
+        returnType = "".here
       or
         $->$
         <type_definition>!?ioAST ?returnType
@@ -245,7 +245,7 @@ private func omnibusNameForStaticListElementType ?let @lstring inStaticListName 
 //·······················································································································
 
 private func llvmNameForStaticListElementType ?let @lstring inStaticListName -> @lstring {
-  result = @{!"staticlist-element-type-" + [inStaticListName assemblerRepresentation] !inStaticListName.location}
+  result = @{!"staticlist-element-type-" + inStaticListName.string.assemblerRepresentation !inStaticListName.location}
 }
 
 //·······················································································································
@@ -285,7 +285,7 @@ override method @staticListAST enterInContext
   for (propertyName kind) in self.mPropertyList do (propertyIndex)
     switch kind
     case valueType (@lstring propertyTypeName) :
-      let propertyType = [[ioContext.mTypeMap searchKey !propertyTypeName] type]
+      let propertyType = [ioContext.mTypeMap searchKey !propertyTypeName].type
       if [propertyNameSet hasKey !propertyName] then
         error propertyName : "duplicated property name"
       else
@@ -365,16 +365,16 @@ override method @staticListAST enterInContext
 //-------------------------------------------------------------------- Enter static list values
   var @stringlist stringValueList = @[]
   for (element *) in self.mValueList do
-    if [propertyList count] != [element count] then
+    if propertyList.count != element.count then
       error self.mStaticListName
-      : [[propertyList count] string] + " expressions required, "
-      + [[element count] string] + " provided"
+      : propertyList.count.string + " expressions required, "
+      + element.count.string + " provided"
     else
       var staticValue = "{"
       for (operand endOfExp) in element, (* propertyType) in propertyList do
         switch operand
         case expression (@expressionAST exp) :
-          if [propertyType.kind isFunction] then
+          if propertyType.kind.isFunction then
             error endOfExp : "a function name is expected here"
           else
             computeStaticExpression (
@@ -382,14 +382,14 @@ override method @staticListAST enterInContext
               !?staticEntityMap:ioStaticEntityMap
               !expression:exp
               !errorLocation:endOfExp
-              !optionalContextualTypeName:["" nowhere]
+              !optionalContextualTypeName:"".nowhere
               ?result:let @objectIR expressionResult
             )
           //--- Enter in static value
-            staticValue += [propertyType llvmTypeName] + " " + [expressionResult llvmName]
+            staticValue += propertyType.llvmTypeName + " " + expressionResult.llvmName
           end      
         case function (@lstring functionName @routineFormalArgumentListAST formalArgs) :
-          if not [propertyType.kind isFunction] then
+          if not propertyType.kind.isFunction then
             error endOfExp : "a static expression is expected here"
           else
             [propertyType.kind extractFunction
@@ -410,23 +410,23 @@ override method @staticListAST enterInContext
             ]
           //--- Check mode
             let routineLLVMName = checkModeAndReturnsRoutineLLVMName (!implementedModeDictionary !mode !functionName)
-            if [functionReturnTypeProxy isNull] && not [candidateReturnTypeProxy isNull] then
-              error functionName : "this function should return an $" + [candidateReturnTypeProxy key] + " object"
-            elsif not [functionReturnTypeProxy isNull] && [candidateReturnTypeProxy isNull] then
+            if functionReturnTypeProxy.isNull && not candidateReturnTypeProxy.isNull then
+              error functionName : "this function should return an $" + candidateReturnTypeProxy.key + " object"
+            elsif not functionReturnTypeProxy.isNull && candidateReturnTypeProxy.isNull then
               error functionName : "this function should return no object"
             end
-            if [functionSignature count] != [candidateSignature count] then
+            if functionSignature.count != candidateSignature.count then
               error functionName
-              : "this function has " + [candidateSignature count] + " argument(s) ("
-              + [functionSignature count] + " required)"
+              : "this function has " + candidateSignature.count + " argument(s) ("
+              + functionSignature.count + " required)"
             else
               for required in functionSignature, candidate in candidateSignature do
                 if required.mTypeProxy != candidate.mTypeProxy then
-                  error candidate.mSelector : "argument type should be $" + [required.mTypeProxy key]
+                  error candidate.mSelector : "argument type should be $" + required.mTypeProxy.key
                 end
               end
             end
-            staticValue += [propertyType llvmTypeName] + " @" + [routineLLVMName assemblerRepresentation]
+            staticValue += propertyType.llvmTypeName + " @" + routineLLVMName.assemblerRepresentation
           end
         end
       between
@@ -442,14 +442,14 @@ override method @staticListAST enterInContext
     !omnibusTypeName: omnibusNameForStaticListType (!self.mStaticListName)
     ! @{!"count" !self.mStaticListName.location}
     !.isPublic
-    !.constantProperty {!value:.literalInteger {!type: compileTimeIntegerType () !value:[self.mValueList count]}}
+    !.constantProperty {!value:.literalInteger {!type: compileTimeIntegerType () !value: self.mValueList.count}}
   ]
 //-------------------------------------------------------------------- Enter list type in type map
   let arrayType = @omnibusType {
-    !subscript:.staticSubscript {!elementType:elementType !size:[stringValueList count]}
+    !subscript:.staticSubscript {!elementType:elementType !size: stringValueList.count}
     !attributes:.instanciable | .copyable
     !omnibusTypeDescriptionName:omnibusNameForStaticListType (!self.mStaticListName)
-    !kind:.staticArrayType {!elementType:elementType !size:[stringValueList count]}
+    !kind:.staticArrayType {!elementType:elementType !size:stringValueList.count}
     !llvmBaseTypeName:llvmNameForStaticListType (!self.mStaticListName)
   }
   [!?ioContext.mTypeMap insertType
@@ -460,23 +460,23 @@ override method @staticListAST enterInContext
   let staticListType = [ioContext.mTypeMap searchKey !omnibusNameForStaticListType (!self.mStaticListName)]
   [!?ioContext.mGlobalConstantMap insertKey
     !self.mStaticListName
-    !.reference {!type:[staticListType type] !llvmName:llvmNameForGlobalVariable (!self.mStaticListName)}
+    !.reference {!type:staticListType.type !llvmName:llvmNameForGlobalVariable (!self.mStaticListName)}
   ]
   [!?ioContext.mValuedObjectMap insertGlobalConstant
     !self.mStaticListName
-    !.reference {!type:[staticListType type] !llvmName:llvmNameForGlobalVariable (!self.mStaticListName)}
+    !.reference {!type:staticListType.type !llvmName:llvmNameForGlobalVariable (!self.mStaticListName)}
   ]
 //---------------- Add decorated declaration
   ioDecoratedDeclarationList += !@decoratedStaticList {!self.mStaticListName !self.mValueList}
 //-------------------------------------------- GenerateLLVM type definitions
   ioUserLLVMTypeDefinitionListIR += !@userLLVMSructureTypeDefinitionIR {
-    ![elementType llvmTypeName]
+    !elementType.llvmTypeName
     !propertyList
   }
   ioUserLLVMTypeDefinitionListIR += !@userLLVMStaticArrayTypeDefinitionIR {
-    ![arrayType llvmTypeName]
+    !arrayType.llvmTypeName
     !elementType
-    ![stringValueList count]
+    !stringValueList.count
   }
 }
 
@@ -542,7 +542,7 @@ method @staticListInitializationMap generateLLVMForStaticLists
         ioLLVMcode += llvmTitleComment (!"Static Arraies")
       end
       ioLLVMcode += llvmNameForGlobalVariable (!key) + " = private unnamed_addr constant ["
-      ioLLVMcode += [[initList count] string] + " x %" + llvmNameForStaticListElementType (![key nowhere]) + "] [\n"
+      ioLLVMcode += initList.count.string + " x %" + llvmNameForStaticListElementType (!key) + "] [\n"
       for (value) in initList
       do
         ioLLVMcode += "  %" + llvmNameForStaticListElementType (![key nowhere]) + " " + value
@@ -573,13 +573,13 @@ override method @staticListIndirectRoutineIR llvmCodeGeneration
   ?!@generationAdds unused ioGenerationAdds
 {
   ioLLVMcode += "define internal "
-  if [self.mReturnTypeProxy isNull] then
+  if self.mReturnTypeProxy.isNull then
     ioLLVMcode += "void"
   else
-    ioLLVMcode += [[self.mReturnTypeProxy type] llvmTypeName]
+    ioLLVMcode += self.mReturnTypeProxy.type.llvmTypeName
   end
-  ioLLVMcode += " @" + [self.mRoutineMangledName assemblerRepresentation] + " ("
-  let receiverLLVMTypeName = [[self.mStaticListElementType type] llvmTypeName]
+  ioLLVMcode += " @" + self.mRoutineMangledName.string.assemblerRepresentation + " ("
+  let receiverLLVMTypeName = self.mStaticListElementType.type.llvmTypeName
   var first = true
   if receiverLLVMTypeName != "" then
     ioLLVMcode += receiverLLVMTypeName + "* " + llvmNameForSelf ()
@@ -593,20 +593,20 @@ override method @staticListIndirectRoutineIR llvmCodeGeneration
     end
     switch mFormalArgumentPassingMode
     case input :
-      ioLLVMcode += [[mTypeProxy type] llvmTypeName] + " %in." + [mFormalArgumentName assemblerRepresentation]
+      ioLLVMcode += mTypeProxy.type.llvmTypeName + " %in." + mFormalArgumentName.string.assemblerRepresentation
     case output :
-      ioLLVMcode += [[mTypeProxy type] llvmTypeName] + "* %out." + [mFormalArgumentName assemblerRepresentation]
+      ioLLVMcode += mTypeProxy.type.llvmTypeName + "* %out." + mFormalArgumentName.string.assemblerRepresentation
    case inputOutput :
-      ioLLVMcode += [[mTypeProxy type] llvmTypeName] + "* %inout." + [mFormalArgumentName assemblerRepresentation]
+      ioLLVMcode += mTypeProxy.type.llvmTypeName + "* %inout." + mFormalArgumentName.string.assemblerRepresentation
     end
   end
   ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
 //--- Indirect function LLVM type name
   var @string llvmFunctionTypeName
-  if [self.mReturnTypeProxy isNull] then
+  if self.mReturnTypeProxy.isNull then
     llvmFunctionTypeName = "void"
   else
-    llvmFunctionTypeName = [[self.mReturnTypeProxy type] llvmTypeName]
+    llvmFunctionTypeName = self.mReturnTypeProxy.type.llvmTypeName
   end
   llvmFunctionTypeName += "("
   first = true
@@ -618,11 +618,11 @@ override method @staticListIndirectRoutineIR llvmCodeGeneration
     end
     switch mFormalArgumentPassingMode
     case input :
-      llvmFunctionTypeName += [[mTypeProxy type] llvmTypeName]
+      llvmFunctionTypeName += mTypeProxy.type.llvmTypeName
     case output :
-      llvmFunctionTypeName += [[mTypeProxy type] llvmTypeName] + "*"
+      llvmFunctionTypeName += mTypeProxy.type.llvmTypeName + "*"
    case inputOutput :
-      llvmFunctionTypeName += [[mTypeProxy type] llvmTypeName] + "*"
+      llvmFunctionTypeName += mTypeProxy.type.llvmTypeName + "*"
     end
   end
   llvmFunctionTypeName += ")*"
@@ -630,10 +630,10 @@ override method @staticListIndirectRoutineIR llvmCodeGeneration
   ioLLVMcode += "  %ptr = getelementptr inbounds " + receiverLLVMTypeName 
   ioLLVMcode += ", " + receiverLLVMTypeName + "* %self, i32 0, i32 " + self.mPropertyIndex + "\n"
   ioLLVMcode += "  %f = load " + llvmFunctionTypeName + ", " + llvmFunctionTypeName + "* %ptr\n"
-  if [self.mReturnTypeProxy isNull] then
+  if self.mReturnTypeProxy.isNull then
     ioLLVMcode += "  call void"
   else
-    ioLLVMcode += "  %result = call " + [[self.mReturnTypeProxy type] llvmTypeName]
+    ioLLVMcode += "  %result = call " + self.mReturnTypeProxy.type.llvmTypeName
   end
   ioLLVMcode += " %f ("
   first = true
@@ -645,19 +645,19 @@ override method @staticListIndirectRoutineIR llvmCodeGeneration
     end
     switch mFormalArgumentPassingMode
     case input :
-      ioLLVMcode += [[mTypeProxy type] llvmTypeName] + " %in." + [mFormalArgumentName assemblerRepresentation]
+      ioLLVMcode += mTypeProxy.type.llvmTypeName + " %in." + mFormalArgumentName.string.assemblerRepresentation
     case output :
-      ioLLVMcode += [[mTypeProxy type] llvmTypeName] + "* %out." + [mFormalArgumentName assemblerRepresentation]
+      ioLLVMcode += mTypeProxy.type.llvmTypeName + "* %out." + mFormalArgumentName.string.assemblerRepresentation
    case inputOutput :
-      ioLLVMcode += [[mTypeProxy type] llvmTypeName] + "* %inout." + [mFormalArgumentName assemblerRepresentation]
+      ioLLVMcode += mTypeProxy.type.llvmTypeName + "* %inout." + mFormalArgumentName.string.assemblerRepresentation
     end
   end
   ioLLVMcode += ")\n"
 //--- Epilog
-  if [self.mReturnTypeProxy isNull] then
+  if self.mReturnTypeProxy.isNull then
     ioLLVMcode += "  ret void\n"
   else
-    ioLLVMcode += "  ret " + [[self.mReturnTypeProxy type] llvmTypeName] + " %result\n"
+    ioLLVMcode += "  ret " + self.mReturnTypeProxy.type.llvmTypeName + " %result\n"
   end
   ioLLVMcode += "}\n\n"
 }

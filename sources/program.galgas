@@ -38,7 +38,7 @@ proc importFilesAndCompile ?sourceFilePath:let @lstring inSourceFile {
   ) in inSourceFile
 //--- Recursively import files
   var @stringset importedFileAbsolutePathSet = .setWithString {!inSourceFile.string}
-  let currentDirectory = [inSourceFile deletingLastPathComponent]
+  let currentDirectory = inSourceFile.string.deletingLastPathComponent
   recursiveImportFiles (
     !?ast:ast
     !currentDirectory:currentDirectory
@@ -57,10 +57,10 @@ proc importFilesAndCompile ?sourceFilePath:let @lstring inSourceFile {
   end
 //--- Compile project for every target
   if @uint.errorCount == 0 then
-    if [ast.mTargetListAST count] == 0 then
+    if ast.mTargetListAST.count == 0 then
       warning endOfSourceFile : "no target: only syntax analysis is performed"
-    elsif [ast.mTargetListAST count] > 1 then
-      warning endOfSourceFile : [[ast.mTargetListAST count] string] + " targets: only syntax analysis is performed"
+    elsif ast.mTargetListAST.count > 1 then
+      warning endOfSourceFile : ast.mTargetListAST.count.string + " targets: only syntax analysis is performed"
     else
       for (targetName) in ast.mTargetListAST do
         compileProject (
@@ -132,8 +132,8 @@ private proc compileProject
   end
 //------------------------------------------------------------ printPasses option
   if [option omnibus_options.printPasses value] & (@uint.errorCount == 0) then
-    print (!"    " + [ast.mDeclarationListAST count] + " declarations\n" )
-    print (!"    Duration: " + [parsingTime string] + "\n")
+    print (!"    " + ast.mDeclarationListAST.count + " declarations\n" )
+    print (!"    Duration: " + parsingTime.string + "\n")
   end
 //------------------------------------------------------------ Ordered declaration list
   var @declarationListAST orderedDeclarationListAST = @[]
@@ -149,7 +149,7 @@ private proc compileProject
       ?orderedDeclarationList: orderedDeclarationListAST
     )
     if [option omnibus_options.printPasses value] then
-      print (!"    Duration: " + [t string] + "\n")
+      print (!"    Duration: " + t.string + "\n")
     end
   end
 //------------------------------------------------------------ Check "check target" declarations
@@ -187,7 +187,7 @@ private proc compileProject
       ?userLLVMTypeDefinitionListIR
     )
     if [option omnibus_options.printPasses value] then
-      print (!"** Context: " + [t string] + "\n")
+      print (!"** Context: " + t.string + "\n")
     end
   end
 //------------------------------------------------------------ Semantic analysis
@@ -207,7 +207,7 @@ private proc compileProject
       ?intermediateCode:intermediateCodeStruct
     )
     if [option omnibus_options.printPasses value] then
-      print (!"** Semantic: " + [t string] + "\n")
+      print (!"** Semantic: " + t.string + "\n")
     end
   end
 //------------------------------------------------------------ Code optimization
@@ -215,7 +215,7 @@ private proc compileProject
     let @timer tOpt = .start
     codeOptimization (!inSourceFile.string !?intermediateCode:intermediateCodeStruct)
     if [option omnibus_options.printPasses value] then
-      print (!"    Duration: " + [tOpt string] + "\n")
+      print (!"    Duration: " + tOpt.string + "\n")
     end
   end
 //------------------------------------------------------------ Code generation
@@ -246,14 +246,14 @@ private proc addTargetSpecificFiles
 {
   if [option omnibus_options.useDirAsTargetDir value] != "" then // Target is defined in files
     let targetDirectory = [[option omnibus_options.useDirAsTargetDir value] absolutePathFromPath !inCurrentDirectory]
-    if [targetDirectory directoryExists] then
+    if targetDirectory.directoryExists then
       let targetDefinitionFullPath = targetDirectory + "/" + inTargetName.string + "/+config.omnibus-target"
-      if [targetDefinitionFullPath fileExists] then
+      if targetDefinitionFullPath.fileExists then
         grammar omnibus_target_grammar (
           !?ioAST
           ?importClauseList:let importedFileList
           ?endOfSourceFile:*
-        ) in [targetDefinitionFullPath nowhere]
+        ) in targetDefinitionFullPath.nowhere
         recursiveImportFileSystemTargetFiles (
           !?ast:ioAST
           !targetDirectory:targetDirectory + "/" + inTargetName.string
@@ -265,7 +265,7 @@ private proc addTargetSpecificFiles
           : "This target is not defined in '" + [option omnibus_options.useDirAsTargetDir value] + "' directory"
       end
     else
-      error ["" nowhere]: "the '" + [option omnibus_options.useDirAsTargetDir value] + "' directory does not exist"
+      error "".nowhere: "the '" + [option omnibus_options.useDirAsTargetDir value] + "' directory does not exist"
     end
   else // Target is defined in embedded files
   //--- Parse target definition file
@@ -300,10 +300,10 @@ private proc recursiveImportFileSystemTargetFiles
 {
   for (path) in inImportedClauseList do
     let absolutePath = inTargetDirectory + "/" + path.string
-    if [absolutePath fileExists] then
+    if absolutePath.fileExists then
       if not [ioImportedFileAbsolutePathSet hasKey !absolutePath] then
         ioImportedFileAbsolutePathSet ++= absolutePath
-        if [absolutePath pathExtension] == "omnibus-import" then
+        if absolutePath.pathExtension == "omnibus-import" then
           grammar omnibus_grammar (
             !?ioAST
             ?importClauseList:let importedFileList
@@ -315,7 +315,7 @@ private proc recursiveImportFileSystemTargetFiles
             !importClauseList:importedFileList
             !?importedFilePathSet:ioImportedFileAbsolutePathSet
           )
-        elsif [absolutePath pathExtension] == "omnibus-target" then
+        elsif absolutePath.pathExtension == "omnibus-target" then
           grammar omnibus_target_grammar (
             !?ioAST
             ?importClauseList:let importedFileList
@@ -359,7 +359,7 @@ private proc recursiveImportEmbeddedTargetFiles
         ) on [fw textFileContentsAtPath !fullPath]:path.string
         recursiveImportEmbeddedTargetFiles (
           !?ast:ioAST
-          !currentDirectory:[fullPath deletingLastPathComponent]
+          !currentDirectory:fullPath.deletingLastPathComponent
           !importClauseList:importedFileList
           !?importedFilePathSet:ioImportedFileAbsolutePathSet
         )
@@ -380,10 +380,10 @@ private proc recursiveImportFiles
 {
   for (path) in inImportedClauseList do
     let absolutePath = [path.string absolutePathFromPath !inCurrentDirectory]
-    if [absolutePath fileExists] then // Exists in file system ?
+    if absolutePath.fileExists then // Exists in file system ?
       if not [ioImportedFileAbsolutePathSet hasKey !absolutePath] then
         ioImportedFileAbsolutePathSet ++= absolutePath
-        if [absolutePath pathExtension] == "omnibus-import" then
+        if absolutePath.pathExtension == "omnibus-import" then
           grammar omnibus_grammar (
             !?ioAST
             ?importClauseList:let importedFileList
@@ -395,7 +395,7 @@ private proc recursiveImportFiles
             !importClauseList:importedFileList
             !?importedFilePathSet:ioImportedFileAbsolutePathSet
           )
-        elsif [absolutePath pathExtension] == "omnibus-target" then
+        elsif absolutePath.pathExtension == "omnibus-target" then
           grammar omnibus_target_grammar (
             !?ioAST
             ?importClauseList:let importedFileList
@@ -417,7 +417,7 @@ private proc recursiveImportFiles
         let embeddedPath = ":" + path
         if not [ioImportedFileAbsolutePathSet hasKey !embeddedPath] then
           ioImportedFileAbsolutePathSet ++= embeddedPath
-          if [path pathExtension] == "omnibus-import" then
+          if path.string.pathExtension == "omnibus-import" then
             grammar omnibus_grammar (
               !?ioAST
               ?importClauseList:let importedFileList
@@ -429,7 +429,7 @@ private proc recursiveImportFiles
               !importClauseList:importedFileList
               !?importedFilePathSet:ioImportedFileAbsolutePathSet
             )
-          elsif [path pathExtension] == "omnibus-target" then
+          elsif path.string.pathExtension == "omnibus-target" then
             grammar omnibus_target_grammar (
               !?ioAST
               ?importClauseList:let importedFileList

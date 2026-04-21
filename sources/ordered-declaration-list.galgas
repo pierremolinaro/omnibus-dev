@@ -154,11 +154,11 @@ proc buildOrderedDeclarationList
   [inAST.mTaskListAST noteTypesInPrecedenceGraph !?precedenceGraph]
 //--------------------------------------- Add needed UIntXX and IntXX types
   var addintegerTypeCount = 0
-  for (mValue) in [precedenceGraph undefinedNodeKeyList] do
+  for (mValue) in precedenceGraph.undefinedNodeKeyList do
   //--- Detect uXX types
     let Uxx = [mValue componentsSeparatedByString !"u"]
-    if ([Uxx count] == 2) && ([Uxx mValueAtIndex !0] == "" ) && [[Uxx mValueAtIndex !1] isDecimalUnsignedNumber] then
-      let n = [[Uxx mValueAtIndex !1] decimalUnsignedNumber]
+    if (Uxx.count == 2) && ([Uxx mValueAtIndex !0] == "" ) && [Uxx mValueAtIndex !1].isDecimalUnsignedNumber then
+      let n = [Uxx mValueAtIndex !1].decimalUnsignedNumber
       let declaration = @integerDeclarationAST {!false !n}
       [declaration enterInPrecedenceGraph !?precedenceGraph]
     //--- Add assignment operator declaration
@@ -167,8 +167,8 @@ proc buildOrderedDeclarationList
       addintegerTypeCount += 1
     else
       let Ixx = [mValue componentsSeparatedByString !"i"]
-      if ([Ixx count] == 2) && ([Ixx mValueAtIndex !0] == "" ) && [[Ixx mValueAtIndex !1] isDecimalUnsignedNumber] then
-        let n = [[Ixx mValueAtIndex !1] decimalUnsignedNumber]
+      if (Ixx.count == 2) && ([Ixx mValueAtIndex !0] == "" ) && [Ixx mValueAtIndex !1].isDecimalUnsignedNumber then
+        let n = [Ixx mValueAtIndex !1].decimalUnsignedNumber
         let declaration = @integerDeclarationAST {!true !n}
         [declaration enterInPrecedenceGraph !?precedenceGraph]
       //--- Add assignment operator declaration
@@ -187,14 +187,14 @@ proc buildOrderedDeclarationList
   end
 //------------------------------------------  Write precedence graph file ?
   if (@uint.errorCount == 0) && [option omnibus_options.emitDeclarationDependencyGraphFile value] then
-    let s = [precedenceGraph graphviz]
+    let s = precedenceGraph.graphviz
     let filePath = inSourceFile + ".declarationDependency.dot"
     [s writeToFileWhenDifferentContents !filePath ?*]
   end
 //------------------------------------------  Get ordered declaration list
   outSortedDeclarationListAST = @[]
-  if [precedenceGraph undefinedNodeCount] > 0 then
-    for (mValue) in  [precedenceGraph undefinedNodeReferenceList] do
+  if precedenceGraph.undefinedNodeCount > 0 then
+    for (mValue) in  precedenceGraph.undefinedNodeReferenceList do
       error mValue : mValue.string + " is not defined in declaration dependency graph"
     end
   else
@@ -204,16 +204,16 @@ proc buildOrderedDeclarationList
       ?let @declarationListAST unsortedSemanticDeclarationListAST
       ?*
     ]
-    if [unsortedSemanticDeclarationListAST count] > 0 then
+    if unsortedSemanticDeclarationListAST.count > 0 then
       var s = "semantic analysis not performed, "
-            + [unsortedSemanticDeclarationListAST count]
+            + unsortedSemanticDeclarationListAST.count
             + " declarations are involved in circular definition:"
       for (mDeclaration) in unsortedSemanticDeclarationListAST do
-        s += "\n-  " + [mDeclaration keyRepresentationForErrorSignaling]
+        s += "\n-  " + mDeclaration.keyRepresentationForErrorSignaling
       end
       error inEndOfSourceFile : s
       for (mDeclaration) in  unsortedSemanticDeclarationListAST do
-        error [mDeclaration locationForErrorSignaling] : "the " + [mDeclaration keyRepresentationForErrorSignaling] + " is declared here"
+        error mDeclaration.locationForErrorSignaling : "the " + mDeclaration.keyRepresentationForErrorSignaling + " is declared here"
       end
     end
   end

@@ -46,9 +46,9 @@ override method @shortCircuitAndOperationIR llvmInstructionCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  let startLabel  = "and." + [self.mLocation endLocationIndex] + ".start"
-  let trueLabel  = "and." + [self.mLocation endLocationIndex] + ".true"
-  let falseLabel = "and." + [self.mLocation endLocationIndex] + ".false"
+  let startLabel  = "and." + self.mLocation.endLocationIndex + ".start"
+  let trueLabel  = "and." + self.mLocation.endLocationIndex + ".true"
+  let falseLabel = "and." + self.mLocation.endLocationIndex + ".false"
   ioLLVMcode += "  br label %" + startLabel + "\n\n"
   ioLLVMcode += startLabel + ":\n"
   [self.mLeftInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
@@ -57,7 +57,7 @@ override method @shortCircuitAndOperationIR llvmInstructionCode
   [self.mRightInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
   ioLLVMcode += "  br label %" + falseLabel + "\n\n"
   ioLLVMcode += falseLabel + ":\n"
-  ioLLVMcode += "  " + [self.mTargetOperand llvmName]
+  ioLLVMcode += "  " + self.mTargetOperand.llvmName
              + " = phi i1 [" + self.mRightOperandLLVMName + ", %" + trueLabel + "], [false, %" + startLabel + "]\n"
 }
 

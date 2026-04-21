@@ -213,9 +213,9 @@ syntax extension omnibus_target_specific_syntax {
     <interruptConfigList> ?let interruptionConfigurationList ?let interruptConstantList
     let @uint ptrSize
     if pointerSize.bigint == 0 then
-      error pointerSize : "zero size pointer is invalid" : ptrSize
+      error pointerSize : "zero size pointer is invalid" spoil (ptrSize)
     else
-      ptrSize = [pointerSize.bigint uint]
+      ptrSize = pointerSize.bigint.uint
     end
     let parameters = @targetParameters {
       !loc
@@ -313,7 +313,7 @@ override method @configurationDeclarationAST enterInPrecedenceGraph ?!@semanticT
   [!?ioGraph addNode !rootNode !self]
   [!?ioGraph addEdge !from: rootNode !to: self.mPanicCodeTypeName]
   [!?ioGraph addEdge !from: rootNode !to: self.mPanicCodeTypeName]
-  [!?ioGraph addEdge !from: rootNode !to: [ctBoolTypeName () nowhere]]
+  [!?ioGraph addEdge !from: rootNode !to: ctBoolTypeName ().nowhere]
 }
 
 //·······················································································································
@@ -354,7 +354,7 @@ override method @configurationDeclarationAST enterInContext
     ?type:let panicCodeType
   ]
   ioContext.mPanicCodeType = panicCodeType
-  if [ioContext.mPanicCodeType.kind isInteger] then
+  if ioContext.mPanicCodeType.kind.isInteger then
     [ioContext.mPanicCodeType.kind extractInteger ?2* ?unsigned:let unsigned ?1*]
     if not unsigned then
       error self.mPanicCodeTypeName : "this type should be an unsigned integer type"
@@ -368,7 +368,7 @@ override method @configurationDeclarationAST enterInContext
     ?type:let panicLineType
   ]
   ioContext.mPanicLineType = panicLineType
-  if [ioContext.mPanicLineType.kind isInteger] then
+  if ioContext.mPanicLineType.kind.isInteger then
     [ioContext.mPanicLineType.kind extractInteger ?2* ?unsigned:let unsigned ?1*]
     if not unsigned then
       error self.mPanicLineTypeName : "this type should be an unsigned integer type"
@@ -383,7 +383,7 @@ override method @configurationDeclarationAST enterInContext
     switch panicCode
     case noCode :
     case code (value) :
-      let s = [value.bigint string]
+      let s = value.bigint.string
       if [panicCodeSet hasKey !s] then
         error value : "duplicate interrupt code"
       end

@@ -23,7 +23,7 @@ syntax extension omnibus_syntax {
   //·····················································································································
 
   rule <declaration> ?!@ast ioAST {
-    <function_declaration> !?ioAST !receiverTypeName: ["" nowhere]
+    <function_declaration> !?ioAST !receiverTypeName: "".nowhere
   }
 
   //·····················································································································
@@ -45,7 +45,7 @@ syntax extension omnibus_syntax {
       ?formalArguments:let procFormalArgumentList
     let @lstring returnTypeName
     select
-      returnTypeName = ["" here]
+      returnTypeName = "".here
     or
       $->$
       <type_definition>!?ioAST  ?returnTypeName
@@ -154,7 +154,7 @@ override method @functionDeclarationAST enterInPrecedenceGraph ?!@semanticTypePr
   end
   s += self.mFunctionName.string + "("
   for (formalArgumentPassingMode selector * *) in self.mFunctionFormalArgumentList do
-    s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
+    s += formalArgumentPassingMode.formalPassingModeString + selector + ":"
   end
   s += ")"
   let nodeName = @lstring {!s !self.mFunctionName.location}
@@ -331,9 +331,9 @@ setter @routineMapForContext addFunctionWithInputArgument
   let argumentList = @routineFormalArgumentListAST @[
     @(
       .input,
-      [inInputSelector nowhere],
-      [[inInputArgumentTypeProxy key] nowhere],
-      [inInputArgumentName nowhere]
+      inInputSelector.nowhere,
+      inInputArgumentTypeProxy.key.nowhere,
+      inInputArgumentName.nowhere
     )
   ]
   routineTypedSignature (!?ioContext.mTypeMap !argumentList ?let signature)
@@ -374,15 +374,15 @@ setter @routineMapForContext addFunctionWithTwoInputArguments
   let argumentList = @routineFormalArgumentListAST @[
     @(
       .input,
-      [inInputSelector1 nowhere],
-      [[inInputArgumentTypeProxy1 key] nowhere],
-      [inInputArgumentName1 nowhere]
+      inInputSelector1.nowhere,
+      inInputArgumentTypeProxy1.key.nowhere,
+      inInputArgumentName1.nowhere
     ),
     @(
       .input,
-      [inInputSelector2 nowhere],
-      [[inInputArgumentTypeProxy2 key] nowhere],
-      [inInputArgumentName2 nowhere]
+      inInputSelector2.nowhere,
+      inInputArgumentTypeProxy2.key.nowhere,
+      inInputArgumentName2.nowhere
     )
   ]
   outRoutineLLVMName = routineMangledNameFromAST (

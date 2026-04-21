@@ -84,7 +84,7 @@ syntax extension omnibus_syntax {
     select
       <type_definition> !?ioAST ?typeName
     or
-      typeName = ["" nowhere]
+      typeName = "".nowhere
     end
     select
       $=$
@@ -150,7 +150,7 @@ syntax extension omnibus_syntax {
         !propertyName
         !propertyAttributeList
         !inVisibility
-        !["" nowhere]
+        !"".nowhere
         !.initializedStoredProperty{!initExpression:initExpression}
     end
   }
@@ -345,7 +345,7 @@ method @structurePropertyListAST.@element enterPropertyInContext
       error attribute : "@align attribute already defined"
     else
     //--- Check alignment is a power of 2
-      if align.bigint != (1 << [align.bigint - 1 bitCountForUnsignedRepresentation]) then
+      if align.bigint != (1 << (align.bigint - 1).bitCountForUnsignedRepresentation) then
         error align : "alignment should be a power of 2"
       else
         explicitAlignment = align
@@ -356,7 +356,7 @@ method @structurePropertyListAST.@element enterPropertyInContext
 //---------- Property type
   let @omnibusType optionalPropertyType = if self.mPropertyTypeName.string == ""
     then voidType ()
-    else [[ioContext.mTypeMap searchKey !self.mPropertyTypeName] type]
+    else [ioContext.mTypeMap searchKey !self.mPropertyTypeName].type
   end
 //---------- Init expression
   switch self.mPropertyKind
@@ -373,12 +373,12 @@ method @structurePropertyListAST.@element enterPropertyInContext
     if optionalPropertyType.kind != .void then
       actualPropertyType = optionalPropertyType
     else
-      actualPropertyType = [expressionIR type]
+      actualPropertyType = expressionIR.type
     end
-    if not [actualPropertyType instanciable] then
+    if not actualPropertyType.instanciable then
       error self.mPropertyName : actualPropertyType.omnibusTypeDescriptionName + " type is not instanciable"
     end
-    if not [actualPropertyType copyable] then
+    if not actualPropertyType.copyable then
       canBeCopied = false
     end
     [!?ioContext insertGetter
@@ -400,20 +400,20 @@ method @structurePropertyListAST.@element enterPropertyInContext
     if optionalPropertyType.kind != .void then
       actualPropertyType = optionalPropertyType
     else
-      actualPropertyType = [expressionIR type]
+      actualPropertyType = expressionIR.type
     end
-    if [actualPropertyType.kind isCompileTimeBool] then
+    if actualPropertyType.kind.isCompileTimeBool then
       actualPropertyType = boolType ()
-    elsif [actualPropertyType.kind isCompileTimeInteger] then
+    elsif actualPropertyType.kind.isCompileTimeInteger then
       error self.mPropertyName
       : "$" + actualPropertyType.omnibusTypeDescriptionName + " type is a compile time type, and is not instanciable"
-    elsif not [actualPropertyType instanciable] then
+    elsif not actualPropertyType.instanciable then
       error self.mPropertyName : actualPropertyType.omnibusTypeDescriptionName + " type is not instanciable"
     end
-    if not [actualPropertyType copyable] then
+    if not actualPropertyType.copyable then
       canBeCopied = false
     end
-    let propertyIndex = [ioPropertyList count]
+    let propertyIndex = ioPropertyList.count
     ioPropertyList += !self.mPropertyName.string !actualPropertyType
     [!?ioContext insertGetter
       !omnibusTypeName: inOmnibusTypeSpecificName
@@ -429,10 +429,10 @@ method @structurePropertyListAST.@element enterPropertyInContext
     ]
     sortedOperandIRList += ![expressionIR withType !actualPropertyType] !propertyIndex
   case uninitializedStoredProperty :
-    if not [optionalPropertyType instanciable] then
+    if not optionalPropertyType.instanciable then
       error self.mPropertyName : optionalPropertyType.omnibusTypeDescriptionName + " type is not instanciable"
     end
-    let propertyIndex = [ioPropertyList count]
+    let propertyIndex = ioPropertyList.count
     ioPropertyList += !self.mPropertyName.string !optionalPropertyType
     [!?ioContext insertGetter
       !omnibusTypeName: inOmnibusTypeSpecificName
@@ -449,10 +449,10 @@ method @structurePropertyListAST.@element enterPropertyInContext
     constructorSignature += !self.mPropertyName.string !optionalPropertyType !propertyIndex
     ioConstructorKey += "!" + self.mPropertyName
   case uninitializedConstantProperty :
-    if not [optionalPropertyType instanciable] then
+    if not optionalPropertyType.instanciable then
       error self.mPropertyName : optionalPropertyType.omnibusTypeDescriptionName + " type is not instanciable"
     end
-    let propertyIndex = [ioPropertyList count]
+    let propertyIndex = ioPropertyList.count
     ioPropertyList += !self.mPropertyName.string !optionalPropertyType
     [!?ioContext insertGetter
       !omnibusTypeName: inOmnibusTypeSpecificName
@@ -463,7 +463,7 @@ method @structurePropertyListAST.@element enterPropertyInContext
     constructorSignature += !self.mPropertyName.string !optionalPropertyType !propertyIndex
     ioConstructorKey += "!" + self.mPropertyName
   case readOnlyComputedProperty (instructionList endOfInstructionList) :
-    if not [optionalPropertyType instanciable] then
+    if not optionalPropertyType.instanciable then
       error self.mPropertyName : optionalPropertyType.omnibusTypeDescriptionName + " type is not instanciable"
     end
     let llvmRoutineName = getterLLVMName (!inReceiverLLVMBaseTypeName !self.mPropertyName)
@@ -496,7 +496,7 @@ method @structurePropertyListAST.@element enterPropertyInContext
       !endOfInstructionList
       !returnTypeName: self.mPropertyTypeName
   case writeComputedProperty (writeInstructionList endOfWriteInstructionList) :
-    if not [optionalPropertyType instanciable] then
+    if not optionalPropertyType.instanciable then
       error self.mPropertyName : optionalPropertyType.omnibusTypeDescriptionName + " type is not instanciable"
     end
     let llvmGetterRoutineName = getterLLVMName (!inReceiverLLVMBaseTypeName !self.mPropertyName)
@@ -520,7 +520,7 @@ method @structurePropertyListAST.@element enterPropertyInContext
     let @routineFormalArgumentListAST formalArgumentList = @[
       @(
         .input,
-        ["" nowhere],
+        "".nowhere,
         self.mPropertyTypeName,
         @{!"newValue" !endOfWriteInstructionList}
       )
@@ -538,7 +538,7 @@ method @structurePropertyListAST.@element enterPropertyInContext
       !warningOnUnusedArgs: false 
       !writeInstructionList
       !endOfWriteInstructionList
-      !returnTypeName: ["" nowhere]
+      !returnTypeName: "".nowhere
   end
 }
 
@@ -617,14 +617,14 @@ override method @structureDeclarationAST enterInContext
   ]
 //-------------------------------------------- GenerateLLVM type definition
   ioUserLLVMTypeDefinitionListIR += !@userLLVMSructureTypeDefinitionIR {
-    ![structureType llvmTypeName]
+    !structureType.llvmTypeName
     !propertyList
   }
 //----------------- Assignment
 //--- Enter assignment function from references
   let assignmentFunctionLLVMName = assignmentOperatorFuncName (!structureType !structureType)
   ioRoutineListIR += !@structureTypeAssignFunctionIR {
-    ![assignmentFunctionLLVMName nowhere]
+    !assignmentFunctionLLVMName.nowhere
     !isRequired: false
     !warnsIfUnused: false
     !structureType
@@ -648,7 +648,7 @@ class @userLLVMSructureTypeDefinitionIR : @userLLVMTypeDefinitionIR {
 override method @userLLVMSructureTypeDefinitionIR generateLLVMType ?!@string ioLLVMcode {
   ioLLVMcode += self.mLLVMDefinedTypeName + " = type {"
   for (* mType) in self.mPropertyList
-    do ioLLVMcode += [mType llvmTypeName]
+    do ioLLVMcode += mType.llvmTypeName
     between ioLLVMcode += ", "
   end
   ioLLVMcode += "}\n"
@@ -673,18 +673,18 @@ override method @structureAssignmentOperatorUsage generateCode
     ?let @location inErrorLocation
     ?initializedTarget: let @bool inTargetIsInitialized
 {
-  let structTypeName = [inTargetType llvmTypeName]
+  let structTypeName = inTargetType.llvmTypeName
   let arcAssignmentList = [inTargetType arcList !@[]]
   if not inTargetIsInitialized then
    for (propertyName propertyType indexPath) in arcAssignmentList do 
-      let llvmPropertyPtrName = "%arc.init." + [inErrorLocation endLocationIndex]
+      let llvmPropertyPtrName = "%arc.init." + inErrorLocation.endLocationIndex
       var s = "  " + llvmPropertyPtrName + " = getelementptr inbounds " + structTypeName + ", " + structTypeName + "* " + inTargetLLVMName + ", i32 0"
       for (idx) in indexPath do
         s += ", i32 " + idx
       end
       s += " ; " + propertyName + "\n"
       [!?ioInstructionListIR appendInstructionAsFreeString !s !@[]]
-      let propertyTypeLLVMName = [propertyType llvmTypeName]
+      let propertyTypeLLVMName = propertyType.llvmTypeName
       s = "store " + propertyTypeLLVMName + " null, " + propertyTypeLLVMName + "* " + llvmPropertyPtrName 
       [!?ioInstructionListIR appendInstructionAsFreeString !s !@[]]
     end
@@ -698,15 +698,15 @@ override method @structureAssignmentOperatorUsage generateCode
     error inErrorLocation : "invalid structure assignment «llvmArrayStaticValues»"
   case llvmArrayRepeatedStaticValue (3* @uint idx) :
     let assignmentFunctionLLVMName =  assignmentOperatorFuncName (!inTargetType !inTargetType)
-    let s = " call void  @" + [assignmentFunctionLLVMName assemblerRepresentation] 
-        + " (" + [inTargetType llvmTypeName] + "* " + inTargetLLVMName 
-          + ", " + [inTargetType llvmTypeName] + "* @gconst." + idx + ")"
+    let s = " call void  @" + assignmentFunctionLLVMName.assemblerRepresentation 
+        + " (" + inTargetType.llvmTypeName + "* " + inTargetLLVMName 
+          + ", " + inTargetType.llvmTypeName + "* @gconst." + idx + ")"
     [!?ioInstructionListIR appendInstructionAsFreeString !s !@[assignmentFunctionLLVMName]]
   case reference (2*) :
     let assignmentFunctionLLVMName = assignmentOperatorFuncName (!inTargetType !inTargetType)
-    let s = " call void  @" + [assignmentFunctionLLVMName assemblerRepresentation] 
-        + " (" + [inTargetType llvmTypeName] + "* " + inTargetLLVMName 
-          + ", " + [inTargetType llvmTypeName] + "* " + [inSourcePossibleReference llvmName] + ")"
+    let s = " call void  @" + assignmentFunctionLLVMName.assemblerRepresentation 
+        + " (" + inTargetType.llvmTypeName + "* " + inTargetLLVMName 
+          + ", " + inTargetType.llvmTypeName + "* " + inSourcePossibleReference.llvmName + ")"
     [!?ioInstructionListIR appendInstructionAsFreeString !s !@[assignmentFunctionLLVMName]]
   case llvmStructureValue (* sortedOperandValues) :
     let uniqueValue = ioTemporaries.mTemporaryIndex
@@ -715,7 +715,7 @@ override method @structureAssignmentOperatorUsage generateCode
       let ptr = "%ptr." + uniqueValue + "." + idx
       var s = ptr + " = getelementptr " + structTypeName + ", " + structTypeName + "* " + inTargetLLVMName + ", i32 0, i32 " + idx
       [!?ioInstructionListIR appendInstructionAsFreeString !s !@[]]
-      s = "store " + [operand llvmTypeName] + " " + [operand llvmName] + ", " + [operand llvmTypeName] + "* " + ptr
+      s = "store " + operand.llvmTypeName + " " + operand.llvmName + ", " + operand.llvmTypeName + "* " + ptr
       [!?ioInstructionListIR appendInstructionAsFreeString !s !@[]]    
     end
   case literalInteger (2*) :
@@ -747,14 +747,14 @@ override method @structureTypeAssignFunctionIR llvmCodeGeneration
   ?!@generationAdds ioGenerationAdds
 {
   let arcAssignmentList = [self.mStructureType arcList !@[]]
-  let structureTypeLLVMTypeName = [self.mStructureType llvmTypeName]
-  ioLLVMcode += "define internal void @" + [self.mRoutineMangledName assemblerRepresentation]
+  let structureTypeLLVMTypeName = self.mStructureType.llvmTypeName
+  ioLLVMcode += "define internal void @" + self.mRoutineMangledName.string.assemblerRepresentation
   ioLLVMcode += " (" + structureTypeLLVMTypeName + " * %inTarget, "
   ioLLVMcode += structureTypeLLVMTypeName + "* %inSource) nounwind optsize {\n"
   ioLLVMcode += ";--- Handle ARC properties\n"
   for (propertyName propertyType indexPath) in arcAssignmentList do
-    let propertyTypeLLVMName = [propertyType llvmTypeName]
-    let llvmVarName = "%arc.retain." + [propertyName assemblerRepresentation] + ioGenerationAdds.mUniqueIndex
+    let propertyTypeLLVMName = propertyType.llvmTypeName
+    let llvmVarName = "%arc.retain." + propertyName.assemblerRepresentation + ioGenerationAdds.mUniqueIndex
     ioGenerationAdds.mUniqueIndex += 1
     ioLLVMcode += "  " + llvmVarName + " = getelementptr inbounds " + structureTypeLLVMTypeName + ", " + structureTypeLLVMTypeName + "* %inSource, i32 0"
     for (idx) in indexPath do
@@ -766,14 +766,14 @@ override method @structureTypeAssignFunctionIR llvmCodeGeneration
     ioLLVMcode += "  call void @arc.retain (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n" 
   end
   for (propertyName propertyType indexPath) in arcAssignmentList do
-    let llvmVarName = "%arc.release." + [propertyName assemblerRepresentation] + ioGenerationAdds.mUniqueIndex
+    let llvmVarName = "%arc.release." + propertyName.assemblerRepresentation + ioGenerationAdds.mUniqueIndex
     ioGenerationAdds.mUniqueIndex += 1
     ioLLVMcode += "  " + llvmVarName + " = getelementptr inbounds " + structureTypeLLVMTypeName + ", " + structureTypeLLVMTypeName + "* %inTarget, i32 0"
     for (idx) in indexPath do
       ioLLVMcode += ", i32 " + idx
     end
     ioLLVMcode += " ; " + propertyName + "\n"
-    let propertyTypeLLVMName = [propertyType llvmTypeName]
+    let propertyTypeLLVMName = propertyType.llvmTypeName
     let llvmLoadedVarName = llvmVarName + ".loaded"
     ioLLVMcode += "  " + llvmLoadedVarName + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n" 
     ioLLVMcode += "  call void @arc.release (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n" 

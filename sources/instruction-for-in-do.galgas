@@ -91,14 +91,14 @@ override method @forInstructionAST instructionSemanticAnalysis
 //--- Analyze iterated expression
   [!?ioUniversalMap searchValuedObjectForReadAccess !self.mIteratedObject ?let @objectIR iteratedObjectPointer]
 //--- Type kind
-  let iteratedType = [iteratedObjectPointer type]
+  let iteratedType = iteratedObjectPointer.type
 //--- Get iterated element type
   let @omnibusType iteratedElementType
   switch iteratedType.subscript
   case noSubscript :
-    error self.mIteratedObject : "this object is not enumerable" : iteratedElementType
+    error self.mIteratedObject : "this object is not enumerable" spoil (iteratedElementType)
   case literalString :
-    iteratedElementType = [[inContext.mTypeMap searchKey !["u8" nowhere]] type]
+    iteratedElementType = [inContext.mTypeMap searchKey !"u8".nowhere].type
   case staticSubscript (elementType *) :
     iteratedElementType = elementType
   end
@@ -140,15 +140,6 @@ override method @forInstructionAST instructionSemanticAnalysis
     end
   case llvmVariable (*) :
   end
-
-
-//  if not [[whileExpressionResult type].kind isBoolean] then
-//    error mEndOf_whileExpression : "'while' expression should be boolean"
-//  elsif mStaticWhileExpression && not [whileExpressionResult isStatic] then
-//    error mEndOf_whileExpression : "'while' expression is not static"
-//  elsif [whileExpressionResult isStatic] && not mStaticWhileExpression then
-//    warning mEndOf_whileExpression : "'while' expression is static (insert @" + staticAttribute () + " attribute)"
-//  end
 //------------------------------------ "DO" instruction list
   var @instructionListIR doInstructionList_GenerationList = @[]
   [self.mDoInstructionList analyzeBranchInstructionList
@@ -188,7 +179,7 @@ override method @forInstructionAST instructionSemanticAnalysis
       !self.mIteratedObject
       !iteratedObjectPointer
       !whileExpression_GenerationList
-      ![whileExpressionBooleanResult llvmName]
+      !whileExpressionBooleanResult.llvmName
       !doInstructionList_GenerationList
       !elementType
       !size
@@ -250,9 +241,9 @@ override method @forInstructionOnArrayIR llvmInstructionCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  let elementTypeLLVMName = [self.mElementType llvmTypeName]
+  let elementTypeLLVMName = self.mElementType.llvmTypeName
   let listTypeLLVMName = "[" + self.mArraySize + " x " + elementTypeLLVMName + "]"
-  let locationIndex = [[self.mIteratedObjectName.location endLocationIndex] string]
+  let locationIndex = self.mIteratedObjectName.location.endLocationIndex.string
   
   let startLabel = "for.label.start." + locationIndex
   let testLabel = "for.label.test." + locationIndex
@@ -273,7 +264,7 @@ override method @forInstructionOnArrayIR llvmInstructionCode
   ioLLVMcode += startLabel + ":\n"
 //--- Init pointer
   ioLLVMcode += "  %" + ptrVar + ".start = getelementptr inbounds " + listTypeLLVMName
-  ioLLVMcode += ", " + listTypeLLVMName + "* " + [self.mIteratedObject llvmName]
+  ioLLVMcode += ", " + listTypeLLVMName + "* " + self.mIteratedObject.llvmName
   ioLLVMcode += ", i32 0, i32 0\n"
 //--- Init index
   ioLLVMcode += "  br label %" + testLabel + "\n\n"
@@ -351,20 +342,20 @@ override method @forInstructionOnLiteralStringIR llvmInstructionCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  let startLabel = "for.label.start." + [self.mLocation endLocationIndex]
-  let testLabel = "for.label.test." + [self.mLocation endLocationIndex]
-  let loopLabel = "for.label.loop." + [self.mLocation endLocationIndex]
-  let whileLabel = "for.label.while." + [self.mLocation endLocationIndex]
-  let nextLabel = "for.label.next." + [self.mLocation endLocationIndex]
-  let endLabel  = "for.label.end." + [self.mLocation endLocationIndex]
-  let ptrVar    = "for.ptr." + [self.mLocation endLocationIndex]
-  let currentVar = "for.current." + [self.mLocation endLocationIndex]
-  let stringLLVMTypeName = [self.mLiteralStringType llvmTypeName]
+  let startLabel = "for.label.start." + self.mLocation.endLocationIndex
+  let testLabel = "for.label.test." + self.mLocation.endLocationIndex
+  let loopLabel = "for.label.loop." + self.mLocation.endLocationIndex
+  let whileLabel = "for.label.while." + self.mLocation.endLocationIndex
+  let nextLabel = "for.label.next." + self.mLocation.endLocationIndex
+  let endLabel  = "for.label.end." + self.mLocation.endLocationIndex
+  let ptrVar    = "for.ptr." + self.mLocation.endLocationIndex
+  let currentVar = "for.current." + self.mLocation.endLocationIndex
+  let stringLLVMTypeName = self.mLiteralStringType.llvmTypeName
 //--- Start of 'for' instruction
   ioLLVMcode += "  br label %" + startLabel + "\n\n"
 
   ioLLVMcode += startLabel + ":\n"
-  ioLLVMcode += "  %" + ptrVar + ".start = load " + stringLLVMTypeName + ", " + stringLLVMTypeName + "* " + [self.mStringElementIteratedObject llvmName] + "\n"
+  ioLLVMcode += "  %" + ptrVar + ".start = load " + stringLLVMTypeName + ", " + stringLLVMTypeName + "* " + self.mStringElementIteratedObject.llvmName + "\n"
   ioLLVMcode += "  br label %" + testLabel + "\n\n"
   
 //------------ Test
@@ -379,7 +370,7 @@ override method @forInstructionOnLiteralStringIR llvmInstructionCode
   ioLLVMcode += whileLabel + ":\n"
 //--- While instructions
   [self.mWhileInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-  ioLLVMcode += "  br i1 " + [self.mWhileExpressionResult llvmName] + ", label %" + loopLabel + ", label %" + endLabel + "\n\n"
+  ioLLVMcode += "  br i1 " + self.mWhileExpressionResult.llvmName + ", label %" + loopLabel + ", label %" + endLabel + "\n\n"
 
 //--------------------- Loop  
   ioLLVMcode += loopLabel + ":\n"

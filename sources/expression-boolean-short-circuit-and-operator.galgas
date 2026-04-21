@@ -78,7 +78,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
   [self.mRightExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
-    !optionalTargetType:[leftOperand type]
+    !optionalTargetType:leftOperand.type
     !context:inContext
     !mode:inMode
     !?temporary:ioTemporaries
@@ -101,19 +101,19 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     ?let rightBooleanOperand
   ]
 //--- Static operation, or dynamic operation
-  if [leftBooleanOperand isCompileTime] && [rightBooleanOperand isCompileTime] then
+  if leftBooleanOperand.isCompileTime && rightBooleanOperand.isCompileTime then
     [leftBooleanOperand extractCompileTime ?value:let @bool leftStaticValue]
     [rightBooleanOperand extractCompileTime ?value:let @bool rightStaticValue]
-    outResult = .literalInteger {!type: [leftOperand type] !value: leftStaticValue & rightStaticValue}
+    outResult = .literalInteger {!type: leftOperand.type !value: leftStaticValue & rightStaticValue}
   else
   //--- Result type : bool 
     getNewTempValue (![inContext booleanType !self.mOperatorLocation] !?ioTemporaries ?outResult)
   //--- Generate code
     [!?ioInstructionGenerationList appendShortCircuitAndOperation
       !outResult
-      ![leftBooleanOperand llvmName]
+      !leftBooleanOperand.llvmName
       !leftInstructionGenerationList
-      ![rightBooleanOperand llvmName]
+      !rightBooleanOperand.llvmName
       !rightInstructionGenerationList
       !self.mOperatorLocation
     ]

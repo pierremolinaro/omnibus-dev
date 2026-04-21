@@ -21,7 +21,7 @@ syntax extension omnibus_syntax {
     $identifier$ ?let syncInstanceName
     let @lstring syncTypeName
     select
-      syncTypeName = ["" here]
+      syncTypeName = "".here
     or
       <type_definition> !?ioAST ?syncTypeName
     end
@@ -99,7 +99,7 @@ override method @syncToolInstanceDeclarationAST enterInContext
     !?staticEntityMap:ioStaticEntityMap
     !expression:self.mSourceExpression
     !errorLocation:self.mSyncInstanceName
-    !optionalContextualTypeName:["" nowhere]
+    !optionalContextualTypeName:"".nowhere
     ?result:let @objectIR expressionResult
   )
 //--- Check variable type and expression type
@@ -113,15 +113,15 @@ override method @syncToolInstanceDeclarationAST enterInContext
 //---------------- Enter variable in global variable map
   [!?ioContext.mGlobalSyncInstanceMap insertKey
     !self.mSyncInstanceName
-    ![result type]
+    !result.type
     !result
   ]
 //---------------- Check type is a sync tool type
-  if not [[result type].kind isSyncTool] then
+  if not result.type.kind.isSyncTool then
     error self.mSyncInstanceName : "the type is not a synchronization tool type"
   end
 //---------------- Enter in valuated object map
-  [!?ioContext.mValuedObjectMap insertGlobalSyncInstance !self.mSyncInstanceName ![result type]]
+  [!?ioContext.mValuedObjectMap insertGlobalSyncInstance !self.mSyncInstanceName !result.type]
 //---------------- Add decorated declaration
   ioDecoratedDeclarationList += !@decoratedSyncInstance {!self.mSyncInstanceName !result}
 }
@@ -161,7 +161,7 @@ map @globalSyncInstanceMapIR {
 
 method @globalSyncInstanceMapIR.@element generateLLVM ?!@string ioLLVMcode {
   ioLLVMcode += llvmNameForGlobalSyncInstance (!self.lkey.string) + " = internal global "
-  ioLLVMcode += [[self.mInitialValue type] llvmTypeName] + " " + [self.mInitialValue llvmValue] + "\n"
+  ioLLVMcode += self.mInitialValue.type.llvmTypeName + " " + self.mInitialValue.llvmValue + "\n"
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————

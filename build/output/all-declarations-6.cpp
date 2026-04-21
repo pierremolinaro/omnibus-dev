@@ -2905,21 +2905,21 @@ void extensionSetter_appendLogicalShiftRight (GGS_instructionListIR & ioObject,
   if (GalgasBool::boolTrue == test_0) {
     test_0 = ioArgument_ioResult.getter_isLiteralInteger (SOURCE_FILE ("intermediate-logical-shift-right.galgas", 7)).boolEnum () ;
     if (GalgasBool::boolTrue == test_0) {
-      GGS_omnibusType var_type_245 ;
-      GGS_bigint var_value_269 ;
-      ioArgument_ioResult.method_extractLiteralInteger (var_type_245, var_value_269, inCompiler COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 8)) ;
-      ioArgument_ioResult = GGS_objectIR::class_func_literalInteger (var_type_245, var_value_269.right_shift_operation (constinArgument_inShiftAmount, inCompiler COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 9))  COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 9)) ;
+      GGS_omnibusType var_type_243 ;
+      GGS_bigint var_value_267 ;
+      ioArgument_ioResult.method_extractLiteralInteger (var_type_243, var_value_267, inCompiler COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 8)) ;
+      ioArgument_ioResult = GGS_objectIR::class_func_literalInteger (var_type_243, var_value_267.right_shift_operation (constinArgument_inShiftAmount, inCompiler COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 9))  COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 9)) ;
     }
   }
   if (GalgasBool::boolFalse == test_0) {
     {
     extensionSetter_appendLoadWhenReference (ioObject, ioArgument_ioTemporaries, ioArgument_ioResult, inCompiler COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 11)) ;
     }
-    GGS_objectIR var_source_429 = ioArgument_ioResult ;
+    GGS_objectIR var_source_427 = ioArgument_ioResult ;
     {
-    routine_getNewTempValue_3F__26__21_ (extensionGetter_type (var_source_429, inCompiler COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 13)), ioArgument_ioTemporaries, ioArgument_ioResult, inCompiler  COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 13)) ;
+    routine_getNewTempValue_3F__26__21_ (extensionGetter_type (var_source_427, inCompiler COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 13)), ioArgument_ioTemporaries, ioArgument_ioResult, inCompiler  COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 13)) ;
     }
-    ioObject.addAssignOperation (GGS_logicalRightShiftIR::init_21__21__21_ (ioArgument_ioResult, var_source_429, constinArgument_inShiftAmount, inCompiler COMMA_HERE)  COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 14)) ;
+    ioObject.addAssignOperation (GGS_logicalRightShiftIR::init_21__21__21_ (ioArgument_ioResult, var_source_427, constinArgument_inShiftAmount, inCompiler COMMA_HERE)  COMMA_SOURCE_FILE ("intermediate-logical-shift-right.galgas", 14)) ;
   }
 }
 
@@ -3783,10 +3783,10 @@ GGS_string extensionGetter_typedString (const GGS_routineTypedSignature & inObje
   GGS_string result_result ; // Returned variable
   result_result = GGS_string ("(") ;
   const GGS_routineTypedSignature temp_0 = inObject ;
-  UpEnumerator_routineTypedSignature enumerator_4990 (temp_0) ;
-  while (enumerator_4990.hasCurrentObject ()) {
-    result_result.plusAssignOperation(extensionGetter_formalPassingModeString (enumerator_4990.current_mFormalArgumentPassingMode (HERE), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 138)).add_operation (enumerator_4990.current_mSelector (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 138)).add_operation (GGS_string (":"), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 138)).add_operation (extensionGetter_key (enumerator_4990.current_mTypeProxy (HERE), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 138)), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 138)), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 138)) ;
-    enumerator_4990.gotoNextObject () ;
+  UpEnumerator_routineTypedSignature enumerator_4986 (temp_0) ;
+  while (enumerator_4986.hasCurrentObject ()) {
+    result_result.plusAssignOperation(extensionGetter_formalPassingModeString (enumerator_4986.current_mFormalArgumentPassingMode (HERE), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 138)).add_operation (enumerator_4986.current_mSelector (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 138)).add_operation (GGS_string (":"), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 138)).add_operation (extensionGetter_key (enumerator_4986.current_mTypeProxy (HERE), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 138)), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 138)), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 138)) ;
+    enumerator_4986.gotoNextObject () ;
   }
   result_result.plusAssignOperation(GGS_string (")"), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 140)) ;
 //---
@@ -3806,23 +3806,23 @@ GGS_lstring extensionGetter_mangledName (const GGS_routineTypedSignature & inObj
                                          Compiler * inCompiler
                                          COMMA_UNUSED_LOCATION_ARGS) {
   GGS_lstring result_result ; // Returned variable
-  GGS_string var_s_5418 = GGS_string::makeEmptyString () ;
+  GGS_string var_s_5410 = GGS_string::makeEmptyString () ;
   GalgasBool test_0 = GalgasBool::boolTrue ;
   if (GalgasBool::boolTrue == test_0) {
     test_0 = GGS_bool (ComparisonKind::notEqual, constinArgument_inReceiverTypeName.objectCompare (GGS_string::makeEmptyString ())).boolEnum () ;
     if (GalgasBool::boolTrue == test_0) {
-      var_s_5418.plusAssignOperation(constinArgument_inReceiverTypeName.add_operation (GGS_string ("."), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 151)), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 151)) ;
+      var_s_5410.plusAssignOperation(constinArgument_inReceiverTypeName.add_operation (GGS_string ("."), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 151)), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 151)) ;
     }
   }
-  var_s_5418.plusAssignOperation(constinArgument_inFunctionName.readProperty_string ().add_operation (GGS_string ("("), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 153)), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 153)) ;
+  var_s_5410.plusAssignOperation(constinArgument_inFunctionName.readProperty_string ().add_operation (GGS_string ("("), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 153)), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 153)) ;
   const GGS_routineTypedSignature temp_1 = inObject ;
-  UpEnumerator_routineTypedSignature enumerator_5579 (temp_1) ;
-  while (enumerator_5579.hasCurrentObject ()) {
-    var_s_5418.plusAssignOperation(extensionGetter_formalPassingModeString (enumerator_5579.current_mFormalArgumentPassingMode (HERE), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 155)).add_operation (enumerator_5579.current_mSelector (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 155)).add_operation (GGS_string (":"), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 155)), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 155)) ;
-    enumerator_5579.gotoNextObject () ;
+  UpEnumerator_routineTypedSignature enumerator_5571 (temp_1) ;
+  while (enumerator_5571.hasCurrentObject ()) {
+    var_s_5410.plusAssignOperation(extensionGetter_formalPassingModeString (enumerator_5571.current_mFormalArgumentPassingMode (HERE), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 155)).add_operation (enumerator_5571.current_mSelector (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 155)).add_operation (GGS_string (":"), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 155)), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 155)) ;
+    enumerator_5571.gotoNextObject () ;
   }
-  var_s_5418.plusAssignOperation(GGS_string (")"), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 157)) ;
-  result_result = GGS_lstring::init_21__21_ (var_s_5418, constinArgument_inFunctionName.readProperty_location (), inCompiler COMMA_HERE) ;
+  var_s_5410.plusAssignOperation(GGS_string (")"), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 157)) ;
+  result_result = GGS_lstring::init_21__21_ (var_s_5410, constinArgument_inFunctionName.readProperty_location (), inCompiler COMMA_HERE) ;
 //---
   return result_result ;
 }
@@ -3839,15 +3839,15 @@ GGS_lstring extensionGetter_routineSignature (const GGS_routineFormalArgumentLis
                                               Compiler * inCompiler
                                               COMMA_UNUSED_LOCATION_ARGS) {
   GGS_lstring result_result ; // Returned variable
-  GGS_string var_key_7974 = GGS_string ("(") ;
+  GGS_string var_key_7964 = GGS_string ("(") ;
   const GGS_routineFormalArgumentListAST temp_0 = inObject ;
-  UpEnumerator_routineFormalArgumentListAST enumerator_8028 (temp_0) ;
-  while (enumerator_8028.hasCurrentObject ()) {
-    var_key_7974.plusAssignOperation(extensionGetter_formalPassingModeString (enumerator_8028.current_mFormalArgumentPassingMode (HERE), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 206)).add_operation (enumerator_8028.current_mSelector (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 206)).add_operation (GGS_string (":"), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 206)), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 206)) ;
-    enumerator_8028.gotoNextObject () ;
+  UpEnumerator_routineFormalArgumentListAST enumerator_8018 (temp_0) ;
+  while (enumerator_8018.hasCurrentObject ()) {
+    var_key_7964.plusAssignOperation(extensionGetter_formalPassingModeString (enumerator_8018.current_mFormalArgumentPassingMode (HERE), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 206)).add_operation (enumerator_8018.current_mSelector (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 206)).add_operation (GGS_string (":"), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 206)), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 206)) ;
+    enumerator_8018.gotoNextObject () ;
   }
-  var_key_7974.plusAssignOperation(GGS_string (")"), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 208)) ;
-  result_result = GGS_lstring::init_21__21_ (var_key_7974, constinArgument_inRoutineNameLocation, inCompiler COMMA_HERE) ;
+  var_key_7964.plusAssignOperation(GGS_string (")"), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 208)) ;
+  result_result = GGS_lstring::init_21__21_ (var_key_7964, constinArgument_inRoutineNameLocation, inCompiler COMMA_HERE) ;
 //---
   return result_result ;
 }
@@ -3864,15 +3864,15 @@ GGS_lstring extensionGetter_routineSignature (const GGS_effectiveArgumentListAST
                                               Compiler * inCompiler
                                               COMMA_UNUSED_LOCATION_ARGS) {
   GGS_lstring result_result ; // Returned variable
-  GGS_string var_key_8416 = GGS_string ("(") ;
+  GGS_string var_key_8404 = GGS_string ("(") ;
   const GGS_effectiveArgumentListAST temp_0 = inObject ;
-  UpEnumerator_effectiveArgumentListAST enumerator_8445 (temp_0) ;
-  while (enumerator_8445.hasCurrentObject ()) {
-    var_key_8416.plusAssignOperation(extensionGetter_matchingFormalArgument (enumerator_8445.current_mEffectiveParameterKind (HERE), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 217)).add_operation (enumerator_8445.current_mSelector (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 217)).add_operation (GGS_string (":"), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 217)), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 217)) ;
-    enumerator_8445.gotoNextObject () ;
+  UpEnumerator_effectiveArgumentListAST enumerator_8433 (temp_0) ;
+  while (enumerator_8433.hasCurrentObject ()) {
+    var_key_8404.plusAssignOperation(extensionGetter_matchingFormalArgument (enumerator_8433.current_mEffectiveParameterKind (HERE), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 217)).add_operation (enumerator_8433.current_mSelector (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 217)).add_operation (GGS_string (":"), inCompiler COMMA_SOURCE_FILE ("formal-arguments.galgas", 217)), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 217)) ;
+    enumerator_8433.gotoNextObject () ;
   }
-  var_key_8416.plusAssignOperation(GGS_string (")"), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 219)) ;
-  result_result = GGS_lstring::init_21__21_ (var_key_8416, constinArgument_inRoutineNameLocation, inCompiler COMMA_HERE) ;
+  var_key_8404.plusAssignOperation(GGS_string (")"), inCompiler  COMMA_SOURCE_FILE ("formal-arguments.galgas", 219)) ;
+  result_result = GGS_lstring::init_21__21_ (var_key_8404, constinArgument_inRoutineNameLocation, inCompiler COMMA_HERE) ;
 //---
   return result_result ;
 }
@@ -16648,12 +16648,12 @@ void extensionMethod_llvmRoutineGeneration (const GGS_routineListIR inObject,
                                             Compiler * inCompiler
                                             COMMA_UNUSED_LOCATION_ARGS) {
   const GGS_routineListIR temp_0 = inObject ;
-  UpEnumerator_routineListIR enumerator_3760 (temp_0) ;
-  while (enumerator_3760.hasCurrentObject ()) {
-    ioArgument_ioLLVMcode.plusAssignOperation(function_llvmTitleComment (GGS_string ("Routine ").add_operation (enumerator_3760.current (HERE).readProperty_mRoutine ().readProperty_mRoutineMangledName ().readProperty_string (), inCompiler COMMA_SOURCE_FILE ("intermediate-code-generation.galgas", 109)), inCompiler COMMA_SOURCE_FILE ("intermediate-code-generation.galgas", 109)), inCompiler  COMMA_SOURCE_FILE ("intermediate-code-generation.galgas", 109)) ;
+  UpEnumerator_routineListIR enumerator_3730 (temp_0) ;
+  while (enumerator_3730.hasCurrentObject ()) {
+    ioArgument_ioLLVMcode.plusAssignOperation(function_llvmTitleComment (GGS_string ("Routine ").add_operation (enumerator_3730.current (HERE).readProperty_mRoutine ().readProperty_mRoutineMangledName ().readProperty_string (), inCompiler COMMA_SOURCE_FILE ("intermediate-code-generation.galgas", 109)), inCompiler COMMA_SOURCE_FILE ("intermediate-code-generation.galgas", 109)), inCompiler  COMMA_SOURCE_FILE ("intermediate-code-generation.galgas", 109)) ;
     ioArgument_ioGenerationAdds.mProperty_mUniqueIndex = GGS_uint (uint32_t (0U)) ;
-    callExtensionMethod_llvmCodeGeneration ((cPtr_abstractRoutineIR *) enumerator_3760.current (HERE).readProperty_mRoutine ().ptr (), ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("intermediate-code-generation.galgas", 111)) ;
-    enumerator_3760.gotoNextObject () ;
+    callExtensionMethod_llvmCodeGeneration ((cPtr_abstractRoutineIR *) enumerator_3730.current (HERE).readProperty_mRoutine ().ptr (), ioArgument_ioLLVMcode, constinArgument_inGenerationContext, ioArgument_ioGenerationAdds, inCompiler COMMA_SOURCE_FILE ("intermediate-code-generation.galgas", 111)) ;
+    enumerator_3730.gotoNextObject () ;
   }
 }
 

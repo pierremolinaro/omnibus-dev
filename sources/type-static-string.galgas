@@ -18,9 +18,9 @@ override getter @literalStringDeclarationAST locationForErrorSignaling -> @locat
 override method @literalStringDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let literalStringTypeName = [staticStringTypeName () nowhere]
+  let literalStringTypeName = staticStringTypeName ().nowhere
   [!?ioGraph addNode !literalStringTypeName !self]
-  [!?ioGraph addEdge !from: literalStringTypeName !to: ["u8" nowhere]]
+  [!?ioGraph addEdge !from: literalStringTypeName !to: "u8".nowhere]
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -46,7 +46,7 @@ override method @literalStringDeclarationAST enterInContext
 //--- Enter in type map
   let selfType = literalStringType ()
   [!?ioContext.mTypeMap insertType
-    ![staticStringTypeName () nowhere]
+    !staticStringTypeName ().nowhere
     !type: selfType
   ]
 //--- Enter assignment operator

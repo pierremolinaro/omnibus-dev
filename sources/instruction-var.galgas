@@ -31,34 +31,10 @@ syntax extension omnibus_syntax {
     ioInstructionList += !@varInstructionWithAssignmentAST {
       !varName.location
       !varName
-      !["" here]
+      !"".here
       !expression
     }
   }
-
-  //·····················································································································
-
-//  rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
-//    $var$
-//    $identifier$ ?let varName
-//    <type_definition> !?ioAST ?let typeName
-//    select
-//      ioInstructionList += !@varDeclarationInstructionAST.new {
-//        !varName.location
-//        !varName
-//        !typeName
-//      }
-//    or
-//      $=$
-//      <expression> !?ioAST ?let @expressionAST expression
-//      ioInstructionList += !@varInstructionWithAssignmentAST.new {
-//        !varName.location
-//        !varName
-//        !typeName
-//        !expression
-//      }
-//   end
-//  }
 
   //·····················································································································
 
@@ -122,7 +98,7 @@ override method @varInstructionWithAssignmentAST instructionSemanticAnalysis
 {
   let @omnibusType targetType = if self.mOptionalTypeName.string == ""
     then voidType ()
-    else [[inContext.mTypeMap searchKey !self.mOptionalTypeName] type]
+    else [inContext.mTypeMap searchKey !self.mOptionalTypeName].type
   end
 //--- Analyze source expression
   [self.mSourceExpression analyzeExpression
@@ -148,15 +124,15 @@ override method @varInstructionWithAssignmentAST instructionSemanticAnalysis
 //--- Declare local variable
   let omnibusLocalVariableName = @lstring {!self.mVarName.string + "." + ioTemporaries.mTemporaryIndex !self.mVarName}
   ioTemporaries.mTemporaryIndex += 1
-  [!?ioUniversalMap insertLocalVariable !self.mVarName ![result type] !omnibusLocalVariableName !.hasUnreadValue !false]
+  [!?ioUniversalMap insertLocalVariable !self.mVarName !result.type !omnibusLocalVariableName !.hasUnreadValue !false]
 //--- Code generation
-  ioAllocaList += !llvmNameForLocalVariable (!omnibusLocalVariableName) ![result type] !false
+  ioAllocaList += !llvmNameForLocalVariable (!omnibusLocalVariableName) !result.type !false
 //--- Assignment generation
   [!?ioInstructionGenerationList appendAssignmentIR
     !?ioTemporaries
     !inContext.mAssignmentOperatorMap
     !?ioAllocaList
-    ![result type]
+    !result.type
     !llvmNameForLocalVariable (!omnibusLocalVariableName)
     !sourcePossibleReference
     !self.mVarName
@@ -177,11 +153,11 @@ override method @varDeclarationInstructionAST instructionSemanticAnalysis
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
 {
-  let targetType = [[inContext.mTypeMap searchKey !self.mTypeName] type]
+  let targetType = [inContext.mTypeMap searchKey !self.mTypeName].type
 //---
-  if [targetType isCompileTimeType] then
+  if targetType.isCompileTimeType then
     error self.mVarName : "$" + targetType.omnibusTypeDescriptionName + " type is a compile time type, and is not instanciable"
-  elsif not [targetType instanciable] then
+  elsif not targetType.instanciable then
     error self.mVarName : "$" + targetType.omnibusTypeDescriptionName + " type is not instanciable"
   end
 //--- Declare local variable

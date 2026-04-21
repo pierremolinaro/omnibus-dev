@@ -19,12 +19,11 @@ syntax extension omnibus_syntax {
     <control_register_lvalue> !?ioAST ?let registerLValue
     let @lstring fieldName
     select
-      fieldName = ["" nowhere]
+      fieldName = "".nowhere
     or
       $.$
       $identifier$ ?fieldName
     end
-//    $)$
   //--- AST
     outExpression = @registerInExpressionAST {!registerLValue !fieldName}
   }
@@ -100,7 +99,7 @@ override method @registerInExpressionAST analyzeExpression
     getNewTempValue (!resultType !?ioTemporaries ?let resultIR)
     [!?ioInstructionGenerationList appendBinaryOperation
       !resultIR
-      ![outResult type]
+      !outResult.type
       !self.mFieldName.location
       !outResult
       !accessOperator

@@ -38,7 +38,7 @@ method @infixOperatorMap generateInfixOperatorCode
   ?!@instructionListIR ioInstructionGenerationList
   !@objectIR outResultValue
 {
-  let key = infixOperatorMapKey (![inLeftOperand type] !inInfixOperator !inOperatorLocation ![inRightOperand type])
+  let key = infixOperatorMapKey (!inLeftOperand.type !inInfixOperator !inOperatorLocation !inRightOperand.type)
   [self searchKey !key ?let resultType ?let operatorUsage]
   [operatorUsage generateCode
     !inLeftOperand
@@ -77,8 +77,8 @@ override method @inlineInfixOperatorUsage generateCode
   var rightOperand = inRightOperand
   [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?rightOperand]
   getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
-  let s = [outResultValue llvmName] + " = " + self.mLLVMOperation + " " + [[leftOperand type] llvmTypeName]
-        + " " + [leftOperand llvmName] + ", " + [rightOperand llvmName]
+  let s = outResultValue.llvmName + " = " + self.mLLVMOperation + " " + leftOperand.type.llvmTypeName
+        + " " + leftOperand.llvmName + ", " + rightOperand.llvmName
   [!?ioInstructionGenerationList appendInstructionAsFreeString !s !@[]]
 }
 

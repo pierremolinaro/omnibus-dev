@@ -106,14 +106,13 @@ override method @switchInstructionAST instructionSemanticAnalysis
     !?switchValueIR
   ]  
 //--- Check inferred type
-  let switchTypeName = @lstring {![switchValueIR type].omnibusTypeDescriptionName !self.mEndOf_test_expression}
+  let switchTypeName = @lstring {!switchValueIR.type.omnibusTypeDescriptionName !self.mEndOf_test_expression}
   [inContext.mTypeConstantMap searchKey !switchTypeName ?let enumConstantMap]
-//  let enumConstantMap = [switchValueIR type].classConstantMap
-  if not [[switchValueIR type].kind isEnumeration] then
+  if not switchValueIR.type.kind.isEnumeration then
     error self.mEndOf_test_expression
-      : "test expression type is '" + [switchValueIR omnibusTypeDescriptionName] + "', it should be boolean"
+      : "test expression type is '" + switchValueIR.omnibusTypeDescriptionName + "', it should be boolean"
   end
-  if [switchValueIR isStatic] then
+  if switchValueIR.isStatic then
     error self.mEndOf_test_expression : "test expression type should not be static"
   end
 //--- Analyse case list
@@ -154,7 +153,7 @@ override method @switchInstructionAST instructionSemanticAnalysis
   end 
 //--- Code generation
   ioInstructionGenerationList += !@switchInstructionIR {
-    ![self.mEndOf_test_expression endLocationIndex]
+    !self.mEndOf_test_expression.endLocationIndex
     !switchExpressionGenerationList
     !switchValueIR
     !switchCaseListIR
@@ -190,11 +189,11 @@ override method @switchInstructionIR llvmInstructionCode
   [self.mSwitchExpressionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
 //--- Generate switch instruction
   let labelOtherwise = "switch." + self.mLabelIndex + ".otherwise"
-  ioLLVMcode += "  switch " + [self.mSwitchExpression llvmTypeName] + " " + [self.mSwitchExpression llvmName]
+  ioLLVMcode += "  switch " + self.mSwitchExpression.llvmTypeName + " " + self.mSwitchExpression.llvmName
   ioLLVMcode += ", label %" + labelOtherwise + " [\n"
   for (caseIdentifierIndexes *) in self.mCaseGenerationList do (branchIdx)
     for (caseIdfIndex) in caseIdentifierIndexes do
-      ioLLVMcode += "    " + [self.mSwitchExpression llvmTypeName] + " " + caseIdfIndex
+      ioLLVMcode += "    " + self.mSwitchExpression.llvmTypeName + " " + caseIdfIndex
       ioLLVMcode += ", label %switch." + self.mLabelIndex + ".branch." + branchIdx + "\n"
     end
   end

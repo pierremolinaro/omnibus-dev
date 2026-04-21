@@ -97,7 +97,7 @@ syntax extension omnibus_syntax {
 override method @compiletimePrefixOperatorAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let nodeName = @lstring {![self.mPrefixOperator string] + "." + self.mReceiverTypeName !self.mPrefixOperatorLocation}
+  let nodeName = @lstring {!self.mPrefixOperator.string + "." + self.mReceiverTypeName !self.mPrefixOperatorLocation}
   [!?ioGraph addNode !nodeName !self]
   [!?ioGraph addEdge !from: nodeName !to: self.mReceiverTypeName]
   [!?ioGraph addEdge !from: nodeName !to: self.mResultTypeName]
@@ -107,7 +107,7 @@ override method @compiletimePrefixOperatorAST enterInPrecedenceGraph
 //·······················································································································
 
 override getter @compiletimePrefixOperatorAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = [self.mPrefixOperator string] + " " + self.mReceiverTypeName
+  outRepresentation = self.mPrefixOperator.string + " " + self.mReceiverTypeName
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -126,10 +126,10 @@ override method @compiletimePrefixOperatorAST enterInContext
 {
 //--- Check types
   [!?ioContext.mTypeMap makeEntry !self.mReceiverTypeName ?let receiverTypeProxy]
-  let receiverType = [receiverTypeProxy type]
+  let receiverType = receiverTypeProxy.type
   [receiverType checkIsCompileTimeType !self.mReceiverTypeName.location]
   [!?ioContext.mTypeMap makeEntry !self.mResultTypeName ?let resultTypeProxy]
-  let resultType = [resultTypeProxy type]
+  let resultType = resultTypeProxy.type
   [resultType checkIsCompileTimeType !self.mResultTypeName.location]
 //--- Check native operator expression
   var @ctCheckMap ctCheckMap = @()

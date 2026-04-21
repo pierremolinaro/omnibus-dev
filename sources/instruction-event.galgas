@@ -200,7 +200,7 @@ override method @syncInstructionAST instructionSemanticAnalysis
       guardedCommandIRList += !.booleanGuard {
         !isExitCommand:isContinue
         !instructionGenerationList:guardInstructionGenerationList
-        !boolGuardBoolLLVMName: [booleanResult llvmName]
+        !boolGuardBoolLLVMName: booleanResult.llvmName
       }
     case boolAndSync (isContinue exp warnsOnStaticExpression endOfExp usesSelf nameList parameterList) :
       var @instructionListIR boolExpInstructionGenerationList = @[]
@@ -239,8 +239,8 @@ override method @syncInstructionAST instructionSemanticAnalysis
       let @procCallEffectiveParameterListIR guardEffectiveParameterListIR
       let @lstring guardMangledName
       if usesSelf.bool then // self.p1.p2. … (…)
-        if [inSelfType.kind isVoid] then
-          error usesSelf : "'self' is not available in this context" : guardEffectiveParameterListIR, guardMangledName
+        if inSelfType.kind.isVoid then
+          error usesSelf : "'self' is not available in this context" spoil (guardEffectiveParameterListIR, guardMangledName)
         else
           var propertyList = nameList
           [!?propertyList popLast ?let guardName]
@@ -273,10 +273,10 @@ override method @syncInstructionAST instructionSemanticAnalysis
             ?guardMangledName: guardMangledName
           )
         end
-      elsif [nameList count] == 1 then // Standalone guard: g (…)
+      elsif nameList.count == 1 then // Standalone guard: g (…)
         error [nameList mValueAtIndex !0]
         : "Standalone guard are not handled"
-        : guardMangledName, guardEffectiveParameterListIR
+        spoil (guardMangledName, guardEffectiveParameterListIR)
       else // Global variable method, or driver method: g.h. … (…)
         var propertyList = nameList
         [!?propertyList popFirst ?let globalReceiverName]
@@ -337,30 +337,6 @@ override method @syncInstructionAST instructionSemanticAnalysis
           !effectiveParameterListIR:guardEffectiveParameterListIR
         }
       end
-
-
-//      if [boolExpressionResult isLiteralInteger] then
-//        [boolExpressionResult literalInteger ?1* ?value:let @bigint value]
-//        if value == 1 then
-//          guardedCommandIRList += !.sync {
-//            !isExitCommand:isContinue
-//            !guardMangledName:guardMangledName.string
-//            !guardInstructionGenerationList:guardInstructionGenerationList
-//            !effectiveParameterListIR:guardEffectiveParameterListIR
-//          }
-//        else
-//          error guardMangledName : "false guard not handled yet"
-//        end
-//      else
-//        guardedCommandIRList += !.boolAndSync {
-//          !isExitCommand:isContinue
-//          !boolExpInstructionGenerationList:boolExpInstructionGenerationList
-//          !boolExpResult:boolExpressionResult
-//          !guardMangledName:guardMangledName.string
-//          !guardInstructionGenerationList:guardInstructionGenerationList
-//          !effectiveParameterListIR:guardEffectiveParameterListIR
-//        }
-//      end
     end
   end
 //-------------------- Instruction lists
@@ -405,12 +381,11 @@ proc analyzeGuardCall
   !effectiveIR:@procCallEffectiveParameterListIR outEffectiveParameterListIR
   !guardMangledName:@lstring outGuardMangledName
 {
-  let guardMangledName = [inEffectiveParameterList mangledName !receiverTypeName: [inReceiver type].omnibusTypeDescriptionName !functionName: inGuardName]
-//  let guardMap = [[inReceiver type] guardMap]
+  let guardMangledName = [inEffectiveParameterList mangledName !receiverTypeName: inReceiver.type.omnibusTypeDescriptionName !functionName: inGuardName]
   [inContext.mGuardMap searchKey !guardMangledName ?let isPublic ?let @routineTypedSignature formalSignature ?let guardRoutineUserLLVMName ?*]
 //--- Check accessibility
   if not isPublic then
-    error inGuardName : "this guard is not public": outGuardMangledName, outEffectiveParameterListIR
+    error inGuardName : "this guard is not public"spoil (outGuardMangledName, outEffectiveParameterListIR)
   else  
     outGuardMangledName = guardRoutineUserLLVMName
   //--- Analyze effective parameters
@@ -517,16 +492,16 @@ override method @syncInstructionIR llvmInstructionCode
       ioLLVMcode += testOkLabelName + ":\n"
       [guardInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
       let guardAcceptationLabelName = startLabel + "." + idx + ".guard.acceptation"
-      ioLLVMcode += "  %" + guardAcceptationLabelName + " = call i1 @" + [guardMangledName assemblerRepresentation]
+      ioLLVMcode += "  %" + guardAcceptationLabelName + " = call i1 @" + guardMangledName.assemblerRepresentation
       ioLLVMcode += " ("
       for (mEffectiveParameterPassingMode mParameter) in effectiveParameterList do
         switch mEffectiveParameterPassingMode
         case input:
-          ioLLVMcode += [mParameter llvmTypeName] + " * " + [mParameter llvmName]
+          ioLLVMcode += mParameter.llvmTypeName + " * " + mParameter.llvmName
         case output:
-          ioLLVMcode += [mParameter llvmTypeName] + " " + [mParameter llvmName]
+          ioLLVMcode += mParameter.llvmTypeName + " " + mParameter.llvmName
         case outputInput:
-          ioLLVMcode += [mParameter llvmTypeName] + " * " + [mParameter llvmName]
+          ioLLVMcode += mParameter.llvmTypeName + " * " + mParameter.llvmName
         end
       between
         ioLLVMcode += ", "
@@ -540,16 +515,16 @@ override method @syncInstructionIR llvmInstructionCode
     case sync (isExitCommand guardMangledName guardInstructionList effectiveParameterList) :
       isWhileGuardedCommand = isExitCommand
       [guardInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
-      ioLLVMcode += "  " + acceptanceVarName + " = call i1 @" + [guardMangledName assemblerRepresentation]
+      ioLLVMcode += "  " + acceptanceVarName + " = call i1 @" + guardMangledName.assemblerRepresentation
       ioLLVMcode += " ("
       for (mEffectiveParameterPassingMode mParameter) in effectiveParameterList do
         switch mEffectiveParameterPassingMode
         case input:
-          ioLLVMcode += [mParameter llvmTypeName] + " * " + [mParameter llvmName]
+          ioLLVMcode += mParameter.llvmTypeName + " * " + mParameter.llvmName
         case output:
-          ioLLVMcode += [mParameter llvmTypeName] + " " + [mParameter llvmName]
+          ioLLVMcode += mParameter.llvmTypeName + " " + mParameter.llvmName
         case outputInput:
-          ioLLVMcode += [mParameter llvmTypeName] + " * " + [mParameter llvmName]
+          ioLLVMcode += mParameter.llvmTypeName + " * " + mParameter.llvmName
         end
       between
         ioLLVMcode += ", "
@@ -571,9 +546,9 @@ override method @syncInstructionIR llvmInstructionCode
   if [option omnibus_options.noPanicGeneration value] then
     ioLLVMcode += "  br label %" + exitLabelName + "\n\n" // No panic generation, pass instruction
   else
-    ioLLVMcode += "  call void @" + [panicRoutineNameForLocationFile (!self.mSelectInstructionLocation) assemblerRepresentation] + " ("
-    ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " " + [self.mSelectInstructionLocation endLine] + ", "
-    ioLLVMcode += [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " " + panicCodeForClosedSync () + ")\n"
+    ioLLVMcode += "  call void @" + panicRoutineNameForLocationFile (!self.mSelectInstructionLocation).assemblerRepresentation + " ("
+    ioLLVMcode += inGenerationContext.mPanicLineLLVMType.llvmTypeName + " " + self.mSelectInstructionLocation.endLine + ", "
+    ioLLVMcode += inGenerationContext.mPanicCodeLLVMType.llvmTypeName + " " + panicCodeForClosedSync () + ")\n"
     ioLLVMcode += "  unreachable\n\n"
   end
   ioLLVMcode += exitLabelName + ":\n"
@@ -585,7 +560,7 @@ override method @syncInstructionIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint ioMaxBranchOfOnInstructions
 {
-  let branchCount = [self.mOnInstructionBranchListIR count]
+  let branchCount = self.mOnInstructionBranchListIR.count
   if ioMaxBranchOfOnInstructions < branchCount then
     ioMaxBranchOfOnInstructions = branchCount
   end

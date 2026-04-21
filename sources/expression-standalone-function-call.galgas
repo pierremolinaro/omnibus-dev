@@ -108,8 +108,8 @@ override method @standaloneFunctionInExpressionAST analyzeExpression
     ?let unused implementedMode
   ]
 //--- Check routine is actually a function
-  if [formalReturnTypeProxy isNull] then
-    error requiredFunctionMangledName : "this function does not return any value" : outFunctionCallReturnedValue
+  if formalReturnTypeProxy.isNull then
+    error requiredFunctionMangledName : "this function does not return any value" spoil (outFunctionCallReturnedValue)
   else
   //--- Check modes
     let functionLLVMName = checkModeAndReturnsRoutineLLVMName (!implementedModeDictionary !inMode !requiredFunctionMangledName)
@@ -131,7 +131,7 @@ override method @standaloneFunctionInExpressionAST analyzeExpression
       !?effectiveIR:effectiveParameterListIR
     )
   //--- New LLVM variable for function call result
-    getNewTempValue (![formalReturnTypeProxy type] !?ioTemporaries ?outFunctionCallReturnedValue)
+    getNewTempValue (!formalReturnTypeProxy.type !?ioTemporaries ?outFunctionCallReturnedValue)
   //--- Code generation
     ioInstructionGenerationList += !@standaloneRoutineCallIR {
       !outFunctionCallReturnedValue

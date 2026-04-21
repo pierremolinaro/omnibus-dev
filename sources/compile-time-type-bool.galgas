@@ -18,7 +18,7 @@ override getter @compiletimeBoolAST locationForErrorSignaling -> @location outLo
 override method @compiletimeBoolAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let nodeName = [ctBoolTypeName () nowhere]
+  let nodeName = ctBoolTypeName ().nowhere
   [!?ioGraph addNode !nodeName !self]
 }
 
@@ -48,7 +48,7 @@ override method @compiletimeBoolAST enterInContext
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
-  let ctBoolTypeName = [ctBoolTypeName () nowhere]
+  let ctBoolTypeName = ctBoolTypeName ().nowhere
   let ctBoolType = compileTimeBoolType ()
  //--- Enter type
   [!?ioContext.mTypeMap insertType ! ctBoolTypeName !type: ctBoolType]

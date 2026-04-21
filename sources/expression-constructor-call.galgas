@@ -88,7 +88,7 @@ override method @constructorCallAST analyzeExpression
   end
   constructorKey += ")"
 //--- Analyze constructor signature and init value
-  let resultType = [[inContext.mTypeMap searchKey !self.mTypeName] type]
+  let resultType = [inContext.mTypeMap searchKey !self.mTypeName].type
   let typeName = @lstring {!resultType.omnibusTypeDescriptionName !self.mErrorLocation}
   [inContext.mTypeConstructorMap searchKey !typeName ?let constructorMap]
 //  let constructorMap = resultType.constructorMap2
@@ -118,8 +118,8 @@ override method @constructorCallAST analyzeExpression
         !errorLocation:[self.mParameterList mSelectorAtIndex !0].location
         !staticTypeAllowed:false
       )
-      if [result isStatic] then
-        let idx = [ioStaticEntityMap.mGlobalStructuredConstantList  count]
+      if result.isStatic then
+        let idx = ioStaticEntityMap.mGlobalStructuredConstantList.count
         outResult = .llvmArrayRepeatedStaticValue {!type:resultType !arraySize:size !value:result !index:idx}
         var @operandIRList operandIRList = @[]
         for * in 0 ..< size do
@@ -160,34 +160,34 @@ override method @constructorCallAST analyzeExpression
             !staticTypeAllowed:false
           )
           operandIRList += !result
-          resultIsStatic = resultIsStatic && [result isStatic]
+          resultIsStatic = resultIsStatic && result.isStatic
         end
         if resultIsStatic then
-          let idx = [ioStaticEntityMap.mGlobalStructuredConstantList  count]
+          let idx = ioStaticEntityMap.mGlobalStructuredConstantList.count
           outResult = .llvmArrayStaticValues {!type:resultType !values:operandIRList !index:idx}
           ioStaticEntityMap.mGlobalStructuredConstantList += !resultType !operandIRList
         else
           outResult = .llvmArrayDynamicValues {!type:resultType !values:operandIRList}
         end
       else
-        error self.mErrorLocation : "invalid constructor" : outResult
+        error self.mErrorLocation : "invalid constructor" spoil (outResult)
       end
     end
   case null :
     outResult = .null {!type: resultType}
   case simple (value) :
-    if [self.mParameterList count] != 0 then
-      error self.mErrorLocation : resultType.omnibusTypeDescriptionName + " constructor should have no parameter" : outResult
+    if self.mParameterList.count != 0 then
+      error self.mErrorLocation : resultType.omnibusTypeDescriptionName + " constructor should have no parameter" spoil (outResult)
     else
       outResult = .literalInteger {!type: resultType !value:value}
     end
   case structure (sortedOperandList) :
     var sortedOperandIRList = sortedOperandList
-    if [self.mParameterList count] != [constructorSignature count] then
-      error self.mErrorLocation : "this constructor call should name " + [constructorSignature count] + " parameter"
-        + if [constructorSignature count] > 1 then "s" else "" end
-        + " instead of " + [self.mParameterList count]
-      : outResult
+    if self.mParameterList.count != constructorSignature.count then
+      error self.mErrorLocation : "this constructor call should name " + constructorSignature.count + " parameter"
+        + if constructorSignature.count > 1 then "s" else "" end
+        + " instead of " + self.mParameterList.count
+      spoil (outResult)
     else
       for (formal_mSelector formal_mType formal_mFieldIndex) in constructorSignature, (effective_mSelector effective_mExpression) in self.mParameterList do
         if effective_mSelector.string != formal_mSelector  then

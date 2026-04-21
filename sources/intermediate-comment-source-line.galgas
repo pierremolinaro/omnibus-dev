@@ -16,10 +16,10 @@ override method @sourceLocationIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  if [self.mSourceLocation isNowhere] then
+  if self.mSourceLocation.isNowhere then
     ioLLVMcode += ";---------\n"
   else
-    ioLLVMcode += ";--------- " + [self.mSourceLocation endLine] + ":" + [[self.mSourceLocation file] lastPathComponent] + "\n"
+    ioLLVMcode += ";--------- " + self.mSourceLocation.endLine + ":" + self.mSourceLocation.file.lastPathComponent + "\n"
   end
 }
 

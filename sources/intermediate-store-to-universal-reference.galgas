@@ -30,14 +30,14 @@ override method @storeToUniversalReferenceIR enterAccessibleEntities
   case literalInteger  (* *) :
   case llvmStructureValue (* *) :
   case llvmArrayRepeatedDynamicValue (* * value) :
-    let llvmAssignRoutineName = assignmentOperatorFuncName (![value type] ![value type])
+    let llvmAssignRoutineName = assignmentOperatorFuncName (!value.type !value.type)
     ioInvokedRoutineSet ++= llvmAssignRoutineName
   case llvmArrayRepeatedStaticValue (4*) :
   case llvmArrayStaticValues (3*) :
   case llvmArrayDynamicValues (* @operandIRList operands) :
     for (value) in operands do
-      if not [value isStatic] then
-        let llvmAssignRoutineName = assignmentOperatorFuncName (![value type] ![value type])
+      if not value.isStatic then
+        let llvmAssignRoutineName = assignmentOperatorFuncName (!value.type !value.type)
         ioInvokedRoutineSet ++= llvmAssignRoutineName
       end
     end
@@ -53,7 +53,7 @@ override method @storeToUniversalReferenceIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  let llvmType = [self.mTargetVarType llvmTypeName]
+  let llvmType = self.mTargetVarType.llvmTypeName
   switch self.mSourceValue
   case void :
     ioLLVMcode += "<< ERROR @storeToUniversalReferenceIR llvmInstructionCode void >>\n"
@@ -71,8 +71,8 @@ override method @storeToUniversalReferenceIR llvmInstructionCode
       ioGenerationAdds.mUniqueIndex += 1
       ioLLVMcode += "  " + tempVar + " = getelementptr inbounds " + llvmType + ", "
                  + llvmType + " * " + self.mLLVMTargetVarName + ", i32 0, i32 " + index + "\n"
-      let valueType = [value llvmTypeName]
-      ioLLVMcode += "  store " +  valueType + " " + [value llvmName] + ", " + valueType + "* " + tempVar + "\n"
+      let valueType = value.llvmTypeName
+      ioLLVMcode += "  store " +  valueType + " " + value.llvmName + ", " + valueType + "* " + tempVar + "\n"
     end
   case llvmArrayRepeatedDynamicValue (type size value) :
     let indexVarName = "%index." + ioGenerationAdds.mUniqueIndex
@@ -88,11 +88,11 @@ override method @storeToUniversalReferenceIR llvmInstructionCode
     ioLLVMcode += "  br label %" + loopLabel + "\n"
     ioLLVMcode += loopLabel + ":\n"
     ioLLVMcode += "  " + indexVarName + " = phi i32 [0, %" + startLabel + "], [" + nextIndexVarName + ", %" + loopLabel + "]\n"
-    ioLLVMcode += "  " + ptrVarName + " = getelementptr inbounds " + [type llvmTypeName] + ", "
-               + [type llvmTypeName] + " * " + self.mLLVMTargetVarName + ", i32 0, i32 " + indexVarName + "\n"
-    let llvmAssignRoutineName = assignmentOperatorFuncName (![value type] ![value type])
-    ioLLVMcode += "  call void @" +[llvmAssignRoutineName assemblerRepresentation]
-    ioLLVMcode += " (" + [value llvmTypeName] + "* " + ptrVarName + ", " + [value llvmTypeName] + "* " + [value llvmName] + ")\n"
+    ioLLVMcode += "  " + ptrVarName + " = getelementptr inbounds " + type.llvmTypeName + ", "
+               + type.llvmTypeName + " * " + self.mLLVMTargetVarName + ", i32 0, i32 " + indexVarName + "\n"
+    let llvmAssignRoutineName = assignmentOperatorFuncName (!value.type !value.type)
+    ioLLVMcode += "  call void @" + llvmAssignRoutineName.assemblerRepresentation
+    ioLLVMcode += " (" + value.llvmTypeName + "* " + ptrVarName + ", " + value.llvmTypeName + "* " + value.llvmName + ")\n"
     ioLLVMcode += "  " + nextIndexVarName + " = add i32 " + indexVarName + ", 1\n"
     ioLLVMcode += "  " + loopTestName + " = icmp ult i32 " + nextIndexVarName + ", " + size + "\n"
     ioLLVMcode += "  br i1 " + loopTestName + ", label %" + loopLabel + ", label %" + exitLabel + "\n"
@@ -111,9 +111,9 @@ override method @storeToUniversalReferenceIR llvmInstructionCode
     ioLLVMcode += "  br label %" + loopLabel + "\n"
     ioLLVMcode += loopLabel + ":\n"
     ioLLVMcode += "  " + indexVarName + " = phi i32 [0, %" + startLabel + "], [" + nextIndexVarName + ", %" + loopLabel + "]\n"
-    ioLLVMcode += "  " + ptrVarName + " = getelementptr inbounds " + [type llvmTypeName] + ", "
-               + [type llvmTypeName] + " * " + self.mLLVMTargetVarName + ", i32 0, i32 " + indexVarName + "\n"
-    ioLLVMcode += "  store " + [value llvmTypeName] + " " + [value llvmName] + ", " + [value llvmTypeName] + "* " + ptrVarName + "\n"
+    ioLLVMcode += "  " + ptrVarName + " = getelementptr inbounds " + type.llvmTypeName + ", "
+               + type.llvmTypeName + " * " + self.mLLVMTargetVarName + ", i32 0, i32 " + indexVarName + "\n"
+    ioLLVMcode += "  store " + value.llvmTypeName + " " + value.llvmName + ", " + value.llvmTypeName + "* " + ptrVarName + "\n"
     ioLLVMcode += "  " + nextIndexVarName + " = add i32 " + indexVarName + ", 1\n"
     ioLLVMcode += "  " + loopTestName + " = icmp ult i32 " + nextIndexVarName + ", " + size + "\n"
     ioLLVMcode += "  br i1 " + loopTestName + ", label %" + loopLabel + ", label %" + exitLabel + "\n"
@@ -125,8 +125,8 @@ override method @storeToUniversalReferenceIR llvmInstructionCode
       ioGenerationAdds.mUniqueIndex += 1
       ioLLVMcode += "  " + tempVar + " = getelementptr inbounds " + llvmType + ", "
                  + llvmType + " * " + self.mLLVMTargetVarName + ", i32 0, i32 " + index + "\n"
-      let valueType = [value llvmTypeName]
-      ioLLVMcode += "  store " +  valueType + " " + [value llvmName] + ", " + valueType + "* " + tempVar + "\n"
+      let valueType = value.llvmTypeName
+      ioLLVMcode += "  store " +  valueType + " " + value.llvmName + ", " + valueType + "* " + tempVar + "\n"
     end
   case llvmArrayDynamicValues (* @operandIRList operands) :
     ioLLVMcode += ";--- Assign static array from dynamic values\n"
@@ -135,18 +135,18 @@ override method @storeToUniversalReferenceIR llvmInstructionCode
       ioGenerationAdds.mUniqueIndex += 1
       ioLLVMcode += "  " + tempVar + " = getelementptr inbounds " + llvmType + ", "
                  + llvmType + " * " + self.mLLVMTargetVarName + ", i32 0, i32 " + index + "\n"
-      let valueType = [value llvmTypeName]
-      if [value isStatic] then
-        ioLLVMcode += "  store " +  valueType + " " + [value llvmName] + ", " + valueType + "* " + tempVar + "\n"
+      let valueType = value.llvmTypeName
+      if value.isStatic then
+        ioLLVMcode += "  store " +  valueType + " " + value.llvmName + ", " + valueType + "* " + tempVar + "\n"
       else
-        let llvmAssignRoutineName = assignmentOperatorFuncName (![value type] ![value type])
-        ioLLVMcode += "  call void @" + [llvmAssignRoutineName assemblerRepresentation]
-        ioLLVMcode += " (" + valueType + "* " + tempVar + ", " + valueType + "* " + [value llvmName] + ")\n"
+        let llvmAssignRoutineName = assignmentOperatorFuncName (!value.type !value.type)
+        ioLLVMcode += "  call void @" + llvmAssignRoutineName.assemblerRepresentation
+        ioLLVMcode += " (" + valueType + "* " + tempVar + ", " + valueType + "* " + value.llvmName + ")\n"
       end
     end
   case literalString  (* *) :
   case zero (*) :
-    ioLLVMcode += "  store " +  llvmType + " " + [self.mSourceValue llvmName] + ", " + llvmType + "* " + self.mLLVMTargetVarName + "\n"
+    ioLLVMcode += "  store " +  llvmType + " " + self.mSourceValue.llvmName + ", " + llvmType + "* " + self.mLLVMTargetVarName + "\n"
   end
 }
 

@@ -38,7 +38,7 @@ syntax extension omnibus_syntax {
         staticIfExpression = true
       else
         error attributeValue : "the attribute should be \"@" + staticAttribute () + "\""
-        : staticIfExpression
+        spoil (staticIfExpression)
         fixit { replace "@" + staticAttribute () }
       end
     or
@@ -176,7 +176,7 @@ override method @ifInstructionAST instructionSemanticAnalysis
   [!?ioUniversalMap closeOverride !self.mEndOf_if_instruction]
 //--- Code generation
   ioInstructionGenerationList += !@ifInstructionIR {
-    ![booleanResult llvmName]
+    !booleanResult.llvmName
     !self.mTestExpressionEndLocation
     !thenInstructionGenerationList
     !elseInstructionGenerationList

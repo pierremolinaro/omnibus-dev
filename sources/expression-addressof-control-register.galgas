@@ -79,9 +79,9 @@ override method @addressofControlRegisterAST analyzeExpression
   ]
 //-------------------- Result
   let resultTypeProxy = [inContext.mTypeMap searchKey
-    !["u" + [inContext.mTargetParameters.mPointerSize string] nowhere]
+    !("u" + inContext.mTargetParameters.mPointerSize.string).nowhere
   ]
-  outResult = .llvmNamedValue {!type:[resultTypeProxy type] !llvmName:llvmRegisterAddressName}
+  outResult = .llvmNamedValue {!type: resultTypeProxy.type !llvmName:llvmRegisterAddressName}
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————

@@ -178,7 +178,7 @@ override method @standAloneProcedureCallInstructionAST instructionSemanticAnalys
     ?let unused implementedMode
   ]
 //--- Check return type proxy is null
-  if not [formalReturnTypeProxy isNull] then
+  if not formalReturnTypeProxy.isNull then
     error self.mSandAloneRoutineName : "this function returns a value, cannot be used as a procedure"
   end
 //--- Check modes
@@ -237,7 +237,7 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
   if self.mIdentifier.string == "" then // Receiver is self
     receiverIsSelf = true
     if inSelfType.kind == .void then
-      error self.mIdentifier : "self is not available in this context" : currentType, currentLLVMAddressVar
+      error self.mIdentifier : "self is not available in this context" spoil (currentType, currentLLVMAddressVar)
     else
       currentType = inSelfType
       currentLLVMAddressVar = llvmNameForSelf ()
@@ -253,12 +253,12 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
         currentType = type
         currentLLVMAddressVar = llvmNameForGlobalVariable (!self.mIdentifier)
       else
-        error self.mIdentifier : "the driver should be instancied" : currentType, currentLLVMAddressVar
+        error self.mIdentifier : "the driver should be instancied" spoil (currentType, currentLLVMAddressVar)
       end
     case globalConstant (*) :
       error self.mIdentifier
         : "a global constant cannot be used in this context"
-        : currentType, currentLLVMAddressVar
+        spoil (currentType, currentLLVMAddressVar)
     case localConstant (@omnibusType type @lstring omnibusName *) :
       currentType = type
       currentLLVMAddressVar = llvmNameForLocalVariable (!omnibusName)
@@ -296,7 +296,7 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
       case constantProperty (*) :
         error propertyName
           : "a context property cannot be used in this context"
-          : currentType, currentLLVMAddressVar
+          spoil (currentType, currentLLVMAddressVar)
       case storedProperty (@omnibusType propertyType @uint propertyIndex) :
         [!?ioTemporaries newTempLLVMVar ?let llvmPropertyName]
         [!?ioInstructionGenerationList appendGetUniversalPropertyReference
@@ -315,15 +315,15 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
           !?ioTemporaries
           !.reference {!type:currentType !llvmName:currentLLVMAddressVar}
           !routineLLVMName
-          ![propertyTypeProxy type]
+          !propertyTypeProxy.type
           ?let resultValueIR
         ]
-        currentType = [resultValueIR type]
-        currentLLVMAddressVar = [resultValueIR llvmName]
+        currentType = resultValueIR.type
+        currentLLVMAddressVar = resultValueIR.llvmName
         currentObjectPropertyMap = [inContext propertyGetterMap !currentType]
       end
     case arrayAccess (* @location endOfIndex *) :
-      error endOfIndex : "not handled yet" : currentType, currentLLVMAddressVar
+      error endOfIndex : "not handled yet" spoil (currentType, currentLLVMAddressVar)
     end
   end
 //--- Handle last access
@@ -344,7 +344,7 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
   //--- Check modes
     let functionLLVMName = checkModeAndReturnsRoutineLLVMName (!implementedModeDictionary !inMode !methodName)
   //--- Check routine does not return any value
-    if not [formalReturnTypeProxy isNull] then
+    if not formalReturnTypeProxy.isNull then
       error methodName : "cannot be called in instruction, returns a value"
     end
   //--- Add receiver as first parameter

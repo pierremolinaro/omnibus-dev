@@ -160,15 +160,15 @@ method @controlRegisterLValueAST controlRegisterLValueSemanticAnalysis
   if inWriteAccess & readOnly then
     error self.mRegisterName
       : "this control register cannot be modified (declared with @ro attribute)"
-  elsif not userAccess && ([inMode isUserMode] || [inMode isAnyMode]) then
+  elsif not userAccess && (inMode.isUserMode || inMode.isAnyMode) then
     error self.mRegisterName : "this control register is not accessible in user mode"
   end
 //-------------------- Group index ?
   let @string registerAddress
   switch groupKind
   case single (@bigint baseAddress) :
-    if [self.mGroupIndex isIndex] then
-      error self.mRegisterGroupName : "subscripting not allowed, group is not an array" : registerAddress
+    if self.mGroupIndex.isIndex then
+      error self.mRegisterGroupName : "subscripting not allowed, group is not an array" spoil (registerAddress)
     else
       let regName = self.mRegisterGroupName.string + ":" + self.mRegisterName
       [!?ioInstructionGenerationList appendEnterRegisterAddress
@@ -182,7 +182,7 @@ method @controlRegisterLValueAST controlRegisterLValueSemanticAnalysis
   case arrayGroup (@lbigintlist baseAddresses) :
     switch self.mGroupIndex
     case noIndex :
-      error self.mRegisterGroupName : "subscripting required, group is an array" : registerAddress
+      error self.mRegisterGroupName : "subscripting required, group is an array" spoil (registerAddress)
     case index (indexExpression endOfIndex checkIndexExpression) :
       handleArraySubscriptNew (
         !self: inSelfType
@@ -196,7 +196,7 @@ method @controlRegisterLValueAST controlRegisterLValueSemanticAnalysis
         !indexExpression 
         !endOfIndex
         !checkIndexExpression
-        !arraySize:[baseAddresses count]
+        !arraySize:baseAddresses.count
         !elementType:outRegisterType
         !?ioInstructionGenerationList
         ?let @objectIR groupIndexIR
@@ -205,7 +205,7 @@ method @controlRegisterLValueAST controlRegisterLValueSemanticAnalysis
         !?ioTemporaries
         ?registerAddress
         !self.mRegisterGroupName.string
-        ![baseAddresses count]
+        !baseAddresses.count
         !groupIndexIR
       ]
     end
@@ -216,7 +216,7 @@ method @controlRegisterLValueAST controlRegisterLValueSemanticAnalysis
     if registerArraySize == 0 then
       outllvmRegisterAddressName = registerAddress
     else
-      error self.mRegisterName : "the control register is an array" : outllvmRegisterAddressName
+      error self.mRegisterName : "the control register is an array" spoil (outllvmRegisterAddressName)
     end
   case index (indexExpression endOfIndex checkIndexExpression) :
     handleArraySubscriptNew (

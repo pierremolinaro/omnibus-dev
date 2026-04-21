@@ -13,7 +13,7 @@ filewrapper embeddedSampleCode in "../embedded-sources/sample-code" {
 before {
   let @filewrapper fw = [filewrapper embeddedSampleCode]
   if [option omnibus_options.listEmbeddedSampleFiles value] then
-    let files = [fw allTextFilePaths]
+    let files = fw.allTextFilePaths
     print (!"Embedded sample code:\n")
     for (f) in files do
       print (!"  " + [f subStringFromIndex !1] + '\n')
@@ -23,10 +23,10 @@ before {
   if path != "" then
     if [fw fileExistsAtPath !path] then
       let text = [fw textFileContentsAtPath !path]
-      let sourceName = [path lastPathComponent]
+      let sourceName = path.lastPathComponent
       [text writeToFileWhenDifferentContents !sourceName ?*]
     else
-      error ["" nowhere] : "there is no '" + path + "' embedded file"
+      error "".nowhere : "there is no '" + path + "' embedded file"
     end  
   end
 }

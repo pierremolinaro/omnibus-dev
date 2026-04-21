@@ -29,7 +29,7 @@ override method @enterRegisterGroupSubscriptedAddressIR llvmInstructionCode
   let groupArrayName = registerGroupAddressArrayLLVMname (!self.mGroupName)
   ioLLVMcode += "  " + self.mLLVMName + ".addr = getelementptr inbounds [" + self.mGroupSize
              + " x i32], [" + self.mGroupSize + " x i32]* " + groupArrayName
-             + ", i32 0, i32 " + [self.mIndexIR llvmName] + "\n"
+             + ", i32 0, i32 " + self.mIndexIR.llvmName + "\n"
   ioLLVMcode += "  " + self.mLLVMName + " = load i32, i32* " + self.mLLVMName + ".addr\n"
 }
 

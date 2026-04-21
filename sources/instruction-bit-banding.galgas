@@ -49,7 +49,7 @@ syntax extension omnibus_syntax {
 
 override method @bitbandInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [self.mControlRegisterLValue noteExpressionTypesInPrecedenceGraph !?ioGraph]
-  [!?ioGraph noteNode !["u1" nowhere]]
+  [!?ioGraph noteNode !"u1".nowhere]
   [self.mBitExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
   [self.mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
@@ -95,14 +95,14 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
     !?sourceExpressionOperand
   ]
 //--- If source expression operand is static type, check value and convert it to 'requiredSourceExpressionType'
-  if ([sourceExpressionOperand type].omnibusTypeDescriptionName == ctIntegerTypeName ()) && [sourceExpressionOperand isLiteralInteger] then
+  if (sourceExpressionOperand.type.omnibusTypeDescriptionName == ctIntegerTypeName ()) && sourceExpressionOperand.isLiteralInteger then
     [sourceExpressionOperand extractLiteralInteger ?1* ?value:let @bigint value]
     if (value < 0) || (value > 1) then
       error self.mSourceExpressionLocation : "static value should be 0 or 1"
     else
       sourceExpressionOperand = .literalInteger {!type:requiredSourceExpressionType !value:value}
     end
-  elsif [sourceExpressionOperand type].omnibusTypeDescriptionName != requiredSourceExpressionType.omnibusTypeDescriptionName then
+  elsif sourceExpressionOperand.type.omnibusTypeDescriptionName != requiredSourceExpressionType.omnibusTypeDescriptionName then
     error self.mSourceExpressionLocation : "bit expression type should be $" + requiredSourceExpressionType.omnibusTypeDescriptionName
   end
 //-------------------- Control register LValue
@@ -126,7 +126,7 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
 //-------------------- Bit Expression
 //--- Inferred bit expression type
   [inContext.mTypeMap searchType
-    !lkey: @{!"u" + [registerBitCount-1 significantBitCount] !self.mBitExpressionLocation}
+    !lkey: @{!"u" + (registerBitCount-1).significantBitCount !self.mBitExpressionLocation}
     ?type:let requiredBitExpressionType
   ]
 //--- Compute bit expression
@@ -149,14 +149,14 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
     !?bitExpressionOperand
   ]
 //--- If bit expression operand is static type, check value and convert it to 'requiredBitExpressionType'
-  if ([bitExpressionOperand type].omnibusTypeDescriptionName == ctIntegerTypeName ()) && [bitExpressionOperand isLiteralInteger] then
+  if (bitExpressionOperand.type.omnibusTypeDescriptionName == ctIntegerTypeName ()) && bitExpressionOperand.isLiteralInteger then
     [bitExpressionOperand extractLiteralInteger ?1* ?value:let @bigint value]
     if (value < 0) || (value >= registerBitCount) then
       error self.mBitExpressionLocation : "static value should be >= 0 and <" + registerBitCount
     else
       bitExpressionOperand = .literalInteger {!type:requiredBitExpressionType !value:value}
     end
-  elsif [bitExpressionOperand type].omnibusTypeDescriptionName != requiredBitExpressionType.omnibusTypeDescriptionName then
+  elsif bitExpressionOperand.type.omnibusTypeDescriptionName != requiredBitExpressionType.omnibusTypeDescriptionName then
     error self.mBitExpressionLocation : "bit expression type should be $" + requiredBitExpressionType.omnibusTypeDescriptionName
   end
 //-------------------- Generate code
@@ -202,16 +202,16 @@ override method @bitbandInstructionIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  let idx = [ioGenerationAdds.mUniqueIndex string]
+  let idx = ioGenerationAdds.mUniqueIndex.string
   ioGenerationAdds.mUniqueIndex += 1
   ioLLVMcode += ";--- Bit band\n"
   ioLLVMcode += "  %byte.offset." + idx + " = sub i32 " + self.mRegisterAddressLLVMname + ", " + self.mBitbandRegisterBaseAddress + "\n"
   ioLLVMcode += "  %byte.offset." + idx + ".mul = mul i32 %byte.offset." + idx + ", " + self.mBitbandRegisterOffsetMultiplier + "\n"
-  ioLLVMcode += "  %bit.offset." + idx + ".mul = mul i32 " + [self.mBitExpressionOperand llvmName] + ", " + self.mBitbandRegisterBitMultiplier + "\n"
+  ioLLVMcode += "  %bit.offset." + idx + ".mul = mul i32 " + self.mBitExpressionOperand.llvmName + ", " + self.mBitbandRegisterBitMultiplier + "\n"
   ioLLVMcode += "  %offset." + idx + " = add i32 %byte.offset." + idx + ".mul, %bit.offset." + idx + ".mul\n"
   ioLLVMcode += "  %bit.word.addr." + idx + " = add i32 %offset." + idx + ", " + self.mBitbandRegisterRelocationAddress + "\n"
   ioLLVMcode += "  %ptr." + idx + " = inttoptr i32 %bit.word.addr." + idx + " to i32*\n"
-  ioLLVMcode += "  %value." + idx + " = zext i1 " + [self.mSourceExpressionOperand llvmName] + " to i32\n"
+  ioLLVMcode += "  %value." + idx + " = zext i1 " + self.mSourceExpressionOperand.llvmName + " to i32\n"
   ioLLVMcode += "  store i32 %value." + idx + ", i32* %ptr." + idx + "\n"
 }
 

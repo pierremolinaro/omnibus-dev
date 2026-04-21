@@ -113,7 +113,7 @@ override method @omnibusInfixOperatorExpressionAST analyzeExpression
   [self.mRightExpression analyzeExpression
     !self:inSelfType
     !routineAttributes:inRoutineAttributes
-    !optionalTargetType:[leftOperand type]
+    !optionalTargetType: leftOperand.type
     !context:inContext
     !mode:inMode
     !?temporary:ioTemporaries

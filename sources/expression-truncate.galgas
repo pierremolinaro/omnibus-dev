@@ -20,7 +20,7 @@ syntax extension omnibus_syntax {
     $truncate$
     let @lstring typeName
     select
-      typeName = ["" here]
+      typeName = "".here
     or
       <type_definition> !?ioAST ?typeName
     end
@@ -104,15 +104,15 @@ override method @truncateExpressionAST analyzeExpression
 //--- Analyze type
   let @omnibusType resultType = if self.mTypeName.string == ""
     then inOptionalTargetType
-    else [[inContext.mTypeMap searchKey !self.mTypeName] type]
+    else [inContext.mTypeMap searchKey !self.mTypeName].type
   end
 //--- Check types
-  if not [resultType.kind isInteger] then
-    error self.mTypeName : "this type is not an integer type" : outResult
-  elsif not [[expressionResult type].kind isInteger] then
-    error self.mEndOfExpression : "expression type is not an integer type" : outResult
+  if not resultType.kind.isInteger then
+    error self.mTypeName : "this type is not an integer type" spoil (outResult)
+  elsif not expressionResult.type.kind.isInteger then
+    error self.mEndOfExpression : "expression type is not an integer type" spoil (outResult)
   else
-    [[expressionResult type].kind extractInteger ?min:let minSource ?max:let maxSource ?1* ?bitCount:let expSize]
+    [expressionResult.type.kind extractInteger ?min:let minSource ?max:let maxSource ?1* ?bitCount:let expSize]
     [resultType.kind extractInteger ?min:let minTarget ?max:let maxTarget ?unsigned:* ?bitCount:let resultSize]
     let alwaysPossible = (minTarget <= minSource) && (maxTarget >= maxSource)
     if alwaysPossible then
@@ -148,9 +148,9 @@ override method @truncateInstructionIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  let operandType = [self.mOperand llvmTypeName]
-  ioLLVMcode += "  " + [self.mTarget llvmName] + " = trunc " + operandType + " " + [self.mOperand llvmName]
-     + " to " + [self.mTarget llvmTypeName] + "\n"
+  let operandType = self.mOperand.llvmTypeName
+  ioLLVMcode += "  " + self.mTarget.llvmName + " = trunc " + operandType + " " + self.mOperand.llvmName
+     + " to " + self.mTarget.llvmTypeName + "\n"
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————

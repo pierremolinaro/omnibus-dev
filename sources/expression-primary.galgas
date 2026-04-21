@@ -42,7 +42,7 @@ syntax extension omnibus_syntax {
 
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     $self$
-    let receiver = ["" here]
+    let receiver = "".here
   //--- Properties and access
     <expression_access_list> !?ioAST ?let accessList
   //--- AST
@@ -137,7 +137,7 @@ override method @primaryInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@
     switch access
     case integerSlice (@lbigint low @lbigint high) :
       if high.bigint >= low.bigint then
-        [!?ioGraph noteUINTType ![high.bigint - low.bigint + 1 uint] !low.location]
+        [!?ioGraph noteUINTType !(high.bigint - low.bigint + 1).uint !low.location]
       end
     case property (*) :
     case arrayAccess (@expressionAST indexExpression 2*) :
@@ -179,7 +179,7 @@ override method @primaryInExpressionAST analyzeExpression
 //--- object access, with ou without self
   if self.mReceiverName.string != "" then
     if [inRoutineAttributes contains !.isGuard] then
-      error self.mReceiverName : "in guard, only 'self' properties may be accessed" : outResult
+      error self.mReceiverName : "in guard, only 'self' properties may be accessed" spoil (outResult)
     else 
       [self analyzePrimaryExpressionNoSelf
         !self: inSelfType
@@ -196,7 +196,7 @@ override method @primaryInExpressionAST analyzeExpression
       ]
     end
   elsif inSelfType.kind == .void then
-    error self.mReceiverName : "'self' is not available in this context" : outResult
+    error self.mReceiverName : "'self' is not available in this context" spoil (outResult)
   else
     [self analyzePrimaryExpressionWithSelf
       !self: inSelfType
@@ -392,7 +392,7 @@ proc procAnalyzeAccesListInExpression
       )
     case funcCall (@lstring methodName @effectiveArgumentListAST arguments @location errorLocation) :
       if [inRoutineAttributes contains !.isGuard] then
-        error errorLocation : "a method cannot be called in guard" : ioResult
+        error errorLocation : "a method cannot be called in guard" spoil (ioResult)
       else
         handleFunctionCallInExpression (
           !methodName
@@ -471,7 +471,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
       )
     case funcCall (@lstring methodName @effectiveArgumentListAST arguments @location errorLocation) :
       if [inRoutineAttributes contains !.isGuard] then
-        error errorLocation : "a method cannot be called in guard" : outResult
+        error errorLocation : "a method cannot be called in guard" spoil (outResult)
       else
         handleFunctionCallInExpression (
           !methodName
@@ -503,12 +503,12 @@ proc handleSliceInExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
   if inLow.bigint > inHigh.bigint then
-    error inLow : "low bound should be lower or equal to high bound" : ioResult
-  elsif not ([[ioResult type].kind isInteger] || [[ioResult type].kind isCompileTimeInteger]) then
-    error inLow : "Invalid, receiver is not an integer" : ioResult
+    error inLow : "low bound should be lower or equal to high bound" spoil (ioResult)
+  elsif not (ioResult.type.kind.isInteger || ioResult.type.kind.isCompileTimeInteger) then
+    error inLow : "Invalid, receiver is not an integer" spoil (ioResult)
   else
   //--- Shift source value
-    [!?ioInstructionGenerationList appendLogicalShiftRight !?ioResult ![inLow.bigint uint] !?ioTemporaries]
+    [!?ioInstructionGenerationList appendLogicalShiftRight !?ioResult !inLow.bigint.uint !?ioTemporaries]
   //--- Truncate source value
     let resultIntegerName = @lstring {!"u" + (inHigh.bigint - inLow.bigint + 1) !inLow.location}
     [inContext.mTypeMap searchType !lkey:resultIntegerName ?type:let sliceType]
@@ -527,7 +527,7 @@ proc handlePropertyAccessInExpression
   ?!alloca:@allocaList ioAllocaList
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
-  let type = [ioResult type]
+  let type = ioResult.type
 //  let typeOmnibusName = @lstring.new {!type.omnibusTypeDescriptionName !inPropertyName.location}
   let propertyGetterMap = [inContext propertyGetterMap !type]
   [propertyGetterMap searchKey !inPropertyName ?* ?let @propertyGetterKind accessKind]
@@ -537,8 +537,8 @@ proc handlePropertyAccessInExpression
   case storedProperty (@omnibusType propertyType @uint propertyIndex) :
    [!?ioTemporaries newTempLLVMVar ?let property_llvmName]
     [!?ioInstructionGenerationList appendGetUniversalPropertyReference
-      ![ioResult type]
-      ![ioResult llvmName]
+      !ioResult.type
+      !ioResult.llvmName
       !property_llvmName
       !propertyIndex
       !inPropertyName
@@ -551,7 +551,7 @@ proc handlePropertyAccessInExpression
       !?ioTemporaries
       !ioResult
       !routineLLVMName
-      ![propertyTypeProxy type]
+      !propertyTypeProxy.type
       ?let resultValueIR
     ]
     ioResult = resultValueIR
@@ -577,9 +577,9 @@ private proc handleArrayAccessInExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
 //--- Check current object is an array
-  switch [ioResult type].subscript
+  switch ioResult.type.subscript
   case noSubscript :
-    error inEndOfIndex : "the receiver type is " + [ioResult type].omnibusTypeDescriptionName + " and does not accept subscripting"
+    error inEndOfIndex : "the receiver type is " + ioResult.type.omnibusTypeDescriptionName + " and does not accept subscripting"
   case literalString  :
     error inEndOfIndex
     : "the receiver type is literal string (dynamic array) and does not accept subscripting"
@@ -628,7 +628,7 @@ private proc handleFunctionCallInExpression
   ?let @effectiveArgumentListAST inArguments 
   ?!@instructionListIR ioInstructionGenerationList
 {
-  let receiverType = [ioObjectIR type]
+  let receiverType = ioObjectIR.type
 //--- Search routine in receiver type routine map
   let methodMangledName = [inArguments mangledName !receiverTypeName: receiverType.omnibusTypeDescriptionName !functionName: inMethodName]
 //  log routineMap
@@ -645,8 +645,8 @@ private proc handleFunctionCallInExpression
 //--- Check modes
   let functionLLVMName = checkModeAndReturnsRoutineLLVMName (!implementedModeDictionary !inMode !inMethodName)
 //--- Check routine is actually a function
-  if [formalReturnTypeProxy type].kind == .void then
-    error inMethodName : "not a function (returns no value)" : ioObjectIR
+  if formalReturnTypeProxy.type.kind == .void then
+    error inMethodName : "not a function (returns no value)" spoil (ioObjectIR)
   else
   //--- If receiver is a value, create a reference
     [!?ioInstructionGenerationList referenceFromPossibleValue !?ioTemporaries !?ioAllocaList !?ioObjectIR]
@@ -670,9 +670,9 @@ private proc handleFunctionCallInExpression
       !?effectiveIR:effectiveParameterListIR
     )
   //--- New LLVM variable for function call result
-    getNewTempValue (![formalReturnTypeProxy type] !?ioTemporaries ?let callReturnedResult)
+    getNewTempValue (!formalReturnTypeProxy.type !?ioTemporaries ?let callReturnedResult)
   //--- Generate call
-    let routineMangledName = routineMangledNameFromCall (![ioObjectIR type].llvmBaseTypeName !inMethodName !inArguments)
+    let routineMangledName = routineMangledNameFromCall (!ioObjectIR.type.llvmBaseTypeName !inMethodName !inArguments)
     ioInstructionGenerationList += !@standaloneRoutineCallIR {
       !callReturnedResult
       !routineMangledName

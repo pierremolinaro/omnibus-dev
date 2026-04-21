@@ -8,35 +8,35 @@ struct @semanticContext {
   public var @targetParameters mTargetParameters = @{
     !.here
     !@()
-    !["" nowhere]
-    !["" nowhere]
+    !"".nowhere
+    !"".nowhere
     !0
     !false
     ! @{!0 !.nowhere}
     ! @{!0 !.nowhere}
-    !["" nowhere]
+    !"".nowhere
     ! @{!0 !.nowhere}
     ! @{!0 !.nowhere}
     ! @{!0 !.nowhere}
     ! @{!0 !.nowhere}
     ! @{!0 !.nowhere}
-    !["" nowhere]
+    !"".nowhere
     ! @{!0 !.nowhere}
-    !["" nowhere]
-    !["" nowhere]
-    !["" nowhere]
-    !["" nowhere]
+    !"".nowhere
+    !"".nowhere
+    !"".nowhere
+    !"".nowhere
     !@()
     !@()
     !@()
-    !["" nowhere]
-    !["" nowhere]
-    !["" nowhere]
+    !"".nowhere
+    !"".nowhere
+    !"".nowhere
     ! @{!0 !.nowhere}
-    !["" nowhere]
-    !["" nowhere]
-    !["" nowhere]
-    !["" nowhere]
+    !"".nowhere
+    !"".nowhere
+    !"".nowhere
+    !"".nowhere
   }
 
   public var @omnibusType mPanicCodeType = @{
@@ -345,10 +345,10 @@ map @staticStringMap {
 
 setter @staticEntityMap findOrAddStaticString ?@string inString !@uint outIndex {
   if [self.mStaticStringMap hasKey !inString]  then
-    [self.mStaticStringMap searchKey ![inString nowhere] ?outIndex]
+    [self.mStaticStringMap searchKey !inString.nowhere ?outIndex]
   else
-    outIndex = [self.mStaticStringMap count]
-    [!?self.mStaticStringMap insertKey ![inString nowhere] !outIndex]
+    outIndex = self.mStaticStringMap.count
+    [!?self.mStaticStringMap insertKey !inString.nowhere !outIndex]
   end
 }
 
@@ -377,7 +377,7 @@ map @availableInterruptMap {
 //·······················································································································
 
 getter @semanticContext booleanType ?let @location unused inErrorLocation -> @omnibusType {
-  [self.mTypeMap searchType !lkey:[boolTypeName () nowhere] ?type:result]
+  [self.mTypeMap searchType !lkey:boolTypeName ().nowhere ?type:result]
 }
 
 //·······················································································································
@@ -469,11 +469,5 @@ proc buildSemanticContext
      !?userDefinedTypes: outUserLLVMTypeDefinitionListIR
    ]
 }
-
-//·······················································································································
-
-//func combineTypeNamesForInfixOperator ?let @string inLeftTypeName ?let @string inRightTypeName -> @lstring {
-//  result = [inLeftTypeName + "," + inRightTypeName nowhere]
-//}
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————

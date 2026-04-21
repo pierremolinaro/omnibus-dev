@@ -112,8 +112,8 @@ override method @controlRegisterAssignmentInstructionAST instructionSemanticAnal
     !?sourceIR
   ]
 //-------------------- Perform assignment
-  let t = [sourceIR type]
-  if not [t copyable] then
+  let t = sourceIR.type
+  if not t.copyable then
     error self.mControlRegisterLValue.mRegisterGroupName : "source expression is not copyable"
   else
     switch self.mAssignmentKind
@@ -124,7 +124,7 @@ override method @controlRegisterAssignmentInstructionAST instructionSemanticAnal
       getNewTempValue (!registerType !?ioTemporaries ?let registerValueIR)
       [!?ioInstructionGenerationList appendLoadIndirectVolatileRegister !registerValueIR !llvmRegAddressName]
     //--- Perform operation
-      let key = infixOperatorMapKey (!registerType !infixOperator !operatorLocation ![sourceIR type])
+      let key = infixOperatorMapKey (!registerType !infixOperator !operatorLocation !sourceIR.type)
       [inContext.mInfixOperatorMap searchKey !key ?let resultType ?let operatorUsage]
       [operatorUsage generateCode
          !registerValueIR
@@ -136,24 +136,6 @@ override method @controlRegisterAssignmentInstructionAST instructionSemanticAnal
          !?ioInstructionGenerationList
          ?let operationResult
       ]
-      
-//      let operatorMap = getInfixOperatorMap (!infixOperator !context:inContext !mode:inMode !operatorLocation)
-//      [operatorMap checkBinaryOperationWith
-//        !leftType:[registerValueIR type]
-//        !rightType:[sourceIR type]
-//        !operatorLocation:operatorLocation
-//        ?resultType:let resultType
-//        ?op:let @omnibusInfixOperatorDescription binaryOperator
-//      ]
-//      [binaryOperator generateInfixOperatorCode
-//        !?ioTemporaries
-//        !?ioInstructionGenerationList
-//        !registerValueIR
-//        !operatorLocation
-//        !sourceIR
-//        !resultType
-//        ?let operationResult
-//      ]
     //--- Store register
       [!?ioInstructionGenerationList appendStoreIndirectVolatileRegister !registerType !llvmRegAddressName !operationResult]
     end

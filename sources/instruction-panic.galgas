@@ -69,9 +69,9 @@ override method @panicInstructionAST instructionSemanticAnalysis
   ]
 //--- Expression type check
 //--- Expression is static ?
-  if ([unusedInstructionListIR count] > 0)
-     || not [result isLiteralInteger]
-     || ([result omnibusTypeDescriptionName] != ctIntegerTypeName ()) then
+  if (unusedInstructionListIR.count > 0)
+     || not result.isLiteralInteger
+     || (result.omnibusTypeDescriptionName != ctIntegerTypeName ()) then
     error self.mInstructionLocation : "throw expression should be a literal integer"
   else
     [inContext.mPanicCodeType.kind extractInteger ?min:let min ?max:let max ?2*]
@@ -104,9 +104,9 @@ override method @panicInstructionIR llvmInstructionCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += "  call void @" + [panicRoutineNameForLocationFile (!self.mThrowLocation) assemblerRepresentation] + " ("
-  ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " " + [self.mThrowLocation endLine] + ", "
-  ioLLVMcode += [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " " + self.mPanicCode + ")\n"
+  ioLLVMcode += "  call void @" + panicRoutineNameForLocationFile (!self.mThrowLocation).assemblerRepresentation + " ("
+  ioLLVMcode += inGenerationContext.mPanicLineLLVMType.llvmTypeName + " " + self.mThrowLocation.endLine + ", "
+  ioLLVMcode += inGenerationContext.mPanicCodeLLVMType.llvmTypeName + " " + self.mPanicCode + ")\n"
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————

@@ -30,7 +30,7 @@ syntax extension omnibus_syntax {
       ?formalArguments:let procFormalArgumentList
     let @lstring returnTypeName
     select
-      returnTypeName = ["" here]
+      returnTypeName = "".here
     or
       $->$
       <type_definition> !?ioAST ?returnTypeName
@@ -173,21 +173,21 @@ override method @externRoutineIR llvmCodeGeneration
   ?!@generationAdds unused ioGenerationAdds
 {
   ioLLVMcode += "declare"
-  if [self.mReturnType isNull] then
+  if self.mReturnType.isNull then
     ioLLVMcode += " void"
   else
-      ioLLVMcode += " " + [[self.mReturnType type] llvmTypeName]
+      ioLLVMcode += " " + self.mReturnType.type.llvmTypeName
   end
-  ioLLVMcode += " @" + [self.mRoutineMangledName assemblerRepresentation] + " ("
+  ioLLVMcode += " @" + self.mRoutineMangledName.string.assemblerRepresentation + " ("
   for (mFormalArgumentKind mFormalArgumentType mFormalArgumentName) in self.mFormalArgumentListForGeneration
   do
     switch mFormalArgumentKind
     case input :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
+      ioLLVMcode += mFormalArgumentType.llvmTypeName + " %in." + mFormalArgumentName
     case output :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * " + llvmNameForLocalVariable (!mFormalArgumentName)
+      ioLLVMcode += mFormalArgumentType.llvmTypeName + " * " + llvmNameForLocalVariable (!mFormalArgumentName)
    case inputOutput :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * " + llvmNameForLocalVariable (!mFormalArgumentName)
+      ioLLVMcode += mFormalArgumentType.llvmTypeName + " * " + llvmNameForLocalVariable (!mFormalArgumentName)
     end
   between
     ioLLVMcode += ", "
@@ -213,21 +213,21 @@ method @externProcedureMapIR llvmPrototypeGeneration  ?!@string unused ioLLVMcod
 method @externProcedureMapIR.@element llvmPrototypeGeneration  ?!@string ioLLVMcode {
   let procName = llvmNameForFunction (!self.lkey.string)
   ioLLVMcode += "declare"
-  if [self.mReturnType isNull] then
+  if self.mReturnType.isNull then
     ioLLVMcode += " void"
   else
-      ioLLVMcode += " " + [[self.mReturnType type] llvmTypeName]
+      ioLLVMcode += " " + self.mReturnType.type.llvmTypeName
   end
   ioLLVMcode += " @" + procName + " ("
   for (mFormalArgumentKind mFormalArgumentType mFormalArgumentName) in self.mFormalArgumentListForGeneration
   do
     switch mFormalArgumentKind
     case input :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
+      ioLLVMcode += mFormalArgumentType.llvmTypeName + " %in." + mFormalArgumentName
     case output :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * " + llvmNameForLocalVariable (!mFormalArgumentName)
+      ioLLVMcode += mFormalArgumentType.llvmTypeName + " * " + llvmNameForLocalVariable (!mFormalArgumentName)
    case inputOutput :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * " + llvmNameForLocalVariable (!mFormalArgumentName)
+      ioLLVMcode += mFormalArgumentType.llvmTypeName + " * " + llvmNameForLocalVariable (!mFormalArgumentName)
     end
   between
     ioLLVMcode += ", "

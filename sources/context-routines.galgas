@@ -20,7 +20,7 @@ func routineMangledNameFromAST ?let @string inReceiverTypeName
   s += inRoutineName.string
   s += "("
   for (formalArgumentPassingMode selector * *) in inFormalArgumentList do
-    s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
+    s += formalArgumentPassingMode.formalPassingModeString + selector + ":"
   end
   s += ")"
   result = @{!s !inRoutineName.location}
@@ -39,7 +39,7 @@ func routineMangledNameFromCall ?let @string inReceiverTypeName
   s += inRoutineName.string
   s += "("
   for (passingMode selector) in inEffectiveParameterList do
-    s += [passingMode matchingFormalArgument] + selector + ":"
+    s += passingMode.matchingFormalArgument + selector + ":"
   end
   s += ")"
   result = @{!s !inRoutineName.location}

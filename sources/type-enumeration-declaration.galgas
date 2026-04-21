@@ -63,7 +63,7 @@ override method @enumerationDeclarationAST enterInPrecedenceGraph
     representationBitCount += 1 ;
     maxValue = maxValue / 2
   end
-  [!?ioGraph addEdge !from: self.mEnumerationName !to: ["u" + representationBitCount nowhere]]
+  [!?ioGraph addEdge !from: self.mEnumerationName !to: ("u" + representationBitCount).nowhere]
 }
 
 //·······················································································································
@@ -128,7 +128,7 @@ override method @enumerationDeclarationAST enterInContext
     !conversionToUIntN
     !isRequired:false
     !warnsIfUnused:false
-    !"i" + representationBitCount // enumerationType llvmTypeName]
+    !"i" + representationBitCount
   }
 //---------------- Insert enumeration in type map
   let enumerationType = @omnibusType {

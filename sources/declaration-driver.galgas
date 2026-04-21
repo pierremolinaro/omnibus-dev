@@ -232,11 +232,11 @@ proc retainRequiredDrivers ?!@ast ioAST {
 //--- Check at most one drive has no dependence
   var @lstringlist driverWithNoDependenceList = @[]
   for (declaration) in ioAST.mDriverDeclarationListAST do
-     if [declaration.mDriverDependanceList count] == 0 then
+     if declaration.mDriverDependanceList.count == 0 then
        driverWithNoDependenceList += !declaration.mDriverName
      end
   end
-  if [driverWithNoDependenceList count] > 1 then
+  if driverWithNoDependenceList.count > 1 then
     for (driverName) in driverWithNoDependenceList do
       error driverName : "almost one driver can have no dependence"
     end
@@ -289,7 +289,7 @@ proc retainRequiredDrivers ?!@ast ioAST {
          !driverPropertyKind
       end
     //--- Check all arguments of driver instanciation have been used
-      for (unusedSelector) in [driverInstanciationArgumentMap keySet] - validArgumentSet do
+      for (unusedSelector) in driverInstanciationArgumentMap.keySet - validArgumentSet do
         error [driverInstanciationArgumentMap locationForKey !unusedSelector] : "invalid selector"
       end
     end
@@ -317,7 +317,7 @@ proc retainRequiredDrivers ?!@ast ioAST {
   end
   ioAST.mDriverDeclarationListAST = @[]
 //--- Check all drivers named in instanciation constructs have been implemented
-  for (unusedDriverName) in [instanciedDriverMap keySet] - validDriverNames do
+  for (unusedDriverName) in instanciedDriverMap.keySet - validDriverNames do
     error [instanciedDriverMap locationForKey !unusedDriverName] : "undefined driver"
   end
 }
@@ -424,9 +424,9 @@ list @driverListIR {
 
 method @driverListIR.@element generateLLVMDriverVariableDefinition ?!@string ioLLVMcode {
   ioLLVMcode += llvmNameForGlobalVariable (!self.mDriverName) + " = internal global "
-  ioLLVMcode += [self.mType llvmTypeName] + " {"
+  ioLLVMcode += self.mType.llvmTypeName + " {"
   for (value) in self.mInitialValueList
-    do ioLLVMcode += [value llvmTypeName] + " " + [value llvmValue]
+    do ioLLVMcode += value.llvmTypeName + " " + value.llvmValue
     between ioLLVMcode += ", "  
   end
   ioLLVMcode += "}\n"
@@ -439,8 +439,8 @@ method @driverListIR generateLLVMDriverCode ?!@string ioLLVMcode {
   ioLLVMcode += llvmTitleComment (!"Boot")
   ioLLVMcode += "define internal void @boot ()" + llvmAttributeFunction () + "{\n"
   for boot in self do
-    ioLLVMcode += "  call void @" + [llvmBootRoutineNameFromDriver (!boot.mDriverName) assemblerRepresentation] + " ("
-    ioLLVMcode += [boot.mType llvmTypeName] + "* " + llvmNameForGlobalVariable (!boot.mDriverName)
+    ioLLVMcode += "  call void @" + llvmBootRoutineNameFromDriver (!boot.mDriverName).string.assemblerRepresentation + " ("
+    ioLLVMcode += boot.mType.llvmTypeName + "* " + llvmNameForGlobalVariable (!boot.mDriverName)
     ioLLVMcode += ")\n"
   end
   ioLLVMcode += "  ret void\n"
@@ -449,8 +449,8 @@ method @driverListIR generateLLVMDriverCode ?!@string ioLLVMcode {
   ioLLVMcode += llvmTitleComment (!"Startup")
   ioLLVMcode += "define internal void @startup ()" + llvmAttributeFunction () + "{\n"
   for startup in self do
-    ioLLVMcode += "  call void @" + [llvmStartupRoutineNameFromDriver (!startup.mDriverName) assemblerRepresentation] + " ("
-    ioLLVMcode += [startup.mType llvmTypeName] + "* " + llvmNameForGlobalVariable (!startup.mDriverName)
+    ioLLVMcode += "  call void @" + llvmStartupRoutineNameFromDriver (!startup.mDriverName).string.assemblerRepresentation + " ("
+    ioLLVMcode += startup.mType.llvmTypeName + "* " + llvmNameForGlobalVariable (!startup.mDriverName)
     ioLLVMcode += ")\n"
   end
   ioLLVMcode += "  ret void\n"

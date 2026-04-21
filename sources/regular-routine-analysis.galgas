@@ -46,7 +46,7 @@ method @decoratedRegularRoutineList.@element semanticAnalysis
 //--- Receiver type
   let receiverType = if self.receiverTypeName.string == ""
     then voidType ()
-    else [[inContext.mTypeMap searchKey !self.receiverTypeName] type]
+    else [inContext.mTypeMap searchKey !self.receiverTypeName].type
     end
 //--- Variable map
   var universalMap = inContext.mValuedObjectMap
@@ -55,7 +55,7 @@ method @decoratedRegularRoutineList.@element semanticAnalysis
 //--- Return value ?
   if self.returnTypeName.string != "" then
     let resultVarName = @lstring {!functionResultVariableName () !self.returnTypeName.location}
-    let resultType = [[inContext.mTypeMap searchKey !self.returnTypeName] type]
+    let resultType = [inContext.mTypeMap searchKey !self.returnTypeName].type
     [!?universalMap insertLocalVariable !resultVarName !resultType !resultVarName !.noValue !true]
   end
 //--- Analyse formal arguments
@@ -89,7 +89,7 @@ method @decoratedRegularRoutineList.@element semanticAnalysis
   let returnType = if self.returnTypeName.string == "" then
     voidType ()
   else
-    [[inContext.mTypeMap searchKey !self.returnTypeName] type]
+    [inContext.mTypeMap searchKey !self.returnTypeName].type
   end
   ioIntermediateCodeStruct.mRoutineListIR += !@regularRoutineIR {
     !self.routineMangledLLVMName
@@ -118,13 +118,13 @@ list @allocaList {
 
 method @allocaList generateAllocaList ?!@string ioLLVMcode {
   for (variable type *) in self do
-    ioLLVMcode += "  " + variable + " = alloca " + [type llvmTypeName] + "\n"
+    ioLLVMcode += "  " + variable + " = alloca " + type.llvmTypeName + "\n"
   end
 //--- Init ARC variables
   for (variable type formalInputArgument) in self do
-    if [type.kind isDynamicArrayType] && not formalInputArgument then
+    if type.kind.isDynamicArrayType && not formalInputArgument then
       ioLLVMcode += ";--- init dynamic array type '" + variable + "'\n"
-      ioLLVMcode += "  store " + [type llvmTypeName] + " null, " + [type llvmTypeName] + "* " + variable + " ; init ARC value\n"
+      ioLLVMcode += "  store " + type.llvmTypeName + " null, " + type.llvmTypeName + "* " + variable + " ; init ARC value\n"
     end
   end
 }
@@ -169,11 +169,11 @@ override method @regularRoutineIR llvmCodeGeneration
   if not self.mExportedFunction then
     ioLLVMcode += " internal"
   end
-  ioLLVMcode += " " + [self.mReturnType llvmTypeName]
-  ioLLVMcode += " @" + [self.mRoutineMangledName assemblerRepresentation] + " ("
+  ioLLVMcode += " " + self.mReturnType.llvmTypeName
+  ioLLVMcode += " @" + self.mRoutineMangledName.string.assemblerRepresentation + " ("
   let receiverLLVMTypeName = if self.mReceiverType.kind == .void
     then ""
-    else [self.mReceiverType llvmTypeName]
+    else self.mReceiverType.llvmTypeName
   end
   var first = true
   if receiverLLVMTypeName != "" then
@@ -188,18 +188,18 @@ override method @regularRoutineIR llvmCodeGeneration
     end
     switch mFormalArgumentKind
     case input :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
+      ioLLVMcode += mFormalArgumentType.llvmTypeName + " %in." + mFormalArgumentName
     case output :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * " + llvmNameForLocalVariable (!mFormalArgumentName)
+      ioLLVMcode += mFormalArgumentType.llvmTypeName + " * " + llvmNameForLocalVariable (!mFormalArgumentName)
    case inputOutput :
-      ioLLVMcode += [mFormalArgumentType llvmTypeName] + " * " + llvmNameForLocalVariable (!mFormalArgumentName)
+      ioLLVMcode += mFormalArgumentType.llvmTypeName + " * " + llvmNameForLocalVariable (!mFormalArgumentName)
     end
   end
   if not [option omnibus_options.noPanicGeneration value] && self.mAppendFileAndLineArgumentForPanicLocation then
     if not first then
       ioLLVMcode += ", "
     end
-    ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " %LINE, i8* %FILE"
+    ioLLVMcode += inGenerationContext.mPanicLineLLVMType.llvmTypeName + " %LINE, i8* %FILE"
   end
   ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
 //--- Add result variable ?
@@ -222,7 +222,7 @@ override method @regularRoutineIR llvmCodeGeneration
     switch mFormalArgumentKind
     case input :
       ioLLVMcode += ";--------- Input argument '" + mFormalArgumentName + "'\n"
-      let llvmType = [mFormalArgumentType llvmTypeName]
+      let llvmType = mFormalArgumentType.llvmTypeName
       ioLLVMcode += "  store " + llvmType + " %in." + mFormalArgumentName + ", " + llvmType + " * "
                  + llvmNameForLocalVariable (!mFormalArgumentName) + "\n"
       [mFormalArgumentType generateRetain !mFormalArgumentName !?ioLLVMcode !?ioGenerationAdds]
@@ -265,8 +265,8 @@ override method @regularRoutineIR llvmCodeGeneration
     ioLLVMcode += "  ret void\n"
   else
     let resultVarLLVMName = llvmNameForLocalVariable (!functionResultVariableName ())
-    ioLLVMcode += "  %result = load " + [self.mReturnType llvmTypeName] + ", " + [self.mReturnType llvmTypeName] + " * " + resultVarLLVMName + "\n"
-    ioLLVMcode += "  ret " + [self.mReturnType llvmTypeName] + " %result\n"
+    ioLLVMcode += "  %result = load " + self.mReturnType.llvmTypeName + ", " + self.mReturnType.llvmTypeName + " * " + resultVarLLVMName + "\n"
+    ioLLVMcode += "  ret " + self.mReturnType.llvmTypeName + " %result\n"
   end
   ioLLVMcode += "}\n\n"
 }

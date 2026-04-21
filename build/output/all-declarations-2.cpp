@@ -3596,12 +3596,12 @@ void extensionMethod_generatePrefixOperatorCode (const GGS_prefixOperatorMap inO
                                                  COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outResultValue.drop () ; // Release 'out' argument
   GGS_lstring var_key_1661 = function_prefixOperatorMapKey (extensionGetter_type (constinArgument_inReceiverOperand, inCompiler COMMA_SOURCE_FILE ("prefix-operator-map.galgas", 41)), constinArgument_inPrefixOperator, constinArgument_inOperatorLocation, inCompiler COMMA_SOURCE_FILE ("prefix-operator-map.galgas", 41)) ;
-  GGS_omnibusType var_resultType_1786 ;
-  GGS_prefixOperatorUsage var_operatorUsage_1802 ;
+  GGS_omnibusType var_resultType_1784 ;
+  GGS_prefixOperatorUsage var_operatorUsage_1800 ;
   const GGS_prefixOperatorMap temp_0 = inObject ;
-  GGS_omnibusType joker_1777_1 ; // Joker input parameter
-  temp_0.method_searchKey (var_key_1661, joker_1777_1, var_resultType_1786, var_operatorUsage_1802, inCompiler COMMA_SOURCE_FILE ("prefix-operator-map.galgas", 42)) ;
-  callExtensionMethod_generateCode ((cPtr_prefixOperatorUsage *) var_operatorUsage_1802.ptr (), constinArgument_inReceiverOperand, constinArgument_inOperatorLocation, var_resultType_1786, constinArgument_inDoNotGeneratePanicCode, constinArgument_inSafeMode, ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, outArgument_outResultValue, inCompiler COMMA_SOURCE_FILE ("prefix-operator-map.galgas", 43)) ;
+  GGS_omnibusType joker_1775_1 ; // Joker input parameter
+  temp_0.method_searchKey (var_key_1661, joker_1775_1, var_resultType_1784, var_operatorUsage_1800, inCompiler COMMA_SOURCE_FILE ("prefix-operator-map.galgas", 42)) ;
+  callExtensionMethod_generateCode ((cPtr_prefixOperatorUsage *) var_operatorUsage_1800.ptr (), constinArgument_inReceiverOperand, constinArgument_inOperatorLocation, var_resultType_1784, constinArgument_inDoNotGeneratePanicCode, constinArgument_inSafeMode, ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, outArgument_outResultValue, inCompiler COMMA_SOURCE_FILE ("prefix-operator-map.galgas", 43)) ;
 }
 
 

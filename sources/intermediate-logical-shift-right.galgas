@@ -4,13 +4,13 @@ setter @instructionListIR appendLogicalShiftRight
   ?let @uint inShiftAmount
   ?!@semanticTemporariesStruct ioTemporaries
 {
-  if [ioResult isLiteralInteger] then
+  if ioResult.isLiteralInteger then
     [ioResult extractLiteralInteger ?type:let @omnibusType type ?value:let @bigint value]
     ioResult = .literalInteger {!type:type !value:value >> inShiftAmount}
   else
     [!?self appendLoadWhenReference !?ioTemporaries !?ioResult]
     let source = ioResult
-    getNewTempValue (![source type] !?ioTemporaries ?ioResult)
+    getNewTempValue (!source.type !?ioTemporaries ?ioResult)
     self += !@logicalRightShiftIR {!ioResult !source !inShiftAmount}
   end
 }
@@ -30,8 +30,8 @@ override method @logicalRightShiftIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += "  " + [self.mResult llvmName] + " = "
-  ioLLVMcode += "lshr " + [self.mResult  llvmTypeName] + " " + [self.mSource llvmName] + ", " + self.mShiftAmount + "\n"
+  ioLLVMcode += "  " + self.mResult.llvmName + " = "
+  ioLLVMcode += "lshr " + self.mResult .llvmTypeName + " " + self.mSource.llvmName + ", " + self.mShiftAmount + "\n"
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————

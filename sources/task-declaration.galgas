@@ -73,7 +73,7 @@ syntax extension omnibus_syntax {
       <procedure_formal_arguments> !?ioAST ?let @routineFormalArgumentListAST formalArgumentList
       let @lstring returnTypeName
       select
-        returnTypeName = ["" here]
+        returnTypeName = "".here
       or
         $->$
         <type_definition> !?ioAST ?returnTypeName
@@ -175,7 +175,7 @@ method @taskListAST enterInContext
   var @taskListAST sortedTaskList = @[]
   var @stringset handledTaskSet = @[]
   var continue = true
-  loop ([taskList count]) while continue && ([taskList count] > 0) do
+  loop (taskList.count) while continue && (taskList.count > 0) do
     continue = false
     var @taskListAST candidateTaskList = @[]
     var idx = 0
@@ -201,12 +201,12 @@ method @taskListAST enterInContext
         idx = idx + 1
       end
     end
-    if [option omnibus_options.taskStrictPriorityOrder value] && ([candidateTaskList count] > 1) then
+    if [option omnibus_options.taskStrictPriorityOrder value] && (candidateTaskList.count > 1) then
       for task in candidateTaskList do
         error task.mTaskName : "this task does not respect a strict priority order"
       end
     end
-    if [candidateTaskList count] > 0 then
+    if candidateTaskList.count > 0 then
       continue = true
       for task in candidateTaskList do
         handledTaskSet ++= task.mTaskName.string
@@ -230,10 +230,10 @@ method @taskListAST enterInContext
       !resultTypeProxy:.null
       ?routineLLVMName:*
     ]
-    let assemblerTaskName = [task.mTaskName assemblerRepresentation]
+    let assemblerTaskName = task.mTaskName.string.assemblerRepresentation
     let activateTaskCallName = llvmNameForServiceCall (!llvmNameForActivateTask ())
     ioRoutineListIR += !@taskActivateFunctionIR {
-      !routineMangledNameFromAST (!task.mTaskName !["activate" nowhere] !@[])
+      !routineMangledNameFromAST (!task.mTaskName !"activate".nowhere !@[])
       !isRequired:false
       !warnsIfUnused:false
       !assemblerTaskName
@@ -243,11 +243,11 @@ method @taskListAST enterInContext
   //------------------------------------------- Analyze task guarded command
   //  Build a "task.loop" function that contains a sync instruction
     var @instructionListAST taskListInstructionList = @[]
-    if [task.mGuardedCommandList count] > 0 then
+    if task.mGuardedCommandList.count > 0 then
       let syncInstruction = @syncInstructionAST {!task.mTaskName.location !task.mGuardedCommandList !task.mTaskName.location}
       taskListInstructionList += !syncInstruction
     end
-    let routineMangledName = routineMangledNameFromAST (!task.mTaskName ![llvmNameForTaskLoopFunction () nowhere] ! @[])
+    let routineMangledName = routineMangledNameFromAST (!task.mTaskName !llvmNameForTaskLoopFunction ().nowhere ! @[])
     ioDecoratedRoutineList +=
       !receiverTypeName: task.mTaskName
       !mode:.userMode
@@ -261,7 +261,7 @@ method @taskListAST enterInContext
       !warningOnUnusedArgs: true
       !taskListInstructionList
       !task.mTaskName.location
-      !returnTypeName: ["" nowhere]
+      !returnTypeName: "".nowhere
     [ioContext.mTypeMap searchType !lkey:task.mTaskName ?type:let taskType]
     [!?ioContext.mValuedObjectMap insertTask !task.mTaskName !taskType]
     var initialValueList = @sortedOperandIRList @[]
@@ -333,11 +333,11 @@ private proc analyzeOrderedTaskRoutines
   !@stringlist outSetupOrderedList
 {
   outSetupOrderedList = @[]
-  if [inTaskRoutineLISTAST count] > 0 then
+  if inTaskRoutineLISTAST.count > 0 then
   //--- Check there is exactly one entry without any precedence
     var @uint numberOfEntriesWithoutAnyPrecedence = 0
     for (* precedenceList) in inTaskRoutineLISTAST do
-      if [precedenceList count] == 0 then
+      if precedenceList.count == 0 then
         numberOfEntriesWithoutAnyPrecedence += numberOfEntriesWithoutAnyPrecedence + 1
       end
     end
@@ -347,7 +347,7 @@ private proc analyzeOrderedTaskRoutines
       end
     elsif numberOfEntriesWithoutAnyPrecedence > 1 then
       for (name precedenceList) in inTaskRoutineLISTAST do
-        if [precedenceList count] == 0 then
+        if precedenceList.count == 0 then
           error name : "Exactly one routine should have no precedence"
         end
       end    
@@ -356,7 +356,7 @@ private proc analyzeOrderedTaskRoutines
     var @taskSetupListAST taskSetupListAST = inTaskRoutineLISTAST
     var @stringset precedenceSet = @[]
     var continue = true
-    loop ([inTaskRoutineLISTAST count]) while continue && ([taskSetupListAST count] > 0) do
+    loop (inTaskRoutineLISTAST.count) while continue && (taskSetupListAST.count > 0) do
       continue = false
       var idx = 0
       for (name precedenceList) in taskSetupListAST do
@@ -493,8 +493,8 @@ method @taskMapIR generateCode
   for (taskName taskTypeName initValueList) in inGenerationContext.mGlobalTaskVariableList do
     ioLLVMcode += llvmNameForGlobalVariable (!taskName)
     ioLLVMcode += " = internal global %"
-    ioLLVMcode += [taskTypeName assemblerRepresentation]
-    ioLLVMcode += " " + [initValueList llvmValue] + "\n"
+    ioLLVMcode += taskTypeName.assemblerRepresentation
+    ioLLVMcode += " " + initValueList.llvmValue + "\n"
   end
   ioLLVMcode += "\n"
 //---------- Build ordered task list
@@ -516,7 +516,7 @@ method @taskMapIR generateCode
   ioLLVMcode += "i32 %inStackBufferSize, void ()* %inTaskRoutine) nounwind\n\n"
   for task in orderedTaskList do
     ioLLVMcode += llvmTitleComment (!"Task " + task.mTaskName)
-    let assemblerTaskName = [task.mTaskName assemblerRepresentation]
+    let assemblerTaskName = task.mTaskName.assemblerRepresentation
     ioLLVMcode += stackNameForTask (!task.mTaskName) + " = global [" + (task.mStackSize / 4) + " x i32] zeroinitializer\n"
     ioLLVMcode += "\n"
     let effectiveParameter = "(%" + assemblerTaskName + "* " + llvmNameForGlobalVariable (!task.mTaskName) + ")"
@@ -526,18 +526,18 @@ method @taskMapIR generateCode
     ioLLVMcode += "define internal void " + setupNameForTaskType (!task.mTaskName) + formalArgument + llvmAttributeFunction () + "{\n"
     for (setupName) in task.mSetupOrderedList do
       let mangledName = "task.setup." + task.mTaskName + "." + setupName
-      ioLLVMcode += "  call void @" + [mangledName assemblerRepresentation] + formalArgument + "\n"
+      ioLLVMcode += "  call void @" + mangledName.assemblerRepresentation + formalArgument + "\n"
     end
     ioLLVMcode += "  ret void\n"
     ioLLVMcode += "}\n\n"
     ioLLVMcode += llvmSeparatorLine ()
     ioLLVMcode += "\n"
   //---------- Activate
-    ioLLVMcode += "define internal void @" + [activateNameForTaskType (!task.mTaskName) assemblerRepresentation]
+    ioLLVMcode += "define internal void @" + activateNameForTaskType (!task.mTaskName).assemblerRepresentation
     ioLLVMcode += formalArgument + llvmAttributeFunction () + "{\n"
     for (activateName) in task.mActivateOrderedList do
       let mangledName = "task.activate." + task.mTaskName + "." + activateName
-      ioLLVMcode += "  call void @" + [mangledName assemblerRepresentation] + formalArgument + "\n"
+      ioLLVMcode += "  call void @" + mangledName.assemblerRepresentation + formalArgument + "\n"
     end
     ioLLVMcode += "  ret void\n"
     ioLLVMcode += "}\n\n"
@@ -547,7 +547,7 @@ method @taskMapIR generateCode
     ioLLVMcode += "define internal void " + deactivateNameForTaskType (!task.mTaskName) + formalArgument + llvmAttributeFunction () + "{\n"
     for (deactivateName) in task.mDeactivateOrderedList do
       let mangledName = "task.deactivate." + task.mTaskName + "." + deactivateName
-      ioLLVMcode += "  call void @" + [mangledName assemblerRepresentation] + formalArgument + "\n"
+      ioLLVMcode += "  call void @" + mangledName.assemblerRepresentation + formalArgument + "\n"
     end
     ioLLVMcode += "  ret void\n"
     ioLLVMcode += "}\n\n"
@@ -556,13 +556,13 @@ method @taskMapIR generateCode
   //---------- Task routine
     ioLLVMcode += "define internal void " + mainRoutineNameForTask (!task.mTaskName) + " ()" + llvmAttributeFunction () + "noreturn {\n"
     ioLLVMcode += "  call void " + setupNameForTaskType (!task.mTaskName) + " " + effectiveParameter + "\n"
-    let taskLoopLabel = "loop." + [task.mTaskName assemblerRepresentation]
+    let taskLoopLabel = "loop." + task.mTaskName.assemblerRepresentation
     ioLLVMcode += "  br label %" + taskLoopLabel + "\n\n"
     ioLLVMcode += taskLoopLabel + ":\n"
     if not task.mActivate then
       ioLLVMcode += "  call void @" + waitForActivationCallName + " ()\n"
     end
-    ioLLVMcode += "  call void @" + [activateNameForTaskType (!task.mTaskName) assemblerRepresentation] + " " + effectiveParameter + "\n"
+    ioLLVMcode += "  call void @" + activateNameForTaskType (!task.mTaskName).assemblerRepresentation + " " + effectiveParameter + "\n"
     ioLLVMcode += "  call void @func." + llvmNameForFunction (!task.mTaskName + "." + llvmNameForTaskLoopFunction () + "()") + " " + effectiveParameter + "\n"
     ioLLVMcode += "  call void " + deactivateNameForTaskType (!task.mTaskName) + " " + effectiveParameter + "\n"
     if task.mActivate then
@@ -608,7 +608,7 @@ override method @taskActivateFunctionIR llvmCodeGeneration
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += "define internal void @" + [self.mRoutineMangledName assemblerRepresentation] + " "
+  ioLLVMcode += "define internal void @" + self.mRoutineMangledName.string.assemblerRepresentation + " "
   ioLLVMcode += "(%" + self.mAssemblerTaskName + "* " + llvmNameForSelf () + ")" + llvmAttributeFunction () + "{\n"
   ioLLVMcode += "  call void @" + self.mActivateServiceInvocationName + " (i8 " + self.mTaskIndex + ")\n"
   ioLLVMcode += "  ret void\n"

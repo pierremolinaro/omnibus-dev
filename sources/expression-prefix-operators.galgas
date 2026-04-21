@@ -68,7 +68,7 @@ override method @prefixOperatorExpressionAST analyzeExpression
     ?result: let @objectIR expressionResult
   ]
 //--- Generate code
-  let currentlyInSafeMode = [inMode isSafe]
+  let currentlyInSafeMode = inMode.isSafe
   let @bool noPanicGeneration = [option omnibus_options.noPanicGeneration value]
   [inContext.mPrefixOperatorMap generatePrefixOperatorCode
     !expressionResult

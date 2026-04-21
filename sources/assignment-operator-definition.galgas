@@ -163,9 +163,9 @@ override method @llvmAssignmentOperatorDeclarationAST enterInContext
   [self.mLLVMInstructionList checkInstructionList !formalGenericConstantParameterMap]
 //--- Types
   [!?ioContext.mTypeMap makeEntry !self.mTargetTypeName ?let targetTypeProxy]
-  let targetType = [targetTypeProxy type]
+  let targetType = targetTypeProxy.type
   [!?ioContext.mTypeMap makeEntry !self.mSourceTypeName ?let sourceTypeProxy]
-  let @omnibusType sourceType = [sourceTypeProxy type]
+  let @omnibusType sourceType = sourceTypeProxy.type
 //---
   let key = assignmentOperatorKey (!targetType !self.mOperatorLocation !sourceType)
   let operatorUsage = @llvmAssignmentOperatorUsage {
@@ -185,16 +185,16 @@ override method @llvmAssignmentOperatorDeclarationAST enterInContext
 //--- Generate function if
 //       - none type is generic
 //       - source type is not a compile time type
-  if ([self.mTargetGenericFormalParameterList count] == 0)
-   && ([self.mSourceGenericFormalParameterList count] == 0)
-   && not [sourceType.kind isCompileTimeInteger]
-   && not [sourceType.kind isCompileTimeBool] then
+  if (self.mTargetGenericFormalParameterList.count == 0)
+   && (self.mSourceGenericFormalParameterList.count == 0)
+   && not sourceType.kind.isCompileTimeInteger
+   && not sourceType.kind.isCompileTimeBool then
     var @assignmentGenerationVarMap varMap = @()
     [!?varMap insertKey !self.mTargetVariableName !"%" + self.mTargetVariableName]
     [!?varMap insertKey !self.mSourceVariableName !"%" + self.mSourceVariableName]
     var @assignmentGenerationVarMap typeMap = @()
-    [!?typeMap insertKey !self.mTargetVariableName ![targetType llvmTypeName]]
-    [!?typeMap insertKey !self.mSourceVariableName ![sourceType llvmTypeName]]
+    [!?typeMap insertKey !self.mTargetVariableName !targetType.llvmTypeName]
+    [!?typeMap insertKey !self.mSourceVariableName !sourceType.llvmTypeName]
     var @stringlist generatedInstructions = @()
     var @allocaList allocaList = @()
     var @uint temporaryIndex = 0
@@ -241,14 +241,14 @@ override method @llvmAssignmentOperatorUsage generateCode
     ?let @location unused inErrorLocation
     ?initializedTarget: let @bool unused inTargetIsInitialized
 {
-  if ([self.mTargetGenericFormalParameterList count] == 0)
-    && ([self.mSourceGenericFormalParameterList count] == 0)
-    && not [[inSourcePossibleReference type].kind isCompileTimeInteger]
-    && not [[inSourcePossibleReference type].kind isCompileTimeBool] then
-      let llvmRoutineName = assignmentOperatorFuncName (!inTargetType ![inSourcePossibleReference type])
-      let s = "call void @" + [llvmRoutineName assemblerRepresentation]
-            + " (" + [inTargetType llvmTypeName] + "* " + inTargetLLVMName
-            + ", " + [[inSourcePossibleReference type] llvmTypeName] + "* " + [inSourcePossibleReference llvmName] + ")"
+  if (self.mTargetGenericFormalParameterList.count == 0)
+    && (self.mSourceGenericFormalParameterList.count == 0)
+    && not inSourcePossibleReference.type.kind.isCompileTimeInteger
+    && not inSourcePossibleReference.type.kind.isCompileTimeBool then
+      let llvmRoutineName = assignmentOperatorFuncName (!inTargetType !inSourcePossibleReference.type)
+      let s = "call void @" + llvmRoutineName.assemblerRepresentation
+            + " (" + inTargetType.llvmTypeName + "* " + inTargetLLVMName
+            + ", " + inSourcePossibleReference.type.llvmTypeName + "* " + inSourcePossibleReference.llvmName + ")"
       [!?ioInstructionListIR appendInstructionAsFreeString !s !@[llvmRoutineName]]
     else
     [inSourcePossibleReference extractReference ?type:let sourceType ?llvmName: let srcLLVMName]
@@ -256,8 +256,8 @@ override method @llvmAssignmentOperatorUsage generateCode
     [!?varMap insertKey !self.mTargetVarName !inTargetLLVMName]
     [!?varMap insertKey !self.mSourceVarName !srcLLVMName]
     var @assignmentGenerationVarMap typeMap = @()
-    [!?typeMap insertKey !self.mTargetVarName ![inTargetType llvmTypeName]]
-    [!?typeMap insertKey !self.mSourceVarName ! [sourceType llvmTypeName]]
+    [!?typeMap insertKey !self.mTargetVarName ! inTargetType.llvmTypeName]
+    [!?typeMap insertKey !self.mSourceVarName ! sourceType.llvmTypeName]
     var @stringlist generatedInstructions = @()
     [self.mInstructionList generateIRCode !varMap !typeMap !?generatedInstructions !?ioTemporaries.mTemporaryIndex !?ioAllocaList]
     for (str) in generatedInstructions do
@@ -278,7 +278,7 @@ setter @instructionListIR appendAssignmentIR
     ?let @location inErrorLocation
     ?initializedTarget: let @bool inTargetIsInitialized
 {
-  let key = assignmentOperatorKey (!inTargetType !inErrorLocation ![inSourcePossibleReference type])
+  let key = assignmentOperatorKey (!inTargetType !inErrorLocation !inSourcePossibleReference.type)
   [inAssignmentOperatorMap searchKey !key ?let operatorUsage]
   var @instructionListIR instructions = @()
   [operatorUsage generateCode
@@ -312,9 +312,9 @@ override method @assignmentRoutineIR llvmCodeGeneration
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += "define internal void @" + [self.mRoutineMangledName assemblerRepresentation]
-  ioLLVMcode += " (" + [self.mTargetType llvmTypeName] + "* %" + self.mTargetVarName
-             + ", " + [self.mSourceType llvmTypeName] + "* %" + self.mSourceVarName + ") nounwind {\n"
+  ioLLVMcode += "define internal void @" + self.mRoutineMangledName.string.assemblerRepresentation
+  ioLLVMcode += " (" + self.mTargetType.llvmTypeName + "* %" + self.mTargetVarName
+             + ", " + self.mSourceType.llvmTypeName + "* %" + self.mSourceVarName + ") nounwind {\n"
   [self.mAllocaList generateAllocaList !?ioLLVMcode]
   for (instruction) in self.mGeneratedInstructions do
     ioLLVMcode += "  " + instruction + "\n"
@@ -336,10 +336,10 @@ override method @simpleAssignmentCopyRoutineIR llvmCodeGeneration
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  let typeName = [self.mTargetType llvmTypeName]
+  let typeName = self.mTargetType.llvmTypeName
   let targetVarName = "%targetPtr"
   let sourceVarName = "%sourcePtr"
-  ioLLVMcode += "define internal void @" + [self.mRoutineMangledName assemblerRepresentation]
+  ioLLVMcode += "define internal void @" + self.mRoutineMangledName.string.assemblerRepresentation
   ioLLVMcode += " (" + typeName + "* " + targetVarName
              + ", " + typeName + "* " + sourceVarName + ") nounwind {\n"
   ioLLVMcode += "  %value = load " + typeName + ", " + typeName + "* " + sourceVarName + "\n"
@@ -367,15 +367,15 @@ override method @simpleCopyAssignmentOperatorUsage generateCode
 {
 //--- If source is a reference, load value
   var @objectIR sourceValue = inSourcePossibleReference
-  if [inSourcePossibleReference isReference] then
+  if inSourcePossibleReference.isReference then
     getNewTempValue (!inTargetType !?ioTemporaries ?sourceValue)
-    let s = [sourceValue llvmName] + " = load " + [inTargetType llvmTypeName] + ", "
-          + [inTargetType llvmTypeName] + "* " + [inSourcePossibleReference llvmName]
+    let s = sourceValue.llvmName + " = load " + inTargetType.llvmTypeName + ", "
+          + inTargetType.llvmTypeName + "* " + inSourcePossibleReference.llvmName
     [!?ioInstructionListIR appendInstructionAsFreeString !s !@()]
   end
 //--- Perfom store
-  let s = "store " + [inTargetType llvmTypeName] + " " + [sourceValue llvmName] 
-        + ", " + [inTargetType llvmTypeName] + "* " + inTargetLLVMName
+  let s = "store " + inTargetType.llvmTypeName + " " + sourceValue.llvmName 
+        + ", " + inTargetType.llvmTypeName + "* " + inTargetLLVMName
   [!?ioInstructionListIR appendInstructionAsFreeString !s !@()]
 }
 

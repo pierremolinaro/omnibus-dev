@@ -180,7 +180,7 @@ syntax extension omnibus_syntax {
 override method @compileTimeInfixOperatorAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let nodeName = @lstring {![self.mInfixOperator string] + "." + self.mLeftTypeName + "." + self.mRightTypeName !self.mInfixOperatorLocation}
+  let nodeName = @lstring {!self.mInfixOperator.string + "." + self.mLeftTypeName + "." + self.mRightTypeName !self.mInfixOperatorLocation}
   [!?ioGraph addNode !nodeName !self]
   [!?ioGraph addEdge !from: nodeName !to: self.mLeftTypeName]
   [!?ioGraph addEdge !from: nodeName !to: self.mRightTypeName]
@@ -210,13 +210,13 @@ override method @compileTimeInfixOperatorAST enterInContext
 {
 //--- Check types
   [!?ioContext.mTypeMap makeEntry !self.mLeftTypeName ?let leftTypeProxy]
-  let leftType = [leftTypeProxy type]
+  let leftType = leftTypeProxy.type
   [leftType checkIsCompileTimeType !self.mLeftTypeName.location]
   [!?ioContext.mTypeMap makeEntry !self.mRightTypeName ?let rightTypeProxy]
-  let rightType = [rightTypeProxy type]
+  let rightType = rightTypeProxy.type
   [rightType checkIsCompileTimeType !self.mRightTypeName.location]
   [!?ioContext.mTypeMap makeEntry !self.mResultTypeName ?let resultTypeProxy]
-  let resultType = [resultTypeProxy type]
+  let resultType = resultTypeProxy.type
   [resultType checkIsCompileTimeType !self.mResultTypeName.location]
 //--- Check native operator expression
   var @ctCheckMap ctCheckMap = @()

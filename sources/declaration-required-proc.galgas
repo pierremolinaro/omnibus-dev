@@ -64,7 +64,7 @@ proc checkRequiredProcedures
       error requiredFunction.mName : "required func is not implemented"
     else
       [inContext.mRoutineMap searchKey
-        ![requiredFunctionMangledName nowhere]
+        !requiredFunctionMangledName.nowhere
         ?let implementedPublic
         ?let implementedSignature
         ?let implementedReturnTypeProxy // null if no returned value
@@ -75,22 +75,14 @@ proc checkRequiredProcedures
       let errorLocation = [inContext.mRoutineMap locationForKey !requiredFunctionMangledName]
     //--- Check signatures
       routineTypedSignature2 (!inContext.mTypeMap !requiredFunction.mFormalArgumentList ?let requiredTypedSignature)
-      if [requiredTypedSignature typedString] != [implementedSignature typedString] then
+      if requiredTypedSignature.typedString != implementedSignature.typedString then
         error errorLocation
-        : "function signature should be " + [requiredTypedSignature typedString] + " (as required by required function declaration)"    
+        : "function signature should be " + requiredTypedSignature.typedString + " (as required by required function declaration)"    
       end
     //--- Check return type
-      if not [implementedReturnTypeProxy isNull] then
+      if not implementedReturnTypeProxy.isNull then
         error errorLocation : "function should not return a value (as required by required function declaration)"    
-//      elsif requiredFunction.mIsSafe && not implementedIsSafe then
-//        error errorLocation : "function should be @safe (as required by required function declaration)"    
       end
-//    //--- Check safety
-//      if implementedIsSafe && not requiredFunction.mIsSafe then
-//        error errorLocation : "function should not be @safe (as required by required function declaration)"    
-//      elsif requiredFunction.mIsSafe && not implementedIsSafe then
-//        error errorLocation : "function should be @safe (as required by required function declaration)"    
-//      end
     //--- Check mode
       if implementedMode != requiredFunction.mExecutionMode then
         error errorLocation : "required mode is '" + requiredFunction.mExecutionMode + "'"    

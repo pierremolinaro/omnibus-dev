@@ -97,13 +97,6 @@ override method @whileInstructionAST instructionSemanticAnalysis
     error self.mEndOf_test_expression : "test expression type should not be a compile time expression"
   case llvmVariable (*) :
   end
-
-//--- Check inferred type
-//  if [testValue type].kind != .boolean then
-//    error mEndOf_test_expression : "test expression type is '" + [testValue omnibusTypeDescriptionName] + "', it should be boolean"
-//  elsif [testValue isStatic] then
-//    error mEndOf_test_expression : "test expression type should not be static"
-//  end
 //--- Analyze instruction list
   var @instructionListIR instructionGenerationList = @[]
   [!?ioUniversalMap openOverrideForRepeatBlock]
@@ -122,9 +115,9 @@ override method @whileInstructionAST instructionSemanticAnalysis
   [!?ioUniversalMap closeOverride !self.mEndOf_while_instruction]
 //--- Code generation
   ioInstructionGenerationList += !@whileInstructionIR {
-    ![self.mEndOf_test_expression endLocationIndex]
+    !self.mEndOf_test_expression.endLocationIndex
     !testInstructionGenerationList
-    ![booleanResult llvmName]
+    !booleanResult.llvmName
     !instructionGenerationList
  }
 }

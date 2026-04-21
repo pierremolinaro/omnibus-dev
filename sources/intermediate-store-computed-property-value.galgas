@@ -22,9 +22,9 @@ override method @storeComputedPropertyValueIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += "  call void @" + [self.mLLVMSetterName assemblerRepresentation] 
-  ioLLVMcode += " (" + [[self.mReceiverIR type] llvmTypeName] + "* " + [self.mReceiverIR llvmName] + ", "
-  ioLLVMcode += [[self.mValueIR type] llvmTypeName] + " " + [self.mValueIR llvmName] + ")\n"
+  ioLLVMcode += "  call void @" + self.mLLVMSetterName.assemblerRepresentation 
+  ioLLVMcode += " (" + self.mReceiverIR.type.llvmTypeName + "* " + self.mReceiverIR.llvmName + ", "
+  ioLLVMcode += self.mValueIR.type.llvmTypeName + " " + self.mValueIR.llvmName + ")\n"
 }
 
 //·······················································································································

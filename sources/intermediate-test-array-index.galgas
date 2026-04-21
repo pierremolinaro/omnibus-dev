@@ -5,7 +5,7 @@ setter @instructionListIR testArrayIndex
   ?let @bigint inSize
   !@bool outGeneratePanicInstruction
 {
-  [[inIndex type].kind extractInteger ?1* ?max:let max ?unsigned:let isUnsigned ?1*]
+  [inIndex.type.kind extractInteger ?1* ?max:let max ?unsigned:let isUnsigned ?1*]
   outGeneratePanicInstruction = (not isUnsigned) || (max >= inSize)
   self += !@testArrayIndexIR {!inIndex !inErrorLocation !inSize}
 }
@@ -25,20 +25,20 @@ override method @testArrayIndexIR llvmInstructionCode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 {
-  [[self.mIndex type].kind extractInteger ?1* ?max:let max ?unsigned:let isUnsigned ?1*]
+  [self.mIndex.type.kind extractInteger ?1* ?max:let max ?unsigned:let isUnsigned ?1*]
 //--- Test index >= 0 (for signed index)
   if not isUnsigned then
     let testToZero = "%test.index.zero." + ioGenerationAdds.mUniqueIndex
     let testToZeroOk = "test.index.zero.ok." + ioGenerationAdds.mUniqueIndex
     let testToZeroFailure = "test.index.zero.fails." + ioGenerationAdds.mUniqueIndex
     ioGenerationAdds.mUniqueIndex += 1
-    ioLLVMcode += "  " + testToZero + " = icmp sge " + [[self.mIndex type] llvmTypeName] + " " + [self.mIndex llvmName] + ", 0\n"
+    ioLLVMcode += "  " + testToZero + " = icmp sge " + self.mIndex.type.llvmTypeName + " " + self.mIndex.llvmName + ", 0\n"
     ioLLVMcode += "  br i1 " + testToZero + ", label %" + testToZeroOk + ", label %" + testToZeroFailure + "\n\n"
   
     ioLLVMcode += testToZeroFailure + ":\n"
-    ioLLVMcode += "  call void @" + [panicRoutineNameForLocationFile (!self.mErrorLocation) assemblerRepresentation] + " ("
-    ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " " + [self.mErrorLocation endLine] + ", "
-    ioLLVMcode += [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " " + panicCodeForNegativeArrayIndex () + ") noreturn \n"
+    ioLLVMcode += "  call void @" + panicRoutineNameForLocationFile (!self.mErrorLocation).assemblerRepresentation + " ("
+    ioLLVMcode += inGenerationContext.mPanicLineLLVMType.llvmTypeName + " " + self.mErrorLocation.endLine + ", "
+    ioLLVMcode += inGenerationContext.mPanicCodeLLVMType.llvmTypeName + " " + panicCodeForNegativeArrayIndex () + ") noreturn \n"
     ioLLVMcode += "  unreachable\n\n"
   
     ioLLVMcode += testToZeroOk + ":\n"
@@ -50,13 +50,13 @@ override method @testArrayIndexIR llvmInstructionCode
     let testToSizeFailure = "test.index.size.fails." + ioGenerationAdds.mUniqueIndex
     ioLLVMcode += "  " + testToSize + " = icmp "
     ioLLVMcode += if isUnsigned then "ult" else "slt" end
-    ioLLVMcode += " " + [[self.mIndex type] llvmTypeName] + " " + [self.mIndex llvmName] + ", " + self.mSize + "\n"
+    ioLLVMcode += " " + self.mIndex.type.llvmTypeName + " " + self.mIndex.llvmName + ", " + self.mSize + "\n"
     ioLLVMcode += "  br i1 " + testToSize + ", label %" + testToSizeOk + ", label %" + testToSizeFailure + "\n\n"
   
     ioLLVMcode += testToSizeFailure + ":\n"
-    ioLLVMcode += "  call void @" + [panicRoutineNameForLocationFile (!self.mErrorLocation) assemblerRepresentation] + " ("
-    ioLLVMcode += [inGenerationContext.mPanicLineLLVMType llvmTypeName] + " " + [self.mErrorLocation endLine] + ", "
-    ioLLVMcode += [inGenerationContext.mPanicCodeLLVMType llvmTypeName] + " " + panicCodeForTooLargeArrayIndex () + ") noreturn \n"
+    ioLLVMcode += "  call void @" + panicRoutineNameForLocationFile (!self.mErrorLocation).assemblerRepresentation + " ("
+    ioLLVMcode += inGenerationContext.mPanicLineLLVMType.llvmTypeName + " " + self.mErrorLocation.endLine + ", "
+    ioLLVMcode += inGenerationContext.mPanicCodeLLVMType.llvmTypeName + " " + panicCodeForTooLargeArrayIndex () + ") noreturn \n"
     ioLLVMcode += "  unreachable\n\n"
   
     ioLLVMcode += testToSizeOk + ":\n"

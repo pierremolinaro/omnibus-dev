@@ -66,7 +66,7 @@ syntax extension omnibus_syntax {
       let @lstring formalArgumentName
       select
         $_$
-        formalArgumentName = ["" nowhere]
+        formalArgumentName = "".nowhere
       or
         $identifier$ ?formalArgumentName
       end
@@ -81,7 +81,7 @@ syntax extension omnibus_syntax {
       let @lstring formalArgumentName
       select
         $_$
-        formalArgumentName = ["" nowhere]
+        formalArgumentName = "".nowhere
       or
         $identifier$ ?formalArgumentName
       end
@@ -135,7 +135,7 @@ list @routineTypedSignature %equatable {
 getter @routineTypedSignature typedString -> @string {
   result = "("
   for (formalArgumentPassingMode selector typeProxy *) in self do
-    result += [formalArgumentPassingMode formalPassingModeString] + selector + ":" + [typeProxy key]
+    result += formalArgumentPassingMode.formalPassingModeString + selector + ":" + typeProxy.key
   end
   result += ")"
 }
@@ -152,7 +152,7 @@ getter @routineTypedSignature mangledName
   end
   s += inFunctionName.string + "("
   for (formalArgumentPassingMode selector * *) in self do
-    s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
+    s += formalArgumentPassingMode.formalPassingModeString + selector + ":"
   end
   s += ")"
   result = @{!s !inFunctionName.location}
@@ -203,7 +203,7 @@ proc routineTypedSignature2 ?@unifiedTypeMap inTypeMap
 getter @routineFormalArgumentListAST routineSignature ?let @location inRoutineNameLocation -> @lstring {
   var key = "("
   for (formalArgumentPassingMode selector * *) in self do
-    key += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
+    key += formalArgumentPassingMode.formalPassingModeString + selector + ":"
   end
   key += ")"
   result = @{!key !inRoutineNameLocation}
@@ -214,7 +214,7 @@ getter @routineFormalArgumentListAST routineSignature ?let @location inRoutineNa
 getter @effectiveArgumentListAST routineSignature ?let @location inRoutineNameLocation -> @lstring {
   var key = "("
   for (passingMode selector) in self do
-    key += [passingMode matchingFormalArgument] + selector + ":"
+    key += passingMode.matchingFormalArgument + selector + ":"
   end
   key += ")"
   result = @{!key !inRoutineNameLocation}
@@ -238,7 +238,7 @@ proc enterFormalArguments
   ?warningOnUnusedArgs:let @bool inUnusedWarning
 {
   for (argumentKind * formalArgumentTypeName formalArgumentName) in inFormalArgumentsAST do
-    let typeProxy = [[inContext.mTypeMap searchKey !formalArgumentTypeName] type]
+    let typeProxy = [inContext.mTypeMap searchKey !formalArgumentTypeName].type
     ioFormalArguments += !argumentKind !typeProxy !formalArgumentName.string
     switch argumentKind
     case input :

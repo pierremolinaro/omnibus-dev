@@ -24,9 +24,9 @@ override getter @boolTypeAST locationForErrorSignaling -> @location outLocation 
 override method @boolTypeAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let nodeName = [boolTypeName () nowhere]
+  let nodeName = boolTypeName ().nowhere
   [!?ioGraph addNode !nodeName !self]
-  [!?ioGraph addEdge !from: nodeName !to: [ctBoolTypeName () nowhere]]
+  [!?ioGraph addEdge !from: nodeName !to: ctBoolTypeName ().nowhere]
 }
 
 //·······················································································································
@@ -49,7 +49,7 @@ override method @boolTypeAST enterInContext
   ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
-  let boolTypeName = [boolTypeName () nowhere]
+  let boolTypeName = boolTypeName ().nowhere
   let boolType = boolType ()
   let ctBoolType = compileTimeBoolType ()
  //--- Enter type
@@ -89,7 +89,7 @@ override method @boolTypeAST enterInContext
 //--- Copy from reference is used by dynamic arraies  
   let functionName = assignmentOperatorFuncName (!boolType !boolType)
   ioRoutineListIR += !@simpleAssignmentCopyRoutineIR {
-    ![functionName nowhere]
+    !functionName.nowhere
     !isRequired: false
     !warnsIfUnused: false
     !boolType
@@ -113,7 +113,7 @@ override method @boolImplicitConverterToBoolean generateConvertToBooleanCode
   ?!alloca:@allocaList unused ioAllocaList
   !@implicitBooleanConversionResult outResult
 {
-  outResult = .llvmVariable {!name: [inReceiverOperand llvmName]}
+  outResult = .llvmVariable {!name: inReceiverOperand.llvmName}
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -138,7 +138,7 @@ override method @boolNotOperator generateCode
   var receiverOperand = inReceiverOperand
   [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?receiverOperand]
   getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
-  let s = [outResultValue llvmName] + " = xor i1 1, " + [receiverOperand llvmName]
+  let s = outResultValue.llvmName + " = xor i1 1, " + receiverOperand.llvmName
   [!?ioInstructionGenerationList appendInstructionAsFreeString !s !@[]]
 }
 

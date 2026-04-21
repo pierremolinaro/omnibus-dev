@@ -22,8 +22,8 @@ override method @leftShiftIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += "  " + [self.mResult llvmName]
-             + " = shl " + [self.mSource  llvmTypeName] + " " + [self.mSource llvmName]
+  ioLLVMcode += "  " + self.mResult.llvmName
+             + " = shl " + self.mSource.llvmTypeName + " " + self.mSource.llvmName
              + ", " + self.mShiftAmount + "\n"
 }
 

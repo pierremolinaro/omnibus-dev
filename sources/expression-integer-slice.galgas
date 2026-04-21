@@ -34,8 +34,8 @@ syntax extension omnibus_syntax {
       integerFieldValues += !sliceWidth !expression !.here
     while
     end
-    if [integerFieldValues count] < 2 then
-      error .here : "this expression should contain two bit slices or more" : outExpression
+    if integerFieldValues.count < 2 then
+      error .here : "this expression should contain two bit slices or more" spoil (outExpression)
     else
       outExpression = @integerSliceExpressionAST {!typeName !integerFieldValues !.here}
     end
@@ -69,7 +69,7 @@ override method @integerSliceExpressionAST noteExpressionTypesInPrecedenceGraph
   [!?ioGraph noteNode !self.mTypeName]
   for (sliceWidthStr expression expressionLocation) in self.mSliceValues do
     [expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
-    if [sliceWidthStr.string isDecimalUnsignedNumber] then
+    if sliceWidthStr.string.isDecimalUnsignedNumber then
       let sliceWidth = [sliceWidthStr decimalUnsignedNumber]
       if sliceWidth == 0 then
         error sliceWidthStr : "the bit slice width should be > 0"
@@ -77,7 +77,7 @@ override method @integerSliceExpressionAST noteExpressionTypesInPrecedenceGraph
         [!?ioGraph noteUINTType !sliceWidth !expressionLocation]
       end
     elsif sliceWidthStr.string == "b" then
-      [!?ioGraph noteNode ![boolTypeName () nowhere]]
+      [!?ioGraph noteNode !boolTypeName ().nowhere]
     end
   end
 }
@@ -100,14 +100,14 @@ override method @integerSliceExpressionAST analyzeExpression
   !result:@objectIR outResult
 {
 //--- Search Type
-  let resultType = [[inContext.mTypeMap searchKey !self.mTypeName] type]
+  let resultType = [inContext.mTypeMap searchKey !self.mTypeName].type
 //--- Check type is an unsigned integer type
-  if not [resultType.kind isInteger] then
-    error self.mTypeName: "this type should be an unsigned integer type" :outResult
+  if not resultType.kind.isInteger then
+    error self.mTypeName: "this type should be an unsigned integer type" spoil (outResult)
   else
     [resultType.kind extractInteger ?2* ?unsigned:let unsigned ?bitCount:let bitCount]
     if not unsigned then
-      error self.mTypeName: "this type should be an unsigned integer type" :outResult
+      error self.mTypeName: "this type should be an unsigned integer type" spoil (outResult)
     else
     //------------------------------------------------------ Valuated fields
       var leftShiftAmount = bitCount
@@ -117,12 +117,12 @@ override method @integerSliceExpressionAST analyzeExpression
         let @uint sliceWidth
         let @lstring expressionTypeName
         if sliceWidthStr.string == "" then
-          error sliceWidthStr : "anonymous selector not allowed here" : operandList, sliceWidth, expressionTypeName
+          error sliceWidthStr : "anonymous selector not allowed here" spoil (operandList, sliceWidth, expressionTypeName)
         elsif sliceWidthStr.string == "b" then
           sliceWidth = 1
           expressionTypeName = @{!boolTypeName () !self.mTypeName.location}
-        elsif not [sliceWidthStr.string isDecimalUnsignedNumber] then
-          error sliceWidthStr : "the selector should be an unsigned integer value" : operandList, sliceWidth, expressionTypeName
+        elsif not sliceWidthStr.string.isDecimalUnsignedNumber then
+          error sliceWidthStr : "the selector should be an unsigned integer value" spoil (operandList, sliceWidth, expressionTypeName)
         else
           sliceWidth = [sliceWidthStr decimalUnsignedNumber]
           expressionTypeName = @{!"u" + sliceWidth !self.mTypeName.location}
@@ -138,7 +138,7 @@ override method @integerSliceExpressionAST analyzeExpression
           leftShiftAmount = 0
         end
       //--- Analyze expression
-        let expressionTargetType = [[inContext.mTypeMap searchKey !expressionTypeName] type]
+        let expressionTargetType = [inContext.mTypeMap searchKey !expressionTypeName].type
         [expression analyzeExpression
           !self:inSelfType
           !routineAttributes:inRoutineAttributes
@@ -157,7 +157,7 @@ override method @integerSliceExpressionAST analyzeExpression
           !?expressionResult
         ]  
       //--- Check expression type
-        switch [expressionResult type].kind
+        switch expressionResult.type.kind
         case staticArrayType (* *) :
           error expressionLocation: "an unsigned integer expression is required here"
         case dynamicArrayType (*) :
@@ -171,12 +171,12 @@ override method @integerSliceExpressionAST analyzeExpression
         case syncTool :
           error expressionLocation: "an unsigned integer expression is required here"
         case boolean :
-          if [expressionResult type].omnibusTypeDescriptionName != expressionTargetType.omnibusTypeDescriptionName then
+          if expressionResult.type.omnibusTypeDescriptionName != expressionTargetType.omnibusTypeDescriptionName then
             error expressionLocation :
             "an $" + expressionTargetType.omnibusTypeDescriptionName + " expression is required, found an $" +
-            [expressionResult type].omnibusTypeDescriptionName + " expression"
+            expressionResult.type.omnibusTypeDescriptionName + " expression"
           end
-          if [expressionResult isLiteralInteger] then
+          if expressionResult.isLiteralInteger then
             [expressionResult extractLiteralInteger ?1* ?value:let @bigint value]
             accumulatedFieldStaticValues = accumulatedFieldStaticValues | (value << leftShiftAmount)
           else
@@ -228,7 +228,7 @@ override method @integerSliceExpressionAST analyzeExpression
         end
       end
       if leftShiftAmount != 0 then
-        error self.mLocation : [bitCount string] + " bits required, " + (bitCount - leftShiftAmount) + " bits defined"
+        error self.mLocation : bitCount.string + " bits required, " + (bitCount - leftShiftAmount) + " bits defined"
       end
     //------------------------------------------------------ Result
       outResult = .literalInteger {!type: resultType!value:accumulatedFieldStaticValues}
@@ -236,7 +236,7 @@ override method @integerSliceExpressionAST analyzeExpression
         getNewTempValue (!resultType !?ioTemporaries ?let newResult)
         [!?ioInstructionGenerationList appendBinaryOperation
           !newResult
-          ![newResult type]
+          !newResult.type
           !.here
           !outResult
           !.ior

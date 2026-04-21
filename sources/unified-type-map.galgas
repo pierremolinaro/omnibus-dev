@@ -18,7 +18,7 @@
 getter @unifiedTypeMap unsolvedEntryList -> @lstringlist {
   result = @[]
   for (lkey element) in self do
-    if [element.mDefinition isUnsolved] then
+    if element.mDefinition.isUnsolved then
       result += !lkey
     end
   end
@@ -70,7 +70,7 @@ getter @unifiedTypeMap searchKey ?let @lstring inLKey -> @unifiedTypeMapEntry {
   elsif let node = self @[inLKey] then
     result = .element {!weakElement: node.mElement}
   else
-    error inLKey : "there is not '@" + inLKey + "' type" : result
+    error inLKey : "there is not '@" + inLKey + "' type" spoil (result)
   end
 }
 
@@ -100,10 +100,10 @@ method @unifiedTypeMap searchType ?lkey: let @lstring inLKey
     case solved (definition) :
       outTypeDefinition = definition
     case unsolved :
-      error inLKey : "unsolved type" : outTypeDefinition
+      error inLKey : "unsolved type" spoil (outTypeDefinition)
     end
   else
-    error inLKey : "there is not '@" + inLKey + "' type" : outTypeDefinition
+    error inLKey : "there is not '@" + inLKey + "' type" spoil (outTypeDefinition)
   end
 }
 
@@ -144,7 +144,7 @@ enum @unifiedTypeMapEntry %equatable {
 getter @unifiedTypeMapElementClass definition -> @omnibusType {
   switch self.mDefinition
   case unsolved :
-    error .nowhere : "unsolved type" : result
+    error .nowhere : "unsolved type" spoil (result)
   case solved (definition) :
     result = definition
   end
@@ -157,17 +157,17 @@ getter @unifiedTypeMapElementClass definition -> @omnibusType {
 getter @unifiedTypeMapEntry type -> @omnibusType {
   switch self
   case null :
-    error .nowhere : "null type" : result
+    error .nowhere : "null type" spoil (result)
   case element (weakElement) :
     if let type = weakElement then
       switch type.mDefinition
       case unsolved :
-        error .nowhere : "unsolved type" : result
+        error .nowhere : "unsolved type" spoil (result)
       case solved (definition) :
         result = definition
       end
     else
-      error .nowhere : "nil type" : result
+      error .nowhere : "nil type" spoil (result)
     end
   end
 }
@@ -177,12 +177,12 @@ getter @unifiedTypeMapEntry type -> @omnibusType {
 getter @unifiedTypeMapEntry key -> @string {
   switch self
   case null :
-    error .nowhere : "null type" : result
+    error .nowhere : "null type" spoil (result)
   case element (weakElement) :
     if let type = weakElement then
       result = type.mTypeName.string
     else
-      error .nowhere : "nil type" : result
+      error .nowhere : "nil type" spoil (result)
     end
   end
 }

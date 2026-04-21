@@ -64,7 +64,7 @@ override method @addressofExpressionAST analyzeExpression
   !result:@objectIR outResult
 {
   if [inRoutineAttributes contains !.isGuard] then
-    error self.mLValue.mIdentifier : "addressof () cannot be used in guard" : outResult
+    error self.mLValue.mIdentifier : "addressof () cannot be used in guard" spoil (outResult)
   else
   //--- Analyze LValue
     [self.mLValue analyzeLValue
@@ -81,9 +81,9 @@ override method @addressofExpressionAST analyzeExpression
       ?let @LValueRepresentation lvalueIR
     ]
     let resultTypeProxy = [inContext.mTypeMap searchKey
-      !["u" + [inContext.mTargetParameters.mPointerSize string] nowhere]
+      !("u" + inContext.mTargetParameters.mPointerSize.string).nowhere
     ]
-    let resultType = [resultTypeProxy type]
+    let resultType = resultTypeProxy.type
     getNewTempValue (!resultType !?ioTemporaries ?outResult)
     ioInstructionGenerationList += !@addressofInstructionIR {
       !outResult
@@ -108,8 +108,8 @@ override method @addressofInstructionIR llvmInstructionCode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += "  " + [self.mTarget llvmName] + " = ptrtoint " + [self.mLValue.type llvmTypeName] + "* " + self.mLValue.llvmName
-             + " to " + [self.mTarget llvmTypeName] + " ; addressof\n"
+  ioLLVMcode += "  " + self.mTarget.llvmName + " = ptrtoint " + self.mLValue.type.llvmTypeName + "* " + self.mLValue.llvmName
+             + " to " + self.mTarget.llvmTypeName + " ; addressof\n"
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————

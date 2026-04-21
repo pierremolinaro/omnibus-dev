@@ -11,7 +11,6 @@ class @llvmInfixOperatorAST : @abstractDeclarationAST {
   public var @lstring mRightOperandName
   public var @lstring mRightTypeName
   public var @genericFormalParameterList mRightGenericFormalParameterList
- // @ctExpressionAST mWhereExpression
   public var @lstring mResultTypeName
   public var @genericFormalParameterList mResultGenericFormalParameterList // À modifier
   public var @llvmGenerationInstructionList mInstructionList
@@ -35,24 +34,24 @@ proc appendInfixOperatorDeclaration
 //--- Operator type --- type
   var @llvmGenerationInstructionList llvmInstructionList = @[]
   var @llvmGenerationInstructionElementList instructionElements = @[]
-  instructionElements += !.symbol {!name: ["result" nowhere]}
+  instructionElements += !.symbol {!name: "result".nowhere}
   instructionElements += !.string {!string: " = " + inLLVMOperation + " "}
-  instructionElements += !.type {!name: ["LEFT" nowhere]}
+  instructionElements += !.type {!name: "LEFT".nowhere}
   instructionElements += !.string {!string: " "}
-  instructionElements += !.symbol {!name: ["LEFT" nowhere]}
+  instructionElements += !.symbol {!name: "LEFT".nowhere}
   instructionElements += !.string {!string: ", "}
-  instructionElements += !.symbol {!name: ["RIGHT" nowhere]}
+  instructionElements += !.symbol {!name: "RIGHT".nowhere}
   llvmInstructionList += !@llvmGenerationInstruction (instructionElements)
   var @abstractDeclarationAST declaration = @llvmInfixOperatorAST {
     !inInfixOperator
     !.nowhere
-    !["LEFT" nowhere]
-    ![inTypeName nowhere]
+    !"LEFT".nowhere
+    !inTypeName.nowhere
     !@[]
-    !["RIGHT" nowhere]
-    ![inTypeName nowhere]
+    !"RIGHT".nowhere
+    !inTypeName.nowhere
     !@[]
-    ![inResultOmnibusTypeName nowhere]
+    !inResultOmnibusTypeName.nowhere
     !@[]
     !llvmInstructionList
   }
@@ -60,24 +59,24 @@ proc appendInfixOperatorDeclaration
 //--- Operator type --- ctInt
   llvmInstructionList = @[]
   instructionElements = @[]
-  instructionElements += !.symbol {!name: ["result" nowhere]}
+  instructionElements += !.symbol {!name: "result".nowhere}
   instructionElements += !.string {!string: " = " + inLLVMOperation + " "}
-  instructionElements += !.type {!name: ["LEFT" nowhere]}
+  instructionElements += !.type {!name: "LEFT".nowhere}
   instructionElements += !.string {!string: " "}
-  instructionElements += !.symbol {!name: ["LEFT" nowhere]}
+  instructionElements += !.symbol {!name: "LEFT".nowhere}
   instructionElements += !.string {!string: ", "}
-  instructionElements += !.symbol {!name: ["RIGHT" nowhere]}
+  instructionElements += !.symbol {!name: "RIGHT".nowhere}
   llvmInstructionList += !@llvmGenerationInstruction (instructionElements)
   declaration = @llvmInfixOperatorAST {
     !inInfixOperator
     !.nowhere
-    !["LEFT" nowhere]
-    ![inTypeName nowhere]
+    !"LEFT".nowhere
+    !inTypeName.nowhere
     !@[]
-    !["RIGHT" nowhere]
-    ![ctIntegerTypeName () nowhere]
+    !"RIGHT".nowhere
+    !ctIntegerTypeName ().nowhere
     !@[]
-    ![inResultOmnibusTypeName nowhere]
+    !inResultOmnibusTypeName.nowhere
     !@[]
     !llvmInstructionList
   }
@@ -85,24 +84,24 @@ proc appendInfixOperatorDeclaration
 //--- Operator ctInt --- type
   llvmInstructionList = @[]
   instructionElements = @[]
-  instructionElements += !.symbol {!name: ["result" nowhere]}
+  instructionElements += !.symbol {!name: "result".nowhere}
   instructionElements += !.string {!string: " = " + inLLVMOperation + " "}
-  instructionElements += !.type {!name: ["RIGHT" nowhere]}
+  instructionElements += !.type {!name: "RIGHT".nowhere}
   instructionElements += !.string {!string: " "}
-  instructionElements += !.symbol {!name: ["LEFT" nowhere]}
+  instructionElements += !.symbol {!name: "LEFT".nowhere}
   instructionElements += !.string {!string: ", "}
-  instructionElements += !.symbol {!name: ["RIGHT" nowhere]}
+  instructionElements += !.symbol {!name: "RIGHT".nowhere}
   llvmInstructionList += !@llvmGenerationInstruction (instructionElements)
   declaration = @llvmInfixOperatorAST {
     !inInfixOperator
     !.nowhere
-    !["LEFT" nowhere]
-    ![ctIntegerTypeName () nowhere]
+    !"LEFT".nowhere
+    !ctIntegerTypeName ().nowhere
     !@[]
-    !["RIGHT" nowhere]
-    ![inTypeName nowhere]
+    !"RIGHT".nowhere
+    !inTypeName.nowhere
     !@[]
-    ![inResultOmnibusTypeName nowhere]
+    !inResultOmnibusTypeName.nowhere
     !@[]
     !llvmInstructionList
   }
@@ -158,7 +157,7 @@ syntax extension omnibus_syntax {
 override method @llvmInfixOperatorAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
-  let nodeName = @lstring {![self.mInfixOperator string] + "." + self.mLeftTypeName + "." + self.mRightTypeName !self.mInfixOperatorLocation}
+  let nodeName = @lstring {!self.mInfixOperator.string + "." + self.mLeftTypeName + "." + self.mRightTypeName !self.mInfixOperatorLocation}
   [!?ioGraph addNode !nodeName !self]
   [!?ioGraph addEdge !from: nodeName !to: self.mLeftTypeName]
   [!?ioGraph addEdge !from: nodeName !to: self.mRightTypeName]
@@ -187,19 +186,19 @@ override method @llvmInfixOperatorAST enterInContext
 {
 //--- Check types
   [!?ioContext.mTypeMap makeEntry !self.mLeftTypeName ?let leftTypeProxy]
-  let leftType = [leftTypeProxy type]
+  let leftType = leftTypeProxy.type
   [!?ioContext.mTypeMap makeEntry !self.mRightTypeName ?let rightTypeProxy]
-  let rightType = [rightTypeProxy type]
+  let rightType = rightTypeProxy.type
   [!?ioContext.mTypeMap makeEntry !self.mResultTypeName ?let resultTypeProxy]
-  let resultType = [resultTypeProxy type]
-  if [leftType isCompileTimeType] & [rightType isCompileTimeType] then
+  let resultType = resultTypeProxy.type
+  if leftType.isCompileTimeType & rightType.isCompileTimeType then
     error self.mInfixOperatorLocation : "one of the two argument types should not be a compile time type"
   end
   [resultType checkIsNotCompileTimeType !self.mResultTypeName.location]
 //--- Enter in infix operator map  
   let key = infixOperatorMapKey (!leftType !self.mInfixOperator !self.mInfixOperatorLocation !rightType)
 //--- Generate function
-  if not [leftType isCompileTimeType] & not [rightType isCompileTimeType] then
+  if not leftType.isCompileTimeType & not rightType.isCompileTimeType then
     let definition = @llvmInfixOperatorUsage {
       !infixOperatorFunctionName (!leftType !self.mInfixOperator !rightType)
       !self.mLeftOperandName
@@ -211,17 +210,17 @@ override method @llvmInfixOperatorAST enterInContext
     [!?varMap insertKey !self.mLeftOperandName !"%" + self.mLeftOperandName]
     [!?varMap insertKey !self.mRightOperandName !"%" + self.mRightOperandName]
     var @assignmentGenerationVarMap typeMap = @()
-    if not [leftType isCompileTimeType] then
-      [!?typeMap insertKey !self.mLeftOperandName ![leftType llvmTypeName]]
+    if not leftType.isCompileTimeType then
+      [!?typeMap insertKey !self.mLeftOperandName !leftType.llvmTypeName]
     end
-    if not [rightType isCompileTimeType] then
-      [!?typeMap insertKey !self.mRightOperandName ![rightType llvmTypeName]]
+    if not rightType.isCompileTimeType then
+      [!?typeMap insertKey !self.mRightOperandName !rightType.llvmTypeName]
     end
-    [!?typeMap insertKey !["result" nowhere] ![resultType llvmTypeName]]
+    [!?typeMap insertKey !"result".nowhere !resultType.llvmTypeName]
     var @llvmGenerationInstructionList instructionList = @[]
-    instructionList += !@llvmVarInstruction {!["result" nowhere]}
+    instructionList += !@llvmVarInstruction {!"result".nowhere}
     instructionList += self.mInstructionList
-    [!?instructionList appendReturn !["result" nowhere] !["result" nowhere]]
+    [!?instructionList appendReturn !"result".nowhere !"result".nowhere]
     var @stringlist generatedInstructions = @[]
     var @allocaList allocaList = @[]
     var @uint temporaryIndex = 0
@@ -330,15 +329,15 @@ override method @llvmInlineInfixOperatorUsage generateCode
 //--- New LLVM variable for result
   getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
   var @assignmentGenerationVarMap varMap = @()
-  [!?varMap insertKey !self.mLeftOperandName ![leftOperand llvmName]]
-  [!?varMap insertKey !self.mRightOperandName ![rightOperand llvmName]]
-  [!?varMap insertKey !["result" nowhere] ![outResultValue llvmName]]
+  [!?varMap insertKey !self.mLeftOperandName !leftOperand.llvmName]
+  [!?varMap insertKey !self.mRightOperandName !rightOperand.llvmName]
+  [!?varMap insertKey !"result".nowhere !outResultValue.llvmName]
   var @assignmentGenerationVarMap typeMap = @()
-  if not [[leftOperand type] isCompileTimeType] then
-    [!?typeMap insertKey !self.mLeftOperandName ![[leftOperand type] llvmTypeName]]
+  if not leftOperand.type.isCompileTimeType then
+    [!?typeMap insertKey !self.mLeftOperandName !leftOperand.type.llvmTypeName]
   end
-  if not [[rightOperand type] isCompileTimeType] then
-    [!?typeMap insertKey !self.mRightOperandName ![[rightOperand type] llvmTypeName]]
+  if not rightOperand.type.isCompileTimeType then
+    [!?typeMap insertKey !self.mRightOperandName !rightOperand.type.llvmTypeName]
   end
   var @stringlist generatedInstructions = @[]
   [self.mInstructionList generateIRCode !varMap !typeMap !?generatedInstructions !?ioTemporaries.mTemporaryIndex !?ioAllocaList]
@@ -368,9 +367,9 @@ override method @infixOperatorRoutineIR llvmCodeGeneration
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += "define internal " + [self.mResultType llvmTypeName] + " @" + [self.mRoutineMangledName assemblerRepresentation]
-  ioLLVMcode += " (" + [self.mTargetType llvmTypeName] + " %" + self.mTargetVarName
-             + ", " + [self.mSourceType llvmTypeName] + " %" + self.mSourceVarName + ") nounwind {\n"
+  ioLLVMcode += "define internal " + self.mResultType.llvmTypeName + " @" + self.mRoutineMangledName.string.assemblerRepresentation
+  ioLLVMcode += " (" + self.mTargetType.llvmTypeName + " %" + self.mTargetVarName
+             + ", " + self.mSourceType.llvmTypeName + " %" + self.mSourceVarName + ") nounwind {\n"
   [self.mAllocaList generateAllocaList !?ioLLVMcode]
   for (instruction) in self.mGeneratedInstructions do
     ioLLVMcode += "  " + instruction + "\n"

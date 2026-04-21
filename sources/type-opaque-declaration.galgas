@@ -114,15 +114,15 @@ override method @typeOpaqueDeclarationAST enterInContext
     !?staticEntityMap:ioStaticEntityMap
     !expression:self.mSizeExpression
     !errorLocation:self.mSizeExpressionLocation
-    !optionalContextualTypeName:["" nowhere]
+    !optionalContextualTypeName:"".nowhere
     ?result:let @objectIR sizeExpressionIR
   )
-  if not [sizeExpressionIR isLiteralInteger] then
+  if not sizeExpressionIR.isLiteralInteger then
     error self.mSizeExpressionLocation : "array size expression is not a literal integer"
   else
     var @constructorMap constructorMap = @()
     if [opaqueTypeAttributes contains !.instanciable] then
-      [!?constructorMap insertKey !["()" nowhere] !@[] !.simple {!value:0}]
+      [!?constructorMap insertKey !"()".nowhere !@[] !.simple {!value:0}]
       [!?ioContext.mTypeConstructorMap insertKey !self.mOpaqueTypeName !constructorMap]
     end
     [sizeExpressionIR extractLiteralInteger ?1* ?value:let bitSize]

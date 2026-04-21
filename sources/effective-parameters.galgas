@@ -41,7 +41,7 @@ getter @effectiveArgumentListAST mangledName
   end
   s += inFunctionName.string + "("
   for (effectiveArgumentPassingMode selector) in self do
-    s += [effectiveArgumentPassingMode matchingFormalArgument] + selector + ":"
+    s += effectiveArgumentPassingMode.matchingFormalArgument + selector + ":"
   end
   s += ")"
   result = @{!s !inFunctionName.location}
@@ -90,7 +90,7 @@ syntax extension omnibus_syntax {
       $identifier$ ?let effectiveParameterName
       let @lstring typeName
       select
-        typeName = ["" nowhere]
+        typeName = "".nowhere
       or
         <type_definition> !?ioAST ?typeName
       end
@@ -131,9 +131,9 @@ proc analyzeEffectiveParameters
     switch effective_mEffectiveParameterKind 
     case inputWithType (@bool constant @lstring typeName @lstring name) :
       let type = if typeName.string == "" then
-        [formal_mTypeProxy type]
+        formal_mTypeProxy.type
       else
-        [[inContext.mTypeMap searchKey !typeName] type]
+        [inContext.mTypeMap searchKey !typeName].type
       end
       if constant then
         [!?ioUniversalMap insertLocalConstant !name !false !type !name]
@@ -147,27 +147,18 @@ proc analyzeEffectiveParameters
         !.reference {!type:type !llvmName:llvmNameForLocalVariable (!name)}
     case input (@lstring name) :
       [!?ioUniversalMap searchValuedObjectForWriteAccess !name ?let objectIR]
-//      if not accessIsAllowed then
-//        error name : "routine has no access right on the this variable"
-//      end
-//      if not canBeUsedAsInputParameter then
-//        error name : "this variable cannot be used as input parameter"
-//      end
-//      if not isCopyable then
-//        error name : "an $" + [type key] + " instance is not copyable"
-//      end
-      parameterList += !effective_mEffectiveParameterKind !effective_mSelector ![objectIR type]
+      parameterList += !effective_mEffectiveParameterKind !effective_mSelector !objectIR.type
       ioEffectiveParameterListIR +=
         !.input
         !.reference {
-          !type:[objectIR type]
-          !llvmName:[[objectIR llvmName] nowhere]
+          !type:objectIR.type
+          !llvmName: objectIR.llvmName.nowhere
         }
     case output (@expressionAST expression @location endOfExp) :
       [expression analyzeExpression
         !self:inSelfType
         !routineAttributes:inRoutineAttributes
-        !optionalTargetType:[formal_mTypeProxy type]
+        !optionalTargetType:formal_mTypeProxy.type
         !context:inContext
         !mode:inRequiredMode
         !?temporary:ioTemporaries
@@ -184,18 +175,18 @@ proc analyzeEffectiveParameters
       let result = checkAssignmentCompatibility (
         !inContext.mAssignmentOperatorMap
         !source:expressionResult
-        !targetAnnotationType:[formal_mTypeProxy type]
+        !targetAnnotationType:formal_mTypeProxy.type
         !errorLocation:endOfExp
         !staticTypeAllowed:false
       )
-      parameterList += !effective_mEffectiveParameterKind !effective_mSelector ![formal_mTypeProxy type]
+      parameterList += !effective_mEffectiveParameterKind !effective_mSelector !formal_mTypeProxy.type
       ioEffectiveParameterListIR += !.output !result
     case outputInput (@lstring name) :
       [!?ioUniversalMap searchValuedObjectForReadWriteAccess !name ?let objectIR]
-      parameterList += !effective_mEffectiveParameterKind !effective_mSelector ![objectIR type]
+      parameterList += !effective_mEffectiveParameterKind !effective_mSelector !objectIR.type
       let argumentIR = @objectIR.reference {
-        !type:[objectIR type]
-        !llvmName:[objectIR llvmName]
+        !type:objectIR.type
+        !llvmName: objectIR.llvmName
       }
       ioEffectiveParameterListIR += !.outputInput !argumentIR
     case outputInputSelfVariable (@lstring name) :
@@ -223,14 +214,14 @@ proc analyzeEffectiveParameters
     end
   end
 //--- Check parameters
-  if [inFormalSignature count] != [inEffectiveParameterList count] then
-    error inErrorLocation: "this routine requires " + [inFormalSignature count] + " argument(s), this call names "
-      + [inEffectiveParameterList count] + " argument(s)"
+  if inFormalSignature.count != inEffectiveParameterList.count then
+    error inErrorLocation: "this routine requires " + inFormalSignature.count + " argument(s), this call names "
+      + inEffectiveParameterList.count + " argument(s)"
   else
     for (formal_mFormalArgumentPassingMode formal_mSelector formal_mTypeProxy *) in inFormalSignature, (actual_mEffectiveParameterPassingMode actual_mSelector actual_mParameterType) in parameterList do
-      if [formal_mTypeProxy type].omnibusTypeDescriptionName != actual_mParameterType.omnibusTypeDescriptionName then
+      if formal_mTypeProxy.type.omnibusTypeDescriptionName != actual_mParameterType.omnibusTypeDescriptionName then
         error actual_mSelector : "the actual parameter type is $" + actual_mParameterType.omnibusTypeDescriptionName +
-           ", and is incompatible with the formal type $" + [formal_mTypeProxy key]
+           ", and is incompatible with the formal type $" + formal_mTypeProxy.key
       end
       let requiredPassingMode = [formal_mFormalArgumentPassingMode requiredActualPassingModeForSelector !formal_mSelector]
       let testedPassingMode = [actual_mEffectiveParameterPassingMode passingModeForActualSelector !actual_mSelector]

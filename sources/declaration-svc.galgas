@@ -48,7 +48,7 @@ syntax extension omnibus_syntax {
     <procedure_formal_arguments> !?ioAST ?let formalArgumentList
     let @lstring returnTypeName
     select
-      returnTypeName = ["" here]
+      returnTypeName = "".here
     or
       $->$
       <type_definition> !?ioAST ?returnTypeName
@@ -107,7 +107,7 @@ syntax extension omnibus_syntax {
       !publicAccess
       !attributeList
       !formalArgumentList
-      !["" here]
+      !"".here
       !instructionList
       !.here
     }
@@ -149,7 +149,7 @@ syntax extension omnibus_syntax {
       !publicAccess
       !attributeList
       !formalArgumentList
-      !["" here]
+      !"".here
       !instructionList
       !.here
     }
@@ -170,7 +170,7 @@ override method @systemRoutineDeclarationAST enterInPrecedenceGraph ?!@semanticT
   end
   s += self.mSystemRoutineName.string + "("
   for (formalArgumentPassingMode selector * *) in self.mFormalArgumentList do
-    s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
+    s += formalArgumentPassingMode.formalPassingModeString + selector + ":"
   end
   s += ")"
   let nodeKey = @lstring {!s !self.mSystemRoutineName.location}
@@ -229,7 +229,7 @@ private func systemUserMangledNameFromAST ?let @string inReceiverLLVMBaseTypeNam
   s += inGuardName.string
   s += "("
   for (formalArgumentPassingMode selector * *) in inFormalArgumentList do
-    s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
+    s += formalArgumentPassingMode.formalPassingModeString + selector + ":"
   end
   s += ")"
   result = @{!s !inGuardName.location}
@@ -260,7 +260,7 @@ func systemImplementationMangledNameFromAST ?let @string inReceiverLLVMBaseTypeN
   s += inGuardName.string
   s += "("
   for (formalArgumentPassingMode selector * *) in inFormalArgumentList do
-    s += [formalArgumentPassingMode formalPassingModeString] + selector + ":"
+    s += formalArgumentPassingMode.formalPassingModeString + selector + ":"
   end
   s += ")"
   result = @{!s !inGuardName.location}
@@ -283,7 +283,7 @@ override method @systemRoutineDeclarationAST enterInContext
 //---------------------------------------- Self type proxy
   [!?ioContext.mTypeMap makeOptionalEntry !self.mReceiverTypeName ?let selfTypeProxy]
 //  log mReceiverTypeName
-  let receiverLLVMBaseTypeName = if [selfTypeProxy isNull] then "" else [selfTypeProxy type].llvmBaseTypeName end
+  let receiverLLVMBaseTypeName = if selfTypeProxy.isNull then "" else selfTypeProxy.type.llvmBaseTypeName end
 //--- Attributes
   var @stringset attributeSet = @[]
   for attribute in self.mAttributeList do
@@ -299,7 +299,7 @@ override method @systemRoutineDeclarationAST enterInContext
   case primitiveMode, safePrimitiveMode :
     routineKind = .primitive
   case userMode, safeUserMode, anyMode, anySafeMode, bootMode, guardMode, panicMode, safeGuardMode, startupMode :
-    error self.mSystemRoutineName : "internal error" : routineKind
+    error self.mSystemRoutineName : "internal error" spoil (routineKind)
   end
 //--- Routine mangled names
   let userRoutineMangledName = systemUserMangledNameFromAST (
@@ -412,7 +412,7 @@ func llvmFunctionPrototype ?let @string inReturnTypeLLVMName
   result += " @" + inFunctionName + " ("
   var first = true
   if inReceiverType.kind != .void then
-    result += [inReceiverType llvmTypeName] + " * %receiver"
+    result += inReceiverType.llvmTypeName + " * %receiver"
     first = false
   end
   for (mFormalArgumentKind mFormalArgumentType mFormalArgumentName) in inFormalArgumentListForGeneration do
@@ -423,11 +423,11 @@ func llvmFunctionPrototype ?let @string inReturnTypeLLVMName
     end
     switch mFormalArgumentKind
     case input :
-      result += [mFormalArgumentType llvmTypeName] + " %in." + mFormalArgumentName
+      result += mFormalArgumentType.llvmTypeName + " %in." + mFormalArgumentName
     case output :
-      result += [mFormalArgumentType llvmTypeName] + " * " + llvmNameForLocalVariable (!mFormalArgumentName)
+      result += mFormalArgumentType.llvmTypeName + " * " + llvmNameForLocalVariable (!mFormalArgumentName)
    case inputOutput :
-      result += [mFormalArgumentType llvmTypeName] + " * " + llvmNameForLocalVariable (!mFormalArgumentName)
+      result += mFormalArgumentType.llvmTypeName + " * " + llvmNameForLocalVariable (!mFormalArgumentName)
     end
   end
   result += ")" + llvmAttributeFunction ()
@@ -450,7 +450,7 @@ proc generateSectionDispatcher
       )
       s = [s replacing !"!USER_ROUTINE!" !by: section.mSectionCallName]
       s = [s replacing !"!IMPLEMENTATION_ROUTINE!" !by: section.mSectionImplementationName]
-      s = [s replacing !"!IDX!" !by: [idx string]]
+      s = [s replacing !"!IDX!" !by: idx.string]
       ioAssemblerCode += s
     else
       var s = getTargetTextFile (
@@ -459,7 +459,7 @@ proc generateSectionDispatcher
       )
       s = [s replacing !"!USER_ROUTINE!" !by: section.mSectionCallName]
       s = [s replacing !"!IMPLEMENTATION_ROUTINE!" !by: section.mSectionImplementationName]
-      s = [s replacing !"!IDX!" !by: [idx string]]
+      s = [s replacing !"!IDX!" !by: idx.string]
       ioAssemblerCode += s
     end
   end
@@ -474,7 +474,7 @@ proc generateSectionDispatcher
     )
     s = [s replacing !"!USER_ROUTINE!" !by: callName]
     s = [s replacing !"!IMPLEMENTATION_ROUTINE!" !by: implementationName]
-    s = [s replacing !"!IDX!" !by: [idx string]]
+    s = [s replacing !"!IDX!" !by: idx.string]
     ioAssemblerCode += s
   end
   ioAssemblerCode += "\n"
@@ -508,7 +508,7 @@ proc generatePrimitiveAndServiceDispatcher
         !from:inTargetName + "/" + inTargetParameters.mServiceEntryWithReturnValue
       )
       s = [s replacing !"!ENTRY!" !by: service.mCallName]
-      s = [s replacing !"!IDX!" !by: [idx string]]
+      s = [s replacing !"!IDX!" !by: idx.string]
       ioAssemblerCode += s
     else
       var s = getTargetTextFile (
@@ -516,7 +516,7 @@ proc generatePrimitiveAndServiceDispatcher
         !from:inTargetName + "/" + inTargetParameters.mServiceEntryNoReturnedValue
       )
       s = [s replacing !"!ENTRY!" !by: service.mCallName]
-      s = [s replacing !"!IDX!" !by: [idx string]]
+      s = [s replacing !"!IDX!" !by: idx.string]
       ioAssemblerCode += s
     end
   end
@@ -530,7 +530,7 @@ proc generatePrimitiveAndServiceDispatcher
       !from:inTargetName + "/" + inTargetParameters.mServiceDispatcherEntry
     )
     s = [s replacing !"!ENTRY!" !by: service.mImplementationName]
-    s = [s replacing !"!IDX!" !by: [idx string]]
+    s = [s replacing !"!IDX!" !by: idx.string]
     ioAssemblerCode += s
   end
   ioAssemblerCode += "\n"
@@ -564,8 +564,8 @@ override method @systemUserRoutineIR svcDeclarationGeneration
   ?!@sectionIRlist ioSectionList
   ?!@generationAdds unused ioGenerationAdds
 {
-  let userMangledName = [self.mRoutineMangledName assemblerRepresentation]
-  let implementationMangledName = [self.mMangledImplementationName assemblerRepresentation]
+  let userMangledName = self.mRoutineMangledName.string.assemblerRepresentation
+  let implementationMangledName = self.mMangledImplementationName.assemblerRepresentation
   if self.mIsSection then
     ioSectionList += !userMangledName !implementationMangledName !invocationFromAnyMode: false
   else
@@ -581,15 +581,15 @@ override method @systemUserRoutineIR llvmCodeGeneration
   ?!@generationAdds unused ioGenerationAdds
 {
   ioLLVMcode += "declare "
-  if [self.mReturnTypeProxy isNull] then
+  if self.mReturnTypeProxy.isNull then
     ioLLVMcode += "void"
   else
-    ioLLVMcode += [[self.mReturnTypeProxy type] llvmTypeName]
+    ioLLVMcode += self.mReturnTypeProxy.type.llvmTypeName
   end
-  ioLLVMcode += " @" + [self.mRoutineMangledName assemblerRepresentation] + " ("
+  ioLLVMcode += " @" + self.mRoutineMangledName.string.assemblerRepresentation + " ("
   var first = true
-  if not [self.mReceiverTypeProxy isNull] then
-    ioLLVMcode += [[self.mReceiverTypeProxy type] llvmTypeName] + "* %receiver"
+  if not self.mReceiverTypeProxy.isNull then
+    ioLLVMcode += self.mReceiverTypeProxy.type.llvmTypeName + "* %receiver"
     first = false
   end
   for (mFormalArgumentPassingMode * mTypeProxy *) in self.mFormalArgumentList do
@@ -600,11 +600,11 @@ override method @systemUserRoutineIR llvmCodeGeneration
     end
     switch mFormalArgumentPassingMode
     case input :
-      ioLLVMcode += [[mTypeProxy type] llvmTypeName]
+      ioLLVMcode += mTypeProxy.type.llvmTypeName
     case output :
-      ioLLVMcode += [[mTypeProxy type] llvmTypeName] + "*"
+      ioLLVMcode += mTypeProxy.type.llvmTypeName + "*"
    case inputOutput :
-      ioLLVMcode += [[mTypeProxy type] llvmTypeName] + "*"
+      ioLLVMcode += mTypeProxy.type.llvmTypeName + "*"
     end
   end
   ioLLVMcode += ")" + llvmAttributeFunction () + "\n\n"

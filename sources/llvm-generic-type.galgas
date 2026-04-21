@@ -198,7 +198,7 @@ override method @llvmGenericType enterInContext
 //--- Check native LLVM type expression
 //  [mTypeNameExpressionString checkCompileTimeExpression !formalGenericConstantParameterMap]
 //---
-  if [self.mGenericFormalParameterList count] == 0 then
+  if self.mGenericFormalParameterList.count == 0 then
     let llvmType = @omnibusType {
       !subscript:.noSubscript
       !attributes: .instanciable | .copyable

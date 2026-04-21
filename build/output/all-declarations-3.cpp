@@ -8052,12 +8052,12 @@ void extensionSetter_appendAssignmentIR (GGS_instructionListIR & ioObject,
                                          const GGS_bool constinArgument_inTargetIsInitialized,
                                          Compiler * inCompiler
                                          COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_lstring var_key_12995 = function_assignmentOperatorKey (constinArgument_inTargetType, constinArgument_inErrorLocation, extensionGetter_type (constinArgument_inSourcePossibleReference, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 281)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 281)) ;
-  GGS_abstractAssignmentOperatorUsage var_operatorUsage_13137 ;
-  constinArgument_inAssignmentOperatorMap.method_searchKey (var_key_12995, var_operatorUsage_13137, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 282)) ;
-  GGS_instructionListIR var_instructions_13177 = GGS_instructionListIR::init (inCompiler COMMA_HERE) ;
-  callExtensionMethod_generateCode ((cPtr_abstractAssignmentOperatorUsage *) var_operatorUsage_13137.ptr (), ioArgument_ioTemporaries, var_instructions_13177, ioArgument_ioAllocaList, constinArgument_inTargetType, constinArgument_inTargetLLVMName, constinArgument_inSourcePossibleReference, constinArgument_inErrorLocation, constinArgument_inTargetIsInitialized, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 284)) ;
-  ioObject.plusAssignOperation(var_instructions_13177, inCompiler  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 294)) ;
+  GGS_lstring var_key_12952 = function_assignmentOperatorKey (constinArgument_inTargetType, constinArgument_inErrorLocation, extensionGetter_type (constinArgument_inSourcePossibleReference, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 281)), inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 281)) ;
+  GGS_abstractAssignmentOperatorUsage var_operatorUsage_13092 ;
+  constinArgument_inAssignmentOperatorMap.method_searchKey (var_key_12952, var_operatorUsage_13092, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 282)) ;
+  GGS_instructionListIR var_instructions_13132 = GGS_instructionListIR::init (inCompiler COMMA_HERE) ;
+  callExtensionMethod_generateCode ((cPtr_abstractAssignmentOperatorUsage *) var_operatorUsage_13092.ptr (), ioArgument_ioTemporaries, var_instructions_13132, ioArgument_ioAllocaList, constinArgument_inTargetType, constinArgument_inTargetLLVMName, constinArgument_inSourcePossibleReference, constinArgument_inErrorLocation, constinArgument_inTargetIsInitialized, inCompiler COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 284)) ;
+  ioObject.plusAssignOperation(var_instructions_13132, inCompiler  COMMA_SOURCE_FILE ("assignment-operator-definition.galgas", 294)) ;
 }
 
 
@@ -14733,25 +14733,25 @@ void extensionMethod_noteTypesInPrecedenceGraph (const GGS_externFunctionDeclara
                                                  Compiler * /* inCompiler */
                                                  COMMA_UNUSED_LOCATION_ARGS) {
   const GGS_externFunctionDeclarationListAST temp_0 = inObject ;
-  UpEnumerator_externFunctionDeclarationListAST enumerator_2346 (temp_0) ;
-  while (enumerator_2346.hasCurrentObject ()) {
-    UpEnumerator_routineFormalArgumentListAST enumerator_2396 (enumerator_2346.current_mProcFormalArgumentList (HERE)) ;
-    while (enumerator_2396.hasCurrentObject ()) {
+  UpEnumerator_externFunctionDeclarationListAST enumerator_2344 (temp_0) ;
+  while (enumerator_2344.hasCurrentObject ()) {
+    UpEnumerator_routineFormalArgumentListAST enumerator_2394 (enumerator_2344.current_mProcFormalArgumentList (HERE)) ;
+    while (enumerator_2394.hasCurrentObject ()) {
       {
-      ioArgument_ioGraph.setter_noteNode (enumerator_2396.current_mFormalArgumentTypeName (HERE) COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 61)) ;
+      ioArgument_ioGraph.setter_noteNode (enumerator_2394.current_mFormalArgumentTypeName (HERE) COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 61)) ;
       }
-      enumerator_2396.gotoNextObject () ;
+      enumerator_2394.gotoNextObject () ;
     }
     GalgasBool test_1 = GalgasBool::boolTrue ;
     if (GalgasBool::boolTrue == test_1) {
-      test_1 = GGS_bool (ComparisonKind::notEqual, enumerator_2346.current_mReturnTypeName (HERE).readProperty_string ().objectCompare (GGS_string::makeEmptyString ())).boolEnum () ;
+      test_1 = GGS_bool (ComparisonKind::notEqual, enumerator_2344.current_mReturnTypeName (HERE).readProperty_string ().objectCompare (GGS_string::makeEmptyString ())).boolEnum () ;
       if (GalgasBool::boolTrue == test_1) {
         {
-        ioArgument_ioGraph.setter_noteNode (enumerator_2346.current_mReturnTypeName (HERE) COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 64)) ;
+        ioArgument_ioGraph.setter_noteNode (enumerator_2344.current_mReturnTypeName (HERE) COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 64)) ;
         }
       }
     }
-    enumerator_2346.gotoNextObject () ;
+    enumerator_2344.gotoNextObject () ;
   }
 }
 
@@ -14767,10 +14767,10 @@ void extensionMethod_enterExternProcInContext (const GGS_externFunctionDeclarati
                                                Compiler * inCompiler
                                                COMMA_UNUSED_LOCATION_ARGS) {
   const GGS_externFunctionDeclarationListAST temp_0 = inObject ;
-  UpEnumerator_externFunctionDeclarationListAST enumerator_3045 (temp_0) ;
-  while (enumerator_3045.hasCurrentObject ()) {
-    extensionMethod_enterExternProcInContext (enumerator_3045.current (HERE), ioArgument_ioContext, inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 77)) ;
-    enumerator_3045.gotoNextObject () ;
+  UpEnumerator_externFunctionDeclarationListAST enumerator_3043 (temp_0) ;
+  while (enumerator_3043.hasCurrentObject ()) {
+    extensionMethod_enterExternProcInContext (enumerator_3043.current (HERE), ioArgument_ioContext, inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 77)) ;
+    enumerator_3043.gotoNextObject () ;
   }
 }
 
@@ -14788,10 +14788,10 @@ void extensionMethod_externProcedureSemanticAnalysis (const GGS_externFunctionDe
                                                       Compiler * inCompiler
                                                       COMMA_UNUSED_LOCATION_ARGS) {
   const GGS_externFunctionDeclarationListAST temp_0 = inObject ;
-  UpEnumerator_externFunctionDeclarationListAST enumerator_4573 (temp_0) ;
-  while (enumerator_4573.hasCurrentObject ()) {
-    extensionMethod_externProcedureSemanticAnalysis (enumerator_4573.current (HERE), constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 114)) ;
-    enumerator_4573.gotoNextObject () ;
+  UpEnumerator_externFunctionDeclarationListAST enumerator_4571 (temp_0) ;
+  while (enumerator_4571.hasCurrentObject ()) {
+    extensionMethod_externProcedureSemanticAnalysis (enumerator_4571.current (HERE), constinArgument_inContext, ioArgument_ioTemporaries, ioArgument_ioIntermediateCodeStruct, inCompiler COMMA_SOURCE_FILE ("declaration-extern-proc.galgas", 114)) ;
+    enumerator_4571.gotoNextObject () ;
   }
 }
 
@@ -16377,10 +16377,10 @@ GGS_string extensionGetter_llvmName (const GGS_implicitBooleanConversionResult &
     break ;
   case GGS_implicitBooleanConversionResult::Enumeration::enum_compileTime:
     {
-      GGS_bool extractedValue_8983_value_0 ;
-      temp_0.getAssociatedValuesFor_compileTime (extractedValue_8983_value_0) ;
+      GGS_bool extractedValue_8979_value_0 ;
+      temp_0.getAssociatedValuesFor_compileTime (extractedValue_8979_value_0) ;
       GGS_bigint temp_1 ;
-      const GalgasBool test_2 = extractedValue_8983_value_0.boolEnum () ;
+      const GalgasBool test_2 = extractedValue_8979_value_0.boolEnum () ;
       if (GalgasBool::boolTrue == test_2) {
         temp_1 = GGS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("convert-to-boolean.galgas", 191)) ;
       }else if (GalgasBool::boolFalse == test_2) {
@@ -16391,9 +16391,9 @@ GGS_string extensionGetter_llvmName (const GGS_implicitBooleanConversionResult &
     break ;
   case GGS_implicitBooleanConversionResult::Enumeration::enum_llvmVariable:
     {
-      GGS_string extractedValue_9057_name_0 ;
-      temp_0.getAssociatedValuesFor_llvmVariable (extractedValue_9057_name_0) ;
-      result_result = extractedValue_9057_name_0 ;
+      GGS_string extractedValue_9053_name_0 ;
+      temp_0.getAssociatedValuesFor_llvmVariable (extractedValue_9053_name_0) ;
+      result_result = extractedValue_9053_name_0 ;
     }
     break ;
   }
@@ -16687,11 +16687,11 @@ void extensionMethod_generateConvertToBooleanCode (const GGS_implicitConversionT
                                                    Compiler * inCompiler
                                                    COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outResult.drop () ; // Release 'out' argument
-  GGS_lstring var_key_12873 = GGS_lstring::init_21__21_ (extensionGetter_omnibusTypeDescriptionName (constinArgument_inReceiverOperand, inCompiler COMMA_SOURCE_FILE ("convert-to-boolean.galgas", 284)), constinArgument_inErrorLocation, inCompiler COMMA_HERE) ;
-  GGS_abstractImplicitConverterToBoolean var_converter_12983 ;
+  GGS_lstring var_key_12859 = GGS_lstring::init_21__21_ (extensionGetter_omnibusTypeDescriptionName (constinArgument_inReceiverOperand, inCompiler COMMA_SOURCE_FILE ("convert-to-boolean.galgas", 284)), constinArgument_inErrorLocation, inCompiler COMMA_HERE) ;
+  GGS_abstractImplicitConverterToBoolean var_converter_12967 ;
   const GGS_implicitConversionToBooleanMap temp_0 = inObject ;
-  temp_0.method_searchKey (var_key_12873, var_converter_12983, inCompiler COMMA_SOURCE_FILE ("convert-to-boolean.galgas", 285)) ;
-  callExtensionMethod_generateConvertToBooleanCode ((cPtr_abstractImplicitConverterToBoolean *) var_converter_12983.ptr (), constinArgument_inReceiverOperand, constinArgument_inErrorLocation, ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, ioArgument_ioAllocaList, outArgument_outResult, inCompiler COMMA_SOURCE_FILE ("convert-to-boolean.galgas", 286)) ;
+  temp_0.method_searchKey (var_key_12859, var_converter_12967, inCompiler COMMA_SOURCE_FILE ("convert-to-boolean.galgas", 285)) ;
+  callExtensionMethod_generateConvertToBooleanCode ((cPtr_abstractImplicitConverterToBoolean *) var_converter_12967.ptr (), constinArgument_inReceiverOperand, constinArgument_inErrorLocation, ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, ioArgument_ioAllocaList, outArgument_outResult, inCompiler COMMA_SOURCE_FILE ("convert-to-boolean.galgas", 286)) ;
 }
 
 
@@ -17011,14 +17011,14 @@ void extensionSetter_testArrayIndex (GGS_instructionListIR & ioObject,
                                      Compiler * inCompiler
                                      COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outGeneratePanicInstruction.drop () ; // Release 'out' argument
-  GGS_bigint var_max_212 ;
-  GGS_bool var_isUnsigned_230 ;
-  GGS_bigint joker_199_1 ; // Joker input parameter
-  GGS_uint joker_241_1 ; // Joker input parameter
-  extensionGetter_type (constinArgument_inIndex, inCompiler COMMA_SOURCE_FILE ("intermediate-test-array-index.galgas", 8)).readProperty_kind ().method_extractInteger (joker_199_1, var_max_212, var_isUnsigned_230, joker_241_1, inCompiler COMMA_SOURCE_FILE ("intermediate-test-array-index.galgas", 8)) ;
-  GGS_bool test_0 = var_isUnsigned_230.operator_not (SOURCE_FILE ("intermediate-test-array-index.galgas", 9)) ;
+  GGS_bigint var_max_210 ;
+  GGS_bool var_isUnsigned_228 ;
+  GGS_bigint joker_197_1 ; // Joker input parameter
+  GGS_uint joker_239_1 ; // Joker input parameter
+  extensionGetter_type (constinArgument_inIndex, inCompiler COMMA_SOURCE_FILE ("intermediate-test-array-index.galgas", 8)).readProperty_kind ().method_extractInteger (joker_197_1, var_max_210, var_isUnsigned_228, joker_239_1, inCompiler COMMA_SOURCE_FILE ("intermediate-test-array-index.galgas", 8)) ;
+  GGS_bool test_0 = var_isUnsigned_228.operator_not (SOURCE_FILE ("intermediate-test-array-index.galgas", 9)) ;
   if (GalgasBool::boolTrue != test_0.boolEnum ()) {
-    test_0 = GGS_bool (ComparisonKind::greaterOrEqual, var_max_212.objectCompare (constinArgument_inSize)) ;
+    test_0 = GGS_bool (ComparisonKind::greaterOrEqual, var_max_210.objectCompare (constinArgument_inSize)) ;
   }
   outArgument_outGeneratePanicInstruction = test_0 ;
   ioObject.addAssignOperation (GGS_testArrayIndexIR::init_21__21__21_ (constinArgument_inIndex, constinArgument_inErrorLocation, constinArgument_inSize, inCompiler COMMA_HERE)  COMMA_SOURCE_FILE ("intermediate-test-array-index.galgas", 10)) ;

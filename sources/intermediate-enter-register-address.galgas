@@ -28,7 +28,7 @@ override method @enterRegisterAddressIR llvmInstructionCode
 {
   ioLLVMcode += "  " + self.mLLVMName + " = add i32 " + self.mBaseAddress
              + ", " + self.mAddressOffset + " ; " + self.mRegisterName
-             + " at " + [self.mBaseAddress hexString] + " = " + [self.mAddressOffset hexString] + "\n"
+             + " at " + self.mBaseAddress.hexString + " = " + self.mAddressOffset.hexString + "\n"
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
