@@ -88,7 +88,7 @@ syntax extension omnibus_syntax {
       select
         $@attribute$ ?let attribute
         if attribute.string != "at" then
-          error attribute : "attribute should be @at"
+          error (attribute : "attribute should be @at")
         end
         $integer$ ?let @lbigint registerGroupBaseAddress
         let groupKind = @controlRegisterGroupKindAST.single {!registerGroupBaseAddress:registerGroupBaseAddress}
@@ -100,7 +100,7 @@ syntax extension omnibus_syntax {
         let groupSizeExpressionLocation = @location.here
         $@attribute$ ?let attribute
         if attribute.string != "at" then
-          error attribute : "attribute should be @at"
+          error (attribute : "attribute should be @at")
         end
         repeat
           $integer$ ?let @lbigint baseAddress
@@ -174,7 +174,7 @@ syntax extension omnibus_syntax {
     select
       $@attribute$ ?let attributeOffset
       if attributeOffset.string != "offset" then
-        error attributeOffset : "attribute should be @offset" fixit { replace "@offset" }
+        error (attributeOffset : "attribute should be @offset" fixit replace "@offset")
       end
       <expression> !?ioAST ?let registerOffset
       let @bool isReadOnly
@@ -183,7 +183,7 @@ syntax extension omnibus_syntax {
       or
         $@attribute$ ?let attribute
         if attribute.string != "ro" then
-          error attribute : "attribute should be @ro" fixit { replace "@ro" }
+          error (attribute : "attribute should be @ro" fixit replace "@ro")
         end
         isReadOnly = true
       end
@@ -199,13 +199,13 @@ syntax extension omnibus_syntax {
       let sizeExpressionLocation = @location.here
       $@attribute$ ?let attributeOffset
       if attributeOffset.string != "offset" then
-        error attributeOffset : "attribute should be @offset" fixit { replace "@offset" }
+        error (attributeOffset : "attribute should be @offset" fixit replace "@offset")
       end
       <expression> !?ioAST ?let baseAddressExpression
       let baseAddressExpressionLocation = @location.here
       $@attribute$ ?let attributeInc
       if attributeInc.string != "inc" then
-        error attributeInc : "attribute should be @inc" fixit { replace "@inc" }
+        error (attributeInc : "attribute should be @inc" fixit replace "@inc")
       end
       <expression> !?ioAST ?let arrayElementSizeExpression
       $]$
@@ -215,7 +215,7 @@ syntax extension omnibus_syntax {
       or
         $@attribute$ ?let attribute
         if attribute.string != "ro" then
-          error attribute : "attribute should be @ro" fixit { replace "@ro" }
+          error (attribute : "attribute should be @ro" fixit replace "@ro")
         end
         isReadOnly = true
       end
@@ -242,7 +242,7 @@ syntax extension omnibus_syntax {
     $registers$
     $@attribute$ ?let attribute
     if attribute.string != userAttributeForRegister () then
-      error attribute : "this attribute should be @" + userAttributeForRegister ()
+      error (attribute : "this attribute should be @" + userAttributeForRegister ())
     end
     $identifier$ ?let registerGroupName
     $($
@@ -404,31 +404,31 @@ private proc controlRegisterType
   case integer (* * * bitCount):
     outRegisterBitCount = bitCount
   case boolean, void :
-    error inRegisterTypeName : "a register should be an $iXXor an $uXX" spoil (outRegisterBitCount)
+    error (inRegisterTypeName : "a register should be an $iXXor an $uXX" spoil outRegisterBitCount)
   case enumeration (*) :
-    error inRegisterTypeName : "a register should be an $iXXor an $uXX" spoil (outRegisterBitCount)
+    error (inRegisterTypeName : "a register should be an $iXXor an $uXX" spoil outRegisterBitCount)
   case literalString :
-    error inRegisterTypeName : "a register should be an $iXXor an $uXX" spoil (outRegisterBitCount)
+    error (inRegisterTypeName : "a register should be an $iXXor an $uXX" spoil outRegisterBitCount)
   case compileTimeBool :
-    error inRegisterTypeName : "a register should be an $iXXor an $uXX" spoil (outRegisterBitCount)
+    error (inRegisterTypeName : "a register should be an $iXXor an $uXX" spoil outRegisterBitCount)
   case compileTimeInteger :
-    error inRegisterTypeName : "a register should be an $iXXor an $uXX" spoil (outRegisterBitCount)
+    error (inRegisterTypeName : "a register should be an $iXXor an $uXX" spoil outRegisterBitCount)
   case structure (*) :
-    error inRegisterTypeName : "a register should be an $iXXor an $uXX" spoil (outRegisterBitCount)
+    error (inRegisterTypeName : "a register should be an $iXXor an $uXX" spoil outRegisterBitCount)
   case syncTool :
-    error inRegisterTypeName : "a register should be an $iXXor an $uXX" spoil (outRegisterBitCount)
+    error (inRegisterTypeName : "a register should be an $iXXor an $uXX" spoil outRegisterBitCount)
   case opaque (*) :
-    error inRegisterTypeName : "a register should be an $iXXor an $uXX" spoil (outRegisterBitCount)
+    error (inRegisterTypeName : "a register should be an $iXXor an $uXX" spoil outRegisterBitCount)
   case staticArrayType (* *) :
-    error inRegisterTypeName : "a register should be an $iXXor an $uXX" spoil (outRegisterBitCount)
+    error (inRegisterTypeName : "a register should be an $iXXor an $uXX" spoil outRegisterBitCount)
   case dynamicArrayType (*) :
-    error inRegisterTypeName : "a register should be an $iXXor an $uXX" spoil (outRegisterBitCount)
+    error (inRegisterTypeName : "a register should be an $iXXor an $uXX" spoil outRegisterBitCount)
   case function (3*) :
-    error inRegisterTypeName : "a register should be an $iXXor an $uXX" spoil (outRegisterBitCount)
+    error (inRegisterTypeName : "a register should be an $iXXor an $uXX" spoil outRegisterBitCount)
   case generic (3*) :
-    error inRegisterTypeName : "a register should be an $iXXor an $uXX" spoil (outRegisterBitCount)
+    error (inRegisterTypeName : "a register should be an $iXXor an $uXX" spoil outRegisterBitCount)
   case llvmType (*) :
-    error inRegisterTypeName : "a register should be an $iXXor an $uXX" spoil (outRegisterBitCount)
+    error (inRegisterTypeName : "a register should be an $iXXor an $uXX" spoil outRegisterBitCount)
   end
 }
 
@@ -476,8 +476,8 @@ private proc buildControlRegisterSliceMap
     end
   //--- Check slice bit count is correct
     if inRegisterBitCount != shiftCount then
-      error inEndOfBitSliceLocation
-       : "total bit slice count is " + shiftCount + " (should be " + inRegisterBitCount + ")"
+      error (inEndOfBitSliceLocation
+       : "total bit slice count is " + shiftCount + " (should be " + inRegisterBitCount + ")")
     end
   end
 }
@@ -514,9 +514,9 @@ method @controlRegisterDeclarationList.@element buildControlRegisterMapForGroup
     )
     let @bigint registerAddressOffset
     if not addressOffsetExpressionResult.isLiteralInteger then
-      error register.mRegisterOffsetLocation
+      error (register.mRegisterOffsetLocation
         : "control register address offset is not a static integer expression"
-        spoil (registerAddressOffset)
+        spoil registerAddressOffset)
     else
       [addressOffsetExpressionResult extractLiteralInteger ?1* ?value:registerAddressOffset]
     end
@@ -538,13 +538,13 @@ method @controlRegisterDeclarationList.@element buildControlRegisterMapForGroup
         ?result:let @objectIR sizeExpressionResult
       )
       if not sizeExpressionResult.isLiteralInteger then
-        error arraySizeLocation : "control register address is not a static integer expression" spoil (arraySize)
+        error (arraySizeLocation : "control register address is not a static integer expression" spoil arraySize)
       else
         [sizeExpressionResult extractLiteralInteger ?1* ?value:arraySize]
         if arraySize < 2 then
-          error arraySizeLocation
+          error (arraySizeLocation
             : "control register array size should be a static integer expression >= 2, equal to a power of 2"
-          spoil (arraySize)
+          spoil arraySize)
         end
       end
     //--- Analyse element array size expression
@@ -557,9 +557,9 @@ method @controlRegisterDeclarationList.@element buildControlRegisterMapForGroup
         ?result:let @objectIR elementArraySizeExpressionResult
       )
       if not elementArraySizeExpressionResult.isLiteralInteger then
-        error arrayElementSizeLocation
+        error (arrayElementSizeLocation
           : "element size is not a static integer expression"
-          spoil (elementArraySize)
+          spoil elementArraySize)
       else
         [elementArraySizeExpressionResult extractLiteralInteger ?1* ?value:let elementArraySizeAsBigInt]
         elementArraySize = elementArraySizeAsBigInt.uint
@@ -627,15 +627,15 @@ override method @controlRegisterGroupDeclarationAST enterInContext
       )
       let @bigint groupSize
       if not groupArraySizeExpressionResult.isLiteralInteger then
-        error groupSizeExpressionLocation
+        error (groupSizeExpressionLocation
           : "control register group size is not a static integer expression"
-          spoil (groupSize)
+          spoil groupSize)
       else
         [groupArraySizeExpressionResult extractLiteralInteger ?1* ?value:groupSize]
       end
       if groupSize.uint != baseAddresses.count then
-        error groupSizeExpressionLocation
-        : "the group size is " + groupSize + ", but " + baseAddresses.count + " base addresses are defined"
+        error (groupSizeExpressionLocation
+        : "the group size is " + groupSize + ", but " + baseAddresses.count + " base addresses are defined")
       end
       let groupKind = @registerGroupKind.arrayGroup {!baseAddresses:baseAddresses}
       [!?ioContext.mControlRegisterGroupMap insertKey !group.mRegisterGroupName !groupKind !registerMap]

@@ -35,7 +35,7 @@ proc computeStaticExpression
     ?result:let @objectIR expressionIR
   ]
   if not expressionIR.isStatic then
-    error inErrorLocation : "expression is not static" spoil (outStaticExpressionIR)
+    error (inErrorLocation : "expression is not static" spoil outStaticExpressionIR)
   else
   //--- Check assignment compatibility
     outStaticExpressionIR = checkAssignmentCompatibility (

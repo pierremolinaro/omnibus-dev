@@ -11,7 +11,7 @@ syntax omnibus_syntax (omnibus_lexique) {
     $"string"$ ?let importedFile
     ioImportedFileList += !importedFile
     if importedFile.string.pathExtension != "omnibus-import" then
-      error importedFile : "the path extension should be .omnibus-import"
+      error (importedFile : "the path extension should be .omnibus-import")
     end
   }
 

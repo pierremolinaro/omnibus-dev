@@ -114,7 +114,7 @@ override method @controlRegisterAssignmentInstructionAST instructionSemanticAnal
 //-------------------- Perform assignment
   let t = sourceIR.type
   if not t.copyable then
-    error self.mControlRegisterLValue.mRegisterGroupName : "source expression is not copyable"
+    error (self.mControlRegisterLValue.mRegisterGroupName : "source expression is not copyable")
   else
     switch self.mAssignmentKind
     case assignment :

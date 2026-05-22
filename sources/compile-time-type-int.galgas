@@ -137,7 +137,7 @@ override method @compileTimeIntModuloOperator generateCode
 {
   [inRightOperand extractLiteralInteger ?1* ?value: let rightValue]
   if rightValue == 0 then
-    error inOperatorLocation : "compile time divide by zero" spoil (outResultValue)
+    error (inOperatorLocation : "compile time divide by zero" spoil outResultValue)
   else
     [inLeftOperand extractLiteralInteger ?1* ?value: let leftValue]
     outResultValue = .literalInteger {!type: inResultType !value: leftValue mod rightValue}
@@ -189,7 +189,7 @@ override method @compileTimeIntDivideOperator generateCode
 {
   [inRightOperand extractLiteralInteger ?1* ?value: let rightValue]
   if rightValue == 0 then
-    error inOperatorLocation : "compile time divide by zero" spoil (outResultValue)
+    error (inOperatorLocation : "compile time divide by zero" spoil outResultValue)
   else
     [inLeftOperand extractLiteralInteger ?1* ?value: let leftValue]
     outResultValue = .literalInteger {!type: inResultType !value: leftValue / rightValue}
@@ -351,7 +351,7 @@ override method @compileTimeIntShiftLeftOperator generateCode
 {
   [inRightOperand extractLiteralInteger ?1* ?value: let rightValue]
   if rightValue < 0 then
-    error inOperatorLocation : "compile time left shift right operand should be ≥ 0" spoil (outResultValue)
+    error (inOperatorLocation : "compile time left shift right operand should be ≥ 0" spoil outResultValue)
   else
     [inLeftOperand extractLiteralInteger ?1* ?value: let leftValue]
     outResultValue = .literalInteger {!type: inResultType !value: leftValue << rightValue}
@@ -377,7 +377,7 @@ override method @compileTimeIntShiftRightOperator generateCode
 {
   [inRightOperand extractLiteralInteger ?1* ?value: let rightValue]
   if rightValue < 0 then
-    error inOperatorLocation : "compile time right shift right operand should be ≥ 0" spoil (outResultValue)
+    error (inOperatorLocation : "compile time right shift right operand should be ≥ 0" spoil outResultValue)
   else
     [inLeftOperand extractLiteralInteger ?1* ?value: let leftValue]
     outResultValue = .literalInteger {!type: inResultType !value: leftValue >> rightValue}

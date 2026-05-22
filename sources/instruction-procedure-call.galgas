@@ -179,7 +179,7 @@ override method @standAloneProcedureCallInstructionAST instructionSemanticAnalys
   ]
 //--- Check return type proxy is null
   if not formalReturnTypeProxy.isNull then
-    error self.mSandAloneRoutineName : "this function returns a value, cannot be used as a procedure"
+    error (self.mSandAloneRoutineName : "this function returns a value, cannot be used as a procedure")
   end
 //--- Check modes
     let functionLLVMName = checkModeAndReturnsRoutineLLVMName (!implementedModeDictionary !inMode !self.mSandAloneRoutineName)
@@ -237,7 +237,7 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
   if self.mIdentifier.string == "" then // Receiver is self
     receiverIsSelf = true
     if inSelfType.kind == .void then
-      error self.mIdentifier : "self is not available in this context" spoil (currentType, currentLLVMAddressVar)
+      error (self.mIdentifier : "self is not available in this context" spoil currentType, currentLLVMAddressVar)
     else
       currentType = inSelfType
       currentLLVMAddressVar = llvmNameForSelf ()
@@ -253,12 +253,12 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
         currentType = type
         currentLLVMAddressVar = llvmNameForGlobalVariable (!self.mIdentifier)
       else
-        error self.mIdentifier : "the driver should be instancied" spoil (currentType, currentLLVMAddressVar)
+        error (self.mIdentifier : "the driver should be instancied" spoil currentType, currentLLVMAddressVar)
       end
     case globalConstant (*) :
-      error self.mIdentifier
+      error (self.mIdentifier
         : "a global constant cannot be used in this context"
-        spoil (currentType, currentLLVMAddressVar)
+        spoil currentType, currentLLVMAddressVar)
     case localConstant (@omnibusType type @lstring omnibusName *) :
       currentType = type
       currentLLVMAddressVar = llvmNameForLocalVariable (!omnibusName)
@@ -288,15 +288,15 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
       case isPublic :
       case isPrivate :
         if not receiverIsSelf then
-          error propertyName : "inaccessible property, is private"
+          error (propertyName : "inaccessible property, is private")
         end
       end
       receiverIsSelf = false
       switch propertyAccess
       case constantProperty (*) :
-        error propertyName
+        error (propertyName
           : "a context property cannot be used in this context"
-          spoil (currentType, currentLLVMAddressVar)
+          spoil currentType, currentLLVMAddressVar)
       case storedProperty (@omnibusType propertyType @uint propertyIndex) :
         [!?ioTemporaries newTempLLVMVar ?let llvmPropertyName]
         [!?ioInstructionGenerationList appendGetUniversalPropertyReference
@@ -323,13 +323,13 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
         currentObjectPropertyMap = [inContext propertyGetterMap !currentType]
       end
     case arrayAccess (* @location endOfIndex *) :
-      error endOfIndex : "not handled yet" spoil (currentType, currentLLVMAddressVar)
+      error (endOfIndex : "not handled yet" spoil currentType, currentLLVMAddressVar)
     end
   end
 //--- Handle last access
   switch lastAccess
   case arrayAccess (* @location endOfIndex *) :
-    error endOfIndex : "a property is required here"
+    error (endOfIndex : "a property is required here")
   case property (@lstring methodName) :
     let methodMangledName = [self.mArguments mangledName !receiverTypeName: currentType.omnibusTypeDescriptionName !functionName: methodName]
     [inContext.mRoutineMap searchKey
@@ -345,7 +345,7 @@ override method @procedureCallInstructionAST instructionSemanticAnalysis
     let functionLLVMName = checkModeAndReturnsRoutineLLVMName (!implementedModeDictionary !inMode !methodName)
   //--- Check routine does not return any value
     if not formalReturnTypeProxy.isNull then
-      error methodName : "cannot be called in instruction, returns a value"
+      error (methodName : "cannot be called in instruction, returns a value")
     end
   //--- Add receiver as first parameter
     var @procCallEffectiveParameterListIR effectiveParameterListIR = @[

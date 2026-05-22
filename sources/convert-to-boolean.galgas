@@ -126,7 +126,7 @@ override method @compileTimeConvertToBooleanAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
   if self.mConverterName.string != "convertToBoolean" then
-    error self.mConverterName : "the implicit converter name should be 'convertToBoolean'"
+    error (self.mConverterName : "the implicit converter name should be 'convertToBoolean'")
   end
 //--- Check types
   [!?ioContext.mTypeMap makeEntry !self.mReceiverTypeName ?let receiverTypeProxy]
@@ -155,7 +155,7 @@ override method @llvmConvertToBooleanAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
   if self.mConverterName.string != "convertToBoolean" then
-    error self.mConverterName : "the implicit converter name should be 'convertToBoolean'"
+    error (self.mConverterName : "the implicit converter name should be 'convertToBoolean'")
   end
 //--- Check types
   [!?ioContext.mTypeMap makeEntry !self.mReceiverTypeName ?let receiverTypeProxy]

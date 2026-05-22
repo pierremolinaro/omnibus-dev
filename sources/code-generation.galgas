@@ -133,7 +133,7 @@ proc codeGeneration
     let fullScript = "python3 " + productDirectory + "/" + script + ".py"
     let @sint result = fullScript.system
     if result != 0 then
-      error inEndOfSourceFileLocation: "error during LLVM compilation or flashing"
+      error (inEndOfSourceFileLocation: "error during LLVM compilation or flashing")
     end
     if [option omnibus_options.printPasses value] then
       print (!"** Compilation script: " + scriptTime.string + "\n")

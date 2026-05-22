@@ -156,9 +156,9 @@ override method @varDeclarationInstructionAST instructionSemanticAnalysis
   let targetType = [inContext.mTypeMap searchKey !self.mTypeName].type
 //---
   if targetType.isCompileTimeType then
-    error self.mVarName : "$" + targetType.omnibusTypeDescriptionName + " type is a compile time type, and is not instanciable"
+    error (self.mVarName : "$" + targetType.omnibusTypeDescriptionName + " type is a compile time type, and is not instanciable")
   elsif not targetType.instanciable then
-    error self.mVarName : "$" + targetType.omnibusTypeDescriptionName + " type is not instanciable"
+    error (self.mVarName : "$" + targetType.omnibusTypeDescriptionName + " type is not instanciable")
   end
 //--- Declare local variable
   let omnibusName = @lstring {!self.mVarName.string + "." + ioTemporaries.mTemporaryIndex !self.mVarName}

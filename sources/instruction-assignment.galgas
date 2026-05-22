@@ -120,7 +120,7 @@ method @LValueAST analyzeLValueInAssignment
 {
   if self.mIdentifier.string == "" then // Receiver is "self"
     if inSelfType.kind == .void then
-      error self.mIdentifier : "self is not available in this context" spoil (outInternalRepresentation)
+      error (self.mIdentifier : "self is not available in this context" spoil outInternalRepresentation)
     else
       analyzeSelfLValueInAssignment (
         !self:inSelfType
@@ -141,15 +141,15 @@ method @LValueAST analyzeLValueInAssignment
     [ioUniversalMap searchEntity !self.mIdentifier ?let @valuedObject entity]
     switch entity
     case task (*) :
-      error self.mIdentifier : "a task has no value" spoil (outInternalRepresentation)
+      error (self.mIdentifier : "a task has no value" spoil outInternalRepresentation)
     case driver (* *) :
-      error self.mIdentifier : "a driver has no value" spoil (outInternalRepresentation)
+      error (self.mIdentifier : "a driver has no value" spoil outInternalRepresentation)
     case globalConstant (*) :
-      error self.mIdentifier : "a global constant cannot be written" spoil (outInternalRepresentation)
+      error (self.mIdentifier : "a global constant cannot be written" spoil outInternalRepresentation)
     case localConstant (3*) :
-      error self.mIdentifier : "a local constant cannot be written" spoil (outInternalRepresentation)
+      error (self.mIdentifier : "a local constant cannot be written" spoil outInternalRepresentation)
     case globalSyncInstance (2*) :
-      error self.mIdentifier : "a global sync instance is not allowed here" spoil (outInternalRepresentation)
+      error (self.mIdentifier : "a global sync instance is not allowed here" spoil outInternalRepresentation)
     case localVariable (@omnibusType variableType @lstring omnibusName) :
       analyzeVariableInLValueInAssignment (
         !self: inSelfType
@@ -354,12 +354,12 @@ private proc handleArrayAccessInAssignment
 {
   switch ioCurrentType.subscript
   case noSubscript :
-    error inEndOfIndex
-    : "the receiver type is " + ioCurrentType.omnibusTypeDescriptionName + " and does not accept subscripting"
+    error (inEndOfIndex
+    : "the receiver type is " + ioCurrentType.omnibusTypeDescriptionName + " and does not accept subscripting")
   case literalString :
-    error inEndOfIndex
+    error (inEndOfIndex
     : "the receiver type is literal string and does not accept subscripting"
-    spoil (ioCurrentType, ioCurrentLLVMName)
+    spoil ioCurrentType, ioCurrentLLVMName)
   case staticSubscript (@omnibusType elementType @bigint arraySize) :
     handleArraySubscriptNew (
       !self: inSelfType

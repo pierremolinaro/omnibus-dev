@@ -45,7 +45,7 @@ syntax extension omnibus_syntax {
     end
     $@attribute$ ?let stackSizeAttribute
     if stackSizeAttribute.string != "stacksize" then
-      error stackSizeAttribute : "this attribute should be @stacksize"
+      error (stackSizeAttribute : "this attribute should be @stacksize")
     end
     $integer$ ?let @lbigint stackSize
   //--- @autostart attribute
@@ -54,7 +54,7 @@ syntax extension omnibus_syntax {
     or
       $@attribute$ ?let activateAttribute
       if activateAttribute.string != "autostart" then
-        error activateAttribute : "this attribute should be @autostart"
+        error (activateAttribute : "this attribute should be @autostart")
       end
       autoStart = true
     end
@@ -203,7 +203,7 @@ method @taskListAST enterInContext
     end
     if [option omnibus_options.taskStrictPriorityOrder value] && (candidateTaskList.count > 1) then
       for task in candidateTaskList do
-        error task.mTaskName : "this task does not respect a strict priority order"
+        error (task.mTaskName : "this task does not respect a strict priority order")
       end
     end
     if candidateTaskList.count > 0 then
@@ -216,7 +216,7 @@ method @taskListAST enterInContext
   end
 //--- Signal unsorted entries as error
   for (name 8*) in taskList do
-    error name : "this task is out of priority order"
+    error (name : "this task is out of priority order")
   end
 //---
   var @decoratedTaskList decoratedTaskList = @[]
@@ -343,12 +343,12 @@ private proc analyzeOrderedTaskRoutines
     end
     if numberOfEntriesWithoutAnyPrecedence == 0 then
       for (name *) in inTaskRoutineLISTAST do
-        error name : "Exactly one routine should have no precedence"
+        error (name : "Exactly one routine should have no precedence")
       end
     elsif numberOfEntriesWithoutAnyPrecedence > 1 then
       for (name precedenceList) in inTaskRoutineLISTAST do
         if precedenceList.count == 0 then
-          error name : "Exactly one routine should have no precedence"
+          error (name : "Exactly one routine should have no precedence")
         end
       end    
     end
@@ -376,7 +376,7 @@ private proc analyzeOrderedTaskRoutines
     end
   //--- Signal unsorted entries as error
     for (name *) in taskSetupListAST do
-      error name : "this routine is out of execution order"
+      error (name : "this routine is out of execution order")
     end
   end
 }
@@ -393,7 +393,7 @@ method @decoratedTaskList.@element taskSemanticAnalysis
 //------------------------------------------- Check stack size is >= 64, and a multiple of 8
   let stackSize = self.mStackSize.bigint
   if (stackSize < 64) || ((stackSize mod 8) != 0) then
-    error self.mStackSize : "stack size should be a multiple of 8, and >= 64"
+    error (self.mStackSize : "stack size should be a multiple of 8, and >= 64")
   end
 //------------------------------------------- Analyze task setup routines
   analyzeOrderedTaskRoutines (

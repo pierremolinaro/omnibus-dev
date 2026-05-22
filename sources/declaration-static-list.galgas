@@ -114,7 +114,7 @@ syntax extension omnibus_syntax {
       repeat
         $!selector:$ ?let selector
         if selector.string != "" then
-          error selector : "selector should be empty"
+          error (selector : "selector should be empty")
         end
         <staticArray_exp> !?ioAST !?expressions
       while
@@ -287,7 +287,7 @@ override method @staticListAST enterInContext
     case valueType (@lstring propertyTypeName) :
       let propertyType = [ioContext.mTypeMap searchKey !propertyTypeName].type
       if [propertyNameSet hasKey !propertyName] then
-        error propertyName : "duplicated property name"
+        error (propertyName : "duplicated property name")
       else
         propertyNameSet ++= propertyName
         propertyList += !propertyName !propertyType
@@ -366,16 +366,16 @@ override method @staticListAST enterInContext
   var @stringlist stringValueList = @[]
   for (element *) in self.mValueList do
     if propertyList.count != element.count then
-      error self.mStaticListName
+      error (self.mStaticListName
       : propertyList.count.string + " expressions required, "
-      + element.count.string + " provided"
+      + element.count.string + " provided")
     else
       var staticValue = "{"
       for (operand endOfExp) in element, (* propertyType) in propertyList do
         switch operand
         case expression (@expressionAST exp) :
           if propertyType.kind.isFunction then
-            error endOfExp : "a function name is expected here"
+            error (endOfExp : "a function name is expected here")
           else
             computeStaticExpression (
               !?context: ioContext
@@ -390,7 +390,7 @@ override method @staticListAST enterInContext
           end      
         case function (@lstring functionName @routineFormalArgumentListAST formalArgs) :
           if not propertyType.kind.isFunction then
-            error endOfExp : "a static expression is expected here"
+            error (endOfExp : "a static expression is expected here")
           else
             [propertyType.kind extractFunction
               ?mode:let mode
@@ -411,18 +411,18 @@ override method @staticListAST enterInContext
           //--- Check mode
             let routineLLVMName = checkModeAndReturnsRoutineLLVMName (!implementedModeDictionary !mode !functionName)
             if functionReturnTypeProxy.isNull && not candidateReturnTypeProxy.isNull then
-              error functionName : "this function should return an $" + candidateReturnTypeProxy.key + " object"
+              error (functionName : "this function should return an $" + candidateReturnTypeProxy.key + " object")
             elsif not functionReturnTypeProxy.isNull && candidateReturnTypeProxy.isNull then
-              error functionName : "this function should return no object"
+              error (functionName : "this function should return no object")
             end
             if functionSignature.count != candidateSignature.count then
-              error functionName
+              error (functionName
               : "this function has " + candidateSignature.count + " argument(s) ("
-              + functionSignature.count + " required)"
+              + functionSignature.count + " required)")
             else
               for required in functionSignature, candidate in candidateSignature do
                 if required.mTypeProxy != candidate.mTypeProxy then
-                  error candidate.mSelector : "argument type should be $" + required.mTypeProxy.key
+                  error (candidate.mSelector : "argument type should be $" + required.mTypeProxy.key)
                 end
               end
             end

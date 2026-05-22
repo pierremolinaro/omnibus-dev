@@ -94,7 +94,7 @@ override method @whileInstructionAST instructionSemanticAnalysis
   ]
   switch booleanResult 
   case compileTime (*) :
-    error self.mEndOf_test_expression : "test expression type should not be a compile time expression"
+    error (self.mEndOf_test_expression : "test expression type should not be a compile time expression")
   case llvmVariable (*) :
   end
 //--- Analyze instruction list

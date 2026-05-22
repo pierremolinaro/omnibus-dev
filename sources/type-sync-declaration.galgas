@@ -54,7 +54,7 @@ override method @syncDeclarationAST enterInPrecedenceGraph ?!@semanticTypePreced
       [!?ioGraph addEdge !from: self.mSyncToolName !to: fieldTypeName]
     end
     if visibility != .isPrivate then
-      error propertyName : "a sync tool property should be private"
+      error (propertyName : "a sync tool property should be private")
     end
     switch propertyKind
     case uninitializedStoredProperty, uninitializedConstantProperty :

@@ -66,16 +66,16 @@ override method @typeDynamicArrayDeclarationAST enterInContext
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
 {
   if not ioContext.mTargetParameters.mHandleDynamicArray then
-    error self.mElementTypeName : "this target does not handle dynamic array"
+    error (self.mElementTypeName : "this target does not handle dynamic array")
   end
   [!?ioContext.mTypeMap makeEntry !self.mDynamicArrayTypeName ?let arrayTypeProxy]
 //-------------------------------------------- Get element type
   [ioContext.mTypeMap searchType !lkey:self.mElementTypeName ?type:let elementType]
   if not elementType.copyable then
-    error self.mElementTypeName : "an array element should be copyable"
+    error (self.mElementTypeName : "an array element should be copyable")
   end
   if not elementType.instanciable then
-    error self.mElementTypeName : "an array element should be instanciable"
+    error (self.mElementTypeName : "an array element should be instanciable")
   end
 //-------------------------------------------- Original type name
   let omnibusTypeDescriptionName = @lstring {!"[" + elementType.omnibusTypeDescriptionName + "]" !self.mDynamicArrayTypeName}

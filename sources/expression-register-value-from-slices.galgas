@@ -106,7 +106,7 @@ override method @registerConstantExpressionAST analyzeExpression
   var @operandIRList operandList = @[]
   for (fieldName expression expressionLocation) in self.mFieldValues do
     if fieldName.string == "" then
-      error fieldName : "anonymous selector not allowed here" spoil (operandList)
+      error (fieldName : "anonymous selector not allowed here" spoil operandList)
     else
       [registerFieldMap searchKey
         !fieldName
@@ -137,18 +137,18 @@ override method @registerConstantExpressionAST analyzeExpression
       if expressionResult.type.kind.isCompileTimeInteger then 
         [expressionResult extractLiteralInteger ?1* ?value:let @bigint value]
         if value < 0 then
-          error expressionLocation: "this integer expression should be positive"
+          error (expressionLocation: "this integer expression should be positive")
         elsif value < (1 << fieldBitCount) then
           accumulatedFieldStaticValues = accumulatedFieldStaticValues | (value << fieldBitIndex)
         else
-          error expressionLocation: "expression too large (should be < " + (1 << fieldBitCount) + ")"
+          error (expressionLocation: "expression too large (should be < " + (1 << fieldBitCount) + ")")
         end
       elsif expressionResult.type.kind.isInteger then 
         [expressionResult.type.kind extractInteger ?2* ?unsigned:let @bool unsigned ?bitCount:let @uint expressionBitCount]
         if not unsigned then
-          error expressionLocation: "an unsigned integer expression is required here"
+          error (expressionLocation: "an unsigned integer expression is required here")
         elsif expressionBitCount != fieldBitCount then
-            error expressionLocation : "type error, $uint" + fieldBitCount + " type required"
+          error (expressionLocation : "type error, $uint" + fieldBitCount + " type required")
         else
         //--- Perform an bit extend to register type or a trunc
           var partialResult = expressionResult

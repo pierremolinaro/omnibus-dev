@@ -179,7 +179,7 @@ override method @primaryInExpressionAST analyzeExpression
 //--- object access, with ou without self
   if self.mReceiverName.string != "" then
     if [inRoutineAttributes contains !.isGuard] then
-      error self.mReceiverName : "in guard, only 'self' properties may be accessed" spoil (outResult)
+      error (self.mReceiverName : "in guard, only 'self' properties may be accessed" spoil outResult)
     else 
       [self analyzePrimaryExpressionNoSelf
         !self: inSelfType
@@ -196,7 +196,7 @@ override method @primaryInExpressionAST analyzeExpression
       ]
     end
   elsif inSelfType.kind == .void then
-    error self.mReceiverName : "'self' is not available in this context" spoil (outResult)
+    error (self.mReceiverName : "'self' is not available in this context" spoil outResult)
   else
     [self analyzePrimaryExpressionWithSelf
       !self: inSelfType
@@ -249,7 +249,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
     )
   case driver (type instancied) :
     if not instancied then
-      error self.mReceiverName : "the driver should be instancied"
+      error (self.mReceiverName : "the driver should be instancied")
     end
     outResult = .reference {!type: type !llvmName:llvmNameForGlobalVariable (!self.mReceiverName)}
     procAnalyzeAccesListInExpression (
@@ -392,7 +392,7 @@ proc procAnalyzeAccesListInExpression
       )
     case funcCall (@lstring methodName @effectiveArgumentListAST arguments @location errorLocation) :
       if [inRoutineAttributes contains !.isGuard] then
-        error errorLocation : "a method cannot be called in guard" spoil (ioResult)
+        error (errorLocation : "a method cannot be called in guard" spoil ioResult)
       else
         handleFunctionCallInExpression (
           !methodName
@@ -471,7 +471,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
       )
     case funcCall (@lstring methodName @effectiveArgumentListAST arguments @location errorLocation) :
       if [inRoutineAttributes contains !.isGuard] then
-        error errorLocation : "a method cannot be called in guard" spoil (outResult)
+        error (errorLocation : "a method cannot be called in guard" spoil outResult)
       else
         handleFunctionCallInExpression (
           !methodName
@@ -503,9 +503,9 @@ proc handleSliceInExpression
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
 {
   if inLow.bigint > inHigh.bigint then
-    error inLow : "low bound should be lower or equal to high bound" spoil (ioResult)
+    error (inLow : "low bound should be lower or equal to high bound" spoil ioResult)
   elsif not (ioResult.type.kind.isInteger || ioResult.type.kind.isCompileTimeInteger) then
-    error inLow : "Invalid, receiver is not an integer" spoil (ioResult)
+    error (inLow : "Invalid, receiver is not an integer" spoil ioResult)
   else
   //--- Shift source value
     [!?ioInstructionGenerationList appendLogicalShiftRight !?ioResult !inLow.bigint.uint !?ioTemporaries]
@@ -579,10 +579,10 @@ private proc handleArrayAccessInExpression
 //--- Check current object is an array
   switch ioResult.type.subscript
   case noSubscript :
-    error inEndOfIndex : "the receiver type is " + ioResult.type.omnibusTypeDescriptionName + " and does not accept subscripting"
+    error (inEndOfIndex : "the receiver type is " + ioResult.type.omnibusTypeDescriptionName + " and does not accept subscripting")
   case literalString  :
-    error inEndOfIndex
-    : "the receiver type is literal string (dynamic array) and does not accept subscripting"
+    error (inEndOfIndex
+    : "the receiver type is literal string (dynamic array) and does not accept subscripting")
   case staticSubscript (@omnibusType elementType @bigint arraySize) :
     handleArraySubscriptNew (
       !self: inSelfType
@@ -646,7 +646,7 @@ private proc handleFunctionCallInExpression
   let functionLLVMName = checkModeAndReturnsRoutineLLVMName (!implementedModeDictionary !inMode !inMethodName)
 //--- Check routine is actually a function
   if formalReturnTypeProxy.type.kind == .void then
-    error inMethodName : "not a function (returns no value)" spoil (ioObjectIR)
+    error (inMethodName : "not a function (returns no value)" spoil ioObjectIR)
   else
   //--- If receiver is a value, create a reference
     [!?ioInstructionGenerationList referenceFromPossibleValue !?ioTemporaries !?ioAllocaList !?ioObjectIR]

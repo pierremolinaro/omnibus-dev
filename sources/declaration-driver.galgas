@@ -93,7 +93,7 @@ syntax extension omnibus_syntax {
       bootEndLocation = @location.here
       $}$
       if bootHandled then
-        error bootLocation : "a driver supports at most one boot routine" 
+        error (bootLocation : "a driver supports at most one boot routine")
       end
       bootHandled = true
     while
@@ -104,7 +104,7 @@ syntax extension omnibus_syntax {
       startupEndLocation = @location.here
       $}$
       if startupHandled then
-        error startupLocation : "a driver supports at most one startup routine" 
+        error (startupLocation : "a driver supports at most one startup routine")
       end
       startupHandled = true
     while
@@ -238,7 +238,7 @@ proc retainRequiredDrivers ?!@ast ioAST {
   end
   if driverWithNoDependenceList.count > 1 then
     for (driverName) in driverWithNoDependenceList do
-      error driverName : "almost one driver can have no dependence"
+      error (driverName : "almost one driver can have no dependence")
     end
   end
 //--- Build instancied driver map
@@ -290,7 +290,7 @@ proc retainRequiredDrivers ?!@ast ioAST {
       end
     //--- Check all arguments of driver instanciation have been used
       for (unusedSelector) in driverInstanciationArgumentMap.keySet - validArgumentSet do
-        error [driverInstanciationArgumentMap locationForKey !unusedSelector] : "invalid selector"
+        error ([driverInstanciationArgumentMap locationForKey !unusedSelector] : "invalid selector")
       end
     end
   //---
@@ -318,7 +318,7 @@ proc retainRequiredDrivers ?!@ast ioAST {
   ioAST.mDriverDeclarationListAST = @[]
 //--- Check all drivers named in instanciation constructs have been implemented
   for (unusedDriverName) in instanciedDriverMap.keySet - validDriverNames do
-    error [instanciedDriverMap locationForKey !unusedDriverName] : "undefined driver"
+    error ([instanciedDriverMap locationForKey !unusedDriverName] : "undefined driver")
   end
 }
 

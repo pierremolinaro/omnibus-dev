@@ -97,9 +97,9 @@ override method @globalConstantDeclarationAST enterInContext
   var displayValue = false
   for (attribute) in self.mAttributeList do
     if attribute.string != "display" then
-      error attribute : "attribute should be @display"
+      error (attribute : "attribute should be @display")
     elsif displayValue then
-      error attribute : "duplicated attribute"
+      error (attribute : "duplicated attribute")
     else
       displayValue = true
     end

@@ -192,7 +192,7 @@ override method @llvmInfixOperatorAST enterInContext
   [!?ioContext.mTypeMap makeEntry !self.mResultTypeName ?let resultTypeProxy]
   let resultType = resultTypeProxy.type
   if leftType.isCompileTimeType & rightType.isCompileTimeType then
-    error self.mInfixOperatorLocation : "one of the two argument types should not be a compile time type"
+    error (self.mInfixOperatorLocation : "one of the two argument types should not be a compile time type")
   end
   [resultType checkIsNotCompileTimeType !self.mResultTypeName.location]
 //--- Enter in infix operator map  

@@ -79,10 +79,10 @@ override method @fixedSizeArrayTypeDeclarationAST enterInContext
 //--- Get element type
   [ioContext.mTypeMap searchType !lkey:self.mElementTypeName ?type:let elementType]
   if not elementType.copyable then
-    error self.mElementTypeName : "an array element should be copyable"
+    error (self.mElementTypeName : "an array element should be copyable")
   end
   if not elementType.instanciable then
-    error self.mElementTypeName : "an array element should be instanciable"
+    error (self.mElementTypeName : "an array element should be instanciable")
   end
 //--- Compute array size
   computeStaticExpression (
@@ -94,7 +94,7 @@ override method @fixedSizeArrayTypeDeclarationAST enterInContext
     ?result:let @objectIR sizeExpressionIR
   )
   if not sizeExpressionIR.isLiteralInteger then
-    error self.mSizeExpressionLocation : "array size expression is a literal interger expression"
+    error (self.mSizeExpressionLocation : "array size expression is a literal interger expression")
   else
     [sizeExpressionIR extractLiteralInteger ?1* ?value:let arraySize]
   //-------------------------------------------- Original type name
@@ -269,19 +269,19 @@ override method @fixedSizeArrayAssignmentOperatorUsage generateCode
           + ", " + inTargetType.llvmTypeName + "* " + inSourcePossibleReference.llvmName + ")"
     [!?ioInstructionListIR appendInstructionAsFreeString !s !@[assignmentFunctionLLVMName]]
   case literalInteger (2*) :
-    error inErrorLocation : "invalid fixed array assignment source (literalInteger)"
+    error (inErrorLocation : "invalid fixed array assignment source (literalInteger)")
   case literalString (2*) :
-    error inErrorLocation : "invalid fixed array assignment source (literalString)"
+    error (inErrorLocation : "invalid fixed array assignment source (literalString)")
   case llvmStructureValue (2*) :
-    error inErrorLocation : "invalid fixed array assignment source (llvmStructureValue)"
+    error (inErrorLocation : "invalid fixed array assignment source (llvmStructureValue)")
   case llvmNamedValue (2*) :
-    error inErrorLocation : "invalid fixed array assignment source (llvmValue)"
+    error (inErrorLocation : "invalid fixed array assignment source (llvmValue)")
   case null (*) :
-    error inErrorLocation : "invalid fixed array assignment source (null)"
+    error (inErrorLocation : "invalid fixed array assignment source (null)")
   case void:
-    error inErrorLocation : "invalid fixed array assignment source (void)"
+    error (inErrorLocation : "invalid fixed array assignment source (void)")
   case zero (*) :
-    error inErrorLocation : "invalid fixed array assignment source (zero)"
+    error (inErrorLocation : "invalid fixed array assignment source (zero)")
   end
 }
 

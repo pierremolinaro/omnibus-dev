@@ -37,8 +37,8 @@ syntax extension omnibus_syntax {
         if attributeValue.string == staticAttribute () then
           staticWhileExpression = true
         else
-          error attributeValue : "the attribute should be \"@" + staticAttribute () + "\"" 
-          fixit { replace "@" + staticAttribute () }
+          error (attributeValue : "the attribute should be \"@" + staticAttribute () + "\"" 
+          fixit replace "@" + staticAttribute ())
         end
       or
       end
@@ -96,7 +96,7 @@ override method @forInstructionAST instructionSemanticAnalysis
   let @omnibusType iteratedElementType
   switch iteratedType.subscript
   case noSubscript :
-    error self.mIteratedObject : "this object is not enumerable" spoil (iteratedElementType)
+    error (self.mIteratedObject : "this object is not enumerable" spoil iteratedElementType)
   case literalString :
     iteratedElementType = [inContext.mTypeMap searchKey !"u8".nowhere].type
   case staticSubscript (elementType *) :
@@ -136,7 +136,7 @@ override method @forInstructionAST instructionSemanticAnalysis
   switch whileExpressionBooleanResult 
   case compileTime (boolValue) :
     if not boolValue then
-      error self.mEndOf_whileExpression : "test expression is always false"
+      error (self.mEndOf_whileExpression : "test expression is always false")
     end
   case llvmVariable (*) :
   end

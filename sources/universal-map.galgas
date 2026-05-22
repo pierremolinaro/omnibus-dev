@@ -142,17 +142,17 @@ method @universalValuedObjectMap searchValuedObject
   switch entity
   case task (@omnibusType type) :
     if inMode == .bootMode then
-      error inValuedObjectName : "cannot call a task entry in a boot routine" spoil (outObjectIR)
+      error (inValuedObjectName : "cannot call a task entry in a boot routine" spoil outObjectIR)
     else
       outObjectIR = .reference {!type:type !llvmName:llvmNameForGlobalVariable (!inValuedObjectName)}
     end
   case driver (@omnibusType type instancied) :
     if inMode == .bootMode then
-      error inValuedObjectName : "cannot call a driver in a boot routine" spoil (outObjectIR)
+      error (inValuedObjectName : "cannot call a driver in a boot routine" spoil outObjectIR)
     elsif not instancied then
-      error inValuedObjectName : "the driver should be instancied" spoil (outObjectIR)
+      error (inValuedObjectName : "the driver should be instancied" spoil outObjectIR)
     elsif not [inInitializedDriverSet hasKey !inValuedObjectName] then
-      error inValuedObjectName : "the driver should be named in driver dependence list" spoil (outObjectIR)
+      error (inValuedObjectName : "the driver should be named in driver dependence list" spoil outObjectIR)
     else
       outObjectIR = .reference {!type:type !llvmName:llvmNameForGlobalVariable (!inValuedObjectName)}
     end
@@ -185,7 +185,7 @@ setter @universalValuedObjectMap readAccess
   case localVariable (2*) :
     switch valueState 
     case noValue :
-      error inValuedObjectName : "'" + inValuedObjectName + "' has no value"
+      error (inValuedObjectName : "'" + inValuedObjectName + "' has no value")
     case hasUnreadValue :
       [!?self.mInternalPropertyAndRoutineMap setMObjectStateForKey !.hasReadValue !inValuedObjectName]
     case hasReadValue :
@@ -207,7 +207,7 @@ setter @universalValuedObjectMap searchValuedObjectForReadAccess
     if instancied then
       outObjectIR = .reference {!type:type !llvmName:llvmNameForGlobalVariable (!inValuedObjectName)}
     else
-      error inValuedObjectName : "the driver should be instancied" spoil (outObjectIR)
+      error (inValuedObjectName : "the driver should be instancied" spoil outObjectIR)
     end
   case globalConstant (@objectIR objectIR) :
     outObjectIR = objectIR
@@ -221,7 +221,7 @@ setter @universalValuedObjectMap searchValuedObjectForReadAccess
   case localVariable (@omnibusType type @lstring omnibusName) :
     switch valueState 
     case noValue :
-      error inValuedObjectName : "'" + inValuedObjectName + "' has no value" spoil (outObjectIR)
+      error (inValuedObjectName : "'" + inValuedObjectName + "' has no value" spoil outObjectIR)
     case hasUnreadValue :
       [!?self.mInternalPropertyAndRoutineMap setMObjectStateForKey !.hasReadValue !inValuedObjectName]
       outObjectIR = .reference {!type:type !llvmName:llvmNameForLocalVariable (!omnibusName)}
@@ -240,15 +240,15 @@ setter @universalValuedObjectMap searchValuedObjectForWriteAccess
   [self.mInternalPropertyAndRoutineMap searchKey !inValuedObjectName ?let valueState ?* ?let property]
   switch property
   case task (*) :
-    error inValuedObjectName : "a task cannot be written" spoil (outObjectIR)
+    error (inValuedObjectName : "a task cannot be written" spoil outObjectIR)
   case driver (* *) :
-    error inValuedObjectName : "a driver cannot be written" spoil (outObjectIR)
+    error (inValuedObjectName : "a driver cannot be written" spoil outObjectIR)
   case globalConstant (*) :
-    error inValuedObjectName : "a constant cannot be written" spoil (outObjectIR)
+    error (inValuedObjectName : "a constant cannot be written" spoil outObjectIR)
   case globalSyncInstance (2*) :
-    error inValuedObjectName : "a global sync instance cannot be written" spoil (outObjectIR)
+    error (inValuedObjectName : "a global sync instance cannot be written" spoil outObjectIR)
   case localConstant (3*) :
-    error inValuedObjectName : "a constant cannot be written" spoil (outObjectIR)
+    error (inValuedObjectName : "a constant cannot be written" spoil outObjectIR)
   case localVariable (@omnibusType type @lstring omnibusName) :
     outObjectIR = @objectIR.reference {!type:type !llvmName:llvmNameForLocalVariable (!omnibusName)}
     switch valueState 
@@ -269,19 +269,19 @@ setter @universalValuedObjectMap searchValuedObjectForReadWriteAccess
   [self.mInternalPropertyAndRoutineMap searchKey !inValuedObjectName ?let valueState ?* ?let property]
   switch property
   case task (*) :
-    error inValuedObjectName : "a task has no value" spoil (outObjectIR)
+    error (inValuedObjectName : "a task has no value" spoil outObjectIR)
   case driver (* *) :
-    error inValuedObjectName : "a driver has no value" spoil (outObjectIR)
+    error (inValuedObjectName : "a driver has no value" spoil outObjectIR)
   case globalConstant (*) :
-    error inValuedObjectName : "a constant cannot be written" spoil (outObjectIR)
+    error (inValuedObjectName : "a constant cannot be written" spoil outObjectIR)
   case localConstant (3*) :
-    error inValuedObjectName : "a constant cannot be written" spoil (outObjectIR)
+    error (inValuedObjectName : "a constant cannot be written" spoil outObjectIR)
   case globalSyncInstance (2*) :
-    error inValuedObjectName : "a global sync instance cannot be written" spoil (outObjectIR)
+    error (inValuedObjectName : "a global sync instance cannot be written" spoil outObjectIR)
   case localVariable (@omnibusType type @lstring omnibusName) :
     switch valueState 
     case noValue :
-      error inValuedObjectName : "object has no value" spoil (outObjectIR)
+      error (inValuedObjectName : "object has no value" spoil outObjectIR)
     case hasUnreadValue :
       outObjectIR = @objectIR.reference {!type:type !llvmName:llvmNameForLocalVariable (!omnibusName)}
     case hasReadValue :
@@ -305,13 +305,13 @@ method @universalValuedObjectMap searchValuedObjectType
     [self.mInternalPropertyAndRoutineMap searchKey !inLValue.mIdentifier ?2* ?let property]
     switch property
     case task (*) :
-      error inLValue.mIdentifier : "undefined in this context" spoil (outType)
+      error (inLValue.mIdentifier : "undefined in this context" spoil outType)
     case driver (* *) :
-      error inLValue.mIdentifier : "undefined in this context" spoil (outType)
+      error (inLValue.mIdentifier : "undefined in this context" spoil outType)
     case globalConstant (*) :
-      error inLValue.mIdentifier : "undefined in this context" spoil (outType)
+      error (inLValue.mIdentifier : "undefined in this context" spoil outType)
     case localConstant (3*) :
-      error inLValue.mIdentifier : "undefined in this context" spoil (outType)
+      error (inLValue.mIdentifier : "undefined in this context" spoil outType)
     case localVariable (@omnibusType type *) :
       outType = type
     case globalSyncInstance (@omnibusType type *) :
@@ -374,7 +374,7 @@ method @universalValuedObjectMap checkLocalVariableFinalState ?!@instructionList
       end
     case localVariable (@omnibusType type @lstring omnibusName) :
       if (entry.mObjectState == .noValue) && entry.mObjectShouldBeValuedAtEndOfScope then
-        error entry.lkey : "'" + entry.lkey + "' should be valued at the end of routine"
+        error (entry.lkey : "'" + entry.lkey + "' should be valued at the end of routine")
       end
       [!?ioInstructionGenerationList generateRelease !type !omnibusName]
     end
@@ -459,8 +459,8 @@ setter @universalValuedObjectMap closeBranch ?let @location inErrorLocation {
         elsif (currentObjectState == .hasReadValue) & (referenceState == .hasUnreadValue) then // Ok, modify reference state
           [!?referenceStateMap setMStateForKey !.hasReadValue !lkey]
         else
-          error inErrorLocation
-            : "invalid state for object '" + lkey + "': found " + currentObjectState + ", required " + referenceState
+          error (inErrorLocation
+            : "invalid state for object '" + lkey + "': found " + currentObjectState + ", required " + referenceState)
         end
       end
       self.mScopeStack += !scopeKind !false !initialStateMap !referenceStateMap !localObjectList
@@ -468,8 +468,8 @@ setter @universalValuedObjectMap closeBranch ?let @location inErrorLocation {
      for (lkey objectState) in referenceStateMap do
         [self.mInternalPropertyAndRoutineMap searchKey !lkey ?let currentObjectState ?2*]
         if objectState != currentObjectState then
-          error inErrorLocation
-            : "invalid state for object '" + lkey + "': found " + currentObjectState + ", required " + objectState
+          error (inErrorLocation
+            : "invalid state for object '" + lkey + "': found " + currentObjectState + ", required " + objectState)
         end
       end
       self.mScopeStack += !scopeKind !false !initialStateMap !referenceStateMap !localObjectList
@@ -504,7 +504,7 @@ setter @universalValuedObjectMap closeOverride ?let @location inErrorLocation {
       end
     case localVariable (**) :
       if (currentObjectState == .noValue) && objectShouldBeValuedAtEndOfScope then
-        error inErrorLocation : "'" + lkey + "' should be valued at the end of routine"
+        error (inErrorLocation : "'" + lkey + "' should be valued at the end of routine")
       end
     end
   end

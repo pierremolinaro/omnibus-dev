@@ -240,7 +240,7 @@ override method @syncInstructionAST instructionSemanticAnalysis
       let @lstring guardMangledName
       if usesSelf.bool then // self.p1.p2. … (…)
         if inSelfType.kind.isVoid then
-          error usesSelf : "'self' is not available in this context" spoil (guardEffectiveParameterListIR, guardMangledName)
+          error (usesSelf : "'self' is not available in this context" spoil guardEffectiveParameterListIR, guardMangledName)
         else
           var propertyList = nameList
           [!?propertyList popLast ?let guardName]
@@ -274,9 +274,9 @@ override method @syncInstructionAST instructionSemanticAnalysis
           )
         end
       elsif nameList.count == 1 then // Standalone guard: g (…)
-        error [nameList mValueAtIndex !0]
+        error ([nameList mValueAtIndex !0]
         : "Standalone guard are not handled"
-        spoil (guardMangledName, guardEffectiveParameterListIR)
+        spoil guardMangledName, guardEffectiveParameterListIR)
       else // Global variable method, or driver method: g.h. … (…)
         var propertyList = nameList
         [!?propertyList popFirst ?let globalReceiverName]
@@ -325,7 +325,7 @@ override method @syncInstructionAST instructionSemanticAnalysis
             !effectiveParameterListIR:guardEffectiveParameterListIR
           }
         else
-          error guardMangledName : "false guard not handled yet"
+          error (guardMangledName : "false guard not handled yet")
         end
       case llvmVariable (llvmName) :
         guardedCommandIRList += !.boolAndSync {
@@ -385,7 +385,7 @@ proc analyzeGuardCall
   [inContext.mGuardMap searchKey !guardMangledName ?let isPublic ?let @routineTypedSignature formalSignature ?let guardRoutineUserLLVMName ?*]
 //--- Check accessibility
   if not isPublic then
-    error inGuardName : "this guard is not public"spoil (outGuardMangledName, outEffectiveParameterListIR)
+    error (inGuardName : "this guard is not public" spoil outGuardMangledName, outEffectiveParameterListIR)
   else  
     outGuardMangledName = guardRoutineUserLLVMName
   //--- Analyze effective parameters

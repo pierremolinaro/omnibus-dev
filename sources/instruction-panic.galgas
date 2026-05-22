@@ -50,7 +50,7 @@ override method @panicInstructionAST instructionSemanticAnalysis
 {
 //--- Panic allowed ?
   if inMode == .panicMode then
-    error self.mInstructionLocation : "operations that can generate panic are not allowed in " + panicModeName () + " mode"
+    error (self.mInstructionLocation : "operations that can generate panic are not allowed in " + panicModeName () + " mode")
   end
 //--- Analyze expression
   var @instructionListIR unusedInstructionListIR = @[]
@@ -72,13 +72,13 @@ override method @panicInstructionAST instructionSemanticAnalysis
   if (unusedInstructionListIR.count > 0)
      || not result.isLiteralInteger
      || (result.omnibusTypeDescriptionName != ctIntegerTypeName ()) then
-    error self.mInstructionLocation : "throw expression should be a literal integer"
+    error (self.mInstructionLocation : "throw expression should be a literal integer")
   else
     [inContext.mPanicCodeType.kind extractInteger ?min:let min ?max:let max ?2*]
     [result extractLiteralInteger ?1* ?value:let throwValue]
     if (throwValue < min) || (throwValue > max) then
-      error self.mInstructionLocation
-      : "panic expression cannot be represented by an `" + inContext.mPanicCodeType.omnibusTypeDescriptionName
+      error (self.mInstructionLocation
+      : "panic expression cannot be represented by an `" + inContext.mPanicCodeType.omnibusTypeDescriptionName)
     elsif not [option omnibus_options.noPanicGeneration value] then
       ioInstructionGenerationList += !@panicInstructionIR {
         !self.mInstructionLocation

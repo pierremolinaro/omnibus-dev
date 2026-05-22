@@ -25,9 +25,9 @@ setter @instructionListIR appendCopyFromReferences
   else // Call a copy routine
     [inSourcePossibleReference extractReference ?type:let sourceType ?llvmName:let sourceLLVMName]
     if sourceType.omnibusTypeDescriptionName != inTargetReference.type.omnibusTypeDescriptionName then
-      error inErrorLocation
+      error (inErrorLocation
       : "object of type " + inTargetReference.type.omnibusTypeDescriptionName
-        + " cannot be assigned from expression of type " + sourceType.omnibusTypeDescriptionName
+        + " cannot be assigned from expression of type " + sourceType.omnibusTypeDescriptionName)
     end
     self += !@copyFromReferencesIR {!inTargetReference !sourceLLVMName}
   end

@@ -30,12 +30,12 @@ syntax extension omnibus_syntax {
     for (attribute) in attributeList do
       if attribute.string == exportedAttribute () then
         if isGlobal then
-          error attribute : "duplicated attribute" fixit { remove }
+          error (attribute : "duplicated attribute" fixit remove)
         else
           isGlobal = true
         end
       else
-        error attribute : "invalid attribute" fixit { remove replace "@" + exportedAttribute () }
+        error (attribute : "invalid attribute" fixit remove replace "@" + exportedAttribute () )
       end
     end
     ioAST.mRequiredFunctionListAST +=
@@ -61,7 +61,7 @@ proc checkRequiredProcedures
     let requiredFunctionSignature = [requiredFunction.mFormalArgumentList routineSignature !requiredFunction.mName]
     let requiredFunctionMangledName = requiredFunction.mName.string + requiredFunctionSignature
     if not [inContext.mRoutineMap hasKey !requiredFunctionMangledName] then
-      error requiredFunction.mName : "required func is not implemented"
+      error (requiredFunction.mName : "required func is not implemented")
     else
       [inContext.mRoutineMap searchKey
         !requiredFunctionMangledName.nowhere
@@ -76,29 +76,29 @@ proc checkRequiredProcedures
     //--- Check signatures
       routineTypedSignature2 (!inContext.mTypeMap !requiredFunction.mFormalArgumentList ?let requiredTypedSignature)
       if requiredTypedSignature.typedString != implementedSignature.typedString then
-        error errorLocation
-        : "function signature should be " + requiredTypedSignature.typedString + " (as required by required function declaration)"    
+        error (errorLocation
+        : "function signature should be " + requiredTypedSignature.typedString + " (as required by required function declaration)")  
       end
     //--- Check return type
       if not implementedReturnTypeProxy.isNull then
-        error errorLocation : "function should not return a value (as required by required function declaration)"    
+        error (errorLocation : "function should not return a value (as required by required function declaration)") 
       end
     //--- Check mode
       if implementedMode != requiredFunction.mExecutionMode then
-        error errorLocation : "required mode is '" + requiredFunction.mExecutionMode + "'"    
+        error (errorLocation : "required mode is '" + requiredFunction.mExecutionMode + "'")
       end
     //--- Check public
       if not implementedPublic then
-        error errorLocation : "function should be public (as required by required function declaration)"    
+        error (errorLocation : "function should be public (as required by required function declaration)")  
       end
     //--- Check attributes
       if requiredFunction.mIsExported && not implementedIsExported then
-        error errorLocation
+        error (errorLocation
         : "missing @" + exportedAttribute () + " attribute (required function declaration names it)"
-        fixit { insert after " @" + exportedAttribute () }
+        fixit insert after " @" + exportedAttribute () )
       elsif implementedIsExported && not requiredFunction.mIsExported then
-        error errorLocation
-        : "incorrect @" + exportedAttribute () + " attribute (required function declaration does not name it)"
+        error (errorLocation
+        : "incorrect @" + exportedAttribute () + " attribute (required function declaration does not name it)")
       end
     end
   end

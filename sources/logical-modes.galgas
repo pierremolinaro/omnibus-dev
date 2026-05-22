@@ -188,7 +188,7 @@ func checkModeAndReturnsRoutineLLVMName ?let @routineLLVMNameDict inCalledRoutin
     for (key *) in inCalledRoutineDictionary do
       m += "\n  - '" + key + "' mode"
     end
-    error inRoutineName : m spoil (result)
+    error (inRoutineName : m spoil result)
   end
 }
 

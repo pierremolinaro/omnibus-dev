@@ -26,7 +26,7 @@ before {
       let sourceName = path.lastPathComponent
       [text writeToFileWhenDifferentContents !sourceName ?*]
     else
-      error "".nowhere : "there is no '" + path + "' embedded file"
+      error ("".nowhere : "there is no '" + path + "' embedded file")
     end  
   end
 }

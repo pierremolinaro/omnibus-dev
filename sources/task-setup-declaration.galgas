@@ -74,7 +74,7 @@ syntax extension omnibus_syntax {
         !endOfInit
       }
     else
-      error attribute : "attribute should be @onSetup, @onStart or @onTermination"
+      error (attribute : "attribute should be @onSetup, @onStart or @onTermination")
     end
   }
 

@@ -84,13 +84,13 @@ override method @checkInstructionAST instructionSemanticAnalysis
   case compileTime (boolValue) :
     if not boolValue then
       if self.mCheckMessage.string != "" then
-        error self.mCheckMessage : "check failure: " + self.mCheckMessage
+        error (self.mCheckMessage : "check failure: " + self.mCheckMessage)
       else
-        error self.mCheckMessage : "check failure"
+        error (self.mCheckMessage : "check failure")
       end
     end
   case llvmVariable (*) :
-    error self.mInstructionLocation : "expression is not static: use assert instruction"
+    error (self.mInstructionLocation : "expression is not static: use assert instruction")
   end
 }
 

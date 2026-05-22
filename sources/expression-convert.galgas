@@ -103,7 +103,7 @@ override method @convertExpressionAST analyzeExpression
   ]  
 //--- 
   if inMode.isSafe then
-    error self.mTypeName : "operations that can generate panic are not allowed in " + panicModeName () + " mode"
+    error (self.mTypeName : "operations that can generate panic are not allowed in " + panicModeName () + " mode")
   end
 //--- Analyze type
   let @omnibusType resultType = if self.mTypeName.string == ""
@@ -112,15 +112,15 @@ override method @convertExpressionAST analyzeExpression
   end
 //--- Check types
   if not resultType.kind.isInteger then
-    error self.mTypeName : "this type is not an integer type" spoil (outResult)
+    error (self.mTypeName : "this type is not an integer type" spoil outResult)
   elsif not expressionResult.type.kind.isInteger then
-    error self.mEndOfExpression : "expression type is not an integer type" spoil (outResult)
+    error (self.mEndOfExpression : "expression type is not an integer type" spoil outResult)
   else
     [expressionResult.type.kind extractInteger ?min:let minSource ?max:let maxSource ?2*]
     [resultType.kind extractInteger ?min:let minTarget ?max:let maxTarget ?2*]
     let alwaysPossible = (minTarget <= minSource) && (maxTarget >= maxSource)
     if alwaysPossible then
-      error self.mTypeName:"useless explicit conversion"
+      error (self.mTypeName:"useless explicit conversion")
     end
     getNewTempValue (!resultType !?ioTemporaries ?outResult)
     if [option omnibus_options.noPanicGeneration value] then

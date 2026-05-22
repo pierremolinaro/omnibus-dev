@@ -52,7 +52,7 @@ proc codeOptimization
     for (routine) in undefinedRoutineSet do
       m += "\n    - " + routine + "\n"
     end
-    error .nowhere : m
+    error (.nowhere : m)
   end
 //----------------------------------------------- Compute useful routines
   if [option omnibus_options.noDeadCodeElimination value] then
@@ -139,7 +139,7 @@ private proc displayInvocationGraph
     for (r) in undefinedRoutineSet do
       m += "\n    - " + r
     end
-    error .nowhere : m
+    error (.nowhere : m)
   end
 }
 

@@ -186,7 +186,7 @@ syntax extension omnibus_syntax {
               !endOfInstructionList: endOfInstructionList
             }
           if getterDefined then
-            error getterOrSetter : "duplicate getter definition"
+            error (getterOrSetter : "duplicate getter definition")
           end
           getterDefined = true
         elsif getterOrSetter.string == "set" then
@@ -200,18 +200,18 @@ syntax extension omnibus_syntax {
               !endOfInstructionList: endOfInstructionList
             }
           if setterDefined then
-            error getterOrSetter : "duplicate setter definition"
+            error (getterOrSetter : "duplicate setter definition")
           end
           setterDefined = true
         else
-          error getterOrSetter : "invalid attribute" fixit { remove replace "@set" replace "@get" }
+          error (getterOrSetter : "invalid attribute" fixit remove replace "@set" replace "@get")
         end
       while
       end
       if setterDefined && not getterDefined then
-        error .here : "a getter should be defined"
+        error (.here : "a getter should be defined")
       elsif not setterDefined && not getterDefined then
-        error .here : "a getter should be defined, and optionaly a setter"
+        error (.here : "a getter should be defined, and optionaly a setter")
       end
     or // getter only
       <instructionList> !?ioAST ?let readInstructionList
@@ -340,13 +340,13 @@ method @structurePropertyListAST.@element enterPropertyInContext
   var alignmentDefined = false
   for (attribute align) in self.mPropertyAttributeList do
     if attribute.string != "align" then
-      error attribute : "only the @align attribute is allowed here"
+      error (attribute : "only the @align attribute is allowed here")
     elsif alignmentDefined then
-      error attribute : "@align attribute already defined"
+      error (attribute : "@align attribute already defined")
     else
     //--- Check alignment is a power of 2
       if align.bigint != (1 << (align.bigint - 1).bitCountForUnsignedRepresentation) then
-        error align : "alignment should be a power of 2"
+        error (align : "alignment should be a power of 2")
       else
         explicitAlignment = align
         alignmentDefined = true
@@ -376,7 +376,7 @@ method @structurePropertyListAST.@element enterPropertyInContext
       actualPropertyType = expressionIR.type
     end
     if not actualPropertyType.instanciable then
-      error self.mPropertyName : actualPropertyType.omnibusTypeDescriptionName + " type is not instanciable"
+      error (self.mPropertyName : actualPropertyType.omnibusTypeDescriptionName + " type is not instanciable")
     end
     if not actualPropertyType.copyable then
       canBeCopied = false
@@ -405,10 +405,10 @@ method @structurePropertyListAST.@element enterPropertyInContext
     if actualPropertyType.kind.isCompileTimeBool then
       actualPropertyType = boolType ()
     elsif actualPropertyType.kind.isCompileTimeInteger then
-      error self.mPropertyName
-      : "$" + actualPropertyType.omnibusTypeDescriptionName + " type is a compile time type, and is not instanciable"
+      error (self.mPropertyName
+      : "$" + actualPropertyType.omnibusTypeDescriptionName + " type is a compile time type, and is not instanciable")
     elsif not actualPropertyType.instanciable then
-      error self.mPropertyName : actualPropertyType.omnibusTypeDescriptionName + " type is not instanciable"
+      error (self.mPropertyName : actualPropertyType.omnibusTypeDescriptionName + " type is not instanciable")
     end
     if not actualPropertyType.copyable then
       canBeCopied = false
@@ -430,7 +430,7 @@ method @structurePropertyListAST.@element enterPropertyInContext
     sortedOperandIRList += ![expressionIR withType !actualPropertyType] !propertyIndex
   case uninitializedStoredProperty :
     if not optionalPropertyType.instanciable then
-      error self.mPropertyName : optionalPropertyType.omnibusTypeDescriptionName + " type is not instanciable"
+      error (self.mPropertyName : optionalPropertyType.omnibusTypeDescriptionName + " type is not instanciable")
     end
     let propertyIndex = ioPropertyList.count
     ioPropertyList += !self.mPropertyName.string !optionalPropertyType
@@ -450,7 +450,7 @@ method @structurePropertyListAST.@element enterPropertyInContext
     ioConstructorKey += "!" + self.mPropertyName
   case uninitializedConstantProperty :
     if not optionalPropertyType.instanciable then
-      error self.mPropertyName : optionalPropertyType.omnibusTypeDescriptionName + " type is not instanciable"
+      error (self.mPropertyName : optionalPropertyType.omnibusTypeDescriptionName + " type is not instanciable")
     end
     let propertyIndex = ioPropertyList.count
     ioPropertyList += !self.mPropertyName.string !optionalPropertyType
@@ -464,7 +464,7 @@ method @structurePropertyListAST.@element enterPropertyInContext
     ioConstructorKey += "!" + self.mPropertyName
   case readOnlyComputedProperty (instructionList endOfInstructionList) :
     if not optionalPropertyType.instanciable then
-      error self.mPropertyName : optionalPropertyType.omnibusTypeDescriptionName + " type is not instanciable"
+      error (self.mPropertyName : optionalPropertyType.omnibusTypeDescriptionName + " type is not instanciable")
     end
     let llvmRoutineName = getterLLVMName (!inReceiverLLVMBaseTypeName !self.mPropertyName)
     let modeDictionary = [@mode.anyMode routineLLVMDictionaryForFunction !llvmRoutineName]
@@ -497,7 +497,7 @@ method @structurePropertyListAST.@element enterPropertyInContext
       !returnTypeName: self.mPropertyTypeName
   case writeComputedProperty (writeInstructionList endOfWriteInstructionList) :
     if not optionalPropertyType.instanciable then
-      error self.mPropertyName : optionalPropertyType.omnibusTypeDescriptionName + " type is not instanciable"
+      error (self.mPropertyName : optionalPropertyType.omnibusTypeDescriptionName + " type is not instanciable")
     end
     let llvmGetterRoutineName = getterLLVMName (!inReceiverLLVMBaseTypeName !self.mPropertyName)
     let getterModeDictionary = [@mode.anyMode routineLLVMDictionaryForFunction !llvmGetterRoutineName]
@@ -592,12 +592,12 @@ override method @structureDeclarationAST enterInContext
   for (s) in self.mAttributeListAST do
     if s.string == copyableAttribute () then
       if [typeAttributes contains !.copyable] then
-        error s : "duplicated attribute"
+        error (s : "duplicated attribute")
       elsif not canBeCopied then
-        error self.mReceiverTypeName : "this structure cannot be copied, one field is not copyable"
+        error (self.mReceiverTypeName : "this structure cannot be copied, one field is not copyable")
       end
     else
-      error s : "only @copyable attribute is allowed here"
+      error (s : "only @copyable attribute is allowed here")
     end
   end
   if self.mGenerateAssignmentRoutine & canBeCopied then
@@ -691,11 +691,11 @@ override method @structureAssignmentOperatorUsage generateCode
   end
   switch inSourcePossibleReference
   case llvmArrayRepeatedDynamicValue (3*) :
-    error inErrorLocation : "invalid structure assignment «llvmArrayRepeatedDynamicValue»"
+    error (inErrorLocation : "invalid structure assignment «llvmArrayRepeatedDynamicValue»")
   case llvmArrayDynamicValues (2*) :
-    error inErrorLocation : "invalid structure assignment «llvmArrayDynamicValues»"
+    error (inErrorLocation : "invalid structure assignment «llvmArrayDynamicValues»")
   case llvmArrayStaticValues (3*) :
-    error inErrorLocation : "invalid structure assignment «llvmArrayStaticValues»"
+    error (inErrorLocation : "invalid structure assignment «llvmArrayStaticValues»")
   case llvmArrayRepeatedStaticValue (3* @uint idx) :
     let assignmentFunctionLLVMName =  assignmentOperatorFuncName (!inTargetType !inTargetType)
     let s = " call void  @" + assignmentFunctionLLVMName.assemblerRepresentation 
@@ -719,17 +719,17 @@ override method @structureAssignmentOperatorUsage generateCode
       [!?ioInstructionListIR appendInstructionAsFreeString !s !@[]]    
     end
   case literalInteger (2*) :
-    error inErrorLocation : "invalid structure assignment «literalInteger»"
+    error (inErrorLocation : "invalid structure assignment «literalInteger»")
   case literalString (2*) :
-    error inErrorLocation : "invalid structure assignment «literalString»"
+    error (inErrorLocation : "invalid structure assignment «literalString»")
   case llvmNamedValue (2*) :
-    error inErrorLocation : "invalid structure assignment «llvmArrayStaticValues»"
+    error (inErrorLocation : "invalid structure assignment «llvmArrayStaticValues»")
   case null (*) :
-    error inErrorLocation : "invalid structure assignment «llvmValue»"
+    error (inErrorLocation : "invalid structure assignment «llvmValue»")
   case void:
-    error inErrorLocation : "invalid structure assignment «void»"
+    error (inErrorLocation : "invalid structure assignment «void»")
   case zero (*) :
-    error inErrorLocation : "invalid structure assignment «zero»"
+    error (inErrorLocation : "invalid structure assignment «zero»")
   end
 }
 

@@ -35,7 +35,7 @@ syntax extension omnibus_syntax {
     while
     end
     if integerFieldValues.count < 2 then
-      error .here : "this expression should contain two bit slices or more" spoil (outExpression)
+      error (.here : "this expression should contain two bit slices or more" spoil outExpression)
     else
       outExpression = @integerSliceExpressionAST {!typeName !integerFieldValues !.here}
     end
@@ -72,7 +72,7 @@ override method @integerSliceExpressionAST noteExpressionTypesInPrecedenceGraph
     if sliceWidthStr.string.isDecimalUnsignedNumber then
       let sliceWidth = [sliceWidthStr decimalUnsignedNumber]
       if sliceWidth == 0 then
-        error sliceWidthStr : "the bit slice width should be > 0"
+        error (sliceWidthStr : "the bit slice width should be > 0")
       else
         [!?ioGraph noteUINTType !sliceWidth !expressionLocation]
       end
@@ -103,11 +103,11 @@ override method @integerSliceExpressionAST analyzeExpression
   let resultType = [inContext.mTypeMap searchKey !self.mTypeName].type
 //--- Check type is an unsigned integer type
   if not resultType.kind.isInteger then
-    error self.mTypeName: "this type should be an unsigned integer type" spoil (outResult)
+    error (self.mTypeName: "this type should be an unsigned integer type" spoil outResult)
   else
     [resultType.kind extractInteger ?2* ?unsigned:let unsigned ?bitCount:let bitCount]
     if not unsigned then
-      error self.mTypeName: "this type should be an unsigned integer type" spoil (outResult)
+      error (self.mTypeName: "this type should be an unsigned integer type" spoil outResult)
     else
     //------------------------------------------------------ Valuated fields
       var leftShiftAmount = bitCount
@@ -117,24 +117,24 @@ override method @integerSliceExpressionAST analyzeExpression
         let @uint sliceWidth
         let @lstring expressionTypeName
         if sliceWidthStr.string == "" then
-          error sliceWidthStr : "anonymous selector not allowed here" spoil (operandList, sliceWidth, expressionTypeName)
+          error (sliceWidthStr : "anonymous selector not allowed here" spoil operandList, sliceWidth, expressionTypeName)
         elsif sliceWidthStr.string == "b" then
           sliceWidth = 1
           expressionTypeName = @{!boolTypeName () !self.mTypeName.location}
         elsif not sliceWidthStr.string.isDecimalUnsignedNumber then
-          error sliceWidthStr : "the selector should be an unsigned integer value" spoil (operandList, sliceWidth, expressionTypeName)
+          error (sliceWidthStr : "the selector should be an unsigned integer value" spoil operandList, sliceWidth, expressionTypeName)
         else
           sliceWidth = [sliceWidthStr decimalUnsignedNumber]
           expressionTypeName = @{!"u" + sliceWidth !self.mTypeName.location}
           if sliceWidth == 0 then
-            error sliceWidthStr : "the bit slice width should be > 0"
+            error (sliceWidthStr : "the bit slice width should be > 0")
           end
         end
         if leftShiftAmount >= sliceWidth then
           leftShiftAmount = leftShiftAmount - sliceWidth
         else
           let specifiedBitCount = bitCount + sliceWidth - leftShiftAmount
-          error sliceWidthStr : "bit slice overflow: " + specifiedBitCount + " bits, should be " + bitCount
+          error (sliceWidthStr : "bit slice overflow: " + specifiedBitCount + " bits, should be " + bitCount)
           leftShiftAmount = 0
         end
       //--- Analyze expression
@@ -159,22 +159,22 @@ override method @integerSliceExpressionAST analyzeExpression
       //--- Check expression type
         switch expressionResult.type.kind
         case staticArrayType (* *) :
-          error expressionLocation: "an unsigned integer expression is required here"
+          error (expressionLocation: "an unsigned integer expression is required here")
         case dynamicArrayType (*) :
-          error expressionLocation: "an unsigned integer expression is required here"
+          error (expressionLocation: "an unsigned integer expression is required here")
         case opaque (*) :
-          error expressionLocation: "an unsigned integer expression is required here"
+          error (expressionLocation: "an unsigned integer expression is required here")
         case enumeration (*) :
-          error expressionLocation: "an unsigned integer expression is required here"
+          error (expressionLocation: "an unsigned integer expression is required here")
         case structure (*) :
-          error expressionLocation: "an unsigned integer expression is required here"
+          error (expressionLocation: "an unsigned integer expression is required here")
         case syncTool :
-          error expressionLocation: "an unsigned integer expression is required here"
+          error (expressionLocation: "an unsigned integer expression is required here")
         case boolean :
           if expressionResult.type.omnibusTypeDescriptionName != expressionTargetType.omnibusTypeDescriptionName then
-            error expressionLocation :
+            error (expressionLocation :
             "an $" + expressionTargetType.omnibusTypeDescriptionName + " expression is required, found an $" +
-            expressionResult.type.omnibusTypeDescriptionName + " expression"
+            expressionResult.type.omnibusTypeDescriptionName + " expression")
           end
           if expressionResult.isLiteralInteger then
             [expressionResult extractLiteralInteger ?1* ?value:let @bigint value]
@@ -190,31 +190,31 @@ override method @integerSliceExpressionAST analyzeExpression
             operandList += !shiftedResult
           end
         case void :
-          error expressionLocation: "an unsigned integer expression is required here"
+          error (expressionLocation: "an unsigned integer expression is required here")
         case literalString :
-          error expressionLocation: "an unsigned integer expression is required here"
+          error (expressionLocation: "an unsigned integer expression is required here")
         case function (3*) :
-          error expressionLocation: "an unsigned integer expression is required here"
+          error (expressionLocation: "an unsigned integer expression is required here")
         case generic (3*) :
-          error expressionLocation: "an unsigned integer expression is required here"
+          error (expressionLocation: "an unsigned integer expression is required here")
         case llvmType (*) :
-          error expressionLocation: "an unsigned integer expression is required here"
+          error (expressionLocation: "an unsigned integer expression is required here")
         case compileTimeBool :
-          error expressionLocation: "an unsigned integer expression is required here"
+          error (expressionLocation: "an unsigned integer expression is required here")
         case compileTimeInteger :
           [expressionResult extractLiteralInteger ?1* ?value:let @bigint value]
           if value < 0 then
-            error expressionLocation: "this integer expression should be positive"
+            error (expressionLocation: "this integer expression should be positive")
           elsif value < (1 << sliceWidth) then
             accumulatedFieldStaticValues = accumulatedFieldStaticValues | (value << leftShiftAmount)
           else
-            error expressionLocation: "expression too large (should be < " + (1 << sliceWidth) + ")"
+            error (expressionLocation: "expression too large (should be < " + (1 << sliceWidth) + ")")
           end
         case integer (@bigint unused min @bigint unused max @bool unsigned @uint expressionBitCount) :
           if not unsigned then
-            error expressionLocation: "an $uint" + sliceWidth + " expression is required here"
+            error (expressionLocation: "an $uint" + sliceWidth + " expression is required here")
           elsif expressionBitCount != sliceWidth then
-            error expressionLocation: "an $uint" + sliceWidth + " expression is required here"
+            error (expressionLocation: "an $uint" + sliceWidth + " expression is required here")
           else
           //--- Perform an bit extend to result type
             getNewTempValue (!resultType !?ioTemporaries ?let extendedResult)
@@ -228,7 +228,7 @@ override method @integerSliceExpressionAST analyzeExpression
         end
       end
       if leftShiftAmount != 0 then
-        error self.mLocation : bitCount.string + " bits required, " + (bitCount - leftShiftAmount) + " bits defined"
+        error (self.mLocation : bitCount.string + " bits required, " + (bitCount - leftShiftAmount) + " bits defined")
       end
     //------------------------------------------------------ Result
       outResult = .literalInteger {!type: resultType!value:accumulatedFieldStaticValues}

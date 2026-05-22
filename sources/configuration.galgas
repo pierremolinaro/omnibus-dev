@@ -81,7 +81,7 @@ syntax extension omnibus_target_specific_syntax {
   rule <configuration_key> ?let @string inKey {
     $identifier$ ?let key
     if key.string != inKey then
-      error key : "invalid key (found '" + key + "', required '" + inKey + "'" fixit { replace inKey }
+      error (key : "invalid key (found '" + key + "', required '" + inKey + "'" fixit replace inKey)
     end
     $:$
   }
@@ -213,7 +213,7 @@ syntax extension omnibus_target_specific_syntax {
     <interruptConfigList> ?let interruptionConfigurationList ?let interruptConstantList
     let @uint ptrSize
     if pointerSize.bigint == 0 then
-      error pointerSize : "zero size pointer is invalid" spoil (ptrSize)
+      error (pointerSize : "zero size pointer is invalid" spoil ptrSize)
     else
       ptrSize = pointerSize.bigint.uint
     end
@@ -345,7 +345,7 @@ override method @configurationDeclarationAST enterInContext
 {
 //---
   if ioContext.mTargetParameters.mPointerSize != 0 then
-    error self.mTargetParameters.mConfigurationLocation : "duplicate configuration"
+    error (self.mTargetParameters.mConfigurationLocation : "duplicate configuration")
   end
   ioContext.mTargetParameters = self.mTargetParameters
 //--- Panic code type
@@ -357,10 +357,10 @@ override method @configurationDeclarationAST enterInContext
   if ioContext.mPanicCodeType.kind.isInteger then
     [ioContext.mPanicCodeType.kind extractInteger ?2* ?unsigned:let unsigned ?1*]
     if not unsigned then
-      error self.mPanicCodeTypeName : "this type should be an unsigned integer type"
+      error (self.mPanicCodeTypeName : "this type should be an unsigned integer type")
     end
   else
-    error self.mPanicCodeTypeName : "this type should be an unsigned integer type"
+    error (self.mPanicCodeTypeName : "this type should be an unsigned integer type")
   end
 //--- Panic line type
   [ioContext.mTypeMap searchType
@@ -371,10 +371,10 @@ override method @configurationDeclarationAST enterInContext
   if ioContext.mPanicLineType.kind.isInteger then
     [ioContext.mPanicLineType.kind extractInteger ?2* ?unsigned:let unsigned ?1*]
     if not unsigned then
-      error self.mPanicLineTypeName : "this type should be an unsigned integer type"
+      error (self.mPanicLineTypeName : "this type should be an unsigned integer type")
     end
   else
-    error self.mPanicLineTypeName : "this type should be an unsigned integer type"
+    error (self.mPanicLineTypeName : "this type should be an unsigned integer type")
   end
 //--------------------------------- Interrupt panic codes
   var @stringset panicCodeSet = @[]
@@ -385,7 +385,7 @@ override method @configurationDeclarationAST enterInContext
     case code (value) :
       let s = value.bigint.string
       if [panicCodeSet hasKey !s] then
-        error value : "duplicate interrupt code"
+        error (value : "duplicate interrupt code")
       end
       panicCodeSet ++= s
     end

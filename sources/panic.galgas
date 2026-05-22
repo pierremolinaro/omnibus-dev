@@ -26,7 +26,7 @@ syntax extension omnibus_syntax {
     elsif attribute.string == "loop" then
       isSetup = false
     else
-      error attribute : "attribute should be @setup or @loop" spoil (isSetup)
+      error (attribute : "attribute should be @setup or @loop" spoil isSetup)
     end
     $integer$ ?let priority
     ${$

@@ -22,7 +22,7 @@ syntax extension omnibus_syntax {
     <control_register_lvalue> !?ioAST ?let registerLValue
     $@attribute$ ?let attribute
     if attribute.string != "bit" then
-      error attribute : "attribute should be @bit" fixit { replace "@bit" }
+      error (attribute : "attribute should be @bit" fixit replace "@bit")
     end
     <expression> !?ioAST ?let bitExpression
     let bitExpressionLocation = @location.here
@@ -98,12 +98,12 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
   if (sourceExpressionOperand.type.omnibusTypeDescriptionName == ctIntegerTypeName ()) && sourceExpressionOperand.isLiteralInteger then
     [sourceExpressionOperand extractLiteralInteger ?1* ?value:let @bigint value]
     if (value < 0) || (value > 1) then
-      error self.mSourceExpressionLocation : "static value should be 0 or 1"
+      error (self.mSourceExpressionLocation : "static value should be 0 or 1")
     else
       sourceExpressionOperand = .literalInteger {!type:requiredSourceExpressionType !value:value}
     end
   elsif sourceExpressionOperand.type.omnibusTypeDescriptionName != requiredSourceExpressionType.omnibusTypeDescriptionName then
-    error self.mSourceExpressionLocation : "bit expression type should be $" + requiredSourceExpressionType.omnibusTypeDescriptionName
+    error (self.mSourceExpressionLocation : "bit expression type should be $" + requiredSourceExpressionType.omnibusTypeDescriptionName)
   end
 //-------------------- Control register LValue
   [self.mControlRegisterLValue controlRegisterLValueSemanticAnalysis
@@ -152,12 +152,12 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
   if (bitExpressionOperand.type.omnibusTypeDescriptionName == ctIntegerTypeName ()) && bitExpressionOperand.isLiteralInteger then
     [bitExpressionOperand extractLiteralInteger ?1* ?value:let @bigint value]
     if (value < 0) || (value >= registerBitCount) then
-      error self.mBitExpressionLocation : "static value should be >= 0 and <" + registerBitCount
+      error (self.mBitExpressionLocation : "static value should be >= 0 and <" + registerBitCount)
     else
       bitExpressionOperand = .literalInteger {!type:requiredBitExpressionType !value:value}
     end
   elsif bitExpressionOperand.type.omnibusTypeDescriptionName != requiredBitExpressionType.omnibusTypeDescriptionName then
-    error self.mBitExpressionLocation : "bit expression type should be $" + requiredBitExpressionType.omnibusTypeDescriptionName
+    error (self.mBitExpressionLocation : "bit expression type should be $" + requiredBitExpressionType.omnibusTypeDescriptionName)
   end
 //-------------------- Generate code
   ioInstructionGenerationList += !@bitbandInstructionIR {

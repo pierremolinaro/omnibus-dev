@@ -97,7 +97,7 @@ override method @letInstructionWithAssignmentAST instructionSemanticAnalysis
   )
 //---
   if not result.type.instanciable then
-    error self.mConstantName : result.omnibusTypeDescriptionName + " type is not instanciable" spoil (result)
+    error (self.mConstantName : result.omnibusTypeDescriptionName + " type is not instanciable" spoil result)
   end
 //--- Declare local constant
   let omnibusName = @lstring {!self.mConstantName.string + "." + ioTemporaries.mTemporaryIndex !self.mConstantName}

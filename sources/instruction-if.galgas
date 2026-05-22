@@ -37,9 +37,9 @@ syntax extension omnibus_syntax {
       if attributeValue.string == staticAttribute () then
         staticIfExpression = true
       else
-        error attributeValue : "the attribute should be \"@" + staticAttribute () + "\""
-        spoil (staticIfExpression)
-        fixit { replace "@" + staticAttribute () }
+        error (attributeValue : "the attribute should be \"@" + staticAttribute () + "\""
+        spoil staticIfExpression
+        fixit replace "@" + staticAttribute ())
       end
     or
      staticIfExpression = false
@@ -141,7 +141,7 @@ override method @ifInstructionAST instructionSemanticAnalysis
     end
   case llvmVariable (*) :
     if self.mStaticIfExpression then
-      error self.mTestExpressionEndLocation : "'if' expression is not static"
+      error (self.mTestExpressionEndLocation : "'if' expression is not static")
     end 
   end
   [!?ioUniversalMap openOverrideForSelectBlock]

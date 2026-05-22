@@ -95,7 +95,7 @@ override method @sizeofExpressionAST analyzeExpression
   !result:@objectIR outResult
 {
   if [inRoutineAttributes contains !.isGuard] then
-    error self.mLValue.mIdentifier : "sizeof () cannot be used in guard" spoil (outResult)
+    error (self.mLValue.mIdentifier : "sizeof () cannot be used in guard" spoil outResult)
   else
   //--- Analyze LValue
     [ioUniversalMap searchValuedObjectType !context:inContext !selfType:inSelfType !self.mLValue ?let type ]
@@ -129,7 +129,7 @@ override method @sizeofTypeAST analyzeExpression
   !result:@objectIR outResult
 {
   if [inRoutineAttributes contains !.isGuard] then
-    error self.mTypeName : "sizeof () cannot be used in guard"  spoil (outResult)
+    error (self.mTypeName : "sizeof () cannot be used in guard"  spoil outResult)
   else
     let type = [inContext.mTypeMap searchKey !self.mTypeName].type
     let resultTypeProxy = [inContext.mTypeMap searchKey

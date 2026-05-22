@@ -114,11 +114,11 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
 //--- Check type is an unsigned integer type
   var @uint bitCount
   if not resultType.kind.isInteger then
-    error self.mTypeName: "this type should be an unsigned integer type" spoil (bitCount)
+    error (self.mTypeName: "this type should be an unsigned integer type" spoil bitCount)
   else
     [resultType.kind extractInteger ?2* ?unsigned:let unsigned ?bitCount:bitCount]
     if not unsigned then
-      error self.mTypeName: "this type should be an unsigned integer type" spoil (bitCount)
+      error (self.mTypeName: "this type should be an unsigned integer type" spoil bitCount)
     end
   end
 //--- Analyze source expression
@@ -141,7 +141,7 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
   if sourceOperand.isLiteralInteger then
     [sourceOperand extractLiteralInteger ?1* ?value:let @bigint value]
     if value >= (1 << bitCount) then
-      error self.mSourceExpressionLocation : "static value too large" spoil (sourceOperand)
+      error (self.mSourceExpressionLocation : "static value too large" spoil sourceOperand)
     else
       sourceOperand = .literalInteger {!type:resultType !value:value}
     end
@@ -154,24 +154,24 @@ override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
     let @lstring sliceTypeName
     let @uint sliceWidth
     if sliceWidthStr.string == "" then
-      error sliceWidthStr : "anonymous selector not allowed here" spoil (sliceWidth, sliceTypeName)
+      error (sliceWidthStr : "anonymous selector not allowed here" spoil sliceWidth, sliceTypeName)
     elsif sliceWidthStr.string == "b" then
       sliceWidth = 1
       sliceTypeName = @{!boolTypeName () !self.mTypeName.location}
     elsif not sliceWidthStr.string.isDecimalUnsignedNumber then
-      error sliceWidthStr : "the selector should be an unsigned integer value" spoil (sliceWidth, sliceTypeName)
+      error (sliceWidthStr : "the selector should be an unsigned integer value" spoil sliceWidth, sliceTypeName)
     else
       sliceWidth = [sliceWidthStr decimalUnsignedNumber]
       sliceTypeName = @{!"u" + sliceWidth !self.mTypeName.location}
       if sliceWidth == 0 then
-        error sliceWidthStr : "the bit slice width should be > 0"
+        error (sliceWidthStr : "the bit slice width should be > 0")
       end
     end
     if rightShiftAmount >= sliceWidth then
       rightShiftAmount = rightShiftAmount - sliceWidth
     else
       let specifiedBitCount = bitCount + sliceWidth - rightShiftAmount
-      error sliceWidthStr : "bit slice overflow: " + specifiedBitCount + " bits, should be " + bitCount
+      error (sliceWidthStr : "bit slice overflow: " + specifiedBitCount + " bits, should be " + bitCount)
       rightShiftAmount = 0
     end
     let sliceType = [inContext.mTypeMap searchKey !sliceTypeName].type

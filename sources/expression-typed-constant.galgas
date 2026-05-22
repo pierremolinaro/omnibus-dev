@@ -124,7 +124,7 @@ override method @typedConstantCallAST analyzeExpression
     inferredResultType = [inContext.mTypeMap searchKey !self.mOptionalTypeName].type
   end
   if inferredResultType.kind == .void then
-    error self.mConstructorName : "cannot infer type" spoil (outResult)
+    error (self.mConstructorName : "cannot infer type" spoil outResult)
   else
     let typeName = @lstring {!inferredResultType.omnibusTypeDescriptionName !self.mConstructorName.location}
     [inContext.mTypeConstantMap searchKey !typeName ?let classConstantMap]

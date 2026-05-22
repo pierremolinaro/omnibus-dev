@@ -195,7 +195,7 @@ proc buildOrderedDeclarationList
   outSortedDeclarationListAST = @[]
   if precedenceGraph.undefinedNodeCount > 0 then
     for (mValue) in  precedenceGraph.undefinedNodeReferenceList do
-      error mValue : mValue.string + " is not defined in declaration dependency graph"
+      error (mValue : mValue.string + " is not defined in declaration dependency graph")
     end
   else
     [precedenceGraph topologicalSort
@@ -211,9 +211,9 @@ proc buildOrderedDeclarationList
       for (mDeclaration) in unsortedSemanticDeclarationListAST do
         s += "\n-  " + mDeclaration.keyRepresentationForErrorSignaling
       end
-      error inEndOfSourceFile : s
+      error (inEndOfSourceFile : s)
       for (mDeclaration) in  unsortedSemanticDeclarationListAST do
-        error mDeclaration.locationForErrorSignaling : "the " + mDeclaration.keyRepresentationForErrorSignaling + " is declared here"
+        error (mDeclaration.locationForErrorSignaling : "the " + mDeclaration.keyRepresentationForErrorSignaling + " is declared here")
       end
     end
   end

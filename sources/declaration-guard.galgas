@@ -241,11 +241,11 @@ override method @decoratedGuardDeclaration semanticAnalysis
   for (attribute) in self.mGuardAttributeList do
     if attribute.string == noUnusedWarningAttribute () then
       if not warnIfUnused then
-        error attribute : "duplicate @" + noUnusedWarningAttribute () + " attribute"
+        error (attribute : "duplicate @" + noUnusedWarningAttribute () + " attribute")
       end
       warnIfUnused = false    
     else
-      error attribute : "unknown attribute; available attribute is @" + noUnusedWarningAttribute ()
+      error (attribute : "unknown attribute; available attribute is @" + noUnusedWarningAttribute ())
     end
   end
 //--- Variable map
@@ -387,7 +387,7 @@ override method @standAloneProcedureCallInstructionAST baseGuardAnalyze
   ?!variableMap:@universalValuedObjectMap unused ioUniversalMap
   !@guardKindGenerationIR outConvenienceGuardGenerationIR
 {
-  error self.mSandAloneRoutineName : "NOT HANDLED YET" spoil (outConvenienceGuardGenerationIR)
+  error (self.mSandAloneRoutineName : "NOT HANDLED YET" spoil outConvenienceGuardGenerationIR)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -408,7 +408,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
   var @objectIR currentObject
   if self.mIdentifier.string == "" then // Receiver is self
     if inSelfType.kind == .void then
-      error self.mIdentifier : "self is not available in this context" spoil (currentObject)
+      error (self.mIdentifier : "self is not available in this context" spoil currentObject)
     else
       currentObject = .reference {!type:inSelfType !llvmName:llvmNameForSelf ()}
     end
@@ -434,7 +434,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
       [propertyGetterMap searchKey !propertyName ?* ?let propertyAccess]
       switch propertyAccess
       case constantProperty (*) :
-        error propertyName: "a constant property not available in this context" spoil (currentObject)
+        error (propertyName: "a constant property not available in this context" spoil currentObject)
       case storedProperty (@omnibusType propertyType @uint propertyIndex) :
         [!?ioTemporaries newTempLLVMVar ?let property_llvmName]
         [!?baseGuardInstructionGenerationList appendGetUniversalPropertyReference
@@ -446,10 +446,10 @@ override method @procedureCallInstructionAST baseGuardAnalyze
         ]
         currentObject = .reference {!type:propertyType !llvmName:property_llvmName}
       case computedProperty (2*) :
-        error propertyName : "a computed property cannot be named in guard" spoil (currentObject)
+        error (propertyName : "a computed property cannot be named in guard" spoil currentObject)
       end
     case arrayAccess (* @location endOfIndex *) :
-      error endOfIndex : "not handled yet" spoil (currentObject)
+      error (endOfIndex : "not handled yet" spoil currentObject)
     end
   end
 //--- Handle last access
@@ -486,7 +486,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
       !baseGuardEffectiveParameterList:effectiveParameterListIR
     }
   case arrayAccess (* @location endOfIndex *) :
-    error endOfIndex : "a property access is required here" spoil (outConvenienceGuardGenerationIR)
+    error (endOfIndex : "a property access is required here" spoil outConvenienceGuardGenerationIR)
   end
 }
 

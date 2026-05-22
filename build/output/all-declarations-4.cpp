@@ -7452,17 +7452,17 @@ void extensionSetter_insertType (GGS_unifiedTypeMap & ioObject,
         break ;
       case GGS_typeDefinition::Enumeration::enum_unsolved:
         {
-          GGS_unifiedTypeMapElementClass var_e_3546 = var_node_3378.readProperty_mElement () ;
-          var_e_3546.setProperty_mDefinition (GGS_typeDefinition::class_func_solved (constinArgument_inTypeDefinition  COMMA_SOURCE_FILE ("unified-type-map.galgas", 86))) ;
+          GGS_unifiedTypeMapElementClass var_e_3548 = var_node_3378.readProperty_mElement () ;
+          var_e_3548.setProperty_mDefinition (GGS_typeDefinition::class_func_solved (constinArgument_inTypeDefinition  COMMA_SOURCE_FILE ("unified-type-map.galgas", 86))) ;
         }
         break ;
       }
     }
   }
   if (GalgasBool::boolFalse == test_0) {
-    GGS_unifiedTypeMapElementClass var_newElement_3643 = GGS_unifiedTypeMapElementClass::init_21__21_ (constinArgument_inTypeName, GGS_typeDefinition::class_func_solved (constinArgument_inTypeDefinition  COMMA_SOURCE_FILE ("unified-type-map.galgas", 89)), inCompiler COMMA_HERE) ;
+    GGS_unifiedTypeMapElementClass var_newElement_3645 = GGS_unifiedTypeMapElementClass::init_21__21_ (constinArgument_inTypeName, GGS_typeDefinition::class_func_solved (constinArgument_inTypeDefinition  COMMA_SOURCE_FILE ("unified-type-map.galgas", 89)), inCompiler COMMA_HERE) ;
     {
-    ioObject.setter_internalInsertKey (constinArgument_inTypeName, var_newElement_3643, inCompiler COMMA_SOURCE_FILE ("unified-type-map.galgas", 90)) ;
+    ioObject.setter_internalInsertKey (constinArgument_inTypeName, var_newElement_3645, inCompiler COMMA_SOURCE_FILE ("unified-type-map.galgas", 90)) ;
     }
   }
 }
@@ -7483,19 +7483,19 @@ void extensionMethod_searchType (const GGS_unifiedTypeMap inObject,
   GalgasBool test_0 = GalgasBool::boolTrue ;
   if (GalgasBool::boolTrue == test_0) {
     const GGS_unifiedTypeMap temp_1 = inObject ;
-    const GGS_unifiedTypeMap_2E_element var_node_4043 = temp_1.readSubscript__3F_ (constinArgument_inLKey.readProperty_string (), inCompiler COMMA_HERE).unwrappedValue () ;
+    const GGS_unifiedTypeMap_2E_element var_node_4045 = temp_1.readSubscript__3F_ (constinArgument_inLKey.readProperty_string (), inCompiler COMMA_HERE).unwrappedValue () ;
     if (!temp_1.readSubscript__3F_ (constinArgument_inLKey.readProperty_string (), inCompiler COMMA_HERE).isValuated ()) {
       test_0 = GalgasBool::boolFalse ;
     }
     if (GalgasBool::boolTrue == test_0) {
-      switch (var_node_4043.readProperty_mElement ().readProperty_mDefinition ().enumValue ()) {
+      switch (var_node_4045.readProperty_mElement ().readProperty_mDefinition ().enumValue ()) {
       case GGS_typeDefinition::Enumeration::invalid:
         break ;
       case GGS_typeDefinition::Enumeration::enum_solved:
         {
-          GGS_omnibusType extractedValue_4124_definition_0 ;
-          var_node_4043.readProperty_mElement ().readProperty_mDefinition ().getAssociatedValuesFor_solved (extractedValue_4124_definition_0) ;
-          outArgument_outTypeDefinition = extractedValue_4124_definition_0 ;
+          GGS_omnibusType extractedValue_4126_definition_0 ;
+          var_node_4045.readProperty_mElement ().readProperty_mDefinition ().getAssociatedValuesFor_solved (extractedValue_4126_definition_0) ;
+          outArgument_outTypeDefinition = extractedValue_4126_definition_0 ;
         }
         break ;
       case GGS_typeDefinition::Enumeration::enum_unsolved:
@@ -7817,16 +7817,16 @@ GGS_omnibusType extensionGetter_type (const GGS_unifiedTypeMapEntry & inObject,
     break ;
   case GGS_unifiedTypeMapEntry::Enumeration::enum_element:
     {
-      GGS_unifiedTypeMapElementClass_3F_ extractedValue_6176_weakElement_0 ;
-      temp_0.getAssociatedValuesFor_element (extractedValue_6176_weakElement_0) ;
+      GGS_unifiedTypeMapElementClass_3F_ extractedValue_6178_weakElement_0 ;
+      temp_0.getAssociatedValuesFor_element (extractedValue_6178_weakElement_0) ;
       GalgasBool test_2 = GalgasBool::boolTrue ;
       if (GalgasBool::boolTrue == test_2) {
-        const GGS_unifiedTypeMapElementClass var_type_6202 = extractedValue_6176_weakElement_0.unwrappedValue () ;
-        if (!extractedValue_6176_weakElement_0.isValuated ()) {
+        const GGS_unifiedTypeMapElementClass var_type_6204 = extractedValue_6178_weakElement_0.unwrappedValue () ;
+        if (!extractedValue_6178_weakElement_0.isValuated ()) {
           test_2 = GalgasBool::boolFalse ;
         }
         if (GalgasBool::boolTrue == test_2) {
-          switch (var_type_6202.readProperty_mDefinition ().enumValue ()) {
+          switch (var_type_6204.readProperty_mDefinition ().enumValue ()) {
           case GGS_typeDefinition::Enumeration::invalid:
             break ;
           case GGS_typeDefinition::Enumeration::enum_unsolved:
@@ -7838,9 +7838,9 @@ GGS_omnibusType extensionGetter_type (const GGS_unifiedTypeMapEntry & inObject,
             break ;
           case GGS_typeDefinition::Enumeration::enum_solved:
             {
-              GGS_omnibusType extractedValue_6353_definition_0 ;
-              var_type_6202.readProperty_mDefinition ().getAssociatedValuesFor_solved (extractedValue_6353_definition_0) ;
-              result_result = extractedValue_6353_definition_0 ;
+              GGS_omnibusType extractedValue_6355_definition_0 ;
+              var_type_6204.readProperty_mDefinition ().getAssociatedValuesFor_solved (extractedValue_6355_definition_0) ;
+              result_result = extractedValue_6355_definition_0 ;
             }
             break ;
           }
@@ -7882,16 +7882,16 @@ GGS_string extensionGetter_key (const GGS_unifiedTypeMapEntry & inObject,
     break ;
   case GGS_unifiedTypeMapEntry::Enumeration::enum_element:
     {
-      GGS_unifiedTypeMapElementClass_3F_ extractedValue_6718_weakElement_0 ;
-      temp_0.getAssociatedValuesFor_element (extractedValue_6718_weakElement_0) ;
+      GGS_unifiedTypeMapElementClass_3F_ extractedValue_6720_weakElement_0 ;
+      temp_0.getAssociatedValuesFor_element (extractedValue_6720_weakElement_0) ;
       GalgasBool test_2 = GalgasBool::boolTrue ;
       if (GalgasBool::boolTrue == test_2) {
-        const GGS_unifiedTypeMapElementClass var_type_6744 = extractedValue_6718_weakElement_0.unwrappedValue () ;
-        if (!extractedValue_6718_weakElement_0.isValuated ()) {
+        const GGS_unifiedTypeMapElementClass var_type_6746 = extractedValue_6720_weakElement_0.unwrappedValue () ;
+        if (!extractedValue_6720_weakElement_0.isValuated ()) {
           test_2 = GalgasBool::boolFalse ;
         }
         if (GalgasBool::boolTrue == test_2) {
-          result_result = var_type_6744.readProperty_mTypeName ().readProperty_string () ;
+          result_result = var_type_6746.readProperty_mTypeName ().readProperty_string () ;
         }
       }
       if (GalgasBool::boolFalse == test_2) {
@@ -14322,24 +14322,24 @@ void extensionMethod_buildFormalGenericConstantMap (const GGS_genericFormalParam
                                                     Compiler * inCompiler
                                                     COMMA_UNUSED_LOCATION_ARGS) {
   const GGS_genericFormalParameterList temp_0 = inObject ;
-  UpEnumerator_genericFormalParameterList enumerator_5801 (temp_0) ;
-  while (enumerator_5801.hasCurrentObject ()) {
-    switch (enumerator_5801.current_mParameter (HERE).enumValue ()) {
+  UpEnumerator_genericFormalParameterList enumerator_5479 (temp_0) ;
+  while (enumerator_5479.hasCurrentObject ()) {
+    switch (enumerator_5479.current_mParameter (HERE).enumValue ()) {
     case GGS_genericFormalParameter::Enumeration::invalid:
       break ;
     case GGS_genericFormalParameter::Enumeration::enum_type:
       break ;
     case GGS_genericFormalParameter::Enumeration::enum_constant:
       {
-        GGS_lstring extractedValue_5880_constantName_0 ;
-        enumerator_5801.current_mParameter (HERE).getAssociatedValuesFor_constant (extractedValue_5880_constantName_0) ;
+        GGS_lstring extractedValue_5558_constantName_0 ;
+        enumerator_5479.current_mParameter (HERE).getAssociatedValuesFor_constant (extractedValue_5558_constantName_0) ;
         {
-        ioArgument_ioMap.setter_insertKey (extractedValue_5880_constantName_0, inCompiler COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 164)) ;
+        ioArgument_ioMap.setter_insertKey (extractedValue_5558_constantName_0, inCompiler COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 153)) ;
         }
       }
       break ;
     }
-    enumerator_5801.gotoNextObject () ;
+    enumerator_5479.gotoNextObject () ;
   }
 }
 
@@ -14355,22 +14355,22 @@ void extensionMethod_checkCompileTimeExpression (const GGS_llvmStringDefinition 
                                                  Compiler * inCompiler
                                                  COMMA_UNUSED_LOCATION_ARGS) {
   const GGS_llvmStringDefinition temp_0 = inObject ;
-  UpEnumerator_llvmStringDefinition enumerator_6164 (temp_0) ;
-  while (enumerator_6164.hasCurrentObject ()) {
-    switch (enumerator_6164.current_mElement (HERE).enumValue ()) {
+  UpEnumerator_llvmStringDefinition enumerator_5842 (temp_0) ;
+  while (enumerator_5842.hasCurrentObject ()) {
+    switch (enumerator_5842.current_mElement (HERE).enumValue ()) {
     case GGS_llvmStringDefinitionElement::Enumeration::invalid:
       break ;
     case GGS_llvmStringDefinitionElement::Enumeration::enum_string:
       break ;
     case GGS_llvmStringDefinitionElement::Enumeration::enum_variable:
       {
-        GGS_lstring extractedValue_6245_name_0 ;
-        enumerator_6164.current_mElement (HERE).getAssociatedValuesFor_variable (extractedValue_6245_name_0) ;
-        constinArgument_inMap.method_searchKey (extractedValue_6245_name_0, inCompiler COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 176)) ;
+        GGS_lstring extractedValue_5923_name_0 ;
+        enumerator_5842.current_mElement (HERE).getAssociatedValuesFor_variable (extractedValue_5923_name_0) ;
+        constinArgument_inMap.method_searchKey (extractedValue_5923_name_0, inCompiler COMMA_SOURCE_FILE ("llvm-generic-type.galgas", 165)) ;
       }
       break ;
     }
-    enumerator_6164.gotoNextObject () ;
+    enumerator_5842.gotoNextObject () ;
   }
 }
 

@@ -196,7 +196,7 @@ proc analyzeEffectiveParameters
       [propertyGetterMap searchKey !name ?* ?let @propertyGetterKind propertyAccess]
       switch propertyAccess
       case constantProperty (*) :
-        error inErrorLocation : "a constant property cannot be used as output / input parameter"
+        error (inErrorLocation : "a constant property cannot be used as output / input parameter")
       case storedProperty (@omnibusType propertyType @uint propertyIndex) :
         [!?ioTemporaries newTempLLVMVar ?let property_llvmName]
         [!?ioInstructionGenerationList appendGetUniversalPropertyReference
@@ -209,24 +209,24 @@ proc analyzeEffectiveParameters
         parameterList += !effective_mEffectiveParameterKind !effective_mSelector !propertyType
         ioEffectiveParameterListIR += !.outputInput !.reference {!type:propertyType !llvmName:property_llvmName}
       case computedProperty (2*) :
-        error inErrorLocation : "a computed property cannot be used as output / input parameter"
+        error (inErrorLocation : "a computed property cannot be used as output / input parameter")
       end    
     end
   end
 //--- Check parameters
   if inFormalSignature.count != inEffectiveParameterList.count then
-    error inErrorLocation: "this routine requires " + inFormalSignature.count + " argument(s), this call names "
-      + inEffectiveParameterList.count + " argument(s)"
+    error (inErrorLocation: "this routine requires " + inFormalSignature.count + " argument(s), this call names "
+      + inEffectiveParameterList.count + " argument(s)")
   else
     for (formal_mFormalArgumentPassingMode formal_mSelector formal_mTypeProxy *) in inFormalSignature, (actual_mEffectiveParameterPassingMode actual_mSelector actual_mParameterType) in parameterList do
       if formal_mTypeProxy.type.omnibusTypeDescriptionName != actual_mParameterType.omnibusTypeDescriptionName then
-        error actual_mSelector : "the actual parameter type is $" + actual_mParameterType.omnibusTypeDescriptionName +
-           ", and is incompatible with the formal type $" + formal_mTypeProxy.key
+        error (actual_mSelector : "the actual parameter type is $" + actual_mParameterType.omnibusTypeDescriptionName +
+           ", and is incompatible with the formal type $" + formal_mTypeProxy.key)
       end
       let requiredPassingMode = [formal_mFormalArgumentPassingMode requiredActualPassingModeForSelector !formal_mSelector]
       let testedPassingMode = [actual_mEffectiveParameterPassingMode passingModeForActualSelector !actual_mSelector]
       if requiredPassingMode != testedPassingMode then
-        error actual_mSelector : "the required selector is '" + requiredPassingMode + "'"
+        error (actual_mSelector : "the required selector is '" + requiredPassingMode + "'")
       end
     end  
   end

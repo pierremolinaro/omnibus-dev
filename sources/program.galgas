@@ -50,7 +50,7 @@ proc importFilesAndCompile ?sourceFilePath:let @lstring inSourceFile {
     var @stringset targetNameSet = @[]
     for (targetName) in ast.mTargetListAST do
       if [targetNameSet hasKey !targetName.string] then
-        error targetName : "Duplicated target"
+        error (targetName : "Duplicated target")
       end
       targetNameSet ++= targetName.string
     end
@@ -103,7 +103,7 @@ private proc compileProject
   end
   for (staticListName elementList) in ast.mExtendStaticArrayDeclarationAST do
     for (* errorLocation) in elementList do
-      error errorLocation : "'" + staticListName + "' static list is not defined"
+      error (errorLocation : "'" + staticListName + "' static list is not defined")
     end
   end
 //------------------------------------------------------------ Add NOP function
@@ -160,7 +160,7 @@ private proc compileProject
         accepted = possibleTarget.string == inTargetName
       end
       if not accepted then
-        error targetLocation : "invalid target"
+        error (targetLocation : "invalid target")
       end
     end
   end
@@ -261,11 +261,11 @@ private proc addTargetSpecificFiles
           !?importedFilePathSet:ioImportedFileAbsolutePathSet
         )
       else
-        error inTargetName
-          : "This target is not defined in '" + [option omnibus_options.useDirAsTargetDir value] + "' directory"
+        error (inTargetName
+          : "This target is not defined in '" + [option omnibus_options.useDirAsTargetDir value] + "' directory")
       end
     else
-      error "".nowhere: "the '" + [option omnibus_options.useDirAsTargetDir value] + "' directory does not exist"
+      error ("".nowhere: "the '" + [option omnibus_options.useDirAsTargetDir value] + "' directory does not exist")
     end
   else // Target is defined in embedded files
   //--- Parse target definition file
@@ -284,8 +284,8 @@ private proc addTargetSpecificFiles
         !?importedFilePathSet:ioImportedFileAbsolutePathSet
       )
     else
-      error inTargetName
-        : "This target is not defined in embedded targets"
+      error (inTargetName
+        : "This target is not defined in embedded targets")
     end
   end
 }
@@ -328,11 +328,11 @@ private proc recursiveImportFileSystemTargetFiles
             !?importedFilePathSet:ioImportedFileAbsolutePathSet
           )
         else
-          error path : "invalid extension (should be .omnibus-import or .omnibus-target)"
+          error (path : "invalid extension (should be .omnibus-import or .omnibus-target)")
         end
       end
     else
-      error path : "file does not exist in file system target definition"
+      error (path : "file does not exist in file system target definition")
     end
   end
 }
@@ -365,7 +365,7 @@ private proc recursiveImportEmbeddedTargetFiles
         )
       end
     else
-      error .nowhere : "cannot find '" + path + "' file in embedded files"
+      error (.nowhere : "cannot find '" + path + "' file in embedded files")
     end
   end
 }
@@ -408,7 +408,7 @@ private proc recursiveImportFiles
             !?importedFilePathSet:ioImportedFileAbsolutePathSet
           )
         else
-          error path : "invalid extension (should be .omnibus-import or .omnibus-target)"
+          error (path : "invalid extension (should be .omnibus-import or .omnibus-target)")
         end
       end
     else
@@ -442,11 +442,11 @@ private proc recursiveImportFiles
               !?importedFilePathSet:ioImportedFileAbsolutePathSet
             )
           else
-            error path : "invalid extension (should be .omnibus-import or .omnibus-target)"
+            error (path : "invalid extension (should be .omnibus-import or .omnibus-target)")
           end
         end
       else
-        error path : "cannot find this file in file system and in embedded files"
+        error (path : "cannot find this file in file system and in embedded files")
       end
     end
   end

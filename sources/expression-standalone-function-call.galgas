@@ -89,7 +89,7 @@ override method @standaloneFunctionInExpressionAST analyzeExpression
 {
 //--- Cannot call a function in guard
   if [inRoutineAttributes contains !.isGuard] then
-    error self.mStandaloneFunctionName.location : "a routine cannot be called in guard"
+    error (self.mStandaloneFunctionName.location : "a routine cannot be called in guard")
   end
 //--- Get function name and map containing the function definition
   let routineLLVMName = routineMangledNameFromCall (!"" !self.mStandaloneFunctionName !self.mArguments)
@@ -109,7 +109,7 @@ override method @standaloneFunctionInExpressionAST analyzeExpression
   ]
 //--- Check routine is actually a function
   if formalReturnTypeProxy.isNull then
-    error requiredFunctionMangledName : "this function does not return any value" spoil (outFunctionCallReturnedValue)
+    error (requiredFunctionMangledName : "this function does not return any value" spoil outFunctionCallReturnedValue)
   else
   //--- Check modes
     let functionLLVMName = checkModeAndReturnsRoutineLLVMName (!implementedModeDictionary !inMode !requiredFunctionMangledName)

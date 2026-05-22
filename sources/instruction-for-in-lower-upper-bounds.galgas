@@ -90,30 +90,30 @@ override method @forLowerUpperBoundInstructionAST instructionSemanticAnalysis
   let type = [inContext.mTypeMap searchKey !self.mTypeName].type
   switch type.kind
   case boolean, void :
-    error self.mTypeName : "an integer type is required here"
+    error (self.mTypeName : "an integer type is required here")
   case staticArrayType (* *) :
-    error self.mTypeName : "an integer type is required here"
+    error (self.mTypeName : "an integer type is required here")
   case dynamicArrayType (*) :
-    error self.mTypeName : "an integer type is required here"
+    error (self.mTypeName : "an integer type is required here")
   case enumeration (*) :
   case literalString :
-    error self.mTypeName : "an integer type is required here"
+    error (self.mTypeName : "an integer type is required here")
   case opaque (*) :
-    error self.mTypeName : "an integer type is required here"
+    error (self.mTypeName : "an integer type is required here")
   case compileTimeBool :
-    error self.mTypeName : "an integer type is required here"
+    error (self.mTypeName : "an integer type is required here")
   case llvmType (*) :
-    error self.mTypeName : "an integer type is required here"
+    error (self.mTypeName : "an integer type is required here")
   case generic (3*) :
-    error self.mTypeName : "an integer type is required here"
+    error (self.mTypeName : "an integer type is required here")
   case compileTimeInteger :
-    error self.mTypeName : "an integer type is required here"
+    error (self.mTypeName : "an integer type is required here")
   case structure (*) :
-    error self.mTypeName : "an integer type is required here"
+    error (self.mTypeName : "an integer type is required here")
   case syncTool :
-    error self.mTypeName : "an integer type is required here"
+    error (self.mTypeName : "an integer type is required here")
   case function (3*) :
-    error self.mTypeName : "an integer type is required here"
+    error (self.mTypeName : "an integer type is required here")
   case integer (@bigint unused min @bigint unused max @bool unsigned @uint unused bitCount) :
   //--- Analyze expressions
     [self.mLowerBoundExpression analyzeExpression

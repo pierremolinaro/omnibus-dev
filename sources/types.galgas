@@ -105,7 +105,7 @@ getter @omnibusType llvmTypeName -> @string {
 
 method @omnibusType checkIsCompileTimeType ?let @location inErrorLocation {
   if not (self.kind.isCompileTimeBool | self.kind.isCompileTimeInteger) then
-    error inErrorLocation : "this type should be a compile time type"
+    error (inErrorLocation : "this type should be a compile time type")
   end
 }
 
@@ -113,7 +113,7 @@ method @omnibusType checkIsCompileTimeType ?let @location inErrorLocation {
 
 method @omnibusType checkIsNotCompileTimeType ?let @location inErrorLocation {
   if self.kind.isCompileTimeBool | self.kind.isCompileTimeInteger then
-    error inErrorLocation : "this type should not be a compile time type"
+    error (inErrorLocation : "this type should not be a compile time type")
   end
 }
 

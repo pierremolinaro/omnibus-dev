@@ -26,7 +26,7 @@ enum @objectIR %equatable {
 
 getter @objectIR llvmName -> @string {
   switch self
-  case void : error .nowhere : "<<@objectIR llvmName void>>" spoil (result)
+  case void : error (.nowhere : "<<@objectIR llvmName void>>" spoil result)
   case zero (*) : result = "zeroinitializer"
   case null (*) : result = "null"
   case literalInteger (* @bigint value) : result = value.string
@@ -48,9 +48,9 @@ getter @objectIR llvmName -> @string {
     result = "getelementptr inbounds ([" + sizeStr + " x i8], [" + sizeStr + " x i8]* "
     result += literalCharacterArrayName (!index) + ", i32 0, i32 0)"
   case llvmArrayRepeatedDynamicValue (3*) :
-    error .nowhere : "<< ERROR @objectIR llvmName llvmArrayRepeatedDynamicValue >>\n" spoil (result)
+    error (.nowhere : "<< ERROR @objectIR llvmName llvmArrayRepeatedDynamicValue >>\n" spoil result)
   case llvmArrayDynamicValues (2*) :
-    error .nowhere : "<< ERROR @objectIR llvmName llvmArrayDynamicValues >>\n" spoil (result)
+    error (.nowhere : "<< ERROR @objectIR llvmName llvmArrayDynamicValues >>\n" spoil result)
   end
 }
 
@@ -58,7 +58,7 @@ getter @objectIR llvmName -> @string {
 
 getter @objectIR llvmValue -> @string {
   switch self
-  case void : error .nowhere : "<<@objectIR llvmName void>>" spoil (result)
+  case void : error (.nowhere : "<<@objectIR llvmName void>>" spoil result)
   case zero (*) : result = "zeroinitializer"
   case null (*) : result = "null"
   case literalInteger (* @bigint value) : result = value.string
@@ -90,9 +90,9 @@ getter @objectIR llvmValue -> @string {
     end
     result += "]"
   case llvmArrayRepeatedDynamicValue (3*) :
-    error .nowhere : "<< ERROR @objectIR llvmValue llvmArrayRepeatedDynamicValue >>\n" spoil (result)
+    error (.nowhere : "<< ERROR @objectIR llvmValue llvmArrayRepeatedDynamicValue >>\n" spoil result)
   case llvmArrayDynamicValues (2*) :
-    error .nowhere : "<< ERROR @objectIR llvmValue llvmArrayRepeatedDynamicValue >>\n" spoil (result)
+    error (.nowhere : "<< ERROR @objectIR llvmValue llvmArrayRepeatedDynamicValue >>\n" spoil result)
   end
 }
 
@@ -100,7 +100,7 @@ getter @objectIR llvmValue -> @string {
 
 getter @objectIR type -> @omnibusType {
   switch self
-  case void : error .nowhere : "<<@objectIR type void>>" spoil (result)
+  case void : error (.nowhere : "<<@objectIR type void>>" spoil result)
   case reference (type *) : result = type
   case null (type) : result = type
   case zero (type) : result = type
@@ -132,7 +132,7 @@ getter @objectIR omnibusTypeDescriptionName -> @string {
 getter @objectIR withType ?let @omnibusType inType -> @objectIR {
   switch self
   case void :
-    error .nowhere : "<<@objectIR withType void>>" spoil (result)
+    error (.nowhere : "<<@objectIR withType void>>" spoil result)
   case reference (* llvmName) :
     result = .reference {!type:inType !llvmName:llvmName}
   case null (*) :
@@ -162,7 +162,7 @@ getter @objectIR withType ?let @omnibusType inType -> @objectIR {
 
 getter @objectIR name -> @string {
   switch self
-  case void : error .nowhere : "<<@objectIR name void>>" spoil (result)
+  case void : error (.nowhere : "<<@objectIR name void>>" spoil result)
   case reference (* llvmName) : result = llvmName
   case zero (*) : result = "zeroinitializer"
   case null (*) : result = "null"
@@ -184,7 +184,7 @@ getter @objectIR name -> @string {
 
 getter @objectIR isStatic -> @bool {
   switch self
-  case void : error .nowhere : "<<@objectIR isStatic void>>" spoil (result)
+  case void : error (.nowhere : "<<@objectIR isStatic void>>" spoil result)
   case reference (**) : result = false
   case zero (*) : result = true
   case null (*) : result = true
