@@ -237,7 +237,7 @@ static const GALGAS_TypeDescriptor * functionArgs_getTargetTextFile [3] = {
 //--------------------------------------------------------------------------------------------------
 
 static GGS_object functionWithGenericHeader_getTargetTextFile (Compiler * inCompiler,
-                                                               const cObjectArray & inEffectiveParameterArray,
+                                                               const GALGAS_ObjectArray & inEffectiveParameterArray,
                                                                const GGS_location & /* inErrorLocation */
                                                                COMMA_LOCATION_ARGS) {
   const GGS_string operand0 = GGS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
@@ -366,7 +366,7 @@ static const GALGAS_TypeDescriptor * functionArgs_panicRoutineNameForLocationFil
 //--------------------------------------------------------------------------------------------------
 
 static GGS_object functionWithGenericHeader_panicRoutineNameForLocationFile (Compiler * inCompiler,
-                                                                             const cObjectArray & inEffectiveParameterArray,
+                                                                             const GALGAS_ObjectArray & inEffectiveParameterArray,
                                                                              const GGS_location & /* inErrorLocation */
                                                                              COMMA_LOCATION_ARGS) {
   const GGS_location operand0 = GGS_location::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
@@ -422,7 +422,7 @@ static const GALGAS_TypeDescriptor * functionArgs_panicRoutineNameForFilePath [2
 //--------------------------------------------------------------------------------------------------
 
 static GGS_object functionWithGenericHeader_panicRoutineNameForFilePath (Compiler * inCompiler,
-                                                                         const cObjectArray & inEffectiveParameterArray,
+                                                                         const GALGAS_ObjectArray & inEffectiveParameterArray,
                                                                          const GGS_location & /* inErrorLocation */
                                                                          COMMA_LOCATION_ARGS) {
   const GGS_string operand0 = GGS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
@@ -575,7 +575,7 @@ static const GALGAS_TypeDescriptor * functionArgs_panicModeName [1] = {
 //--------------------------------------------------------------------------------------------------
 
 static GGS_object functionWithGenericHeader_panicModeName (Compiler * inCompiler,
-                                                           const cObjectArray & /* inEffectiveParameterArray */,
+                                                           const GALGAS_ObjectArray & /* inEffectiveParameterArray */,
                                                            const GGS_location & /* inErrorLocation */
                                                            COMMA_LOCATION_ARGS) {
   return function_panicModeName (inCompiler COMMA_THERE).getter_object (THERE) ;
@@ -862,7 +862,7 @@ static const GALGAS_TypeDescriptor * functionArgs_checkAssignmentCompatibility [
 //--------------------------------------------------------------------------------------------------
 
 static GGS_object functionWithGenericHeader_checkAssignmentCompatibility (Compiler * inCompiler,
-                                                                          const cObjectArray & inEffectiveParameterArray,
+                                                                          const GALGAS_ObjectArray & inEffectiveParameterArray,
                                                                           const GGS_location & /* inErrorLocation */
                                                                           COMMA_LOCATION_ARGS) {
   const GGS_assignmentOperatorMap operand0 = GGS_assignmentOperatorMap::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
@@ -2196,7 +2196,7 @@ static const GALGAS_TypeDescriptor * functionArgs_guardUserLLVMName [4] = {
 //--------------------------------------------------------------------------------------------------
 
 static GGS_object functionWithGenericHeader_guardUserLLVMName (Compiler * inCompiler,
-                                                               const cObjectArray & inEffectiveParameterArray,
+                                                               const GALGAS_ObjectArray & inEffectiveParameterArray,
                                                                const GGS_location & /* inErrorLocation */
                                                                COMMA_LOCATION_ARGS) {
   const GGS_string operand0 = GGS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
@@ -2265,7 +2265,7 @@ static const GALGAS_TypeDescriptor * functionArgs_guardImplementationLLVMName [4
 //--------------------------------------------------------------------------------------------------
 
 static GGS_object functionWithGenericHeader_guardImplementationLLVMName (Compiler * inCompiler,
-                                                                         const cObjectArray & inEffectiveParameterArray,
+                                                                         const GALGAS_ObjectArray & inEffectiveParameterArray,
                                                                          const GGS_location & /* inErrorLocation */
                                                                          COMMA_LOCATION_ARGS) {
   const GGS_string operand0 = GGS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
@@ -3925,7 +3925,7 @@ static const GALGAS_TypeDescriptor * functionArgs_fieldIndexColumns [2] = {
 //--------------------------------------------------------------------------------------------------
 
 static GGS_object functionWithGenericHeader_fieldIndexColumns (Compiler * inCompiler,
-                                                               const cObjectArray & inEffectiveParameterArray,
+                                                               const GALGAS_ObjectArray & inEffectiveParameterArray,
                                                                const GGS_location & /* inErrorLocation */
                                                                COMMA_LOCATION_ARGS) {
   const GGS_uint operand0 = GGS_uint::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
@@ -3978,7 +3978,7 @@ static const GALGAS_TypeDescriptor * functionArgs_arrayIndexListFor [2] = {
 //--------------------------------------------------------------------------------------------------
 
 static GGS_object functionWithGenericHeader_arrayIndexListFor (Compiler * inCompiler,
-                                                               const cObjectArray & inEffectiveParameterArray,
+                                                               const GALGAS_ObjectArray & inEffectiveParameterArray,
                                                                const GGS_location & /* inErrorLocation */
                                                                COMMA_LOCATION_ARGS) {
   const GGS_uint operand0 = GGS_uint::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
@@ -4134,7 +4134,7 @@ static const GALGAS_TypeDescriptor * functionArgs_assignmentOperatorFuncName [3]
 //--------------------------------------------------------------------------------------------------
 
 static GGS_object functionWithGenericHeader_assignmentOperatorFuncName (Compiler * inCompiler,
-                                                                        const cObjectArray & inEffectiveParameterArray,
+                                                                        const GALGAS_ObjectArray & inEffectiveParameterArray,
                                                                         const GGS_location & /* inErrorLocation */
                                                                         COMMA_LOCATION_ARGS) {
   const GGS_omnibusType operand0 = GGS_omnibusType::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
@@ -4189,7 +4189,7 @@ static const GALGAS_TypeDescriptor * functionArgs_assignmentOperatorKey [4] = {
 //--------------------------------------------------------------------------------------------------
 
 static GGS_object functionWithGenericHeader_assignmentOperatorKey (Compiler * inCompiler,
-                                                                   const cObjectArray & inEffectiveParameterArray,
+                                                                   const GALGAS_ObjectArray & inEffectiveParameterArray,
                                                                    const GGS_location & /* inErrorLocation */
                                                                    COMMA_LOCATION_ARGS) {
   const GGS_omnibusType operand0 = GGS_omnibusType::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
@@ -5015,7 +5015,7 @@ static const GALGAS_TypeDescriptor * functionArgs_systemUserMangledNameFromAST [
 //--------------------------------------------------------------------------------------------------
 
 static GGS_object functionWithGenericHeader_systemUserMangledNameFromAST (Compiler * inCompiler,
-                                                                          const cObjectArray & inEffectiveParameterArray,
+                                                                          const GALGAS_ObjectArray & inEffectiveParameterArray,
                                                                           const GGS_location & /* inErrorLocation */
                                                                           COMMA_LOCATION_ARGS) {
   const GGS_string operand0 = GGS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
@@ -5121,7 +5121,7 @@ static const GALGAS_TypeDescriptor * functionArgs_systemImplementationMangledNam
 //--------------------------------------------------------------------------------------------------
 
 static GGS_object functionWithGenericHeader_systemImplementationMangledNameFromAST (Compiler * inCompiler,
-                                                                                    const cObjectArray & inEffectiveParameterArray,
+                                                                                    const GALGAS_ObjectArray & inEffectiveParameterArray,
                                                                                     const GGS_location & /* inErrorLocation */
                                                                                     COMMA_LOCATION_ARGS) {
   const GGS_string operand0 = GGS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
@@ -5388,7 +5388,7 @@ static const GALGAS_TypeDescriptor * functionArgs_llvmFunctionPrototype [5] = {
 //--------------------------------------------------------------------------------------------------
 
 static GGS_object functionWithGenericHeader_llvmFunctionPrototype (Compiler * inCompiler,
-                                                                   const cObjectArray & inEffectiveParameterArray,
+                                                                   const GALGAS_ObjectArray & inEffectiveParameterArray,
                                                                    const GGS_location & /* inErrorLocation */
                                                                    COMMA_LOCATION_ARGS) {
   const GGS_string operand0 = GGS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
@@ -7802,7 +7802,7 @@ static const GALGAS_TypeDescriptor * functionArgs_linkForGlobalConstant [2] = {
 //--------------------------------------------------------------------------------------------------
 
 static GGS_object functionWithGenericHeader_linkForGlobalConstant (Compiler * inCompiler,
-                                                                   const cObjectArray & inEffectiveParameterArray,
+                                                                   const GALGAS_ObjectArray & inEffectiveParameterArray,
                                                                    const GGS_location & /* inErrorLocation */
                                                                    COMMA_LOCATION_ARGS) {
   const GGS_string operand0 = GGS_string::extractObject (inEffectiveParameterArray.objectAtIndex (0 COMMA_HERE),
@@ -7877,7 +7877,7 @@ static const GALGAS_TypeDescriptor * functionArgs_configurationNodeNameForPreced
 //--------------------------------------------------------------------------------------------------
 
 static GGS_object functionWithGenericHeader_configurationNodeNameForPrecedenceGraph (Compiler * inCompiler,
-                                                                                     const cObjectArray & /* inEffectiveParameterArray */,
+                                                                                     const GALGAS_ObjectArray & /* inEffectiveParameterArray */,
                                                                                      const GGS_location & /* inErrorLocation */
                                                                                      COMMA_LOCATION_ARGS) {
   return function_configurationNodeNameForPrecedenceGraph (inCompiler COMMA_THERE).getter_object (THERE) ;
@@ -7947,7 +7947,7 @@ static const GALGAS_TypeDescriptor * functionArgs_isrSlotTypeName [1] = {
 //--------------------------------------------------------------------------------------------------
 
 static GGS_object functionWithGenericHeader_isrSlotTypeName (Compiler * inCompiler,
-                                                             const cObjectArray & /* inEffectiveParameterArray */,
+                                                             const GALGAS_ObjectArray & /* inEffectiveParameterArray */,
                                                              const GGS_location & /* inErrorLocation */
                                                              COMMA_LOCATION_ARGS) {
   return function_isrSlotTypeName (inCompiler COMMA_THERE).getter_object (THERE) ;
@@ -8495,7 +8495,7 @@ static const GALGAS_TypeDescriptor * functionArgs_ctBoolTypeName [1] = {
 //--------------------------------------------------------------------------------------------------
 
 static GGS_object functionWithGenericHeader_ctBoolTypeName (Compiler * inCompiler,
-                                                            const cObjectArray & /* inEffectiveParameterArray */,
+                                                            const GALGAS_ObjectArray & /* inEffectiveParameterArray */,
                                                             const GGS_location & /* inErrorLocation */
                                                             COMMA_LOCATION_ARGS) {
   return function_ctBoolTypeName (inCompiler COMMA_THERE).getter_object (THERE) ;
