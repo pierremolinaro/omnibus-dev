@@ -108,10 +108,10 @@ class GGS_registerGroupListAST : public AC_GALGAS_root {
 
 
 //--- List constructor for graph
-  public: GGS_registerGroupListAST (const capCollectionElementArray & inSharedArray) ;
+  public: GGS_registerGroupListAST (const CollectionElementArray & inSharedArray) ;
 
 //--- Element constructor
-  public: static void makeAttributesFromObjects (capCollectionElement & outAttributes,
+  public: static void makeAttributesFromObjects (CollectionElement & outAttributes,
                                                  const class GGS_lstring & in_mRegisterGroupName,
                                                  const class GGS_controlRegisterGroupKindAST & in_mControlRegisterGroupKind
                                                  COMMA_LOCATION_ARGS) ;
@@ -443,7 +443,7 @@ class cPtr_controlRegisterGroupDeclarationAST : public cPtr_abstractDeclarationA
                                                    COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
+  public: virtual AbstractPtrClass * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -473,7 +473,7 @@ class GGS_controlRegisterGroupDeclarationAST_2E_weak : public GGS_abstractDeclar
 //--------------------------------- nil initializer
   public: inline static GGS_controlRegisterGroupDeclarationAST_2E_weak init_nil (void) {
     GGS_controlRegisterGroupDeclarationAST_2E_weak result ;
-    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    macroMyNew (result.mProxyPtr, PtrWeakReferenceProxy (HERE)) ;
     return result ;
   }
 
@@ -634,10 +634,10 @@ class GGS_controlRegisterFieldList : public AC_GALGAS_root {
 
 
 //--- List constructor for graph
-  public: GGS_controlRegisterFieldList (const capCollectionElementArray & inSharedArray) ;
+  public: GGS_controlRegisterFieldList (const CollectionElementArray & inSharedArray) ;
 
 //--- Element constructor
-  public: static void makeAttributesFromObjects (capCollectionElement & outAttributes,
+  public: static void makeAttributesFromObjects (CollectionElement & outAttributes,
                                                  const class GGS_uint & in_mFieldBitCount,
                                                  const class GGS_string & in_mFieldName
                                                  COMMA_LOCATION_ARGS) ;
@@ -3118,7 +3118,7 @@ class cPtr_decoratedControlRegisterArrayGroupDeclaration : public cPtr_abstractD
                                                               COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
+  public: virtual AbstractPtrClass * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -3148,7 +3148,7 @@ class GGS_decoratedControlRegisterArrayGroupDeclaration_2E_weak : public GGS_abs
 //--------------------------------- nil initializer
   public: inline static GGS_decoratedControlRegisterArrayGroupDeclaration_2E_weak init_nil (void) {
     GGS_decoratedControlRegisterArrayGroupDeclaration_2E_weak result ;
-    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    macroMyNew (result.mProxyPtr, PtrWeakReferenceProxy (HERE)) ;
     return result ;
   }
 
@@ -3917,7 +3917,7 @@ class cPtr_instructionNOP : public cPtr_instructionAST {
                                COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
+  public: virtual AbstractPtrClass * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -3947,7 +3947,7 @@ class GGS_instructionNOP_2E_weak : public GGS_instructionAST_2E_weak {
 //--------------------------------- nil initializer
   public: inline static GGS_instructionNOP_2E_weak init_nil (void) {
     GGS_instructionNOP_2E_weak result ;
-    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    macroMyNew (result.mProxyPtr, PtrWeakReferenceProxy (HERE)) ;
     return result ;
   }
 
@@ -4184,7 +4184,7 @@ extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_genericFormalParameter
 // Phase 2: pointer class for @ctExpressionAST class
 //--------------------------------------------------------------------------------------------------
 
-class cPtr_ctExpressionAST : public acStrongPtr_class {
+class cPtr_ctExpressionAST : public AbstractStrongPtrClass {
 
   #ifndef DO_NOT_GENERATE_CHECKINGS
     public: virtual void printNonNullClassInstanceProperties (void) const override ;
@@ -4378,7 +4378,7 @@ class cPtr_llvmAssignmentOperatorDeclarationAST : public cPtr_abstractDeclaratio
                                                      COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
+  public: virtual AbstractPtrClass * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -4408,7 +4408,7 @@ class GGS_llvmAssignmentOperatorDeclarationAST_2E_weak : public GGS_abstractDecl
 //--------------------------------- nil initializer
   public: inline static GGS_llvmAssignmentOperatorDeclarationAST_2E_weak init_nil (void) {
     GGS_llvmAssignmentOperatorDeclarationAST_2E_weak result ;
-    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    macroMyNew (result.mProxyPtr, PtrWeakReferenceProxy (HERE)) ;
     return result ;
   }
 
@@ -4788,7 +4788,7 @@ class cPtr_llvmAssignmentOperatorUsage : public cPtr_abstractAssignmentOperatorU
                                             COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
+  public: virtual AbstractPtrClass * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -4818,7 +4818,7 @@ class GGS_llvmAssignmentOperatorUsage_2E_weak : public GGS_abstractAssignmentOpe
 //--------------------------------- nil initializer
   public: inline static GGS_llvmAssignmentOperatorUsage_2E_weak init_nil (void) {
     GGS_llvmAssignmentOperatorUsage_2E_weak result ;
-    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    macroMyNew (result.mProxyPtr, PtrWeakReferenceProxy (HERE)) ;
     return result ;
   }
 
@@ -5039,7 +5039,7 @@ class cPtr_assignmentRoutineIR : public cPtr_abstractRoutineIR {
                                     COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
+  public: virtual AbstractPtrClass * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -5069,7 +5069,7 @@ class GGS_assignmentRoutineIR_2E_weak : public GGS_abstractRoutineIR_2E_weak {
 //--------------------------------- nil initializer
   public: inline static GGS_assignmentRoutineIR_2E_weak init_nil (void) {
     GGS_assignmentRoutineIR_2E_weak result ;
-    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    macroMyNew (result.mProxyPtr, PtrWeakReferenceProxy (HERE)) ;
     return result ;
   }
 
@@ -5225,7 +5225,7 @@ class cPtr_simpleAssignmentCopyRoutineIR : public cPtr_abstractRoutineIR {
                                               COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
+  public: virtual AbstractPtrClass * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -5255,7 +5255,7 @@ class GGS_simpleAssignmentCopyRoutineIR_2E_weak : public GGS_abstractRoutineIR_2
 //--------------------------------- nil initializer
   public: inline static GGS_simpleAssignmentCopyRoutineIR_2E_weak init_nil (void) {
     GGS_simpleAssignmentCopyRoutineIR_2E_weak result ;
-    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    macroMyNew (result.mProxyPtr, PtrWeakReferenceProxy (HERE)) ;
     return result ;
   }
 
@@ -5398,7 +5398,7 @@ class cPtr_simpleCopyAssignmentOperatorUsage : public cPtr_abstractAssignmentOpe
                                                   COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
+  public: virtual AbstractPtrClass * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -5428,7 +5428,7 @@ class GGS_simpleCopyAssignmentOperatorUsage_2E_weak : public GGS_abstractAssignm
 //--------------------------------- nil initializer
   public: inline static GGS_simpleCopyAssignmentOperatorUsage_2E_weak init_nil (void) {
     GGS_simpleCopyAssignmentOperatorUsage_2E_weak result ;
-    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    macroMyNew (result.mProxyPtr, PtrWeakReferenceProxy (HERE)) ;
     return result ;
   }
 
@@ -5615,7 +5615,7 @@ class cPtr_typeOpaqueDeclarationAST : public cPtr_abstractDeclarationAST {
                                          COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
+  public: virtual AbstractPtrClass * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -5645,7 +5645,7 @@ class GGS_typeOpaqueDeclarationAST_2E_weak : public GGS_abstractDeclarationAST_2
 //--------------------------------- nil initializer
   public: inline static GGS_typeOpaqueDeclarationAST_2E_weak init_nil (void) {
     GGS_typeOpaqueDeclarationAST_2E_weak result ;
-    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    macroMyNew (result.mProxyPtr, PtrWeakReferenceProxy (HERE)) ;
     return result ;
   }
 
@@ -6125,7 +6125,7 @@ class cPtr_bitbandInstructionAST : public cPtr_instructionAST {
                                       COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
+  public: virtual AbstractPtrClass * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -6155,7 +6155,7 @@ class GGS_bitbandInstructionAST_2E_weak : public GGS_instructionAST_2E_weak {
 //--------------------------------- nil initializer
   public: inline static GGS_bitbandInstructionAST_2E_weak init_nil (void) {
     GGS_bitbandInstructionAST_2E_weak result ;
-    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    macroMyNew (result.mProxyPtr, PtrWeakReferenceProxy (HERE)) ;
     return result ;
   }
 
@@ -6344,7 +6344,7 @@ class cPtr_bitbandInstructionIR : public cPtr_abstractInstructionIR {
                                      COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
+  public: virtual AbstractPtrClass * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -6374,7 +6374,7 @@ class GGS_bitbandInstructionIR_2E_weak : public GGS_abstractInstructionIR_2E_wea
 //--------------------------------- nil initializer
   public: inline static GGS_bitbandInstructionIR_2E_weak init_nil (void) {
     GGS_bitbandInstructionIR_2E_weak result ;
-    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    macroMyNew (result.mProxyPtr, PtrWeakReferenceProxy (HERE)) ;
     return result ;
   }
 
@@ -6548,7 +6548,7 @@ class cPtr_storeFromTemporaryReferenceIR : public cPtr_abstractInstructionIR {
                                               COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
+  public: virtual AbstractPtrClass * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -6578,7 +6578,7 @@ class GGS_storeFromTemporaryReferenceIR_2E_weak : public GGS_abstractInstruction
 //--------------------------------- nil initializer
   public: inline static GGS_storeFromTemporaryReferenceIR_2E_weak init_nil (void) {
     GGS_storeFromTemporaryReferenceIR_2E_weak result ;
-    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    macroMyNew (result.mProxyPtr, PtrWeakReferenceProxy (HERE)) ;
     return result ;
   }
 
@@ -6796,7 +6796,7 @@ class cPtr_systemRoutineDeclarationAST : public cPtr_abstractDeclarationAST {
                                             COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
+  public: virtual AbstractPtrClass * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -6826,7 +6826,7 @@ class GGS_systemRoutineDeclarationAST_2E_weak : public GGS_abstractDeclarationAS
 //--------------------------------- nil initializer
   public: inline static GGS_systemRoutineDeclarationAST_2E_weak init_nil (void) {
     GGS_systemRoutineDeclarationAST_2E_weak result ;
-    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    macroMyNew (result.mProxyPtr, PtrWeakReferenceProxy (HERE)) ;
     return result ;
   }
 
@@ -6989,10 +6989,10 @@ class GGS_sectionIRlist : public AC_GALGAS_root {
 
 
 //--- List constructor for graph
-  public: GGS_sectionIRlist (const capCollectionElementArray & inSharedArray) ;
+  public: GGS_sectionIRlist (const CollectionElementArray & inSharedArray) ;
 
 //--- Element constructor
-  public: static void makeAttributesFromObjects (capCollectionElement & outAttributes,
+  public: static void makeAttributesFromObjects (CollectionElement & outAttributes,
                                                  const class GGS_string & in_mSectionCallName,
                                                  const class GGS_string & in_mSectionImplementationName,
                                                  const class GGS_bool & in_invocationFromAnyMode
@@ -7471,7 +7471,7 @@ class cPtr_systemUserRoutineIR : public cPtr_abstractRoutineIR {
                                     COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
+  public: virtual AbstractPtrClass * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -7501,7 +7501,7 @@ class GGS_systemUserRoutineIR_2E_weak : public GGS_abstractRoutineIR_2E_weak {
 //--------------------------------- nil initializer
   public: inline static GGS_systemUserRoutineIR_2E_weak init_nil (void) {
     GGS_systemUserRoutineIR_2E_weak result ;
-    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    macroMyNew (result.mProxyPtr, PtrWeakReferenceProxy (HERE)) ;
     return result ;
   }
 
@@ -7661,7 +7661,7 @@ class cPtr_assertInstructionAST : public cPtr_instructionAST {
                                      COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
+  public: virtual AbstractPtrClass * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -7691,7 +7691,7 @@ class GGS_assertInstructionAST_2E_weak : public GGS_instructionAST_2E_weak {
 //--------------------------------- nil initializer
   public: inline static GGS_assertInstructionAST_2E_weak init_nil (void) {
     GGS_assertInstructionAST_2E_weak result ;
-    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    macroMyNew (result.mProxyPtr, PtrWeakReferenceProxy (HERE)) ;
     return result ;
   }
 
@@ -7857,7 +7857,7 @@ class cPtr_assertInstructionIR : public cPtr_abstractInstructionIR {
                                     COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
+  public: virtual AbstractPtrClass * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -7887,7 +7887,7 @@ class GGS_assertInstructionIR_2E_weak : public GGS_abstractInstructionIR_2E_weak
 //--------------------------------- nil initializer
   public: inline static GGS_assertInstructionIR_2E_weak init_nil (void) {
     GGS_assertInstructionIR_2E_weak result ;
-    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    macroMyNew (result.mProxyPtr, PtrWeakReferenceProxy (HERE)) ;
     return result ;
   }
 
@@ -8065,7 +8065,7 @@ class cPtr_prefixOperatorExpressionAST : public cPtr_expressionAST {
                                             COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
+  public: virtual AbstractPtrClass * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -8095,7 +8095,7 @@ class GGS_prefixOperatorExpressionAST_2E_weak : public GGS_expressionAST_2E_weak
 //--------------------------------- nil initializer
   public: inline static GGS_prefixOperatorExpressionAST_2E_weak init_nil (void) {
     GGS_prefixOperatorExpressionAST_2E_weak result ;
-    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    macroMyNew (result.mProxyPtr, PtrWeakReferenceProxy (HERE)) ;
     return result ;
   }
 
@@ -8264,7 +8264,7 @@ class cPtr_typeAliasDeclarationAST : public cPtr_abstractDeclarationAST {
                                         COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
+  public: virtual AbstractPtrClass * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -8294,7 +8294,7 @@ class GGS_typeAliasDeclarationAST_2E_weak : public GGS_abstractDeclarationAST_2E
 //--------------------------------- nil initializer
   public: inline static GGS_typeAliasDeclarationAST_2E_weak init_nil (void) {
     GGS_typeAliasDeclarationAST_2E_weak result ;
-    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    macroMyNew (result.mProxyPtr, PtrWeakReferenceProxy (HERE)) ;
     return result ;
   }
 
@@ -8373,7 +8373,7 @@ class GGS_callInstructionAST_2E_weak : public GGS_instructionAST_2E_weak {
 //--------------------------------- nil initializer
   public: inline static GGS_callInstructionAST_2E_weak init_nil (void) {
     GGS_callInstructionAST_2E_weak result ;
-    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    macroMyNew (result.mProxyPtr, PtrWeakReferenceProxy (HERE)) ;
     return result ;
   }
 
@@ -8550,7 +8550,7 @@ class cPtr_standAloneProcedureCallInstructionAST : public cPtr_callInstructionAS
                                                       COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
+  public: virtual AbstractPtrClass * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -8580,7 +8580,7 @@ class GGS_standAloneProcedureCallInstructionAST_2E_weak : public GGS_callInstruc
 //--------------------------------- nil initializer
   public: inline static GGS_standAloneProcedureCallInstructionAST_2E_weak init_nil (void) {
     GGS_standAloneProcedureCallInstructionAST_2E_weak result ;
-    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    macroMyNew (result.mProxyPtr, PtrWeakReferenceProxy (HERE)) ;
     return result ;
   }
 
@@ -8739,10 +8739,10 @@ class GGS_accessInAssignmentListAST : public AC_GALGAS_root {
 
 
 //--- List constructor for graph
-  public: GGS_accessInAssignmentListAST (const capCollectionElementArray & inSharedArray) ;
+  public: GGS_accessInAssignmentListAST (const CollectionElementArray & inSharedArray) ;
 
 //--- Element constructor
-  public: static void makeAttributesFromObjects (capCollectionElement & outAttributes,
+  public: static void makeAttributesFromObjects (CollectionElement & outAttributes,
                                                  const class GGS_accessInAssignmentAST & in_mAccess
                                                  COMMA_LOCATION_ARGS) ;
 
@@ -9156,7 +9156,7 @@ class cPtr_procedureCallInstructionAST : public cPtr_callInstructionAST {
                                             COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
+  public: virtual AbstractPtrClass * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -9186,7 +9186,7 @@ class GGS_procedureCallInstructionAST_2E_weak : public GGS_callInstructionAST_2E
 //--------------------------------- nil initializer
   public: inline static GGS_procedureCallInstructionAST_2E_weak init_nil (void) {
     GGS_procedureCallInstructionAST_2E_weak result ;
-    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    macroMyNew (result.mProxyPtr, PtrWeakReferenceProxy (HERE)) ;
     return result ;
   }
 
@@ -10143,10 +10143,10 @@ class GGS_procEffectiveParameterList : public AC_GALGAS_root {
 
 
 //--- List constructor for graph
-  public: GGS_procEffectiveParameterList (const capCollectionElementArray & inSharedArray) ;
+  public: GGS_procEffectiveParameterList (const CollectionElementArray & inSharedArray) ;
 
 //--- Element constructor
-  public: static void makeAttributesFromObjects (capCollectionElement & outAttributes,
+  public: static void makeAttributesFromObjects (CollectionElement & outAttributes,
                                                  const class GGS_effectiveArgumentPassingModeAST & in_mEffectiveParameterPassingMode,
                                                  const class GGS_lstring & in_mSelector,
                                                  const class GGS_omnibusType & in_mParameterType
@@ -10557,7 +10557,7 @@ class cPtr_externRoutineIR : public cPtr_abstractRoutineIR {
                                 COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
+  public: virtual AbstractPtrClass * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -10587,7 +10587,7 @@ class GGS_externRoutineIR_2E_weak : public GGS_abstractRoutineIR_2E_weak {
 //--------------------------------- nil initializer
   public: inline static GGS_externRoutineIR_2E_weak init_nil (void) {
     GGS_externRoutineIR_2E_weak result ;
-    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    macroMyNew (result.mProxyPtr, PtrWeakReferenceProxy (HERE)) ;
     return result ;
   }
 
@@ -10953,7 +10953,7 @@ class cPtr_compileTimeConvertToBooleanAST : public cPtr_abstractDeclarationAST {
                                                COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
+  public: virtual AbstractPtrClass * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -10983,7 +10983,7 @@ class GGS_compileTimeConvertToBooleanAST_2E_weak : public GGS_abstractDeclaratio
 //--------------------------------- nil initializer
   public: inline static GGS_compileTimeConvertToBooleanAST_2E_weak init_nil (void) {
     GGS_compileTimeConvertToBooleanAST_2E_weak result ;
-    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    macroMyNew (result.mProxyPtr, PtrWeakReferenceProxy (HERE)) ;
     return result ;
   }
 
@@ -11166,7 +11166,7 @@ class cPtr_llvmConvertToBooleanAST : public cPtr_abstractDeclarationAST {
                                         COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
+  public: virtual AbstractPtrClass * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -11196,7 +11196,7 @@ class GGS_llvmConvertToBooleanAST_2E_weak : public GGS_abstractDeclarationAST_2E
 //--------------------------------- nil initializer
   public: inline static GGS_llvmConvertToBooleanAST_2E_weak init_nil (void) {
     GGS_llvmConvertToBooleanAST_2E_weak result ;
-    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    macroMyNew (result.mProxyPtr, PtrWeakReferenceProxy (HERE)) ;
     return result ;
   }
 
@@ -11935,7 +11935,7 @@ class cPtr_compileTimeImplicitConverterToBoolean : public cPtr_abstractImplicitC
                                                       COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
+  public: virtual AbstractPtrClass * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -11965,7 +11965,7 @@ class GGS_compileTimeImplicitConverterToBoolean_2E_weak : public GGS_abstractImp
 //--------------------------------- nil initializer
   public: inline static GGS_compileTimeImplicitConverterToBoolean_2E_weak init_nil (void) {
     GGS_compileTimeImplicitConverterToBoolean_2E_weak result ;
-    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    macroMyNew (result.mProxyPtr, PtrWeakReferenceProxy (HERE)) ;
     return result ;
   }
 
@@ -12129,7 +12129,7 @@ class cPtr_llvmImplicitConverterToBoolean : public cPtr_abstractImplicitConverte
                                                COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
+  public: virtual AbstractPtrClass * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -12159,7 +12159,7 @@ class GGS_llvmImplicitConverterToBoolean_2E_weak : public GGS_abstractImplicitCo
 //--------------------------------- nil initializer
   public: inline static GGS_llvmImplicitConverterToBoolean_2E_weak init_nil (void) {
     GGS_llvmImplicitConverterToBoolean_2E_weak result ;
-    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    macroMyNew (result.mProxyPtr, PtrWeakReferenceProxy (HERE)) ;
     return result ;
   }
 
@@ -12343,7 +12343,7 @@ class cPtr_sourceLocationIR : public cPtr_abstractInstructionIR {
                                  COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
+  public: virtual AbstractPtrClass * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
@@ -12373,7 +12373,7 @@ class GGS_sourceLocationIR_2E_weak : public GGS_abstractInstructionIR_2E_weak {
 //--------------------------------- nil initializer
   public: inline static GGS_sourceLocationIR_2E_weak init_nil (void) {
     GGS_sourceLocationIR_2E_weak result ;
-    macroMyNew (result.mProxyPtr, cPtr_weakReference_proxy (HERE)) ;
+    macroMyNew (result.mProxyPtr, PtrWeakReferenceProxy (HERE)) ;
     return result ;
   }
 
@@ -12553,7 +12553,7 @@ class cPtr_testArrayIndexIR : public cPtr_abstractInstructionIR {
                                  COMMA_LOCATION_ARGS) ;
 
 //--- Duplication
-  public: virtual acPtr_class * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
+  public: virtual AbstractPtrClass * duplicate (Compiler * inCompiler COMMA_LOCATION_ARGS) const override ;
 
 //--- Attribute accessors
 //--- Description
