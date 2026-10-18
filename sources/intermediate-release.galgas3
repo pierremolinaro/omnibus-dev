@@ -12,7 +12,7 @@ class @releaseIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @releaseIR llvmInstructionCode
+override proc @releaseIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds ioGenerationAdds

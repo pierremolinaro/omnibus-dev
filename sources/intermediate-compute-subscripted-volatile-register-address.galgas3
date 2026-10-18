@@ -21,7 +21,7 @@ class @computeSubscriptedVolatileRegisterAddress : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @computeSubscriptedVolatileRegisterAddress llvmInstructionCode
+override proc @computeSubscriptedVolatileRegisterAddress llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds ioGenerationAdds

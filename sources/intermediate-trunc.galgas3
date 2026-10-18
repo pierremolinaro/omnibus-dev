@@ -24,7 +24,7 @@ class @truncIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @truncIR llvmInstructionCode
+override proc @truncIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds

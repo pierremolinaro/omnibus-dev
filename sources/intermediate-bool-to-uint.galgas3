@@ -15,7 +15,7 @@ class @boolToUIntIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @boolToUIntIR llvmInstructionCode
+override proc @boolToUIntIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds

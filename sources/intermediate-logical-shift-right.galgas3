@@ -25,7 +25,7 @@ class @logicalRightShiftIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @logicalRightShiftIR llvmInstructionCode
+override proc @logicalRightShiftIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds

@@ -1,7 +1,7 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//                                                                                                                       
-//    B U I L D    O R D E R E D    D E C L A R A T I O N    L I S T                                                     
-//                                                                                                                       
+//
+//    B U I L D    O R D E R E D    D E C L A R A T I O N    L I S T
+//
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 graph @semanticTypePrecedenceGraph (@declarationListAST) {
@@ -17,11 +17,11 @@ setter @semanticTypePrecedenceGraph noteUINTType ?let @uint inBitSize ?let @loca
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract method @abstractDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph
+abstract proc @abstractDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract getter @abstractDeclarationAST keyRepresentationForErrorSignaling -> @string
+abstract func @abstractDeclarationAST keyRepresentationForErrorSignaling -> @string
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //  COMPILE TIME BARRIER FOR PRECEDENCE GRAPH
@@ -32,7 +32,7 @@ class @compileTimeDeclarationBarrierAST : @abstractDeclarationAST {
 
 //·······················································································································
 
-override method @compileTimeDeclarationBarrierAST enterInPrecedenceGraph
+override proc @compileTimeDeclarationBarrierAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   [!?ioGraph addNode !compileTimeDeclarationBarrier () !self]
@@ -40,19 +40,19 @@ override method @compileTimeDeclarationBarrierAST enterInPrecedenceGraph
 
 //·······················································································································
 
-override getter @compileTimeDeclarationBarrierAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+override func @compileTimeDeclarationBarrierAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = compileTimeDeclarationBarrier ()
 }
 
 //·······················································································································
 
-override getter @compileTimeDeclarationBarrierAST locationForErrorSignaling -> @location outLocation {
+override func @compileTimeDeclarationBarrierAST locationForErrorSignaling -> @location outLocation {
   outLocation = .nowhere
 }
 
 //·······················································································································
 
-override method @compileTimeDeclarationBarrierAST enterInContext
+override proc @compileTimeDeclarationBarrierAST enterInContext
   ?!context:@semanticContext unused ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
@@ -96,7 +96,7 @@ private proc appendUnsignedOperatorsTo ?let @string inTypeName ?!@semanticTypePr
 //  appendInfixOperatorDeclaration (!.leftShiftOp !"shl" !inTypeName !inTypeName !?ioPrecedenceGraph)
 //--- >>
 //  appendInfixOperatorDeclaration (!.rightShiftOp !"lshr" !inTypeName !inTypeName !?ioPrecedenceGraph)
-//--- ~ 
+//--- ~
   appendPrefixOperatorDeclaration_bitWiseComplement (!inTypeName !?ioPrecedenceGraph)
 }
 

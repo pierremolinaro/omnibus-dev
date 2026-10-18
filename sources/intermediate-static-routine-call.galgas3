@@ -9,7 +9,7 @@ class @standaloneRoutineCallIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @standaloneRoutineCallIR llvmInstructionCode
+override proc @standaloneRoutineCallIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
@@ -38,7 +38,7 @@ override method @standaloneRoutineCallIR llvmInstructionCode
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @standaloneRoutineCallIR enterAccessibleEntities
+override proc @standaloneRoutineCallIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint unused ioMaxBranchOfOnInstructions
  {

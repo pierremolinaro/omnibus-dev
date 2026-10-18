@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  AST                                                                                                                  
+//!  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @syncDeclarationAST : @abstractDeclarationAST {
@@ -8,7 +8,7 @@ class @syncDeclarationAST : @abstractDeclarationAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  SYNTAX                                                                                                               
+//!  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -42,10 +42,10 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  PRECEDENCE GRAPH                                                                                                     
+//!  PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @syncDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @syncDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
 //--- Add structure type name as node
   [!?ioGraph addNode !self.mSyncToolName !self]
 //--- Add property types
@@ -72,21 +72,21 @@ override method @syncDeclarationAST enterInPrecedenceGraph ?!@semanticTypePreced
 
 //·······················································································································
 
-override getter @syncDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "sync " + self.mSyncToolName 
+override func @syncDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+  outRepresentation = "sync " + self.mSyncToolName
 }
 
 //·······················································································································
 
-override getter @syncDeclarationAST locationForErrorSignaling -> @location outLocation {
+override func @syncDeclarationAST locationForErrorSignaling -> @location outLocation {
   outLocation = self.mSyncToolName.location
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  ENTER IN CONTEXT                                                                                                     
+//!  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @syncDeclarationAST enterInContext
+override proc @syncDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList ioDecoratedRoutineList

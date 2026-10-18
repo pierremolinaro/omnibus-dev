@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract class @ctExpressionAST {
@@ -45,7 +45,7 @@ class @ctIdentifierExpressionAST : @ctExpressionAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SYNTAX                                                                                                               
+//  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -400,7 +400,7 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  CHECK COMPILE TIME EXPRESSION                                                                                                            
+//  CHECK COMPILE TIME EXPRESSION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @ctCheckMap {
@@ -410,44 +410,44 @@ map @ctCheckMap {
 
 //·······················································································································
 
-abstract method @ctExpressionAST checkCompileTimeExpression ?let @ctCheckMap inMap
+abstract proc @ctExpressionAST checkCompileTimeExpression ?let @ctCheckMap inMap
 
 //·······················································································································
 
-override method @ctInfixExpressionAST checkCompileTimeExpression ?let @ctCheckMap inMap {
+override proc @ctInfixExpressionAST checkCompileTimeExpression ?let @ctCheckMap inMap {
   [self.mLeftExpression checkCompileTimeExpression  !inMap]
   [self.mRightExpression checkCompileTimeExpression !inMap]
 }
 
 //·······················································································································
 
-override method @ctPrefixExpressionAST checkCompileTimeExpression ?let @ctCheckMap inMap {
+override proc @ctPrefixExpressionAST checkCompileTimeExpression ?let @ctCheckMap inMap {
   [self.mExpression checkCompileTimeExpression !inMap]
 }
 
 //·······················································································································
 
-override method @ctTrueExpressionAST checkCompileTimeExpression ?let @ctCheckMap unused inMap {
+override proc @ctTrueExpressionAST checkCompileTimeExpression ?let @ctCheckMap unused inMap {
 }
 
 //·······················································································································
 
-override method @ctFalseExpressionAST checkCompileTimeExpression ?let @ctCheckMap unused inMap {
+override proc @ctFalseExpressionAST checkCompileTimeExpression ?let @ctCheckMap unused inMap {
 }
 
 //·······················································································································
 
-override method @ctIntExpressionAST checkCompileTimeExpression ?let @ctCheckMap unused inMap {
+override proc @ctIntExpressionAST checkCompileTimeExpression ?let @ctCheckMap unused inMap {
 }
 
 //·······················································································································
 
-override method @ctIdentifierExpressionAST checkCompileTimeExpression ?let @ctCheckMap inMap {
+override proc @ctIdentifierExpressionAST checkCompileTimeExpression ?let @ctCheckMap inMap {
   [inMap searchKey !self.mIdentifier]
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  COMPUTE COMPILE TIME EXPRESSION                                                                                                            
+//  COMPUTE COMPILE TIME EXPRESSION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @ctMap {
@@ -458,13 +458,13 @@ map @ctMap {
 
 //·······················································································································
 
-abstract method @ctExpressionAST computeCompileTimeExpression
+abstract proc @ctExpressionAST computeCompileTimeExpression
   ?let @ctMap inMap
   !result: @bigint outValue
 
 //·······················································································································
 
-override method @ctInfixExpressionAST computeCompileTimeExpression
+override proc @ctInfixExpressionAST computeCompileTimeExpression
   ?let @ctMap inMap
   !result: @bigint outValue
 {
@@ -490,7 +490,7 @@ override method @ctInfixExpressionAST computeCompileTimeExpression
 
 //·······················································································································
 
-override method @ctPrefixExpressionAST computeCompileTimeExpression
+override proc @ctPrefixExpressionAST computeCompileTimeExpression
   ?let @ctMap inMap
   !result: @bigint outValue
 {
@@ -503,7 +503,7 @@ override method @ctPrefixExpressionAST computeCompileTimeExpression
 
 //·······················································································································
 
-override method @ctTrueExpressionAST computeCompileTimeExpression
+override proc @ctTrueExpressionAST computeCompileTimeExpression
   ?let @ctMap unused inMap
   !result: @bigint outValue
 {
@@ -512,7 +512,7 @@ override method @ctTrueExpressionAST computeCompileTimeExpression
 
 //·······················································································································
 
-override method @ctFalseExpressionAST computeCompileTimeExpression
+override proc @ctFalseExpressionAST computeCompileTimeExpression
   ?let @ctMap unused inMap
   !result: @bigint outValue
 {
@@ -521,7 +521,7 @@ override method @ctFalseExpressionAST computeCompileTimeExpression
 
 //·······················································································································
 
-override method @ctIntExpressionAST computeCompileTimeExpression
+override proc @ctIntExpressionAST computeCompileTimeExpression
   ?let @ctMap unused inMap
   !result: @bigint outValue
 {
@@ -530,7 +530,7 @@ override method @ctIntExpressionAST computeCompileTimeExpression
 
 //·······················································································································
 
-override method @ctIdentifierExpressionAST computeCompileTimeExpression
+override proc @ctIdentifierExpressionAST computeCompileTimeExpression
   ?let @ctMap inMap
   !result: @bigint outValue
 {

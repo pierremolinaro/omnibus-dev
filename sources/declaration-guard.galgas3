@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  AST                                                                                                                  
+//!  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @guardKind {
@@ -22,7 +22,7 @@ class @guardDeclarationAST : @abstractDeclarationAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  SYNTAX                                                                                                               
+//!  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -78,10 +78,10 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  NOTE TYPES IN PRECEDENCE GRAPH                                                                                       
+//  NOTE TYPES IN PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @guardDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @guardDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   var s = "guard."
   if self.mReceiverTypeName.string != "" then
     s += self.mReceiverTypeName.string + "."
@@ -104,21 +104,21 @@ override method @guardDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrece
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @guardDeclarationAST keyRepresentationForErrorSignaling -> @string {
+override func @guardDeclarationAST keyRepresentationForErrorSignaling -> @string {
   result = "guard " + self.mReceiverTypeName + "." + self.mGuardName
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @guardDeclarationAST locationForErrorSignaling -> @location {
+override func @guardDeclarationAST locationForErrorSignaling -> @location {
   result = self.mGuardName.location
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  ENTER IN CONTEXT                                                                                                     
+//  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @guardDeclarationAST enterInContext
+override proc @guardDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
@@ -164,7 +164,7 @@ override method @guardDeclarationAST enterInContext
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!   UTILITIES                                                                                                            
+//!   UTILITIES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 private func guardUserLLVMName ?let @string inReceiverLLVMBaseTypeName
@@ -200,7 +200,7 @@ private func guardImplementationLLVMName ?let @string inReceiverLLVMBaseTypeName
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  ENTER IN CONTEXT                                                                                                    
+//!  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @guardMapForContext {
@@ -214,7 +214,7 @@ map @guardMapForContext {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  SEMANTIC ANALYSIS                                                                                                    
+//!  SEMANTIC ANALYSIS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @decoratedGuardDeclaration : @abstractDecoratedDeclaration {
@@ -230,20 +230,20 @@ class @decoratedGuardDeclaration : @abstractDecoratedDeclaration {
 
 //·······················································································································
 
-override method @decoratedGuardDeclaration semanticAnalysis
+override proc @decoratedGuardDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   let receiverType = [inContext.mTypeMap searchKey !self.mReceiverTypeName].type
-//----------- 
+//-----------
   var warnIfUnused = true
   for (attribute) in self.mGuardAttributeList do
     if attribute.string == noUnusedWarningAttribute () then
       if not warnIfUnused then
         error (attribute : "duplicate @" + noUnusedWarningAttribute () + " attribute")
       end
-      warnIfUnused = false    
+      warnIfUnused = false
     else
       error (attribute : "unknown attribute; available attribute is @" + noUnusedWarningAttribute ())
     end
@@ -301,7 +301,7 @@ override method @decoratedGuardDeclaration semanticAnalysis
       !warningOnUnusedArgs: true
     )
   //--- Analyze base guard
-    [baseGuardInstruction baseGuardAnalyze 
+    [baseGuardInstruction baseGuardAnalyze
       !self:receiverType
       !routineAttributes:.mutatingRoutine
       !context:inContext
@@ -323,7 +323,7 @@ override method @decoratedGuardDeclaration semanticAnalysis
       !?alloca:allocaList
       !?generatedCode:instructionGenerationList
     ]
-  end 
+  end
 //--- End of variableMap
   [universalMap checkLocalVariableFinalState !?instructionGenerationList]
   [!?universalMap closeBranch !self.mEndOfGuardDeclaration]
@@ -362,10 +362,10 @@ override method @decoratedGuardDeclaration semanticAnalysis
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  SEMANTIC ANALYSIS                                                                                                    
+//!  SEMANTIC ANALYSIS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract method @callInstructionAST baseGuardAnalyze
+abstract proc @callInstructionAST baseGuardAnalyze
   ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
@@ -377,7 +377,7 @@ abstract method @callInstructionAST baseGuardAnalyze
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @standAloneProcedureCallInstructionAST baseGuardAnalyze
+override proc @standAloneProcedureCallInstructionAST baseGuardAnalyze
   ?self:let @omnibusType unused inSelfType
   ?routineAttributes:let @routineAttributes unused inRoutineAttributes
   ?context:let @semanticContext unused inContext
@@ -392,7 +392,7 @@ override method @standAloneProcedureCallInstructionAST baseGuardAnalyze
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @procedureCallInstructionAST baseGuardAnalyze
+override proc @procedureCallInstructionAST baseGuardAnalyze
   ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
@@ -491,7 +491,7 @@ override method @procedureCallInstructionAST baseGuardAnalyze
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  CODE GENERATION                                                                                                      
+//!  CODE GENERATION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @guardKindGenerationIR {
@@ -513,7 +513,7 @@ class @guardUserRoutineIR : @abstractRoutineIR {
 
 //·······················································································································
 
-override method @guardUserRoutineIR enterAccessibleEntities
+override proc @guardUserRoutineIR enterAccessibleEntities
    ?!@stringset ioInvokedRoutineSet
    ?!@uint unused ioMaxBranchOfOnInstructions
 {
@@ -522,7 +522,7 @@ override method @guardUserRoutineIR enterAccessibleEntities
 
 //·······················································································································
 
-override method @guardUserRoutineIR svcDeclarationGeneration
+override proc @guardUserRoutineIR svcDeclarationGeneration
   ?!@primitiveAndServiceIRlist ioPrimitiveAndServiceList
   ?!@sectionIRlist ioSectionList
   ?!@generationAdds unused ioGenerationAdds
@@ -542,7 +542,7 @@ override method @guardUserRoutineIR svcDeclarationGeneration
 
 //·······················································································································
 
-override method @guardUserRoutineIR llvmCodeGeneration 
+override proc @guardUserRoutineIR llvmCodeGeneration
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
@@ -568,7 +568,7 @@ class @guardImplementationRoutineIR : @abstractRoutineIR {
 
 //·······················································································································
 
-override method @guardImplementationRoutineIR llvmCodeGeneration 
+override proc @guardImplementationRoutineIR llvmCodeGeneration
   ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
@@ -601,7 +601,7 @@ override method @guardImplementationRoutineIR llvmCodeGeneration
     end
   end
   ioLLVMcode += ")" + llvmAttributeFunction () + "{\n"
-//--- Allocate local variables 
+//--- Allocate local variables
   var allocaList = self.mAllocaList
 //--- Store input arguments in memory
   for (mFormalArgumentKind mFormalArgumentType mFormalArgumentName) in self.mFormalArgumentListForGeneration do
@@ -611,7 +611,7 @@ override method @guardImplementationRoutineIR llvmCodeGeneration
     case output, inputOutput :
     end
   end
-//--- Allocate local variables 
+//--- Allocate local variables
   [allocaList generateAllocaList !?ioLLVMcode]
 //---
   for (mFormalArgumentKind mFormalArgumentType mFormalArgumentName) in self.mFormalArgumentListForGeneration do
@@ -623,7 +623,7 @@ override method @guardImplementationRoutineIR llvmCodeGeneration
     case output, inputOutput :
     end
   end
-//--- Declare "accept" variable 
+//--- Declare "accept" variable
   let accepted_llvmName = llvmNameForLocalVariable (!acceptVariableOmnibusName ())
   let accepted_llvmName_loaded = llvmNameForLocalVariable (!acceptVariableOmnibusName () + ".loaded")
 //--- Base guard or convenience guard ?
@@ -672,7 +672,7 @@ override method @guardImplementationRoutineIR llvmCodeGeneration
 
 //·······················································································································
 
-override method @guardImplementationRoutineIR enterAccessibleEntities
+override proc @guardImplementationRoutineIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint ioMaxBranchOfOnInstructions
 {

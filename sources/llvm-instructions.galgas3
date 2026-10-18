@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @llvmGenerationInstructionElement {
@@ -49,7 +49,7 @@ setter @llvmGenerationInstructionList appendReturn ?let @lstring inReturnType ?l
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  SYNTAX                                                                                                               
+//!  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -72,7 +72,7 @@ syntax extension omnibus_syntax {
     $identifier$ ?let name
     outInstruction = @llvmVarInstruction {!name}
   }
-  
+
   //·····················································································································
 
   rule <llvm_instruction> !@abstractLLVMInstruction outInstruction {
@@ -94,16 +94,16 @@ syntax extension omnibus_syntax {
     end
     outInstruction = @llvmGenerationInstruction {!elementList}
   }
-  
+
   //·····················································································································
 
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  ENTER IN CONTEXT                                                                                                     
+//!  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @llvmGenerationInstructionList checkInstructionList  ?let @ctCheckMap inMap {
+proc @llvmGenerationInstructionList checkInstructionList  ?let @ctCheckMap inMap {
   var currentMap = inMap
   for (instruction) in self do
     [instruction checkInstructionList !?currentMap]
@@ -112,17 +112,17 @@ method @llvmGenerationInstructionList checkInstructionList  ?let @ctCheckMap inM
 
 //·······················································································································
 
-abstract method @abstractLLVMInstruction checkInstructionList ?!@ctCheckMap ioMap
+abstract proc @abstractLLVMInstruction checkInstructionList ?!@ctCheckMap ioMap
 
 //·······················································································································
 
-override method @llvmVarInstruction checkInstructionList  ?!@ctCheckMap ioMap {
+override proc @llvmVarInstruction checkInstructionList  ?!@ctCheckMap ioMap {
   [!?ioMap insertKey !self.mVariableName]
 }
 
 //·······················································································································
 
-override method @llvmGenerationInstruction checkInstructionList ?!@ctCheckMap ioMap {
+override proc @llvmGenerationInstruction checkInstructionList ?!@ctCheckMap ioMap {
   for (element) in self.mGenerationList do
     switch element
     case string (*) :
@@ -146,7 +146,7 @@ map @assignmentGenerationVarMap {
 
 //·······················································································································
 
-method @llvmGenerationInstructionList generateIRCode
+proc @llvmGenerationInstructionList generateIRCode
     ?let @assignmentGenerationVarMap inVarMap
     ?let @assignmentGenerationVarMap inTypeMap
     ?!@stringlist ioInstructionAsStringListIR
@@ -162,7 +162,7 @@ method @llvmGenerationInstructionList generateIRCode
 
 //·······················································································································
 
-abstract method @abstractLLVMInstruction generateIRCode
+abstract proc @abstractLLVMInstruction generateIRCode
     ?!@assignmentGenerationVarMap ioVarMap
     ?!@assignmentGenerationVarMap ioTypeMap
     ?!@stringlist ioInstructionAsStringListIR
@@ -171,7 +171,7 @@ abstract method @abstractLLVMInstruction generateIRCode
 
 //·······················································································································
 
-override method @llvmGenerationInstruction generateIRCode
+override proc @llvmGenerationInstruction generateIRCode
     ?!@assignmentGenerationVarMap ioVarMap
     ?!@assignmentGenerationVarMap ioTypeMap
     ?!@stringlist ioInstructionAsStringListIR
@@ -180,7 +180,7 @@ override method @llvmGenerationInstruction generateIRCode
 {
    var s = ""
    for (element) in self.mGenerationList do
-     switch element 
+     switch element
      case string (value) :
        s += value
      case symbol (name) :
@@ -196,7 +196,7 @@ override method @llvmGenerationInstruction generateIRCode
 
 //·······················································································································
 
-override method @llvmVarInstruction generateIRCode
+override proc @llvmVarInstruction generateIRCode
     ?!@assignmentGenerationVarMap ioVarMap
     ?!@assignmentGenerationVarMap unused ioTypeMap
     ?!@stringlist unused ioInstructionAsStringListIR

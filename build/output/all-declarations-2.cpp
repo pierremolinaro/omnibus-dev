@@ -131,7 +131,7 @@ GGS_storeComputedPropertyValueIR_2E_weak GGS_storeComputedPropertyValueIR_2E_wea
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@instructionListIR generateRelease'
+//Extension proc '@instructionListIR generateRelease'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -1286,7 +1286,7 @@ void GGS_controlRegisterKind::method_extractRegisterArray (GGS_expressionAST & o
     outAssociatedValue_arrayElementSize.drop () ;
     outAssociatedValue_arrayElementSizeLocation.drop () ;
     String s ;
-    s.appendCString ("method @controlRegisterKind.registerArray invoked with an invalid enum value") ;
+    s.appendCString ("proc @controlRegisterKind.registerArray invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const auto ptr = (GGS_controlRegisterKind_2E_registerArray *) mAssociatedValues.associatedValuesPointer () ;
@@ -1410,10 +1410,10 @@ class CollectionElementPtr_controlRegisterNameListAST : public CollectionElement
                                                            COMMA_LOCATION_ARGS) ;
   public: CollectionElementPtr_controlRegisterNameListAST (const GGS_controlRegisterNameListAST_2E_element & inElement COMMA_LOCATION_ARGS) ;
 
-//--- Virtual method that checks that all attributes are valid
+//--- Virtual proc that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
 
-//--- Virtual method that returns a copy of current object
+//--- Virtual proc that returns a copy of current object
   public: virtual CollectionElementPtr * copy (void) ;
 } ;
 
@@ -1921,7 +1921,7 @@ void GGS_controlRegisterNameListAST::setter_setMRegisterNameAtIndex (GGS_lstring
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_lstring GGS_controlRegisterNameListAST::getter_mRegisterNameAtIndex (const GGS_uint & inIndex,
                                                                          Compiler * inCompiler
                                                                          COMMA_LOCATION_ARGS) const {
@@ -1960,7 +1960,7 @@ void GGS_controlRegisterNameListAST::setter_setMControlRegisterKindAtIndex (GGS_
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_controlRegisterKind GGS_controlRegisterNameListAST::getter_mControlRegisterKindAtIndex (const GGS_uint & inIndex,
                                                                                             Compiler * inCompiler
                                                                                             COMMA_LOCATION_ARGS) const {
@@ -1999,7 +1999,7 @@ void GGS_controlRegisterNameListAST::setter_setMIsReadOnlyAtIndex (GGS_bool inOp
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_bool GGS_controlRegisterNameListAST::getter_mIsReadOnlyAtIndex (const GGS_uint & inIndex,
                                                                     Compiler * inCompiler
                                                                     COMMA_LOCATION_ARGS) const {
@@ -2038,7 +2038,7 @@ void GGS_controlRegisterNameListAST::setter_setMRegisterOffsetAtIndex (GGS_expre
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_expressionAST GGS_controlRegisterNameListAST::getter_mRegisterOffsetAtIndex (const GGS_uint & inIndex,
                                                                                  Compiler * inCompiler
                                                                                  COMMA_LOCATION_ARGS) const {
@@ -2077,7 +2077,7 @@ void GGS_controlRegisterNameListAST::setter_setMRegisterOffsetLocationAtIndex (G
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_location GGS_controlRegisterNameListAST::getter_mRegisterOffsetLocationAtIndex (const GGS_uint & inIndex,
                                                                                     Compiler * inCompiler
                                                                                     COMMA_LOCATION_ARGS) const {
@@ -2247,10 +2247,10 @@ class CollectionElementPtr_controlRegisterDeclarationList : public CollectionEle
                                                                COMMA_LOCATION_ARGS) ;
   public: CollectionElementPtr_controlRegisterDeclarationList (const GGS_controlRegisterDeclarationList_2E_element & inElement COMMA_LOCATION_ARGS) ;
 
-//--- Virtual method that checks that all attributes are valid
+//--- Virtual proc that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
 
-//--- Virtual method that returns a copy of current object
+//--- Virtual proc that returns a copy of current object
   public: virtual CollectionElementPtr * copy (void) ;
 } ;
 
@@ -2733,7 +2733,7 @@ void GGS_controlRegisterDeclarationList::setter_setMRegisterArrayListAtIndex (GG
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_controlRegisterNameListAST GGS_controlRegisterDeclarationList::getter_mRegisterArrayListAtIndex (const GGS_uint & inIndex,
                                                                                                      Compiler * inCompiler
                                                                                                      COMMA_LOCATION_ARGS) const {
@@ -2772,7 +2772,7 @@ void GGS_controlRegisterDeclarationList::setter_setMRegisterTypeNameAtIndex (GGS
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_lstring GGS_controlRegisterDeclarationList::getter_mRegisterTypeNameAtIndex (const GGS_uint & inIndex,
                                                                                  Compiler * inCompiler
                                                                                  COMMA_LOCATION_ARGS) const {
@@ -2811,7 +2811,7 @@ void GGS_controlRegisterDeclarationList::setter_setMRegisterBitSliceListAtIndex 
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_controlRegisterBitSliceList GGS_controlRegisterDeclarationList::getter_mRegisterBitSliceListAtIndex (const GGS_uint & inIndex,
                                                                                                          Compiler * inCompiler
                                                                                                          COMMA_LOCATION_ARGS) const {
@@ -2850,7 +2850,7 @@ void GGS_controlRegisterDeclarationList::setter_setMRegisterBitSliceListLocation
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_location GGS_controlRegisterDeclarationList::getter_mRegisterBitSliceListLocationAtIndex (const GGS_uint & inIndex,
                                                                                               Compiler * inCompiler
                                                                                               COMMA_LOCATION_ARGS) const {
@@ -3005,10 +3005,10 @@ class CollectionElementPtr_controlRegisterBitSliceList : public CollectionElemen
                                                             COMMA_LOCATION_ARGS) ;
   public: CollectionElementPtr_controlRegisterBitSliceList (const GGS_controlRegisterBitSliceList_2E_element & inElement COMMA_LOCATION_ARGS) ;
 
-//--- Virtual method that checks that all attributes are valid
+//--- Virtual proc that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
 
-//--- Virtual method that returns a copy of current object
+//--- Virtual proc that returns a copy of current object
   public: virtual CollectionElementPtr * copy (void) ;
 } ;
 
@@ -3416,7 +3416,7 @@ void GGS_controlRegisterBitSliceList::setter_setMRegisterBitSliceAtIndex (GGS_co
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_controlRegisterBitSlice GGS_controlRegisterBitSliceList::getter_mRegisterBitSliceAtIndex (const GGS_uint & inIndex,
                                                                                               Compiler * inCompiler
                                                                                               COMMA_LOCATION_ARGS) const {
@@ -3572,7 +3572,7 @@ void GGS_controlRegisterBitSlice::method_extractUnusedBits (GGS_lbigint & outAss
   if (mEnum != Enumeration::enum_unusedBits) {
     outAssociatedValue_count.drop () ;
     String s ;
-    s.appendCString ("method @controlRegisterBitSlice.unusedBits invoked with an invalid enum value") ;
+    s.appendCString ("proc @controlRegisterBitSlice.unusedBits invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const auto ptr = (GGS_controlRegisterBitSlice_2E_unusedBits *) mAssociatedValues.associatedValuesPointer () ;
@@ -3590,7 +3590,7 @@ void GGS_controlRegisterBitSlice::method_extractNamedBit (GGS_lstring & outAssoc
     outAssociatedValue_name.drop () ;
     outAssociatedValue_count.drop () ;
     String s ;
-    s.appendCString ("method @controlRegisterBitSlice.namedBit invoked with an invalid enum value") ;
+    s.appendCString ("proc @controlRegisterBitSlice.namedBit invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const auto ptr = (GGS_controlRegisterBitSlice_2E_namedBit *) mAssociatedValues.associatedValuesPointer () ;
@@ -3758,7 +3758,7 @@ void GGS_controlRegisterGroupKindAST::method_extractSingle (GGS_lbigint & outAss
   if (mEnum != Enumeration::enum_single) {
     outAssociatedValue_registerGroupBaseAddress.drop () ;
     String s ;
-    s.appendCString ("method @controlRegisterGroupKindAST.single invoked with an invalid enum value") ;
+    s.appendCString ("proc @controlRegisterGroupKindAST.single invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const auto ptr = (GGS_controlRegisterGroupKindAST_2E_single *) mAssociatedValues.associatedValuesPointer () ;
@@ -3778,7 +3778,7 @@ void GGS_controlRegisterGroupKindAST::method_extractGroupArray (GGS_expressionAS
     outAssociatedValue_groupSizeExpLocation.drop () ;
     outAssociatedValue_baseAddresses.drop () ;
     String s ;
-    s.appendCString ("method @controlRegisterGroupKindAST.groupArray invoked with an invalid enum value") ;
+    s.appendCString ("proc @controlRegisterGroupKindAST.groupArray invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const auto ptr = (GGS_controlRegisterGroupKindAST_2E_groupArray *) mAssociatedValues.associatedValuesPointer () ;
@@ -3912,10 +3912,10 @@ class CollectionElementPtr_registerGroupListAST : public CollectionElementPtr {
                                                      COMMA_LOCATION_ARGS) ;
   public: CollectionElementPtr_registerGroupListAST (const GGS_registerGroupListAST_2E_element & inElement COMMA_LOCATION_ARGS) ;
 
-//--- Virtual method that checks that all attributes are valid
+//--- Virtual proc that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
 
-//--- Virtual method that returns a copy of current object
+//--- Virtual proc that returns a copy of current object
   public: virtual CollectionElementPtr * copy (void) ;
 } ;
 
@@ -4348,7 +4348,7 @@ void GGS_registerGroupListAST::setter_setMRegisterGroupNameAtIndex (GGS_lstring 
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_lstring GGS_registerGroupListAST::getter_mRegisterGroupNameAtIndex (const GGS_uint & inIndex,
                                                                         Compiler * inCompiler
                                                                         COMMA_LOCATION_ARGS) const {
@@ -4387,7 +4387,7 @@ void GGS_registerGroupListAST::setter_setMControlRegisterGroupKindAtIndex (GGS_c
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_controlRegisterGroupKindAST GGS_registerGroupListAST::getter_mControlRegisterGroupKindAtIndex (const GGS_uint & inIndex,
                                                                                                    Compiler * inCompiler
                                                                                                    COMMA_LOCATION_ARGS) const {
@@ -4839,10 +4839,10 @@ class CollectionElementPtr_controlRegisterFieldList : public CollectionElementPt
                                                          COMMA_LOCATION_ARGS) ;
   public: CollectionElementPtr_controlRegisterFieldList (const GGS_controlRegisterFieldList_2E_element & inElement COMMA_LOCATION_ARGS) ;
 
-//--- Virtual method that checks that all attributes are valid
+//--- Virtual proc that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
 
-//--- Virtual method that returns a copy of current object
+//--- Virtual proc that returns a copy of current object
   public: virtual CollectionElementPtr * copy (void) ;
 } ;
 
@@ -5275,7 +5275,7 @@ void GGS_controlRegisterFieldList::setter_setMFieldBitCountAtIndex (GGS_uint inO
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_uint GGS_controlRegisterFieldList::getter_mFieldBitCountAtIndex (const GGS_uint & inIndex,
                                                                      Compiler * inCompiler
                                                                      COMMA_LOCATION_ARGS) const {
@@ -5314,7 +5314,7 @@ void GGS_controlRegisterFieldList::setter_setMFieldNameAtIndex (GGS_string inOpe
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_string GGS_controlRegisterFieldList::getter_mFieldNameAtIndex (const GGS_uint & inIndex,
                                                                    Compiler * inCompiler
                                                                    COMMA_LOCATION_ARGS) const {
@@ -7132,22 +7132,22 @@ GGS_llvmBinaryOperation GGS_llvmBinaryOperation::extractObject (const GGS_object
 }
 
 //--------------------------------------------------------------------------------------------------
-//Extension method '@controlRegisterGroupDeclarationAST noteTypesInPrecedenceGraph'
+//Extension proc '@controlRegisterGroupDeclarationAST noteTypesInPrecedenceGraph'
 //--------------------------------------------------------------------------------------------------
 
 void cPtr_controlRegisterGroupDeclarationAST::method_noteTypesInPrecedenceGraph (GGS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
                                                                                  Compiler * inCompiler
                                                                                  COMMA_UNUSED_LOCATION_ARGS) {
   const GGS_controlRegisterGroupDeclarationAST temp_0 = this ;
-  UpEnumerator_controlRegisterDeclarationList enumerator_11436 (temp_0.readProperty_mRegisters ()) ;
-  while (enumerator_11436.hasCurrentObject ()) {
+  UpEnumerator_controlRegisterDeclarationList enumerator_11096 (temp_0.readProperty_mRegisters ()) ;
+  while (enumerator_11096.hasCurrentObject ()) {
     {
-    ioArgument_ioGraph.setter_noteNode (enumerator_11436.current (HERE).readProperty_mRegisterTypeName () COMMA_SOURCE_FILE ("declaration-control-register.galgas3", 297)) ;
+    ioArgument_ioGraph.setter_noteNode (enumerator_11096.current (HERE).readProperty_mRegisterTypeName () COMMA_SOURCE_FILE ("declaration-control-register.galgas3", 297)) ;
     }
     {
-    ioArgument_ioGraph.setter_addEdge (function_compileTimeDeclarationBarrier (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas3", 298)), enumerator_11436.current (HERE).readProperty_mRegisterTypeName () COMMA_SOURCE_FILE ("declaration-control-register.galgas3", 298)) ;
+    ioArgument_ioGraph.setter_addEdge (function_compileTimeDeclarationBarrier (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas3", 298)), enumerator_11096.current (HERE).readProperty_mRegisterTypeName () COMMA_SOURCE_FILE ("declaration-control-register.galgas3", 298)) ;
     }
-    enumerator_11436.gotoNextObject () ;
+    enumerator_11096.gotoNextObject () ;
   }
 }
 
@@ -8247,7 +8247,7 @@ void GGS_registerGroupKind::method_extractSingle (GGS_bigint & outAssociatedValu
   if (mEnum != Enumeration::enum_single) {
     outAssociatedValue_baseAddress.drop () ;
     String s ;
-    s.appendCString ("method @registerGroupKind.single invoked with an invalid enum value") ;
+    s.appendCString ("proc @registerGroupKind.single invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const auto ptr = (GGS_registerGroupKind_2E_single *) mAssociatedValues.associatedValuesPointer () ;
@@ -8263,7 +8263,7 @@ void GGS_registerGroupKind::method_extractArrayGroup (GGS_lbigintlist & outAssoc
   if (mEnum != Enumeration::enum_arrayGroup) {
     outAssociatedValue_baseAddresses.drop () ;
     String s ;
-    s.appendCString ("method @registerGroupKind.arrayGroup invoked with an invalid enum value") ;
+    s.appendCString ("proc @registerGroupKind.arrayGroup invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const auto ptr = (GGS_registerGroupKind_2E_arrayGroup *) mAssociatedValues.associatedValuesPointer () ;
@@ -9159,10 +9159,10 @@ class CollectionElementPtr_controlRegisterGroupArrayList : public CollectionElem
                                                               COMMA_LOCATION_ARGS) ;
   public: CollectionElementPtr_controlRegisterGroupArrayList (const GGS_controlRegisterGroupArrayList_2E_element & inElement COMMA_LOCATION_ARGS) ;
 
-//--- Virtual method that checks that all attributes are valid
+//--- Virtual proc that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
 
-//--- Virtual method that returns a copy of current object
+//--- Virtual proc that returns a copy of current object
   public: virtual CollectionElementPtr * copy (void) ;
 } ;
 
@@ -9595,7 +9595,7 @@ void GGS_controlRegisterGroupArrayList::setter_setMGroupNameAtIndex (GGS_lstring
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_lstring GGS_controlRegisterGroupArrayList::getter_mGroupNameAtIndex (const GGS_uint & inIndex,
                                                                          Compiler * inCompiler
                                                                          COMMA_LOCATION_ARGS) const {
@@ -9634,7 +9634,7 @@ void GGS_controlRegisterGroupArrayList::setter_setMBaseAddressesAtIndex (GGS_lbi
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_lbigintlist GGS_controlRegisterGroupArrayList::getter_mBaseAddressesAtIndex (const GGS_uint & inIndex,
                                                                                  Compiler * inCompiler
                                                                                  COMMA_LOCATION_ARGS) const {
@@ -9853,7 +9853,7 @@ void GGS_controlRegisterByAddress::setter_popSmallest (GGS_bigint & outOperand0,
   bool found = false ;
   if (isValid ()) {
     if (count () == 0) {
-      inCompiler->onTheFlyRunTimeError ("'popSmallest' method invoked on an empty list" COMMA_THERE) ;
+      inCompiler->onTheFlyRunTimeError ("'popSmallest' proc invoked on an empty list" COMMA_THERE) ;
     }else{
       outOperand0 = mSharedArray (0 COMMA_HERE).mProperty_mAddress ;
       outOperand1 = mSharedArray (0 COMMA_HERE).mProperty_mHTML ;
@@ -9876,7 +9876,7 @@ void GGS_controlRegisterByAddress::setter_popGreatest (GGS_bigint & outOperand0,
   bool found = false ;
   if (isValid ()) {
     if (count () == 0) {
-      inCompiler->onTheFlyRunTimeError ("'popGreatest' method invoked on an empty list" COMMA_THERE) ;
+      inCompiler->onTheFlyRunTimeError ("'popGreatest' proc invoked on an empty list" COMMA_THERE) ;
     }else{
       outOperand0 = mSharedArray.lastObject (HERE).mProperty_mAddress ;
       outOperand1 = mSharedArray.lastObject (HERE).mProperty_mHTML ;
@@ -9899,7 +9899,7 @@ void GGS_controlRegisterByAddress::method_smallest (GGS_bigint & outOperand0,
   bool found = false ;
   if (isValid ()) {
     if (count () == 0) {
-      inCompiler->onTheFlyRunTimeError ("'smallest' method invoked on an empty list" COMMA_THERE) ;
+      inCompiler->onTheFlyRunTimeError ("'smallest' proc invoked on an empty list" COMMA_THERE) ;
     }else{
       outOperand0 = mSharedArray (0 COMMA_HERE).mProperty_mAddress ;
       outOperand1 = mSharedArray (0 COMMA_HERE).mProperty_mHTML ;
@@ -9921,7 +9921,7 @@ void GGS_controlRegisterByAddress::method_greatest (GGS_bigint & outOperand0,
   bool found = false ;
   if (isValid ()) {
     if (count () == 0) {
-      inCompiler->onTheFlyRunTimeError ("'greatest' method invoked on an empty list" COMMA_THERE) ;
+      inCompiler->onTheFlyRunTimeError ("'greatest' proc invoked on an empty list" COMMA_THERE) ;
     }else{
       outOperand0 = mSharedArray.lastObject (HERE).mProperty_mAddress ;
       outOperand1 = mSharedArray.lastObject (HERE).mProperty_mHTML ;
@@ -10146,7 +10146,7 @@ void GGS_controlRegisterByName::setter_popSmallest (GGS_bigint & outOperand0,
   bool found = false ;
   if (isValid ()) {
     if (count () == 0) {
-      inCompiler->onTheFlyRunTimeError ("'popSmallest' method invoked on an empty list" COMMA_THERE) ;
+      inCompiler->onTheFlyRunTimeError ("'popSmallest' proc invoked on an empty list" COMMA_THERE) ;
     }else{
       outOperand0 = mSharedArray (0 COMMA_HERE).mProperty_mAddress ;
       outOperand1 = mSharedArray (0 COMMA_HERE).mProperty_mHTML ;
@@ -10172,7 +10172,7 @@ void GGS_controlRegisterByName::setter_popGreatest (GGS_bigint & outOperand0,
   bool found = false ;
   if (isValid ()) {
     if (count () == 0) {
-      inCompiler->onTheFlyRunTimeError ("'popGreatest' method invoked on an empty list" COMMA_THERE) ;
+      inCompiler->onTheFlyRunTimeError ("'popGreatest' proc invoked on an empty list" COMMA_THERE) ;
     }else{
       outOperand0 = mSharedArray.lastObject (HERE).mProperty_mAddress ;
       outOperand1 = mSharedArray.lastObject (HERE).mProperty_mHTML ;
@@ -10198,7 +10198,7 @@ void GGS_controlRegisterByName::method_smallest (GGS_bigint & outOperand0,
   bool found = false ;
   if (isValid ()) {
     if (count () == 0) {
-      inCompiler->onTheFlyRunTimeError ("'smallest' method invoked on an empty list" COMMA_THERE) ;
+      inCompiler->onTheFlyRunTimeError ("'smallest' proc invoked on an empty list" COMMA_THERE) ;
     }else{
       outOperand0 = mSharedArray (0 COMMA_HERE).mProperty_mAddress ;
       outOperand1 = mSharedArray (0 COMMA_HERE).mProperty_mHTML ;
@@ -10223,7 +10223,7 @@ void GGS_controlRegisterByName::method_greatest (GGS_bigint & outOperand0,
   bool found = false ;
   if (isValid ()) {
     if (count () == 0) {
-      inCompiler->onTheFlyRunTimeError ("'greatest' method invoked on an empty list" COMMA_THERE) ;
+      inCompiler->onTheFlyRunTimeError ("'greatest' proc invoked on an empty list" COMMA_THERE) ;
     }else{
       outOperand0 = mSharedArray.lastObject (HERE).mProperty_mAddress ;
       outOperand1 = mSharedArray.lastObject (HERE).mProperty_mHTML ;
@@ -10698,7 +10698,7 @@ void GGS_effectiveArgumentPassingModeAST::method_extractInput (GGS_lstring & out
   if (mEnum != Enumeration::enum_input) {
     outAssociatedValue_name.drop () ;
     String s ;
-    s.appendCString ("method @effectiveArgumentPassingModeAST.input invoked with an invalid enum value") ;
+    s.appendCString ("proc @effectiveArgumentPassingModeAST.input invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const auto ptr = (GGS_effectiveArgumentPassingModeAST_2E_input *) mAssociatedValues.associatedValuesPointer () ;
@@ -10718,7 +10718,7 @@ void GGS_effectiveArgumentPassingModeAST::method_extractInputWithType (GGS_bool 
     outAssociatedValue_typeName.drop () ;
     outAssociatedValue_name.drop () ;
     String s ;
-    s.appendCString ("method @effectiveArgumentPassingModeAST.inputWithType invoked with an invalid enum value") ;
+    s.appendCString ("proc @effectiveArgumentPassingModeAST.inputWithType invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const auto ptr = (GGS_effectiveArgumentPassingModeAST_2E_inputWithType *) mAssociatedValues.associatedValuesPointer () ;
@@ -10738,7 +10738,7 @@ void GGS_effectiveArgumentPassingModeAST::method_extractOutput (GGS_expressionAS
     outAssociatedValue_exp.drop () ;
     outAssociatedValue_endOfExp.drop () ;
     String s ;
-    s.appendCString ("method @effectiveArgumentPassingModeAST.output invoked with an invalid enum value") ;
+    s.appendCString ("proc @effectiveArgumentPassingModeAST.output invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const auto ptr = (GGS_effectiveArgumentPassingModeAST_2E_output *) mAssociatedValues.associatedValuesPointer () ;
@@ -10755,7 +10755,7 @@ void GGS_effectiveArgumentPassingModeAST::method_extractOutputInput (GGS_lstring
   if (mEnum != Enumeration::enum_outputInput) {
     outAssociatedValue_name.drop () ;
     String s ;
-    s.appendCString ("method @effectiveArgumentPassingModeAST.outputInput invoked with an invalid enum value") ;
+    s.appendCString ("proc @effectiveArgumentPassingModeAST.outputInput invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const auto ptr = (GGS_effectiveArgumentPassingModeAST_2E_outputInput *) mAssociatedValues.associatedValuesPointer () ;
@@ -10771,7 +10771,7 @@ void GGS_effectiveArgumentPassingModeAST::method_extractOutputInputSelfVariable 
   if (mEnum != Enumeration::enum_outputInputSelfVariable) {
     outAssociatedValue_name.drop () ;
     String s ;
-    s.appendCString ("method @effectiveArgumentPassingModeAST.outputInputSelfVariable invoked with an invalid enum value") ;
+    s.appendCString ("proc @effectiveArgumentPassingModeAST.outputInputSelfVariable invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const auto ptr = (GGS_effectiveArgumentPassingModeAST_2E_outputInputSelfVariable *) mAssociatedValues.associatedValuesPointer () ;
@@ -10981,39 +10981,39 @@ GGS_string extensionGetter_matchingFormalArgument (const GGS_effectiveArgumentPa
     break ;
   case GGS_effectiveArgumentPassingModeAST::Enumeration::enum_input:
     {
-      GGS_lstring extractedValue_850__0 ;
-      temp_0.getAssociatedValuesFor_input (extractedValue_850__0) ;
+      GGS_lstring extractedValue_733__0 ;
+      temp_0.getAssociatedValuesFor_input (extractedValue_733__0) ;
       result_result = GGS_string ("!") ;
     }
     break ;
   case GGS_effectiveArgumentPassingModeAST::Enumeration::enum_inputWithType:
     {
-      GGS_bool extractedValue_890__0 ;
-      GGS_lstring extractedValue_892__1 ;
-      GGS_lstring extractedValue_894__2 ;
-      temp_0.getAssociatedValuesFor_inputWithType (extractedValue_890__0, extractedValue_892__1, extractedValue_894__2) ;
+      GGS_bool extractedValue_773__0 ;
+      GGS_lstring extractedValue_775__1 ;
+      GGS_lstring extractedValue_777__2 ;
+      temp_0.getAssociatedValuesFor_inputWithType (extractedValue_773__0, extractedValue_775__1, extractedValue_777__2) ;
       result_result = GGS_string ("!") ;
     }
     break ;
   case GGS_effectiveArgumentPassingModeAST::Enumeration::enum_output:
     {
-      GGS_expressionAST extractedValue_927__0 ;
-      GGS_location extractedValue_929__1 ;
-      temp_0.getAssociatedValuesFor_output (extractedValue_927__0, extractedValue_929__1) ;
+      GGS_expressionAST extractedValue_810__0 ;
+      GGS_location extractedValue_812__1 ;
+      temp_0.getAssociatedValuesFor_output (extractedValue_810__0, extractedValue_812__1) ;
       result_result = GGS_string ("\?") ;
     }
     break ;
   case GGS_effectiveArgumentPassingModeAST::Enumeration::enum_outputInput:
     {
-      GGS_lstring extractedValue_967__0 ;
-      temp_0.getAssociatedValuesFor_outputInput (extractedValue_967__0) ;
+      GGS_lstring extractedValue_850__0 ;
+      temp_0.getAssociatedValuesFor_outputInput (extractedValue_850__0) ;
       result_result = GGS_string ("\?!") ;
     }
     break ;
   case GGS_effectiveArgumentPassingModeAST::Enumeration::enum_outputInputSelfVariable:
     {
-      GGS_lstring extractedValue_1018__0 ;
-      temp_0.getAssociatedValuesFor_outputInputSelfVariable (extractedValue_1018__0) ;
+      GGS_lstring extractedValue_901__0 ;
+      temp_0.getAssociatedValuesFor_outputInputSelfVariable (extractedValue_901__0) ;
       result_result = GGS_string ("\?!") ;
     }
     break ;
@@ -11038,10 +11038,10 @@ class CollectionElementPtr_effectiveArgumentListAST : public CollectionElementPt
                                                          COMMA_LOCATION_ARGS) ;
   public: CollectionElementPtr_effectiveArgumentListAST (const GGS_effectiveArgumentListAST_2E_element & inElement COMMA_LOCATION_ARGS) ;
 
-//--- Virtual method that checks that all attributes are valid
+//--- Virtual proc that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
 
-//--- Virtual method that returns a copy of current object
+//--- Virtual proc that returns a copy of current object
   public: virtual CollectionElementPtr * copy (void) ;
 } ;
 
@@ -11474,7 +11474,7 @@ void GGS_effectiveArgumentListAST::setter_setMEffectiveParameterKindAtIndex (GGS
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_effectiveArgumentPassingModeAST GGS_effectiveArgumentListAST::getter_mEffectiveParameterKindAtIndex (const GGS_uint & inIndex,
                                                                                                          Compiler * inCompiler
                                                                                                          COMMA_LOCATION_ARGS) const {
@@ -11513,7 +11513,7 @@ void GGS_effectiveArgumentListAST::setter_setMSelectorAtIndex (GGS_lstring inOpe
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_lstring GGS_effectiveArgumentListAST::getter_mSelectorAtIndex (const GGS_uint & inIndex,
                                                                    Compiler * inCompiler
                                                                    COMMA_LOCATION_ARGS) const {
@@ -11642,23 +11642,23 @@ GGS_lstring extensionGetter_mangledName (const GGS_effectiveArgumentListAST & in
                                          Compiler * inCompiler
                                          COMMA_UNUSED_LOCATION_ARGS) {
   GGS_lstring result_result ; // Returned variable
-  GGS_string var_s_1596 = GGS_string::makeEmptyString () ;
+  GGS_string var_s_1477 = GGS_string::makeEmptyString () ;
   GalgasBool test_0 = GalgasBool::boolTrue ;
   if (GalgasBool::boolTrue == test_0) {
     test_0 = GGS_bool (ComparisonKind::notEqual, constinArgument_inReceiverTypeName.objectCompare (GGS_string::makeEmptyString ())).boolEnum () ;
     if (GalgasBool::boolTrue == test_0) {
-      var_s_1596.plusAssignOperation(constinArgument_inReceiverTypeName.add_operation (GGS_string ("."), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas3", 40)), inCompiler  COMMA_SOURCE_FILE ("effective-parameters.galgas3", 40)) ;
+      var_s_1477.plusAssignOperation(constinArgument_inReceiverTypeName.add_operation (GGS_string ("."), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas3", 40)), inCompiler  COMMA_SOURCE_FILE ("effective-parameters.galgas3", 40)) ;
     }
   }
-  var_s_1596.plusAssignOperation(constinArgument_inFunctionName.readProperty_string ().add_operation (GGS_string ("("), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas3", 42)), inCompiler  COMMA_SOURCE_FILE ("effective-parameters.galgas3", 42)) ;
+  var_s_1477.plusAssignOperation(constinArgument_inFunctionName.readProperty_string ().add_operation (GGS_string ("("), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas3", 42)), inCompiler  COMMA_SOURCE_FILE ("effective-parameters.galgas3", 42)) ;
   const GGS_effectiveArgumentListAST temp_1 = inObject ;
-  UpEnumerator_effectiveArgumentListAST enumerator_1749 (temp_1) ;
-  while (enumerator_1749.hasCurrentObject ()) {
-    var_s_1596.plusAssignOperation(extensionGetter_matchingFormalArgument (enumerator_1749.current_mEffectiveParameterKind (HERE), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas3", 44)).add_operation (enumerator_1749.current_mSelector (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas3", 44)).add_operation (GGS_string (":"), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas3", 44)), inCompiler  COMMA_SOURCE_FILE ("effective-parameters.galgas3", 44)) ;
-    enumerator_1749.gotoNextObject () ;
+  UpEnumerator_effectiveArgumentListAST enumerator_1630 (temp_1) ;
+  while (enumerator_1630.hasCurrentObject ()) {
+    var_s_1477.plusAssignOperation(extensionGetter_matchingFormalArgument (enumerator_1630.current_mEffectiveParameterKind (HERE), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas3", 44)).add_operation (enumerator_1630.current_mSelector (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas3", 44)).add_operation (GGS_string (":"), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas3", 44)), inCompiler  COMMA_SOURCE_FILE ("effective-parameters.galgas3", 44)) ;
+    enumerator_1630.gotoNextObject () ;
   }
-  var_s_1596.plusAssignOperation(GGS_string (")"), inCompiler  COMMA_SOURCE_FILE ("effective-parameters.galgas3", 46)) ;
-  result_result = GGS_lstring::init_21__21_ (var_s_1596, constinArgument_inFunctionName.readProperty_location (), inCompiler COMMA_HERE) ;
+  var_s_1477.plusAssignOperation(GGS_string (")"), inCompiler  COMMA_SOURCE_FILE ("effective-parameters.galgas3", 46)) ;
+  result_result = GGS_lstring::init_21__21_ (var_s_1477, constinArgument_inFunctionName.readProperty_location (), inCompiler COMMA_HERE) ;
 //---
   return result_result ;
 }
@@ -13079,10 +13079,10 @@ class CollectionElementPtr_sliceAssignmentListAST : public CollectionElementPtr 
                                                        COMMA_LOCATION_ARGS) ;
   public: CollectionElementPtr_sliceAssignmentListAST (const GGS_sliceAssignmentListAST_2E_element & inElement COMMA_LOCATION_ARGS) ;
 
-//--- Virtual method that checks that all attributes are valid
+//--- Virtual proc that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
 
-//--- Virtual method that returns a copy of current object
+//--- Virtual proc that returns a copy of current object
   public: virtual CollectionElementPtr * copy (void) ;
 } ;
 
@@ -13515,7 +13515,7 @@ void GGS_sliceAssignmentListAST::setter_setMSliceWidthAtIndex (GGS_lstring inOpe
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_lstring GGS_sliceAssignmentListAST::getter_mSliceWidthAtIndex (const GGS_uint & inIndex,
                                                                    Compiler * inCompiler
                                                                    COMMA_LOCATION_ARGS) const {
@@ -13554,7 +13554,7 @@ void GGS_sliceAssignmentListAST::setter_setMSliceKindAtIndex (GGS_sliceTargetAST
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_sliceTargetAST GGS_sliceAssignmentListAST::getter_mSliceKindAtIndex (const GGS_uint & inIndex,
                                                                          Compiler * inCompiler
                                                                          COMMA_LOCATION_ARGS) const {
@@ -13866,7 +13866,7 @@ void GGS_sliceTargetAST::method_extractVarDeclaration (GGS_lstring & outAssociat
   if (mEnum != Enumeration::enum_varDeclaration) {
     outAssociatedValue_varName.drop () ;
     String s ;
-    s.appendCString ("method @sliceTargetAST.varDeclaration invoked with an invalid enum value") ;
+    s.appendCString ("proc @sliceTargetAST.varDeclaration invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const auto ptr = (GGS_sliceTargetAST_2E_varDeclaration *) mAssociatedValues.associatedValuesPointer () ;
@@ -13882,7 +13882,7 @@ void GGS_sliceTargetAST::method_extractLetDeclaration (GGS_lstring & outAssociat
   if (mEnum != Enumeration::enum_letDeclaration) {
     outAssociatedValue_letName.drop () ;
     String s ;
-    s.appendCString ("method @sliceTargetAST.letDeclaration invoked with an invalid enum value") ;
+    s.appendCString ("proc @sliceTargetAST.letDeclaration invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const auto ptr = (GGS_sliceTargetAST_2E_letDeclaration *) mAssociatedValues.associatedValuesPointer () ;
@@ -13898,7 +13898,7 @@ void GGS_sliceTargetAST::method_extractLValue (GGS_LValueAST & outAssociatedValu
   if (mEnum != Enumeration::enum_lValue) {
     outAssociatedValue_target.drop () ;
     String s ;
-    s.appendCString ("method @sliceTargetAST.lValue invoked with an invalid enum value") ;
+    s.appendCString ("proc @sliceTargetAST.lValue invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const auto ptr = (GGS_sliceTargetAST_2E_lValue *) mAssociatedValues.associatedValuesPointer () ;
@@ -14183,10 +14183,10 @@ class CollectionElementPtr_registerIntegerFieldListAST : public CollectionElemen
                                                             COMMA_LOCATION_ARGS) ;
   public: CollectionElementPtr_registerIntegerFieldListAST (const GGS_registerIntegerFieldListAST_2E_element & inElement COMMA_LOCATION_ARGS) ;
 
-//--- Virtual method that checks that all attributes are valid
+//--- Virtual proc that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
 
-//--- Virtual method that returns a copy of current object
+//--- Virtual proc that returns a copy of current object
   public: virtual CollectionElementPtr * copy (void) ;
 } ;
 
@@ -14644,7 +14644,7 @@ void GGS_registerIntegerFieldListAST::setter_setMFieldNameAtIndex (GGS_lstring i
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_lstring GGS_registerIntegerFieldListAST::getter_mFieldNameAtIndex (const GGS_uint & inIndex,
                                                                        Compiler * inCompiler
                                                                        COMMA_LOCATION_ARGS) const {
@@ -14683,7 +14683,7 @@ void GGS_registerIntegerFieldListAST::setter_setMExpressionAtIndex (GGS_expressi
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_expressionAST GGS_registerIntegerFieldListAST::getter_mExpressionAtIndex (const GGS_uint & inIndex,
                                                                               Compiler * inCompiler
                                                                               COMMA_LOCATION_ARGS) const {
@@ -14722,7 +14722,7 @@ void GGS_registerIntegerFieldListAST::setter_setMExpressionLocationAtIndex (GGS_
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_location GGS_registerIntegerFieldListAST::getter_mExpressionLocationAtIndex (const GGS_uint & inIndex,
                                                                                  Compiler * inCompiler
                                                                                  COMMA_LOCATION_ARGS) const {
@@ -15473,10 +15473,10 @@ class CollectionElementPtr_taskSetupListAST : public CollectionElementPtr {
                                                  COMMA_LOCATION_ARGS) ;
   public: CollectionElementPtr_taskSetupListAST (const GGS_taskSetupListAST_2E_element & inElement COMMA_LOCATION_ARGS) ;
 
-//--- Virtual method that checks that all attributes are valid
+//--- Virtual proc that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
 
-//--- Virtual method that returns a copy of current object
+//--- Virtual proc that returns a copy of current object
   public: virtual CollectionElementPtr * copy (void) ;
 } ;
 
@@ -15909,7 +15909,7 @@ void GGS_taskSetupListAST::setter_setMNameAtIndex (GGS_lstring inOperand,
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_lstring GGS_taskSetupListAST::getter_mNameAtIndex (const GGS_uint & inIndex,
                                                        Compiler * inCompiler
                                                        COMMA_LOCATION_ARGS) const {
@@ -15948,7 +15948,7 @@ void GGS_taskSetupListAST::setter_setMDependanceListAtIndex (GGS_lstringlist inO
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_lstringlist GGS_taskSetupListAST::getter_mDependanceListAtIndex (const GGS_uint & inIndex,
                                                                      Compiler * inCompiler
                                                                      COMMA_LOCATION_ARGS) const {
@@ -16081,10 +16081,10 @@ class CollectionElementPtr_syncInstructionBranchListAST : public CollectionEleme
                                                              COMMA_LOCATION_ARGS) ;
   public: CollectionElementPtr_syncInstructionBranchListAST (const GGS_syncInstructionBranchListAST_2E_element & inElement COMMA_LOCATION_ARGS) ;
 
-//--- Virtual method that checks that all attributes are valid
+//--- Virtual proc that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
 
-//--- Virtual method that returns a copy of current object
+//--- Virtual proc that returns a copy of current object
   public: virtual CollectionElementPtr * copy (void) ;
 } ;
 
@@ -16542,7 +16542,7 @@ void GGS_syncInstructionBranchListAST::setter_setMGuardedCommandAtIndex (GGS_gua
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_guardedCommandAST GGS_syncInstructionBranchListAST::getter_mGuardedCommandAtIndex (const GGS_uint & inIndex,
                                                                                        Compiler * inCompiler
                                                                                        COMMA_LOCATION_ARGS) const {
@@ -16581,7 +16581,7 @@ void GGS_syncInstructionBranchListAST::setter_setMInstructionListAtIndex (GGS_in
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_instructionListAST GGS_syncInstructionBranchListAST::getter_mInstructionListAtIndex (const GGS_uint & inIndex,
                                                                                          Compiler * inCompiler
                                                                                          COMMA_LOCATION_ARGS) const {
@@ -16620,7 +16620,7 @@ void GGS_syncInstructionBranchListAST::setter_setMEndOfBranchAtIndex (GGS_locati
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_location GGS_syncInstructionBranchListAST::getter_mEndOfBranchAtIndex (const GGS_uint & inIndex,
                                                                            Compiler * inCompiler
                                                                            COMMA_LOCATION_ARGS) const {
@@ -16753,7 +16753,7 @@ GGS_syncInstructionBranchListAST GGS_syncInstructionBranchListAST::extractObject
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@taskListAST noteTypesInPrecedenceGraph'
+//Extension proc '@taskListAST noteTypesInPrecedenceGraph'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -16762,14 +16762,14 @@ void extensionMethod_noteTypesInPrecedenceGraph (const GGS_taskListAST inObject,
                                                  Compiler * inCompiler
                                                  COMMA_UNUSED_LOCATION_ARGS) {
   const GGS_taskListAST temp_0 = inObject ;
-  UpEnumerator_taskListAST enumerator_5017 (temp_0) ;
-  while (enumerator_5017.hasCurrentObject ()) {
-    UpEnumerator_syncInstructionBranchListAST enumerator_5057 (enumerator_5017.current_mGuardedCommandList (HERE)) ;
-    while (enumerator_5057.hasCurrentObject ()) {
-      extensionMethod_noteInstructionListTypesInPrecedenceGraph (enumerator_5057.current (HERE).readProperty_mInstructionList (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas3", 148)) ;
-      enumerator_5057.gotoNextObject () ;
+  UpEnumerator_taskListAST enumerator_4689 (temp_0) ;
+  while (enumerator_4689.hasCurrentObject ()) {
+    UpEnumerator_syncInstructionBranchListAST enumerator_4729 (enumerator_4689.current_mGuardedCommandList (HERE)) ;
+    while (enumerator_4729.hasCurrentObject ()) {
+      extensionMethod_noteInstructionListTypesInPrecedenceGraph (enumerator_4729.current (HERE).readProperty_mInstructionList (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas3", 148)) ;
+      enumerator_4729.gotoNextObject () ;
     }
-    enumerator_5017.gotoNextObject () ;
+    enumerator_4689.gotoNextObject () ;
   }
 }
 

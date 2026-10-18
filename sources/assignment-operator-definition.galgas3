@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @llvmAssignmentOperatorDeclarationAST : @abstractDeclarationAST {
@@ -16,12 +16,12 @@ class @llvmAssignmentOperatorDeclarationAST : @abstractDeclarationAST {
 
 //·······················································································································
 
-override getter @llvmAssignmentOperatorDeclarationAST locationForErrorSignaling -> @location outLocation {
+override func @llvmAssignmentOperatorDeclarationAST locationForErrorSignaling -> @location outLocation {
   outLocation = self.mOperatorLocation
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  SYNTAX                                                                                                               
+//!  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -41,7 +41,7 @@ syntax extension omnibus_syntax {
     <generic_formal_arguments> ?outTargetGenericFormalParameterList
     $)$
   }
-  
+
   //·····················································································································
 
   rule <declaration> ?!@ast ioAST {
@@ -75,10 +75,10 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  PRECEDENCE GRAPH                                                                                                     
+//  PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @llvmAssignmentOperatorDeclarationAST enterInPrecedenceGraph
+override proc @llvmAssignmentOperatorDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   let nodeName = @lstring {!self.mTargetTypeName.string + " = " + self.mSourceTypeName !self.mOperatorLocation}
@@ -89,7 +89,7 @@ override method @llvmAssignmentOperatorDeclarationAST enterInPrecedenceGraph
 
 //·······················································································································
 
-override getter @llvmAssignmentOperatorDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+override func @llvmAssignmentOperatorDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = "Assignment " + self.mTargetTypeName + " = " + self.mSourceTypeName
 }
 
@@ -113,7 +113,7 @@ func assignmentOperatorKey ?let @omnibusType inTargetType
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  ENTER IN CONTEXT                                                                                                     
+//!  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract class @abstractAssignmentOperatorUsage {
@@ -121,7 +121,7 @@ abstract class @abstractAssignmentOperatorUsage {
 
 //·······················································································································
 
-abstract method @abstractAssignmentOperatorUsage generateCode
+abstract proc @abstractAssignmentOperatorUsage generateCode
     ?!@semanticTemporariesStruct ioTemporaries
     ?!@instructionListIR ioInstructionListIR
     ?!@allocaList ioAllocaList
@@ -141,7 +141,7 @@ map @assignmentOperatorMap {
 
 //·······················································································································
 
-override method @llvmAssignmentOperatorDeclarationAST enterInContext
+override proc @llvmAssignmentOperatorDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
@@ -179,7 +179,7 @@ override method @llvmAssignmentOperatorDeclarationAST enterInContext
     !self.mLLVMInstructionList
   }
   [!?ioContext.mAssignmentOperatorMap insertKey
-    !key 
+    !key
     !operatorUsage
   ]
 //--- Generate function if
@@ -231,7 +231,7 @@ class @llvmAssignmentOperatorUsage : @abstractAssignmentOperatorUsage {
 
 //·······················································································································
 
-override method @llvmAssignmentOperatorUsage generateCode
+override proc @llvmAssignmentOperatorUsage generateCode
     ?!@semanticTemporariesStruct ioTemporaries
     ?!@instructionListIR ioInstructionListIR
     ?!@allocaList ioAllocaList
@@ -307,7 +307,7 @@ class @assignmentRoutineIR : @abstractRoutineIR {
 
 //·······················································································································
 
-override method @assignmentRoutineIR llvmCodeGeneration 
+override proc @assignmentRoutineIR llvmCodeGeneration
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
@@ -331,7 +331,7 @@ class @simpleAssignmentCopyRoutineIR : @abstractRoutineIR {
 
 //·······················································································································
 
-override method @simpleAssignmentCopyRoutineIR llvmCodeGeneration 
+override proc @simpleAssignmentCopyRoutineIR llvmCodeGeneration
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
@@ -355,7 +355,7 @@ class @simpleCopyAssignmentOperatorUsage : @abstractAssignmentOperatorUsage {
 
 //·······················································································································
 
-override method @simpleCopyAssignmentOperatorUsage generateCode
+override proc @simpleCopyAssignmentOperatorUsage generateCode
     ?!@semanticTemporariesStruct ioTemporaries
     ?!@instructionListIR ioInstructionListIR
     ?!@allocaList unused ioAllocaList
@@ -374,7 +374,7 @@ override method @simpleCopyAssignmentOperatorUsage generateCode
     [!?ioInstructionListIR appendInstructionAsFreeString !s !@()]
   end
 //--- Perfom store
-  let s = "store " + inTargetType.llvmTypeName + " " + sourceValue.llvmName 
+  let s = "store " + inTargetType.llvmTypeName + " " + sourceValue.llvmName
         + ", " + inTargetType.llvmTypeName + "* " + inTargetLLVMName
   [!?ioInstructionListIR appendInstructionAsFreeString !s !@()]
 }

@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                     
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @compiletimeBoolAST : @abstractDeclarationAST {
@@ -7,15 +7,15 @@ class @compiletimeBoolAST : @abstractDeclarationAST {
 
 //·······················································································································
 
-override getter @compiletimeBoolAST locationForErrorSignaling -> @location outLocation {
+override func @compiletimeBoolAST locationForErrorSignaling -> @location outLocation {
   outLocation = .nowhere
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  PRECEDENCE GRAPH                                                                                                     
+//  PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @compiletimeBoolAST enterInPrecedenceGraph
+override proc @compiletimeBoolAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   let nodeName = ctBoolTypeName ().nowhere
@@ -24,12 +24,12 @@ override method @compiletimeBoolAST enterInPrecedenceGraph
 
 //·······················································································································
 
-override getter @compiletimeBoolAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+override func @compiletimeBoolAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = ctBoolTypeName ()
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  ENTER IN CONTEXT                                                                                                     
+//  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func %once ctBoolTypeName ->@string {
@@ -38,7 +38,7 @@ func %once ctBoolTypeName ->@string {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @compiletimeBoolAST enterInContext
+override proc @compiletimeBoolAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
@@ -78,7 +78,7 @@ class @compileTimeBoolImplicitConverterToBoolean : @abstractImplicitConverterToB
 
 //·······················································································································
 
-override method @compileTimeBoolImplicitConverterToBoolean generateConvertToBooleanCode
+override proc @compileTimeBoolImplicitConverterToBoolean generateConvertToBooleanCode
   ?let @objectIR inReceiverOperand
   ?let @location unused inErrorLocation
   ?!@semanticTemporariesStruct unused ioTemporaries
@@ -99,7 +99,7 @@ class @compileTimeBoolNotOperator : @prefixOperatorUsage {
 
 //·······················································································································
 
-override method @compileTimeBoolNotOperator generateCode
+override proc @compileTimeBoolNotOperator generateCode
   ?let @objectIR inReceiverOperand
   ?let @location unused inOperatorLocation
   ?let @omnibusType inResultType
@@ -122,7 +122,7 @@ class @compileTimeBoolEqualOperator : @omnibusInfixOperatorUsage {
 
 //·······················································································································
 
-override method @compileTimeBoolEqualOperator generateCode
+override proc @compileTimeBoolEqualOperator generateCode
   ?let @objectIR inLeftOperand
   ?let @location unused inOperatorLocation
   ?let @objectIR inRightOperand
@@ -144,7 +144,7 @@ class @compileTimeBoolXorOperator : @omnibusInfixOperatorUsage {
 
 //·······················································································································
 
-override method @compileTimeBoolXorOperator generateCode
+override proc @compileTimeBoolXorOperator generateCode
   ?let @objectIR inLeftOperand
   ?let @location unused inOperatorLocation
   ?let @objectIR inRightOperand
@@ -166,7 +166,7 @@ class @compileTimeBoolOrOperator : @omnibusInfixOperatorUsage {
 
 //·······················································································································
 
-override method @compileTimeBoolOrOperator generateCode
+override proc @compileTimeBoolOrOperator generateCode
   ?let @objectIR inLeftOperand
   ?let @location unused inOperatorLocation
   ?let @objectIR inRightOperand

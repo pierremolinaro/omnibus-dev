@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @convertExpressionAST : @expressionAST {
@@ -9,7 +9,7 @@ class @convertExpressionAST : @expressionAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SYNTAX                                                                                                               
+//  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -40,10 +40,10 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
+//  PRECEDENCE GRAPH FROM EXPRESSION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @convertExpressionAST addDependenceEdgeForStaticExpression
+override proc @convertExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
@@ -54,10 +54,10 @@ override method @convertExpressionAST addDependenceEdgeForStaticExpression
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  NOTE TYPES                                                                                                           
+//  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @convertExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @convertExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [self.mExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
   if self.mTypeName.string != "" then
     [!?ioGraph noteNode !self.mTypeName]
@@ -65,12 +65,12 @@ override method @convertExpressionAST noteExpressionTypesInPrecedenceGraph ?!@se
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SEMANTICS                                                                                                            
+//  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //! @convertExpressionAST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @convertExpressionAST analyzeExpression
+override proc @convertExpressionAST analyzeExpression
   ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?optionalTargetType:let @omnibusType inOptionalTargetType
@@ -100,8 +100,8 @@ override method @convertExpressionAST analyzeExpression
   [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
     !?expressionResult
-  ]  
-//--- 
+  ]
+//---
   if inMode.isSafe then
     error (self.mTypeName : "operations that can generate panic are not allowed in " + panicModeName () + " mode")
   end
@@ -139,7 +139,7 @@ override method @convertExpressionAST analyzeExpression
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  CODE GENERATION                                                                                                      
+//  CODE GENERATION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //! @convertInstructionIR
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -152,7 +152,7 @@ class @convertInstructionIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @convertInstructionIR enterAccessibleEntities
+override proc @convertInstructionIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
@@ -161,7 +161,7 @@ override method @convertInstructionIR enterAccessibleEntities
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @convertInstructionIR llvmInstructionCode
+override proc @convertInstructionIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds unused ioGenerationAdds

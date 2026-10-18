@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @literalStringDeclarationAST : @abstractDeclarationAST {
@@ -7,15 +7,15 @@ class @literalStringDeclarationAST : @abstractDeclarationAST {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @literalStringDeclarationAST locationForErrorSignaling -> @location outLocation {
+override func @literalStringDeclarationAST locationForErrorSignaling -> @location outLocation {
   outLocation = .nowhere
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  PRECEDENCE GRAPH                                                                                                     
+//  PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @literalStringDeclarationAST enterInPrecedenceGraph
+override proc @literalStringDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   let literalStringTypeName = staticStringTypeName ().nowhere
@@ -25,15 +25,15 @@ override method @literalStringDeclarationAST enterInPrecedenceGraph
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @literalStringDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "literal string " + staticStringTypeName () 
+override func @literalStringDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+  outRepresentation = "literal string " + staticStringTypeName ()
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  ENTER IN CONTEXT                                                                                                     
+//  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @literalStringDeclarationAST enterInContext
+override proc @literalStringDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList

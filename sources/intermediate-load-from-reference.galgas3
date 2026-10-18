@@ -15,7 +15,7 @@ class @loadFromReferenceIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @loadFromReferenceIR llvmInstructionCode
+override proc @loadFromReferenceIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds

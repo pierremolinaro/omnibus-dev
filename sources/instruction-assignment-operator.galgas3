@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SYNTAX                                                                                                               
+//  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -86,7 +86,7 @@ syntax extension omnibus_syntax {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @LValueOperandAST buildExpressionAccessList ?!@primaryInExpressionAccessListAST ioExpressionAccessList {
+proc @LValueOperandAST buildExpressionAccessList ?!@primaryInExpressionAccessListAST ioExpressionAccessList {
   switch self
   case noOperand :
   case property (@lstring name @LValueOperandAST next) :

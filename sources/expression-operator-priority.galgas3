@@ -1,12 +1,12 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract class @expressionAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SYNTAX                                                                                                               
+//  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -405,16 +405,16 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  NOTE TYPES                                                                                                           
+//  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract method @expressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph
+abstract proc @expressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SEMANTICS                                                                                                            
+//  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract method @expressionAST analyzeExpression
+abstract proc @expressionAST analyzeExpression
   ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?optionalTargetType:let @omnibusType inTargetType

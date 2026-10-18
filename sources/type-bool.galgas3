@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                     
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func %once boolTypeName -> @string {
@@ -13,15 +13,15 @@ class @boolTypeAST : @abstractDeclarationAST {
 
 //·······················································································································
 
-override getter @boolTypeAST locationForErrorSignaling -> @location outLocation {
+override func @boolTypeAST locationForErrorSignaling -> @location outLocation {
   outLocation = .nowhere
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  PRECEDENCE GRAPH                                                                                                     
+//  PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @boolTypeAST enterInPrecedenceGraph
+override proc @boolTypeAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   let nodeName = boolTypeName ().nowhere
@@ -31,15 +31,15 @@ override method @boolTypeAST enterInPrecedenceGraph
 
 //·······················································································································
 
-override getter @boolTypeAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+override func @boolTypeAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = boolTypeName ()
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  ENTER IN CONTEXT                                                                                                     
+//  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @boolTypeAST enterInContext
+override proc @boolTypeAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
@@ -86,7 +86,7 @@ override method @boolTypeAST enterInContext
   [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage ()]
   key = assignmentOperatorKey (!boolType !.nowhere !ctBoolType)
   [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage ()]
-//--- Copy from reference is used by dynamic arraies  
+//--- Copy from reference is used by dynamic arraies
   let functionName = assignmentOperatorFuncName (!boolType !boolType)
   ioRoutineListIR += !@simpleAssignmentCopyRoutineIR {
     !functionName.nowhere
@@ -105,7 +105,7 @@ class @boolImplicitConverterToBoolean : @abstractImplicitConverterToBoolean {
 
 //·······················································································································
 
-override method @boolImplicitConverterToBoolean generateConvertToBooleanCode
+override proc @boolImplicitConverterToBoolean generateConvertToBooleanCode
   ?let @objectIR inReceiverOperand
   ?let @location unused inErrorLocation
   ?!@semanticTemporariesStruct unused ioTemporaries
@@ -125,7 +125,7 @@ class @boolNotOperator : @prefixOperatorUsage {
 
 //·······················································································································
 
-override method @boolNotOperator generateCode
+override proc @boolNotOperator generateCode
   ?let @objectIR inReceiverOperand
   ?let @location unused inOperatorLocation
   ?let @omnibusType inResultType

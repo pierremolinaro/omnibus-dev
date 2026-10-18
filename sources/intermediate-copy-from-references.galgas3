@@ -42,7 +42,7 @@ class @copyFromReferencesIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @copyFromReferencesIR llvmInstructionCode
+override proc @copyFromReferencesIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
@@ -55,7 +55,7 @@ override method @copyFromReferencesIR llvmInstructionCode
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @copyFromReferencesIR enterAccessibleEntities 
+override proc @copyFromReferencesIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint unused ioMaxBranchOfOnInstructions
 {

@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @compileTimePrefixOperatorEnumeration  %equatable{
@@ -9,7 +9,7 @@ enum @compileTimePrefixOperatorEnumeration  %equatable{
 
 //·······················································································································
 
-getter @compileTimePrefixOperatorEnumeration string -> @string {
+func @compileTimePrefixOperatorEnumeration string -> @string {
   switch self
   case notOp   : result = "not"
   case minusOp : result = "-"
@@ -18,7 +18,7 @@ getter @compileTimePrefixOperatorEnumeration string -> @string {
 
 //·······················································································································
 
-getter @compileTimePrefixOperatorEnumeration prefixOperator -> @prefixOperator {
+func @compileTimePrefixOperatorEnumeration prefixOperator -> @prefixOperator {
   switch self
   case notOp   : result = .notOp
   case minusOp : result = .minusOp
@@ -38,12 +38,12 @@ class @compiletimePrefixOperatorAST : @abstractDeclarationAST {
 
 //·······················································································································
 
-override getter @compiletimePrefixOperatorAST locationForErrorSignaling -> @location outLocation {
+override func @compiletimePrefixOperatorAST locationForErrorSignaling -> @location outLocation {
   outLocation = self.mPrefixOperatorLocation
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  SYNTAX                                                                                                               
+//!  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -59,7 +59,7 @@ syntax extension omnibus_syntax {
       outOperator = .minusOp
     end
   }
-  
+
   //·····················································································································
 
   rule <declaration> ?!@ast ioAST {
@@ -91,10 +91,10 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  PRECEDENCE GRAPH                                                                                                     
+//  PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @compiletimePrefixOperatorAST enterInPrecedenceGraph
+override proc @compiletimePrefixOperatorAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   let nodeName = @lstring {!self.mPrefixOperator.string + "." + self.mReceiverTypeName !self.mPrefixOperatorLocation}
@@ -106,15 +106,15 @@ override method @compiletimePrefixOperatorAST enterInPrecedenceGraph
 
 //·······················································································································
 
-override getter @compiletimePrefixOperatorAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+override func @compiletimePrefixOperatorAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = self.mPrefixOperator.string + " " + self.mReceiverTypeName
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  ENTER IN CONTEXT                                                                                                     
+//!  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @compiletimePrefixOperatorAST enterInContext
+override proc @compiletimePrefixOperatorAST enterInContext
   ?!context: @semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
@@ -135,7 +135,7 @@ override method @compiletimePrefixOperatorAST enterInContext
   var @ctCheckMap ctCheckMap = @()
   [!?ctCheckMap insertKey !self.mReceiverName]
   [self.mExpression checkCompileTimeExpression !ctCheckMap]
-//--- Enter in infix operator map  
+//--- Enter in infix operator map
   let key = prefixOperatorMapKey (!receiverType !self.mPrefixOperator !self.mPrefixOperatorLocation)
   let definition = @compileTimePrefixOperatorUsage {
     !self.mPrefixOperatorLocation
@@ -162,7 +162,7 @@ class @compileTimePrefixOperatorUsage : @prefixOperatorUsage {
 
 //·······················································································································
 
-override method @compileTimePrefixOperatorUsage generateCode
+override proc @compileTimePrefixOperatorUsage generateCode
   ?let @objectIR inReceiverOperand
   ?let @location unused inOperatorLocation
   ?let @omnibusType inResultType

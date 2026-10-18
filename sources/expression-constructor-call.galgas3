@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @functionCallEffectiveParameterListAST {
@@ -16,7 +16,7 @@ class @constructorCallAST : @expressionAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SYNTAX                                                                                                               
+//  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -39,25 +39,25 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
+//  PRECEDENCE GRAPH FROM EXPRESSION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @constructorCallAST addDependenceEdgeForStaticExpression
+override proc @constructorCallAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   [!?ioGraph addEdge !from: inConstantName !to: self.mTypeName]
-  
+
   for (* mExpression) in self.mParameterList do
     [mExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
   end
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  NOTE TYPES                                                                                                           
+//  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @constructorCallAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @constructorCallAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [!?ioGraph noteNode !self.mTypeName]
   for (* mExpression) in self.mParameterList do
     [mExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
@@ -65,10 +65,10 @@ override method @constructorCallAST noteExpressionTypesInPrecedenceGraph ?!@sema
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SEMANTICS                                                                                                            
+//  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @constructorCallAST analyzeExpression
+override proc @constructorCallAST analyzeExpression
   ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?optionalTargetType:let @omnibusType unused inOptionalTargetType

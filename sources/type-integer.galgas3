@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @integerDeclarationAST : @abstractDeclarationAST {
@@ -9,21 +9,21 @@ class @integerDeclarationAST : @abstractDeclarationAST {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @integerDeclarationAST locationForErrorSignaling -> @location outLocation {
+override func @integerDeclarationAST locationForErrorSignaling -> @location outLocation {
   outLocation = .nowhere
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @integerDeclarationAST typeName -> @string outName {
+func @integerDeclarationAST typeName -> @string outName {
   outName = if self.mIsSigned then "i" else "u" end + self.mSize
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  PRECEDENCE GRAPH                                                                                                     
+//  PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @integerDeclarationAST enterInPrecedenceGraph
+override proc @integerDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   let nodeName = self.typeName.nowhere
@@ -35,12 +35,12 @@ override method @integerDeclarationAST enterInPrecedenceGraph
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @integerDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+override func @integerDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = "integer " + self.typeName
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  UTILITIES                                                                                                     
+//!  UTILITIES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func minValueForInteger ?let @bool inIsUnsigned ?let @uint inBitCount -> @bigint {
@@ -62,10 +62,10 @@ func maxValueForInteger ?let @bool inIsUnsigned ?let @uint inBitCount -> @bigint
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  ENTER IN CONTEXT                                                                                                     
+//!  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @integerDeclarationAST enterInContext
+override proc @integerDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
@@ -178,7 +178,7 @@ override method @integerDeclarationAST enterInContext
     !constantMap
   ]
 //--------------------------------------- Constructor map
-  var @constructorMap constructorMap = @() 
+  var @constructorMap constructorMap = @()
   [!?constructorMap insertKey !"()".nowhere !@[] !.simple {!value:0}]
   [!?ioContext.mTypeConstructorMap insertKey !integerTypeName !constructorMap]
 //--------------------------------------- Enter in type map
@@ -213,7 +213,7 @@ override method @integerDeclarationAST enterInContext
   [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage ()]
   key = assignmentOperatorKey (!integerType !.nowhere !compileTimeIntegerType ())
   [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage ()]
-//--- Copy from reference is used by dynamic arraies  
+//--- Copy from reference is used by dynamic arraies
   let functionName = assignmentOperatorFuncName (!integerType !integerType)
   ioRoutineListIR += !@simpleAssignmentCopyRoutineIR {
     !functionName.nowhere
@@ -280,7 +280,7 @@ proc addIntegerInfixOperator
   key = infixOperatorMapKey (!inIntegerType !inInfixOperator !.nowhere !ctIntType)
   [!?ioInfixOperatorMap insertKey !key !inResultType !@inlineInfix_integer_compileTimeInt_operatorUsage {!inLLVMOp}]
   key = infixOperatorMapKey (!ctIntType !inInfixOperator !.nowhere !inIntegerType)
-  [!?ioInfixOperatorMap insertKey !key !inResultType !@inlineInfix_compileTimeInt_integer_operatorUsage {!inLLVMOp}] 
+  [!?ioInfixOperatorMap insertKey !key !inResultType !@inlineInfix_compileTimeInt_integer_operatorUsage {!inLLVMOp}]
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -293,7 +293,7 @@ class @inlineInfix_integer_compileTimeInt_operatorUsage : @omnibusInfixOperatorU
 
 //·······················································································································
 
-override method @inlineInfix_integer_compileTimeInt_operatorUsage generateCode
+override proc @inlineInfix_integer_compileTimeInt_operatorUsage generateCode
   ?let @objectIR inLeftOperand
   ?let @location inOperatorLocation
   ?let @objectIR inRightOperand
@@ -334,7 +334,7 @@ class @inlineInfix_compileTimeInt_integer_operatorUsage : @omnibusInfixOperatorU
 
 //·······················································································································
 
-override method @inlineInfix_compileTimeInt_integer_operatorUsage generateCode
+override proc @inlineInfix_compileTimeInt_integer_operatorUsage generateCode
   ?let @objectIR inLeftOperand
   ?let @location inOperatorLocation
   ?let @objectIR inRightOperand
@@ -376,7 +376,7 @@ class @integerBuiltinFunctionIR : @abstractRoutineIR {
 
 //·······················································································································
 
-override method @integerBuiltinFunctionIR llvmCodeGeneration 
+override proc @integerBuiltinFunctionIR llvmCodeGeneration
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds ioGenerationAdds

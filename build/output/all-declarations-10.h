@@ -10,7 +10,7 @@
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@controlRegisterLValueAST noteExpressionTypesInPrecedenceGraph'
+//Extension proc '@controlRegisterLValueAST noteExpressionTypesInPrecedenceGraph'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -21,7 +21,7 @@ void extensionMethod_noteExpressionTypesInPrecedenceGraph (const class GGS_contr
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@controlRegisterLValueAST addDependenceEdgeForStaticExpression'
+//Extension proc '@controlRegisterLValueAST addDependenceEdgeForStaticExpression'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -33,7 +33,7 @@ void extensionMethod_addDependenceEdgeForStaticExpression (const class GGS_contr
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@controlRegisterLValueAST controlRegisterLValueSemanticAnalysis'
+//Extension proc '@controlRegisterLValueAST controlRegisterLValueSemanticAnalysis'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -81,7 +81,7 @@ void routine_handleArraySubscriptNew_3F_self_3F_routineAttributes_3F_context_3F_
 
 //--------------------------------------------------------------------------------------------------
 //
-//Abstract extension method '@callInstructionAST baseGuardAnalyze'
+//Abstract extension proc '@callInstructionAST baseGuardAnalyze'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -179,7 +179,7 @@ void extensionSetter_insertLocalVariable (class GGS_universalValuedObjectMap & i
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@universalValuedObjectMap searchValuedObject'
+//Extension proc '@universalValuedObjectMap searchValuedObject'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -229,7 +229,7 @@ void extensionSetter_searchValuedObjectForReadWriteAccess (class GGS_universalVa
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@universalValuedObjectMap searchValuedObjectType'
+//Extension proc '@universalValuedObjectMap searchValuedObjectType'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -243,7 +243,7 @@ void extensionMethod_searchValuedObjectType (const class GGS_universalValuedObje
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@LValueOperandAST getValuedObjectType'
+//Extension proc '@LValueOperandAST getValuedObjectType'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -255,7 +255,7 @@ void extensionMethod_getValuedObjectType (const class GGS_LValueOperandAST inObj
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension getter '@semanticContext propertyGetterMap' (as function)
+//Extension func '@semanticContext propertyGetterMap' (as function)
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -266,7 +266,7 @@ class GGS_propertyGetterMap extensionGetter_propertyGetterMap (const class GGS_s
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@universalValuedObjectMap checkLocalVariableFinalState'
+//Extension proc '@universalValuedObjectMap checkLocalVariableFinalState'
 //
 //--------------------------------------------------------------------------------------------------
 

@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @registerIntegerFieldListAST {
@@ -17,7 +17,7 @@ class @registerConstantExpressionAST : @expressionAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SYNTAX                                                                                                               
+//  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -45,20 +45,20 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
+//  PRECEDENCE GRAPH FROM EXPRESSION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @registerConstantExpressionAST addDependenceEdgeForStaticExpression
+override proc @registerConstantExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring unused inConstantName
   ?!@semanticTypePrecedenceGraph unused ioGraph
 {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  NOTE TYPES                                                                                                           
+//  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @registerConstantExpressionAST noteExpressionTypesInPrecedenceGraph
+override proc @registerConstantExpressionAST noteExpressionTypesInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   for (* expression *) in self.mFieldValues do
@@ -67,10 +67,10 @@ override method @registerConstantExpressionAST noteExpressionTypesInPrecedenceGr
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SEMANTICS                                                                                                            
+//  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @registerConstantExpressionAST analyzeExpression
+override proc @registerConstantExpressionAST analyzeExpression
   ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?optionalTargetType:let @omnibusType unused inOptionalTargetType
@@ -132,9 +132,9 @@ override method @registerConstantExpressionAST analyzeExpression
       [!?ioInstructionGenerationList appendLoadWhenReference
         !?ioTemporaries
         !?expressionResult
-      ]  
+      ]
     //--- Check expression type
-      if expressionResult.type.kind.isCompileTimeInteger then 
+      if expressionResult.type.kind.isCompileTimeInteger then
         [expressionResult extractLiteralInteger ?1* ?value:let @bigint value]
         if value < 0 then
           error (expressionLocation: "this integer expression should be positive")
@@ -143,7 +143,7 @@ override method @registerConstantExpressionAST analyzeExpression
         else
           error (expressionLocation: "expression too large (should be < " + (1 << fieldBitCount) + ")")
         end
-      elsif expressionResult.type.kind.isInteger then 
+      elsif expressionResult.type.kind.isInteger then
         [expressionResult.type.kind extractInteger ?2* ?unsigned:let @bool unsigned ?bitCount:let @uint expressionBitCount]
         if not unsigned then
           error (expressionLocation: "an unsigned integer expression is required here")
@@ -160,9 +160,9 @@ override method @registerConstantExpressionAST analyzeExpression
         //--- Perform left shift
           getNewTempValue (!registerType !?ioTemporaries ?let shiftedResult)
           [!?ioInstructionGenerationList appendShiftLeft !shiftedResult !partialResult !fieldBitIndex]
-        //---- Accumulate 
+        //---- Accumulate
           operandList += !shiftedResult
-        end   
+        end
       end
     end
   end
@@ -177,7 +177,7 @@ override method @registerConstantExpressionAST analyzeExpression
       !outResult
       !.ior
       !operand
-    ] 
+    ]
     outResult = newResult
   end
 }

@@ -70,7 +70,7 @@ class cPtr_compileTimeIntBitWiseOrOperator : public cPtr_omnibusInfixOperatorUsa
   public: void compileTimeIntBitWiseOrOperator_init (Compiler * inCompiler) ;
 
 
-//--- Extension method generateCode
+//--- Extension proc generateCode
   public: virtual void method_generateCode (const class GGS_objectIR arg_inLeftOperand,
            const class GGS_location arg_inOperatorLocation,
            const class GGS_objectIR arg_inRightOperand,
@@ -243,7 +243,7 @@ class cPtr_compileTimeIntMinusOperator : public cPtr_prefixOperatorUsage {
   public: void compileTimeIntMinusOperator_init (Compiler * inCompiler) ;
 
 
-//--- Extension method generateCode
+//--- Extension proc generateCode
   public: virtual void method_generateCode (const class GGS_objectIR arg_inReceiverOperand,
            const class GGS_location arg_inOperatorLocation,
            const class GGS_omnibusType arg_inResultType,
@@ -416,7 +416,7 @@ class cPtr_compileTimeIntComplementOperator : public cPtr_prefixOperatorUsage {
   public: void compileTimeIntComplementOperator_init (Compiler * inCompiler) ;
 
 
-//--- Extension method generateCode
+//--- Extension proc generateCode
   public: virtual void method_generateCode (const class GGS_objectIR arg_inReceiverOperand,
            const class GGS_location arg_inOperatorLocation,
            const class GGS_omnibusType arg_inResultType,
@@ -714,12 +714,12 @@ class cPtr_regularRoutineIR : public cPtr_abstractRoutineIR {
                                                                                                          Compiler * inCompiler) ;
 
 
-//--- Extension method enterAccessibleEntities
+//--- Extension proc enterAccessibleEntities
   public: virtual void method_enterAccessibleEntities (class GGS_stringset & arg_ioInvokedRoutineSet,
            class GGS_uint & arg_ioMaxBranchOfOnInstructions,
            Compiler * COMMA_LOCATION_ARGS) override ;
 
-//--- Extension method llvmCodeGeneration
+//--- Extension proc llvmCodeGeneration
   public: virtual void method_llvmCodeGeneration (class GGS_string & arg_ioLLVMcode,
            const class GGS_generationContext arg_inGenerationContext,
            class GGS_generationAdds & arg_ioGenerationAdds,

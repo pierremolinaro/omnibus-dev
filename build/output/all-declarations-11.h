@@ -110,7 +110,7 @@ class cGrammar_omnibus_5F_target_5F_grammar : public cParser_omnibus_5F_target_5
 //--------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@LValueAST noteInstructionTypesInPrecedenceGraph'
+//Extension proc '@LValueAST noteInstructionTypesInPrecedenceGraph'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -121,7 +121,7 @@ void extensionMethod_noteInstructionTypesInPrecedenceGraph (const class GGS_LVal
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@LValueAST analyzeLValue'
+//Extension proc '@LValueAST analyzeLValue'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -195,7 +195,7 @@ void routine_analyzeVariableInLValue_3F_self_3F_readAccess_3F_routineAttributes_
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension getter '@unifiedTypeMap unsolvedEntryList' (as function)
+//Extension func '@unifiedTypeMap unsolvedEntryList' (as function)
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -205,7 +205,7 @@ class GGS_lstringlist extensionGetter_unsolvedEntryList (const class GGS_unified
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension getter '@unifiedTypeMapElementClass definition'
+//Extension func '@unifiedTypeMapElementClass definition'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -215,7 +215,7 @@ class GGS_omnibusType callExtensionGetter_definition (const cPtr_unifiedTypeMapE
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@abstractRoutineIR svcDeclarationGeneration'
+//Extension proc '@abstractRoutineIR svcDeclarationGeneration'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -228,7 +228,7 @@ void callExtensionMethod_svcDeclarationGeneration (class cPtr_abstractRoutineIR 
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@abstractRoutineIR enterAccessibleEntities'
+//Extension proc '@abstractRoutineIR enterAccessibleEntities'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -240,7 +240,7 @@ void callExtensionMethod_enterAccessibleEntities (class cPtr_abstractRoutineIR *
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@binaryOperationIR enterCodeForOverflowOperation'
+//Extension proc '@binaryOperationIR enterCodeForOverflowOperation'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -265,7 +265,7 @@ class GGS_string function_panicRoutineNameForLocationFile (const class GGS_locat
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@binaryOperationIR enterCodeForDivisionWithZeroDivisorPanic'
+//Extension proc '@binaryOperationIR enterCodeForDivisionWithZeroDivisorPanic'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -336,7 +336,7 @@ void extensionSetter_insertPropertySetter (class GGS_semanticContext & ioObject,
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension getter '@semanticContext propertySetterMap' (as function)
+//Extension func '@semanticContext propertySetterMap' (as function)
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -359,7 +359,7 @@ void extensionSetter_findOrAddStaticString (class GGS_staticEntityMap & ioObject
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension getter '@semanticContext booleanType' (as function)
+//Extension func '@semanticContext booleanType' (as function)
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -379,7 +379,7 @@ class GGS_string function_boolTypeName (class Compiler * inCompiler
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@LValueAST analyzeLValueInAssignment'
+//Extension proc '@LValueAST analyzeLValueInAssignment'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -445,7 +445,7 @@ void routine_analyzeVariableInLValueInAssignment_3F_self_3F_routineAttributes_3F
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@typeOpaqueDeclarationAST noteTypesInPrecedenceGraph'
+//Extension proc '@typeOpaqueDeclarationAST noteTypesInPrecedenceGraph'
 //
 //--------------------------------------------------------------------------------------------------
 

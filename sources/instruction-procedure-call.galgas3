@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  AST                                                                                                                  
+//!  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract class @callInstructionAST : @instructionAST {
@@ -21,7 +21,7 @@ class @procedureCallInstructionAST : @callInstructionAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  SYNTAX                                                                                                               
+//!  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -65,7 +65,7 @@ syntax extension omnibus_syntax {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @LValueOperandAST buildProcedureCallAccessList ?!@accessInAssignmentListAST ioAccessList {
+proc @LValueOperandAST buildProcedureCallAccessList ?!@accessInAssignmentListAST ioAccessList {
   switch self
   case noOperand :
   case property (@lstring name @LValueOperandAST next) :
@@ -78,10 +78,10 @@ method @LValueOperandAST buildProcedureCallAccessList ?!@accessInAssignmentListA
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  NOTE TYPES                                                                                                           
+//!  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @procedureCallInstructionAST noteInstructionTypesInPrecedenceGraph
+override proc @procedureCallInstructionAST noteInstructionTypesInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
 //  [mOperand noteInstructionTypesInPrecedenceGraph !?ioGraph]
@@ -102,13 +102,13 @@ override method @procedureCallInstructionAST noteInstructionTypesInPrecedenceGra
     case output (expression *) : [expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
     case outputInput (*) :
     case outputInputSelfVariable (*) :
-    end 
+    end
   end
 }
 
 //·······················································································································
 
-override method @standAloneProcedureCallInstructionAST noteInstructionTypesInPrecedenceGraph
+override proc @standAloneProcedureCallInstructionAST noteInstructionTypesInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   for (mEffectiveParameterKind *) in self.mArguments do
@@ -121,15 +121,15 @@ override method @standAloneProcedureCallInstructionAST noteInstructionTypesInPre
     case output (expression *) : [expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
     case outputInput (*) :
     case outputInputSelfVariable (*) :
-    end 
+    end
   end
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  SEMANTICS                                                                                                            
+//!  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @effectiveArgumentPassingModeAST passingModeForActualSelector ?let @lstring inSelector -> @string {
+func @effectiveArgumentPassingModeAST passingModeForActualSelector ?let @lstring inSelector -> @string {
   switch self
   case input (*) : result = "?"
   case inputWithType (* * *) : result = "?"
@@ -152,7 +152,7 @@ list @procEffectiveParameterList {
 
 //·······················································································································
 
-override method @standAloneProcedureCallInstructionAST instructionSemanticAnalysis
+override proc @standAloneProcedureCallInstructionAST instructionSemanticAnalysis
   ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
@@ -218,7 +218,7 @@ override method @standAloneProcedureCallInstructionAST instructionSemanticAnalys
 
 //·······················································································································
 
-override method @procedureCallInstructionAST instructionSemanticAnalysis
+override proc @procedureCallInstructionAST instructionSemanticAnalysis
   ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext

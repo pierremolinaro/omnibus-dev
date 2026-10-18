@@ -1,21 +1,21 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//                                           
-//  semantics definitions for semantics component 
-//                                           
+//
+//  semantics definitions for semantics component
+//
 //  Copyright (C) 2022, ..., 2022 Pierre Molinaro.
-//                                           
-//  e-mail : pierre@pcmolinaro.name          
-//                                           
+//
+//  e-mail : pierre@pcmolinaro.name
+//
 //  This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public
 //  License as published by the Free Software Foundation.
-//                                           
+//
 //  This program is distributed in the hope it will be useful, but WITHOUT ANY WARRANTY; without even the implied
 //  warranty of MERCHANDIBILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
-//  details.                                 
-//                                           
+//  details.
+//
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @unifiedTypeMap unsolvedEntryList -> @lstringlist {
+func @unifiedTypeMap unsolvedEntryList -> @lstringlist {
   result = @[]
   for (lkey element) in self do
     if element.mDefinition.isUnsolved then
@@ -64,7 +64,7 @@ setter @unifiedTypeMap makeEntryFromString ?let @string inKey !@unifiedTypeMapEn
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @unifiedTypeMap searchKey ?let @lstring inLKey -> @unifiedTypeMapEntry {
+func @unifiedTypeMap searchKey ?let @lstring inLKey -> @unifiedTypeMapEntry {
   if inLKey.string == "" then
     result = .null
   elsif let node = self @[inLKey] then
@@ -93,7 +93,7 @@ setter @unifiedTypeMap insertType ?let @lstring inTypeName ?type: let @omnibusTy
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @unifiedTypeMap searchType ?lkey: let @lstring inLKey
+proc @unifiedTypeMap searchType ?lkey: let @lstring inLKey
                                   !type: @omnibusType outTypeDefinition {
   if let node = self @[inLKey] then
     switch node.mElement.mDefinition
@@ -141,7 +141,7 @@ enum @unifiedTypeMapEntry %equatable {
 // @unifiedTypeMapElementClass getters
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @unifiedTypeMapElementClass definition -> @omnibusType {
+func @unifiedTypeMapElementClass definition -> @omnibusType {
   switch self.mDefinition
   case unsolved :
     error (.nowhere : "unsolved type" spoil result)
@@ -154,7 +154,7 @@ getter @unifiedTypeMapElementClass definition -> @omnibusType {
 //! @unifiedTypeMapEntry getters
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @unifiedTypeMapEntry type -> @omnibusType {
+func @unifiedTypeMapEntry type -> @omnibusType {
   switch self
   case null :
     error (.nowhere : "null type" spoil result)
@@ -174,7 +174,7 @@ getter @unifiedTypeMapEntry type -> @omnibusType {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-getter @unifiedTypeMapEntry key -> @string {
+func @unifiedTypeMapEntry key -> @string {
   switch self
   case null :
     error (.nowhere : "null type" spoil result)

@@ -16,7 +16,7 @@ abstract class @omnibusInfixOperatorUsage {
 
 //·······················································································································
 
-abstract method @omnibusInfixOperatorUsage generateCode
+abstract proc @omnibusInfixOperatorUsage generateCode
   ?let @objectIR inLeftOperand
   ?let @location inOperatorLocation
   ?let @objectIR inRightOperand
@@ -28,7 +28,7 @@ abstract method @omnibusInfixOperatorUsage generateCode
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @infixOperatorMap generateInfixOperatorCode
+proc @infixOperatorMap generateInfixOperatorCode
   ?let @objectIR inLeftOperand
   ?let @omnibusInfixOperator inInfixOperator
   ?let @location inOperatorLocation
@@ -62,7 +62,7 @@ class @inlineInfixOperatorUsage : @omnibusInfixOperatorUsage {
 
 //·······················································································································
 
-override method @inlineInfixOperatorUsage generateCode
+override proc @inlineInfixOperatorUsage generateCode
   ?let @objectIR inLeftOperand
   ?let @location unused inOperatorLocation
   ?let @objectIR inRightOperand

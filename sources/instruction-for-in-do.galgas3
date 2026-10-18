@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @forInstructionAST : @instructionAST {
@@ -13,7 +13,7 @@ class @forInstructionAST : @instructionAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SYNTAX                                                                                                               
+//  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -37,7 +37,7 @@ syntax extension omnibus_syntax {
         if attributeValue.string == staticAttribute () then
           staticWhileExpression = true
         else
-          error (attributeValue : "the attribute should be \"@" + staticAttribute () + "\"" 
+          error (attributeValue : "the attribute should be \"@" + staticAttribute () + "\""
           fixit replace "@" + staticAttribute ())
         end
       or
@@ -60,24 +60,24 @@ syntax extension omnibus_syntax {
       !endOfInstruction
     }
   }
-  
+
   //·····················································································································
 
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  NOTE TYPES                                                                                                           
+//  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @forInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @forInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [self.mDoInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SEMANTICS                                                                                                            
+//  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @forInstructionAST instructionSemanticAnalysis
+override proc @forInstructionAST instructionSemanticAnalysis
   ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
@@ -133,7 +133,7 @@ override method @forInstructionAST instructionSemanticAnalysis
     !?alloca: ioAllocaList
     ?let whileExpressionBooleanResult
   ]
-  switch whileExpressionBooleanResult 
+  switch whileExpressionBooleanResult
   case compileTime (boolValue) :
     if not boolValue then
       error (self.mEndOf_whileExpression : "test expression is always false")
@@ -206,7 +206,7 @@ class @forInstructionOnArrayIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //----------------- La boucle exprimée en C est :
-//  TYPE_ELEMENT * ptr = VALEUR_LISTE ; 
+//  TYPE_ELEMENT * ptr = VALEUR_LISTE ;
 //  unsigned idx = TAILLE_LISTE ;
 //  while (idx > 0) {
 //    ... instructions de la boucle ...
@@ -236,7 +236,7 @@ class @forInstructionOnArrayIR : @abstractInstructionIR {
 //
 //endLabel:
 
-override method @forInstructionOnArrayIR llvmInstructionCode
+override proc @forInstructionOnArrayIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
@@ -244,7 +244,7 @@ override method @forInstructionOnArrayIR llvmInstructionCode
   let elementTypeLLVMName = self.mElementType.llvmTypeName
   let listTypeLLVMName = "[" + self.mArraySize + " x " + elementTypeLLVMName + "]"
   let locationIndex = self.mIteratedObjectName.location.endLocationIndex.string
-  
+
   let startLabel = "for.label.start." + locationIndex
   let testLabel = "for.label.test." + locationIndex
   let whileLabel = "for.label.while." + locationIndex
@@ -252,11 +252,11 @@ override method @forInstructionOnArrayIR llvmInstructionCode
   let loopVar = "for.loop." + locationIndex
   let loopLabel = "for.label.loop." + locationIndex
   let endLabel  = "for.label.end." + locationIndex
- 
+
   let indexVar  = "for.index." + locationIndex
   let ptrVar  = "for.ptr." + locationIndex
   let currentValue = "for.currentValue." + locationIndex
- 
+
 //--- Start of 'for' instruction
   ioLLVMcode += "  br label %" + startLabel + "\n\n"
 
@@ -268,7 +268,7 @@ override method @forInstructionOnArrayIR llvmInstructionCode
   ioLLVMcode += ", i32 0, i32 0\n"
 //--- Init index
   ioLLVMcode += "  br label %" + testLabel + "\n\n"
-  
+
 //------------ Test
   ioLLVMcode += testLabel + ":\n"
 //--- Ptr var
@@ -287,7 +287,7 @@ override method @forInstructionOnArrayIR llvmInstructionCode
   [self.mWhileInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
   ioLLVMcode += "  br i1 " + self.mWhileExpressionBooleanResult_llvmName + ", label %" + loopLabel + ", label %" + endLabel + "\n\n"
 
-//------------ Loop  
+//------------ Loop
   ioLLVMcode += loopLabel + ":\n"
 //--- Load current value
   ioLLVMcode += "  %" + currentValue + " = load " + elementTypeLLVMName + ", "
@@ -312,7 +312,7 @@ override method @forInstructionOnArrayIR llvmInstructionCode
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @forInstructionOnArrayIR enterAccessibleEntities
+override proc @forInstructionOnArrayIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint ioMaxBranchOfOnInstructions
 {
@@ -337,7 +337,7 @@ class @forInstructionOnLiteralStringIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @forInstructionOnLiteralStringIR llvmInstructionCode
+override proc @forInstructionOnLiteralStringIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
@@ -357,7 +357,7 @@ override method @forInstructionOnLiteralStringIR llvmInstructionCode
   ioLLVMcode += startLabel + ":\n"
   ioLLVMcode += "  %" + ptrVar + ".start = load " + stringLLVMTypeName + ", " + stringLLVMTypeName + "* " + self.mStringElementIteratedObject.llvmName + "\n"
   ioLLVMcode += "  br label %" + testLabel + "\n\n"
-  
+
 //------------ Test
   ioLLVMcode += testLabel + ":\n"
   ioLLVMcode += "  %" + ptrVar + " = phi " + stringLLVMTypeName + " [%" + ptrVar + ".start, %"
@@ -372,7 +372,7 @@ override method @forInstructionOnLiteralStringIR llvmInstructionCode
   [self.mWhileInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
   ioLLVMcode += "  br i1 " + self.mWhileExpressionResult.llvmName + ", label %" + loopLabel + ", label %" + endLabel + "\n\n"
 
-//--------------------- Loop  
+//--------------------- Loop
   ioLLVMcode += loopLabel + ":\n"
 //--- Get current value
   ioLLVMcode += "  store i8 %" + currentVar + ", "
@@ -392,7 +392,7 @@ override method @forInstructionOnLiteralStringIR llvmInstructionCode
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @forInstructionOnLiteralStringIR enterAccessibleEntities
+override proc @forInstructionOnLiteralStringIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint ioMaxBranchOfOnInstructions
 {

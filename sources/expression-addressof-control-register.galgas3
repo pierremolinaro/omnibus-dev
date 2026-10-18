@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  AST                                                                                                                  
+//!  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @addressofControlRegisterAST : @expressionAST {
@@ -7,7 +7,7 @@ class @addressofControlRegisterAST : @expressionAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  SYNTAX                                                                                                               
+//!  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -25,30 +25,30 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
+//!  PRECEDENCE GRAPH FROM EXPRESSION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @addressofControlRegisterAST addDependenceEdgeForStaticExpression
+override proc @addressofControlRegisterAST addDependenceEdgeForStaticExpression
   ?let @lstring unused inConstantName
   ?!@semanticTypePrecedenceGraph unused ioGraph
 {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  NOTE TYPES                                                                                                           
+//!  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @addressofControlRegisterAST noteExpressionTypesInPrecedenceGraph
+override proc @addressofControlRegisterAST noteExpressionTypesInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   [self.mControlRegisterLValue noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  SEMANTICS                                                                                                            
+//!  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @addressofControlRegisterAST analyzeExpression
+override proc @addressofControlRegisterAST analyzeExpression
   ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?optionalTargetType:let @omnibusType unused inOptionalTargetType

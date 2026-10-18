@@ -23,14 +23,14 @@ abstract class @abstractInstructionIR {
 
 //·······················································································································
 
-abstract method @abstractInstructionIR llvmInstructionCode
+abstract proc @abstractInstructionIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 
 //·······················································································································
 
-method @abstractInstructionIR enterAccessibleEntities
+proc @abstractInstructionIR enterAccessibleEntities
   ?!@stringset unused ioInvokedRoutineSet
   ?!@uint unused ioMaxBranchOfOnInstructions
 {

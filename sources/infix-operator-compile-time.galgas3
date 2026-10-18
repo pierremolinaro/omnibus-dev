@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @compileTimeInfixOperatorEnumeration %equatable {
@@ -24,7 +24,7 @@ enum @compileTimeInfixOperatorEnumeration %equatable {
 
 //·······················································································································
 
-getter @compileTimeInfixOperatorEnumeration string -> @string {
+func @compileTimeInfixOperatorEnumeration string -> @string {
  switch self
  case equal     : result = "=="
  case lessThan : result = "<"
@@ -45,7 +45,7 @@ getter @compileTimeInfixOperatorEnumeration string -> @string {
 
 //·······················································································································
 
-getter @compileTimeInfixOperatorEnumeration omnibusInfixOperator -> @omnibusInfixOperator {
+func @compileTimeInfixOperatorEnumeration omnibusInfixOperator -> @omnibusInfixOperator {
  switch self
  case equal     : result = .equal
  case lessThan : result = .lessThan
@@ -79,12 +79,12 @@ class @compileTimeInfixOperatorAST : @abstractDeclarationAST {
 
 //·······················································································································
 
-override getter @compileTimeInfixOperatorAST locationForErrorSignaling -> @location outLocation {
+override func @compileTimeInfixOperatorAST locationForErrorSignaling -> @location outLocation {
   outLocation = self.mInfixOperatorLocation
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  SYNTAX                                                                                                               
+//!  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -136,7 +136,7 @@ syntax extension omnibus_syntax {
       outOperator = .rightShift
     end
   }
-  
+
   //·····················································································································
 
   rule <declaration> ?!@ast ioAST {
@@ -174,10 +174,10 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  PRECEDENCE GRAPH                                                                                                     
+//  PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @compileTimeInfixOperatorAST enterInPrecedenceGraph
+override proc @compileTimeInfixOperatorAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   let nodeName = @lstring {!self.mInfixOperator.string + "." + self.mLeftTypeName + "." + self.mRightTypeName !self.mInfixOperatorLocation}
@@ -190,15 +190,15 @@ override method @compileTimeInfixOperatorAST enterInPrecedenceGraph
 
 //·······················································································································
 
-override getter @compileTimeInfixOperatorAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+override func @compileTimeInfixOperatorAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = self.mLeftTypeName.string + " " + self.mInfixOperator + " " + self.mRightTypeName
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  ENTER IN CONTEXT                                                                                                     
+//!  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @compileTimeInfixOperatorAST enterInContext
+override proc @compileTimeInfixOperatorAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
@@ -223,7 +223,7 @@ override method @compileTimeInfixOperatorAST enterInContext
   [!?ctCheckMap insertKey !self.mLeftOperandName]
   [!?ctCheckMap insertKey !self.mRightOperandName]
   [self.mExpression checkCompileTimeExpression !ctCheckMap]
-//--- Enter in infix operator map  
+//--- Enter in infix operator map
   let key = infixOperatorMapKey (!leftType !self.mInfixOperator !self.mInfixOperatorLocation !rightType)
   let definition = @compileTimeInfixOperatorUsage {
     !self.mLeftOperandName
@@ -242,19 +242,19 @@ override method @compileTimeInfixOperatorAST enterInContext
        let ltou = lessThanOperatorUsage as @compileTimeInfixOperatorUsage then
       let infEqual_definition = @compileTimeInfixInfEqualOperatorUsage {!eou !ltou}
       let infEqual_key = infixOperatorMapKey (!leftType !.infEqual !self.mInfixOperatorLocation !rightType)
-      [!?ioContext.mInfixOperatorMap insertKey !infEqual_key !resultType !infEqual_definition] 
-      end  
+      [!?ioContext.mInfixOperatorMap insertKey !infEqual_key !resultType !infEqual_definition]
+      end
     end
   end
 //--- Define '+%' operator ?
   if self.mInfixOperator == .addOp then
     let addOpNoOVF_key = infixOperatorMapKey (!leftType !.addOpNoOvf !self.mInfixOperatorLocation !rightType)
-    [!?ioContext.mInfixOperatorMap insertKey !addOpNoOVF_key !resultType !definition] 
+    [!?ioContext.mInfixOperatorMap insertKey !addOpNoOVF_key !resultType !definition]
   end
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  GENERATE CODE                                                                                                     
+//!  GENERATE CODE
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @compileTimeInfixOperatorUsage : @omnibusInfixOperatorUsage {
@@ -265,7 +265,7 @@ class @compileTimeInfixOperatorUsage : @omnibusInfixOperatorUsage {
 
 //·······················································································································
 
-method @compileTimeInfixOperatorUsage eval
+proc @compileTimeInfixOperatorUsage eval
   ?let @objectIR inLeftOperand
   ?let @objectIR inRightOperand
   !@bigint outResult
@@ -280,7 +280,7 @@ method @compileTimeInfixOperatorUsage eval
 
 //·······················································································································
 
-override method @compileTimeInfixOperatorUsage generateCode
+override proc @compileTimeInfixOperatorUsage generateCode
   ?let @objectIR inLeftOperand
   ?let @location unused inOperatorLocation
   ?let @objectIR inRightOperand
@@ -303,7 +303,7 @@ class @compileTimeInfixInfEqualOperatorUsage : @omnibusInfixOperatorUsage {
 
 //·······················································································································
 
-override method @compileTimeInfixInfEqualOperatorUsage generateCode
+override proc @compileTimeInfixInfEqualOperatorUsage generateCode
   ?let @objectIR inLeftOperand
   ?let @location unused inOperatorLocation
   ?let @objectIR inRightOperand

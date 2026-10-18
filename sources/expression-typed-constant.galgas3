@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @typedConstantCallAST : @expressionAST {
@@ -9,7 +9,7 @@ class @typedConstantCallAST : @expressionAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SYNTAX                                                                                                               
+//  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -35,10 +35,10 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
+//  PRECEDENCE GRAPH FROM EXPRESSION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @typedConstantCallAST addDependenceEdgeForStaticExpression
+override proc @typedConstantCallAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
@@ -62,17 +62,17 @@ override method @typedConstantCallAST addDependenceEdgeForStaticExpression
         case output (expression *) : [expression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
         case outputInput (*) :
         case outputInputSelfVariable (*) :
-        end 
+        end
       end
     end
   end
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  NOTE TYPES                                                                                                           
+//  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @typedConstantCallAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @typedConstantCallAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   if self.mOptionalTypeName.string != "" then
     [!?ioGraph noteNode !self.mOptionalTypeName]
   end
@@ -93,17 +93,17 @@ override method @typedConstantCallAST noteExpressionTypesInPrecedenceGraph ?!@se
         case output (expression *) : [expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
         case outputInput (*) :
         case outputInputSelfVariable (*) :
-        end 
+        end
       end
     end
   end
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SEMANTICS                                                                                                            
+//  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @typedConstantCallAST analyzeExpression
+override proc @typedConstantCallAST analyzeExpression
   ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?optionalTargetType:let @omnibusType inOptionalTargetType

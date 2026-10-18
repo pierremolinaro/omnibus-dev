@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @genericFormalParameter %equatable {
@@ -37,12 +37,12 @@ class @llvmGenericType : @abstractDeclarationAST {
 
 //·······················································································································
 
-override getter @llvmGenericType locationForErrorSignaling -> @location outLocation {
+override func @llvmGenericType locationForErrorSignaling -> @location outLocation {
   outLocation = self.mTypeName.location
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  SYNTAX                                                                                                               
+//!  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -63,7 +63,7 @@ syntax extension omnibus_syntax {
 //      $+$
 //    end
 //  }
-  
+
   //·····················································································································
 
   rule <generic_formal_arguments> !@genericFormalParameterList outGenericFormalParameterList {
@@ -96,7 +96,7 @@ syntax extension omnibus_syntax {
       <compile_time_expression> ?outWhereClause
     end
   }
-  
+
   //·····················································································································
 
   rule <declaration> ?!@ast ioAST {
@@ -125,10 +125,10 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  PRECEDENCE GRAPH                                                                                                     
+//  PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @llvmGenericType enterInPrecedenceGraph
+override proc @llvmGenericType enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   let nodeName = self.mTypeName
@@ -137,17 +137,17 @@ override method @llvmGenericType enterInPrecedenceGraph
 
 //·······················································································································
 
-override getter @llvmGenericType keyRepresentationForErrorSignaling -> @string outRepresentation {
+override func @llvmGenericType keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = "Generic type " + self.mTypeName.string
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  ENTER IN CONTEXT                                                                                                     
+//!  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @genericFormalParameterList buildFormalGenericConstantMap ?!@ctCheckMap ioMap {
+proc @genericFormalParameterList buildFormalGenericConstantMap ?!@ctCheckMap ioMap {
   for (element) in self do
-    switch element 
+    switch element
     case type (*) :
     case constant (constantName) :
       [!?ioMap insertKey !constantName]
@@ -157,9 +157,9 @@ method @genericFormalParameterList buildFormalGenericConstantMap ?!@ctCheckMap i
 
 //·······················································································································
 
-method @llvmStringDefinition checkCompileTimeExpression ?let @ctCheckMap inMap {
+proc @llvmStringDefinition checkCompileTimeExpression ?let @ctCheckMap inMap {
   for (element) in self do
-    switch element 
+    switch element
     case string (*) :
     case variable (name) :
       [inMap searchKey !name]
@@ -169,7 +169,7 @@ method @llvmStringDefinition checkCompileTimeExpression ?let @ctCheckMap inMap {
 
 //·······················································································································
 
-override method @llvmGenericType enterInContext
+override proc @llvmGenericType enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList

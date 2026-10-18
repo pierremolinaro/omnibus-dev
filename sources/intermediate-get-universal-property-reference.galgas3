@@ -21,7 +21,7 @@ class @getUniversalPropertyReferenceIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @getUniversalPropertyReferenceIR llvmInstructionCode
+override proc @getUniversalPropertyReferenceIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds

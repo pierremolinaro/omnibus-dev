@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @sizeofExpressionAST : @expressionAST {
@@ -13,7 +13,7 @@ class @sizeofTypeAST : @expressionAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SYNTAX                                                                                                               
+//  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -41,10 +41,10 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
+//  PRECEDENCE GRAPH FROM EXPRESSION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @sizeofExpressionAST addDependenceEdgeForStaticExpression
+override proc @sizeofExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring unused inConstantName
   ?!@semanticTypePrecedenceGraph unused ioGraph
 {
@@ -52,36 +52,36 @@ override method @sizeofExpressionAST addDependenceEdgeForStaticExpression
 
 //·······················································································································
 
-override method @sizeofTypeAST addDependenceEdgeForStaticExpression
+override proc @sizeofTypeAST addDependenceEdgeForStaticExpression
   ?let @lstring unused inConstantName
   ?!@semanticTypePrecedenceGraph unused ioGraph
 {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  NOTE TYPES                                                                                                           
+//  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @sizeofExpressionAST noteExpressionTypesInPrecedenceGraph
+override proc @sizeofExpressionAST noteExpressionTypesInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph unused ioGraph
 {
 }
 
 //·······················································································································
 
-override method @sizeofTypeAST noteExpressionTypesInPrecedenceGraph
+override proc @sizeofTypeAST noteExpressionTypesInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   [!?ioGraph noteNode !self.mTypeName]
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SEMANTICS                                                                                                            
+//  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //! @sizeofExpressionAST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @sizeofExpressionAST analyzeExpression
+override proc @sizeofExpressionAST analyzeExpression
   ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?optionalTargetType:let @omnibusType unused inOptionalTargetType
@@ -115,7 +115,7 @@ override method @sizeofExpressionAST analyzeExpression
 //! @sizeofTypeAST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @sizeofTypeAST analyzeExpression
+override proc @sizeofTypeAST analyzeExpression
   ?self:let @omnibusType unused inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?optionalTargetType:let @omnibusType unused inOptionalTargetType
@@ -142,7 +142,7 @@ override method @sizeofTypeAST analyzeExpression
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  CODE GENERATION                                                                                                      
+//  CODE GENERATION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //! @sizeofInstructionIR
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -154,7 +154,7 @@ class @sizeofInstructionIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @sizeofInstructionIR llvmInstructionCode
+override proc @sizeofInstructionIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds

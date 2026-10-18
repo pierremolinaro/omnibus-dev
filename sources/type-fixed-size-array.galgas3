@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @fixedSizeArrayTypeDeclarationAST : @abstractDeclarationAST {
@@ -10,7 +10,7 @@ class @fixedSizeArrayTypeDeclarationAST : @abstractDeclarationAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SYNTAX                                                                                                               
+//  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -39,10 +39,10 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  PRECEDENCE GRAPH                                                                                                     
+//  PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @fixedSizeArrayTypeDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @fixedSizeArrayTypeDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [!?ioGraph addNode !self.mFixedSizeArrayType !self]
   [!?ioGraph addEdge !from: self.mFixedSizeArrayType !to: self.mElementTypeName]
   [self.mSizeExpression addDependenceEdgeForStaticExpression !self.mFixedSizeArrayType !?ioGraph]
@@ -52,21 +52,21 @@ override method @fixedSizeArrayTypeDeclarationAST enterInPrecedenceGraph ?!@sema
 
 //·······················································································································
 
-override getter @fixedSizeArrayTypeDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "anonymous $" + self.mFixedSizeArrayType 
+override func @fixedSizeArrayTypeDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+  outRepresentation = "anonymous $" + self.mFixedSizeArrayType
 }
 
 //·······················································································································
 
-override getter @fixedSizeArrayTypeDeclarationAST locationForErrorSignaling -> @location outLocation {
+override func @fixedSizeArrayTypeDeclarationAST locationForErrorSignaling -> @location outLocation {
   outLocation = self.mFixedSizeArrayType.location
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  ENTER IN CONTEXT                                                                                                     
+//  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @fixedSizeArrayTypeDeclarationAST enterInContext
+override proc @fixedSizeArrayTypeDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
@@ -107,7 +107,7 @@ override method @fixedSizeArrayTypeDeclarationAST enterInContext
         !type:type
       ]
     else
-    //-------------------------------------------- Class method map : add "count" constructor
+    //-------------------------------------------- Class proc map : add "count" constructor
       var @constantMap constantMap = @()
       [!?constantMap insertKey ! @{!"count" !self.mFixedSizeArrayType} !arraySize !ctIntegerTypeName ().nowhere]
       [!?ioContext.mTypeConstantMap insertKey
@@ -198,7 +198,7 @@ class @userLLVMStaticArrayTypeDefinitionIR : @userLLVMTypeDefinitionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @userLLVMStaticArrayTypeDefinitionIR generateLLVMType ?!@string ioLLVMcode {
+override proc @userLLVMStaticArrayTypeDefinitionIR generateLLVMType ?!@string ioLLVMcode {
   ioLLVMcode += self.mLLVMDefinedTypeName + " = type [" + self.mSize + " x " + self.mElementType.llvmTypeName + "]\n"
 }
 
@@ -214,7 +214,7 @@ class @fixedSizeArrayAssignmentOperatorUsage : @abstractAssignmentOperatorUsage 
 
 //·······················································································································
 
-override method @fixedSizeArrayAssignmentOperatorUsage generateCode
+override proc @fixedSizeArrayAssignmentOperatorUsage generateCode
     ?!@semanticTemporariesStruct ioTemporaries
     ?!@instructionListIR ioInstructionListIR
     ?!@allocaList unused ioAllocaList
@@ -244,7 +244,7 @@ override method @fixedSizeArrayAssignmentOperatorUsage generateCode
       var s = ptr + " = getelementptr " + arrayTypeName + ", " + arrayTypeName + "* " + inTargetLLVMName + ", i32 0, i32 " + idx
       [!?ioInstructionListIR appendInstructionAsFreeString !s !@()]
       s = "store " + elementTypeName + " " + sourceValue.llvmName + ", " + elementTypeName + "* " + ptr
-      [!?ioInstructionListIR appendInstructionAsFreeString !s !@()]    
+      [!?ioInstructionListIR appendInstructionAsFreeString !s !@()]
     end
   case llvmArrayStaticValues (1* @operandIRList values 1*) :
     let uniqueValue = ioTemporaries.mTemporaryIndex
@@ -254,18 +254,18 @@ override method @fixedSizeArrayAssignmentOperatorUsage generateCode
       var s = ptr + " = getelementptr " + arrayTypeName + ", " + arrayTypeName + "* " + inTargetLLVMName + ", i32 0, i32 " + idx
       [!?ioInstructionListIR appendInstructionAsFreeString !s !@()]
       s = "store " + elementTypeName + " " + value.llvmName + ", " + elementTypeName + "* " + ptr
-      [!?ioInstructionListIR appendInstructionAsFreeString !s !@()]    
+      [!?ioInstructionListIR appendInstructionAsFreeString !s !@()]
     end
   case llvmArrayRepeatedStaticValue (3* @uint idx) :
     let assignmentFunctionLLVMName =  assignmentOperatorFuncName (!inTargetType !inTargetType)
-    let s = " call void  @" + assignmentFunctionLLVMName.assemblerRepresentation 
-        + " (" + inTargetType.llvmTypeName + "* " + inTargetLLVMName 
+    let s = " call void  @" + assignmentFunctionLLVMName.assemblerRepresentation
+        + " (" + inTargetType.llvmTypeName + "* " + inTargetLLVMName
           + ", " + inTargetType.llvmTypeName + "* @gconst." + idx + ")"
     [!?ioInstructionListIR appendInstructionAsFreeString !s !@[assignmentFunctionLLVMName]]
   case reference (2*) :
     let assignmentFunctionLLVMName =  assignmentOperatorFuncName (!inTargetType !inTargetType)
-    let s = " call void  @" + assignmentFunctionLLVMName.assemblerRepresentation 
-        + " (" + inTargetType.llvmTypeName + "* " + inTargetLLVMName 
+    let s = " call void  @" + assignmentFunctionLLVMName.assemblerRepresentation
+        + " (" + inTargetType.llvmTypeName + "* " + inTargetLLVMName
           + ", " + inTargetType.llvmTypeName + "* " + inSourcePossibleReference.llvmName + ")"
     [!?ioInstructionListIR appendInstructionAsFreeString !s !@[assignmentFunctionLLVMName]]
   case literalInteger (2*) :
@@ -295,7 +295,7 @@ class @assignRepeatedValueToFixedSizeArrayElementsFunctionIR : @abstractRoutineI
 
 //·······················································································································
 
-override method @assignRepeatedValueToFixedSizeArrayElementsFunctionIR llvmCodeGeneration 
+override proc @assignRepeatedValueToFixedSizeArrayElementsFunctionIR llvmCodeGeneration
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
@@ -328,7 +328,7 @@ class @staticArrayTypeAssignFunctionIR : @abstractRoutineIR {
 
 //·······················································································································
 
-override method @staticArrayTypeAssignFunctionIR llvmCodeGeneration 
+override proc @staticArrayTypeAssignFunctionIR llvmCodeGeneration
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds ioGenerationAdds
@@ -348,8 +348,8 @@ override method @staticArrayTypeAssignFunctionIR llvmCodeGeneration
     end
     ioLLVMcode += " ; " + propertyName + "\n"
     let llvmLoadedVarName = llvmVarName + ".loaded"
-    ioLLVMcode += "  " + llvmLoadedVarName + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n" 
-    ioLLVMcode += "  call void @arc.retain (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n" 
+    ioLLVMcode += "  " + llvmLoadedVarName + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n"
+    ioLLVMcode += "  call void @arc.retain (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n"
   end
   for (propertyName propertyType indexPath) in arcAssignmentList do
     let llvmVarName = "%arc.release." + propertyName.assemblerRepresentation + ioGenerationAdds.mUniqueIndex
@@ -361,8 +361,8 @@ override method @staticArrayTypeAssignFunctionIR llvmCodeGeneration
     ioLLVMcode += " ; " + propertyName + "\n"
     let propertyTypeLLVMName = propertyType.llvmTypeName
     let llvmLoadedVarName = llvmVarName + ".loaded"
-    ioLLVMcode += "  " + llvmLoadedVarName + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n" 
-    ioLLVMcode += "  call void @arc.release (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n" 
+    ioLLVMcode += "  " + llvmLoadedVarName + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n"
+    ioLLVMcode += "  call void @arc.release (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n"
   end
   ioLLVMcode += ";--- Compute type size\n"
   ioLLVMcode += "  %sizeAsPtr = getelementptr inbounds " + llvmTypeName + ", " + llvmTypeName + "* null, i32 1\n"
@@ -371,8 +371,8 @@ override method @staticArrayTypeAssignFunctionIR llvmCodeGeneration
   ioLLVMcode += "  br i1 %useLoadStore, label %loadStore, label %copyBytesOrCopyWords\n"
   ioLLVMcode += ";--- Copy\n"
   ioLLVMcode += "loadStore:\n"
-  ioLLVMcode += "  %v = load " + llvmTypeName + ", " + llvmTypeName + "* %inSource\n" 
-  ioLLVMcode += "  store " + llvmTypeName + " %v, " + llvmTypeName + "* %inTarget\n" 
+  ioLLVMcode += "  %v = load " + llvmTypeName + ", " + llvmTypeName + "* %inSource\n"
+  ioLLVMcode += "  store " + llvmTypeName + " %v, " + llvmTypeName + "* %inTarget\n"
   ioLLVMcode += "  br label %copy.end\n"
   ioLLVMcode += "copyBytesOrCopyWords:\n"
   ioLLVMcode += "  %byteCountAnd3 = and i32 %byteCount, 3\n"

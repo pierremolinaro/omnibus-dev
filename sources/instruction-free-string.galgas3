@@ -13,7 +13,7 @@ class @freeStringIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @freeStringIR llvmInstructionCode
+override proc @freeStringIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
@@ -23,7 +23,7 @@ override method @freeStringIR llvmInstructionCode
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @freeStringIR enterAccessibleEntities
+override proc @freeStringIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint unused ioMaxBranchOfOnInstructions
  {

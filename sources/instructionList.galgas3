@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  AST                                                                                                                  
+//!  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract class @instructionAST {
@@ -13,7 +13,7 @@ list @instructionListAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  SYNTAX                                                                                                               
+//!  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -29,7 +29,7 @@ syntax extension omnibus_syntax {
 //     select
 //        $;$
 //      or
-//        let s = @string.separatorString 
+//        let s = @string.separatorString
 //        if not [s containsCharacter !'\n'] then
 //          error .here : "instruction should be terminated by an end of line or a ';'"
 //        end
@@ -42,14 +42,14 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  NOTE TYPES                                                                                                           
+//!  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract method @instructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph
+abstract proc @instructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph
 
 //·······················································································································
 
-method @instructionListAST noteInstructionListTypesInPrecedenceGraph
+proc @instructionListAST noteInstructionListTypesInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   for (mInstruction) in self do
@@ -58,7 +58,7 @@ method @instructionListAST noteInstructionListTypesInPrecedenceGraph
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  SEMANTICS                                                                                                            
+//!  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 boolset @routineAttributes {
@@ -68,7 +68,7 @@ boolset @routineAttributes {
 
 //·······················································································································
 
-abstract method @instructionAST instructionSemanticAnalysis
+abstract proc @instructionAST instructionSemanticAnalysis
   ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
@@ -81,7 +81,7 @@ abstract method @instructionAST instructionSemanticAnalysis
 
 //·······················································································································
 
-method @instructionListAST analyzeBranchInstructionList
+proc @instructionListAST analyzeBranchInstructionList
   ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?endOfInstructionList:@location inEndOfInstructionList
@@ -97,7 +97,7 @@ method @instructionListAST analyzeBranchInstructionList
   [!?ioUniversalMap openBranch]
   for (mInstruction) in self do
     [!?ioInstructionGenerationList appendSourceLineComment !mInstruction.mInstructionLocation]
-    [mInstruction instructionSemanticAnalysis 
+    [mInstruction instructionSemanticAnalysis
       !self:inSelfType
       !routineAttributes:inRoutineAttributes
       !context:inContext
@@ -115,7 +115,7 @@ method @instructionListAST analyzeBranchInstructionList
 
 //·······················································································································
 
-method @instructionListAST analyzeRoutineInstructionList
+proc @instructionListAST analyzeRoutineInstructionList
   ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
@@ -128,7 +128,7 @@ method @instructionListAST analyzeRoutineInstructionList
 {
   for (mInstruction) in self do
     [!?ioInstructionGenerationList appendSourceLineComment !mInstruction.mInstructionLocation]
-    [mInstruction instructionSemanticAnalysis 
+    [mInstruction instructionSemanticAnalysis
       !self:inSelfType
       !routineAttributes:inRoutineAttributes
       !context:inContext
@@ -143,10 +143,10 @@ method @instructionListAST analyzeRoutineInstructionList
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  CODE GENERATION                                                                                                      
+//!  CODE GENERATION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @instructionListIR instructionListLLVMCode
+proc @instructionListIR instructionListLLVMCode
   ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds

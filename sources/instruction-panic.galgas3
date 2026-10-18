@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @panicInstructionAST : @instructionAST {
@@ -7,7 +7,7 @@ class @panicInstructionAST : @instructionAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SYNTAX                                                                                                               
+//  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -26,18 +26,18 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  NOTE TYPES                                                                                                           
+//  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @panicInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @panicInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [self.mCodeExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SEMANTICS                                                                                                            
+//  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @panicInstructionAST instructionSemanticAnalysis
+override proc @panicInstructionAST instructionSemanticAnalysis
   ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes unused inRoutineAttributes
   ?context:let @semanticContext inContext
@@ -89,7 +89,7 @@ override method @panicInstructionAST instructionSemanticAnalysis
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  CODE GENERATION                                                                                                      
+//  CODE GENERATION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @panicInstructionIR : @abstractInstructionIR {
@@ -99,7 +99,7 @@ class @panicInstructionIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @panicInstructionIR llvmInstructionCode
+override proc @panicInstructionIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
@@ -111,7 +111,7 @@ override method @panicInstructionIR llvmInstructionCode
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @panicInstructionIR enterAccessibleEntities
+override proc @panicInstructionIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint unused ioMaxBranchOfOnInstructions
 {

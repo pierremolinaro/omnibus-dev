@@ -18,7 +18,7 @@ class @storeToUniversalReferenceIR : @abstractInstructionIR {
 
 //·······················································································································
 
-override method @storeToUniversalReferenceIR enterAccessibleEntities
+override proc @storeToUniversalReferenceIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint unused ioMaxBranchOfOnInstructions
 {
@@ -48,7 +48,7 @@ override method @storeToUniversalReferenceIR enterAccessibleEntities
 
 //·······················································································································
 
-override method @storeToUniversalReferenceIR llvmInstructionCode
+override proc @storeToUniversalReferenceIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds ioGenerationAdds

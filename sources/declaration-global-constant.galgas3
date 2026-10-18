@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  AST                                                                                                                  
+//!  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @globalConstantDeclarationAST : @abstractDeclarationAST {
@@ -11,12 +11,12 @@ class @globalConstantDeclarationAST : @abstractDeclarationAST {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @globalConstantDeclarationAST locationForErrorSignaling -> @location outLocation {
+override func @globalConstantDeclarationAST locationForErrorSignaling -> @location outLocation {
   outLocation = self.mConstantName.location
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  SYNTAX                                                                                                               
+//!  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -53,16 +53,16 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  PRECEDENCE GRAPH                                                                                                     
+//!  PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract method @expressionAST addDependenceEdgeForStaticExpression
+abstract proc @expressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 
 //·······················································································································
 
-override method @globalConstantDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @globalConstantDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
 //--- Add 'constant name' node
   [!?ioGraph addNode !self.mConstantName !self]
 //--- Add dependency from constant type name
@@ -76,15 +76,15 @@ override method @globalConstantDeclarationAST enterInPrecedenceGraph ?!@semantic
 
 //·······················································································································
 
-override getter @globalConstantDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "global constant " + self.mConstantName 
+override func @globalConstantDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+  outRepresentation = "global constant " + self.mConstantName
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  ENTER IN CONTEXT                                                                                                     
+//!  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @globalConstantDeclarationAST enterInContext
+override proc @globalConstantDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
@@ -123,7 +123,7 @@ override method @globalConstantDeclarationAST enterInContext
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  BUILD CONSTANT MAP HTML FILE                                                                                                      
+//!  BUILD CONSTANT MAP HTML FILE
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc buildGlobalConstantMapHTMLFile

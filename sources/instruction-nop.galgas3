@@ -1,12 +1,12 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @instructionNOP : @instructionAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  ENTER IN CONTEXT                                                                                                     
+//  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc enter_NOP_function ?!@declarationListAST ioDeclarationListAST {
@@ -28,17 +28,17 @@ proc enter_NOP_function ?!@declarationListAST ioDeclarationListAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  NOTE TYPES                                                                                                           
+//  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @instructionNOP noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph unused ioGraph {
+override proc @instructionNOP noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph unused ioGraph {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SEMANTICS                                                                                                            
+//  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @instructionNOP instructionSemanticAnalysis
+override proc @instructionNOP instructionSemanticAnalysis
   ?self:let @omnibusType unused inSelfType
   ?routineAttributes:let @routineAttributes unused inRoutineAttributes
   ?context:let @semanticContext unused inContext

@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @omnibusInfixOperator {
@@ -25,7 +25,7 @@ enum @omnibusInfixOperator {
 
 //·······················································································································
 
-getter @omnibusInfixOperator string -> @string {
+func @omnibusInfixOperator string -> @string {
   switch self
    case equal     : result = "=="
    case lessThan : result = "<"
@@ -58,10 +58,10 @@ class @omnibusInfixOperatorExpressionAST : @expressionAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
+//  PRECEDENCE GRAPH FROM EXPRESSION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @omnibusInfixOperatorExpressionAST addDependenceEdgeForStaticExpression
+override proc @omnibusInfixOperatorExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
@@ -70,19 +70,19 @@ override method @omnibusInfixOperatorExpressionAST addDependenceEdgeForStaticExp
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  NOTE TYPES                                                                                                           
+//  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @omnibusInfixOperatorExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @omnibusInfixOperatorExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [self.mLeftExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
   [self.mRightExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SEMANTICS                                                                                                            
+//  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @omnibusInfixOperatorExpressionAST analyzeExpression
+override proc @omnibusInfixOperatorExpressionAST analyzeExpression
   ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?optionalTargetType:let @omnibusType inOptionalTargetType
@@ -145,7 +145,7 @@ override method @omnibusInfixOperatorExpressionAST analyzeExpression
 //  ?let @location inOperatorLocation
 //  -> @infixOperatorMap_EX outOperatorMap
 //{
-//  switch inOp 
+//  switch inOp
 //  case equal :
 //    outOperatorMap = inContext.mEqualOperatorMap
 //  case lessThan :
@@ -230,7 +230,7 @@ override method @omnibusInfixOperatorExpressionAST analyzeExpression
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-//abstract method @omnibusInfixOperatorDescription generateInfixOperatorCode
+//abstract proc @omnibusInfixOperatorDescription generateInfixOperatorCode
 //  ?!@semanticTemporariesStruct ioTemporaries
 //  ?!@instructionListIR ioInstructionGenerationList
 //  ?let @objectIR inLeftOperand
@@ -241,7 +241,7 @@ override method @omnibusInfixOperatorExpressionAST analyzeExpression
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-//getter @omnibusInfixOperatorDescription performStaticOperation
+//func @omnibusInfixOperatorDescription performStaticOperation
 //  ?let @bigint inLeft
 //  ?let @bigint inRight
 //  -> @bigint
@@ -272,7 +272,7 @@ override method @omnibusInfixOperatorExpressionAST analyzeExpression
 //  case shl : result = inLeft << [inRight uint]
 //  case ashr : result = inLeft >> [inRight uint]
 //  case lshr : result = inLeft >> [inRight uint]
-//  
+//
 //  case icmp_eq : result = [inLeft == inRight bigint]
 //  case icmp_ult : result = [inLeft < inRight bigint]
 //  case icmp_ule : result = [inLeft <= inRight bigint]

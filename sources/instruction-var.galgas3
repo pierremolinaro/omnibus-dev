@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @varInstructionWithAssignmentAST : @instructionAST {
@@ -16,7 +16,7 @@ class @varDeclarationInstructionAST : @instructionAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SYNTAX                                                                                                               
+//  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -65,10 +65,10 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  NOTE TYPES                                                                                                           
+//  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @varInstructionWithAssignmentAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @varInstructionWithAssignmentAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   if self.mOptionalTypeName.string != "" then
     [!?ioGraph noteNode !self.mOptionalTypeName]
   end
@@ -77,15 +77,15 @@ override method @varInstructionWithAssignmentAST noteInstructionTypesInPrecedenc
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @varDeclarationInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @varDeclarationInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [!?ioGraph noteNode !self.mTypeName]
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SEMANTICS                                                                                                            
+//  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @varInstructionWithAssignmentAST instructionSemanticAnalysis
+override proc @varInstructionWithAssignmentAST instructionSemanticAnalysis
   ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
@@ -142,7 +142,7 @@ override method @varInstructionWithAssignmentAST instructionSemanticAnalysis
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @varDeclarationInstructionAST instructionSemanticAnalysis
+override proc @varDeclarationInstructionAST instructionSemanticAnalysis
   ?self:let @omnibusType unused inSelfType
   ?routineAttributes:let @routineAttributes unused inRoutineAttributes
   ?context:let @semanticContext inContext

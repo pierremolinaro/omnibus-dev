@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @letInstructionWithAssignmentAST : @instructionAST {
@@ -9,7 +9,7 @@ class @letInstructionWithAssignmentAST : @instructionAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SYNTAX                                                                                                               
+//  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -40,10 +40,10 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  NOTE TYPES                                                                                                           
+//  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @letInstructionWithAssignmentAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @letInstructionWithAssignmentAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   if self.mOptionalTypeName.string != "" then
     [!?ioGraph noteNode !self.mOptionalTypeName]
   end
@@ -51,10 +51,10 @@ override method @letInstructionWithAssignmentAST noteInstructionTypesInPrecedenc
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SEMANTICS                                                                                                            
+//  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @letInstructionWithAssignmentAST instructionSemanticAnalysis
+override proc @letInstructionWithAssignmentAST instructionSemanticAnalysis
   ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
@@ -86,7 +86,7 @@ override method @letInstructionWithAssignmentAST instructionSemanticAnalysis
   [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
     !?expressionResult
-  ]  
+  ]
 //--- Declare local constant
   var result = checkAssignmentCompatibility (
     !inContext.mAssignmentOperatorMap

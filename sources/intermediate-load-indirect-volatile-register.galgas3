@@ -15,7 +15,7 @@ class @loadIndirectVolatileIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @loadIndirectVolatileIR llvmInstructionCode
+override proc @loadIndirectVolatileIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds ioGenerationAdds

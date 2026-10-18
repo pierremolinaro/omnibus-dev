@@ -639,7 +639,7 @@ GGS_llvmVarInstruction_2E_weak GGS_llvmVarInstruction_2E_weak::extractObject (co
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@llvmGenerationInstructionList appendReturn'
+//Extension proc '@llvmGenerationInstructionList appendReturn'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -649,18 +649,18 @@ void extensionSetter_appendReturn (GGS_llvmGenerationInstructionList & ioObject,
                                    Compiler * inCompiler
                                    COMMA_UNUSED_LOCATION_ARGS) {
   GGS_llvmGenerationInstructionElementList temp_0 = GGS_llvmGenerationInstructionElementList::init (inCompiler COMMA_SOURCE_FILE ("llvm-instructions.galgas3", 43)) ;
-  GGS_llvmGenerationInstructionElementList var_elements_1813 = temp_0 ;
-  var_elements_1813.addAssignOperation (GGS_llvmGenerationInstructionElement::class_func_string (GGS_string ("ret ")  COMMA_SOURCE_FILE ("llvm-instructions.galgas3", 44))  COMMA_SOURCE_FILE ("llvm-instructions.galgas3", 44)) ;
-  var_elements_1813.addAssignOperation (GGS_llvmGenerationInstructionElement::class_func_type (constinArgument_inReturnType  COMMA_SOURCE_FILE ("llvm-instructions.galgas3", 45))  COMMA_SOURCE_FILE ("llvm-instructions.galgas3", 45)) ;
-  var_elements_1813.addAssignOperation (GGS_llvmGenerationInstructionElement::class_func_string (GGS_string (" ")  COMMA_SOURCE_FILE ("llvm-instructions.galgas3", 46))  COMMA_SOURCE_FILE ("llvm-instructions.galgas3", 46)) ;
-  var_elements_1813.addAssignOperation (GGS_llvmGenerationInstructionElement::class_func_symbol (constinArgument_inReturnValue  COMMA_SOURCE_FILE ("llvm-instructions.galgas3", 47))  COMMA_SOURCE_FILE ("llvm-instructions.galgas3", 47)) ;
-  ioObject.addAssignOperation (GGS_llvmGenerationInstruction::init_21_ (var_elements_1813, inCompiler COMMA_HERE)  COMMA_SOURCE_FILE ("llvm-instructions.galgas3", 48)) ;
+  GGS_llvmGenerationInstructionElementList var_elements_1699 = temp_0 ;
+  var_elements_1699.addAssignOperation (GGS_llvmGenerationInstructionElement::class_func_string (GGS_string ("ret ")  COMMA_SOURCE_FILE ("llvm-instructions.galgas3", 44))  COMMA_SOURCE_FILE ("llvm-instructions.galgas3", 44)) ;
+  var_elements_1699.addAssignOperation (GGS_llvmGenerationInstructionElement::class_func_type (constinArgument_inReturnType  COMMA_SOURCE_FILE ("llvm-instructions.galgas3", 45))  COMMA_SOURCE_FILE ("llvm-instructions.galgas3", 45)) ;
+  var_elements_1699.addAssignOperation (GGS_llvmGenerationInstructionElement::class_func_string (GGS_string (" ")  COMMA_SOURCE_FILE ("llvm-instructions.galgas3", 46))  COMMA_SOURCE_FILE ("llvm-instructions.galgas3", 46)) ;
+  var_elements_1699.addAssignOperation (GGS_llvmGenerationInstructionElement::class_func_symbol (constinArgument_inReturnValue  COMMA_SOURCE_FILE ("llvm-instructions.galgas3", 47))  COMMA_SOURCE_FILE ("llvm-instructions.galgas3", 47)) ;
+  ioObject.addAssignOperation (GGS_llvmGenerationInstruction::init_21_ (var_elements_1699, inCompiler COMMA_HERE)  COMMA_SOURCE_FILE ("llvm-instructions.galgas3", 48)) ;
 }
 
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@llvmGenerationInstructionList checkInstructionList'
+//Extension proc '@llvmGenerationInstructionList checkInstructionList'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -668,19 +668,19 @@ void extensionMethod_checkInstructionList (const GGS_llvmGenerationInstructionLi
                                            const GGS_ctCheckMap constinArgument_inMap,
                                            Compiler * inCompiler
                                            COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_ctCheckMap var_currentMap_4240 = constinArgument_inMap ;
+  GGS_ctCheckMap var_currentMap_3908 = constinArgument_inMap ;
   const GGS_llvmGenerationInstructionList temp_0 = inObject ;
-  UpEnumerator_llvmGenerationInstructionList enumerator_4266 (temp_0) ;
-  while (enumerator_4266.hasCurrentObject ()) {
-    callExtensionMethod_checkInstructionList ((cPtr_abstractLLVMInstruction *) enumerator_4266.current_mInstruction (HERE).ptr (), var_currentMap_4240, inCompiler COMMA_SOURCE_FILE ("llvm-instructions.galgas3", 109)) ;
-    enumerator_4266.gotoNextObject () ;
+  UpEnumerator_llvmGenerationInstructionList enumerator_3934 (temp_0) ;
+  while (enumerator_3934.hasCurrentObject ()) {
+    callExtensionMethod_checkInstructionList ((cPtr_abstractLLVMInstruction *) enumerator_3934.current_mInstruction (HERE).ptr (), var_currentMap_3908, inCompiler COMMA_SOURCE_FILE ("llvm-instructions.galgas3", 109)) ;
+    enumerator_3934.gotoNextObject () ;
   }
 }
 
 
 //--------------------------------------------------------------------------------------------------
 //
-//Abstract extension method '@abstractLLVMInstruction checkInstructionList'
+//Abstract extension proc '@abstractLLVMInstruction checkInstructionList'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -689,7 +689,7 @@ void callExtensionMethod_checkInstructionList (cPtr_abstractLLVMInstruction * in
                                                Compiler * inCompiler
                                                COMMA_LOCATION_ARGS) {
 //--- Drop output arguments
-//--- Find method
+//--- Find proc
   if (nullptr != inObject) {
     macroValidSharedObject (inObject, cPtr_abstractLLVMInstruction) ;
     inObject->method_checkInstructionList (io_ioMap, inCompiler COMMA_THERE) ;
@@ -1184,7 +1184,7 @@ GGS_assignmentGenerationVarMap GGS_assignmentGenerationVarMap::extractObject (co
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@llvmGenerationInstructionList generateIRCode'
+//Extension proc '@llvmGenerationInstructionList generateIRCode'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -1196,20 +1196,20 @@ void extensionMethod_generateIRCode (const GGS_llvmGenerationInstructionList inO
                                      GGS_allocaList & ioArgument_ioAllocaList,
                                      Compiler * inCompiler
                                      COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_assignmentGenerationVarMap var_varMap_5993 = constinArgument_inVarMap ;
-  GGS_assignmentGenerationVarMap var_typeMap_6017 = constinArgument_inTypeMap ;
+  GGS_assignmentGenerationVarMap var_varMap_5653 = constinArgument_inVarMap ;
+  GGS_assignmentGenerationVarMap var_typeMap_5677 = constinArgument_inTypeMap ;
   const GGS_llvmGenerationInstructionList temp_0 = inObject ;
-  UpEnumerator_llvmGenerationInstructionList enumerator_6044 (temp_0) ;
-  while (enumerator_6044.hasCurrentObject ()) {
-    callExtensionMethod_generateIRCode ((cPtr_abstractLLVMInstruction *) enumerator_6044.current_mInstruction (HERE).ptr (), var_varMap_5993, var_typeMap_6017, ioArgument_ioInstructionAsStringListIR, ioArgument_ioTemporaryIndex, ioArgument_ioAllocaList, inCompiler COMMA_SOURCE_FILE ("llvm-instructions.galgas3", 159)) ;
-    enumerator_6044.gotoNextObject () ;
+  UpEnumerator_llvmGenerationInstructionList enumerator_5704 (temp_0) ;
+  while (enumerator_5704.hasCurrentObject ()) {
+    callExtensionMethod_generateIRCode ((cPtr_abstractLLVMInstruction *) enumerator_5704.current_mInstruction (HERE).ptr (), var_varMap_5653, var_typeMap_5677, ioArgument_ioInstructionAsStringListIR, ioArgument_ioTemporaryIndex, ioArgument_ioAllocaList, inCompiler COMMA_SOURCE_FILE ("llvm-instructions.galgas3", 159)) ;
+    enumerator_5704.gotoNextObject () ;
   }
 }
 
 
 //--------------------------------------------------------------------------------------------------
 //
-//Abstract extension method '@abstractLLVMInstruction generateIRCode'
+//Abstract extension proc '@abstractLLVMInstruction generateIRCode'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -1222,7 +1222,7 @@ void callExtensionMethod_generateIRCode (cPtr_abstractLLVMInstruction * inObject
                                          Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) {
 //--- Drop output arguments
-//--- Find method
+//--- Find proc
   if (nullptr != inObject) {
     macroValidSharedObject (inObject, cPtr_abstractLLVMInstruction) ;
     inObject->method_generateIRCode (io_ioVarMap, io_ioTypeMap, io_ioInstructionAsStringListIR, io_ioTemporaryIndex, io_ioAllocaList, inCompiler COMMA_THERE) ;
@@ -1230,7 +1230,7 @@ void callExtensionMethod_generateIRCode (cPtr_abstractLLVMInstruction * inObject
 }
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@instructionListIR appendBinaryOperation'
+//Extension proc '@instructionListIR appendBinaryOperation'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -1737,7 +1737,7 @@ GGS_procedureCallInstructionAST_2E_weak GGS_procedureCallInstructionAST_2E_weak:
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@LValueOperandAST buildProcedureCallAccessList'
+//Extension proc '@LValueOperandAST buildProcedureCallAccessList'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -1753,22 +1753,22 @@ void extensionMethod_buildProcedureCallAccessList (const GGS_LValueOperandAST in
     break ;
   case GGS_LValueOperandAST::Enumeration::enum_property:
     {
-      GGS_lstring extractedValue_3034_name_0 ;
-      GGS_LValueOperandAST extractedValue_3057_next_1 ;
-      temp_0.getAssociatedValuesFor_property (extractedValue_3034_name_0, extractedValue_3057_next_1) ;
-      ioArgument_ioAccessList.addAssignOperation (GGS_accessInAssignmentAST::class_func_property (extractedValue_3034_name_0  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas3", 72))  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas3", 72)) ;
-      extensionMethod_buildProcedureCallAccessList (extractedValue_3057_next_1, ioArgument_ioAccessList, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas3", 73)) ;
+      GGS_lstring extractedValue_2807_name_0 ;
+      GGS_LValueOperandAST extractedValue_2830_next_1 ;
+      temp_0.getAssociatedValuesFor_property (extractedValue_2807_name_0, extractedValue_2830_next_1) ;
+      ioArgument_ioAccessList.addAssignOperation (GGS_accessInAssignmentAST::class_func_property (extractedValue_2807_name_0  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas3", 72))  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas3", 72)) ;
+      extensionMethod_buildProcedureCallAccessList (extractedValue_2830_next_1, ioArgument_ioAccessList, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas3", 73)) ;
     }
     break ;
   case GGS_LValueOperandAST::Enumeration::enum_arrayAccess:
     {
-      GGS_expressionAST extractedValue_3199_index_0 ;
-      GGS_location extractedValue_3215_endOfIndex_1 ;
-      GGS_bool extractedValue_3232_checkIndexExpression_2 ;
-      GGS_LValueOperandAST extractedValue_3271_next_3 ;
-      temp_0.getAssociatedValuesFor_arrayAccess (extractedValue_3199_index_0, extractedValue_3215_endOfIndex_1, extractedValue_3232_checkIndexExpression_2, extractedValue_3271_next_3) ;
-      ioArgument_ioAccessList.addAssignOperation (GGS_accessInAssignmentAST::class_func_arrayAccess (extractedValue_3199_index_0, extractedValue_3215_endOfIndex_1, extractedValue_3232_checkIndexExpression_2  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas3", 75))  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas3", 75)) ;
-      extensionMethod_buildProcedureCallAccessList (extractedValue_3271_next_3, ioArgument_ioAccessList, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas3", 76)) ;
+      GGS_expressionAST extractedValue_2972_index_0 ;
+      GGS_location extractedValue_2988_endOfIndex_1 ;
+      GGS_bool extractedValue_3005_checkIndexExpression_2 ;
+      GGS_LValueOperandAST extractedValue_3044_next_3 ;
+      temp_0.getAssociatedValuesFor_arrayAccess (extractedValue_2972_index_0, extractedValue_2988_endOfIndex_1, extractedValue_3005_checkIndexExpression_2, extractedValue_3044_next_3) ;
+      ioArgument_ioAccessList.addAssignOperation (GGS_accessInAssignmentAST::class_func_arrayAccess (extractedValue_2972_index_0, extractedValue_2988_endOfIndex_1, extractedValue_3005_checkIndexExpression_2  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas3", 75))  COMMA_SOURCE_FILE ("instruction-procedure-call.galgas3", 75)) ;
+      extensionMethod_buildProcedureCallAccessList (extractedValue_3044_next_3, ioArgument_ioAccessList, inCompiler COMMA_SOURCE_FILE ("instruction-procedure-call.galgas3", 76)) ;
     }
     break ;
   }
@@ -1790,39 +1790,39 @@ GGS_string extensionGetter_passingModeForActualSelector (const GGS_effectiveArgu
     break ;
   case GGS_effectiveArgumentPassingModeAST::Enumeration::enum_input:
     {
-      GGS_lstring extractedValue_5757__0 ;
-      temp_0.getAssociatedValuesFor_input (extractedValue_5757__0) ;
+      GGS_lstring extractedValue_5307__0 ;
+      temp_0.getAssociatedValuesFor_input (extractedValue_5307__0) ;
       result_result = GGS_string ("\?") ;
     }
     break ;
   case GGS_effectiveArgumentPassingModeAST::Enumeration::enum_inputWithType:
     {
-      GGS_bool extractedValue_5797__0 ;
-      GGS_lstring extractedValue_5799__1 ;
-      GGS_lstring extractedValue_5801__2 ;
-      temp_0.getAssociatedValuesFor_inputWithType (extractedValue_5797__0, extractedValue_5799__1, extractedValue_5801__2) ;
+      GGS_bool extractedValue_5347__0 ;
+      GGS_lstring extractedValue_5349__1 ;
+      GGS_lstring extractedValue_5351__2 ;
+      temp_0.getAssociatedValuesFor_inputWithType (extractedValue_5347__0, extractedValue_5349__1, extractedValue_5351__2) ;
       result_result = GGS_string ("\?") ;
     }
     break ;
   case GGS_effectiveArgumentPassingModeAST::Enumeration::enum_output:
     {
-      GGS_expressionAST extractedValue_5834__0 ;
-      GGS_location extractedValue_5836__1 ;
-      temp_0.getAssociatedValuesFor_output (extractedValue_5834__0, extractedValue_5836__1) ;
+      GGS_expressionAST extractedValue_5384__0 ;
+      GGS_location extractedValue_5386__1 ;
+      temp_0.getAssociatedValuesFor_output (extractedValue_5384__0, extractedValue_5386__1) ;
       result_result = GGS_string ("!") ;
     }
     break ;
   case GGS_effectiveArgumentPassingModeAST::Enumeration::enum_outputInput:
     {
-      GGS_lstring extractedValue_5874__0 ;
-      temp_0.getAssociatedValuesFor_outputInput (extractedValue_5874__0) ;
+      GGS_lstring extractedValue_5424__0 ;
+      temp_0.getAssociatedValuesFor_outputInput (extractedValue_5424__0) ;
       result_result = GGS_string ("!\?") ;
     }
     break ;
   case GGS_effectiveArgumentPassingModeAST::Enumeration::enum_outputInputSelfVariable:
     {
-      GGS_lstring extractedValue_5925__0 ;
-      temp_0.getAssociatedValuesFor_outputInputSelfVariable (extractedValue_5925__0) ;
+      GGS_lstring extractedValue_5475__0 ;
+      temp_0.getAssociatedValuesFor_outputInputSelfVariable (extractedValue_5475__0) ;
       result_result = GGS_string ("!\?") ;
     }
     break ;
@@ -1855,10 +1855,10 @@ class CollectionElementPtr_procEffectiveParameterList : public CollectionElement
                                                            COMMA_LOCATION_ARGS) ;
   public: CollectionElementPtr_procEffectiveParameterList (const GGS_procEffectiveParameterList_2E_element & inElement COMMA_LOCATION_ARGS) ;
 
-//--- Virtual method that checks that all attributes are valid
+//--- Virtual proc that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
 
-//--- Virtual method that returns a copy of current object
+//--- Virtual proc that returns a copy of current object
   public: virtual CollectionElementPtr * copy (void) ;
 } ;
 
@@ -2316,7 +2316,7 @@ void GGS_procEffectiveParameterList::setter_setMEffectiveParameterPassingModeAtI
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_effectiveArgumentPassingModeAST GGS_procEffectiveParameterList::getter_mEffectiveParameterPassingModeAtIndex (const GGS_uint & inIndex,
                                                                                                                   Compiler * inCompiler
                                                                                                                   COMMA_LOCATION_ARGS) const {
@@ -2355,7 +2355,7 @@ void GGS_procEffectiveParameterList::setter_setMSelectorAtIndex (GGS_lstring inO
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_lstring GGS_procEffectiveParameterList::getter_mSelectorAtIndex (const GGS_uint & inIndex,
                                                                      Compiler * inCompiler
                                                                      COMMA_LOCATION_ARGS) const {
@@ -2394,7 +2394,7 @@ void GGS_procEffectiveParameterList::setter_setMParameterTypeAtIndex (GGS_omnibu
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_omnibusType GGS_procEffectiveParameterList::getter_mParameterTypeAtIndex (const GGS_uint & inIndex,
                                                                               Compiler * inCompiler
                                                                               COMMA_LOCATION_ARGS) const {
@@ -2654,10 +2654,10 @@ class CollectionElementPtr_procCallEffectiveParameterListIR : public CollectionE
                                                                  COMMA_LOCATION_ARGS) ;
   public: CollectionElementPtr_procCallEffectiveParameterListIR (const GGS_procCallEffectiveParameterListIR_2E_element & inElement COMMA_LOCATION_ARGS) ;
 
-//--- Virtual method that checks that all attributes are valid
+//--- Virtual proc that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
 
-//--- Virtual method that returns a copy of current object
+//--- Virtual proc that returns a copy of current object
   public: virtual CollectionElementPtr * copy (void) ;
 } ;
 
@@ -3090,7 +3090,7 @@ void GGS_procCallEffectiveParameterListIR::setter_setMEffectiveParameterPassingM
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_procEffectiveParameterPassingModeIR GGS_procCallEffectiveParameterListIR::getter_mEffectiveParameterPassingModeAtIndex (const GGS_uint & inIndex,
                                                                                                                             Compiler * inCompiler
                                                                                                                             COMMA_LOCATION_ARGS) const {
@@ -3129,7 +3129,7 @@ void GGS_procCallEffectiveParameterListIR::setter_setMParameterAtIndex (GGS_obje
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_objectIR GGS_procCallEffectiveParameterListIR::getter_mParameterAtIndex (const GGS_uint & inIndex,
                                                                              Compiler * inCompiler
                                                                              COMMA_LOCATION_ARGS) const {
@@ -3798,7 +3798,7 @@ GGS_infixOperatorMap GGS_infixOperatorMap::extractObject (const GGS_object & inO
 
 //--------------------------------------------------------------------------------------------------
 //
-//Abstract extension method '@omnibusInfixOperatorUsage generateCode'
+//Abstract extension proc '@omnibusInfixOperatorUsage generateCode'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -3815,7 +3815,7 @@ void callExtensionMethod_generateCode (cPtr_omnibusInfixOperatorUsage * inObject
                                        COMMA_LOCATION_ARGS) {
 //--- Drop output arguments
   out_outResultValue.drop () ;
-//--- Find method
+//--- Find proc
   if (nullptr != inObject) {
     macroValidSharedObject (inObject, cPtr_omnibusInfixOperatorUsage) ;
     inObject->method_generateCode (constin_inLeftOperand, constin_inOperatorLocation, constin_inRightOperand, constin_inResultType, io_ioTemporaries, io_ioAllocaList, io_ioInstructionGenerationList, out_outResultValue, inCompiler COMMA_THERE) ;
@@ -3823,7 +3823,7 @@ void callExtensionMethod_generateCode (cPtr_omnibusInfixOperatorUsage * inObject
 }
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@infixOperatorMap generateInfixOperatorCode'
+//Extension proc '@infixOperatorMap generateInfixOperatorCode'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -3839,12 +3839,12 @@ void extensionMethod_generateInfixOperatorCode (const GGS_infixOperatorMap inObj
                                                 Compiler * inCompiler
                                                 COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outResultValue.drop () ; // Release 'out' argument
-  GGS_lstring var_key_1589 = function_infixOperatorMapKey (extensionGetter_type (constinArgument_inLeftOperand, inCompiler COMMA_SOURCE_FILE ("infix-operator-map.galgas3", 41)), constinArgument_inInfixOperator, constinArgument_inOperatorLocation, extensionGetter_type (constinArgument_inRightOperand, inCompiler COMMA_SOURCE_FILE ("infix-operator-map.galgas3", 41)), inCompiler COMMA_SOURCE_FILE ("infix-operator-map.galgas3", 41)) ;
-  GGS_omnibusType var_resultType_1723 ;
-  GGS_omnibusInfixOperatorUsage var_operatorUsage_1739 ;
+  GGS_lstring var_key_1585 = function_infixOperatorMapKey (extensionGetter_type (constinArgument_inLeftOperand, inCompiler COMMA_SOURCE_FILE ("infix-operator-map.galgas3", 41)), constinArgument_inInfixOperator, constinArgument_inOperatorLocation, extensionGetter_type (constinArgument_inRightOperand, inCompiler COMMA_SOURCE_FILE ("infix-operator-map.galgas3", 41)), inCompiler COMMA_SOURCE_FILE ("infix-operator-map.galgas3", 41)) ;
+  GGS_omnibusType var_resultType_1719 ;
+  GGS_omnibusInfixOperatorUsage var_operatorUsage_1735 ;
   const GGS_infixOperatorMap temp_0 = inObject ;
-  temp_0.method_searchKey (var_key_1589, var_resultType_1723, var_operatorUsage_1739, inCompiler COMMA_SOURCE_FILE ("infix-operator-map.galgas3", 42)) ;
-  callExtensionMethod_generateCode ((cPtr_omnibusInfixOperatorUsage *) var_operatorUsage_1739.ptr (), constinArgument_inLeftOperand, constinArgument_inOperatorLocation, constinArgument_inRightOperand, var_resultType_1723, ioArgument_ioTemporaries, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, outArgument_outResultValue, inCompiler COMMA_SOURCE_FILE ("infix-operator-map.galgas3", 43)) ;
+  temp_0.method_searchKey (var_key_1585, var_resultType_1719, var_operatorUsage_1735, inCompiler COMMA_SOURCE_FILE ("infix-operator-map.galgas3", 42)) ;
+  callExtensionMethod_generateCode ((cPtr_omnibusInfixOperatorUsage *) var_operatorUsage_1735.ptr (), constinArgument_inLeftOperand, constinArgument_inOperatorLocation, constinArgument_inRightOperand, var_resultType_1719, ioArgument_ioTemporaries, ioArgument_ioAllocaList, ioArgument_ioInstructionGenerationList, outArgument_outResultValue, inCompiler COMMA_SOURCE_FILE ("infix-operator-map.galgas3", 43)) ;
 }
 
 
@@ -4260,7 +4260,7 @@ GGS_typeAliasDeclarationAST_2E_weak GGS_typeAliasDeclarationAST_2E_weak::extract
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@instructionListIR appendShiftLeft'
+//Extension proc '@instructionListIR appendShiftLeft'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -5405,7 +5405,7 @@ void GGS_implicitBooleanConversionResult::method_extractCompileTime (GGS_bool & 
   if (mEnum != Enumeration::enum_compileTime) {
     outAssociatedValue_value.drop () ;
     String s ;
-    s.appendCString ("method @implicitBooleanConversionResult.compileTime invoked with an invalid enum value") ;
+    s.appendCString ("proc @implicitBooleanConversionResult.compileTime invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const auto ptr = (GGS_implicitBooleanConversionResult_2E_compileTime *) mAssociatedValues.associatedValuesPointer () ;
@@ -5421,7 +5421,7 @@ void GGS_implicitBooleanConversionResult::method_extractLlvmVariable (GGS_string
   if (mEnum != Enumeration::enum_llvmVariable) {
     outAssociatedValue_name.drop () ;
     String s ;
-    s.appendCString ("method @implicitBooleanConversionResult.llvmVariable invoked with an invalid enum value") ;
+    s.appendCString ("proc @implicitBooleanConversionResult.llvmVariable invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const auto ptr = (GGS_implicitBooleanConversionResult_2E_llvmVariable *) mAssociatedValues.associatedValuesPointer () ;
@@ -5550,10 +5550,10 @@ GGS_string extensionGetter_llvmName (const GGS_implicitBooleanConversionResult &
     break ;
   case GGS_implicitBooleanConversionResult::Enumeration::enum_compileTime:
     {
-      GGS_bool extractedValue_8983_value_0 ;
-      temp_0.getAssociatedValuesFor_compileTime (extractedValue_8983_value_0) ;
+      GGS_bool extractedValue_8430_value_0 ;
+      temp_0.getAssociatedValuesFor_compileTime (extractedValue_8430_value_0) ;
       GGS_bigint temp_1 ;
-      const GalgasBool test_2 = extractedValue_8983_value_0.boolEnum () ;
+      const GalgasBool test_2 = extractedValue_8430_value_0.boolEnum () ;
       if (GalgasBool::boolTrue == test_2) {
         temp_1 = GGS_bigint ("1", inCompiler  COMMA_SOURCE_FILE ("convert-to-boolean.galgas3", 191)) ;
       }else if (GalgasBool::boolFalse == test_2) {
@@ -5564,9 +5564,9 @@ GGS_string extensionGetter_llvmName (const GGS_implicitBooleanConversionResult &
     break ;
   case GGS_implicitBooleanConversionResult::Enumeration::enum_llvmVariable:
     {
-      GGS_string extractedValue_9057_name_0 ;
-      temp_0.getAssociatedValuesFor_llvmVariable (extractedValue_9057_name_0) ;
-      result_result = extractedValue_9057_name_0 ;
+      GGS_string extractedValue_8504_name_0 ;
+      temp_0.getAssociatedValuesFor_llvmVariable (extractedValue_8504_name_0) ;
+      result_result = extractedValue_8504_name_0 ;
     }
     break ;
   }
@@ -5579,7 +5579,7 @@ GGS_string extensionGetter_llvmName (const GGS_implicitBooleanConversionResult &
 
 //--------------------------------------------------------------------------------------------------
 //
-//Abstract extension method '@abstractImplicitConverterToBoolean generateConvertToBooleanCode'
+//Abstract extension proc '@abstractImplicitConverterToBoolean generateConvertToBooleanCode'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -5594,7 +5594,7 @@ void callExtensionMethod_generateConvertToBooleanCode (cPtr_abstractImplicitConv
                                                        COMMA_LOCATION_ARGS) {
 //--- Drop output arguments
   out_outResult.drop () ;
-//--- Find method
+//--- Find proc
   if (nullptr != inObject) {
     macroValidSharedObject (inObject, cPtr_abstractImplicitConverterToBoolean) ;
     inObject->method_generateConvertToBooleanCode (constin_inReceiverOperand, constin_inErrorLocation, io_ioTemporaries, io_ioInstructionGenerationList, io_ioAllocaList, out_outResult, inCompiler COMMA_THERE) ;
@@ -5846,7 +5846,7 @@ GGS_llvmImplicitConverterToBoolean_2E_weak GGS_llvmImplicitConverterToBoolean_2E
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@implicitConversionToBooleanMap generateConvertToBooleanCode'
+//Extension proc '@implicitConversionToBooleanMap generateConvertToBooleanCode'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -5860,11 +5860,11 @@ void extensionMethod_generateConvertToBooleanCode (const GGS_implicitConversionT
                                                    Compiler * inCompiler
                                                    COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outResult.drop () ; // Release 'out' argument
-  GGS_lstring var_key_12863 = GGS_lstring::init_21__21_ (extensionGetter_omnibusTypeDescriptionName (constinArgument_inReceiverOperand, inCompiler COMMA_SOURCE_FILE ("convert-to-boolean.galgas3", 284)), constinArgument_inErrorLocation, inCompiler COMMA_HERE) ;
-  GGS_abstractImplicitConverterToBoolean var_converter_12971 ;
+  GGS_lstring var_key_12298 = GGS_lstring::init_21__21_ (extensionGetter_omnibusTypeDescriptionName (constinArgument_inReceiverOperand, inCompiler COMMA_SOURCE_FILE ("convert-to-boolean.galgas3", 284)), constinArgument_inErrorLocation, inCompiler COMMA_HERE) ;
+  GGS_abstractImplicitConverterToBoolean var_converter_12406 ;
   const GGS_implicitConversionToBooleanMap temp_0 = inObject ;
-  temp_0.method_searchKey (var_key_12863, var_converter_12971, inCompiler COMMA_SOURCE_FILE ("convert-to-boolean.galgas3", 285)) ;
-  callExtensionMethod_generateConvertToBooleanCode ((cPtr_abstractImplicitConverterToBoolean *) var_converter_12971.ptr (), constinArgument_inReceiverOperand, constinArgument_inErrorLocation, ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, ioArgument_ioAllocaList, outArgument_outResult, inCompiler COMMA_SOURCE_FILE ("convert-to-boolean.galgas3", 286)) ;
+  temp_0.method_searchKey (var_key_12298, var_converter_12406, inCompiler COMMA_SOURCE_FILE ("convert-to-boolean.galgas3", 285)) ;
+  callExtensionMethod_generateConvertToBooleanCode ((cPtr_abstractImplicitConverterToBoolean *) var_converter_12406.ptr (), constinArgument_inReceiverOperand, constinArgument_inErrorLocation, ioArgument_ioTemporaries, ioArgument_ioInstructionGenerationList, ioArgument_ioAllocaList, outArgument_outResult, inCompiler COMMA_SOURCE_FILE ("convert-to-boolean.galgas3", 286)) ;
 }
 
 
@@ -7787,7 +7787,7 @@ GGS_compileTimeBoolOrOperator_2E_weak GGS_compileTimeBoolOrOperator_2E_weak::ext
 
 //--------------------------------------------------------------------------------------------------
 //
-//Abstract extension method '@abstractInstructionIR llvmInstructionCode'
+//Abstract extension proc '@abstractInstructionIR llvmInstructionCode'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -7798,14 +7798,14 @@ void callExtensionMethod_llvmInstructionCode (cPtr_abstractInstructionIR * inObj
                                               Compiler * inCompiler
                                               COMMA_LOCATION_ARGS) {
 //--- Drop output arguments
-//--- Find method
+//--- Find proc
   if (nullptr != inObject) {
     macroValidSharedObject (inObject, cPtr_abstractInstructionIR) ;
     inObject->method_llvmInstructionCode (io_ioLLVMcode, constin_inGenerationContext, io_ioGenerationAdds, inCompiler COMMA_THERE) ;
   }
 }
 //--------------------------------------------------------------------------------------------------
-//Extension method '@abstractInstructionIR enterAccessibleEntities'
+//Extension proc '@abstractInstructionIR enterAccessibleEntities'
 //--------------------------------------------------------------------------------------------------
 
 void cPtr_abstractInstructionIR::method_enterAccessibleEntities (GGS_stringset & /* ioArgument_ioInvokedRoutineSet */,
@@ -7839,10 +7839,10 @@ class CollectionElementPtr_instructionListListIR : public CollectionElementPtr {
                                                       COMMA_LOCATION_ARGS) ;
   public: CollectionElementPtr_instructionListListIR (const GGS_instructionListListIR_2E_element & inElement COMMA_LOCATION_ARGS) ;
 
-//--- Virtual method that checks that all attributes are valid
+//--- Virtual proc that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
 
-//--- Virtual method that returns a copy of current object
+//--- Virtual proc that returns a copy of current object
   public: virtual CollectionElementPtr * copy (void) ;
 } ;
 
@@ -8250,7 +8250,7 @@ void GGS_instructionListListIR::setter_setMInstructionListAtIndex (GGS_instructi
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_instructionListIR GGS_instructionListListIR::getter_mInstructionListAtIndex (const GGS_uint & inIndex,
                                                                                  Compiler * inCompiler
                                                                                  COMMA_LOCATION_ARGS) const {
@@ -8846,7 +8846,7 @@ GGS_availableInterruptMap GGS_availableInterruptMap::extractObject (const GGS_ob
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@instructionListIR appendEnterRegisterGroupSubscriptedAddress'
+//Extension proc '@instructionListIR appendEnterRegisterGroupSubscriptedAddress'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -9263,10 +9263,10 @@ class CollectionElementPtr_functionCallEffectiveParameterListAST : public Collec
                                                                       COMMA_LOCATION_ARGS) ;
   public: CollectionElementPtr_functionCallEffectiveParameterListAST (const GGS_functionCallEffectiveParameterListAST_2E_element & inElement COMMA_LOCATION_ARGS) ;
 
-//--- Virtual method that checks that all attributes are valid
+//--- Virtual proc that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
 
-//--- Virtual method that returns a copy of current object
+//--- Virtual proc that returns a copy of current object
   public: virtual CollectionElementPtr * copy (void) ;
 } ;
 
@@ -9699,7 +9699,7 @@ void GGS_functionCallEffectiveParameterListAST::setter_setMSelectorAtIndex (GGS_
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_lstring GGS_functionCallEffectiveParameterListAST::getter_mSelectorAtIndex (const GGS_uint & inIndex,
                                                                                 Compiler * inCompiler
                                                                                 COMMA_LOCATION_ARGS) const {
@@ -9738,7 +9738,7 @@ void GGS_functionCallEffectiveParameterListAST::setter_setMExpressionAtIndex (GG
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_expressionAST GGS_functionCallEffectiveParameterListAST::getter_mExpressionAtIndex (const GGS_uint & inIndex,
                                                                                         Compiler * inCompiler
                                                                                         COMMA_LOCATION_ARGS) const {
@@ -10029,7 +10029,7 @@ void GGS_staticListPropertyTypeAST::method_extractValueType (GGS_lstring & outAs
   if (mEnum != Enumeration::enum_valueType) {
     outAssociatedValue_type.drop () ;
     String s ;
-    s.appendCString ("method @staticListPropertyTypeAST.valueType invoked with an invalid enum value") ;
+    s.appendCString ("proc @staticListPropertyTypeAST.valueType invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const auto ptr = (GGS_staticListPropertyTypeAST_2E_valueType *) mAssociatedValues.associatedValuesPointer () ;
@@ -10049,7 +10049,7 @@ void GGS_staticListPropertyTypeAST::method_extractFunction (GGS_mode & outAssoci
     outAssociatedValue_formalArgs.drop () ;
     outAssociatedValue_returnType.drop () ;
     String s ;
-    s.appendCString ("method @staticListPropertyTypeAST.function invoked with an invalid enum value") ;
+    s.appendCString ("proc @staticListPropertyTypeAST.function invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const auto ptr = (GGS_staticListPropertyTypeAST_2E_function *) mAssociatedValues.associatedValuesPointer () ;
@@ -10183,10 +10183,10 @@ class CollectionElementPtr_staticListPropertyListAST : public CollectionElementP
                                                           COMMA_LOCATION_ARGS) ;
   public: CollectionElementPtr_staticListPropertyListAST (const GGS_staticListPropertyListAST_2E_element & inElement COMMA_LOCATION_ARGS) ;
 
-//--- Virtual method that checks that all attributes are valid
+//--- Virtual proc that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
 
-//--- Virtual method that returns a copy of current object
+//--- Virtual proc that returns a copy of current object
   public: virtual CollectionElementPtr * copy (void) ;
 } ;
 
@@ -10619,7 +10619,7 @@ void GGS_staticListPropertyListAST::setter_setMPropertyNameAtIndex (GGS_lstring 
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_lstring GGS_staticListPropertyListAST::getter_mPropertyNameAtIndex (const GGS_uint & inIndex,
                                                                         Compiler * inCompiler
                                                                         COMMA_LOCATION_ARGS) const {
@@ -10658,7 +10658,7 @@ void GGS_staticListPropertyListAST::setter_setMPropertyTypeAtIndex (GGS_staticLi
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_staticListPropertyTypeAST GGS_staticListPropertyListAST::getter_mPropertyTypeAtIndex (const GGS_uint & inIndex,
                                                                                           Compiler * inCompiler
                                                                                           COMMA_LOCATION_ARGS) const {
@@ -10790,10 +10790,10 @@ class CollectionElementPtr_staticListValueListAST : public CollectionElementPtr 
                                                        COMMA_LOCATION_ARGS) ;
   public: CollectionElementPtr_staticListValueListAST (const GGS_staticListValueListAST_2E_element & inElement COMMA_LOCATION_ARGS) ;
 
-//--- Virtual method that checks that all attributes are valid
+//--- Virtual proc that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
 
-//--- Virtual method that returns a copy of current object
+//--- Virtual proc that returns a copy of current object
   public: virtual CollectionElementPtr * copy (void) ;
 } ;
 
@@ -11226,7 +11226,7 @@ void GGS_staticListValueListAST::setter_setMElementAtIndex (GGS_extendStaticList
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_extendStaticListElementAST GGS_staticListValueListAST::getter_mElementAtIndex (const GGS_uint & inIndex,
                                                                                    Compiler * inCompiler
                                                                                    COMMA_LOCATION_ARGS) const {
@@ -11265,7 +11265,7 @@ void GGS_staticListValueListAST::setter_setMLocationAtIndex (GGS_location inOper
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_location GGS_staticListValueListAST::getter_mLocationAtIndex (const GGS_uint & inIndex,
                                                                   Compiler * inCompiler
                                                                   COMMA_LOCATION_ARGS) const {
@@ -11519,10 +11519,10 @@ class CollectionElementPtr_extendStaticListElementAST : public CollectionElement
                                                            COMMA_LOCATION_ARGS) ;
   public: CollectionElementPtr_extendStaticListElementAST (const GGS_extendStaticListElementAST_2E_element & inElement COMMA_LOCATION_ARGS) ;
 
-//--- Virtual method that checks that all attributes are valid
+//--- Virtual proc that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
 
-//--- Virtual method that returns a copy of current object
+//--- Virtual proc that returns a copy of current object
   public: virtual CollectionElementPtr * copy (void) ;
 } ;
 
@@ -11955,7 +11955,7 @@ void GGS_extendStaticListElementAST::setter_setMExpressionAtIndex (GGS_extendSta
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_extendStaticListExpressionAST GGS_extendStaticListElementAST::getter_mExpressionAtIndex (const GGS_uint & inIndex,
                                                                                              Compiler * inCompiler
                                                                                              COMMA_LOCATION_ARGS) const {
@@ -11994,7 +11994,7 @@ void GGS_extendStaticListElementAST::setter_setMEndOfExpressionAtIndex (GGS_loca
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_location GGS_extendStaticListElementAST::getter_mEndOfExpressionAtIndex (const GGS_uint & inIndex,
                                                                              Compiler * inCompiler
                                                                              COMMA_LOCATION_ARGS) const {
@@ -12162,7 +12162,7 @@ void GGS_extendStaticListExpressionAST::method_extractExpression (GGS_expression
   if (mEnum != Enumeration::enum_expression) {
     outAssociatedValue_exp.drop () ;
     String s ;
-    s.appendCString ("method @extendStaticListExpressionAST.expression invoked with an invalid enum value") ;
+    s.appendCString ("proc @extendStaticListExpressionAST.expression invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const auto ptr = (GGS_extendStaticListExpressionAST_2E_expression *) mAssociatedValues.associatedValuesPointer () ;
@@ -12180,7 +12180,7 @@ void GGS_extendStaticListExpressionAST::method_extractFunction (GGS_lstring & ou
     outAssociatedValue_functionName.drop () ;
     outAssociatedValue_formalArgs.drop () ;
     String s ;
-    s.appendCString ("method @extendStaticListExpressionAST.function invoked with an invalid enum value") ;
+    s.appendCString ("proc @extendStaticListExpressionAST.function invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const auto ptr = (GGS_extendStaticListExpressionAST_2E_function *) mAssociatedValues.associatedValuesPointer () ;
@@ -13350,7 +13350,7 @@ GGS_decoratedStaticList_2E_weak GGS_decoratedStaticList_2E_weak::extractObject (
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@staticListInitializationMap generateLLVMForStaticLists'
+//Extension proc '@staticListInitializationMap generateLLVMForStaticLists'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -13359,36 +13359,36 @@ void extensionMethod_generateLLVMForStaticLists (const GGS_staticListInitializat
                                                  GGS_string & ioArgument_ioLLVMcode,
                                                  Compiler * inCompiler
                                                  COMMA_UNUSED_LOCATION_ARGS) {
-  GGS_bool var_first_22747 = GGS_bool (true) ;
+  GGS_bool var_first_21995 = GGS_bool (true) ;
   const GGS_staticListInitializationMap temp_0 = inObject ;
-  UpEnumerator_staticListInitializationMap enumerator_22771 (temp_0) ;
-  while (enumerator_22771.hasCurrentObject ()) {
+  UpEnumerator_staticListInitializationMap enumerator_22019 (temp_0) ;
+  while (enumerator_22019.hasCurrentObject ()) {
     GalgasBool test_1 = GalgasBool::boolTrue ;
     if (GalgasBool::boolTrue == test_1) {
-      test_1 = constinArgument_inUsefulStaticArrayMap.getter_hasKey (enumerator_22771.current_lkey (HERE).readProperty_string () COMMA_SOURCE_FILE ("declaration-static-list.galgas3", 539)).boolEnum () ;
+      test_1 = constinArgument_inUsefulStaticArrayMap.getter_hasKey (enumerator_22019.current_lkey (HERE).readProperty_string () COMMA_SOURCE_FILE ("declaration-static-list.galgas3", 539)).boolEnum () ;
       if (GalgasBool::boolTrue == test_1) {
         GalgasBool test_2 = GalgasBool::boolTrue ;
         if (GalgasBool::boolTrue == test_2) {
-          test_2 = var_first_22747.boolEnum () ;
+          test_2 = var_first_21995.boolEnum () ;
           if (GalgasBool::boolTrue == test_2) {
-            var_first_22747 = GGS_bool (false) ;
+            var_first_21995 = GGS_bool (false) ;
             ioArgument_ioLLVMcode.plusAssignOperation(function_llvmTitleComment (GGS_string ("Static Arraies"), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas3", 542)), inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas3", 542)) ;
           }
         }
-        ioArgument_ioLLVMcode.plusAssignOperation(function_llvmNameForGlobalVariable (enumerator_22771.current_lkey (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas3", 544)).add_operation (GGS_string (" = private unnamed_addr constant ["), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas3", 544)), inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas3", 544)) ;
-        ioArgument_ioLLVMcode.plusAssignOperation(enumerator_22771.current_mInitializationList (HERE).getter_count (SOURCE_FILE ("declaration-static-list.galgas3", 545)).getter_string (SOURCE_FILE ("declaration-static-list.galgas3", 545)).add_operation (GGS_string (" x %"), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas3", 545)).add_operation (function_llvmNameForStaticListElementType (enumerator_22771.current_lkey (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas3", 545)).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas3", 545)).add_operation (GGS_string ("] [\n"), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas3", 545)), inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas3", 545)) ;
-        UpEnumerator_stringlist enumerator_23158 (enumerator_22771.current_mInitializationList (HERE)) ;
-        while (enumerator_23158.hasCurrentObject ()) {
-          ioArgument_ioLLVMcode.plusAssignOperation(GGS_string ("  %").add_operation (function_llvmNameForStaticListElementType (enumerator_22771.current_lkey (HERE).readProperty_string ().getter_nowhere (SOURCE_FILE ("declaration-static-list.galgas3", 548)), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas3", 548)).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas3", 548)).add_operation (GGS_string (" "), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas3", 548)).add_operation (enumerator_23158.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas3", 548)), inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas3", 548)) ;
-          enumerator_23158.gotoNextObject () ;
-          if (enumerator_23158.hasCurrentObject ()) {
+        ioArgument_ioLLVMcode.plusAssignOperation(function_llvmNameForGlobalVariable (enumerator_22019.current_lkey (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas3", 544)).add_operation (GGS_string (" = private unnamed_addr constant ["), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas3", 544)), inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas3", 544)) ;
+        ioArgument_ioLLVMcode.plusAssignOperation(enumerator_22019.current_mInitializationList (HERE).getter_count (SOURCE_FILE ("declaration-static-list.galgas3", 545)).getter_string (SOURCE_FILE ("declaration-static-list.galgas3", 545)).add_operation (GGS_string (" x %"), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas3", 545)).add_operation (function_llvmNameForStaticListElementType (enumerator_22019.current_lkey (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas3", 545)).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas3", 545)).add_operation (GGS_string ("] [\n"), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas3", 545)), inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas3", 545)) ;
+        UpEnumerator_stringlist enumerator_22406 (enumerator_22019.current_mInitializationList (HERE)) ;
+        while (enumerator_22406.hasCurrentObject ()) {
+          ioArgument_ioLLVMcode.plusAssignOperation(GGS_string ("  %").add_operation (function_llvmNameForStaticListElementType (enumerator_22019.current_lkey (HERE).readProperty_string ().getter_nowhere (SOURCE_FILE ("declaration-static-list.galgas3", 548)), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas3", 548)).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas3", 548)).add_operation (GGS_string (" "), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas3", 548)).add_operation (enumerator_22406.current_mValue (HERE), inCompiler COMMA_SOURCE_FILE ("declaration-static-list.galgas3", 548)), inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas3", 548)) ;
+          enumerator_22406.gotoNextObject () ;
+          if (enumerator_22406.hasCurrentObject ()) {
             ioArgument_ioLLVMcode.plusAssignOperation(GGS_string (",\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas3", 550)) ;
           }
         }
         ioArgument_ioLLVMcode.plusAssignOperation(GGS_string ("\n]\n\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-static-list.galgas3", 552)) ;
       }
     }
-    enumerator_22771.gotoNextObject () ;
+    enumerator_22019.gotoNextObject () ;
   }
 }
 
@@ -13528,10 +13528,10 @@ class CollectionElementPtr_enumerationConstantList : public CollectionElementPtr
                                                         COMMA_LOCATION_ARGS) ;
   public: CollectionElementPtr_enumerationConstantList (const GGS_enumerationConstantList_2E_element & inElement COMMA_LOCATION_ARGS) ;
 
-//--- Virtual method that checks that all attributes are valid
+//--- Virtual proc that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
 
-//--- Virtual method that returns a copy of current object
+//--- Virtual proc that returns a copy of current object
   public: virtual CollectionElementPtr * copy (void) ;
 } ;
 
@@ -13964,7 +13964,7 @@ void GGS_enumerationConstantList::setter_setMConstantNameAtIndex (GGS_lstring in
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_lstring GGS_enumerationConstantList::getter_mConstantNameAtIndex (const GGS_uint & inIndex,
                                                                       Compiler * inCompiler
                                                                       COMMA_LOCATION_ARGS) const {
@@ -14003,7 +14003,7 @@ void GGS_enumerationConstantList::setter_setMConstantValueAtIndex (GGS_bigint in
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_bigint GGS_enumerationConstantList::getter_mConstantValueAtIndex (const GGS_uint & inIndex,
                                                                       Compiler * inCompiler
                                                                       COMMA_LOCATION_ARGS) const {
@@ -14368,7 +14368,7 @@ GGS_enumToUintRoutineIR_2E_weak GGS_enumToUintRoutineIR_2E_weak::extractObject (
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@instructionListIR appendNOP'
+//Extension proc '@instructionListIR appendNOP'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -15366,7 +15366,7 @@ GGS_decoratedISRDeclaration_2E_weak GGS_decoratedISRDeclaration_2E_weak::extract
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@interruptMapIR interruptCodeGeneration'
+//Extension proc '@interruptMapIR interruptCodeGeneration'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -15380,75 +15380,75 @@ void extensionMethod_interruptCodeGeneration (const GGS_interruptMapIR inObject,
                                               Compiler * inCompiler
                                               COMMA_UNUSED_LOCATION_ARGS) {
   GGS_stringset temp_0 = GGS_stringset::init (inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 163)) ;
-  GGS_stringset var_definedInterrupts_6302 = temp_0 ;
+  GGS_stringset var_definedInterrupts_6290 = temp_0 ;
   const GGS_interruptMapIR temp_1 = inObject ;
-  UpEnumerator_interruptMapIR enumerator_6345 (temp_1) ;
-  while (enumerator_6345.hasCurrentObject ()) {
-    var_definedInterrupts_6302.plusPlusAssignOperation (enumerator_6345.current (HERE).readProperty_lkey ().readProperty_string ()  COMMA_SOURCE_FILE ("declaration-isr.galgas3", 165)) ;
+  UpEnumerator_interruptMapIR enumerator_6333 (temp_1) ;
+  while (enumerator_6333.hasCurrentObject ()) {
+    var_definedInterrupts_6290.plusPlusAssignOperation (enumerator_6333.current (HERE).readProperty_lkey ().readProperty_string ()  COMMA_SOURCE_FILE ("declaration-isr.galgas3", 165)) ;
     GGS_string temp_2 ;
-    const GalgasBool test_3 = GGS_bool (ComparisonKind::equal, enumerator_6345.current (HERE).readProperty_mMode ().objectCompare (GGS_mode::class_func_serviceMode (SOURCE_FILE ("declaration-isr.galgas3", 166)))).boolEnum () ;
+    const GalgasBool test_3 = GGS_bool (ComparisonKind::equal, enumerator_6333.current (HERE).readProperty_mMode ().objectCompare (GGS_mode::class_func_serviceMode (SOURCE_FILE ("declaration-isr.galgas3", 166)))).boolEnum () ;
     if (GalgasBool::boolTrue == test_3) {
-      temp_2 = function_llvmNameForServiceInterrupt (enumerator_6345.current (HERE).readProperty_lkey (), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 167)).readProperty_string () ;
+      temp_2 = function_llvmNameForServiceInterrupt (enumerator_6333.current (HERE).readProperty_lkey (), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 167)).readProperty_string () ;
     }else if (GalgasBool::boolFalse == test_3) {
-      temp_2 = function_llvmNameForSectionInterrupt (enumerator_6345.current (HERE).readProperty_lkey ().readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 169)) ;
+      temp_2 = function_llvmNameForSectionInterrupt (enumerator_6333.current (HERE).readProperty_lkey ().readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 169)) ;
     }
-    GGS_string var_interruptImplementationName_6409 = temp_2 ;
-    ioArgument_ioLLVMcode.plusAssignOperation(function_llvmTitleComment (var_interruptImplementationName_6409, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 171)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas3", 171)) ;
-    ioArgument_ioLLVMcode.plusAssignOperation(GGS_string ("define void @").add_operation (var_interruptImplementationName_6409, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 172)).add_operation (GGS_string (" ()"), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 172)).add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 172)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 172)).add_operation (GGS_string (" {\n"), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 172)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas3", 172)) ;
-    GGS_string var_varName_6816 = function_llvmNameForGlobalVariable (enumerator_6345.current (HERE).readProperty_mDriverName (), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 174)) ;
-    GGS_string var_llvmTypeName_6885 = callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) enumerator_6345.current (HERE).readProperty_mSelfType ().ptr (), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 175)) ;
-    GGS_string var_driverLLVMBaseTypeName_6971 = enumerator_6345.current (HERE).readProperty_mSelfType ().readProperty_llvmBaseTypeName () ;
+    GGS_string var_interruptImplementationName_6397 = temp_2 ;
+    ioArgument_ioLLVMcode.plusAssignOperation(function_llvmTitleComment (var_interruptImplementationName_6397, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 171)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas3", 171)) ;
+    ioArgument_ioLLVMcode.plusAssignOperation(GGS_string ("define void @").add_operation (var_interruptImplementationName_6397, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 172)).add_operation (GGS_string (" ()"), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 172)).add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 172)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 172)).add_operation (GGS_string (" {\n"), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 172)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas3", 172)) ;
+    GGS_string var_varName_6804 = function_llvmNameForGlobalVariable (enumerator_6333.current (HERE).readProperty_mDriverName (), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 174)) ;
+    GGS_string var_llvmTypeName_6873 = callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) enumerator_6333.current (HERE).readProperty_mSelfType ().ptr (), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 175)) ;
+    GGS_string var_driverLLVMBaseTypeName_6959 = enumerator_6333.current (HERE).readProperty_mSelfType ().readProperty_llvmBaseTypeName () ;
     GGS_routineFormalArgumentListAST temp_4 = GGS_routineFormalArgumentListAST::init (inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 178)) ;
-    GGS_lstring var_isrRoutineMangledName_7041 = function_routineMangledNameFromAST (var_driverLLVMBaseTypeName_6971, enumerator_6345.current (HERE).readProperty_lkey (), temp_4, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 178)) ;
-    GGS_string var_isrRoutineLLVMName_7146 = function_llvmNameForFunction (var_isrRoutineMangledName_7041.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 179)) ;
-    ioArgument_ioLLVMcode.plusAssignOperation(GGS_string ("  call void @").add_operation (var_isrRoutineLLVMName_7146, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 180)).add_operation (GGS_string (" ("), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 180)).add_operation (var_llvmTypeName_6885, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 180)).add_operation (GGS_string ("* "), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 180)).add_operation (var_varName_6816, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 180)).add_operation (GGS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 180)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas3", 180)) ;
+    GGS_lstring var_isrRoutineMangledName_7029 = function_routineMangledNameFromAST (var_driverLLVMBaseTypeName_6959, enumerator_6333.current (HERE).readProperty_lkey (), temp_4, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 178)) ;
+    GGS_string var_isrRoutineLLVMName_7134 = function_llvmNameForFunction (var_isrRoutineMangledName_7029.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 179)) ;
+    ioArgument_ioLLVMcode.plusAssignOperation(GGS_string ("  call void @").add_operation (var_isrRoutineLLVMName_7134, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 180)).add_operation (GGS_string (" ("), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 180)).add_operation (var_llvmTypeName_6873, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 180)).add_operation (GGS_string ("* "), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 180)).add_operation (var_varName_6804, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 180)).add_operation (GGS_string (")\n"), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 180)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas3", 180)) ;
     ioArgument_ioLLVMcode.plusAssignOperation(GGS_string ("  ret void\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas3", 182)) ;
     ioArgument_ioLLVMcode.plusAssignOperation(GGS_string ("}\n\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas3", 183)) ;
     GalgasBool test_5 = GalgasBool::boolTrue ;
     if (GalgasBool::boolTrue == test_5) {
-      test_5 = GGS_bool (ComparisonKind::equal, enumerator_6345.current (HERE).readProperty_mMode ().objectCompare (GGS_mode::class_func_serviceMode (SOURCE_FILE ("declaration-isr.galgas3", 185)))).boolEnum () ;
+      test_5 = GGS_bool (ComparisonKind::equal, enumerator_6333.current (HERE).readProperty_mMode ().objectCompare (GGS_mode::class_func_serviceMode (SOURCE_FILE ("declaration-isr.galgas3", 185)))).boolEnum () ;
       if (GalgasBool::boolTrue == test_5) {
-        GGS_string var_interruptHandlerName_7485 = function_llvmNameForServiceInterrupt (enumerator_6345.current (HERE).readProperty_lkey (), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 186)).readProperty_string () ;
-        GGS_string var_isrName_7570 = function_llvmNameForSectionInterrupt (enumerator_6345.current (HERE).readProperty_lkey ().readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 187)) ;
-        GGS_string var_s_31__7642 = constinArgument_inXTRInterruptHandlerString.getter_replacing (GGS_string ("!ISR!"), var_isrName_7570, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 188)) ;
-        GGS_string var_s_32__7718 = var_s_31__7642.getter_replacing (GGS_string ("!HANDLER!"), var_interruptHandlerName_7485, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 189)) ;
-        ioArgument_ioAScode.plusAssignOperation(var_s_32__7718, inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas3", 190)) ;
+        GGS_string var_interruptHandlerName_7473 = function_llvmNameForServiceInterrupt (enumerator_6333.current (HERE).readProperty_lkey (), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 186)).readProperty_string () ;
+        GGS_string var_isrName_7558 = function_llvmNameForSectionInterrupt (enumerator_6333.current (HERE).readProperty_lkey ().readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 187)) ;
+        GGS_string var_s_31__7630 = constinArgument_inXTRInterruptHandlerString.getter_replacing (GGS_string ("!ISR!"), var_isrName_7558, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 188)) ;
+        GGS_string var_s_32__7706 = var_s_31__7630.getter_replacing (GGS_string ("!HANDLER!"), var_interruptHandlerName_7473, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 189)) ;
+        ioArgument_ioAScode.plusAssignOperation(var_s_32__7706, inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas3", 190)) ;
       }
     }
-    enumerator_6345.gotoNextObject () ;
+    enumerator_6333.gotoNextObject () ;
   }
-  UpEnumerator_availableInterruptMap enumerator_7876 (constinArgument_inGenerationContext.readProperty_mAvailableInterruptMap ()) ;
-  while (enumerator_7876.hasCurrentObject ()) {
+  UpEnumerator_availableInterruptMap enumerator_7864 (constinArgument_inGenerationContext.readProperty_mAvailableInterruptMap ()) ;
+  while (enumerator_7864.hasCurrentObject ()) {
     GalgasBool test_6 = GalgasBool::boolTrue ;
     if (GalgasBool::boolTrue == test_6) {
-      test_6 = var_definedInterrupts_6302.getter_hasKey (enumerator_7876.current_lkey (HERE).readProperty_string () COMMA_SOURCE_FILE ("declaration-isr.galgas3", 195)).operator_not (SOURCE_FILE ("declaration-isr.galgas3", 195)).boolEnum () ;
+      test_6 = var_definedInterrupts_6290.getter_hasKey (enumerator_7864.current_lkey (HERE).readProperty_string () COMMA_SOURCE_FILE ("declaration-isr.galgas3", 195)).operator_not (SOURCE_FILE ("declaration-isr.galgas3", 195)).boolEnum () ;
       if (GalgasBool::boolTrue == test_6) {
-        switch (enumerator_7876.current_mInterruptionPanicCode (HERE).enumValue ()) {
+        switch (enumerator_7864.current_mInterruptionPanicCode (HERE).enumValue ()) {
         case GGS_interruptionPanicCode::Enumeration::invalid:
           break ;
         case GGS_interruptionPanicCode::Enumeration::enum_noCode:
           {
-            GGS_string var_s_8047 = constinArgument_inUndefinedInterruptString.getter_replacing (GGS_string ("!ISR!"), function_llvmNameForSectionInterrupt (enumerator_7876.current_lkey (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 198)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 198)) ;
-            ioArgument_ioAScode.plusAssignOperation(var_s_8047, inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas3", 199)) ;
+            GGS_string var_s_8035 = constinArgument_inUndefinedInterruptString.getter_replacing (GGS_string ("!ISR!"), function_llvmNameForSectionInterrupt (enumerator_7864.current_lkey (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 198)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 198)) ;
+            ioArgument_ioAScode.plusAssignOperation(var_s_8035, inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas3", 199)) ;
           }
           break ;
         case GGS_interruptionPanicCode::Enumeration::enum_code:
           {
-            GGS_lbigint extractedValue_8195_value_0 ;
-            enumerator_7876.current_mInterruptionPanicCode (HERE).getAssociatedValuesFor_code (extractedValue_8195_value_0) ;
+            GGS_lbigint extractedValue_8183_value_0 ;
+            enumerator_7864.current_mInterruptionPanicCode (HERE).getAssociatedValuesFor_code (extractedValue_8183_value_0) ;
             GalgasBool test_7 = GalgasBool::boolTrue ;
             if (GalgasBool::boolTrue == test_7) {
               test_7 = GGS_bool (gOption_omnibus_5F_options_noPanicGeneration.readProperty_value ()).boolEnum () ;
               if (GalgasBool::boolTrue == test_7) {
-                GGS_string var_s_8283 = constinArgument_inUndefinedInterruptString.getter_replacing (GGS_string ("!ISR!"), function_llvmNameForSectionInterrupt (enumerator_7876.current_lkey (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 202)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 202)) ;
-                ioArgument_ioAScode.plusAssignOperation(var_s_8283, inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas3", 203)) ;
+                GGS_string var_s_8271 = constinArgument_inUndefinedInterruptString.getter_replacing (GGS_string ("!ISR!"), function_llvmNameForSectionInterrupt (enumerator_7864.current_lkey (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 202)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 202)) ;
+                ioArgument_ioAScode.plusAssignOperation(var_s_8271, inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas3", 203)) ;
               }
             }
             if (GalgasBool::boolFalse == test_7) {
-              GGS_string var_name_8434 = function_llvmNameForSectionInterrupt (enumerator_7876.current_lkey (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 205)) ;
-              ioArgument_ioLLVMcode.plusAssignOperation(function_llvmTitleComment (GGS_string ("Panic code for ").add_operation (var_name_8434, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 206)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 206)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas3", 206)) ;
-              ioArgument_ioLLVMcode.plusAssignOperation(GGS_string ("define void @").add_operation (var_name_8434, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 207)).add_operation (GGS_string (" ()"), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 207)).add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 207)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 207)).add_operation (GGS_string (" noreturn {\n"), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 207)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas3", 207)) ;
-              ioArgument_ioLLVMcode.plusAssignOperation(GGS_string ("  call void @panic.isr (").add_operation (callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) constinArgument_inGenerationContext.readProperty_mPanicCodeLLVMType ().ptr (), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 208)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 208)).add_operation (GGS_string (" "), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 208)).add_operation (extractedValue_8195_value_0.readProperty_bigint ().getter_string (SOURCE_FILE ("declaration-isr.galgas3", 208)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 208)).add_operation (GGS_string (") noreturn \n"), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 208)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas3", 208)) ;
+              GGS_string var_name_8422 = function_llvmNameForSectionInterrupt (enumerator_7864.current_lkey (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 205)) ;
+              ioArgument_ioLLVMcode.plusAssignOperation(function_llvmTitleComment (GGS_string ("Panic code for ").add_operation (var_name_8422, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 206)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 206)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas3", 206)) ;
+              ioArgument_ioLLVMcode.plusAssignOperation(GGS_string ("define void @").add_operation (var_name_8422, inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 207)).add_operation (GGS_string (" ()"), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 207)).add_operation (function_llvmAttributeFunction (inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 207)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 207)).add_operation (GGS_string (" noreturn {\n"), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 207)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas3", 207)) ;
+              ioArgument_ioLLVMcode.plusAssignOperation(GGS_string ("  call void @panic.isr (").add_operation (callExtensionGetter_llvmTypeName ((const cPtr_omnibusType *) constinArgument_inGenerationContext.readProperty_mPanicCodeLLVMType ().ptr (), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 208)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 208)).add_operation (GGS_string (" "), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 208)).add_operation (extractedValue_8183_value_0.readProperty_bigint ().getter_string (SOURCE_FILE ("declaration-isr.galgas3", 208)), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 208)).add_operation (GGS_string (") noreturn \n"), inCompiler COMMA_SOURCE_FILE ("declaration-isr.galgas3", 208)), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas3", 208)) ;
               ioArgument_ioLLVMcode.plusAssignOperation(GGS_string ("  unreachable\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas3", 209)) ;
               ioArgument_ioLLVMcode.plusAssignOperation(GGS_string ("}\n\n"), inCompiler  COMMA_SOURCE_FILE ("declaration-isr.galgas3", 210)) ;
             }
@@ -15457,7 +15457,7 @@ void extensionMethod_interruptCodeGeneration (const GGS_interruptMapIR inObject,
         }
       }
     }
-    enumerator_7876.gotoNextObject () ;
+    enumerator_7864.gotoNextObject () ;
   }
 }
 
@@ -15991,7 +15991,7 @@ void GGS_interruptionPanicCode::method_extractCode (GGS_lbigint & outAssociatedV
   if (mEnum != Enumeration::enum_code) {
     outAssociatedValue_value.drop () ;
     String s ;
-    s.appendCString ("method @interruptionPanicCode.code invoked with an invalid enum value") ;
+    s.appendCString ("proc @interruptionPanicCode.code invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const auto ptr = (GGS_interruptionPanicCode_2E_code *) mAssociatedValues.associatedValuesPointer () ;
@@ -16103,10 +16103,10 @@ class CollectionElementPtr_interruptionConfigurationList : public CollectionElem
                                                               COMMA_LOCATION_ARGS) ;
   public: CollectionElementPtr_interruptionConfigurationList (const GGS_interruptionConfigurationList_2E_element & inElement COMMA_LOCATION_ARGS) ;
 
-//--- Virtual method that checks that all attributes are valid
+//--- Virtual proc that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
 
-//--- Virtual method that returns a copy of current object
+//--- Virtual proc that returns a copy of current object
   public: virtual CollectionElementPtr * copy (void) ;
 } ;
 
@@ -16539,7 +16539,7 @@ void GGS_interruptionConfigurationList::setter_setMInterruptNameAtIndex (GGS_lst
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_lstring GGS_interruptionConfigurationList::getter_mInterruptNameAtIndex (const GGS_uint & inIndex,
                                                                              Compiler * inCompiler
                                                                              COMMA_LOCATION_ARGS) const {
@@ -16578,7 +16578,7 @@ void GGS_interruptionConfigurationList::setter_setMInterruptionPanicCodeAtIndex 
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_interruptionPanicCode GGS_interruptionConfigurationList::getter_mInterruptionPanicCodeAtIndex (const GGS_uint & inIndex,
                                                                                                    Compiler * inCompiler
                                                                                                    COMMA_LOCATION_ARGS) const {

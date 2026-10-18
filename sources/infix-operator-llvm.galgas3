@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @llvmInfixOperatorAST : @abstractDeclarationAST {
@@ -18,7 +18,7 @@ class @llvmInfixOperatorAST : @abstractDeclarationAST {
 
 //·······················································································································
 
-override getter @llvmInfixOperatorAST locationForErrorSignaling -> @location outLocation {
+override func @llvmInfixOperatorAST locationForErrorSignaling -> @location outLocation {
   outLocation = self.mInfixOperatorLocation
 }
 
@@ -109,7 +109,7 @@ proc appendInfixOperatorDeclaration
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  SYNTAX                                                                                                               
+//!  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -151,10 +151,10 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  PRECEDENCE GRAPH                                                                                                     
+//  PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @llvmInfixOperatorAST enterInPrecedenceGraph
+override proc @llvmInfixOperatorAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   let nodeName = @lstring {!self.mInfixOperator.string + "." + self.mLeftTypeName + "." + self.mRightTypeName !self.mInfixOperatorLocation}
@@ -166,15 +166,15 @@ override method @llvmInfixOperatorAST enterInPrecedenceGraph
 
 //·······················································································································
 
-override getter @llvmInfixOperatorAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+override func @llvmInfixOperatorAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = self.mLeftTypeName.string + " " + self.mInfixOperator + " " + self.mRightTypeName
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  ENTER IN CONTEXT                                                                                                     
+//!  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @llvmInfixOperatorAST enterInContext
+override proc @llvmInfixOperatorAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
@@ -195,7 +195,7 @@ override method @llvmInfixOperatorAST enterInContext
     error (self.mInfixOperatorLocation : "one of the two argument types should not be a compile time type")
   end
   [resultType checkIsNotCompileTimeType !self.mResultTypeName.location]
-//--- Enter in infix operator map  
+//--- Enter in infix operator map
   let key = infixOperatorMapKey (!leftType !self.mInfixOperator !self.mInfixOperatorLocation !rightType)
 //--- Generate function
   if not leftType.isCompileTimeType & not rightType.isCompileTimeType then
@@ -261,7 +261,7 @@ class @llvmInfixOperatorUsage : @omnibusInfixOperatorUsage {
 
 //·······················································································································
 
-override method @llvmInfixOperatorUsage generateCode
+override proc @llvmInfixOperatorUsage generateCode
   ?let @objectIR inLeftOperand
   ?let @location inOperatorLocation
   ?let @objectIR inRightOperand
@@ -276,12 +276,12 @@ override method @llvmInfixOperatorUsage generateCode
   [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
     !?leftOperand
-  ]  
+  ]
   var rightOperand = inRightOperand
   [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
     !?rightOperand
-  ]  
+  ]
 //--- New LLVM variable for result
   getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
   var @procCallEffectiveParameterListIR argumentList = @[]
@@ -305,7 +305,7 @@ class @llvmInlineInfixOperatorUsage : @omnibusInfixOperatorUsage {
 
 //·······················································································································
 
-override method @llvmInlineInfixOperatorUsage generateCode
+override proc @llvmInlineInfixOperatorUsage generateCode
   ?let @objectIR inLeftOperand
   ?let @location unused inOperatorLocation
   ?let @objectIR inRightOperand
@@ -320,12 +320,12 @@ override method @llvmInlineInfixOperatorUsage generateCode
   [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
     !?leftOperand
-  ]  
+  ]
   var rightOperand = inRightOperand
   [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
     !?rightOperand
-  ]  
+  ]
 //--- New LLVM variable for result
   getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
   var @assignmentGenerationVarMap varMap = @()
@@ -362,7 +362,7 @@ class @infixOperatorRoutineIR : @abstractRoutineIR {
 
 //·······················································································································
 
-override method @infixOperatorRoutineIR llvmCodeGeneration 
+override proc @infixOperatorRoutineIR llvmCodeGeneration
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds

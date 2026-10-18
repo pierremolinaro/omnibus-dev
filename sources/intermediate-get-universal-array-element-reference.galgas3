@@ -21,7 +21,7 @@ class @getUniversalArrayElementReferenceIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @getUniversalArrayElementReferenceIR llvmInstructionCode
+override proc @getUniversalArrayElementReferenceIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds

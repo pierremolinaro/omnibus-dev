@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  AST                                                                                                                  
+//!  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @addressofExpressionAST : @expressionAST {
@@ -7,7 +7,7 @@ class @addressofExpressionAST : @expressionAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  SYNTAX                                                                                                               
+//!  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -27,30 +27,30 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
+//!  PRECEDENCE GRAPH FROM EXPRESSION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @addressofExpressionAST addDependenceEdgeForStaticExpression
+override proc @addressofExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring unused inConstantName
   ?!@semanticTypePrecedenceGraph unused ioGraph
 {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  NOTE TYPES                                                                                                           
+//!  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @addressofExpressionAST noteExpressionTypesInPrecedenceGraph
+override proc @addressofExpressionAST noteExpressionTypesInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   [self.mLValue noteInstructionTypesInPrecedenceGraph !?ioGraph]
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  SEMANTICS                                                                                                            
+//!  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @addressofExpressionAST analyzeExpression
+override proc @addressofExpressionAST analyzeExpression
   ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?optionalTargetType:let @omnibusType unused inOptionalTargetType
@@ -93,7 +93,7 @@ override method @addressofExpressionAST analyzeExpression
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  CODE GENERATION                                                                                                      
+//!  CODE GENERATION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @addressofInstructionIR : @abstractInstructionIR {
@@ -103,7 +103,7 @@ class @addressofInstructionIR : @abstractInstructionIR {
 
 //·······················································································································
 
-override method @addressofInstructionIR llvmInstructionCode
+override proc @addressofInstructionIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds

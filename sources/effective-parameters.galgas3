@@ -1,5 +1,5 @@
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-//! AST                                                                                                                  
+//! AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @effectiveArgumentPassingModeAST {
@@ -12,8 +12,8 @@ enum @effectiveArgumentPassingModeAST {
 
 //·······················································································································
 
-getter @effectiveArgumentPassingModeAST matchingFormalArgument -> @string {
-  switch self 
+func @effectiveArgumentPassingModeAST matchingFormalArgument -> @string {
+  switch self
   case input (*) : result = "!"
   case inputWithType (* * *) : result = "!"
   case output (* *) : result = "?"
@@ -31,7 +31,7 @@ list @effectiveArgumentListAST {
 
 //·······················································································································
 
-getter @effectiveArgumentListAST mangledName
+func @effectiveArgumentListAST mangledName
     ?receiverTypeName: let @string inReceiverTypeName
     ?functionName: let @lstring inFunctionName
 -> @lstring {
@@ -48,7 +48,7 @@ getter @effectiveArgumentListAST mangledName
 }
 
 //-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-//! SYNTAX                                                                                                               
+//! SYNTAX
 //-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -94,7 +94,7 @@ syntax extension omnibus_syntax {
       or
         <type_definition> !?ioAST ?typeName
       end
-      outEffectiveParameterList += 
+      outEffectiveParameterList +=
         !.inputWithType{!constant:constant !typeName:typeName !name:effectiveParameterName}
         !selector
     end
@@ -107,7 +107,7 @@ syntax extension omnibus_syntax {
 }
 
 //-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-//! SEMANTICS                                                                                                            
+//! SEMANTICS
 //-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc analyzeEffectiveParameters
@@ -128,7 +128,7 @@ proc analyzeEffectiveParameters
 //--- Analyze effective parameters
   var @procEffectiveParameterList parameterList = @[]
   for (* * formal_mTypeProxy *) in inFormalSignature, (effective_mEffectiveParameterKind effective_mSelector) in inEffectiveParameterList do
-    switch effective_mEffectiveParameterKind 
+    switch effective_mEffectiveParameterKind
     case inputWithType (@bool constant @lstring typeName @lstring name) :
       let type = if typeName.string == "" then
         formal_mTypeProxy.type
@@ -171,7 +171,7 @@ proc analyzeEffectiveParameters
       [!?ioInstructionGenerationList appendLoadWhenReference
         !?ioTemporaries
         !?expressionResult
-      ]  
+      ]
       let result = checkAssignmentCompatibility (
         !inContext.mAssignmentOperatorMap
         !source:expressionResult
@@ -210,7 +210,7 @@ proc analyzeEffectiveParameters
         ioEffectiveParameterListIR += !.outputInput !.reference {!type:propertyType !llvmName:property_llvmName}
       case computedProperty (2*) :
         error (inErrorLocation : "a computed property cannot be used as output / input parameter")
-      end    
+      end
     end
   end
 //--- Check parameters
@@ -228,7 +228,7 @@ proc analyzeEffectiveParameters
       if requiredPassingMode != testedPassingMode then
         error (actual_mSelector : "the required selector is '" + requiredPassingMode + "'")
       end
-    end  
+    end
   end
 }
 

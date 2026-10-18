@@ -1,7 +1,7 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//                                                                                                                       
-//    S E M A N T I C    C O N T E X T                                                                      
-//                                                                                                                       
+//
+//    S E M A N T I C    C O N T E X T
+//
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @semanticContext {
@@ -58,7 +58,7 @@ struct @semanticContext {
 
   public var @routineMapForContext mRoutineMap = @()
   public var @guardMapForContext mGuardMap = @()
-  
+
   public var @controlRegisterGroupMap mControlRegisterGroupMap = @()
   public var @globalConstantMap mGlobalConstantMap = @()
   public var @globalSyncInstanceMap mGlobalSyncInstanceMap = @()
@@ -76,11 +76,11 @@ struct @semanticContext {
 //--- Interrupts
   public var @availableInterruptMap mAvailableInterruptMap = @()
 
-//--- Operator maps  
+//--- Operator maps
   public var @infixOperatorMap mInfixOperatorMap = @()
   public var @prefixOperatorMap mPrefixOperatorMap = @()
   public var @assignmentOperatorMap mAssignmentOperatorMap = @()
-  
+
   public var @implicitConversionToBooleanMap mImplicitConversionToBooleanMap = @()
 
 //--- Tasks
@@ -103,7 +103,7 @@ list @declarationDecorationList {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  TYPE CONSTANT MAP                                                                                                                  
+//  TYPE CONSTANT MAP
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @typeConstantMap {
@@ -122,7 +122,7 @@ map @constantMap {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  TYPE CONSTRUCTOR MAP                                                                                                                  
+//  TYPE CONSTRUCTOR MAP
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @typeConstructorMap {
@@ -194,7 +194,7 @@ setter @semanticContext insertGetter ?omnibusTypeName: let @lstring inTypeName
 
 //·······················································································································
 
-getter @semanticContext propertyGetterMap ?let @omnibusType inType-> @propertyGetterMap {
+func @semanticContext propertyGetterMap ?let @omnibusType inType-> @propertyGetterMap {
   if let entry = self.mTypePropertyGetterMap @[inType.omnibusTypeDescriptionName] then
     result = entry.mGetterMap
   else
@@ -291,7 +291,7 @@ setter @semanticContext insertPropertySetter ?let @lstring inTypeName
 
 //·······················································································································
 
-getter @semanticContext propertySetterMap ?let @omnibusType inType-> @propertySetterMap {
+func @semanticContext propertySetterMap ?let @omnibusType inType-> @propertySetterMap {
   if let entry = self.mTypePropertySetterMap @[inType.omnibusTypeDescriptionName] then
     result = entry.mSetterMap
   else
@@ -376,13 +376,13 @@ map @availableInterruptMap {
 
 //·······················································································································
 
-getter @semanticContext booleanType ?let @location unused inErrorLocation -> @omnibusType {
+func @semanticContext booleanType ?let @location unused inErrorLocation -> @omnibusType {
   [self.mTypeMap searchType !lkey:boolTypeName ().nowhere ?type:result]
 }
 
 //·······················································································································
 
-abstract method @abstractDeclarationAST enterInContext
+abstract proc @abstractDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList ioDecoratedRoutineList
@@ -418,7 +418,7 @@ proc buildSemanticContext
       !requiredProc.mFormalArgumentList
     )
     outSemanticContext.mRequiredRoutineSet ++= procedureMangledName.string
-  end 
+  end
   [inAST.mExternFunctionListAST enterExternProcInContext
     !?context: outSemanticContext
   ]

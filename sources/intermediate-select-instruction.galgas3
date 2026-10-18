@@ -19,7 +19,7 @@ class @selectInstructionIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @selectInstructionIR llvmInstructionCode
+override proc @selectInstructionIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds

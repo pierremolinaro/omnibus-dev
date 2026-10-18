@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @whileInstructionAST : @instructionAST {
@@ -10,7 +10,7 @@ class @whileInstructionAST : @instructionAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SYNTAX                                                                                                               
+//  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -35,25 +35,25 @@ syntax extension omnibus_syntax {
       !endOfInstruction
     }
   }
-  
+
   //·····················································································································
 
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  NOTE TYPES                                                                                                           
+//  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @whileInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @whileInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [self.mWhileInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   [self.m_while_Expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SEMANTICS                                                                                                            
+//  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @whileInstructionAST instructionSemanticAnalysis
+override proc @whileInstructionAST instructionSemanticAnalysis
   ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
@@ -82,7 +82,7 @@ override method @whileInstructionAST instructionSemanticAnalysis
   [!?testInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
     !?testValue
-  ]  
+  ]
 //--- Check result is allowed for condition
   [inContext.mImplicitConversionToBooleanMap generateConvertToBooleanCode
     !testValue
@@ -92,7 +92,7 @@ override method @whileInstructionAST instructionSemanticAnalysis
     !?alloca: ioAllocaList
     ?let booleanResult
   ]
-  switch booleanResult 
+  switch booleanResult
   case compileTime (*) :
     error (self.mEndOf_test_expression : "test expression type should not be a compile time expression")
   case llvmVariable (*) :
@@ -123,7 +123,7 @@ override method @whileInstructionAST instructionSemanticAnalysis
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  CODE GENERATION                                                                                                      
+//  CODE GENERATION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @whileInstructionIR : @abstractInstructionIR {
@@ -135,7 +135,7 @@ class @whileInstructionIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @whileInstructionIR llvmInstructionCode
+override proc @whileInstructionIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
@@ -155,7 +155,7 @@ override method @whileInstructionIR llvmInstructionCode
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @whileInstructionIR enterAccessibleEntities
+override proc @whileInstructionIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint ioMaxBranchOfOnInstructions
 {

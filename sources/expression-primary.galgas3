@@ -1,5 +1,5 @@
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-//! AST                                                                                                                  
+//! AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @primaryInExpressionAccessAST {
@@ -23,7 +23,7 @@ class @primaryInExpressionAST : @expressionAST {
 }
 
 //-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-//! SYNTAX                                                                                                               
+//! SYNTAX
 //-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -95,10 +95,10 @@ syntax extension omnibus_syntax {
 }
 
 //-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-//! PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
+//! PRECEDENCE GRAPH FROM EXPRESSION
 //-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @primaryInExpressionAST addDependenceEdgeForStaticExpression
+override proc @primaryInExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
@@ -122,17 +122,17 @@ override method @primaryInExpressionAST addDependenceEdgeForStaticExpression
         case output (expression *) : [expression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
         case outputInput (*) :
         case outputInputSelfVariable (*) :
-        end 
+        end
       end
     end
   end
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//! NOTE TYPES                                                                                                           
+//! NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @primaryInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @primaryInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for (access) in self.mAccessList do
     switch access
     case integerSlice (@lbigint low @lbigint high) :
@@ -153,17 +153,17 @@ override method @primaryInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@
         case output (expression *) : [expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
         case outputInput (*) :
         case outputInputSelfVariable (*) :
-        end 
+        end
       end
     end
   end
 }
 
 //-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-//! SEMANTICS                                                                                                            
+//! SEMANTICS
 //-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @primaryInExpressionAST analyzeExpression
+override proc @primaryInExpressionAST analyzeExpression
   ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?optionalTargetType:let @omnibusType inOptionalTargetType
@@ -180,7 +180,7 @@ override method @primaryInExpressionAST analyzeExpression
   if self.mReceiverName.string != "" then
     if [inRoutineAttributes contains !.isGuard] then
       error (self.mReceiverName : "in guard, only 'self' properties may be accessed" spoil outResult)
-    else 
+    else
       [self analyzePrimaryExpressionNoSelf
         !self: inSelfType
         !routineAttributes:inRoutineAttributes
@@ -216,7 +216,7 @@ override method @primaryInExpressionAST analyzeExpression
 
 //·······················································································································
 
-method @primaryInExpressionAST analyzePrimaryExpressionNoSelf
+proc @primaryInExpressionAST analyzePrimaryExpressionNoSelf
   ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?optionalTargetType:let @omnibusType inOptionalTargetType
@@ -392,7 +392,7 @@ proc procAnalyzeAccesListInExpression
       )
     case funcCall (@lstring methodName @effectiveArgumentListAST arguments @location errorLocation) :
       if [inRoutineAttributes contains !.isGuard] then
-        error (errorLocation : "a method cannot be called in guard" spoil ioResult)
+        error (errorLocation : "a proc cannot be called in guard" spoil ioResult)
       else
         handleFunctionCallInExpression (
           !methodName
@@ -405,7 +405,7 @@ proc procAnalyzeAccesListInExpression
           !?staticEntityMap:ioStaticEntityMap
           !?variableMap:ioUniversalMap
           !?alloca:ioAllocaList
-          !arguments 
+          !arguments
           !?ioInstructionGenerationList
         )
       end
@@ -415,7 +415,7 @@ proc procAnalyzeAccesListInExpression
 
 //·······················································································································
 
-method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
+proc @primaryInExpressionAST analyzePrimaryExpressionWithSelf
   ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?optionalTargetType:let @omnibusType inOptionalTargetType
@@ -471,7 +471,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
       )
     case funcCall (@lstring methodName @effectiveArgumentListAST arguments @location errorLocation) :
       if [inRoutineAttributes contains !.isGuard] then
-        error (errorLocation : "a method cannot be called in guard" spoil outResult)
+        error (errorLocation : "a proc cannot be called in guard" spoil outResult)
       else
         handleFunctionCallInExpression (
           !methodName
@@ -484,7 +484,7 @@ method @primaryInExpressionAST analyzePrimaryExpressionWithSelf
           !?staticEntityMap:ioStaticEntityMap
           !?variableMap:ioUniversalMap
           !?alloca:ioAllocaList
-          !arguments 
+          !arguments
           !?ioInstructionGenerationList
         )
       end
@@ -593,7 +593,7 @@ private proc handleArrayAccessInExpression
       !?staticEntityMap:ioStaticEntityMap
       !?variableMap: ioUniversalMap
       !?alloca: ioAllocaList
-      !inIndexExpression 
+      !inIndexExpression
       !inEndOfIndex
       !inCheckIndexExpression
       !arraySize:arraySize
@@ -608,7 +608,7 @@ private proc handleArrayAccessInExpression
       !index:indexIR
       ?elementPtr:let result
     ]
-    ioResult = result      
+    ioResult = result
   end
 }
 
@@ -625,7 +625,7 @@ private proc handleFunctionCallInExpression
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
   ?!variableMap:@universalValuedObjectMap ioUniversalMap
   ?!alloca:@allocaList ioAllocaList
-  ?let @effectiveArgumentListAST inArguments 
+  ?let @effectiveArgumentListAST inArguments
   ?!@instructionListIR ioInstructionGenerationList
 {
   let receiverType = ioObjectIR.type

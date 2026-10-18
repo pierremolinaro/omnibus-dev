@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  Logical modes                                                                                                                  
+//  Logical modes
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @mode %comparable {
@@ -24,7 +24,7 @@ enum @mode %comparable {
 
 //·······················································································································
 
-getter @mode string -> @string {
+func @mode string -> @string {
   switch self
   case userMode : result = "user"
   case safeUserMode : result = "safe user"
@@ -46,7 +46,7 @@ getter @mode string -> @string {
 
 //·······················································································································
 
-getter @mode isSafe -> @bool {
+func @mode isSafe -> @bool {
   switch self
   case userMode : result = false
   case safeUserMode : result = true
@@ -68,7 +68,7 @@ getter @mode isSafe -> @bool {
 
 //·······················································································································
 
-getter @mode routineLLVMDictionaryForFunction ?let @string inRoutineNameForGeneration -> @routineLLVMNameDict {
+func @mode routineLLVMDictionaryForFunction ?let @string inRoutineNameForGeneration -> @routineLLVMNameDict {
   result = @[@(self, inRoutineNameForGeneration)]
   switch self
   case serviceMode : // If routine is in service mode ...
@@ -132,14 +132,14 @@ getter @mode routineLLVMDictionaryForFunction ?let @string inRoutineNameForGener
 
 //·······················································································································
 
-getter @mode routineLLVMDictionaryForSystemRoutine
+func @mode routineLLVMDictionaryForSystemRoutine
   ?let @string inUserRoutineNameForGeneration
   ?let @string inImplementationRoutineNameForGeneration
   -> @routineLLVMNameDict
 {
   result = @[@(self, inImplementationRoutineNameForGeneration)]
   result += !.userMode !inUserRoutineNameForGeneration
-  switch self 
+  switch self
   case serviceMode :
     result += !.primitiveMode !inImplementationRoutineNameForGeneration
     result += !.guardMode !inImplementationRoutineNameForGeneration

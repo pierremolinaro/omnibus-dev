@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                     
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @compileTimeIntAST : @abstractDeclarationAST {
@@ -7,15 +7,15 @@ class @compileTimeIntAST : @abstractDeclarationAST {
 
 //·······················································································································
 
-override getter @compileTimeIntAST locationForErrorSignaling -> @location outLocation {
+override func @compileTimeIntAST locationForErrorSignaling -> @location outLocation {
   outLocation = .nowhere
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  PRECEDENCE GRAPH                                                                                                     
+//  PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @compileTimeIntAST enterInPrecedenceGraph
+override proc @compileTimeIntAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   let nodeName = ctIntegerTypeName ().nowhere
@@ -25,12 +25,12 @@ override method @compileTimeIntAST enterInPrecedenceGraph
 
 //·······················································································································
 
-override getter @compileTimeIntAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+override func @compileTimeIntAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = ctIntegerTypeName ()
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  ENTER IN CONTEXT                                                                                                     
+//  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func %once ctIntegerTypeName ->@string {
@@ -39,7 +39,7 @@ func %once ctIntegerTypeName ->@string {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @compileTimeIntAST enterInContext
+override proc @compileTimeIntAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
@@ -125,7 +125,7 @@ class @compileTimeIntModuloOperator : @omnibusInfixOperatorUsage {
 
 //·······················································································································
 
-override method @compileTimeIntModuloOperator generateCode
+override proc @compileTimeIntModuloOperator generateCode
   ?let @objectIR inLeftOperand
   ?let @location inOperatorLocation
   ?let @objectIR inRightOperand
@@ -151,7 +151,7 @@ class @compileTimeIntModuloZeroOperator : @omnibusInfixOperatorUsage {
 
 //·······················································································································
 
-override method @compileTimeIntModuloZeroOperator generateCode
+override proc @compileTimeIntModuloZeroOperator generateCode
   ?let @objectIR inLeftOperand
   ?let @location unused inOperatorLocation
   ?let @objectIR inRightOperand
@@ -177,7 +177,7 @@ class @compileTimeIntDivideOperator : @omnibusInfixOperatorUsage {
 
 //·······················································································································
 
-override method @compileTimeIntDivideOperator generateCode
+override proc @compileTimeIntDivideOperator generateCode
   ?let @objectIR inLeftOperand
   ?let @location inOperatorLocation
   ?let @objectIR inRightOperand
@@ -203,7 +203,7 @@ class @compileTimeIntDivideZeroOperator : @omnibusInfixOperatorUsage {
 
 //·······················································································································
 
-override method @compileTimeIntDivideZeroOperator generateCode
+override proc @compileTimeIntDivideZeroOperator generateCode
   ?let @objectIR inLeftOperand
   ?let @location unused inOperatorLocation
   ?let @objectIR inRightOperand
@@ -229,7 +229,7 @@ class @compileTimeIntMultiplyOperator : @omnibusInfixOperatorUsage {
 
 //·······················································································································
 
-override method @compileTimeIntMultiplyOperator generateCode
+override proc @compileTimeIntMultiplyOperator generateCode
   ?let @objectIR inLeftOperand
   ?let @location unused inOperatorLocation
   ?let @objectIR inRightOperand
@@ -251,7 +251,7 @@ class @compileTimeIntSubtractOperator : @omnibusInfixOperatorUsage {
 
 //·······················································································································
 
-override method @compileTimeIntSubtractOperator generateCode
+override proc @compileTimeIntSubtractOperator generateCode
   ?let @objectIR inLeftOperand
   ?let @location unused inOperatorLocation
   ?let @objectIR inRightOperand
@@ -273,7 +273,7 @@ class @compileTimeIntEqualOperator : @omnibusInfixOperatorUsage {
 
 //·······················································································································
 
-override method @compileTimeIntEqualOperator generateCode
+override proc @compileTimeIntEqualOperator generateCode
   ?let @objectIR inLeftOperand
   ?let @location unused inOperatorLocation
   ?let @objectIR inRightOperand
@@ -295,7 +295,7 @@ class @compileTimeIntAddOperator : @omnibusInfixOperatorUsage {
 
 //·······················································································································
 
-override method @compileTimeIntAddOperator generateCode
+override proc @compileTimeIntAddOperator generateCode
   ?let @objectIR inLeftOperand
   ?let @location unused inOperatorLocation
   ?let @objectIR inRightOperand
@@ -317,7 +317,7 @@ class @compileTimeIntBitWiseAndOperator : @omnibusInfixOperatorUsage {
 
 //·······················································································································
 
-override method @compileTimeIntBitWiseAndOperator generateCode
+override proc @compileTimeIntBitWiseAndOperator generateCode
   ?let @objectIR inLeftOperand
   ?let @location unused inOperatorLocation
   ?let @objectIR inRightOperand
@@ -339,7 +339,7 @@ class @compileTimeIntShiftLeftOperator : @omnibusInfixOperatorUsage {
 
 //·······················································································································
 
-override method @compileTimeIntShiftLeftOperator generateCode
+override proc @compileTimeIntShiftLeftOperator generateCode
   ?let @objectIR inLeftOperand
   ?let @location inOperatorLocation
   ?let @objectIR inRightOperand
@@ -365,7 +365,7 @@ class @compileTimeIntShiftRightOperator : @omnibusInfixOperatorUsage {
 
 //·······················································································································
 
-override method @compileTimeIntShiftRightOperator generateCode
+override proc @compileTimeIntShiftRightOperator generateCode
   ?let @objectIR inLeftOperand
   ?let @location inOperatorLocation
   ?let @objectIR inRightOperand
@@ -391,7 +391,7 @@ class @compileTimeIntLessThanOperator : @omnibusInfixOperatorUsage {
 
 //·······················································································································
 
-override method @compileTimeIntLessThanOperator generateCode
+override proc @compileTimeIntLessThanOperator generateCode
   ?let @objectIR inLeftOperand
   ?let @location unused inOperatorLocation
   ?let @objectIR inRightOperand
@@ -413,7 +413,7 @@ class @compileTimeIntLowerOrEqualOperator : @omnibusInfixOperatorUsage {
 
 //·······················································································································
 
-override method @compileTimeIntLowerOrEqualOperator generateCode
+override proc @compileTimeIntLowerOrEqualOperator generateCode
   ?let @objectIR inLeftOperand
   ?let @location unused inOperatorLocation
   ?let @objectIR inRightOperand
@@ -435,7 +435,7 @@ class @compileTimeIntXorOperator : @omnibusInfixOperatorUsage {
 
 //·······················································································································
 
-override method @compileTimeIntXorOperator generateCode
+override proc @compileTimeIntXorOperator generateCode
   ?let @objectIR inLeftOperand
   ?let @location unused inOperatorLocation
   ?let @objectIR inRightOperand
@@ -457,7 +457,7 @@ class @compileTimeIntBitWiseOrOperator : @omnibusInfixOperatorUsage {
 
 //·······················································································································
 
-override method @compileTimeIntBitWiseOrOperator generateCode
+override proc @compileTimeIntBitWiseOrOperator generateCode
   ?let @objectIR inLeftOperand
   ?let @location unused inOperatorLocation
   ?let @objectIR inRightOperand
@@ -481,7 +481,7 @@ class @compileTimeIntMinusOperator : @prefixOperatorUsage {
 
 //·······················································································································
 
-override method @compileTimeIntMinusOperator generateCode
+override proc @compileTimeIntMinusOperator generateCode
   ?let @objectIR inReceiverOperand
   ?let @location unused inOperatorLocation
   ?let @omnibusType inResultType
@@ -502,7 +502,7 @@ class @compileTimeIntComplementOperator : @prefixOperatorUsage {
 
 //·······················································································································
 
-override method @compileTimeIntComplementOperator generateCode
+override proc @compileTimeIntComplementOperator generateCode
   ?let @objectIR inReceiverOperand
   ?let @location unused inOperatorLocation
   ?let @omnibusType inResultType

@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @integerSliceFieldListAST {
@@ -17,7 +17,7 @@ class @integerSliceExpressionAST : @expressionAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SYNTAX                                                                                                               
+//  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -47,10 +47,10 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
+//  PRECEDENCE GRAPH FROM EXPRESSION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @integerSliceExpressionAST addDependenceEdgeForStaticExpression
+override proc @integerSliceExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
@@ -60,10 +60,10 @@ override method @integerSliceExpressionAST addDependenceEdgeForStaticExpression
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  NOTE TYPES                                                                                                           
+//  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @integerSliceExpressionAST noteExpressionTypesInPrecedenceGraph
+override proc @integerSliceExpressionAST noteExpressionTypesInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   [!?ioGraph noteNode !self.mTypeName]
@@ -83,10 +83,10 @@ override method @integerSliceExpressionAST noteExpressionTypesInPrecedenceGraph
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SEMANTICS                                                                                                            
+//  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @integerSliceExpressionAST analyzeExpression
+override proc @integerSliceExpressionAST analyzeExpression
   ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?optionalTargetType:let @omnibusType unused inOptionalTargetType
@@ -155,7 +155,7 @@ override method @integerSliceExpressionAST analyzeExpression
         [!?ioInstructionGenerationList appendLoadWhenReference
           !?ioTemporaries
           !?expressionResult
-        ]  
+        ]
       //--- Check expression type
         switch expressionResult.type.kind
         case staticArrayType (* *) :
@@ -186,7 +186,7 @@ override method @integerSliceExpressionAST analyzeExpression
           //--- Perform left shift
             getNewTempValue (!resultType !?ioTemporaries ?let shiftedResult)
             [!?ioInstructionGenerationList appendShiftLeft !shiftedResult !extendedResult !leftShiftAmount]
-          //---- Accumulate 
+          //---- Accumulate
             operandList += !shiftedResult
           end
         case void :
@@ -222,7 +222,7 @@ override method @integerSliceExpressionAST analyzeExpression
           //--- Perform left shift
             getNewTempValue (!resultType !?ioTemporaries ?let shiftedResult)
             [!?ioInstructionGenerationList appendShiftLeft !shiftedResult !extendedResult !leftShiftAmount]
-          //---- Accumulate 
+          //---- Accumulate
             operandList += !shiftedResult
           end
         end
@@ -241,7 +241,7 @@ override method @integerSliceExpressionAST analyzeExpression
           !outResult
           !.ior
           !operand
-        ] 
+        ]
         outResult = newResult
       end
       end

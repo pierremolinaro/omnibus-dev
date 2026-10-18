@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @syncToolInstanceDeclarationAST : @abstractDeclarationAST {
@@ -9,7 +9,7 @@ class @syncToolInstanceDeclarationAST : @abstractDeclarationAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SYNTAX                                                                                                               
+//  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -39,10 +39,10 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  ENTER IN PRECEDENCE GRAPH                                                                                       
+//  ENTER IN PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @syncToolInstanceDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @syncToolInstanceDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [!?ioGraph addNode !self.mSyncInstanceName !self]
   if self.mSyncTypeName.string != "" then
     [!?ioGraph addEdge !from: self.mSyncInstanceName !to: self.mSyncTypeName]
@@ -52,18 +52,18 @@ override method @syncToolInstanceDeclarationAST enterInPrecedenceGraph ?!@semant
 
 //·······················································································································
 
-override getter @syncToolInstanceDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "sync " + self.mSyncInstanceName 
+override func @syncToolInstanceDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+  outRepresentation = "sync " + self.mSyncInstanceName
 }
 
 //·······················································································································
 
-override getter @syncToolInstanceDeclarationAST locationForErrorSignaling -> @location outLocation {
+override func @syncToolInstanceDeclarationAST locationForErrorSignaling -> @location outLocation {
   outLocation = self.mSyncInstanceName.location
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  ENTER IN CONTEXT                                                                                                     
+//!  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @globalSyncInstanceMap {
@@ -76,7 +76,7 @@ map @globalSyncInstanceMap {
 
 //·······················································································································
 
-override method @syncToolInstanceDeclarationAST enterInContext
+override proc @syncToolInstanceDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
@@ -127,7 +127,7 @@ override method @syncToolInstanceDeclarationAST enterInContext
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SEMANTIC ANALYSIS                                                                                                    
+//  SEMANTIC ANALYSIS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @decoratedSyncInstance : @abstractDecoratedDeclaration {
@@ -137,7 +137,7 @@ class @decoratedSyncInstance : @abstractDecoratedDeclaration {
 
 //·······················································································································
 
-override method @decoratedSyncInstance semanticAnalysis
+override proc @decoratedSyncInstance semanticAnalysis
   ?context:let @semanticContext unused inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
@@ -149,7 +149,7 @@ override method @decoratedSyncInstance semanticAnalysis
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  CODE GENERATION                                                                                                      
+//  CODE GENERATION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @globalSyncInstanceMapIR {
@@ -159,7 +159,7 @@ map @globalSyncInstanceMapIR {
 
 //·······················································································································
 
-method @globalSyncInstanceMapIR.@element generateLLVM ?!@string ioLLVMcode {
+proc @globalSyncInstanceMapIR.@element generateLLVM ?!@string ioLLVMcode {
   ioLLVMcode += llvmNameForGlobalSyncInstance (!self.lkey.string) + " = internal global "
   ioLLVMcode += self.mInitialValue.type.llvmTypeName + " " + self.mInitialValue.llvmValue + "\n"
 }

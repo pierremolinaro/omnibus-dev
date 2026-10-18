@@ -53,7 +53,7 @@ enum @typeKind %equatable {
 
 //·······················································································································
 
-getter @omnibusType llvmTypeName -> @string {
+func @omnibusType llvmTypeName -> @string {
   switch self.kind
   case void :
     result = "void"
@@ -88,7 +88,7 @@ getter @omnibusType llvmTypeName -> @string {
       result = returnTypeProxy.type.llvmTypeName
     end
     result += "("
-    for (mFormalArgumentPassingMode * mTypeProxy *) in signature 
+    for (mFormalArgumentPassingMode * mTypeProxy *) in signature
     do
       result += mTypeProxy.type.llvmTypeName
       switch mFormalArgumentPassingMode
@@ -103,7 +103,7 @@ getter @omnibusType llvmTypeName -> @string {
 
 //·······················································································································
 
-method @omnibusType checkIsCompileTimeType ?let @location inErrorLocation {
+proc @omnibusType checkIsCompileTimeType ?let @location inErrorLocation {
   if not (self.kind.isCompileTimeBool | self.kind.isCompileTimeInteger) then
     error (inErrorLocation : "this type should be a compile time type")
   end
@@ -111,7 +111,7 @@ method @omnibusType checkIsCompileTimeType ?let @location inErrorLocation {
 
 //·······················································································································
 
-method @omnibusType checkIsNotCompileTimeType ?let @location inErrorLocation {
+proc @omnibusType checkIsNotCompileTimeType ?let @location inErrorLocation {
   if self.kind.isCompileTimeBool | self.kind.isCompileTimeInteger then
     error (inErrorLocation : "this type should not be a compile time type")
   end
@@ -119,7 +119,7 @@ method @omnibusType checkIsNotCompileTimeType ?let @location inErrorLocation {
 
 //·······················································································································
 
-getter @omnibusType isCompileTimeType -> @bool {
+func @omnibusType isCompileTimeType -> @bool {
   result = self.kind.isCompileTimeBool | self.kind.isCompileTimeInteger
 }
 
@@ -165,7 +165,7 @@ func %once literalStringType -> @omnibusType {
   result = @{
     !subscript:.literalString
     !attributes:.instanciable | .copyable
-    !omnibusTypeDescriptionName:staticStringTypeName () 
+    !omnibusTypeDescriptionName:staticStringTypeName ()
     !kind:.literalString
     !llvmBaseTypeName:staticStringTypeName ()
   }
@@ -185,19 +185,19 @@ func %once voidType -> @omnibusType {
 
 //·······················································································································
 
-getter @omnibusType instanciable -> @bool {
+func @omnibusType instanciable -> @bool {
   result = [self.attributes contains !.instanciable]
 }
 
 //·······················································································································
 
-getter @omnibusType copyable -> @bool {
+func @omnibusType copyable -> @bool {
   result = [self.attributes contains !.copyable]
 }
 
 //·······················································································································
 
-method @omnibusType generateRetain
+proc @omnibusType generateRetain
   ?let @string inOmnibusName
   ?!@string ioLLVMcode
   ?!@generationAdds ioGenerationAdds
@@ -211,7 +211,7 @@ method @omnibusType generateRetain
     ioLLVMcode += "  call void @arc.retain (" + llvmTypeName + " " + tempLLVMVariable + ")\n"
   else
     let arcAssignmentList = [self arcList !@[]]
-    for (propertyName propertyType indexPath) in arcAssignmentList do 
+    for (propertyName propertyType indexPath) in arcAssignmentList do
       let llvmVarName = "%arc.retain." + ioGenerationAdds.mUniqueIndex
       ioGenerationAdds.mUniqueIndex += 1
       ioLLVMcode += "  " + llvmVarName + " = getelementptr inbounds "
@@ -223,15 +223,15 @@ method @omnibusType generateRetain
       let propertyTypeLLVMName = propertyType.llvmTypeName
       let llvmLoadedVarName = llvmVarName + ".loaded"
       ioLLVMcode += "  " + llvmLoadedVarName + " = load " + propertyTypeLLVMName + ", "
-      ioLLVMcode += propertyTypeLLVMName + "* " + llvmVarName + "\n" 
-      ioLLVMcode += "  call void @arc.retain (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n" 
+      ioLLVMcode += propertyTypeLLVMName + "* " + llvmVarName + "\n"
+      ioLLVMcode += "  call void @arc.retain (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n"
     end
   end
 }
 
 //·······················································································································
 
-method @omnibusType generateInsulate
+proc @omnibusType generateInsulate
   ?let @string inOmnibusName
   ?!@string ioLLVMcode
   ?!@generationAdds ioGenerationAdds
@@ -239,15 +239,15 @@ method @omnibusType generateInsulate
   let llvmTypeName = self.llvmTypeName
   let LLVMVariable =  llvmNameForLocalVariable (!inOmnibusName)
   if self.kind.isDynamicArrayType then
-    let loadedVar = "%temp." + inOmnibusName.assemblerRepresentation + ".loaded." + ioGenerationAdds.mUniqueIndex   
-    let insulatedVar = "%temp." + inOmnibusName.assemblerRepresentation + ".insulated." + ioGenerationAdds.mUniqueIndex   
+    let loadedVar = "%temp." + inOmnibusName.assemblerRepresentation + ".loaded." + ioGenerationAdds.mUniqueIndex
+    let insulatedVar = "%temp." + inOmnibusName.assemblerRepresentation + ".insulated." + ioGenerationAdds.mUniqueIndex
     ioGenerationAdds.mUniqueIndex += 1
     ioLLVMcode += "  " + loadedVar + " = load " + llvmTypeName + ", " + llvmTypeName + "* " + LLVMVariable + "\n"
     ioLLVMcode += "  " + insulatedVar + " = call " + llvmTypeName + " @arc.insulate (" + llvmTypeName + " " + loadedVar + ")\n"
     ioLLVMcode += "  store " + llvmTypeName + " " + insulatedVar + ", " + llvmTypeName + "* " + LLVMVariable + "\n"
   else
     let arcAssignmentList = [self arcList !@[]]
-    for (propertyName propertyType indexPath) in arcAssignmentList do 
+    for (propertyName propertyType indexPath) in arcAssignmentList do
       let llvmVarName = "%arc.release." + ioGenerationAdds.mUniqueIndex
       ioGenerationAdds.mUniqueIndex += 1
       ioLLVMcode += "  " + llvmVarName + " = getelementptr inbounds " + llvmTypeName + ", " + llvmTypeName + "* " + LLVMVariable + ", i32 0"
@@ -256,11 +256,11 @@ method @omnibusType generateInsulate
       end
       ioLLVMcode += " ; " + propertyName + "\n"
       let propertyTypeLLVMName = propertyType.llvmTypeName
-      let loadedVar = llvmVarName + ".loaded." + ioGenerationAdds.mUniqueIndex 
-      let insulatedVar = llvmVarName + ".insulated." + ioGenerationAdds.mUniqueIndex 
+      let loadedVar = llvmVarName + ".loaded." + ioGenerationAdds.mUniqueIndex
+      let insulatedVar = llvmVarName + ".insulated." + ioGenerationAdds.mUniqueIndex
       ioGenerationAdds.mUniqueIndex += 1
-      ioLLVMcode += "  " + loadedVar + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n" 
-      ioLLVMcode += "  " + insulatedVar + " = call " + propertyTypeLLVMName + " @arc.insulate (" + propertyTypeLLVMName + " " + loadedVar + ")\n" 
+      ioLLVMcode += "  " + loadedVar + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n"
+      ioLLVMcode += "  " + insulatedVar + " = call " + propertyTypeLLVMName + " @arc.insulate (" + propertyTypeLLVMName + " " + loadedVar + ")\n"
       ioLLVMcode += "  store " + propertyTypeLLVMName + " " + insulatedVar + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n"
     end
   end
@@ -268,7 +268,7 @@ method @omnibusType generateInsulate
 
 //·······················································································································
 
-method @omnibusType generateRelease
+proc @omnibusType generateRelease
   ?let @string inOmnibusName
   ?!@string ioLLVMcode
   ?!@generationAdds ioGenerationAdds
@@ -276,13 +276,13 @@ method @omnibusType generateRelease
   let llvmTypeName = self.llvmTypeName
   let LLVMVariable =  llvmNameForLocalVariable (!inOmnibusName)
   if self.kind.isDynamicArrayType then
-    let tempLLVMVariable = "%temp." + inOmnibusName.assemblerRepresentation + ".loaded." + ioGenerationAdds.mUniqueIndex   
+    let tempLLVMVariable = "%temp." + inOmnibusName.assemblerRepresentation + ".loaded." + ioGenerationAdds.mUniqueIndex
     ioGenerationAdds.mUniqueIndex += 1
     ioLLVMcode += "  " + tempLLVMVariable + " = load " + llvmTypeName + ", " + llvmTypeName + "* " + LLVMVariable + "\n"
     ioLLVMcode += "  call void @arc.release (" + llvmTypeName + " " + tempLLVMVariable + ") ;\n"
   else
     let arcAssignmentList = [self arcList !@[]]
-    for (propertyName propertyType indexPath) in arcAssignmentList do 
+    for (propertyName propertyType indexPath) in arcAssignmentList do
       let llvmVarName = "%arc.release." + ioGenerationAdds.mUniqueIndex
       ioGenerationAdds.mUniqueIndex += 1
       ioLLVMcode += "  " + llvmVarName + " = getelementptr inbounds " + llvmTypeName + ", " + llvmTypeName + "* " + LLVMVariable + ", i32 0"
@@ -292,15 +292,15 @@ method @omnibusType generateRelease
       ioLLVMcode += " ; " + propertyName + "\n"
       let propertyTypeLLVMName = propertyType.llvmTypeName
       let llvmLoadedVarName = llvmVarName + ".loaded"
-      ioLLVMcode += "  " + llvmLoadedVarName + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n" 
-      ioLLVMcode += "  call void @arc.release (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n" 
+      ioLLVMcode += "  " + llvmLoadedVarName + " = load " + propertyTypeLLVMName + ", " + propertyTypeLLVMName + "* " + llvmVarName + "\n"
+      ioLLVMcode += "  call void @arc.release (" + propertyTypeLLVMName + " " + llvmLoadedVarName + ")\n"
     end
   end
 }
 
 //·······················································································································
 
-getter @omnibusType descriptionForHTMLFile -> @string {
+func @omnibusType descriptionForHTMLFile -> @string {
   switch self.kind
   case void :
     result = "Void"
@@ -346,7 +346,7 @@ list @arcAssignmentList {
 
 //·······················································································································
 
-getter @omnibusType arcList ?let @uintlist inPropertyIndexPath -> @arcAssignmentList {
+func @omnibusType arcList ?let @uintlist inPropertyIndexPath -> @arcAssignmentList {
   result = @[]
   if self.kind.isDynamicArrayType then
     result += !"" !self !inPropertyIndexPath
@@ -361,7 +361,7 @@ getter @omnibusType arcList ?let @uintlist inPropertyIndexPath -> @arcAssignment
 
 //·······················································································································
 
-getter @omnibusType deinitNeeded -> @bool {
+func @omnibusType deinitNeeded -> @bool {
   result = self.kind.isDynamicArrayType
   if self.kind.isStructure then
     [self.kind extractStructure ?propertyList:let @propertyList propertyList]
@@ -372,7 +372,7 @@ getter @omnibusType deinitNeeded -> @bool {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  BUILD TYPE MAP HTML FILE                                                                                                      
+//!  BUILD TYPE MAP HTML FILE
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc buildTypeMapHTMLFile
@@ -438,7 +438,7 @@ func linkForHTMLTypeMap ?let @string inTypeName -> @string {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  LLVM TYPE GENERATION                                                                                                     
+//!  LLVM TYPE GENERATION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc declareLLVMTypes
@@ -464,7 +464,7 @@ abstract class @userLLVMTypeDefinitionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract method @userLLVMTypeDefinitionIR generateLLVMType ?!@string ioLLVMcode
+abstract proc @userLLVMTypeDefinitionIR generateLLVMType ?!@string ioLLVMcode
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 

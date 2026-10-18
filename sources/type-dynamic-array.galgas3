@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @typeDynamicArrayDeclarationAST : @abstractDeclarationAST {
@@ -8,7 +8,7 @@ class @typeDynamicArrayDeclarationAST : @abstractDeclarationAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SYNTAX                                                                                                               
+//  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -29,10 +29,10 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  PRECEDENCE GRAPH                                                                                                     
+//  PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @typeDynamicArrayDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @typeDynamicArrayDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [!?ioGraph addNode !self.mDynamicArrayTypeName !self]
   [!?ioGraph addEdge !from: self.mDynamicArrayTypeName !to: self.mElementTypeName]
   let rootNode = @lstring {!configurationNodeNameForPrecedenceGraph () !self.mDynamicArrayTypeName.location}
@@ -41,21 +41,21 @@ override method @typeDynamicArrayDeclarationAST enterInPrecedenceGraph ?!@semant
 
 //·······················································································································
 
-override getter @typeDynamicArrayDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "anonymous " + self.mDynamicArrayTypeName 
+override func @typeDynamicArrayDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+  outRepresentation = "anonymous " + self.mDynamicArrayTypeName
 }
 
 //·······················································································································
 
-override getter @typeDynamicArrayDeclarationAST locationForErrorSignaling -> @location outLocation {
+override func @typeDynamicArrayDeclarationAST locationForErrorSignaling -> @location outLocation {
   outLocation = self.mDynamicArrayTypeName.location
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  ENTER IN CONTEXT                                                                                                     
+//  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @typeDynamicArrayDeclarationAST enterInContext
+override proc @typeDynamicArrayDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
@@ -203,7 +203,7 @@ class @dynArrayRemoveAllFunctionIR : @abstractRoutineIR {
 
 //·······················································································································
 
-override method @dynArrayRemoveAllFunctionIR llvmCodeGeneration 
+override proc @dynArrayRemoveAllFunctionIR llvmCodeGeneration
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds ioGenerationAdds
@@ -227,7 +227,7 @@ class @dynArrayLengthFunctionIR : @abstractRoutineIR {
 
 //·······················································································································
 
-override method @dynArrayLengthFunctionIR llvmCodeGeneration 
+override proc @dynArrayLengthFunctionIR llvmCodeGeneration
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds ioGenerationAdds
@@ -253,7 +253,7 @@ class @dynArrayAppendFunctionIR : @abstractRoutineIR {
 
 //·······················································································································
 
-override method @dynArrayAppendFunctionIR enterAccessibleEntities
+override proc @dynArrayAppendFunctionIR enterAccessibleEntities
    ?!@stringset ioInvokedRoutineSet
    ?!@uint unused ioMaxBranchOfOnInstructions
 {
@@ -262,7 +262,7 @@ override method @dynArrayAppendFunctionIR enterAccessibleEntities
 
 //·······················································································································
 
-override method @dynArrayAppendFunctionIR llvmCodeGeneration 
+override proc @dynArrayAppendFunctionIR llvmCodeGeneration
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds ioGenerationAdds
@@ -312,7 +312,7 @@ class @dynArrayInsertFunctionIR : @abstractRoutineIR {
 
 //·······················································································································
 
-override method @dynArrayInsertFunctionIR enterAccessibleEntities
+override proc @dynArrayInsertFunctionIR enterAccessibleEntities
    ?!@stringset ioInvokedRoutineSet
    ?!@uint unused ioMaxBranchOfOnInstructions
 {
@@ -322,7 +322,7 @@ override method @dynArrayInsertFunctionIR enterAccessibleEntities
 
 //·······················································································································
 
-override method @dynArrayInsertFunctionIR llvmCodeGeneration 
+override proc @dynArrayInsertFunctionIR llvmCodeGeneration
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds ioGenerationAdds
@@ -366,7 +366,7 @@ class @dynamicArrayTypeAssignUsage : @abstractAssignmentOperatorUsage {
 
 //·······················································································································
 
-override method @dynamicArrayTypeAssignUsage generateCode
+override proc @dynamicArrayTypeAssignUsage generateCode
     ?!@semanticTemporariesStruct ioTemporaries
     ?!@instructionListIR ioInstructionListIR
     ?!@allocaList unused ioAllocaList
@@ -378,11 +378,11 @@ override method @dynamicArrayTypeAssignUsage generateCode
 {
   let targetTypeName = inTargetType.llvmTypeName
   if inTargetIsInitialized then
-    let s = " call void  @" + self.mAssignFunctionName.assemblerRepresentation 
-        + " (" + targetTypeName + "* " + inTargetLLVMName 
+    let s = " call void  @" + self.mAssignFunctionName.assemblerRepresentation
+        + " (" + targetTypeName + "* " + inTargetLLVMName
           + ", " + targetTypeName + "* " + inSourcePossibleReference.llvmName + ")"
     [!?ioInstructionListIR appendInstructionAsFreeString !s !@[self.mAssignFunctionName]]
-  else // Not initialized, perform a store  
+  else // Not initialized, perform a store
     var @objectIR sourceValue = inSourcePossibleReference
     [!?ioInstructionListIR appendLoadWhenReference !?ioTemporaries !?sourceValue]
     let s = "store " + targetTypeName + " " + sourceValue.llvmName + ", " + targetTypeName + "* " + inTargetLLVMName
@@ -397,7 +397,7 @@ class @dynamicArrayTypeAssignGenericFunctionIR : @abstractRoutineIR {
 
 //·······················································································································
 
-override method @dynamicArrayTypeAssignGenericFunctionIR llvmCodeGeneration 
+override proc @dynamicArrayTypeAssignGenericFunctionIR llvmCodeGeneration
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds ioGenerationAdds
@@ -406,11 +406,11 @@ override method @dynamicArrayTypeAssignGenericFunctionIR llvmCodeGeneration
 //--- Assignment
   ioLLVMcode += "define internal void @" + self.mRoutineMangledName.string.assemblerRepresentation
   ioLLVMcode += " (%ptrtype * %inTargetPtr, %ptrtype* %inSourcePtr) nounwind optsize {\n"
-  ioLLVMcode += "  %source = load %ptrtype, %ptrtype* %inSourcePtr\n" 
-  ioLLVMcode += "  call void @arc.retain (%ptrtype %source)\n" 
-  ioLLVMcode += "  %target = load %ptrtype, %ptrtype* %inTargetPtr\n" 
-  ioLLVMcode += "  call void @arc.release (%ptrtype %target)\n" 
-  ioLLVMcode += "  store %ptrtype %source, %ptrtype* %inTargetPtr\n" 
+  ioLLVMcode += "  %source = load %ptrtype, %ptrtype* %inSourcePtr\n"
+  ioLLVMcode += "  call void @arc.retain (%ptrtype %source)\n"
+  ioLLVMcode += "  %target = load %ptrtype, %ptrtype* %inTargetPtr\n"
+  ioLLVMcode += "  call void @arc.release (%ptrtype %target)\n"
+  ioLLVMcode += "  store %ptrtype %source, %ptrtype* %inTargetPtr\n"
   ioLLVMcode += "  ret void\n"
   ioLLVMcode += "}\n\n"
 }

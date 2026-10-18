@@ -1,7 +1,7 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//                                                                                                                       
-//    I N T E R M E D I A T E    C O D E    G E N E R A T I O N                                                          
-//                                                                                                                       
+//
+//    I N T E R M E D I A T E    C O D E    G E N E R A T I O N
+//
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @intermediateCodeStruct {
@@ -70,7 +70,7 @@ abstract class @abstractRoutineIR {
 
 //·······················································································································
 
-method @abstractRoutineIR svcDeclarationGeneration
+proc @abstractRoutineIR svcDeclarationGeneration
   ?!@primitiveAndServiceIRlist unused ioPrimitiveAndServiceList
   ?!@sectionIRlist unused ioSectionList
   ?!@generationAdds unused ioGenerationAdds
@@ -79,14 +79,14 @@ method @abstractRoutineIR svcDeclarationGeneration
 
 //·······················································································································
 
-abstract method @abstractRoutineIR llvmCodeGeneration 
+abstract proc @abstractRoutineIR llvmCodeGeneration
   ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
 
 //·······················································································································
 
-method @abstractRoutineIR enterAccessibleEntities
+proc @abstractRoutineIR enterAccessibleEntities
    ?!@stringset unused ioInvokedRoutineSet
    ?!@uint unused ioMaxBranchOfOnInstructions
 {
@@ -100,7 +100,7 @@ list @routineListIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @routineListIR llvmRoutineGeneration
+proc @routineListIR llvmRoutineGeneration
   ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds

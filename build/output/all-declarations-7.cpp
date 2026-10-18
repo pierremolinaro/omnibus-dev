@@ -3775,10 +3775,10 @@ class CollectionElementPtr_declarationDecorationList : public CollectionElementP
                                                           COMMA_LOCATION_ARGS) ;
   public: CollectionElementPtr_declarationDecorationList (const GGS_declarationDecorationList_2E_element & inElement COMMA_LOCATION_ARGS) ;
 
-//--- Virtual method that checks that all attributes are valid
+//--- Virtual proc that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
 
-//--- Virtual method that returns a copy of current object
+//--- Virtual proc that returns a copy of current object
   public: virtual CollectionElementPtr * copy (void) ;
 } ;
 
@@ -4186,7 +4186,7 @@ void GGS_declarationDecorationList::setter_setMDeclarationAtIndex (GGS_abstractD
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_abstractDecoratedDeclaration GGS_declarationDecorationList::getter_mDeclarationAtIndex (const GGS_uint & inIndex,
                                                                                             Compiler * inCompiler
                                                                                             COMMA_LOCATION_ARGS) const {
@@ -5461,7 +5461,7 @@ void GGS_constructorValue::method_extractSimple (GGS_bigint & outAssociatedValue
   if (mEnum != Enumeration::enum_simple) {
     outAssociatedValue_value.drop () ;
     String s ;
-    s.appendCString ("method @constructorValue.simple invoked with an invalid enum value") ;
+    s.appendCString ("proc @constructorValue.simple invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const auto ptr = (GGS_constructorValue_2E_simple *) mAssociatedValues.associatedValuesPointer () ;
@@ -5477,7 +5477,7 @@ void GGS_constructorValue::method_extractStructure (GGS_sortedOperandIRList & ou
   if (mEnum != Enumeration::enum_structure) {
     outAssociatedValue_sortedOperandList.drop () ;
     String s ;
-    s.appendCString ("method @constructorValue.structure invoked with an invalid enum value") ;
+    s.appendCString ("proc @constructorValue.structure invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const auto ptr = (GGS_constructorValue_2E_structure *) mAssociatedValues.associatedValuesPointer () ;
@@ -5495,7 +5495,7 @@ void GGS_constructorValue::method_extractArrayValue (GGS_omnibusType & outAssoci
     outAssociatedValue_elementType.drop () ;
     outAssociatedValue_size.drop () ;
     String s ;
-    s.appendCString ("method @constructorValue.arrayValue invoked with an invalid enum value") ;
+    s.appendCString ("proc @constructorValue.arrayValue invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const auto ptr = (GGS_constructorValue_2E_arrayValue *) mAssociatedValues.associatedValuesPointer () ;
@@ -5661,10 +5661,10 @@ class CollectionElementPtr_constructorSignature : public CollectionElementPtr {
                                                      COMMA_LOCATION_ARGS) ;
   public: CollectionElementPtr_constructorSignature (const GGS_constructorSignature_2E_element & inElement COMMA_LOCATION_ARGS) ;
 
-//--- Virtual method that checks that all attributes are valid
+//--- Virtual proc that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
 
-//--- Virtual method that returns a copy of current object
+//--- Virtual proc that returns a copy of current object
   public: virtual CollectionElementPtr * copy (void) ;
 } ;
 
@@ -6122,7 +6122,7 @@ void GGS_constructorSignature::setter_setMSelectorAtIndex (GGS_string inOperand,
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_string GGS_constructorSignature::getter_mSelectorAtIndex (const GGS_uint & inIndex,
                                                               Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) const {
@@ -6161,7 +6161,7 @@ void GGS_constructorSignature::setter_setMTypeAtIndex (GGS_omnibusType inOperand
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_omnibusType GGS_constructorSignature::getter_mTypeAtIndex (const GGS_uint & inIndex,
                                                                Compiler * inCompiler
                                                                COMMA_LOCATION_ARGS) const {
@@ -6200,7 +6200,7 @@ void GGS_constructorSignature::setter_setMFieldIndexAtIndex (GGS_uint inOperand,
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_uint GGS_constructorSignature::getter_mFieldIndexAtIndex (const GGS_uint & inIndex,
                                                               Compiler * inCompiler
                                                               COMMA_LOCATION_ARGS) const {
@@ -6970,7 +6970,7 @@ void GGS_propertyGetterKind::method_extractStoredProperty (GGS_omnibusType & out
     outAssociatedValue_type.drop () ;
     outAssociatedValue_index.drop () ;
     String s ;
-    s.appendCString ("method @propertyGetterKind.storedProperty invoked with an invalid enum value") ;
+    s.appendCString ("proc @propertyGetterKind.storedProperty invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const auto ptr = (GGS_propertyGetterKind_2E_storedProperty *) mAssociatedValues.associatedValuesPointer () ;
@@ -6989,7 +6989,7 @@ void GGS_propertyGetterKind::method_extractComputedProperty (GGS_unifiedTypeMapE
     outAssociatedValue_typeProxy.drop () ;
     outAssociatedValue_modeDictionary.drop () ;
     String s ;
-    s.appendCString ("method @propertyGetterKind.computedProperty invoked with an invalid enum value") ;
+    s.appendCString ("proc @propertyGetterKind.computedProperty invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const auto ptr = (GGS_propertyGetterKind_2E_computedProperty *) mAssociatedValues.associatedValuesPointer () ;
@@ -7006,7 +7006,7 @@ void GGS_propertyGetterKind::method_extractConstantProperty (GGS_objectIR & outA
   if (mEnum != Enumeration::enum_constantProperty) {
     outAssociatedValue_value.drop () ;
     String s ;
-    s.appendCString ("method @propertyGetterKind.constantProperty invoked with an invalid enum value") ;
+    s.appendCString ("proc @propertyGetterKind.constantProperty invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const auto ptr = (GGS_propertyGetterKind_2E_constantProperty *) mAssociatedValues.associatedValuesPointer () ;
@@ -7751,7 +7751,7 @@ void GGS_propertySetterKind::method_extractStoredProperty (GGS_omnibusType & out
     outAssociatedValue_type.drop () ;
     outAssociatedValue_index.drop () ;
     String s ;
-    s.appendCString ("method @propertySetterKind.storedProperty invoked with an invalid enum value") ;
+    s.appendCString ("proc @propertySetterKind.storedProperty invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const auto ptr = (GGS_propertySetterKind_2E_storedProperty *) mAssociatedValues.associatedValuesPointer () ;
@@ -7772,7 +7772,7 @@ void GGS_propertySetterKind::method_extractComputedProperty (GGS_unifiedTypeMapE
     outAssociatedValue_getterModeDictionary.drop () ;
     outAssociatedValue_setterModeDictionary.drop () ;
     String s ;
-    s.appendCString ("method @propertySetterKind.computedProperty invoked with an invalid enum value") ;
+    s.appendCString ("proc @propertySetterKind.computedProperty invoked with an invalid enum value") ;
     inCompiler->onTheFlyRunTimeError (s COMMA_THERE) ;
   }else{
     const auto ptr = (GGS_propertySetterKind_2E_computedProperty *) mAssociatedValues.associatedValuesPointer () ;
@@ -8395,10 +8395,10 @@ class CollectionElementPtr_globalStructuredConstantList : public CollectionEleme
                                                              COMMA_LOCATION_ARGS) ;
   public: CollectionElementPtr_globalStructuredConstantList (const GGS_globalStructuredConstantList_2E_element & inElement COMMA_LOCATION_ARGS) ;
 
-//--- Virtual method that checks that all attributes are valid
+//--- Virtual proc that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
 
-//--- Virtual method that returns a copy of current object
+//--- Virtual proc that returns a copy of current object
   public: virtual CollectionElementPtr * copy (void) ;
 } ;
 
@@ -8831,7 +8831,7 @@ void GGS_globalStructuredConstantList::setter_setMTypeAtIndex (GGS_omnibusType i
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_omnibusType GGS_globalStructuredConstantList::getter_mTypeAtIndex (const GGS_uint & inIndex,
                                                                        Compiler * inCompiler
                                                                        COMMA_LOCATION_ARGS) const {
@@ -8870,7 +8870,7 @@ void GGS_globalStructuredConstantList::setter_setMOperandIRListAtIndex (GGS_oper
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_operandIRList GGS_globalStructuredConstantList::getter_mOperandIRListAtIndex (const GGS_uint & inIndex,
                                                                                   Compiler * inCompiler
                                                                                   COMMA_LOCATION_ARGS) const {
@@ -8991,7 +8991,7 @@ GGS_globalStructuredConstantList GGS_globalStructuredConstantList::extractObject
 
 //--------------------------------------------------------------------------------------------------
 //
-//Abstract extension method '@abstractDeclarationAST enterInContext'
+//Abstract extension proc '@abstractDeclarationAST enterInContext'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -9007,7 +9007,7 @@ void callExtensionMethod_enterInContext (cPtr_abstractDeclarationAST * inObject,
                                          Compiler * inCompiler
                                          COMMA_LOCATION_ARGS) {
 //--- Drop output arguments
-//--- Find method
+//--- Find proc
   if (nullptr != inObject) {
     macroValidSharedObject (inObject, cPtr_abstractDeclarationAST) ;
     inObject->method_enterInContext (io_ioContext, io_ioDecoratedDeclarationList, io_ioDecoratedRoutineList, io_ioRoutineListIR, io_ioStaticListValueMap, io_ioStaticEntityMap, io_ioControlRegisterUserAccesMapAST, io_ioUserLLVMTypeDefinitionListIR, inCompiler COMMA_THERE) ;
@@ -9015,7 +9015,7 @@ void callExtensionMethod_enterInContext (cPtr_abstractDeclarationAST * inObject,
 }
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@LValueOperandAST buildExpressionAccessList'
+//Extension proc '@LValueOperandAST buildExpressionAccessList'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -9031,22 +9031,22 @@ void extensionMethod_buildExpressionAccessList (const GGS_LValueOperandAST inObj
     break ;
   case GGS_LValueOperandAST::Enumeration::enum_property:
     {
-      GGS_lstring extractedValue_3121_name_0 ;
-      GGS_LValueOperandAST extractedValue_3144_next_1 ;
-      temp_0.getAssociatedValuesFor_property (extractedValue_3121_name_0, extractedValue_3144_next_1) ;
-      ioArgument_ioExpressionAccessList.addAssignOperation (GGS_primaryInExpressionAccessAST::class_func_property (extractedValue_3121_name_0  COMMA_SOURCE_FILE ("instruction-assignment-operator.galgas3", 93))  COMMA_SOURCE_FILE ("instruction-assignment-operator.galgas3", 93)) ;
-      extensionMethod_buildExpressionAccessList (extractedValue_3144_next_1, ioArgument_ioExpressionAccessList, inCompiler COMMA_SOURCE_FILE ("instruction-assignment-operator.galgas3", 94)) ;
+      GGS_lstring extractedValue_3008_name_0 ;
+      GGS_LValueOperandAST extractedValue_3031_next_1 ;
+      temp_0.getAssociatedValuesFor_property (extractedValue_3008_name_0, extractedValue_3031_next_1) ;
+      ioArgument_ioExpressionAccessList.addAssignOperation (GGS_primaryInExpressionAccessAST::class_func_property (extractedValue_3008_name_0  COMMA_SOURCE_FILE ("instruction-assignment-operator.galgas3", 93))  COMMA_SOURCE_FILE ("instruction-assignment-operator.galgas3", 93)) ;
+      extensionMethod_buildExpressionAccessList (extractedValue_3031_next_1, ioArgument_ioExpressionAccessList, inCompiler COMMA_SOURCE_FILE ("instruction-assignment-operator.galgas3", 94)) ;
     }
     break ;
   case GGS_LValueOperandAST::Enumeration::enum_arrayAccess:
     {
-      GGS_expressionAST extractedValue_3303_index_0 ;
-      GGS_location extractedValue_3319_endOfIndex_1 ;
-      GGS_bool extractedValue_3336_checkIndexExpression_2 ;
-      GGS_LValueOperandAST extractedValue_3375_next_3 ;
-      temp_0.getAssociatedValuesFor_arrayAccess (extractedValue_3303_index_0, extractedValue_3319_endOfIndex_1, extractedValue_3336_checkIndexExpression_2, extractedValue_3375_next_3) ;
-      ioArgument_ioExpressionAccessList.addAssignOperation (GGS_primaryInExpressionAccessAST::class_func_arrayAccess (extractedValue_3303_index_0, extractedValue_3319_endOfIndex_1, extractedValue_3336_checkIndexExpression_2  COMMA_SOURCE_FILE ("instruction-assignment-operator.galgas3", 96))  COMMA_SOURCE_FILE ("instruction-assignment-operator.galgas3", 96)) ;
-      extensionMethod_buildExpressionAccessList (extractedValue_3375_next_3, ioArgument_ioExpressionAccessList, inCompiler COMMA_SOURCE_FILE ("instruction-assignment-operator.galgas3", 97)) ;
+      GGS_expressionAST extractedValue_3190_index_0 ;
+      GGS_location extractedValue_3206_endOfIndex_1 ;
+      GGS_bool extractedValue_3223_checkIndexExpression_2 ;
+      GGS_LValueOperandAST extractedValue_3262_next_3 ;
+      temp_0.getAssociatedValuesFor_arrayAccess (extractedValue_3190_index_0, extractedValue_3206_endOfIndex_1, extractedValue_3223_checkIndexExpression_2, extractedValue_3262_next_3) ;
+      ioArgument_ioExpressionAccessList.addAssignOperation (GGS_primaryInExpressionAccessAST::class_func_arrayAccess (extractedValue_3190_index_0, extractedValue_3206_endOfIndex_1, extractedValue_3223_checkIndexExpression_2  COMMA_SOURCE_FILE ("instruction-assignment-operator.galgas3", 96))  COMMA_SOURCE_FILE ("instruction-assignment-operator.galgas3", 96)) ;
+      extensionMethod_buildExpressionAccessList (extractedValue_3262_next_3, ioArgument_ioExpressionAccessList, inCompiler COMMA_SOURCE_FILE ("instruction-assignment-operator.galgas3", 97)) ;
     }
     break ;
   }
@@ -9055,7 +9055,7 @@ void extensionMethod_buildExpressionAccessList (const GGS_LValueOperandAST inObj
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@instructionListIR appendSourceLineComment'
+//Extension proc '@instructionListIR appendSourceLineComment'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -9973,7 +9973,7 @@ GGS_assignmentInstructionAST_2E_weak GGS_assignmentInstructionAST_2E_weak::extra
 
 //--------------------------------------------------------------------------------------------------
 //
-//Abstract extension method '@abstractDecoratedDeclaration semanticAnalysis'
+//Abstract extension proc '@abstractDecoratedDeclaration semanticAnalysis'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -9984,7 +9984,7 @@ void callExtensionMethod_semanticAnalysis (cPtr_abstractDecoratedDeclaration * i
                                            Compiler * inCompiler
                                            COMMA_LOCATION_ARGS) {
 //--- Drop output arguments
-//--- Find method
+//--- Find proc
   if (nullptr != inObject) {
     macroValidSharedObject (inObject, cPtr_abstractDecoratedDeclaration) ;
     inObject->method_semanticAnalysis (constin_inContext, io_ioTemporaries, io_ioIntermediateCodeStruct, inCompiler COMMA_THERE) ;
@@ -10133,7 +10133,7 @@ GGS_semanticTemporariesStruct GGS_semanticTemporariesStruct::extractObject (cons
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@semanticTemporariesStruct newTempLLVMVar'
+//Extension proc '@semanticTemporariesStruct newTempLLVMVar'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -10150,7 +10150,7 @@ void extensionSetter_newTempLLVMVar (GGS_semanticTemporariesStruct & ioObject,
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@instructionListIR appendEnterRegisterAddress'
+//Extension proc '@instructionListIR appendEnterRegisterAddress'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -11349,7 +11349,7 @@ GGS_panicAST_2E_weak GGS_panicAST_2E_weak::extractObject (const GGS_object & inO
 }
 
 //--------------------------------------------------------------------------------------------------
-//Extension method '@panicAST noteTypesInPrecedenceGraph'
+//Extension proc '@panicAST noteTypesInPrecedenceGraph'
 //--------------------------------------------------------------------------------------------------
 
 void cPtr_panicAST::method_noteTypesInPrecedenceGraph (GGS_semanticTypePrecedenceGraph & ioArgument_ioGraph,
@@ -12322,7 +12322,7 @@ GGS_instructionNOP_2E_weak GGS_instructionNOP_2E_weak::extractObject (const GGS_
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@instructionListIR enterAccessibleEntities'
+//Extension proc '@instructionListIR enterAccessibleEntities'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -12332,10 +12332,10 @@ void extensionMethod_enterAccessibleEntities (const GGS_instructionListIR inObje
                                               Compiler * inCompiler
                                               COMMA_UNUSED_LOCATION_ARGS) {
   const GGS_instructionListIR temp_0 = inObject ;
-  UpEnumerator_instructionListIR enumerator_720 (temp_0) ;
-  while (enumerator_720.hasCurrentObject ()) {
-    callExtensionMethod_enterAccessibleEntities ((cPtr_abstractInstructionIR *) enumerator_720.current_mInstructionGeneration (HERE).ptr (), ioArgument_ioInvokedRoutineSet, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas3", 10)) ;
-    enumerator_720.gotoNextObject () ;
+  UpEnumerator_instructionListIR enumerator_399 (temp_0) ;
+  while (enumerator_399.hasCurrentObject ()) {
+    callExtensionMethod_enterAccessibleEntities ((cPtr_abstractInstructionIR *) enumerator_399.current_mInstructionGeneration (HERE).ptr (), ioArgument_ioInvokedRoutineSet, ioArgument_ioMaxBranchOfOnInstructions, inCompiler COMMA_SOURCE_FILE ("dead-code-elimination.galgas3", 10)) ;
+    enumerator_399.gotoNextObject () ;
   }
 }
 
@@ -12353,10 +12353,10 @@ class CollectionElementPtr_routineAccessibilityIR : public CollectionElementPtr 
                                                        COMMA_LOCATION_ARGS) ;
   public: CollectionElementPtr_routineAccessibilityIR (const GGS_routineAccessibilityIR_2E_element & inElement COMMA_LOCATION_ARGS) ;
 
-//--- Virtual method that checks that all attributes are valid
+//--- Virtual proc that checks that all attributes are valid
   public: virtual bool isValid (void) const ;
 
-//--- Virtual method that returns a copy of current object
+//--- Virtual proc that returns a copy of current object
   public: virtual CollectionElementPtr * copy (void) ;
 } ;
 
@@ -12789,7 +12789,7 @@ void GGS_routineAccessibilityIR::setter_setMRoutineAtIndex (GGS_abstractRoutineI
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_abstractRoutineIR GGS_routineAccessibilityIR::getter_mRoutineAtIndex (const GGS_uint & inIndex,
                                                                           Compiler * inCompiler
                                                                           COMMA_LOCATION_ARGS) const {
@@ -12828,7 +12828,7 @@ void GGS_routineAccessibilityIR::setter_setMAccessibleRoutineSetAtIndex (GGS_str
   }
 }
 //--------------------------------------------------------------------------------------------------
-  
+
 GGS_stringset GGS_routineAccessibilityIR::getter_mAccessibleRoutineSetAtIndex (const GGS_uint & inIndex,
                                                                                Compiler * inCompiler
                                                                                COMMA_LOCATION_ARGS) const {
@@ -13350,7 +13350,7 @@ GGS_routineLLVMNameDict GGS_routineLLVMNameDict::extractObject (const GGS_object
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@routineMapForContext addFunctionWithoutArgument'
+//Extension proc '@routineMapForContext addFunctionWithoutArgument'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -13365,20 +13365,20 @@ void extensionSetter_addFunctionWithoutArgument (GGS_routineMapForContext & ioOb
                                                  COMMA_UNUSED_LOCATION_ARGS) {
   outArgument_outRoutineLLVMName.drop () ; // Release 'out' argument
   GGS_routineFormalArgumentListAST temp_0 = GGS_routineFormalArgumentListAST::init (inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 299)) ;
-  GGS_routineFormalArgumentListAST var_formalArguments_10869 = temp_0 ;
-  GGS_lstring var_routineMangledName_10897 = GGS_lstring::init_21__21_ (constinArgument_inOmnibusTypeDescriptionName.add_operation (GGS_string ("."), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 301)).add_operation (constinArgument_inMethodName.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 301)).add_operation (extensionGetter_routineSignature (var_formalArguments_10869, constinArgument_inMethodName.readProperty_location (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 301)).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 301)), constinArgument_inMethodName.readProperty_location (), inCompiler COMMA_HERE) ;
-  outArgument_outRoutineLLVMName = function_routineMangledNameFromAST (constinArgument_inLLVMBaseTypeName, constinArgument_inMethodName, var_formalArguments_10869, inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 304)) ;
-  GGS_routineLLVMNameDict var_modeDictionary_11172 = extensionGetter_routineLLVMDictionaryForFunction (constinArgument_inMode, outArgument_outRoutineLLVMName.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 305)) ;
+  GGS_routineFormalArgumentListAST var_formalArguments_10444 = temp_0 ;
+  GGS_lstring var_routineMangledName_10472 = GGS_lstring::init_21__21_ (constinArgument_inOmnibusTypeDescriptionName.add_operation (GGS_string ("."), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 301)).add_operation (constinArgument_inMethodName.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 301)).add_operation (extensionGetter_routineSignature (var_formalArguments_10444, constinArgument_inMethodName.readProperty_location (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 301)).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 301)), constinArgument_inMethodName.readProperty_location (), inCompiler COMMA_HERE) ;
+  outArgument_outRoutineLLVMName = function_routineMangledNameFromAST (constinArgument_inLLVMBaseTypeName, constinArgument_inMethodName, var_formalArguments_10444, inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 304)) ;
+  GGS_routineLLVMNameDict var_modeDictionary_10747 = extensionGetter_routineLLVMDictionaryForFunction (constinArgument_inMode, outArgument_outRoutineLLVMName.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 305)) ;
   {
   GGS_routineTypedSignature temp_1 = GGS_routineTypedSignature::init (inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 309)) ;
-  ioObject.setter_insertKey (var_routineMangledName_10897, GGS_bool (true), temp_1, constinArgument_inResultType, var_modeDictionary_11172, GGS_bool (false), constinArgument_inMode, inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 306)) ;
+  ioObject.setter_insertKey (var_routineMangledName_10472, GGS_bool (true), temp_1, constinArgument_inResultType, var_modeDictionary_10747, GGS_bool (false), constinArgument_inMode, inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 306)) ;
   }
 }
 
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@routineMapForContext addFunctionWithInputArgument'
+//Extension proc '@routineMapForContext addFunctionWithInputArgument'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -13398,23 +13398,23 @@ void extensionSetter_addFunctionWithInputArgument (GGS_routineMapForContext & io
   outArgument_outRoutineLLVMName.drop () ; // Release 'out' argument
   GGS_routineFormalArgumentListAST temp_0 = GGS_routineFormalArgumentListAST::init (inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 337)) ;
   temp_0.plusPlusAssignOperation (GGS_routineFormalArgumentListAST_2E_element::init_21__21__21__21_ (GGS_procFormalArgumentPassingMode::class_func_input (SOURCE_FILE ("declaration-function.galgas3", 333)), constinArgument_inInputSelector.getter_nowhere (SOURCE_FILE ("declaration-function.galgas3", 334)), extensionGetter_key (constinArgument_inInputArgumentTypeProxy, inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 335)).getter_nowhere (SOURCE_FILE ("declaration-function.galgas3", 335)), constinArgument_inInputArgumentName.getter_nowhere (SOURCE_FILE ("declaration-function.galgas3", 336)), inCompiler COMMA_HERE)  COMMA_SOURCE_FILE ("declaration-function.galgas3", 337)) ;
-  GGS_routineFormalArgumentListAST var_argumentList_12085 = temp_0 ;
-  GGS_routineTypedSignature var_signature_12338 ;
+  GGS_routineFormalArgumentListAST var_argumentList_11660 = temp_0 ;
+  GGS_routineTypedSignature var_signature_11913 ;
   {
-  routine_routineTypedSignature_26__3F__21_ (ioArgument_ioContext.mProperty_mTypeMap, var_argumentList_12085, var_signature_12338, inCompiler  COMMA_SOURCE_FILE ("declaration-function.galgas3", 339)) ;
+  routine_routineTypedSignature_26__3F__21_ (ioArgument_ioContext.mProperty_mTypeMap, var_argumentList_11660, var_signature_11913, inCompiler  COMMA_SOURCE_FILE ("declaration-function.galgas3", 339)) ;
   }
-  GGS_lstring var_routineMangledName_12355 = GGS_lstring::init_21__21_ (constinArgument_inOmnibusTypeDescriptionName.add_operation (GGS_string ("."), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 341)).add_operation (constinArgument_inMethodName.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 341)).add_operation (extensionGetter_routineSignature (var_argumentList_12085, constinArgument_inMethodName.readProperty_location (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 341)).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 341)), constinArgument_inMethodName.readProperty_location (), inCompiler COMMA_HERE) ;
-  outArgument_outRoutineLLVMName = function_routineMangledNameFromAST (constinArgument_inLLVMBaseTypeName, constinArgument_inMethodName, var_argumentList_12085, inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 344)) ;
-  GGS_routineLLVMNameDict var_modeDictionary_12624 = extensionGetter_routineLLVMDictionaryForFunction (constinArgument_inMode, outArgument_outRoutineLLVMName.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 345)) ;
+  GGS_lstring var_routineMangledName_11930 = GGS_lstring::init_21__21_ (constinArgument_inOmnibusTypeDescriptionName.add_operation (GGS_string ("."), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 341)).add_operation (constinArgument_inMethodName.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 341)).add_operation (extensionGetter_routineSignature (var_argumentList_11660, constinArgument_inMethodName.readProperty_location (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 341)).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 341)), constinArgument_inMethodName.readProperty_location (), inCompiler COMMA_HERE) ;
+  outArgument_outRoutineLLVMName = function_routineMangledNameFromAST (constinArgument_inLLVMBaseTypeName, constinArgument_inMethodName, var_argumentList_11660, inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 344)) ;
+  GGS_routineLLVMNameDict var_modeDictionary_12199 = extensionGetter_routineLLVMDictionaryForFunction (constinArgument_inMode, outArgument_outRoutineLLVMName.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 345)) ;
   {
-  ioObject.setter_insertKey (var_routineMangledName_12355, GGS_bool (true), var_signature_12338, constinArgument_inResultType, var_modeDictionary_12624, GGS_bool (false), constinArgument_inMode, inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 346)) ;
+  ioObject.setter_insertKey (var_routineMangledName_11930, GGS_bool (true), var_signature_11913, constinArgument_inResultType, var_modeDictionary_12199, GGS_bool (false), constinArgument_inMode, inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 346)) ;
   }
 }
 
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@routineMapForContext addFunctionWithTwoInputArguments'
+//Extension proc '@routineMapForContext addFunctionWithTwoInputArguments'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -13438,23 +13438,23 @@ void extensionSetter_addFunctionWithTwoInputArguments (GGS_routineMapForContext 
   GGS_routineFormalArgumentListAST temp_0 = GGS_routineFormalArgumentListAST::init (inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 386)) ;
   temp_0.plusPlusAssignOperation (GGS_routineFormalArgumentListAST_2E_element::init_21__21__21__21_ (GGS_procFormalArgumentPassingMode::class_func_input (SOURCE_FILE ("declaration-function.galgas3", 376)), constinArgument_inInputSelector_31_.getter_nowhere (SOURCE_FILE ("declaration-function.galgas3", 377)), extensionGetter_key (constinArgument_inInputArgumentTypeProxy_31_, inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 378)).getter_nowhere (SOURCE_FILE ("declaration-function.galgas3", 378)), constinArgument_inInputArgumentName_31_.getter_nowhere (SOURCE_FILE ("declaration-function.galgas3", 379)), inCompiler COMMA_HERE)  COMMA_SOURCE_FILE ("declaration-function.galgas3", 380)) ;
   temp_0.plusPlusAssignOperation (GGS_routineFormalArgumentListAST_2E_element::init_21__21__21__21_ (GGS_procFormalArgumentPassingMode::class_func_input (SOURCE_FILE ("declaration-function.galgas3", 382)), constinArgument_inInputSelector_32_.getter_nowhere (SOURCE_FILE ("declaration-function.galgas3", 383)), extensionGetter_key (constinArgument_inInputArgumentTypeProxy_32_, inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 384)).getter_nowhere (SOURCE_FILE ("declaration-function.galgas3", 384)), constinArgument_inInputArgumentName_32_.getter_nowhere (SOURCE_FILE ("declaration-function.galgas3", 385)), inCompiler COMMA_HERE)  COMMA_SOURCE_FILE ("declaration-function.galgas3", 386)) ;
-  GGS_routineFormalArgumentListAST var_argumentList_13742 = temp_0 ;
-  outArgument_outRoutineLLVMName = function_routineMangledNameFromAST (constinArgument_inLLVMBaseTypeName, GGS_lstring::init_21__21_ (constinArgument_inMethodName.readProperty_string (), GGS_location::class_func_nowhere (SOURCE_FILE ("declaration-function.galgas3", 390)), inCompiler COMMA_HERE), var_argumentList_13742, inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 388)) ;
-  GGS_routineTypedSignature var_signature_14268 ;
+  GGS_routineFormalArgumentListAST var_argumentList_13317 = temp_0 ;
+  outArgument_outRoutineLLVMName = function_routineMangledNameFromAST (constinArgument_inLLVMBaseTypeName, GGS_lstring::init_21__21_ (constinArgument_inMethodName.readProperty_string (), GGS_location::class_func_nowhere (SOURCE_FILE ("declaration-function.galgas3", 390)), inCompiler COMMA_HERE), var_argumentList_13317, inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 388)) ;
+  GGS_routineTypedSignature var_signature_13843 ;
   {
-  routine_routineTypedSignature_26__3F__21_ (ioArgument_ioContext.mProperty_mTypeMap, var_argumentList_13742, var_signature_14268, inCompiler  COMMA_SOURCE_FILE ("declaration-function.galgas3", 393)) ;
+  routine_routineTypedSignature_26__3F__21_ (ioArgument_ioContext.mProperty_mTypeMap, var_argumentList_13317, var_signature_13843, inCompiler  COMMA_SOURCE_FILE ("declaration-function.galgas3", 393)) ;
   }
-  GGS_lstring var_routineMangledName_14285 = GGS_lstring::init_21__21_ (constinArgument_inOmnibusTypeDescriptionName.add_operation (GGS_string ("."), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 395)).add_operation (constinArgument_inMethodName.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 395)).add_operation (extensionGetter_routineSignature (var_argumentList_13742, constinArgument_inMethodName.readProperty_location (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 395)).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 395)), constinArgument_inMethodName.readProperty_location (), inCompiler COMMA_HERE) ;
-  GGS_routineLLVMNameDict var_modeDictionary_14455 = extensionGetter_routineLLVMDictionaryForFunction (constinArgument_inMode, outArgument_outRoutineLLVMName.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 398)) ;
+  GGS_lstring var_routineMangledName_13860 = GGS_lstring::init_21__21_ (constinArgument_inOmnibusTypeDescriptionName.add_operation (GGS_string ("."), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 395)).add_operation (constinArgument_inMethodName.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 395)).add_operation (extensionGetter_routineSignature (var_argumentList_13317, constinArgument_inMethodName.readProperty_location (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 395)).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 395)), constinArgument_inMethodName.readProperty_location (), inCompiler COMMA_HERE) ;
+  GGS_routineLLVMNameDict var_modeDictionary_14030 = extensionGetter_routineLLVMDictionaryForFunction (constinArgument_inMode, outArgument_outRoutineLLVMName.readProperty_string (), inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 398)) ;
   {
-  ioObject.setter_insertKey (var_routineMangledName_14285, GGS_bool (true), var_signature_14268, constinArgument_inResultType, var_modeDictionary_14455, GGS_bool (false), constinArgument_inMode, inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 399)) ;
+  ioObject.setter_insertKey (var_routineMangledName_13860, GGS_bool (true), var_signature_13843, constinArgument_inResultType, var_modeDictionary_14030, GGS_bool (false), constinArgument_inMode, inCompiler COMMA_SOURCE_FILE ("declaration-function.galgas3", 399)) ;
   }
 }
 
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@instructionListIR referenceFromPossibleValue'
+//Extension proc '@instructionListIR referenceFromPossibleValue'
 //
 //--------------------------------------------------------------------------------------------------
 

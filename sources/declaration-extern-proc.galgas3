@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @externFunctionDeclarationListAST {
@@ -13,7 +13,7 @@ list @externFunctionDeclarationListAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SYNTAX                                                                                                               
+//  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -52,10 +52,10 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  PRECEDENCE GRAPH                                                                                                     
+//  PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @externFunctionDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+proc @externFunctionDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for (* * * mProcFormalArgumentList mReturnTypeName * *) in self do
     for (* * formalArgumentTypeName *) in mProcFormalArgumentList do
       [!?ioGraph noteNode !formalArgumentTypeName]
@@ -67,10 +67,10 @@ method @externFunctionDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticT
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//   ENTER IN CONTEXT                                                                                                    
+//   ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @externFunctionDeclarationListAST enterExternProcInContext
+proc @externFunctionDeclarationListAST enterExternProcInContext
   ?!context:@semanticContext ioContext
 {
   for externProcedure in self do
@@ -80,7 +80,7 @@ method @externFunctionDeclarationListAST enterExternProcInContext
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @externFunctionDeclarationListAST.@element enterExternProcInContext
+proc @externFunctionDeclarationListAST.@element enterExternProcInContext
   ?!context:@semanticContext ioContext
 {
 //--- Signature
@@ -102,10 +102,10 @@ method @externFunctionDeclarationListAST.@element enterExternProcInContext
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SEMANTIC ANALYSIS                                                                                                    
+//  SEMANTIC ANALYSIS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @externFunctionDeclarationListAST externProcedureSemanticAnalysis
+proc @externFunctionDeclarationListAST externProcedureSemanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
@@ -121,7 +121,7 @@ method @externFunctionDeclarationListAST externProcedureSemanticAnalysis
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @externFunctionDeclarationListAST.@element externProcedureSemanticAnalysis
+proc @externFunctionDeclarationListAST.@element externProcedureSemanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
@@ -146,7 +146,7 @@ method @externFunctionDeclarationListAST.@element externProcedureSemanticAnalysi
     !self.mRoutineNameForGeneration
     !formalArguments
     !returnType
-  ]  
+  ]
   ioIntermediateCodeStruct.mRoutineListIR += !@externRoutineIR {
     !self.mRoutineNameForGeneration
     !isRequired:false // Is not root
@@ -157,7 +157,7 @@ method @externFunctionDeclarationListAST.@element externProcedureSemanticAnalysi
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  CODE GENERATION                                                                                                      
+//!  CODE GENERATION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @externRoutineIR : @abstractRoutineIR {
@@ -167,7 +167,7 @@ class @externRoutineIR : @abstractRoutineIR {
 
 //·······················································································································
 
-override method @externRoutineIR llvmCodeGeneration 
+override proc @externRoutineIR llvmCodeGeneration
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
@@ -205,12 +205,12 @@ map @externProcedureMapIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @externProcedureMapIR llvmPrototypeGeneration  ?!@string unused ioLLVMcode {
+proc @externProcedureMapIR llvmPrototypeGeneration  ?!@string unused ioLLVMcode {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @externProcedureMapIR.@element llvmPrototypeGeneration  ?!@string ioLLVMcode {
+proc @externProcedureMapIR.@element llvmPrototypeGeneration  ?!@string ioLLVMcode {
   let procName = llvmNameForFunction (!self.lkey.string)
   ioLLVMcode += "declare"
   if self.mReturnType.isNull then

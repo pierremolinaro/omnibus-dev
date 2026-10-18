@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @bitbandInstructionAST : @instructionAST {
@@ -11,7 +11,7 @@ class @bitbandInstructionAST : @instructionAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SYNTAX                                                                                                               
+//  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -44,10 +44,10 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  NOTE TYPES                                                                                                           
+//  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @bitbandInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @bitbandInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [self.mControlRegisterLValue noteExpressionTypesInPrecedenceGraph !?ioGraph]
   [!?ioGraph noteNode !"u1".nowhere]
   [self.mBitExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
@@ -55,10 +55,10 @@ override method @bitbandInstructionAST noteInstructionTypesInPrecedenceGraph ?!@
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SEMANTICS                                                                                                            
+//  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @bitbandInstructionAST instructionSemanticAnalysis
+override proc @bitbandInstructionAST instructionSemanticAnalysis
   ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
@@ -172,7 +172,7 @@ override method @bitbandInstructionAST instructionSemanticAnalysis
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  CODE GENERATION                                                                                                      
+//  CODE GENERATION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @bitbandInstructionIR : @abstractInstructionIR {
@@ -197,7 +197,7 @@ class @bitbandInstructionIR : @abstractInstructionIR {
 //}
 //·······················································································································
 
-override method @bitbandInstructionIR llvmInstructionCode
+override proc @bitbandInstructionIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds ioGenerationAdds

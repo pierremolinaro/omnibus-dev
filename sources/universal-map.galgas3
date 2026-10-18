@@ -123,7 +123,7 @@ setter @universalValuedObjectMap insertLocalVariable
 //! SEARCH METHODS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @universalValuedObjectMap searchEntity
+proc @universalValuedObjectMap searchEntity
   ?let @lstring inValuedObjectName
   !@valuedObject outEntity
 {
@@ -132,7 +132,7 @@ method @universalValuedObjectMap searchEntity
 
 //·······················································································································
 
-method @universalValuedObjectMap searchValuedObject
+proc @universalValuedObjectMap searchValuedObject
   ?let @lstring inValuedObjectName
   ?let @mode inMode
   ?let @stringset inInitializedDriverSet
@@ -183,7 +183,7 @@ setter @universalValuedObjectMap readAccess
       [!?self.mInternalPropertyAndRoutineMap setMObjectStateForKey !.hasReadValue !inValuedObjectName]
     end
   case localVariable (2*) :
-    switch valueState 
+    switch valueState
     case noValue :
       error (inValuedObjectName : "'" + inValuedObjectName + "' has no value")
     case hasUnreadValue :
@@ -219,7 +219,7 @@ setter @universalValuedObjectMap searchValuedObjectForReadAccess
   case globalSyncInstance (@omnibusType type @lstring omnibusName) :
     outObjectIR = .reference {!type:type !llvmName:llvmNameForGlobalSyncInstance (!omnibusName)}
   case localVariable (@omnibusType type @lstring omnibusName) :
-    switch valueState 
+    switch valueState
     case noValue :
       error (inValuedObjectName : "'" + inValuedObjectName + "' has no value" spoil outObjectIR)
     case hasUnreadValue :
@@ -251,7 +251,7 @@ setter @universalValuedObjectMap searchValuedObjectForWriteAccess
     error (inValuedObjectName : "a constant cannot be written" spoil outObjectIR)
   case localVariable (@omnibusType type @lstring omnibusName) :
     outObjectIR = @objectIR.reference {!type:type !llvmName:llvmNameForLocalVariable (!omnibusName)}
-    switch valueState 
+    switch valueState
     case noValue, hasReadValue :
       [!?self.mInternalPropertyAndRoutineMap setMObjectStateForKey !.hasUnreadValue !inValuedObjectName]
     case hasUnreadValue :
@@ -279,7 +279,7 @@ setter @universalValuedObjectMap searchValuedObjectForReadWriteAccess
   case globalSyncInstance (2*) :
     error (inValuedObjectName : "a global sync instance cannot be written" spoil outObjectIR)
   case localVariable (@omnibusType type @lstring omnibusName) :
-    switch valueState 
+    switch valueState
     case noValue :
       error (inValuedObjectName : "object has no value" spoil outObjectIR)
     case hasUnreadValue :
@@ -293,7 +293,7 @@ setter @universalValuedObjectMap searchValuedObjectForReadWriteAccess
 
 //·······················································································································
 
-method @universalValuedObjectMap searchValuedObjectType
+proc @universalValuedObjectMap searchValuedObjectType
   ?context:let @semanticContext inContext
   ?selfType: let @omnibusType inSelfType
   ?let @LValueAST inLValue
@@ -323,14 +323,14 @@ method @universalValuedObjectMap searchValuedObjectType
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @LValueOperandAST getValuedObjectType
+proc @LValueOperandAST getValuedObjectType
       ?context:let @semanticContext inContext
       ?!@omnibusType ioType
 {
   switch self
   case noOperand :
   case property (@lstring propertyName @LValueOperandAST next) :
-    
+
     let @propertyGetterMap propertyGetterMap = [inContext propertyGetterMap !ioType]
     [propertyGetterMap searchKey !propertyName ?* ?let accessKind]
     switch accessKind
@@ -358,7 +358,7 @@ method @LValueOperandAST getValuedObjectType
 //! STATE HANDLING
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @universalValuedObjectMap checkLocalVariableFinalState ?!@instructionListIR ioInstructionGenerationList {
+proc @universalValuedObjectMap checkLocalVariableFinalState ?!@instructionListIR ioInstructionGenerationList {
   for entry in self.mInternalPropertyAndRoutineMap do
     switch entry.mValuedObject
     case task (*) :
@@ -580,7 +580,7 @@ enum @valuedObjectState %equatable {
 
 //·······················································································································
 
-getter @valuedObjectState string -> @string {
+func @valuedObjectState string -> @string {
   switch self
   case noValue : result = "no value"
   case hasUnreadValue : result = "unread value"

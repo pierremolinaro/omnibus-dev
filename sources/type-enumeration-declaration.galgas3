@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  AST                                                                                                                  
+//!  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @enumerationConstantList {
@@ -15,7 +15,7 @@ class @enumerationDeclarationAST : @abstractDeclarationAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  SYNTAX                                                                                                               
+//!  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -44,10 +44,10 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  PRECEDENCE GRAPH                                                                                                     
+//!  PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @enumerationDeclarationAST enterInPrecedenceGraph
+override proc @enumerationDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   [!?ioGraph addNode !self.mEnumerationName !self]
@@ -68,21 +68,21 @@ override method @enumerationDeclarationAST enterInPrecedenceGraph
 
 //·······················································································································
 
-override getter @enumerationDeclarationAST locationForErrorSignaling -> @location outLocation {
+override func @enumerationDeclarationAST locationForErrorSignaling -> @location outLocation {
   outLocation = self.mEnumerationName.location
 }
 
 //·······················································································································
 
-override getter @enumerationDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "enum " + self.mEnumerationName 
+override func @enumerationDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+  outRepresentation = "enum " + self.mEnumerationName
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  ENTER IN CONTEXT                                                                                                     
+//!  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @enumerationDeclarationAST enterInContext
+override proc @enumerationDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
@@ -191,7 +191,7 @@ override method @enumerationDeclarationAST enterInContext
 //}
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  CODE GENERATION                                                                                                    
+//!  CODE GENERATION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @enumToUintRoutineIR : @abstractRoutineIR {
@@ -200,7 +200,7 @@ class @enumToUintRoutineIR : @abstractRoutineIR {
 
 //·······················································································································
 
-override method @enumToUintRoutineIR llvmCodeGeneration 
+override proc @enumToUintRoutineIR llvmCodeGeneration
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds

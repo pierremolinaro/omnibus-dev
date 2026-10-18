@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @driverDeclarationAST {
@@ -53,7 +53,7 @@ class @implementedDriverAST : @abstractDeclarationAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SYNTAX                                                                                                               
+//  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -72,7 +72,7 @@ syntax extension omnibus_syntax {
         driverDependenceList += !dependenceName
       while
         $,$
-      end       
+      end
     end
     ${$
     var @structurePropertyListAST propertyListAST = @[]
@@ -152,16 +152,16 @@ syntax extension omnibus_syntax {
     $)$
     ioAST.mRequiredDriverListAST += !driverName !driverInstanciationArgumentList
   }
- 
+
   //·····················································································································
 
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  PRECEDENCE GRAPH                                                                                                     
+//!  PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @implementedDriverAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @implementedDriverAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [!?ioGraph addNode !self.mDriverName !self]
   [!?ioGraph addEdge !from: self.mDriverName !to: omnibusTypeSpecificNameForDriver (!self.mDriverName)]
   for (driver) in self.mDriverDependanceList do
@@ -172,13 +172,13 @@ override method @implementedDriverAST enterInPrecedenceGraph ?!@semanticTypePrec
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @implementedDriverAST keyRepresentationForErrorSignaling -> @string outRepresentation {
-  outRepresentation = "driver " + self.mDriverName 
+override func @implementedDriverAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+  outRepresentation = "driver " + self.mDriverName
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @implementedDriverAST locationForErrorSignaling -> @location outLocation {
+override func @implementedDriverAST locationForErrorSignaling -> @location outLocation {
   outLocation = self.mDriverName.location
 }
 
@@ -209,7 +209,7 @@ private func llvmStartupRoutineNameFromDriver ?let @lstring inDriverName -> @lst
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  RETAIN REQUIRED DRIVERS IN DECLARATION LIST AST                                                                                                  
+//  RETAIN REQUIRED DRIVERS IN DECLARATION LIST AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @driverInstanciationArgumentMap {
@@ -263,7 +263,7 @@ proc retainRequiredDrivers ?!@ast ioAST {
       var @stringset validArgumentSet = @[]
       for (propertyName propertyAttributeList * optionalPropertyTypeName propertyKind) in declaration.mPropertyListAST do
         let @propertyKindAST driverPropertyKind
-        switch propertyKind 
+        switch propertyKind
         case uninitializedStoredProperty :
           [driverInstanciationArgumentMap searchKey !propertyName ?let initExpression]
           validArgumentSet ++= propertyName.string
@@ -281,7 +281,7 @@ proc retainRequiredDrivers ?!@ast ioAST {
         case writeComputedProperty (2*) :
           driverPropertyKind = propertyKind
         end
-        driverPropertyListAST += 
+        driverPropertyListAST +=
          !propertyName
          !propertyAttributeList
          !.isPrivate
@@ -323,10 +323,10 @@ proc retainRequiredDrivers ?!@ast ioAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  ENTER IN CONTEXT                                                                                                     
+//!  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @implementedDriverAST enterInContext
+override proc @implementedDriverAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList ioDecoratedRoutineList
@@ -376,7 +376,7 @@ override method @implementedDriverAST enterInContext
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//   SEMANTICS                                                                                                           
+//   SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @decoratedRequiredDriver : @abstractDecoratedDeclaration {
@@ -385,7 +385,7 @@ class @decoratedRequiredDriver : @abstractDecoratedDeclaration {
 
 //·······················································································································
 
-override method @decoratedRequiredDriver semanticAnalysis
+override proc @decoratedRequiredDriver semanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
@@ -402,7 +402,7 @@ override method @decoratedRequiredDriver semanticAnalysis
   for (initialValue *) in sortedOperandList do
     initialValueList += !initialValue
   end
-  ioIntermediateCodeStruct.mDriverList += 
+  ioIntermediateCodeStruct.mDriverList +=
     !self.mDriverName
     !driverType
     !initialValueList
@@ -411,7 +411,7 @@ override method @decoratedRequiredDriver semanticAnalysis
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//! CODE GENERATION                                                                                                    
+//! CODE GENERATION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @driverListIR {
@@ -422,19 +422,19 @@ list @driverListIR {
 
 //·······················································································································
 
-method @driverListIR.@element generateLLVMDriverVariableDefinition ?!@string ioLLVMcode {
+proc @driverListIR.@element generateLLVMDriverVariableDefinition ?!@string ioLLVMcode {
   ioLLVMcode += llvmNameForGlobalVariable (!self.mDriverName) + " = internal global "
   ioLLVMcode += self.mType.llvmTypeName + " {"
   for (value) in self.mInitialValueList
     do ioLLVMcode += value.llvmTypeName + " " + value.llvmValue
-    between ioLLVMcode += ", "  
+    between ioLLVMcode += ", "
   end
   ioLLVMcode += "}\n"
 }
 
 //·······················································································································
 
-method @driverListIR generateLLVMDriverCode ?!@string ioLLVMcode {
+proc @driverListIR generateLLVMDriverCode ?!@string ioLLVMcode {
 //--- Boot
   ioLLVMcode += llvmTitleComment (!"Boot")
   ioLLVMcode += "define internal void @boot ()" + llvmAttributeFunction () + "{\n"

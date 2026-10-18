@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @ast {
@@ -23,11 +23,11 @@ abstract class @abstractDeclarationAST {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract getter @abstractDeclarationAST locationForErrorSignaling -> @location
+abstract func @abstractDeclarationAST locationForErrorSignaling -> @location
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @abstractDeclarationAST enterExtension
+proc @abstractDeclarationAST enterExtension
   ?!@extendStaticArrayDeclarationDictAST unused ioExtendStaticArrayDeclarationAST
   !@abstractDeclarationAST outNewDeclaration {
   outNewDeclaration = self

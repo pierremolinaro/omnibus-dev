@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @ifExpressionAST : @expressionAST {
@@ -12,20 +12,20 @@ class @ifExpressionAST : @expressionAST {
 }
 
 //-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-//  SYNTAX                                                                                                               
+//  SYNTAX
 //-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
 
   //·····················································································································
-  
+
   rule <primary> ?!@ast ioAST !@expressionAST outExpression {
     <expression_if> !?ioAST ?let if_expression
     outExpression = if_expression
   }
-  
+
   //·····················································································································
-  
+
   rule <expression_if> ?!@ast ioAST !@ifExpressionAST outExpression {
     $if$
     <expression> !?ioAST ?let ifExpression
@@ -57,10 +57,10 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
+//  PRECEDENCE GRAPH FROM EXPRESSION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @ifExpressionAST addDependenceEdgeForStaticExpression
+override proc @ifExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
@@ -70,20 +70,20 @@ override method @ifExpressionAST addDependenceEdgeForStaticExpression
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  NOTE TYPES                                                                                                           
+//  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @ifExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @ifExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [self.mIfExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
   [self.mThenExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
   [self.mElseExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SEMANTICS                                                                                                            
+//  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @ifExpressionAST analyzeExpression
+override proc @ifExpressionAST analyzeExpression
   ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?optionalTargetType:let @omnibusType inOptionalTargetType
@@ -108,9 +108,9 @@ override method @ifExpressionAST analyzeExpression
     !?variableMap:ioUniversalMap
     !?alloca:ioAllocaList
     !?instructionListIR:ioInstructionGenerationList
-    ?result:@objectIR ifExpressionResult 
+    ?result:@objectIR ifExpressionResult
   ]
-  [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?ifExpressionResult]  
+  [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?ifExpressionResult]
 //--- Check "if" expression type is boolean
   [inContext.mImplicitConversionToBooleanMap generateConvertToBooleanCode
     !ifExpressionResult
@@ -137,7 +137,7 @@ override method @ifExpressionAST analyzeExpression
   [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
     !?thenExpressionTempResult
-  ]  
+  ]
   let thenExpressionResult = checkAssignmentCompatibility (
     !inContext.mAssignmentOperatorMap
     !source:thenExpressionTempResult
@@ -162,7 +162,7 @@ override method @ifExpressionAST analyzeExpression
   [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
     !?elseExpressionTempResult
-  ]  
+  ]
   let elseExpressionResult = checkAssignmentCompatibility (
     !inContext.mAssignmentOperatorMap
     !source:elseExpressionTempResult
@@ -181,7 +181,7 @@ override method @ifExpressionAST analyzeExpression
       !testResultVariableName
       !thenExpressionResult
       !elseExpressionResult
-    ]      
+    ]
   end
 }
 

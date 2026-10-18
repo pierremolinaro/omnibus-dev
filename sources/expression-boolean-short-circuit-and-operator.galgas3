@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @booleanShortCircuitAndOperatorExpressionAST : @expressionAST {
@@ -9,10 +9,10 @@ class @booleanShortCircuitAndOperatorExpressionAST : @expressionAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
+//  PRECEDENCE GRAPH FROM EXPRESSION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @booleanShortCircuitAndOperatorExpressionAST addDependenceEdgeForStaticExpression
+override proc @booleanShortCircuitAndOperatorExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
@@ -21,19 +21,19 @@ override method @booleanShortCircuitAndOperatorExpressionAST addDependenceEdgeFo
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  NOTE TYPES                                                                                                           
+//  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @booleanShortCircuitAndOperatorExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @booleanShortCircuitAndOperatorExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [self.mLeftExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
   [self.mRightExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SEMANTICS                                                                                                            
+//  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
+override proc @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
   ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?optionalTargetType:let @omnibusType inOptionalTargetType
@@ -64,7 +64,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
   [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
     !?leftOperand
-  ]  
+  ]
   [inContext.mImplicitConversionToBooleanMap generateConvertToBooleanCode
     !leftOperand
     !self.mOperatorLocation
@@ -91,7 +91,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
   [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
     !?rightOperand
-  ]  
+  ]
   [inContext.mImplicitConversionToBooleanMap generateConvertToBooleanCode
     !rightOperand
     !self.mOperatorLocation
@@ -106,7 +106,7 @@ override method @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
     [rightBooleanOperand extractCompileTime ?value:let @bool rightStaticValue]
     outResult = .literalInteger {!type: leftOperand.type !value: leftStaticValue & rightStaticValue}
   else
-  //--- Result type : bool 
+  //--- Result type : bool
     getNewTempValue (![inContext booleanType !self.mOperatorLocation] !?ioTemporaries ?outResult)
   //--- Generate code
     [!?ioInstructionGenerationList appendShortCircuitAndOperation

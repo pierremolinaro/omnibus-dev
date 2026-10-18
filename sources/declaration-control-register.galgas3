@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  AST                                                                                                                  
+//!  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @controlRegisterKind {
@@ -8,7 +8,7 @@ enum @controlRegisterKind {
                       @location arraySizeLocation
                       @expressionAST arrayElementSize
                       @location arrayElementSizeLocation)
-}  
+}
 
 //·······················································································································
 
@@ -71,7 +71,7 @@ map @controlRegisterUserAccesMapAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  SYNTAX                                                                                                               
+//!  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -191,7 +191,7 @@ syntax extension omnibus_syntax {
         !registerName
         !.scalar
         !isReadOnly
-        !registerOffset 
+        !registerOffset
         !.here
     or
       $[$
@@ -229,7 +229,7 @@ syntax extension omnibus_syntax {
            !arrayElementSizeLocation:arrayElementSizeExpressionLocation
          }
         !isReadOnly
-        !baseAddressExpression 
+        !baseAddressExpression
         !baseAddressExpressionLocation
     end
   }
@@ -253,15 +253,15 @@ syntax extension omnibus_syntax {
     while
       $,$
     end
-    $)$      
+    $)$
   }
-  
+
   //·····················································································································
 
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  ENTER IN CONTEXT                                                                                                     
+//!  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @controlRegisterFieldList { // Used for displaying in HTML file
@@ -292,7 +292,7 @@ map @sliceMap {
 //!   PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @controlRegisterGroupDeclarationAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+proc @controlRegisterGroupDeclarationAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for reg in self.mRegisters do
     [!?ioGraph noteNode !reg.mRegisterTypeName]
     [!?ioGraph addEdge !from: compileTimeDeclarationBarrier () !to: reg.mRegisterTypeName]
@@ -301,19 +301,19 @@ method @controlRegisterGroupDeclarationAST noteTypesInPrecedenceGraph ?!@semanti
 
 //·······················································································································
 
-override getter @controlRegisterGroupDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+override func @controlRegisterGroupDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = registerGroupNameFromOmnibusName (![self.mRegisterGroupList mRegisterGroupNameAtIndex !0])
 }
 
 //·······················································································································
 
-override getter @controlRegisterGroupDeclarationAST locationForErrorSignaling -> @location {
+override func @controlRegisterGroupDeclarationAST locationForErrorSignaling -> @location {
   result = [self.mRegisterGroupList mRegisterGroupNameAtIndex !0]
 }
 
 //·······················································································································
 
-override method @controlRegisterGroupDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @controlRegisterGroupDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   let nodeName = registerGroupNameFromOmnibusName (![self.mRegisterGroupList mRegisterGroupNameAtIndex !0])
 //--- Add node
   [!?ioGraph addNode !nodeName !self]
@@ -484,7 +484,7 @@ private proc buildControlRegisterSliceMap
 
 //·······················································································································
 
-method @controlRegisterDeclarationList.@element buildControlRegisterMapForGroup
+proc @controlRegisterDeclarationList.@element buildControlRegisterMapForGroup
   ?!context:@semanticContext ioContext
   ?!@controlRegisterMap ioControlRegisterMap
   ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
@@ -501,7 +501,7 @@ method @controlRegisterDeclarationList.@element buildControlRegisterMapForGroup
     ?let registerBitSliceMap
     ?let controlRegisterFieldList  // Used for HTML file
   )
-//---  
+//---
   for register in self.mRegisterArrayList do
   //--- Analyse register address expression
     computeStaticExpression (
@@ -583,7 +583,7 @@ method @controlRegisterDeclarationList.@element buildControlRegisterMapForGroup
 
 //·······················································································································
 
-override method @controlRegisterGroupDeclarationAST enterInContext
+override proc @controlRegisterGroupDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
@@ -648,7 +648,7 @@ override method @controlRegisterGroupDeclarationAST enterInContext
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  SEMANTIC ANALYSIS                                                                                                    
+//!  SEMANTIC ANALYSIS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @decoratedControlRegisterArrayGroupDeclaration : @abstractDecoratedDeclaration {
@@ -658,7 +658,7 @@ class @decoratedControlRegisterArrayGroupDeclaration : @abstractDecoratedDeclara
 
 //·······················································································································
 
-override method @decoratedControlRegisterArrayGroupDeclaration semanticAnalysis
+override proc @decoratedControlRegisterArrayGroupDeclaration semanticAnalysis
   ?context:let @semanticContext unused inContext
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
@@ -667,10 +667,10 @@ override method @decoratedControlRegisterArrayGroupDeclaration semanticAnalysis
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  CODE GENERATION                                                                                                   
+//!  CODE GENERATION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @controlRegisterGroupArrayList generateLLVMcode ?!@string ioLLVMcode ?let @uint inPointerSize {
+proc @controlRegisterGroupArrayList generateLLVMcode ?!@string ioLLVMcode ?let @uint inPointerSize {
   if self.count > 0 then
     ioLLVMcode += llvmTitleComment (!"Control Register Group Arraies")
     let int = "i" + inPointerSize
@@ -697,7 +697,7 @@ method @controlRegisterGroupArrayList generateLLVMcode ?!@string ioLLVMcode ?let
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  BUILD HTML FILE                                                                                                      
+//!  BUILD HTML FILE
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 sortedlist @controlRegisterByAddress {
@@ -799,7 +799,7 @@ private proc buildControlRegisterMaps
           s += "<td class=\"fields\" colspan=\"" + mFieldBitCount.string + "\">" + mFieldName + "</td>"
         end
         s += "</tr></table>"
-      end  
+      end
       s += "</td></tr>\n"
       ioControlRegisterByAddress += !registerAddress !s
       ioControlRegisterByName += !registerAddress !s !registerName
@@ -820,7 +820,7 @@ private proc buildControlRegisterMaps
             s += "<td class=\"fields\" colspan=\"" + mFieldBitCount.string + "\">" + mFieldName + "</td>"
           end
           s += "</tr></table>"
-        end  
+        end
         s += "</td></tr>\n"
         ioControlRegisterByAddress += !registerAddress !s
         ioControlRegisterByName += !registerAddress !s !registerName

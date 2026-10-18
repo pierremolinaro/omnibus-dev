@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @literalIntegerInExpressionAST : @expressionAST {
@@ -7,7 +7,7 @@ class @literalIntegerInExpressionAST : @expressionAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SYNTAX                                                                                                               
+//  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -24,10 +24,10 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
+//  PRECEDENCE GRAPH FROM EXPRESSION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @literalIntegerInExpressionAST addDependenceEdgeForStaticExpression
+override proc @literalIntegerInExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
@@ -35,18 +35,18 @@ override method @literalIntegerInExpressionAST addDependenceEdgeForStaticExpress
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  NOTE TYPES                                                                                                           
+//  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @literalIntegerInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @literalIntegerInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [!?ioGraph noteNode !ctIntegerTypeName ().nowhere]
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  SEMANTICS                                                                                                            
+//!  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @literalIntegerInExpressionAST analyzeExpression
+override proc @literalIntegerInExpressionAST analyzeExpression
   ?self:let @omnibusType unused inSelfType
   ?routineAttributes:let @routineAttributes unused inRoutineAttributes
   ?optionalTargetType:let @omnibusType unused inOptionalTargetType

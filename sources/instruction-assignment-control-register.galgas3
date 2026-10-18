@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @controlRegisterAssignmentOperatorKind {
@@ -16,7 +16,7 @@ class @controlRegisterAssignmentInstructionAST : @instructionAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SYNTAX                                                                                                               
+//  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -50,10 +50,10 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  NOTE TYPES                                                                                                           
+//!  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @controlRegisterAssignmentInstructionAST noteInstructionTypesInPrecedenceGraph
+override proc @controlRegisterAssignmentInstructionAST noteInstructionTypesInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   [self.mControlRegisterLValue noteExpressionTypesInPrecedenceGraph !?ioGraph]
@@ -61,10 +61,10 @@ override method @controlRegisterAssignmentInstructionAST noteInstructionTypesInP
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  SEMANTICS                                                                                                            
+//!  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @controlRegisterAssignmentInstructionAST instructionSemanticAnalysis
+override proc @controlRegisterAssignmentInstructionAST instructionSemanticAnalysis
   ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext

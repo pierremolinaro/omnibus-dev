@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @assignmentInstructionAST : @instructionAST {
@@ -8,7 +8,7 @@ class @assignmentInstructionAST : @instructionAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SYNTAX                                                                                                               
+//  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -33,19 +33,19 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  NOTE TYPES                                                                                                           
+//!  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @assignmentInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @assignmentInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [self.mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
   [self.mTargetAST noteInstructionTypesInPrecedenceGraph !?ioGraph]
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  SEMANTICS                                                                                                            
+//!  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @assignmentInstructionAST instructionSemanticAnalysis
+override proc @assignmentInstructionAST instructionSemanticAnalysis
   ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
@@ -105,7 +105,7 @@ override method @assignmentInstructionAST instructionSemanticAnalysis
 
 //·······················································································································
 
-method @LValueAST analyzeLValueInAssignment
+proc @LValueAST analyzeLValueInAssignment
   ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
@@ -370,7 +370,7 @@ private proc handleArrayAccessInAssignment
       !?staticEntityMap:ioStaticEntityMap
       !?variableMap:ioUniversalMap
       !?alloca: ioAllocaList
-      !inIndexExpression 
+      !inIndexExpression
       !inEndOfIndex
       !inCheckIndexExpression
       !arraySize:arraySize

@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @ifInstructionAST : @instructionAST {
@@ -14,7 +14,7 @@ class @ifInstructionAST : @instructionAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SYNTAX                                                                                                               
+//  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -25,7 +25,7 @@ syntax extension omnibus_syntax {
     <if_instruction> !?ioAST ?let ifInstruction
     ioInstructionList += !ifInstruction
   }
-  
+
   //·····················································································································
 
   rule <if_instruction> ?!@ast ioAST !@ifInstructionAST outIfInstruction {
@@ -82,20 +82,20 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  NOTE TYPES                                                                                                           
+//  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @ifInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @ifInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [self.mThenInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   [self.mElseInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   [self.mTestExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SEMANTICS                                                                                                            
+//  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @ifInstructionAST instructionSemanticAnalysis
+override proc @ifInstructionAST instructionSemanticAnalysis
   ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
@@ -123,7 +123,7 @@ override method @ifInstructionAST instructionSemanticAnalysis
   [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
     !?testResult
-  ]  
+  ]
 //--- Check result is allowed for condition
   [inContext.mImplicitConversionToBooleanMap generateConvertToBooleanCode
     !testResult
@@ -133,8 +133,8 @@ override method @ifInstructionAST instructionSemanticAnalysis
     !?alloca: ioAllocaList
     ?let booleanResult
   ]
-//----  
-  switch booleanResult 
+//----
+  switch booleanResult
   case compileTime (*) :
     if not self.mStaticIfExpression then
       warning self.mTestExpressionEndLocation : "'if' expression is static (insert @" + staticAttribute () + " attribute)"
@@ -142,7 +142,7 @@ override method @ifInstructionAST instructionSemanticAnalysis
   case llvmVariable (*) :
     if self.mStaticIfExpression then
       error (self.mTestExpressionEndLocation : "'if' expression is not static")
-    end 
+    end
   end
   [!?ioUniversalMap openOverrideForSelectBlock]
 //--- Analyze 'then' instruction list
@@ -184,7 +184,7 @@ override method @ifInstructionAST instructionSemanticAnalysis
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  CODE GENERATION                                                                                                      
+//  CODE GENERATION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @ifInstructionIR : @abstractInstructionIR {
@@ -196,7 +196,7 @@ class @ifInstructionIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @ifInstructionIR llvmInstructionCode
+override proc @ifInstructionIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
@@ -221,7 +221,7 @@ override method @ifInstructionIR llvmInstructionCode
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @ifInstructionIR enterAccessibleEntities
+override proc @ifInstructionIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint ioMaxBranchOfOnInstructions
 {

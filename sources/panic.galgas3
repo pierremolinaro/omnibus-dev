@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @panicAST : @abstractDeclarationAST {
@@ -10,7 +10,7 @@ class @panicAST : @abstractDeclarationAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SYNTAX                                                                                                               
+//  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -46,16 +46,16 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  PRECEDENCE GRAPH                                                                                                     
+//!  PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @panicAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+proc @panicAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [self.mPanicInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
 }
 
 //·······················································································································
 
-override method @panicAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @panicAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
  let nodeName = @lstring {
    !"panic " + if self.mIsSetup then "setup" else "loop" end + " " + self.mPriority.bigint
    !self.mPriority.location
@@ -67,18 +67,18 @@ override method @panicAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph 
 
 //·······················································································································
 
-override getter @panicAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+override func @panicAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = "panic " + if self.mIsSetup then "setup" else "loop" end + " " + self.mPriority.bigint
 }
 
 //·······················································································································
 
-override getter @panicAST locationForErrorSignaling -> @location outLocation {
+override func @panicAST locationForErrorSignaling -> @location outLocation {
   outLocation = self.mPriority.location
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//! UTILITY                                                                                                    
+//! UTILITY
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func panicRoutineNameForLocationFile ?let @location inLocation -> @string {
@@ -100,7 +100,7 @@ func panicRoutineNameForFilePath ?let @string inFilePath -> @string {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  ENTER IN CONTEXT                                                                                                     
+//  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @panicRoutinePriorityMap {
@@ -112,7 +112,7 @@ map @panicRoutinePriorityMap {
 
 //·······················································································································
 
-override method @panicAST enterInContext
+override proc @panicAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList ioDecoratedRoutineList
@@ -170,7 +170,7 @@ override method @panicAST enterInContext
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  SEMANTIC ANALYSIS                                                                                                    
+//!  SEMANTIC ANALYSIS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc appendPanicRoutines
@@ -208,7 +208,7 @@ proc appendPanicRoutines
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  SEMANTIC ANALYSIS                                                                                                    
+//!  SEMANTIC ANALYSIS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func %once panicModeName -> @string {
@@ -224,7 +224,7 @@ class @decoratedPanicRoutine : @abstractDecoratedDeclaration {
 
 //·······················································································································
 
-override method @decoratedPanicRoutine semanticAnalysis
+override proc @decoratedPanicRoutine semanticAnalysis
   ?context:let @semanticContext unused inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
@@ -240,7 +240,7 @@ override method @decoratedPanicRoutine semanticAnalysis
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  CODE GENERATION                                                                                                    
+//!  CODE GENERATION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 sortedlist @panicSortedListIR {
@@ -261,17 +261,17 @@ proc generatePanicCode
   ioLLVMcode += llvmTitleComment (!"Panic for ISR")
   ioLLVMcode += "define internal void @panic.isr (" + inGenerationContext.mPanicCodeLLVMType.llvmTypeName + " %in.CODE) " + llvmAttributeFunction () + "noreturn {\n"
   ioLLVMcode += "  %str.FILE = load i8*, i8** " + literalStringName (!emptyStringIndex) + "\n"
-  ioLLVMcode += "  call void @" + llvmNameForSectionImplementation (!panicRoutineName ()) + " ("    
+  ioLLVMcode += "  call void @" + llvmNameForSectionImplementation (!panicRoutineName ()) + " ("
   ioLLVMcode += inGenerationContext.mPanicLineLLVMType.llvmTypeName + " 0, "
   ioLLVMcode += inGenerationContext.mPanicCodeLLVMType.llvmTypeName + " %in.CODE, "
   ioLLVMcode += "i8* %str.FILE"
-  ioLLVMcode += " )\n"    
-  ioLLVMcode += "  unreachable\n"    
-  ioLLVMcode += "}\n\n"    
+  ioLLVMcode += " )\n"
+  ioLLVMcode += "  unreachable\n"
+  ioLLVMcode += "}\n\n"
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//! CODE GENERATION: Panic routine, specific to a source file 
+//! CODE GENERATION: Panic routine, specific to a source file
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @fileSpecificPanicRoutineIR : @abstractRoutineIR {
@@ -280,7 +280,7 @@ class @fileSpecificPanicRoutineIR : @abstractRoutineIR {
 
 //·······················································································································
 
-override method @fileSpecificPanicRoutineIR llvmCodeGeneration 
+override proc @fileSpecificPanicRoutineIR llvmCodeGeneration
   ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
@@ -290,7 +290,7 @@ override method @fileSpecificPanicRoutineIR llvmCodeGeneration
     + inGenerationContext.mPanicCodeLLVMType.llvmTypeName + " %in.CODE, "
     + "i8* %in.FILE)"
   let fileBaseName = self.inFilePath.lastPathComponent.deletingPathExtension
-  
+
   [!?ioGenerationAdds.mStaticEntityMap findOrAddStaticString
     !fileBaseName
     ?let staticStringIndex
@@ -307,7 +307,7 @@ override method @fileSpecificPanicRoutineIR llvmCodeGeneration
 
 //·······················································································································
 
-override method @fileSpecificPanicRoutineIR enterAccessibleEntities
+override proc @fileSpecificPanicRoutineIR enterAccessibleEntities
    ?!@stringset ioInvokedRoutineSet
    ?!@uint unused ioMaxBranchOfOnInstructions
 {
@@ -315,7 +315,7 @@ override method @fileSpecificPanicRoutineIR enterAccessibleEntities
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//! CODE GENERATION: Panic routine, in universal mode 
+//! CODE GENERATION: Panic routine, in universal mode
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @universalModePanicRoutineIR : @abstractRoutineIR {
@@ -323,7 +323,7 @@ class @universalModePanicRoutineIR : @abstractRoutineIR {
 
 //·······················································································································
 
-override method @universalModePanicRoutineIR llvmCodeGeneration 
+override proc @universalModePanicRoutineIR llvmCodeGeneration
   ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
@@ -341,12 +341,12 @@ override method @universalModePanicRoutineIR llvmCodeGeneration
 
 //·······················································································································
 
-override method @universalModePanicRoutineIR svcDeclarationGeneration
+override proc @universalModePanicRoutineIR svcDeclarationGeneration
   ?!@primitiveAndServiceIRlist unused ioPrimitiveAndServiceList
   ?!@sectionIRlist ioSectionList
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioSectionList += 
+  ioSectionList +=
     !llvmNameForSectionCall (!panicRoutineName ())
     !llvmNameForSectionImplementation (!panicRoutineName ())
     !invocationFromAnyMode: true
@@ -354,7 +354,7 @@ override method @universalModePanicRoutineIR svcDeclarationGeneration
 
 //·······················································································································
 
-override method @universalModePanicRoutineIR enterAccessibleEntities
+override proc @universalModePanicRoutineIR enterAccessibleEntities
    ?!@stringset ioInvokedRoutineSet
    ?!@uint unused ioMaxBranchOfOnInstructions
 {
@@ -362,7 +362,7 @@ override method @universalModePanicRoutineIR enterAccessibleEntities
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//! CODE GENERATION: Panic routine, in section mode 
+//! CODE GENERATION: Panic routine, in section mode
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @sectionModePanicRoutineIR : @abstractRoutineIR {
@@ -372,18 +372,18 @@ class @sectionModePanicRoutineIR : @abstractRoutineIR {
 
 //·······················································································································
 
-override method @sectionModePanicRoutineIR llvmCodeGeneration 
+override proc @sectionModePanicRoutineIR llvmCodeGeneration
   ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
   ioLLVMcode += llvmTitleComment (!"Raise Panic internal (section mode)")
-  
+
   let arguments = " ("
     + inGenerationContext.mPanicLineLLVMType.llvmTypeName + " %in.LINE, "
     + inGenerationContext.mPanicCodeLLVMType.llvmTypeName + " %in.CODE, "
     + "i8* %in.FILE)"
-  
+
   ioLLVMcode += "define void @" + llvmNameForSectionImplementation (!panicRoutineName ())
   ioLLVMcode += arguments + llvmAttributeFunction () + "noreturn {\n"
 //---
@@ -401,7 +401,7 @@ override method @sectionModePanicRoutineIR llvmCodeGeneration
 
 //·······················································································································
 
-override method @sectionModePanicRoutineIR enterAccessibleEntities
+override proc @sectionModePanicRoutineIR enterAccessibleEntities
    ?!@stringset ioInvokedRoutineSet
    ?!@uint unused ioMaxBranchOfOnInstructions
 {

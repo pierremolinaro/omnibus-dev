@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  AST                                                                                                                  
+//!  AST
 //-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @accessInAssignmentAST {
@@ -30,7 +30,7 @@ struct @LValueAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  SYNTAX                                                                                                               
+//!  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -48,7 +48,7 @@ syntax extension omnibus_syntax {
     <lvalue_operand> !?ioAST ?let operand
     outAssignmentTargetAST = @{!receiver !operand}
   }
-  
+
   //·····················································································································
 
   rule <lvalue_operand> ?!@ast unused ioAST !@LValueOperandAST outOperand {
@@ -63,7 +63,7 @@ syntax extension omnibus_syntax {
     <lvalue_operand> !?ioAST ?let operand
     outOperand = .property {!name:propertyName !next:operand}
   }
-  
+
   //·····················································································································
 
   rule <lvalue_operand> ?!@ast ioAST !@LValueOperandAST outOperand {
@@ -92,16 +92,16 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  NOTE TYPES                                                                                                           
+//!  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @LValueAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+proc @LValueAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [self.mOperand noteInstructionTypesInPrecedenceGraph !?ioGraph]
 }
 
 //·······················································································································
 
-method @LValueOperandAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+proc @LValueOperandAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   switch self
   case noOperand :
   case property (* @LValueOperandAST next) :
@@ -113,7 +113,7 @@ method @LValueOperandAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePr
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  SEMANTICS                                                                                                            
+//!  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 struct @LValueRepresentation {
@@ -123,7 +123,7 @@ struct @LValueRepresentation {
 
 //·······················································································································
 
-method @LValueAST analyzeLValue
+proc @LValueAST analyzeLValue
   ?self:let @omnibusType inSelfType
   ?forAddressOf:let @bool inIsAddressOf
   ?routineAttributes:let @routineAttributes inRoutineAttributes
@@ -141,7 +141,7 @@ method @LValueAST analyzeLValue
       error (self.mIdentifier : "self is not available in this context" spoil outInternalRepresentation)
     elsif not [inRoutineAttributes contains !.mutatingRoutine] && not inIsAddressOf then
       error (self.mIdentifier
-      : "cannot mutate properties, current method is not declared with @" + mutatingAttribute () + " attribute"
+      : "cannot mutate properties, current proc is not declared with @" + mutatingAttribute () + " attribute"
       spoil outInternalRepresentation)
     else
       analyzeSelfLValue (
@@ -357,7 +357,7 @@ private proc handleArrayAccess
       !?staticEntityMap:ioStaticEntityMap
       !?variableMap:ioUniversalMap
       !?alloca: ioAllocaList
-      !inIndexExpression 
+      !inIndexExpression
       !inEndOfIndex
       !inCheckIndexExpression
       !arraySize:arraySize

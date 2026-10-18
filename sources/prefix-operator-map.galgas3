@@ -16,7 +16,7 @@ abstract class @prefixOperatorUsage { }
 
 //·······················································································································
 
-abstract method @prefixOperatorUsage generateCode
+abstract proc @prefixOperatorUsage generateCode
   ?let @objectIR inReceiverOperand
   ?let @location inOperatorLocation
   ?let @omnibusType inResultType
@@ -28,7 +28,7 @@ abstract method @prefixOperatorUsage generateCode
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @prefixOperatorMap generatePrefixOperatorCode
+proc @prefixOperatorMap generatePrefixOperatorCode
   ?let @objectIR inReceiverOperand
   ?let @prefixOperator inPrefixOperator
   ?let @location inOperatorLocation

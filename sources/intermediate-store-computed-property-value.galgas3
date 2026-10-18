@@ -17,19 +17,19 @@ class @storeComputedPropertyValueIR : @abstractInstructionIR {
 
 //·······················································································································
 
-override method @storeComputedPropertyValueIR llvmInstructionCode
+override proc @storeComputedPropertyValueIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
 {
-  ioLLVMcode += "  call void @" + self.mLLVMSetterName.assemblerRepresentation 
+  ioLLVMcode += "  call void @" + self.mLLVMSetterName.assemblerRepresentation
   ioLLVMcode += " (" + self.mReceiverIR.type.llvmTypeName + "* " + self.mReceiverIR.llvmName + ", "
   ioLLVMcode += self.mValueIR.type.llvmTypeName + " " + self.mValueIR.llvmName + ")\n"
 }
 
 //·······················································································································
 
-override method @storeComputedPropertyValueIR enterAccessibleEntities
+override proc @storeComputedPropertyValueIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint unused ioMaxBranchOfOnInstructions
 {

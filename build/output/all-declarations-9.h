@@ -101,7 +101,7 @@ void extensionSetter_noteUINTType (class GGS_semanticTypePrecedenceGraph & ioObj
 
 //--------------------------------------------------------------------------------------------------
 //
-//Abstract extension method '@abstractDeclarationAST enterInPrecedenceGraph'
+//Abstract extension proc '@abstractDeclarationAST enterInPrecedenceGraph'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -350,7 +350,7 @@ class cPtr_llvmInfixOperatorUsage : public cPtr_omnibusInfixOperatorUsage {
                                                             Compiler * inCompiler) ;
 
 
-//--- Extension method generateCode
+//--- Extension proc generateCode
   public: virtual void method_generateCode (const class GGS_objectIR arg_inLeftOperand,
            const class GGS_location arg_inOperatorLocation,
            const class GGS_objectIR arg_inRightOperand,
@@ -473,7 +473,7 @@ extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_llvmInfixOperatorUsage
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@omnibusType checkIsCompileTimeType'
+//Extension proc '@omnibusType checkIsCompileTimeType'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -484,7 +484,7 @@ void callExtensionMethod_checkIsCompileTimeType (class cPtr_omnibusType * inObje
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@omnibusType checkIsNotCompileTimeType'
+//Extension proc '@omnibusType checkIsNotCompileTimeType'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -495,7 +495,7 @@ void callExtensionMethod_checkIsNotCompileTimeType (class cPtr_omnibusType * inO
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension getter '@omnibusType isCompileTimeType'
+//Extension func '@omnibusType isCompileTimeType'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -505,7 +505,7 @@ class GGS_bool callExtensionGetter_isCompileTimeType (const cPtr_omnibusType * i
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension getter '@omnibusType instanciable'
+//Extension func '@omnibusType instanciable'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -515,7 +515,7 @@ class GGS_bool callExtensionGetter_instanciable (const cPtr_omnibusType * inObje
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension getter '@omnibusType copyable'
+//Extension func '@omnibusType copyable'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -525,7 +525,7 @@ class GGS_bool callExtensionGetter_copyable (const cPtr_omnibusType * inObject,
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@omnibusType generateRetain'
+//Extension proc '@omnibusType generateRetain'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -538,7 +538,7 @@ void callExtensionMethod_generateRetain (class cPtr_omnibusType * inObject,
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension getter '@omnibusType arcList'
+//Extension func '@omnibusType arcList'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -549,7 +549,7 @@ class GGS_arcAssignmentList callExtensionGetter_arcList (const cPtr_omnibusType 
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@omnibusType generateInsulate'
+//Extension proc '@omnibusType generateInsulate'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -562,7 +562,7 @@ void callExtensionMethod_generateInsulate (class cPtr_omnibusType * inObject,
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@omnibusType generateRelease'
+//Extension proc '@omnibusType generateRelease'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -575,7 +575,7 @@ void callExtensionMethod_generateRelease (class cPtr_omnibusType * inObject,
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension getter '@omnibusType descriptionForHTMLFile'
+//Extension func '@omnibusType descriptionForHTMLFile'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -585,7 +585,7 @@ class GGS_string callExtensionGetter_descriptionForHTMLFile (const cPtr_omnibusT
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension getter '@omnibusType deinitNeeded'
+//Extension func '@omnibusType deinitNeeded'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -609,7 +609,7 @@ void routine_enterFormalArguments_3F_context_3F__26__26__3F_warningOnUnusedArgs 
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@primaryInExpressionAST analyzePrimaryExpressionNoSelf'
+//Extension proc '@primaryInExpressionAST analyzePrimaryExpressionNoSelf'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -640,18 +640,6 @@ class GGS_string function_llvmNameForGlobalSyncInstance (const class GGS_string 
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@universalValuedObjectMap searchEntity'
-//
-//--------------------------------------------------------------------------------------------------
-
-void extensionMethod_searchEntity (const class GGS_universalValuedObjectMap inObject,
-                                   const class GGS_lstring constin_inValuedObjectName,
-                                   class GGS_valuedObject & out_outEntity,
-                                   class Compiler * inCompiler
-                                   COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
 //Routine 'procAnalyzeAccesListInExpression?self?routineAttributes?optionalTargetType?context?mode&temporary&staticEntityMap&variableMap&alloca&instructionListIR?&result'
 //
 //--------------------------------------------------------------------------------------------------
@@ -673,6 +661,18 @@ void routine_procAnalyzeAccesListInExpression_3F_self_3F_routineAttributes_3F_op
 
 //--------------------------------------------------------------------------------------------------
 //
+//Extension proc '@universalValuedObjectMap searchEntity'
+//
+//--------------------------------------------------------------------------------------------------
+
+void extensionMethod_searchEntity (const class GGS_universalValuedObjectMap inObject,
+                                   const class GGS_lstring constin_inValuedObjectName,
+                                   class GGS_valuedObject & out_outEntity,
+                                   class Compiler * inCompiler
+                                   COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
 //Extension setter '@universalValuedObjectMap readAccess'
 //
 //--------------------------------------------------------------------------------------------------
@@ -684,7 +684,7 @@ void extensionSetter_readAccess (class GGS_universalValuedObjectMap & ioObject,
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@primaryInExpressionAST analyzePrimaryExpressionWithSelf'
+//Extension proc '@primaryInExpressionAST analyzePrimaryExpressionWithSelf'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -840,7 +840,7 @@ class cPtr_boolImplicitConverterToBoolean : public cPtr_abstractImplicitConverte
   public: void boolImplicitConverterToBoolean_init (Compiler * inCompiler) ;
 
 
-//--- Extension method generateConvertToBooleanCode
+//--- Extension proc generateConvertToBooleanCode
   public: virtual void method_generateConvertToBooleanCode (const class GGS_objectIR arg_inReceiverOperand,
            const class GGS_location arg_inErrorLocation,
            class GGS_semanticTemporariesStruct & arg_ioTemporaries,
@@ -1021,7 +1021,7 @@ class cPtr_decoratedControlRegisterArrayGroupDeclaration : public cPtr_abstractD
                                                                            Compiler * inCompiler) ;
 
 
-//--- Extension method semanticAnalysis
+//--- Extension proc semanticAnalysis
   public: virtual void method_semanticAnalysis (const class GGS_semanticContext arg_inContext,
            class GGS_semanticTemporariesStruct & arg_ioTemporaries,
            class GGS_intermediateCodeStruct & arg_ioIntermediateCodeStruct,
@@ -1135,7 +1135,7 @@ extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_decoratedControlRegist
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@controlRegisterGroupArrayList generateLLVMcode'
+//Extension proc '@controlRegisterGroupArrayList generateLLVMcode'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -1157,7 +1157,7 @@ class GGS_string function_registerGroupAddressArrayLLVMname (const class GGS_str
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@compileTimeInfixOperatorUsage eval'
+//Extension proc '@compileTimeInfixOperatorUsage eval'
 //
 //--------------------------------------------------------------------------------------------------
 

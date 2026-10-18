@@ -28,7 +28,7 @@ class GGS_omnibusType function_voidType (class Compiler * inCompiler
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@externProcedureMapIR.element llvmPrototypeGeneration'
+//Extension proc '@externProcedureMapIR.element llvmPrototypeGeneration'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -39,7 +39,7 @@ void extensionMethod_llvmPrototypeGeneration (const class GGS_externProcedureMap
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@controlRegisterDeclarationList.element buildControlRegisterMapForGroup'
+//Extension proc '@controlRegisterDeclarationList.element buildControlRegisterMapForGroup'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -97,7 +97,7 @@ void routine_controlRegisterType_3F__26_context_21_type_21_bitCount (const class
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@decoratedTaskList.element taskSemanticAnalysis'
+//Extension proc '@decoratedTaskList.element taskSemanticAnalysis'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -122,7 +122,7 @@ void routine_analyzeOrderedTaskRoutines_3F__21_ (const class GGS_taskSetupListAS
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@structurePropertyListAST.element enterPropertyInContext'
+//Extension proc '@structurePropertyListAST.element enterPropertyInContext'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -163,7 +163,7 @@ class GGS_string function_setterLLVMName (const class GGS_string & constinArgume
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@driverListIR.element generateLLVMDriverVariableDefinition'
+//Extension proc '@driverListIR.element generateLLVMDriverVariableDefinition'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -174,7 +174,7 @@ void extensionMethod_generateLLVMDriverVariableDefinition (const class GGS_drive
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension method '@globalSyncInstanceMapIR.element generateLLVM'
+//Extension proc '@globalSyncInstanceMapIR.element generateLLVM'
 //
 //--------------------------------------------------------------------------------------------------
 

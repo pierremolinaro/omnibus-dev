@@ -18,7 +18,7 @@ class @storeFromTemporaryReferenceIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @storeFromTemporaryReferenceIR llvmInstructionCode
+override proc @storeFromTemporaryReferenceIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds

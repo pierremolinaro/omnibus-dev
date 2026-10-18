@@ -20,7 +20,7 @@ class @testArrayIndexIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @testArrayIndexIR llvmInstructionCode
+override proc @testArrayIndexIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
@@ -34,13 +34,13 @@ override method @testArrayIndexIR llvmInstructionCode
     ioGenerationAdds.mUniqueIndex += 1
     ioLLVMcode += "  " + testToZero + " = icmp sge " + self.mIndex.type.llvmTypeName + " " + self.mIndex.llvmName + ", 0\n"
     ioLLVMcode += "  br i1 " + testToZero + ", label %" + testToZeroOk + ", label %" + testToZeroFailure + "\n\n"
-  
+
     ioLLVMcode += testToZeroFailure + ":\n"
     ioLLVMcode += "  call void @" + panicRoutineNameForLocationFile (!self.mErrorLocation).assemblerRepresentation + " ("
     ioLLVMcode += inGenerationContext.mPanicLineLLVMType.llvmTypeName + " " + self.mErrorLocation.endLine + ", "
     ioLLVMcode += inGenerationContext.mPanicCodeLLVMType.llvmTypeName + " " + panicCodeForNegativeArrayIndex () + ") noreturn \n"
     ioLLVMcode += "  unreachable\n\n"
-  
+
     ioLLVMcode += testToZeroOk + ":\n"
   end
 //--- Test index < size (only if index max value is >= size)
@@ -52,13 +52,13 @@ override method @testArrayIndexIR llvmInstructionCode
     ioLLVMcode += if isUnsigned then "ult" else "slt" end
     ioLLVMcode += " " + self.mIndex.type.llvmTypeName + " " + self.mIndex.llvmName + ", " + self.mSize + "\n"
     ioLLVMcode += "  br i1 " + testToSize + ", label %" + testToSizeOk + ", label %" + testToSizeFailure + "\n\n"
-  
+
     ioLLVMcode += testToSizeFailure + ":\n"
     ioLLVMcode += "  call void @" + panicRoutineNameForLocationFile (!self.mErrorLocation).assemblerRepresentation + " ("
     ioLLVMcode += inGenerationContext.mPanicLineLLVMType.llvmTypeName + " " + self.mErrorLocation.endLine + ", "
     ioLLVMcode += inGenerationContext.mPanicCodeLLVMType.llvmTypeName + " " + panicCodeForTooLargeArrayIndex () + ") noreturn \n"
     ioLLVMcode += "  unreachable\n\n"
-  
+
     ioLLVMcode += testToSizeOk + ":\n"
   end
 //---
@@ -67,7 +67,7 @@ override method @testArrayIndexIR llvmInstructionCode
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @testArrayIndexIR enterAccessibleEntities
+override proc @testArrayIndexIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint unused ioMaxBranchOfOnInstructions
 {

@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  AST                                                                                                                  
+//!  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @staticListPropertyTypeAST {
@@ -51,7 +51,7 @@ dict @extendStaticArrayDeclarationDictAST : @string { // key is static list name
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  SYNTAX                                                                                                               
+//!  SYNTAX
 ///—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -152,10 +152,10 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  ENTER EXTENSIONS                                                                                                     
+//!  ENTER EXTENSIONS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @staticListAST enterExtension
+override proc @staticListAST enterExtension
   ?!@extendStaticArrayDeclarationDictAST ioExtendStaticArrayDeclarationAST
   !@abstractDeclarationAST outNewDeclaration
 {
@@ -172,10 +172,10 @@ override method @staticListAST enterExtension
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  PRECEDENCE GRAPH                                                                                                     
+//!  PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @staticListAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @staticListAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
 //--- Add node
   [!?ioGraph addNode !self.mStaticListName !self]
   [!?ioGraph addEdge !from: self.mStaticListName !to: compileTimeDeclarationBarrier ()]
@@ -210,18 +210,18 @@ override method @staticListAST enterInPrecedenceGraph ?!@semanticTypePrecedenceG
 
 //·······················································································································
 
-override getter @staticListAST locationForErrorSignaling -> @location {
+override func @staticListAST locationForErrorSignaling -> @location {
   result = self.mStaticListName.location
 }
 
 //·······················································································································
 
-override getter @staticListAST keyRepresentationForErrorSignaling -> @string {
+override func @staticListAST keyRepresentationForErrorSignaling -> @string {
   result = "staticlist " + self.mStaticListName
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  ENTER IN CONTEXT                                                                                                     
+//!  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //! Static list
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -266,7 +266,7 @@ map @staticListInitializationMap {
 
 //·······················································································································
 
-override method @staticListAST enterInContext
+override proc @staticListAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
@@ -320,7 +320,7 @@ override method @staticListAST enterInContext
         !kind:.function {
           !mode:mode
           !signature:signature
-          !returnTypeProxy:returnTypeProxy 
+          !returnTypeProxy:returnTypeProxy
         }
         !llvmBaseTypeName:""
       }
@@ -387,7 +387,7 @@ override method @staticListAST enterInContext
             )
           //--- Enter in static value
             staticValue += propertyType.llvmTypeName + " " + expressionResult.llvmName
-          end      
+          end
         case function (@lstring functionName @routineFormalArgumentListAST formalArgs) :
           if not propertyType.kind.isFunction then
             error (endOfExp : "a static expression is expected here")
@@ -481,12 +481,12 @@ override method @staticListAST enterInContext
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  SEMANTIC ANALYSIS                                                                                                    
+//!  SEMANTIC ANALYSIS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @staticListInvokedFunctionSetMap {
   public var @stringset mInvokedFunctionSet
-  
+
   insert insertKey error message "INTERNAL ERROR"
   search searchKey error message "INTERNAL ERROR"
 }
@@ -500,7 +500,7 @@ class @decoratedStaticList : @abstractDecoratedDeclaration {
 
 //·······················································································································
 
-override method @decoratedStaticList semanticAnalysis
+override proc @decoratedStaticList semanticAnalysis
   ?context:let @semanticContext unused inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
@@ -513,7 +513,7 @@ override method @decoratedStaticList semanticAnalysis
       case function (@lstring functionName @routineFormalArgumentListAST formalArgs) :
       //--- Routine mangled name
         let routineMangledName = routineMangledNameFromAST (
-          !"" 
+          !""
           !functionName
           !formalArgs
         )
@@ -527,10 +527,10 @@ override method @decoratedStaticList semanticAnalysis
 
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  CODE GENERATION                                                                                                    
+//!  CODE GENERATION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @staticListInitializationMap generateLLVMForStaticLists
+proc @staticListInitializationMap generateLLVMForStaticLists
   ?let @staticListInvokedFunctionSetMap inUsefulStaticArrayMap
   ?!@string ioLLVMcode
 {
@@ -567,7 +567,7 @@ class @staticListIndirectRoutineIR : @abstractRoutineIR {
 
 //·······················································································································
 
-override method @staticListIndirectRoutineIR llvmCodeGeneration 
+override proc @staticListIndirectRoutineIR llvmCodeGeneration
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
@@ -627,7 +627,7 @@ override method @staticListIndirectRoutineIR llvmCodeGeneration
   end
   llvmFunctionTypeName += ")*"
 //--- Indirect call
-  ioLLVMcode += "  %ptr = getelementptr inbounds " + receiverLLVMTypeName 
+  ioLLVMcode += "  %ptr = getelementptr inbounds " + receiverLLVMTypeName
   ioLLVMcode += ", " + receiverLLVMTypeName + "* %self, i32 0, i32 " + self.mPropertyIndex + "\n"
   ioLLVMcode += "  %f = load " + llvmFunctionTypeName + ", " + llvmFunctionTypeName + "* %ptr\n"
   if self.mReturnTypeProxy.isNull then

@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @llvmPrefixOperatorEnumeration {
@@ -11,7 +11,7 @@ enum @llvmPrefixOperatorEnumeration {
 
 //·······················································································································
 
-getter @llvmPrefixOperatorEnumeration string -> @string {
+func @llvmPrefixOperatorEnumeration string -> @string {
   switch self
   case notOp   : result = "not"
   case minusOp : result = "-"
@@ -22,7 +22,7 @@ getter @llvmPrefixOperatorEnumeration string -> @string {
 
 //·······················································································································
 
-getter @llvmPrefixOperatorEnumeration prefixOperator -> @prefixOperator {
+func @llvmPrefixOperatorEnumeration prefixOperator -> @prefixOperator {
   switch self
   case notOp   : result = .notOp
   case minusOp : result = .minusOp
@@ -44,7 +44,7 @@ class @llvmPrefixOperatorAST : @abstractDeclarationAST {
 
 //·······················································································································
 
-override getter @llvmPrefixOperatorAST locationForErrorSignaling -> @location outLocation {
+override func @llvmPrefixOperatorAST locationForErrorSignaling -> @location outLocation {
   outLocation = self.mPrefixOperatorLocation
 }
 
@@ -111,7 +111,7 @@ proc appendPrefixOperatorDeclaration_bitWiseComplement
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  SYNTAX                                                                                                               
+//!  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -133,7 +133,7 @@ syntax extension omnibus_syntax {
       outOperator = .bitWiseComplement
     end
   }
-  
+
   //·····················································································································
 
   rule <declaration> ?!@ast ioAST {
@@ -165,10 +165,10 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  PRECEDENCE GRAPH                                                                                                     
+//  PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @llvmPrefixOperatorAST enterInPrecedenceGraph
+override proc @llvmPrefixOperatorAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   let nodeName = @lstring {!self.mPrefixOperator.string + "." + self.mReceiverTypeName !self.mPrefixOperatorLocation}
@@ -179,15 +179,15 @@ override method @llvmPrefixOperatorAST enterInPrecedenceGraph
 
 //·······················································································································
 
-override getter @llvmPrefixOperatorAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+override func @llvmPrefixOperatorAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = self.mPrefixOperator.string + " " + self.mReceiverTypeName
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  ENTER IN CONTEXT                                                                                                     
+//!  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @llvmPrefixOperatorAST enterInContext
+override proc @llvmPrefixOperatorAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
@@ -252,7 +252,7 @@ class @llvmPrefixOperatorUsage : @prefixOperatorUsage {
 
 //·······················································································································
 
-override method @llvmPrefixOperatorUsage generateCode
+override proc @llvmPrefixOperatorUsage generateCode
   ?let @objectIR inReceiverOperand
   ?let @location inOperatorLocation
   ?let @omnibusType inResultType
@@ -267,7 +267,7 @@ override method @llvmPrefixOperatorUsage generateCode
   [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
     !?receiverOperand
-  ]  
+  ]
 //--- New LLVM variable for result
   getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
   var @procCallEffectiveParameterListIR argumentList = @[]
@@ -294,7 +294,7 @@ class @prefixOperatorRoutineIR : @abstractRoutineIR {
 
 //·······················································································································
 
-override method @prefixOperatorRoutineIR llvmCodeGeneration 
+override proc @prefixOperatorRoutineIR llvmCodeGeneration
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds

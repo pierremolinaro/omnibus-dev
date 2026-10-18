@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  AST                                                                                                                  
+//!  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @taskListAST {
@@ -22,7 +22,7 @@ list @taskSetupListAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  SYNTAX                                                                                                               
+//!  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -139,10 +139,10 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  PRECEDENCE GRAPH                                                                                                     
+//!  PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @taskListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+proc @taskListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for (* * * * * * mGuardedCommandList * *) in self do
     for guardedCommand in mGuardedCommandList do
       [guardedCommand.mInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
@@ -151,7 +151,7 @@ method @taskListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph io
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  ENTER IN CONTEXT                                                                                                     
+//!  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @taskMap {
@@ -162,7 +162,7 @@ map @taskMap {
 
 //·······················································································································
 
-method @taskListAST enterInContext
+proc @taskListAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList ioDecoratedRoutineList
@@ -272,11 +272,11 @@ method @taskListAST enterInContext
       [initValue extractStructure ?sortedOperandList: initialValueList]
     end
     ioContext.mGlobalTaskVariableList +=
-      !task.mTaskName.string 
+      !task.mTaskName.string
       !task.mTaskName.string
       !.llvmStructureValue{!type:taskType !values:initialValueList}
   //---
-    decoratedTaskList += 
+    decoratedTaskList +=
       !task.mTaskName
       !task.mStackSize
       !task.mTaskSetupListAST
@@ -290,7 +290,7 @@ method @taskListAST enterInContext
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  SEMANTIC ANALYSIS                                                                                                    
+//!  SEMANTIC ANALYSIS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @decoratedTaskList {
@@ -311,7 +311,7 @@ class @decoratedTaskListDeclaration : @abstractDecoratedDeclaration {
 
 //·······················································································································
 
-override method @decoratedTaskListDeclaration semanticAnalysis
+override proc @decoratedTaskListDeclaration semanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
@@ -350,7 +350,7 @@ private proc analyzeOrderedTaskRoutines
         if precedenceList.count == 0 then
           error (name : "Exactly one routine should have no precedence")
         end
-      end    
+      end
     end
   //--- Signal unsorted entries as error
     var @taskSetupListAST taskSetupListAST = inTaskRoutineLISTAST
@@ -383,7 +383,7 @@ private proc analyzeOrderedTaskRoutines
 
 //·······················································································································
 
-method @decoratedTaskList.@element taskSemanticAnalysis
+proc @decoratedTaskList.@element taskSemanticAnalysis
   ?context:let @semanticContext inContext
   ?priority:let @uint inPriority
   ?!temporary:@semanticTemporariesStruct unused ioTemporaries
@@ -427,7 +427,7 @@ method @decoratedTaskList.@element taskSemanticAnalysis
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  CODE GENERATION                                                                                                      
+//  CODE GENERATION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 map @taskMapIR {
@@ -470,7 +470,7 @@ list @globalTaskVariableList {
 
 //·······················································································································
 
-method @taskMapIR generateCode
+proc @taskMapIR generateCode
   ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds unused ioGenerationAdds
@@ -603,7 +603,7 @@ class @taskActivateFunctionIR : @abstractRoutineIR {
 
 //·······················································································································
 
-override method @taskActivateFunctionIR llvmCodeGeneration 
+override proc @taskActivateFunctionIR llvmCodeGeneration
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds

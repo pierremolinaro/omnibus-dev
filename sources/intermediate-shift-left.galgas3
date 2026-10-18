@@ -17,7 +17,7 @@ class @leftShiftIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @leftShiftIR llvmInstructionCode
+override proc @leftShiftIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds

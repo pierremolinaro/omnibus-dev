@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  AST                                                                                                               
+//!  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @typeAliasDeclarationAST : @abstractDeclarationAST {
@@ -9,12 +9,12 @@ class @typeAliasDeclarationAST : @abstractDeclarationAST {
 
 //·······················································································································
 
-override getter @typeAliasDeclarationAST locationForErrorSignaling -> @location {
+override func @typeAliasDeclarationAST locationForErrorSignaling -> @location {
   result = self.mAliasTypeName.location
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  SYNTAX                                                                                                               
+//!  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -34,16 +34,16 @@ syntax extension omnibus_syntax {
   rule <type_definition> ?!@ast unused ioAST !@lstring outTypeName {
     $\$type$ ?outTypeName // Simple redéfinition de type
   }
-  
+
   //·····················································································································
 
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  PRECEDENCE GRAPH                                                                                                     
+//!  PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @typeAliasDeclarationAST enterInPrecedenceGraph
+override proc @typeAliasDeclarationAST enterInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   [!?ioGraph addNode !self.mAliasTypeName !self]
@@ -52,15 +52,15 @@ override method @typeAliasDeclarationAST enterInPrecedenceGraph
 
 //·······················································································································
 
-override getter @typeAliasDeclarationAST keyRepresentationForErrorSignaling -> @string {
-  result = "typealias " + self.mAliasTypeName 
+override func @typeAliasDeclarationAST keyRepresentationForErrorSignaling -> @string {
+  result = "typealias " + self.mAliasTypeName
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  ENTER IN CONTEXT                                                                                                     
+//!  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @typeAliasDeclarationAST enterInContext
+override proc @typeAliasDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList

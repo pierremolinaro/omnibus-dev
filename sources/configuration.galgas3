@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  AST                                                                                                                  
+//!  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @interruptionPanicCode {
@@ -18,16 +18,16 @@ list @interruptionConfigurationList {
 
 struct @targetParameters {
   public var @location mConfigurationLocation
-  
+
   public var @2lstringlist mPython_utilityToolList
   public var @lstring mPython_build
 
   public var @lstring mLinkerScript
-  
+
   public var @uint mPointerSize
 
   public var @bool mHandleDynamicArray
- 
+
   public var @lbigint mSystemStackSize
   public var @lbigint mStackedUserRegisterOnInterruptByteSize
 
@@ -38,7 +38,7 @@ struct @targetParameters {
   public var @lbigint mBitbandRegisterRelocationAddress
   public var @lbigint mBitbandRegisterOffsetMultiplier
   public var @lbigint mBitbandRegisterBitMultiplier
-  
+
   public var @lstring mSectionHandler
   public var @lbigint mSectionPushedRegisterByteSize
   public var @lstring mSectionDispatcherHeader
@@ -49,10 +49,10 @@ struct @targetParameters {
   public var @lstringlist m_C_definitionFiles
   public var @lstringlist m_S_definitionFiles
   public var @lstringlist m_LL_definitionFiles
-  
+
   public var @lstring mXtrInterruptHandler
   public var @lstring mUndefinedInterruptHandler
-  
+
   public var @lstring mServiceHandler
   public var @lbigint mServicePushedRegisterByteSize
   public var @lstring mServiceDispatcherEntry
@@ -71,7 +71,7 @@ class @configurationDeclarationAST : @abstractDeclarationAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  SYNTAX                                                                                                               
+//!  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_target_specific_syntax {
@@ -114,7 +114,7 @@ syntax extension omnibus_target_specific_syntax {
     <configuration_key> !"LINKER_SCRIPT"
     $"string"$ ?let linkerScript
     <configuration_key> !"PANIC_CODE_TYPE_NAME"
-    $\$type$ ?let panicCodeTypeName 
+    $\$type$ ?let panicCodeTypeName
     <configuration_key> !"PANIC_LINE_TYPE_NAME"
     $\$type$ ?let panicLineTypeName
     <configuration_key> !"POINTER_BIT_COUNT"
@@ -293,7 +293,7 @@ syntax extension omnibus_target_specific_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  PRECEDENCE GRAPH                                                                                                     
+//!  PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func %once configurationNodeNameForPrecedenceGraph -> @string {
@@ -308,7 +308,7 @@ func %once isrSlotTypeName -> @string {
 
 //·······················································································································
 
-override method @configurationDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @configurationDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   let rootNode =  @lstring {!configurationNodeNameForPrecedenceGraph () !self.mPanicCodeTypeName.location}
   [!?ioGraph addNode !rootNode !self]
   [!?ioGraph addEdge !from: rootNode !to: self.mPanicCodeTypeName]
@@ -318,22 +318,22 @@ override method @configurationDeclarationAST enterInPrecedenceGraph ?!@semanticT
 
 //·······················································································································
 
-override getter @configurationDeclarationAST locationForErrorSignaling -> @location outLocation {
+override func @configurationDeclarationAST locationForErrorSignaling -> @location outLocation {
   outLocation = self.mPanicCodeTypeName.location
 }
 
 //·······················································································································
 
-override getter @configurationDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+override func @configurationDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
   outRepresentation = configurationNodeNameForPrecedenceGraph ()
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  ENTER IN CONTEXT                                                                                                     
+//!  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 // Duplicate configuration is detected in noteTypesInPrecedenceGraph
 
-override method @configurationDeclarationAST enterInContext
+override proc @configurationDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList

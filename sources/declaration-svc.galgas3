@@ -163,7 +163,7 @@ syntax extension omnibus_syntax {
 //  NOTE TYPES IN PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @systemRoutineDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @systemRoutineDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   var s = ""
   if self.mReceiverTypeName.string != "" then
     s += self.mReceiverTypeName.string + "."
@@ -192,13 +192,13 @@ override method @systemRoutineDeclarationAST enterInPrecedenceGraph ?!@semanticT
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @systemRoutineDeclarationAST keyRepresentationForErrorSignaling -> @string {
+override func @systemRoutineDeclarationAST keyRepresentationForErrorSignaling -> @string {
   result = "system " + self.mReceiverTypeName + "." + self.mSystemRoutineName
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @systemRoutineDeclarationAST locationForErrorSignaling -> @location {
+override func @systemRoutineDeclarationAST locationForErrorSignaling -> @location {
   result = self.mSystemRoutineName.location
 }
 
@@ -270,7 +270,7 @@ func systemImplementationMangledNameFromAST ?let @string inReceiverLLVMBaseTypeN
 //  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @systemRoutineDeclarationAST enterInContext
+override proc @systemRoutineDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList ioDecoratedRoutineList
@@ -551,7 +551,7 @@ class @systemUserRoutineIR : @abstractRoutineIR {
 
 //·······················································································································
 
-override method @systemUserRoutineIR enterAccessibleEntities
+override proc @systemUserRoutineIR enterAccessibleEntities
    ?!@stringset ioInvokedRoutineSet
    ?!@uint unused ioMaxBranchOfOnInstructions
 {
@@ -560,7 +560,7 @@ override method @systemUserRoutineIR enterAccessibleEntities
 
 //·······················································································································
 
-override method @systemUserRoutineIR svcDeclarationGeneration
+override proc @systemUserRoutineIR svcDeclarationGeneration
   ?!@primitiveAndServiceIRlist ioPrimitiveAndServiceList
   ?!@sectionIRlist ioSectionList
   ?!@generationAdds unused ioGenerationAdds
@@ -576,7 +576,7 @@ override method @systemUserRoutineIR svcDeclarationGeneration
 
 //·······················································································································
 
-override method @systemUserRoutineIR llvmCodeGeneration
+override proc @systemUserRoutineIR llvmCodeGeneration
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds

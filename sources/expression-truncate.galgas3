@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @truncateExpressionAST : @expressionAST {
@@ -9,7 +9,7 @@ class @truncateExpressionAST : @expressionAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SYNTAX                                                                                                               
+//  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -40,10 +40,10 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
+//  PRECEDENCE GRAPH FROM EXPRESSION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @truncateExpressionAST addDependenceEdgeForStaticExpression
+override proc @truncateExpressionAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
@@ -54,10 +54,10 @@ override method @truncateExpressionAST addDependenceEdgeForStaticExpression
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  NOTE TYPES                                                                                                           
+//  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @truncateExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @truncateExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [self.mExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
   if self.mTypeName.string != "" then
     [!?ioGraph noteNode !self.mTypeName]
@@ -65,12 +65,12 @@ override method @truncateExpressionAST noteExpressionTypesInPrecedenceGraph ?!@s
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SEMANTICS                                                                                                            
+//  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //! @truncateExpressionAST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @truncateExpressionAST analyzeExpression
+override proc @truncateExpressionAST analyzeExpression
   ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?optionalTargetType:let @omnibusType inOptionalTargetType
@@ -100,7 +100,7 @@ override method @truncateExpressionAST analyzeExpression
   [!?ioInstructionGenerationList appendLoadWhenReference
     !?ioTemporaries
     !?expressionResult
-  ]  
+  ]
 //--- Analyze type
   let @omnibusType resultType = if self.mTypeName.string == ""
     then inOptionalTargetType
@@ -131,7 +131,7 @@ override method @truncateExpressionAST analyzeExpression
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  CODE GENERATION                                                                                                      
+//  CODE GENERATION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //! @truncateInstructionIR
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -143,7 +143,7 @@ class @truncateInstructionIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @truncateInstructionIR llvmInstructionCode
+override proc @truncateInstructionIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds

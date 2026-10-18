@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  AST                                                                                                                  
+//!  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @procFormalArgumentPassingMode %equatable {
@@ -19,7 +19,7 @@ list @routineFormalArgumentListAST {
 
 //·······················································································································
 
-getter @procFormalArgumentPassingMode formalPassingModeString -> @string {
+func @procFormalArgumentPassingMode formalPassingModeString -> @string {
   switch self
   case input : result = "?"
   case output : result = "!"
@@ -29,7 +29,7 @@ getter @procFormalArgumentPassingMode formalPassingModeString -> @string {
 
 //·······················································································································
 
-getter @procFormalArgumentPassingMode requiredActualPassingModeForSelector ?let @string inSelector -> @string {
+func @procFormalArgumentPassingMode requiredActualPassingModeForSelector ?let @string inSelector -> @string {
   switch self
   case input : result = "!"
   case output : result = "?"
@@ -41,7 +41,7 @@ getter @procFormalArgumentPassingMode requiredActualPassingModeForSelector ?let 
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  SYNTAX                                                                                                               
+//!  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -132,7 +132,7 @@ list @routineTypedSignature %equatable {
 
 //·······················································································································
 
-getter @routineTypedSignature typedString -> @string {
+func @routineTypedSignature typedString -> @string {
   result = "("
   for (formalArgumentPassingMode selector typeProxy *) in self do
     result += formalArgumentPassingMode.formalPassingModeString + selector + ":" + typeProxy.key
@@ -142,7 +142,7 @@ getter @routineTypedSignature typedString -> @string {
 
 //·······················································································································
 
-getter @routineTypedSignature mangledName
+func @routineTypedSignature mangledName
      ?receiverTypeName: let @string inReceiverTypeName
      ?functionName: let @lstring inFunctionName
 -> @lstring {
@@ -200,7 +200,7 @@ proc routineTypedSignature2 ?@unifiedTypeMap inTypeMap
 
 //·······················································································································
 
-getter @routineFormalArgumentListAST routineSignature ?let @location inRoutineNameLocation -> @lstring {
+func @routineFormalArgumentListAST routineSignature ?let @location inRoutineNameLocation -> @lstring {
   var key = "("
   for (formalArgumentPassingMode selector * *) in self do
     key += formalArgumentPassingMode.formalPassingModeString + selector + ":"
@@ -211,7 +211,7 @@ getter @routineFormalArgumentListAST routineSignature ?let @location inRoutineNa
 
 //·······················································································································
 
-getter @effectiveArgumentListAST routineSignature ?let @location inRoutineNameLocation -> @lstring {
+func @effectiveArgumentListAST routineSignature ?let @location inRoutineNameLocation -> @lstring {
   var key = "("
   for (passingMode selector) in self do
     key += passingMode.matchingFormalArgument + selector + ":"

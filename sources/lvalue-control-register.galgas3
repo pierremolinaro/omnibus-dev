@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @registerGroupIndexAST {
@@ -24,7 +24,7 @@ struct @controlRegisterLValueAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SYNTAX                                                                                                               
+//  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -81,10 +81,10 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  NOTE TYPES                                                                                                           
+//!  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @controlRegisterLValueAST noteExpressionTypesInPrecedenceGraph
+proc @controlRegisterLValueAST noteExpressionTypesInPrecedenceGraph
   ?!@semanticTypePrecedenceGraph ioGraph
 {
   switch self.mGroupIndex
@@ -100,10 +100,10 @@ method @controlRegisterLValueAST noteExpressionTypesInPrecedenceGraph
 }
 
 //-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-//! PRECEDENCE GRAPH FROM EXPRESSION                                                                                     
+//! PRECEDENCE GRAPH FROM EXPRESSION
 //-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @controlRegisterLValueAST addDependenceEdgeForStaticExpression
+proc @controlRegisterLValueAST addDependenceEdgeForStaticExpression
   ?let @lstring inConstantName
   ?!@semanticTypePrecedenceGraph ioGraph
 {
@@ -121,10 +121,10 @@ method @controlRegisterLValueAST addDependenceEdgeForStaticExpression
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  SEMANTICS                                                                                                            
+//!  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @controlRegisterLValueAST controlRegisterLValueSemanticAnalysis
+proc @controlRegisterLValueAST controlRegisterLValueSemanticAnalysis
   ?writeAccess:let @bool inWriteAccess
   ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
@@ -193,7 +193,7 @@ method @controlRegisterLValueAST controlRegisterLValueSemanticAnalysis
         !?staticEntityMap:ioStaticEntityMap
         !?variableMap: ioUniversalMap
         !?alloca: ioAllocaList
-        !indexExpression 
+        !indexExpression
         !endOfIndex
         !checkIndexExpression
         !arraySize:baseAddresses.count
@@ -228,7 +228,7 @@ method @controlRegisterLValueAST controlRegisterLValueSemanticAnalysis
       !?staticEntityMap:ioStaticEntityMap
       !?variableMap: ioUniversalMap
       !?alloca: ioAllocaList
-      !indexExpression 
+      !indexExpression
       !endOfIndex
       !checkIndexExpression
       !arraySize:registerArraySize

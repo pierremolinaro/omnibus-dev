@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @sliceAssignmentInstructionAST : @instructionAST {
@@ -26,7 +26,7 @@ enum @sliceTargetAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SYNTAX                                                                                                               
+//  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -77,10 +77,10 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  NOTE TYPES                                                                                                           
+//  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @sliceAssignmentInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @sliceAssignmentInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   [!?ioGraph noteNode !self.mTypeName]
   [self.mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
   for (* sliceKind) in self.mSliceAssignmentList do
@@ -95,10 +95,10 @@ override method @sliceAssignmentInstructionAST noteInstructionTypesInPrecedenceG
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SEMANTICS                                                                                                            
+//  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @sliceAssignmentInstructionAST instructionSemanticAnalysis
+override proc @sliceAssignmentInstructionAST instructionSemanticAnalysis
   ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext

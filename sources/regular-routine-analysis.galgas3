@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//   SEMANTICS                                                                                                           
+//   SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 list @decoratedRegularRoutineList {
@@ -20,13 +20,13 @@ list @decoratedRegularRoutineList {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @decoratedRegularRoutineList routineSemanticAnalysis
+proc @decoratedRegularRoutineList routineSemanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
 {
   for function in self do
-    [function semanticAnalysis 
+    [function semanticAnalysis
       !context: inContext
       !?temporary: ioTemporaries
       !?intermediateCode: ioIntermediateCodeStruct
@@ -36,7 +36,7 @@ method @decoratedRegularRoutineList routineSemanticAnalysis
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @decoratedRegularRoutineList.@element semanticAnalysis
+proc @decoratedRegularRoutineList.@element semanticAnalysis
   ?context:let @semanticContext inContext
   ?!temporary:@semanticTemporariesStruct ioTemporaries
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
@@ -116,7 +116,7 @@ list @allocaList {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-method @allocaList generateAllocaList ?!@string ioLLVMcode {
+proc @allocaList generateAllocaList ?!@string ioLLVMcode {
   for (variable type *) in self do
     ioLLVMcode += "  " + variable + " = alloca " + type.llvmTypeName + "\n"
   end
@@ -146,7 +146,7 @@ class @regularRoutineIR : @abstractRoutineIR {
 
 //·······················································································································
 
-override method @regularRoutineIR enterAccessibleEntities
+override proc @regularRoutineIR enterAccessibleEntities
    ?!@stringset ioInvokedRoutineSet
    ?!@uint ioMaxBranchOfOnInstructions
 {
@@ -160,7 +160,7 @@ override method @regularRoutineIR enterAccessibleEntities
 
 //·······················································································································
 
-override method @regularRoutineIR llvmCodeGeneration 
+override proc @regularRoutineIR llvmCodeGeneration
   ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds

@@ -11,7 +11,7 @@ class @sourceLocationIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @sourceLocationIR llvmInstructionCode
+override proc @sourceLocationIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds

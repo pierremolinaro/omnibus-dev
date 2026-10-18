@@ -21,7 +21,7 @@ class @enterRegisterGroupSubscriptedAddressIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @enterRegisterGroupSubscriptedAddressIR llvmInstructionCode
+override proc @enterRegisterGroupSubscriptedAddressIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext unused inGenerationContext
   ?!@generationAdds unused ioGenerationAdds

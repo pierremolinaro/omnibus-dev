@@ -31,7 +31,7 @@ class @shortCircuitAndOperationIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @shortCircuitAndOperationIR enterAccessibleEntities 
+override proc @shortCircuitAndOperationIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint ioMaxBranchOfOnInstructions
 {
@@ -41,7 +41,7 @@ override method @shortCircuitAndOperationIR enterAccessibleEntities
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @shortCircuitAndOperationIR llvmInstructionCode
+override proc @shortCircuitAndOperationIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds

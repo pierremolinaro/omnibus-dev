@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 class @functionDeclarationAST : @abstractDeclarationAST {
@@ -15,7 +15,7 @@ class @functionDeclarationAST : @abstractDeclarationAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SYNTAX                                                                                                               
+//  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -144,10 +144,10 @@ syntax extension omnibus_syntax {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  NOTE TYPES IN PRECEDENCE GRAPH                                                                                       
+//  NOTE TYPES IN PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @functionDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @functionDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   var s = ""
   if self.mReceiverTypeName.string != "" then
     s += self.mReceiverTypeName.string + "."
@@ -175,21 +175,21 @@ override method @functionDeclarationAST enterInPrecedenceGraph ?!@semanticTypePr
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @functionDeclarationAST keyRepresentationForErrorSignaling -> @string {
+override func @functionDeclarationAST keyRepresentationForErrorSignaling -> @string {
   result = "function " + self.mReceiverTypeName + "." + self.mFunctionName
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override getter @functionDeclarationAST locationForErrorSignaling -> @location {
+override func @functionDeclarationAST locationForErrorSignaling -> @location {
   result = self.mFunctionName.location
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  ENTER IN CONTEXT                                                                                                     
+//  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @functionDeclarationAST enterInContext
+override proc @functionDeclarationAST enterInContext
   ?!context:@semanticContext ioContext
   ?!@declarationDecorationList unused ioDecoratedDeclarationList
   ?!@decoratedRegularRoutineList ioDecoratedRoutineList
@@ -212,7 +212,7 @@ override method @functionDeclarationAST enterInContext
       if not warnIfUnused then
         error (attribute : "duplicated @" + noUnusedWarningAttribute () + " attribute")
       end
-      warnIfUnused = false    
+      warnIfUnused = false
     elsif attribute.string == exportedAttribute () then
       if exportedFunction then
         error (attribute : "duplicated @" + exportedAttribute () + " attribute")

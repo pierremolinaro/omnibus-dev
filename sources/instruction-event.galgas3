@@ -1,5 +1,5 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  AST                                                                                                                  
+//  AST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @guardedCommandAST {
@@ -32,7 +32,7 @@ class @syncInstructionAST : @instructionAST {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SYNTAX                                                                                                               
+//  SYNTAX
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 syntax extension omnibus_syntax {
@@ -68,7 +68,7 @@ syntax extension omnibus_syntax {
       !effectiveParameterListAST:effectiveParameterList
     }
   }
-  
+
   //·····················································································································
 
   rule <guarded_command> ?!@ast ioAST ?let @bool inIsExitCommand !@guardedCommandAST outGuardedCommand {
@@ -134,26 +134,26 @@ syntax extension omnibus_syntax {
     $}$
     ioInstructionList += !@syncInstructionAST {!startLocation !instructionBranchList !.here}
   }
-  
+
   //·····················································································································
 
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  NOTE TYPES                                                                                                           
+//  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @syncInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @syncInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
   for (* instructionList *) in self.mBranchList do
     [instructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
   end
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//  SEMANTICS                                                                                                            
+//  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @syncInstructionAST instructionSemanticAnalysis
+override proc @syncInstructionAST instructionSemanticAnalysis
   ?self:let @omnibusType inSelfType
   ?routineAttributes:let @routineAttributes inRoutineAttributes
   ?context:let @semanticContext inContext
@@ -277,7 +277,7 @@ override method @syncInstructionAST instructionSemanticAnalysis
         error ([nameList mValueAtIndex !0]
         : "Standalone guard are not handled"
         spoil guardMangledName, guardEffectiveParameterListIR)
-      else // Global variable method, or driver method: g.h. … (…)
+      else // Global variable proc, or driver proc: g.h. … (…)
         var propertyList = nameList
         [!?propertyList popFirst ?let globalReceiverName]
         [!?propertyList popLast ?let guardName]
@@ -386,7 +386,7 @@ proc analyzeGuardCall
 //--- Check accessibility
   if not isPublic then
     error (inGuardName : "this guard is not public" spoil outGuardMangledName, outEffectiveParameterListIR)
-  else  
+  else
     outGuardMangledName = guardRoutineUserLLVMName
   //--- Analyze effective parameters
     outEffectiveParameterListIR = @[@(.outputInput, inReceiver)]
@@ -409,7 +409,7 @@ proc analyzeGuardCall
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
-//!  CODE GENERATION                                                                                                      
+//!  CODE GENERATION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 enum @guardedCommandIR {
@@ -452,7 +452,7 @@ class @syncInstructionIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @syncInstructionIR llvmInstructionCode
+override proc @syncInstructionIR llvmInstructionCode
   ?!@string ioLLVMcode
   ?let @generationContext inGenerationContext
   ?!@generationAdds ioGenerationAdds
@@ -462,7 +462,7 @@ override method @syncInstructionIR llvmInstructionCode
   ioGenerationAdds.mUniqueIndex += 1
 //---
   ioLLVMcode += "  br label %" + startLabel + ".start\n\n"
-  let startLabelName = startLabel + ".start" 
+  let startLabelName = startLabel + ".start"
   ioLLVMcode += startLabelName + ":\n"
   let exitLabelName = startLabel + ".exit"
   let selectLabelName = startLabel + ".select"
@@ -556,7 +556,7 @@ override method @syncInstructionIR llvmInstructionCode
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override method @syncInstructionIR enterAccessibleEntities
+override proc @syncInstructionIR enterAccessibleEntities
   ?!@stringset ioInvokedRoutineSet
   ?!@uint ioMaxBranchOfOnInstructions
 {
