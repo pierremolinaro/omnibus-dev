@@ -4,19 +4,19 @@
 
 enum @effectiveArgumentPassingModeAST {
   case input (@lstring name)
-  case inputWithType (@bool constant @lstring typeName @lstring name)
-  case output (@expressionAST exp @location endOfExp)
+  case inputWithType (@bool constant, @lstring typeName, @lstring name)
+  case output (@expressionAST exp, @location endOfExp)
   case outputInput (@lstring name)
   case outputInputSelfVariable (@lstring name)
 }
 
 //·······················································································································
 
-func @effectiveArgumentPassingModeAST matchingFormalArgument -> @string {
+func @effectiveArgumentPassingModeAST.matchingFormalArgument () -> @string {
   switch self
   case input (*) : result = "!"
-  case inputWithType (* * *) : result = "!"
-  case output (* *) : result = "?"
+  case inputWithType (*, *, *) : result = "!"
+  case output (*, *) : result = "?"
   case outputInput (*) : result = "?!"
   case outputInputSelfVariable (*) : result = "?!"
   end
@@ -31,10 +31,10 @@ list @effectiveArgumentListAST {
 
 //·······················································································································
 
-func @effectiveArgumentListAST mangledName
-    ?receiverTypeName: let @string inReceiverTypeName
+func @effectiveArgumentListAST.mangledName
+    (?receiverTypeName: let @string inReceiverTypeName,
     ?functionName: let @lstring inFunctionName
--> @lstring {
+) -> @lstring {
   var s = ""
   if inReceiverTypeName != "" then
     s += inReceiverTypeName + "."
@@ -44,7 +44,7 @@ func @effectiveArgumentListAST mangledName
     s += effectiveArgumentPassingMode.matchingFormalArgument + selector + ":"
   end
   s += ")"
-  result = @{!s !inFunctionName.location}
+  result = @(!s, inFunctionName.location)
 }
 
 //-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -55,30 +55,30 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <effective_parameters> ?!@ast ioAST !@effectiveArgumentListAST outEffectiveParameterList !@location outEndOfArgs {
+  rule <effective_parameters> (?!@ast ioAST ,!@effectiveArgumentListAST outEffectiveParameterList ,!@location outEndOfArgs ) {
     outEffectiveParameterList = @[]
     $($
     repeat
     while
-      $!selector:$ ?let selector
-      <expression> !?ioAST ?let expression
-      outEffectiveParameterList += !.output{!exp:expression !endOfExp:.here} !selector
+      $!selector:$ (?let selector)
+      <expression> (!?ioAST, ?let expression)
+      outEffectiveParameterList += !.output(!exp:expression, !endOfExp:.here) !selector
     while
-      $!?selector:$ ?let selector
-      $identifier$ ?let effectiveParameterName
-      outEffectiveParameterList += !.outputInput{!name:effectiveParameterName} !selector
+      $!?selector:$ (?let selector)
+      $identifier$ (?let effectiveParameterName)
+      outEffectiveParameterList += !.outputInput(!name:effectiveParameterName) !selector
     while
-      $!?selector:$ ?let selector
+      $!?selector:$ (?let selector)
       $self$
       $.$
-      $identifier$ ?let effectiveParameterName
-      outEffectiveParameterList += !.outputInputSelfVariable{!name:effectiveParameterName} !selector
+      $identifier$ (?let effectiveParameterName)
+      outEffectiveParameterList += !.outputInputSelfVariable(!name:effectiveParameterName) !selector
     while
-      $?selector:$ ?let selector
-      $identifier$ ?let effectiveParameterName
-      outEffectiveParameterList += !.input{!name:effectiveParameterName} !selector
+      $?selector:$ (?let selector)
+      $identifier$ (?let effectiveParameterName)
+      outEffectiveParameterList += !.input(!name:effectiveParameterName) !selector
     while
-      $?selector:$ ?let selector
+      $?selector:$ (?let selector)
       let @bool constant
       select
         $var$
@@ -87,15 +87,15 @@ syntax extension omnibus_syntax {
         $let$
         constant = true
       end
-      $identifier$ ?let effectiveParameterName
+      $identifier$ (?let effectiveParameterName)
       let @lstring typeName
       select
         typeName = "".nowhere
       or
-        <type_definition> !?ioAST ?typeName
+        <type_definition> (!?ioAST, ?typeName)
       end
       outEffectiveParameterList +=
-        !.inputWithType{!constant:constant !typeName:typeName !name:effectiveParameterName}
+        !.inputWithType(!constant:constant, !typeName:typeName, !name:effectiveParameterName)
         !selector
     end
     outEndOfArgs = .here
@@ -111,67 +111,67 @@ syntax extension omnibus_syntax {
 //-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc analyzeEffectiveParameters
-  ?self:let @omnibusType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?formal:let @routineTypedSignature inFormalSignature
-  ?effective:let @effectiveArgumentListAST inEffectiveParameterList
-  ?errorLocation:let @location inErrorLocation
-  ?context:let @semanticContext inContext
-  ?requiredMode:let @mode inRequiredMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  (?self:let @omnibusType inSelfType,
+  ?routineAttributes:let @routineAttributes inRoutineAttributes,
+  ?formal:let @routineTypedSignature inFormalSignature,
+  ?effective:let @effectiveArgumentListAST inEffectiveParameterList,
+  ?errorLocation:let @location inErrorLocation,
+  ?context:let @semanticContext inContext,
+  ?requiredMode:let @mode inRequiredMode,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap,
+  ?!alloca:@allocaList ioAllocaList,
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList,
   ?!effectiveIR:@procCallEffectiveParameterListIR ioEffectiveParameterListIR
-{
+) {
 //--- Analyze effective parameters
   var @procEffectiveParameterList parameterList = @[]
   for (* * formal_mTypeProxy *) in inFormalSignature, (effective_mEffectiveParameterKind effective_mSelector) in inEffectiveParameterList do
     switch effective_mEffectiveParameterKind
-    case inputWithType (@bool constant @lstring typeName @lstring name) :
+    case inputWithType (@bool constant, @lstring typeName, @lstring name) :
       let type = if typeName.string == "" then
         formal_mTypeProxy.type
       else
         [inContext.mTypeMap searchKey !typeName].type
       end
       if constant then
-        [!?ioUniversalMap insertLocalConstant !name !false !type !name]
+        !?ioUniversalMap.insertLocalConstant (!name, !false, !type, !name)
       else
-        [!?ioUniversalMap insertLocalVariable !name !type !name !.hasUnreadValue !false]
+        !?ioUniversalMap.insertLocalVariable (!name, !type, !name, !.hasUnreadValue, !false)
       end
       ioAllocaList += !llvmNameForLocalVariable (!name) !type !true
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !type
       ioEffectiveParameterListIR +=
         !.input
-        !.reference {!type:type !llvmName:llvmNameForLocalVariable (!name)}
+        !.reference (!type:type, !llvmName:llvmNameForLocalVariable (!name))
     case input (@lstring name) :
-      [!?ioUniversalMap searchValuedObjectForWriteAccess !name ?let objectIR]
+      !?ioUniversalMap.searchValuedObjectForWriteAccess (!name, ?let objectIR)
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !objectIR.type
       ioEffectiveParameterListIR +=
         !.input
-        !.reference {
-          !type:objectIR.type
+        !.reference (
+          !type:objectIR.type,
           !llvmName: objectIR.llvmName.nowhere
-        }
-    case output (@expressionAST expression @location endOfExp) :
-      [expression analyzeExpression
-        !self:inSelfType
-        !routineAttributes:inRoutineAttributes
-        !optionalTargetType:formal_mTypeProxy.type
-        !context:inContext
-        !mode:inRequiredMode
-        !?temporary:ioTemporaries
-        !?staticEntityMap:ioStaticEntityMap
-        !?variableMap:ioUniversalMap
-        !?alloca:ioAllocaList
-        !?instructionListIR:ioInstructionGenerationList
+        )
+    case output (@expressionAST expression, @location endOfExp) :
+      expression.analyzeExpression
+        (!self:inSelfType,
+        !routineAttributes:inRoutineAttributes,
+        !optionalTargetType:formal_mTypeProxy.type,
+        !context:inContext,
+        !mode:inRequiredMode,
+        !?temporary:ioTemporaries,
+        !?staticEntityMap:ioStaticEntityMap,
+        !?variableMap:ioUniversalMap,
+        !?alloca:ioAllocaList,
+        !?instructionListIR:ioInstructionGenerationList,
         ?result:@objectIR expressionResult
-      ]
-      [!?ioInstructionGenerationList appendLoadWhenReference
-        !?ioTemporaries
+      )
+      !?ioInstructionGenerationList.appendLoadWhenReference
+        (!?ioTemporaries,
         !?expressionResult
-      ]
+      )
       let result = checkAssignmentCompatibility (
         !inContext.mAssignmentOperatorMap
         !source:expressionResult
@@ -182,32 +182,32 @@ proc analyzeEffectiveParameters
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !formal_mTypeProxy.type
       ioEffectiveParameterListIR += !.output !result
     case outputInput (@lstring name) :
-      [!?ioUniversalMap searchValuedObjectForReadWriteAccess !name ?let objectIR]
+      !?ioUniversalMap.searchValuedObjectForReadWriteAccess (!name, ?let objectIR)
       parameterList += !effective_mEffectiveParameterKind !effective_mSelector !objectIR.type
-      let argumentIR = @objectIR.reference {
-        !type:objectIR.type
+      let argumentIR = @objectIR.reference (
+        !type:objectIR.type,
         !llvmName: objectIR.llvmName
-      }
+      )
       ioEffectiveParameterListIR += !.outputInput !argumentIR
     case outputInputSelfVariable (@lstring name) :
 //      let typeOmnibusName = @lstring.new {!inSelfType.omnibusTypeDescriptionName !name.location}
       let propertyGetterMap = [inContext propertyGetterMap !inSelfType]
 //      [inContext.mTypePropertyGetterMap searchKey !typeOmnibusName ?let propertyGetterMap]
-      [propertyGetterMap searchKey !name ?* ?let @propertyGetterKind propertyAccess]
+      propertyGetterMap.searchKey (!name, ?*, ?let @propertyGetterKind propertyAccess)
       switch propertyAccess
       case constantProperty (*) :
         error (inErrorLocation : "a constant property cannot be used as output / input parameter")
-      case storedProperty (@omnibusType propertyType @uint propertyIndex) :
-        [!?ioTemporaries newTempLLVMVar ?let property_llvmName]
-        [!?ioInstructionGenerationList appendGetUniversalPropertyReference
-          !inSelfType
-          !llvmNameForSelf ()
-          !property_llvmName
-          !propertyIndex
+      case storedProperty (@omnibusType propertyType, @uint propertyIndex) :
+        !?ioTemporaries.newTempLLVMVar (?let property_llvmName)
+        !?ioInstructionGenerationList.appendGetUniversalPropertyReference
+          (!inSelfType,
+          !llvmNameForSelf (),
+          !property_llvmName,
+          !propertyIndex,
           !name
-        ]
+        )
         parameterList += !effective_mEffectiveParameterKind !effective_mSelector !propertyType
-        ioEffectiveParameterListIR += !.outputInput !.reference {!type:propertyType !llvmName:property_llvmName}
+        ioEffectiveParameterListIR += !.outputInput !.reference (!type:propertyType, !llvmName:property_llvmName)
       case computedProperty (2*) :
         error (inErrorLocation : "a computed property cannot be used as output / input parameter")
       end

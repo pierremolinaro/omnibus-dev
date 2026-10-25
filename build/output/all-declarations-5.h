@@ -728,7 +728,7 @@ extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_structureTypeAssignFun
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@instructionListIR appendLoadIndirectVolatileRegister'
+//Extension mutating proc '@instructionListIR appendLoadIndirectVolatileRegister'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -1522,7 +1522,7 @@ void extensionMethod_noteInstructionTypesInPrecedenceGraph (const class GGS_LVal
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@instructionListIR appendGetArrayElementReference'
+//Extension mutating proc '@instructionListIR appendGetArrayElementReference'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -1889,7 +1889,7 @@ extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_unifiedTypeMap_2E_elem
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@unifiedTypeMap makeEntry'
+//Extension mutating proc '@unifiedTypeMap makeEntry'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -2034,7 +2034,7 @@ class cPtr_unifiedTypeMapElementClass : public AbstractStrongPtrClass {
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@unifiedTypeMap makeOptionalEntry'
+//Extension mutating proc '@unifiedTypeMap makeOptionalEntry'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -2046,7 +2046,7 @@ void extensionSetter_makeOptionalEntry (class GGS_unifiedTypeMap & ioObject,
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@unifiedTypeMap makeEntryFromString'
+//Extension mutating proc '@unifiedTypeMap makeEntryFromString'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -2069,7 +2069,7 @@ class GGS_unifiedTypeMapEntry extensionGetter_searchKey (const class GGS_unified
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@unifiedTypeMap insertType'
+//Extension mutating proc '@unifiedTypeMap insertType'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -5989,7 +5989,7 @@ class GGS_lstring function_llvmStartupRoutineNameFromDriver (const class GGS_lst
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@instructionListIR appendComputeSubscriptedVolatileRegisterAddress'
+//Extension mutating proc '@instructionListIR appendComputeSubscriptedVolatileRegisterAddress'
 //
 //--------------------------------------------------------------------------------------------------
 

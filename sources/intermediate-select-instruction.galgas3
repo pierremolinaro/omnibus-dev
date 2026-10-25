@@ -1,11 +1,11 @@
 
-setter @instructionListIR appendSelectOperation
-  ?let @objectIR inTargetValue
-  ?let @string in_if_variableLLVMName
-  ?let @objectIR in_then_variable
+mutating proc @instructionListIR.appendSelectOperation
+  (?let @objectIR inTargetValue,
+  ?let @string in_if_variableLLVMName,
+  ?let @objectIR in_then_variable,
   ?let @objectIR in_else_variable
-{
-  self += !@selectInstructionIR {!inTargetValue !in_if_variableLLVMName !in_then_variable !in_else_variable}
+) {
+  self += !@selectInstructionIR (!inTargetValue, in_if_variableLLVMName, in_then_variable, in_else_variable)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -19,11 +19,11 @@ class @selectInstructionIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @selectInstructionIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
+override proc @selectInstructionIR.llvmInstructionCode
+  (?!@string ioLLVMcode,
+  ?let @generationContext unused inGenerationContext,
   ?!@generationAdds unused ioGenerationAdds
-{
+) {
   ioLLVMcode += "  " + self.mTargetValue.llvmName + " = select "
   ioLLVMcode += "i1 " + self.m_if_variableLLVMName + ", "
   ioLLVMcode += self.m_then_variable.type.llvmTypeName + " " + self.m_then_variable.llvmName + ", "

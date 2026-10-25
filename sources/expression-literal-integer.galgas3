@@ -14,9 +14,9 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <primary> ?!@ast unused ioAST !@expressionAST outExpression {
-    $integer$ ?let @lbigint integerLiteral
-    outExpression = @literalIntegerInExpressionAST {!integerLiteral}
+  rule <primary> (?!@ast unused ioAST ,!@expressionAST outExpression ) {
+    $integer$ (?let @lbigint integerLiteral)
+    outExpression = @literalIntegerInExpressionAST (!integerLiteral)
   }
 
   //·····················································································································
@@ -27,39 +27,39 @@ syntax extension omnibus_syntax {
 //  PRECEDENCE GRAPH FROM EXPRESSION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @literalIntegerInExpressionAST addDependenceEdgeForStaticExpression
-  ?let @lstring inConstantName
+override proc @literalIntegerInExpressionAST.addDependenceEdgeForStaticExpression
+  (?let @lstring inConstantName,
   ?!@semanticTypePrecedenceGraph ioGraph
-{
-  [!?ioGraph addEdge !from: inConstantName !to: ctIntegerTypeName ().nowhere]
+) {
+  !?ioGraph.addEdge (!from: inConstantName, !to: ctIntegerTypeName ().nowhere)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @literalIntegerInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [!?ioGraph noteNode !ctIntegerTypeName ().nowhere]
+override proc @literalIntegerInExpressionAST.noteExpressionTypesInPrecedenceGraph (?!@semanticTypePrecedenceGraph ioGraph ) {
+  !?ioGraph.noteNode (!ctIntegerTypeName ().nowhere)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //!  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @literalIntegerInExpressionAST analyzeExpression
-  ?self:let @omnibusType unused inSelfType
-  ?routineAttributes:let @routineAttributes unused inRoutineAttributes
-  ?optionalTargetType:let @omnibusType unused inOptionalTargetType
-  ?context:let @semanticContext unused inContext
-  ?mode:let @mode unused inMode
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap unused ioUniversalMap
-  ?!alloca:@allocaList unused ioAllocaList
-  ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
+override proc @literalIntegerInExpressionAST.analyzeExpression
+  (?self:let @omnibusType unused inSelfType,
+  ?routineAttributes:let @routineAttributes unused inRoutineAttributes,
+  ?optionalTargetType:let @omnibusType unused inOptionalTargetType,
+  ?context:let @semanticContext unused inContext,
+  ?mode:let @mode unused inMode,
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap unused ioUniversalMap,
+  ?!alloca:@allocaList unused ioAllocaList,
+  ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList,
   !result:@objectIR outResult
-{
-  outResult = .literalInteger {!type: compileTimeIntegerType () !value: self.mLiteralInteger.bigint}
+) {
+  outResult = .literalInteger (!type: compileTimeIntegerType (), !value: self.mLiteralInteger.bigint)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————

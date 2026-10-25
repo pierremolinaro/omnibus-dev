@@ -39,13 +39,13 @@ list @llvmGenerationInstructionList {
 
 //·······················································································································
 
-setter @llvmGenerationInstructionList appendReturn ?let @lstring inReturnType ?let @lstring inReturnValue {
+mutating proc @llvmGenerationInstructionList.appendReturn (?let @lstring inReturnType ,?let @lstring inReturnValue ) {
   var @llvmGenerationInstructionElementList elements = @[]
-  elements += !.string {!string: "ret "}
-  elements += !.type {!name: inReturnType}
-  elements += !.string {!string: " "}
-  elements += !.symbol {!name: inReturnValue}
-  self += !@llvmGenerationInstruction {!elements}
+  elements += !.string (!string: "ret ")
+  elements += !.type (!name: inReturnType)
+  elements += !.string (!string: " ")
+  elements += !.symbol (!name: inReturnValue)
+  self += !@llvmGenerationInstruction (!elements)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -56,43 +56,43 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <llvm_instruction_list> !@llvmGenerationInstructionList outInstructionList {
+  rule <llvm_instruction_list> (!@llvmGenerationInstructionList outInstructionList ) {
     outInstructionList = @[]
     repeat
     while
-      <llvm_instruction> ?let instruction
+      <llvm_instruction> (?let instruction)
       outInstructionList += !instruction
     end
   }
 
   //·····················································································································
 
-  rule <llvm_instruction> !@abstractLLVMInstruction outInstruction {
+  rule <llvm_instruction> (!@abstractLLVMInstruction outInstruction ) {
     $var$
-    $identifier$ ?let name
-    outInstruction = @llvmVarInstruction {!name}
+    $identifier$ (?let name)
+    outInstruction = @llvmVarInstruction (!name)
   }
 
   //·····················································································································
 
-  rule <llvm_instruction> !@abstractLLVMInstruction outInstruction {
+  rule <llvm_instruction> (!@abstractLLVMInstruction outInstruction ) {
     $llvm$
     var @llvmGenerationInstructionElementList elementList = @[]
     repeat
       select
-        $"string"$ ?let string
-        elementList += !.string {!string: string}
+        $"string"$ (?let string)
+        elementList += !.string (!string: string)
       or
-        $identifier$ ?let name
-        elementList += !.symbol {!name: name}
+        $identifier$ (?let name)
+        elementList += !.symbol (!name: name)
       or
-        $\$type$ ?let typeName
-        elementList += !.type {!name: typeName}
+        $\$type$ (?let typeName)
+        elementList += !.type (!name: typeName)
       end
     while
      $+$
     end
-    outInstruction = @llvmGenerationInstruction {!elementList}
+    outInstruction = @llvmGenerationInstruction (!elementList)
   }
 
   //·····················································································································
@@ -103,33 +103,33 @@ syntax extension omnibus_syntax {
 //!  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc @llvmGenerationInstructionList checkInstructionList  ?let @ctCheckMap inMap {
+proc @llvmGenerationInstructionList checkInstructionList  (?let @ctCheckMap inMap ) {
   var currentMap = inMap
   for (instruction) in self do
-    [instruction checkInstructionList !?currentMap]
+    instruction.checkInstructionList (!?currentMap)
   end
 }
 
 //·······················································································································
 
-abstract proc @abstractLLVMInstruction checkInstructionList ?!@ctCheckMap ioMap
+abstract proc @abstractLLVMInstruction checkInstructionList (?!@ctCheckMap ioMap)
 
 //·······················································································································
 
-override proc @llvmVarInstruction checkInstructionList  ?!@ctCheckMap ioMap {
-  [!?ioMap insertKey !self.mVariableName]
+override proc @llvmVarInstruction.checkInstructionList  (?!@ctCheckMap ioMap ) {
+  !?ioMap.insertKey (!self.mVariableName)
 }
 
 //·······················································································································
 
-override proc @llvmGenerationInstruction checkInstructionList ?!@ctCheckMap ioMap {
+override proc @llvmGenerationInstruction.checkInstructionList (?!@ctCheckMap ioMap ) {
   for (element) in self.mGenerationList do
     switch element
     case string (*) :
     case symbol (name) :
-      [ioMap searchKey !name]
+      ioMap.searchKey (!name)
     case type (name) :
-      [ioMap searchKey !name]
+      ioMap.searchKey (!name)
     end
   end
 }
@@ -147,47 +147,47 @@ map @assignmentGenerationVarMap {
 //·······················································································································
 
 proc @llvmGenerationInstructionList generateIRCode
-    ?let @assignmentGenerationVarMap inVarMap
-    ?let @assignmentGenerationVarMap inTypeMap
-    ?!@stringlist ioInstructionAsStringListIR
-    ?!@uint ioTemporaryIndex
+    (?let @assignmentGenerationVarMap inVarMap,
+    ?let @assignmentGenerationVarMap inTypeMap,
+    ?!@stringlist ioInstructionAsStringListIR,
+    ?!@uint ioTemporaryIndex,
     ?!@allocaList ioAllocaList
-{
+) {
   var varMap = inVarMap
   var typeMap = inTypeMap
   for (instruction) in self do
-    [instruction generateIRCode !?varMap !?typeMap !?ioInstructionAsStringListIR !?ioTemporaryIndex !?ioAllocaList]
+    instruction.generateIRCode (!?varMap, !?typeMap, !?ioInstructionAsStringListIR, !?ioTemporaryIndex, !?ioAllocaList)
   end
 }
 
 //·······················································································································
 
 abstract proc @abstractLLVMInstruction generateIRCode
-    ?!@assignmentGenerationVarMap ioVarMap
-    ?!@assignmentGenerationVarMap ioTypeMap
-    ?!@stringlist ioInstructionAsStringListIR
-    ?!@uint ioTemporaryIndex
-    ?!@allocaList unused ioAllocaList
+    (?!@assignmentGenerationVarMap ioVarMap,
+    ?!@assignmentGenerationVarMap ioTypeMap,
+    ?!@stringlist ioInstructionAsStringListIR,
+    ?!@uint ioTemporaryIndex,
+    ?!@allocaList unused ioAllocaList)
 
 //·······················································································································
 
-override proc @llvmGenerationInstruction generateIRCode
-    ?!@assignmentGenerationVarMap ioVarMap
-    ?!@assignmentGenerationVarMap ioTypeMap
-    ?!@stringlist ioInstructionAsStringListIR
-    ?!@uint unused ioTemporaryIndex
+override proc @llvmGenerationInstruction.generateIRCode
+    (?!@assignmentGenerationVarMap ioVarMap,
+    ?!@assignmentGenerationVarMap ioTypeMap,
+    ?!@stringlist ioInstructionAsStringListIR,
+    ?!@uint unused ioTemporaryIndex,
     ?!@allocaList unused ioAllocaList
-{
+) {
    var s = ""
    for (element) in self.mGenerationList do
      switch element
      case string (value) :
        s += value
      case symbol (name) :
-       [ioVarMap searchKey !name ?let value]
+       ioVarMap.searchKey (!name, ?let value)
        s += value
      case type (name) :
-       [ioTypeMap searchKey !name ?let value]
+       ioTypeMap.searchKey (!name, ?let value)
        s += value
      end
    end
@@ -196,16 +196,16 @@ override proc @llvmGenerationInstruction generateIRCode
 
 //·······················································································································
 
-override proc @llvmVarInstruction generateIRCode
-    ?!@assignmentGenerationVarMap ioVarMap
-    ?!@assignmentGenerationVarMap unused ioTypeMap
-    ?!@stringlist unused ioInstructionAsStringListIR
-    ?!@uint ioTemporaryIndex
+override proc @llvmVarInstruction.generateIRCode
+    (?!@assignmentGenerationVarMap ioVarMap,
+    ?!@assignmentGenerationVarMap unused ioTypeMap,
+    ?!@stringlist unused ioInstructionAsStringListIR,
+    ?!@uint ioTemporaryIndex,
     ?!@allocaList unused ioAllocaList
-{
+) {
   let newTemporaryVariable = "%temp" + ioTemporaryIndex
   ioTemporaryIndex += 1
-  [!?ioVarMap insertKey !self.mVariableName !newTemporaryVariable]
+  !?ioVarMap.insertKey (!self.mVariableName, !newTemporaryVariable)
 }
 
 

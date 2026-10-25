@@ -17,39 +17,39 @@ abstract class @prefixOperatorUsage { }
 //·······················································································································
 
 abstract proc @prefixOperatorUsage generateCode
-  ?let @objectIR inReceiverOperand
-  ?let @location inOperatorLocation
-  ?let @omnibusType inResultType
-  ?noPanicCode: let @bool inDoNotGeneratePanicCode
-  ?safeMode: let @bool inSafeMode
-  ?!@semanticTemporariesStruct ioTemporaries
-  ?!@instructionListIR ioInstructionGenerationList
-  !@objectIR outResultValue
+  (?let @objectIR inReceiverOperand,
+  ?let @location inOperatorLocation,
+  ?let @omnibusType inResultType,
+  ?noPanicCode: let @bool inDoNotGeneratePanicCode,
+  ?safeMode: let @bool inSafeMode,
+  ?!@semanticTemporariesStruct ioTemporaries,
+  ?!@instructionListIR ioInstructionGenerationList,
+  !@objectIR outResultValue)
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc @prefixOperatorMap generatePrefixOperatorCode
-  ?let @objectIR inReceiverOperand
-  ?let @prefixOperator inPrefixOperator
-  ?let @location inOperatorLocation
-  ?safeMode: let @bool inSafeMode
-  ?noPanicCode: let @bool inDoNotGeneratePanicCode
-  ?!@semanticTemporariesStruct ioTemporaries
-  ?!@instructionListIR ioInstructionGenerationList
+  (?let @objectIR inReceiverOperand,
+  ?let @prefixOperator inPrefixOperator,
+  ?let @location inOperatorLocation,
+  ?safeMode: let @bool inSafeMode,
+  ?noPanicCode: let @bool inDoNotGeneratePanicCode,
+  ?!@semanticTemporariesStruct ioTemporaries,
+  ?!@instructionListIR ioInstructionGenerationList,
   !@objectIR outResultValue
-{
+) {
   let key = prefixOperatorMapKey (!inReceiverOperand.type !inPrefixOperator !inOperatorLocation)
-  [self searchKey !key ?1* ?let resultType ?let operatorUsage]
-  [operatorUsage generateCode
-    !inReceiverOperand
-    !inOperatorLocation
-    !resultType
-    !noPanicCode: inDoNotGeneratePanicCode
-    !safeMode: inSafeMode
-    !?ioTemporaries
-    !?ioInstructionGenerationList
+  self.searchKey (!key, ?1*, ?let resultType, ?let operatorUsage)
+  operatorUsage.generateCode
+    (!inReceiverOperand,
+    !inOperatorLocation,
+    !resultType,
+    !noPanicCode: inDoNotGeneratePanicCode,
+    !safeMode: inSafeMode,
+    !?ioTemporaries,
+    !?ioInstructionGenerationList,
     ?outResultValue
-  ]
+  )
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————

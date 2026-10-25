@@ -9,47 +9,47 @@ class @instructionNOP : @instructionAST {
 //  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc enter_NOP_function ?!@declarationListAST ioDeclarationListAST {
+proc enter_NOP_function (?!@declarationListAST ioDeclarationListAST ) {
 //--- NOP function parameters
   let @lstringlist attributeList = @[@(noUnusedWarningAttribute ().nowhere)]
-  let instructionList = @instructionListAST @[@(@instructionNOP {!.nowhere})]
+  let instructionList = @instructionListAST @[@(@instructionNOP (!.nowhere))]
 //--- Enter in AST
-  ioDeclarationListAST += !@functionDeclarationAST {
-    !.anySafeMode
-    !true // is public
-    !"".nowhere
-    !"nop".nowhere
-    !attributeList
-    !@[]
-    !"".nowhere // returnTypeName
-    !instructionList
-    !.nowhere
-  }
+  ioDeclarationListAST += !@functionDeclarationAST (
+    !.anySafeMode,
+    true, // is public
+    "".nowhere,
+    "nop".nowhere,
+    attributeList,
+    @[],
+    "".nowhere,
+    instructionList,
+    .nowhere
+  )
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @instructionNOP noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph unused ioGraph {
+override proc @instructionNOP.noteInstructionTypesInPrecedenceGraph (?!@semanticTypePrecedenceGraph unused ioGraph ) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @instructionNOP instructionSemanticAnalysis
-  ?self:let @omnibusType unused inSelfType
-  ?routineAttributes:let @routineAttributes unused inRoutineAttributes
-  ?context:let @semanticContext unused inContext
-  ?mode:let @mode unused inMode
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
-  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap unused ioUniversalMap
-  ?!alloca:@allocaList unused ioAllocaList
+override proc @instructionNOP.instructionSemanticAnalysis
+  (?self:let @omnibusType unused inSelfType,
+  ?routineAttributes:let @routineAttributes unused inRoutineAttributes,
+  ?context:let @semanticContext unused inContext,
+  ?mode:let @mode unused inMode,
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap unused ioUniversalMap,
+  ?!alloca:@allocaList unused ioAllocaList,
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-{
-  [!?ioInstructionGenerationList appendNOP]
+) {
+  !?ioInstructionGenerationList.appendNOP ()
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————

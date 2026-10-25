@@ -1,9 +1,9 @@
 
-setter @instructionListIR appendExtend
-  ?let @objectIR inResult
+mutating proc @instructionListIR.appendExtend
+  (?let @objectIR inResult,
   ?let @objectIR inSource
-{
-  self += !@extendIR {!inResult !inSource}
+) {
+  self += !@extendIR (!inResult, inSource)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -15,17 +15,17 @@ class @extendIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @extendIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
+override proc @extendIR.llvmInstructionCode
+  (?!@string ioLLVMcode,
+  ?let @generationContext unused inGenerationContext,
   ?!@generationAdds unused ioGenerationAdds
-{
+) {
   ioLLVMcode += "  " + self.mResult.llvmName + " = "
   let kind = self.mSource.type.kind
   if kind.isLlvmType then
     ioLLVMcode += "zext"
   else
-    [kind extractInteger ?2* ?unsigned:let sourceIsUnsigned ?1*]
+    kind.extractInteger (?2*, ?unsigned:let sourceIsUnsigned, ?1*)
     ioLLVMcode += if sourceIsUnsigned then "zext" else "sext" end
   end
   ioLLVMcode += " " + self.mSource .llvmTypeName + " " + self.mSource.llvmName + " to " + self.mResult.llvmTypeName + "\n"

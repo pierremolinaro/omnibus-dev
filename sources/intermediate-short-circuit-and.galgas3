@@ -1,21 +1,21 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-setter @instructionListIR appendShortCircuitAndOperation
-  ?let @objectIR inTargetOperand
-  ?let @string inLeftOperandLLVMName
-  ?let @instructionListIR inLeftInstructionList
-  ?let @string inRightOperandLLVMName
-  ?let @instructionListIR inRightInstructionList
+mutating proc @instructionListIR.appendShortCircuitAndOperation
+  (?let @objectIR inTargetOperand,
+  ?let @string inLeftOperandLLVMName,
+  ?let @instructionListIR inLeftInstructionList,
+  ?let @string inRightOperandLLVMName,
+  ?let @instructionListIR inRightInstructionList,
   ?let @location inLocation
-{
-  self += !@shortCircuitAndOperationIR {
-    !inTargetOperand
-    !inLeftOperandLLVMName
-    !inLeftInstructionList
-    !inRightOperandLLVMName
-    !inRightInstructionList
-    !inLocation
-  }
+) {
+  self += !@shortCircuitAndOperationIR (
+    !inTargetOperand,
+    inLeftOperandLLVMName,
+    inLeftInstructionList,
+    inRightOperandLLVMName,
+    inRightInstructionList,
+    inLocation
+  )
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -31,30 +31,30 @@ class @shortCircuitAndOperationIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @shortCircuitAndOperationIR enterAccessibleEntities
-  ?!@stringset ioInvokedRoutineSet
+override proc @shortCircuitAndOperationIR.enterAccessibleEntities
+  (?!@stringset ioInvokedRoutineSet,
   ?!@uint ioMaxBranchOfOnInstructions
-{
-  [self.mLeftInstructionList  enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
-  [self.mRightInstructionList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
+) {
+  self.mLeftInstructionList.enterAccessibleEntities (!?ioInvokedRoutineSet, !?ioMaxBranchOfOnInstructions)
+  self.mRightInstructionList.enterAccessibleEntities (!?ioInvokedRoutineSet, !?ioMaxBranchOfOnInstructions)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @shortCircuitAndOperationIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext inGenerationContext
+override proc @shortCircuitAndOperationIR.llvmInstructionCode
+  (?!@string ioLLVMcode,
+  ?let @generationContext inGenerationContext,
   ?!@generationAdds ioGenerationAdds
-{
+) {
   let startLabel  = "and." + self.mLocation.endLocationIndex + ".start"
   let trueLabel  = "and." + self.mLocation.endLocationIndex + ".true"
   let falseLabel = "and." + self.mLocation.endLocationIndex + ".false"
   ioLLVMcode += "  br label %" + startLabel + "\n\n"
   ioLLVMcode += startLabel + ":\n"
-  [self.mLeftInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  self.mLeftInstructionList.instructionListLLVMCode (!?ioLLVMcode, !inGenerationContext, !?ioGenerationAdds)
   ioLLVMcode += "  br i1 " + self.mLeftOperandLLVMName + ", label %" + trueLabel + ", label %" + falseLabel + "\n\n"
   ioLLVMcode += trueLabel + ":\n"
-  [self.mRightInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  self.mRightInstructionList.instructionListLLVMCode (!?ioLLVMcode, !inGenerationContext, !?ioGenerationAdds)
   ioLLVMcode += "  br label %" + falseLabel + "\n\n"
   ioLLVMcode += falseLabel + ":\n"
   ioLLVMcode += "  " + self.mTargetOperand.llvmName

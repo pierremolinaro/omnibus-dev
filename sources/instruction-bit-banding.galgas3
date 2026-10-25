@@ -18,25 +18,25 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
-    <control_register_lvalue> !?ioAST ?let registerLValue
-    $@attribute$ ?let attribute
+  rule <instruction> (?!@ast ioAST ,?!@instructionListAST ioInstructionList ) {
+    <control_register_lvalue> (!?ioAST, ?let registerLValue)
+    $@attribute$ (?let attribute)
     if attribute.string != "bit" then
       error (attribute : "attribute should be @bit" fixit replace "@bit")
     end
-    <expression> !?ioAST ?let bitExpression
+    <expression> (!?ioAST, ?let bitExpression)
     let bitExpressionLocation = @location.here
     $=$
-    <expression> !?ioAST ?let sourceExpression
+    <expression> (!?ioAST, ?let sourceExpression)
   //--- AST
-    ioInstructionList += !@bitbandInstructionAST {
-      !registerLValue.mRegisterGroupName.location
-      !registerLValue
-      !bitExpression
-      !bitExpressionLocation
-      !sourceExpression
-      !.here
-    }
+    ioInstructionList += !@bitbandInstructionAST (
+      !registerLValue.mRegisterGroupName.location,
+      registerLValue,
+      bitExpression,
+      bitExpressionLocation,
+      sourceExpression,
+      .here
+    )
   }
 
   //·····················································································································
@@ -47,128 +47,128 @@ syntax extension omnibus_syntax {
 //  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @bitbandInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [self.mControlRegisterLValue noteExpressionTypesInPrecedenceGraph !?ioGraph]
-  [!?ioGraph noteNode !"u1".nowhere]
-  [self.mBitExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
-  [self.mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+override proc @bitbandInstructionAST.noteInstructionTypesInPrecedenceGraph (?!@semanticTypePrecedenceGraph ioGraph ) {
+  self.mControlRegisterLValue.noteExpressionTypesInPrecedenceGraph (!?ioGraph)
+  !?ioGraph.noteNode (!"u1".nowhere)
+  self.mBitExpression.noteExpressionTypesInPrecedenceGraph (!?ioGraph)
+  self.mSourceExpression.noteExpressionTypesInPrecedenceGraph (!?ioGraph)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @bitbandInstructionAST instructionSemanticAnalysis
-  ?self:let @omnibusType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
+override proc @bitbandInstructionAST.instructionSemanticAnalysis
+  (?self:let @omnibusType inSelfType,
+  ?routineAttributes:let @routineAttributes inRoutineAttributes,
+  ?context:let @semanticContext inContext,
+  ?mode:let @mode inMode,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap,
+  ?!alloca:@allocaList ioAllocaList,
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-{
+) {
 //-------------------- Source Expression
 //--- Inferred source expression type
-  [inContext.mTypeMap searchType
-    !lkey: @{!"u1" !self.mSourceExpressionLocation}
+  inContext.mTypeMap.searchType
+    (!lkey: @(!"u1", self.mSourceExpressionLocation),
     ?type:let requiredSourceExpressionType
-  ]
+  )
 //--- Compute source expression
-  [self.mSourceExpression analyzeExpression
-    !self:inSelfType
-    !routineAttributes:inRoutineAttributes
-    !optionalTargetType:requiredSourceExpressionType
-    !context:inContext
-    !mode:inMode
-    !?temporary:ioTemporaries
-    !?staticEntityMap:ioStaticEntityMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:ioInstructionGenerationList
+  self.mSourceExpression.analyzeExpression
+    (!self:inSelfType,
+    !routineAttributes:inRoutineAttributes,
+    !optionalTargetType:requiredSourceExpressionType,
+    !context:inContext,
+    !mode:inMode,
+    !?temporary:ioTemporaries,
+    !?staticEntityMap:ioStaticEntityMap,
+    !?variableMap:ioUniversalMap,
+    !?alloca:ioAllocaList,
+    !?instructionListIR:ioInstructionGenerationList,
     ?result:@objectIR sourceExpressionOperand
-  ]
+  )
 //--- Load from reference ?
-  [!?ioInstructionGenerationList appendLoadWhenReference
-    !?ioTemporaries
+  !?ioInstructionGenerationList.appendLoadWhenReference
+    (!?ioTemporaries,
     !?sourceExpressionOperand
-  ]
+  )
 //--- If source expression operand is static type, check value and convert it to 'requiredSourceExpressionType'
   if (sourceExpressionOperand.type.omnibusTypeDescriptionName == ctIntegerTypeName ()) && sourceExpressionOperand.isLiteralInteger then
-    [sourceExpressionOperand extractLiteralInteger ?1* ?value:let @bigint value]
+    sourceExpressionOperand.extractLiteralInteger (?1*, ?value:let @bigint value)
     if (value < 0) || (value > 1) then
       error (self.mSourceExpressionLocation : "static value should be 0 or 1")
     else
-      sourceExpressionOperand = .literalInteger {!type:requiredSourceExpressionType !value:value}
+      sourceExpressionOperand = .literalInteger (!type:requiredSourceExpressionType, !value:value)
     end
   elsif sourceExpressionOperand.type.omnibusTypeDescriptionName != requiredSourceExpressionType.omnibusTypeDescriptionName then
     error (self.mSourceExpressionLocation : "bit expression type should be $" + requiredSourceExpressionType.omnibusTypeDescriptionName)
   end
 //-------------------- Control register LValue
-  [self.mControlRegisterLValue controlRegisterLValueSemanticAnalysis
-    !writeAccess:false
-    !self: inSelfType
-    !routineAttributes: inRoutineAttributes
-    !context: inContext
-    !mode: inMode
-    !?temporary: ioTemporaries
-    !?staticEntityMap: ioStaticEntityMap
-    !?variableMap: ioUniversalMap
-    !?alloca: ioAllocaList
-    !?instructionListIR: ioInstructionGenerationList
-    ?registerType:*
-    ?registerBitCount:let registerBitCount
-    ?sliceMap:*
+  self.mControlRegisterLValue.controlRegisterLValueSemanticAnalysis
+    (!writeAccess:false,
+    !self: inSelfType,
+    !routineAttributes: inRoutineAttributes,
+    !context: inContext,
+    !mode: inMode,
+    !?temporary: ioTemporaries,
+    !?staticEntityMap: ioStaticEntityMap,
+    !?variableMap: ioUniversalMap,
+    !?alloca: ioAllocaList,
+    !?instructionListIR: ioInstructionGenerationList,
+    ?registerType:*,
+    ?registerBitCount:let registerBitCount,
+    ?sliceMap:*,
     ?llvmRegisterAddressName:let llvmRegisterAddressName
-  ]
+  )
 
 //-------------------- Bit Expression
 //--- Inferred bit expression type
-  [inContext.mTypeMap searchType
-    !lkey: @{!"u" + (registerBitCount-1).significantBitCount !self.mBitExpressionLocation}
+  inContext.mTypeMap.searchType
+    (!lkey: @(!"u" + (registerBitCount-1).significantBitCount, self.mBitExpressionLocation),
     ?type:let requiredBitExpressionType
-  ]
+  )
 //--- Compute bit expression
-  [self.mBitExpression analyzeExpression
-    !self:inSelfType
-    !routineAttributes:inRoutineAttributes
-    !optionalTargetType:requiredBitExpressionType
-    !context:inContext
-    !mode:inMode
-    !?temporary:ioTemporaries
-    !?staticEntityMap:ioStaticEntityMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:ioInstructionGenerationList
+  self.mBitExpression.analyzeExpression
+    (!self:inSelfType,
+    !routineAttributes:inRoutineAttributes,
+    !optionalTargetType:requiredBitExpressionType,
+    !context:inContext,
+    !mode:inMode,
+    !?temporary:ioTemporaries,
+    !?staticEntityMap:ioStaticEntityMap,
+    !?variableMap:ioUniversalMap,
+    !?alloca:ioAllocaList,
+    !?instructionListIR:ioInstructionGenerationList,
     ?result:@objectIR bitExpressionOperand
-  ]
+  )
 //--- Load from reference ?
-  [!?ioInstructionGenerationList appendLoadWhenReference
-    !?ioTemporaries
+  !?ioInstructionGenerationList.appendLoadWhenReference
+    (!?ioTemporaries,
     !?bitExpressionOperand
-  ]
+  )
 //--- If bit expression operand is static type, check value and convert it to 'requiredBitExpressionType'
   if (bitExpressionOperand.type.omnibusTypeDescriptionName == ctIntegerTypeName ()) && bitExpressionOperand.isLiteralInteger then
-    [bitExpressionOperand extractLiteralInteger ?1* ?value:let @bigint value]
+    bitExpressionOperand.extractLiteralInteger (?1*, ?value:let @bigint value)
     if (value < 0) || (value >= registerBitCount) then
       error (self.mBitExpressionLocation : "static value should be >= 0 and <" + registerBitCount)
     else
-      bitExpressionOperand = .literalInteger {!type:requiredBitExpressionType !value:value}
+      bitExpressionOperand = .literalInteger (!type:requiredBitExpressionType, !value:value)
     end
   elsif bitExpressionOperand.type.omnibusTypeDescriptionName != requiredBitExpressionType.omnibusTypeDescriptionName then
     error (self.mBitExpressionLocation : "bit expression type should be $" + requiredBitExpressionType.omnibusTypeDescriptionName)
   end
 //-------------------- Generate code
-  ioInstructionGenerationList += !@bitbandInstructionIR {
-    !llvmRegisterAddressName
-    !bitExpressionOperand
-    !sourceExpressionOperand
-    !inContext.mTargetParameters.mBitbandRegisterBaseAddress.bigint
-    !inContext.mTargetParameters.mBitbandRegisterRelocationAddress.bigint
-    !inContext.mTargetParameters.mBitbandRegisterOffsetMultiplier.bigint
-    !inContext.mTargetParameters.mBitbandRegisterBitMultiplier.bigint
-  }
+  ioInstructionGenerationList += !@bitbandInstructionIR (
+    !llvmRegisterAddressName,
+    bitExpressionOperand,
+    sourceExpressionOperand,
+    inContext.mTargetParameters.mBitbandRegisterBaseAddress.bigint,
+    inContext.mTargetParameters.mBitbandRegisterRelocationAddress.bigint,
+    inContext.mTargetParameters.mBitbandRegisterOffsetMultiplier.bigint,
+    inContext.mTargetParameters.mBitbandRegisterBitMultiplier.bigint
+  )
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -197,11 +197,11 @@ class @bitbandInstructionIR : @abstractInstructionIR {
 //}
 //·······················································································································
 
-override proc @bitbandInstructionIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
+override proc @bitbandInstructionIR.llvmInstructionCode
+  (?!@string ioLLVMcode,
+  ?let @generationContext unused inGenerationContext,
   ?!@generationAdds ioGenerationAdds
-{
+) {
   let idx = ioGenerationAdds.mUniqueIndex.string
   ioGenerationAdds.mUniqueIndex += 1
   ioLLVMcode += ";--- Bit band\n"

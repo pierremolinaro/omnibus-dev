@@ -1,9 +1,9 @@
 
-setter @instructionListIR appendBoolToUInt
-  ?let @objectIR inUIntResult
+mutating proc @instructionListIR.appendBoolToUInt
+  (?let @objectIR inUIntResult,
   ?let @objectIR inBoolSource
-{
-  self += !@boolToUIntIR {!inUIntResult !inBoolSource}
+) {
+  self += !@boolToUIntIR (!inUIntResult, inBoolSource)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -15,11 +15,11 @@ class @boolToUIntIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @boolToUIntIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
+override proc @boolToUIntIR.llvmInstructionCode
+  (?!@string ioLLVMcode,
+  ?let @generationContext unused inGenerationContext,
   ?!@generationAdds unused ioGenerationAdds
-{
+) {
   ioLLVMcode += "  " + self.mUIntResult.llvmName
              +  " = zext " + self.mBoolSource.llvmTypeName + " " + self.mBoolSource.llvmName
              + " to " + self.mUIntResult.llvmTypeName + "\n"

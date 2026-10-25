@@ -19,7 +19,7 @@ list @routineFormalArgumentListAST {
 
 //·······················································································································
 
-func @procFormalArgumentPassingMode formalPassingModeString -> @string {
+func @procFormalArgumentPassingMode.formalPassingModeString () -> @string {
   switch self
   case input : result = "?"
   case output : result = "!"
@@ -29,7 +29,7 @@ func @procFormalArgumentPassingMode formalPassingModeString -> @string {
 
 //·······················································································································
 
-func @procFormalArgumentPassingMode requiredActualPassingModeForSelector ?let @string inSelector -> @string {
+func @procFormalArgumentPassingMode.requiredActualPassingModeForSelector (?let @string inSelector ) -> @string {
   switch self
   case input : result = "!"
   case output : result = "?"
@@ -48,44 +48,44 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <procedure_formal_arguments> ?!@ast ioAST !@routineFormalArgumentListAST outProcFormalArgumentList {
+  rule <procedure_formal_arguments> (?!@ast ioAST ,!@routineFormalArgumentListAST outProcFormalArgumentList ) {
     outProcFormalArgumentList = @[]
     $($
     repeat
     while
-      $!selector:$ ?let selector
-      $identifier$ ?let formalArgumentName
-      <type_definition> !?ioAST  ?let formalArgumentTypeName
+      $!selector:$ (?let selector)
+      $identifier$ (?let formalArgumentName)
+      <type_definition> (!?ioAST, ?let formalArgumentTypeName)
       outProcFormalArgumentList +=
         !@procFormalArgumentPassingMode.output
         !selector
         !formalArgumentTypeName
         !formalArgumentName
     while
-      $?!selector:$ ?let selector
+      $?!selector:$ (?let selector)
       let @lstring formalArgumentName
       select
         $_$
         formalArgumentName = "".nowhere
       or
-        $identifier$ ?formalArgumentName
+        $identifier$ (?formalArgumentName)
       end
-      <type_definition> !?ioAST ?let formalArgumentTypeName
+      <type_definition> (!?ioAST, ?let formalArgumentTypeName)
       outProcFormalArgumentList +=
         !@procFormalArgumentPassingMode.inputOutput
         !selector
         !formalArgumentTypeName
         !formalArgumentName
     while
-      $?selector:$ ?let selector
+      $?selector:$ (?let selector)
       let @lstring formalArgumentName
       select
         $_$
         formalArgumentName = "".nowhere
       or
-        $identifier$ ?formalArgumentName
+        $identifier$ (?formalArgumentName)
       end
-      <type_definition> !?ioAST  ?let formalArgumentTypeName
+      <type_definition> (!?ioAST, ?let formalArgumentTypeName)
       outProcFormalArgumentList +=
         !@procFormalArgumentPassingMode.input
         !selector
@@ -97,14 +97,14 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <procedure_input_formal_arguments> ?!@ast ioAST !@routineFormalArgumentListAST outProcFormalArgumentList {
+  rule <procedure_input_formal_arguments> (?!@ast ioAST ,!@routineFormalArgumentListAST outProcFormalArgumentList ) {
     outProcFormalArgumentList = @[]
     $($
     repeat
     while
-      $?selector:$ ?let selector
-      $identifier$ ?let formalArgumentName
-      <type_definition> !?ioAST  ?let formalArgumentTypeName
+      $?selector:$ (?let selector)
+      $identifier$ (?let formalArgumentName)
+      <type_definition> (!?ioAST, ?let formalArgumentTypeName)
       outProcFormalArgumentList +=
         !@procFormalArgumentPassingMode.input
         !selector
@@ -132,7 +132,7 @@ list @routineTypedSignature %equatable {
 
 //·······················································································································
 
-func @routineTypedSignature typedString -> @string {
+func @routineTypedSignature.typedString () -> @string {
   result = "("
   for (formalArgumentPassingMode selector typeProxy *) in self do
     result += formalArgumentPassingMode.formalPassingModeString + selector + ":" + typeProxy.key
@@ -142,10 +142,10 @@ func @routineTypedSignature typedString -> @string {
 
 //·······················································································································
 
-func @routineTypedSignature mangledName
-     ?receiverTypeName: let @string inReceiverTypeName
+func @routineTypedSignature.mangledName
+     (?receiverTypeName: let @string inReceiverTypeName,
      ?functionName: let @lstring inFunctionName
--> @lstring {
+) -> @lstring {
   var s = ""
   if inReceiverTypeName != "" then
     s += inReceiverTypeName + "."
@@ -155,28 +155,28 @@ func @routineTypedSignature mangledName
     s += formalArgumentPassingMode.formalPassingModeString + selector + ":"
   end
   s += ")"
-  result = @{!s !inFunctionName.location}
+  result = @(!s, inFunctionName.location)
 }
 
 //·······················································································································
 
-proc routineTypedSignature ?!@unifiedTypeMap ioTypeMap
-                           ?let @routineFormalArgumentListAST inFormalArgumentList
+proc routineTypedSignature (?!@unifiedTypeMap ioTypeMap,
+                           ?let @routineFormalArgumentListAST inFormalArgumentList,
                            !@routineTypedSignature outSignature
-{
+) {
   outSignature = @[]
   for (formalArgumentPassingMode selector formalArgumentTypeName formalArgumentName) in inFormalArgumentList do
-    [!?ioTypeMap makeEntry !formalArgumentTypeName ?let typeProxy]
+    !?ioTypeMap.makeEntry (!formalArgumentTypeName, ?let typeProxy)
     outSignature += !formalArgumentPassingMode !selector !typeProxy !formalArgumentName
   end
 }
 
 //·······················································································································
 
-proc routineTypedSignature2 ?@unifiedTypeMap inTypeMap
-                            ?let @routineFormalArgumentListAST inFormalArgumentList
+proc routineTypedSignature2 (?@unifiedTypeMap inTypeMap,
+                            ?let @routineFormalArgumentListAST inFormalArgumentList,
                             !@routineTypedSignature outSignature
-{
+) {
   outSignature = @[]
   for (formalArgumentPassingMode selector formalArgumentTypeName formalArgumentName) in inFormalArgumentList do
     let typeProxy = [inTypeMap searchKey !formalArgumentTypeName]
@@ -200,24 +200,24 @@ proc routineTypedSignature2 ?@unifiedTypeMap inTypeMap
 
 //·······················································································································
 
-func @routineFormalArgumentListAST routineSignature ?let @location inRoutineNameLocation -> @lstring {
+func @routineFormalArgumentListAST.routineSignature (?let @location inRoutineNameLocation ) -> @lstring {
   var key = "("
   for (formalArgumentPassingMode selector * *) in self do
     key += formalArgumentPassingMode.formalPassingModeString + selector + ":"
   end
   key += ")"
-  result = @{!key !inRoutineNameLocation}
+  result = @(!key, inRoutineNameLocation)
 }
 
 //·······················································································································
 
-func @effectiveArgumentListAST routineSignature ?let @location inRoutineNameLocation -> @lstring {
+func @effectiveArgumentListAST.routineSignature (?let @location inRoutineNameLocation ) -> @lstring {
   var key = "("
   for (passingMode selector) in self do
     key += passingMode.matchingFormalArgument + selector + ":"
   end
   key += ")"
-  result = @{!key !inRoutineNameLocation}
+  result = @(!key, inRoutineNameLocation)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -231,12 +231,12 @@ list @routineFormalArgumentListIR {
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc enterFormalArguments
-  ?context:let @semanticContext inContext
-  ?let @routineFormalArgumentListAST inFormalArgumentsAST
-  ?!@universalValuedObjectMap ioUniversalMap
-  ?!@routineFormalArgumentListIR ioFormalArguments
+  (?context:let @semanticContext inContext,
+  ?let @routineFormalArgumentListAST inFormalArgumentsAST,
+  ?!@universalValuedObjectMap ioUniversalMap,
+  ?!@routineFormalArgumentListIR ioFormalArguments,
   ?warningOnUnusedArgs:let @bool inUnusedWarning
-{
+) {
   for (argumentKind * formalArgumentTypeName formalArgumentName) in inFormalArgumentsAST do
     let typeProxy = [inContext.mTypeMap searchKey !formalArgumentTypeName].type
     ioFormalArguments += !argumentKind !typeProxy !formalArgumentName.string
@@ -244,21 +244,21 @@ proc enterFormalArguments
     case input :
       if formalArgumentName.string != "" then
         if inUnusedWarning then
-          [!?ioUniversalMap insertLocalConstant !formalArgumentName !true !typeProxy !formalArgumentName]
+          !?ioUniversalMap.insertLocalConstant (!formalArgumentName, !true, !typeProxy, !formalArgumentName)
         else
-          [!?ioUniversalMap insertUsedLocalConstant !formalArgumentName !true !typeProxy !formalArgumentName]
+          !?ioUniversalMap.insertUsedLocalConstant (!formalArgumentName, !true, !typeProxy, !formalArgumentName)
         end
       end
     case inputOutput :
      if formalArgumentName.string != "" then
        if inUnusedWarning then
-          [!?ioUniversalMap insertLocalVariable !formalArgumentName !typeProxy !formalArgumentName !.hasUnreadValue !true]
+          !?ioUniversalMap.insertLocalVariable (!formalArgumentName, !typeProxy, !formalArgumentName, !.hasUnreadValue, !true)
         else
-          [!?ioUniversalMap insertLocalVariable !formalArgumentName !typeProxy !formalArgumentName !.hasReadValue !true]
+          !?ioUniversalMap.insertLocalVariable (!formalArgumentName, !typeProxy, !formalArgumentName, !.hasReadValue, !true)
         end
       end
     case output :
-      [!?ioUniversalMap insertLocalVariable !formalArgumentName !typeProxy !formalArgumentName !.noValue !true]
+      !?ioUniversalMap.insertLocalVariable (!formalArgumentName, !typeProxy, !formalArgumentName, !.noValue, !true)
     end
   end
 }

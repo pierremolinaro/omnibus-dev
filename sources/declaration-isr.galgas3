@@ -18,7 +18,7 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <isr_in_driver> ?!@ast ioAST ?let @lstring inDriverName {
+  rule <isr_in_driver> (?!@ast ioAST ,?let @lstring inDriverName ) {
     $interrupt$
     let @mode mode
     select
@@ -28,17 +28,17 @@ syntax extension omnibus_syntax {
       $section$
       mode = .sectionMode
     end
-    $identifier$ ?let isrName
+    $identifier$ (?let isrName)
     ${$
-    <instructionList> !?ioAST ?let instructionList
+    <instructionList> (!?ioAST, ?let instructionList)
     $}$
-    ioAST.mDeclarationListAST += !@isrDeclarationAST {
-      !isrName
-      !mode
-      !inDriverName
-      !instructionList
-      !.here
-    }
+    ioAST.mDeclarationListAST += !@isrDeclarationAST (
+      !isrName,
+      mode,
+      inDriverName,
+      instructionList,
+      .here
+    )
   }
 
   //·····················································································································
@@ -49,27 +49,27 @@ syntax extension omnibus_syntax {
 //  NOTE TYPES IN PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @isrDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @isrDeclarationAST.enterInPrecedenceGraph (?!@semanticTypePrecedenceGraph ioGraph ) {
   let receiverTypeName = omnibusTypeSpecificNameForDriver (!self.mDriverName)
   let s = receiverTypeName.string + "." + self.mISRName.string + "()"
-  [!?ioGraph addNode ! @{!s !self.mISRName.location} !self]
+  !?ioGraph.addNode (! @(!s, self.mISRName.location), !self)
 //---
-  [self.mISRInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+  self.mISRInstructionList.noteInstructionListTypesInPrecedenceGraph (!?ioGraph)
   if receiverTypeName.string != "" then
-    [!?ioGraph noteNode !receiverTypeName]
+    !?ioGraph.noteNode (!receiverTypeName)
   end
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override func @isrDeclarationAST keyRepresentationForErrorSignaling -> @string {
+override func @isrDeclarationAST.keyRepresentationForErrorSignaling () -> @string {
   let receiverTypeName = omnibusTypeSpecificNameForDriver (!self.mDriverName)
   result = "function " + receiverTypeName + "." + self.mISRName
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override func @isrDeclarationAST locationForErrorSignaling -> @location {
+override func @isrDeclarationAST.locationForErrorSignaling () -> @location {
   result = self.mISRName.location
 }
 
@@ -77,18 +77,18 @@ override func @isrDeclarationAST locationForErrorSignaling -> @location {
 //  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @isrDeclarationAST enterInContext
-  ?!context:@semanticContext unused ioContext
-  ?!@declarationDecorationList ioDecoratedDeclarationList
-  ?!@decoratedRegularRoutineList ioDecoratedRoutineList
-  ?!@routineListIR unused ioRoutineListIR
-  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
-  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
-  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
+override proc @isrDeclarationAST.enterInContext
+  (?!context:@semanticContext unused ioContext,
+  ?!@declarationDecorationList ioDecoratedDeclarationList,
+  ?!@decoratedRegularRoutineList ioDecoratedRoutineList,
+  ?!@routineListIR unused ioRoutineListIR,
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap,
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap,
+  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST,
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
-{
+) {
 //---------------- Add decorated declaration (BEFORE adding isr routine in ioDecoratedDeclarationList
-  ioDecoratedDeclarationList += !@decoratedISRDeclaration {!self.mISRName !self.mMode !self.mDriverName}
+  ioDecoratedDeclarationList += !@decoratedISRDeclaration (!self.mISRName, self.mMode, self.mDriverName)
 //----------------
   let driverLLVMBaseTypeName = llvmDriverNameFromName (!self.mDriverName)
   let isrRoutineMangledName = routineMangledNameFromAST (!driverLLVMBaseTypeName !self.mISRName !@[])
@@ -120,21 +120,21 @@ class @decoratedISRDeclaration : @abstractDecoratedDeclaration {
 
 //·······················································································································
 
-override proc @decoratedISRDeclaration semanticAnalysis
-  ?context:let @semanticContext inContext
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+override proc @decoratedISRDeclaration.semanticAnalysis
+  (?context:let @semanticContext inContext,
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries,
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
+) {
 //--- Self type
-  [inContext.mTypeMap searchType !lkey:omnibusTypeSpecificNameForDriver (!self.mDriverName) ?type:let selfType]
+  inContext.mTypeMap.searchType (!lkey:omnibusTypeSpecificNameForDriver (!self.mDriverName), ?type:let selfType)
 //--- Code generation
-  [inContext.mAvailableInterruptMap searchKey !self.mISRName ?*]
-  [!?ioIntermediateCodeStruct.mInterruptMapIR insertKey
-    !self.mISRName
-    !selfType
-    !self.mDriverName
+  inContext.mAvailableInterruptMap.searchKey (!self.mISRName, ?*)
+  !?ioIntermediateCodeStruct.mInterruptMapIR.insertKey
+    (!self.mISRName,
+    !selfType,
+    !self.mDriverName,
     !self.mMode
-  ]
+  )
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -152,13 +152,13 @@ map @interruptMapIR {
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc @interruptMapIR interruptCodeGeneration
-  ?!@string ioLLVMcode
-  ?!@string ioAScode
-  ?let @string inUndefinedInterruptString
-  ?let @string inXTRInterruptHandlerString
-  ?let @generationContext inGenerationContext
+  (?!@string ioLLVMcode,
+  ?!@string ioAScode,
+  ?let @string inUndefinedInterruptString,
+  ?let @string inXTRInterruptHandlerString,
+  ?let @generationContext inGenerationContext,
   ?!@generationAdds unused ioGenerationAdds
-{
+) {
 //--- Generate interrupt routines
   var @stringset definedInterrupts = @[]
   for interrupt in self do

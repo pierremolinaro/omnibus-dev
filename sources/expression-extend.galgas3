@@ -16,23 +16,23 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
+  rule <primary> (?!@ast ioAST ,!@expressionAST outExpression ) {
     $extend$
     let @lstring typeName
     select
       typeName = "".here
     or
-      <type_definition> !?ioAST ?typeName
+      <type_definition> (!?ioAST, ?typeName)
     end
     $($
-    <expression> !?ioAST ?outExpression
+    <expression> (!?ioAST, ?outExpression)
     let endOfExpression = @location.here
     $)$
-    outExpression = @extendExpressionAST {
-      !outExpression
-      !typeName
-      !endOfExpression
-    }
+    outExpression = @extendExpressionAST (
+      !outExpression,
+      typeName,
+      endOfExpression
+    )
   }
 
   //·····················································································································
@@ -43,13 +43,13 @@ syntax extension omnibus_syntax {
 //!  PRECEDENCE GRAPH FROM EXPRESSION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @extendExpressionAST addDependenceEdgeForStaticExpression
-  ?let @lstring inConstantName
+override proc @extendExpressionAST.addDependenceEdgeForStaticExpression
+  (?let @lstring inConstantName,
   ?!@semanticTypePrecedenceGraph ioGraph
-{
-  [self.mExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+) {
+  self.mExpression.addDependenceEdgeForStaticExpression (!inConstantName, !?ioGraph)
   if self.mTypeName.string != "" then
-    [!?ioGraph noteNode !self.mTypeName]
+    !?ioGraph.noteNode (!self.mTypeName)
   end
 }
 
@@ -57,10 +57,10 @@ override proc @extendExpressionAST addDependenceEdgeForStaticExpression
 //!  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @extendExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [self.mExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+override proc @extendExpressionAST.noteExpressionTypesInPrecedenceGraph (?!@semanticTypePrecedenceGraph ioGraph ) {
+  self.mExpression.noteExpressionTypesInPrecedenceGraph (!?ioGraph)
   if self.mTypeName.string != "" then
-    [!?ioGraph noteNode !self.mTypeName]
+    !?ioGraph.noteNode (!self.mTypeName)
   end
 }
 
@@ -68,37 +68,37 @@ override proc @extendExpressionAST noteExpressionTypesInPrecedenceGraph ?!@seman
 //!  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @extendExpressionAST analyzeExpression
-  ?self:let @omnibusType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?optionalTargetType:let @omnibusType inOptionalTargetType
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+override proc @extendExpressionAST.analyzeExpression
+  (?self:let @omnibusType inSelfType,
+  ?routineAttributes:let @routineAttributes inRoutineAttributes,
+  ?optionalTargetType:let @omnibusType inOptionalTargetType,
+  ?context:let @semanticContext inContext,
+  ?mode:let @mode inMode,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap,
+  ?!alloca:@allocaList ioAllocaList,
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList,
   !result:@objectIR outResult
-{
+) {
 //--- Analyze expression
-  [self.mExpression analyzeExpression
-    !self:inSelfType
-    !routineAttributes:inRoutineAttributes
-    !optionalTargetType:inOptionalTargetType
-    !context:inContext
-    !mode:inMode
-    !?temporary:ioTemporaries
-    !?staticEntityMap:ioStaticEntityMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:ioInstructionGenerationList
+  self.mExpression.analyzeExpression
+    (!self:inSelfType,
+    !routineAttributes:inRoutineAttributes,
+    !optionalTargetType:inOptionalTargetType,
+    !context:inContext,
+    !mode:inMode,
+    !?temporary:ioTemporaries,
+    !?staticEntityMap:ioStaticEntityMap,
+    !?variableMap:ioUniversalMap,
+    !?alloca:ioAllocaList,
+    !?instructionListIR:ioInstructionGenerationList,
     ?result:@objectIR expressionResult
-  ]
-  [!?ioInstructionGenerationList appendLoadWhenReference
-    !?ioTemporaries
+  )
+  !?ioInstructionGenerationList.appendLoadWhenReference
+    (!?ioTemporaries,
     !?expressionResult
-  ]
+  )
 //--- Analyze type
   let @omnibusType resultType = if self.mTypeName.string == ""
     then inOptionalTargetType
@@ -110,8 +110,8 @@ override proc @extendExpressionAST analyzeExpression
   elsif not expressionResult.type.kind.isInteger then
     error (self.mEndOfExpression : "expression type is not an integer type" spoil outResult)
   else
-    [expressionResult.type.kind extractInteger ?2* ?unsigned:let sourceIsUnsigned ?bitCount:let sourceSize]
-    [resultType.kind extractInteger ?2* ?unsigned:let targetIsUnsigned ?bitCount:let targetSize]
+    expressionResult.type.kind.extractInteger (?2*, ?unsigned:let sourceIsUnsigned, ?bitCount:let sourceSize)
+    resultType.kind.extractInteger (?2*, ?unsigned:let targetIsUnsigned, ?bitCount:let targetSize)
     if sourceIsUnsigned && targetIsUnsigned then // unsigned -> unsigned
       if sourceSize > targetSize then
         error (self.mTypeName: "cannot extend, use convert or truncate")
@@ -131,11 +131,11 @@ override proc @extendExpressionAST analyzeExpression
         error (self.mTypeName: "same size: useless extend operation")
       end
     end
-    getNewTempValue (!resultType !?ioTemporaries ?outResult)
-    [!?ioInstructionGenerationList appendExtend
-      !outResult
+    getNewTempValue (!resultType, !?ioTemporaries, ?outResult)
+    !?ioInstructionGenerationList.appendExtend
+      (!outResult,
       !expressionResult
-    ]
+    )
   end
 }
 

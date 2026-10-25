@@ -1,16 +1,16 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-setter @instructionListIR appendTrunc
-  ?let @omnibusType inResultType
-  ?!@objectIR ioObject
+mutating proc @instructionListIR.appendTrunc
+  (?let @omnibusType inResultType,
+  ?!@objectIR ioObject,
   ?!@semanticTemporariesStruct ioTemporaries
-{
+) {
   if ioObject.isLiteralInteger then
-    [ioObject extractLiteralInteger ?type:* ?value:let @bigint value]
-    ioObject = .literalInteger {!type:inResultType !value:value}
+    ioObject.extractLiteralInteger (?type:*, ?value:let @bigint value)
+    ioObject = .literalInteger (!type:inResultType, !value:value)
   else
-    getNewTempValue (!inResultType !?ioTemporaries ?let result)
-    self += !@truncIR {!result !ioObject}
+    getNewTempValue (!inResultType, !?ioTemporaries, ?let result)
+    self += !@truncIR (!result, ioObject)
     ioObject = result
   end
 }
@@ -24,11 +24,11 @@ class @truncIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @truncIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
+override proc @truncIR.llvmInstructionCode
+  (?!@string ioLLVMcode,
+  ?let @generationContext unused inGenerationContext,
   ?!@generationAdds unused ioGenerationAdds
-{
+) {
   ioLLVMcode += "  " + self.mResult.llvmName + " = trunc "
   ioLLVMcode += self.mSource.llvmTypeName + " " + self.mSource.llvmName + " to " + self.mResult.llvmTypeName + "\n"
 }

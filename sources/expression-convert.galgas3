@@ -16,23 +16,23 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
+  rule <primary> (?!@ast ioAST ,!@expressionAST outExpression ) {
     $convert$
     let @lstring typeName
     select
       typeName = "".here
     or
-      <type_definition> !?ioAST ?typeName
+      <type_definition> (!?ioAST, ?typeName)
     end
     $($
-    <expression> !?ioAST ?outExpression
+    <expression> (!?ioAST, ?outExpression)
     let endOfExpression = @location.here
     $)$
-    outExpression = @convertExpressionAST {
-      !outExpression
-      !typeName
-      !endOfExpression
-    }
+    outExpression = @convertExpressionAST (
+      !outExpression,
+      typeName,
+      endOfExpression
+    )
   }
 
   //·····················································································································
@@ -43,13 +43,13 @@ syntax extension omnibus_syntax {
 //  PRECEDENCE GRAPH FROM EXPRESSION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @convertExpressionAST addDependenceEdgeForStaticExpression
-  ?let @lstring inConstantName
+override proc @convertExpressionAST.addDependenceEdgeForStaticExpression
+  (?let @lstring inConstantName,
   ?!@semanticTypePrecedenceGraph ioGraph
-{
-  [self.mExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+) {
+  self.mExpression.addDependenceEdgeForStaticExpression (!inConstantName, !?ioGraph)
   if self.mTypeName.string != "" then
-    [!?ioGraph noteNode !self.mTypeName]
+    !?ioGraph.noteNode (!self.mTypeName)
   end
 }
 
@@ -57,10 +57,10 @@ override proc @convertExpressionAST addDependenceEdgeForStaticExpression
 //  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @convertExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [self.mExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+override proc @convertExpressionAST.noteExpressionTypesInPrecedenceGraph (?!@semanticTypePrecedenceGraph ioGraph ) {
+  self.mExpression.noteExpressionTypesInPrecedenceGraph (!?ioGraph)
   if self.mTypeName.string != "" then
-    [!?ioGraph noteNode !self.mTypeName]
+    !?ioGraph.noteNode (!self.mTypeName)
   end
 }
 
@@ -70,37 +70,37 @@ override proc @convertExpressionAST noteExpressionTypesInPrecedenceGraph ?!@sema
 //! @convertExpressionAST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @convertExpressionAST analyzeExpression
-  ?self:let @omnibusType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?optionalTargetType:let @omnibusType inOptionalTargetType
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+override proc @convertExpressionAST.analyzeExpression
+  (?self:let @omnibusType inSelfType,
+  ?routineAttributes:let @routineAttributes inRoutineAttributes,
+  ?optionalTargetType:let @omnibusType inOptionalTargetType,
+  ?context:let @semanticContext inContext,
+  ?mode:let @mode inMode,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap,
+  ?!alloca:@allocaList ioAllocaList,
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList,
   !result:@objectIR outResult
-{
+) {
 //--- Analyze expression
-  [self.mExpression analyzeExpression
-    !self:inSelfType
-    !routineAttributes:inRoutineAttributes
-    !optionalTargetType:inOptionalTargetType
-    !context:inContext
-    !mode:inMode
-    !?temporary:ioTemporaries
-    !?staticEntityMap:ioStaticEntityMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:ioInstructionGenerationList
+  self.mExpression.analyzeExpression
+    (!self:inSelfType,
+    !routineAttributes:inRoutineAttributes,
+    !optionalTargetType:inOptionalTargetType,
+    !context:inContext,
+    !mode:inMode,
+    !?temporary:ioTemporaries,
+    !?staticEntityMap:ioStaticEntityMap,
+    !?variableMap:ioUniversalMap,
+    !?alloca:ioAllocaList,
+    !?instructionListIR:ioInstructionGenerationList,
     ?result:@objectIR expressionResult
-  ]
-  [!?ioInstructionGenerationList appendLoadWhenReference
-    !?ioTemporaries
+  )
+  !?ioInstructionGenerationList.appendLoadWhenReference
+    (!?ioTemporaries,
     !?expressionResult
-  ]
+  )
 //---
   if inMode.isSafe then
     error (self.mTypeName : "operations that can generate panic are not allowed in " + panicModeName () + " mode")
@@ -116,24 +116,24 @@ override proc @convertExpressionAST analyzeExpression
   elsif not expressionResult.type.kind.isInteger then
     error (self.mEndOfExpression : "expression type is not an integer type" spoil outResult)
   else
-    [expressionResult.type.kind extractInteger ?min:let minSource ?max:let maxSource ?2*]
-    [resultType.kind extractInteger ?min:let minTarget ?max:let maxTarget ?2*]
+    expressionResult.type.kind.extractInteger (?min:let minSource, ?max:let maxSource, ?2*)
+    resultType.kind.extractInteger (?min:let minTarget, ?max:let maxTarget, ?2*)
     let alwaysPossible = (minTarget <= minSource) && (maxTarget >= maxSource)
     if alwaysPossible then
       error (self.mTypeName:"useless explicit conversion")
     end
-    getNewTempValue (!resultType !?ioTemporaries ?outResult)
+    getNewTempValue (!resultType, !?ioTemporaries, ?outResult)
     if [option omnibus_options.noPanicGeneration value] then
-      ioInstructionGenerationList += !@truncateInstructionIR {
-        !outResult
-        !expressionResult
-      }
+      ioInstructionGenerationList += !@truncateInstructionIR (
+        !outResult,
+        expressionResult
+      )
     else
-      ioInstructionGenerationList += !@convertInstructionIR {
-        !outResult
-        !expressionResult
-        !self.mTypeName.location
-      }
+      ioInstructionGenerationList += !@convertInstructionIR (
+        !outResult,
+        expressionResult,
+        self.mTypeName.location
+      )
     end
   end
 }
@@ -152,28 +152,28 @@ class @convertInstructionIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @convertInstructionIR enterAccessibleEntities
-  ?!@stringset ioInvokedRoutineSet
+override proc @convertInstructionIR.enterAccessibleEntities
+  (?!@stringset ioInvokedRoutineSet,
   ?!@uint unused ioMaxBranchOfOnInstructions
-{
+) {
   ioInvokedRoutineSet ++= panicRoutineNameForLocationFile (!self.mLocation)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @convertInstructionIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext inGenerationContext
+override proc @convertInstructionIR.llvmInstructionCode
+  (?!@string ioLLVMcode,
+  ?let @generationContext inGenerationContext,
   ?!@generationAdds unused ioGenerationAdds
-{
+) {
   let lbl = self.mLocation.endLocationIndex.string
   let convertMinOkLabel = "min." + lbl + ".ok"
   let convertMaxOkLabel = "max." + lbl + ".ok"
   let convertFailLabel  = "fail." + lbl
   let compareMinVar     = "cmp." + lbl + ".min"
   let compareMaxVar     = "cmp." + lbl + ".max"
-  [self.mTarget.type.kind extractInteger ?min:let minTarget ?max:let maxTarget ?2*]
-  [self.mOperand.type.kind extractInteger ?min:let minSource ?max:* ?unsigned:let operandIsUnsigned ?1*]
+  self.mTarget.type.kind.extractInteger (?min:let minTarget, ?max:let maxTarget, ?2*)
+  self.mOperand.type.kind.extractInteger (?min:let minSource, ?max:*, ?unsigned:let operandIsUnsigned, ?1*)
   let operandType = self.mOperand.llvmTypeName
   if minTarget != minSource then
     ioLLVMcode += "  %" + compareMinVar + " = icmp "

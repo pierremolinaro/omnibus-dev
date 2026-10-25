@@ -12,111 +12,111 @@ class @booleanShortCircuitAndOperatorExpressionAST : @expressionAST {
 //  PRECEDENCE GRAPH FROM EXPRESSION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @booleanShortCircuitAndOperatorExpressionAST addDependenceEdgeForStaticExpression
-  ?let @lstring inConstantName
+override proc @booleanShortCircuitAndOperatorExpressionAST.addDependenceEdgeForStaticExpression
+  (?let @lstring inConstantName,
   ?!@semanticTypePrecedenceGraph ioGraph
-{
-  [self.mLeftExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
-  [self.mRightExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+) {
+  self.mLeftExpression.addDependenceEdgeForStaticExpression (!inConstantName, !?ioGraph)
+  self.mRightExpression.addDependenceEdgeForStaticExpression (!inConstantName, !?ioGraph)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @booleanShortCircuitAndOperatorExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [self.mLeftExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
-  [self.mRightExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+override proc @booleanShortCircuitAndOperatorExpressionAST.noteExpressionTypesInPrecedenceGraph (?!@semanticTypePrecedenceGraph ioGraph ) {
+  self.mLeftExpression.noteExpressionTypesInPrecedenceGraph (!?ioGraph)
+  self.mRightExpression.noteExpressionTypesInPrecedenceGraph (!?ioGraph)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @booleanShortCircuitAndOperatorExpressionAST analyzeExpression
-  ?self:let @omnibusType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?optionalTargetType:let @omnibusType inOptionalTargetType
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+override proc @booleanShortCircuitAndOperatorExpressionAST.analyzeExpression
+  (?self:let @omnibusType inSelfType,
+  ?routineAttributes:let @routineAttributes inRoutineAttributes,
+  ?optionalTargetType:let @omnibusType inOptionalTargetType,
+  ?context:let @semanticContext inContext,
+  ?mode:let @mode inMode,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap,
+  ?!alloca:@allocaList ioAllocaList,
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList,
   !result:@objectIR outResult
-{
+) {
 //--- Analyze left expression
   var @instructionListIR leftInstructionGenerationList = @[]
-  [self.mLeftExpression analyzeExpression
-    !self:inSelfType
-    !routineAttributes:inRoutineAttributes
-    !optionalTargetType:inOptionalTargetType
-    !context:inContext
-    !mode:inMode
-    !?temporary:ioTemporaries
-    !?staticEntityMap:ioStaticEntityMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:leftInstructionGenerationList
+  self.mLeftExpression.analyzeExpression
+    (!self:inSelfType,
+    !routineAttributes:inRoutineAttributes,
+    !optionalTargetType:inOptionalTargetType,
+    !context:inContext,
+    !mode:inMode,
+    !?temporary:ioTemporaries,
+    !?staticEntityMap:ioStaticEntityMap,
+    !?variableMap:ioUniversalMap,
+    !?alloca:ioAllocaList,
+    !?instructionListIR:leftInstructionGenerationList,
     ?result:@objectIR leftOperand
-  ]
-  [!?ioInstructionGenerationList appendLoadWhenReference
-    !?ioTemporaries
+  )
+  !?ioInstructionGenerationList.appendLoadWhenReference
+    (!?ioTemporaries,
     !?leftOperand
-  ]
-  [inContext.mImplicitConversionToBooleanMap generateConvertToBooleanCode
-    !leftOperand
-    !self.mOperatorLocation
-    !?ioTemporaries
-    !?leftInstructionGenerationList
-    !?alloca: ioAllocaList
+  )
+  inContext.mImplicitConversionToBooleanMap.generateConvertToBooleanCode
+    (!leftOperand,
+    !self.mOperatorLocation,
+    !?ioTemporaries,
+    !?leftInstructionGenerationList,
+    !?alloca: ioAllocaList,
     ?let @implicitBooleanConversionResult leftBooleanOperand
-  ]
+  )
 //--- Analyze right expression
   var @instructionListIR rightInstructionGenerationList = @[]
-  [self.mRightExpression analyzeExpression
-    !self:inSelfType
-    !routineAttributes:inRoutineAttributes
-    !optionalTargetType:leftOperand.type
-    !context:inContext
-    !mode:inMode
-    !?temporary:ioTemporaries
-    !?staticEntityMap: ioStaticEntityMap
-    !?variableMap:ioUniversalMap
-    !?alloca: ioAllocaList
-    !?instructionListIR: rightInstructionGenerationList
+  self.mRightExpression.analyzeExpression
+    (!self:inSelfType,
+    !routineAttributes:inRoutineAttributes,
+    !optionalTargetType:leftOperand.type,
+    !context:inContext,
+    !mode:inMode,
+    !?temporary:ioTemporaries,
+    !?staticEntityMap: ioStaticEntityMap,
+    !?variableMap:ioUniversalMap,
+    !?alloca: ioAllocaList,
+    !?instructionListIR: rightInstructionGenerationList,
     ?result: @objectIR rightOperand
-  ]
-  [!?ioInstructionGenerationList appendLoadWhenReference
-    !?ioTemporaries
+  )
+  !?ioInstructionGenerationList.appendLoadWhenReference
+    (!?ioTemporaries,
     !?rightOperand
-  ]
-  [inContext.mImplicitConversionToBooleanMap generateConvertToBooleanCode
-    !rightOperand
-    !self.mOperatorLocation
-    !?ioTemporaries
-    !?rightInstructionGenerationList
-    !?alloca: ioAllocaList
+  )
+  inContext.mImplicitConversionToBooleanMap.generateConvertToBooleanCode
+    (!rightOperand,
+    !self.mOperatorLocation,
+    !?ioTemporaries,
+    !?rightInstructionGenerationList,
+    !?alloca: ioAllocaList,
     ?let rightBooleanOperand
-  ]
+  )
 //--- Static operation, or dynamic operation
   if leftBooleanOperand.isCompileTime && rightBooleanOperand.isCompileTime then
-    [leftBooleanOperand extractCompileTime ?value:let @bool leftStaticValue]
-    [rightBooleanOperand extractCompileTime ?value:let @bool rightStaticValue]
-    outResult = .literalInteger {!type: leftOperand.type !value: leftStaticValue & rightStaticValue}
+    leftBooleanOperand.extractCompileTime (?value:let @bool leftStaticValue)
+    rightBooleanOperand.extractCompileTime (?value:let @bool rightStaticValue)
+    outResult = .literalInteger (!type: leftOperand.type, !value: leftStaticValue & rightStaticValue)
   else
   //--- Result type : bool
-    getNewTempValue (![inContext booleanType !self.mOperatorLocation] !?ioTemporaries ?outResult)
+    getNewTempValue (![inContext booleanType !self.mOperatorLocation], !?ioTemporaries, ?outResult)
   //--- Generate code
-    [!?ioInstructionGenerationList appendShortCircuitAndOperation
-      !outResult
-      !leftBooleanOperand.llvmName
-      !leftInstructionGenerationList
-      !rightBooleanOperand.llvmName
-      !rightInstructionGenerationList
+    !?ioInstructionGenerationList.appendShortCircuitAndOperation
+      (!outResult,
+      !leftBooleanOperand.llvmName,
+      !leftInstructionGenerationList,
+      !rightBooleanOperand.llvmName,
+      !rightInstructionGenerationList,
       !self.mOperatorLocation
-    ]
+    )
   end
 }
 

@@ -52,347 +52,347 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <compile_time_expression> !@ctExpressionAST outExpression {
-    <compile_time_expression_bitwise_xor> ?outExpression
+  rule <compile_time_expression> (!@ctExpressionAST outExpression ) {
+    <compile_time_expression_bitwise_xor> (?outExpression)
     repeat
     while
       $|$
       let operatorLocation = @location.here
-      <compile_time_expression_bitwise_xor> ?let rightExpression
-      outExpression = @ctInfixExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.bitWiseOrOp
-        !rightExpression
-      }
+      <compile_time_expression_bitwise_xor> (?let rightExpression)
+      outExpression = @ctInfixExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .bitWiseOrOp,
+        rightExpression
+      )
     end
   }
 
   //·····················································································································
 
-  rule <compile_time_expression_bitwise_xor> !@ctExpressionAST outExpression {
-    <compile_time_expression_bitwise_and> ?outExpression
+  rule <compile_time_expression_bitwise_xor> (!@ctExpressionAST outExpression ) {
+    <compile_time_expression_bitwise_and> (?outExpression)
     repeat
     while
       $^$
       let operatorLocation = @location.here
-      <compile_time_expression_bitwise_and> ?let rightExpression
-      outExpression = @ctInfixExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.bitWiseXorOp
-        !rightExpression
-      }
+      <compile_time_expression_bitwise_and> (?let rightExpression)
+      outExpression = @ctInfixExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .bitWiseXorOp,
+        rightExpression
+      )
     end
    }
 
   //·····················································································································
 
-  rule <compile_time_expression_bitwise_and> !@ctExpressionAST outExpression {
-    <compile_time_expression_equality> ?outExpression
+  rule <compile_time_expression_bitwise_and> (!@ctExpressionAST outExpression ) {
+    <compile_time_expression_equality> (?outExpression)
     repeat
     while
       $&$
       let operatorLocation = @location.here
-      <compile_time_expression_equality> ?let rightExpression
-      outExpression = @ctInfixExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.bitWiseAndOp
-        !rightExpression
-      }
+      <compile_time_expression_equality> (?let rightExpression)
+      outExpression = @ctInfixExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .bitWiseAndOp,
+        rightExpression
+      )
     end
   }
 
   //·····················································································································
 
-  rule <compile_time_expression_equality> !@ctExpressionAST outExpression {
-    <compile_time_expression_comparison> ?outExpression
+  rule <compile_time_expression_equality> (!@ctExpressionAST outExpression ) {
+    <compile_time_expression_comparison> (?outExpression)
     select
     or
       $==$
       let operatorLocation = @location.here
-      <compile_time_expression_comparison> ?let rightExpression
-      outExpression = @ctInfixExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.equal
-        !rightExpression
-      }
+      <compile_time_expression_comparison> (?let rightExpression)
+      outExpression = @ctInfixExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .equal,
+        rightExpression
+      )
     or
       $≠$ // (a ≠ b) equivalent to not (a == b)
       let operatorLocation = @location.here
-      <compile_time_expression_comparison> ?let rightExpression
-      let expression = @ctInfixExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.equal
-        !rightExpression
-      }
-      outExpression = @ctPrefixExpressionAST {
-        !operatorLocation
-        !.notOp
-        !expression
-      }
+      <compile_time_expression_comparison> (?let rightExpression)
+      let expression = @ctInfixExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .equal,
+        rightExpression
+      )
+      outExpression = @ctPrefixExpressionAST (
+        !operatorLocation,
+        .notOp,
+        expression
+      )
     end
   }
 
   //·····················································································································
 
-  rule <compile_time_expression_comparison> !@ctExpressionAST outExpression {
-    <compile_time_expression_shift> ?outExpression
+  rule <compile_time_expression_comparison> (!@ctExpressionAST outExpression ) {
+    <compile_time_expression_shift> (?outExpression)
     select
     or
       $≤$ // (a ≤ b) equivalent to (a == b) | (a < b)
       let operatorLocation = @location.here
-      <compile_time_expression_shift> ?let rightExpression
-      let lessThanExpression = @ctInfixExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.lessThan
-        !rightExpression
-      }
-      let equalExpression = @ctInfixExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.equal
-        !rightExpression
-      }
-      outExpression = @ctInfixExpressionAST {
-        !lessThanExpression
-        !operatorLocation
-        !.bitWiseOrOp
-        !equalExpression
-      }
+      <compile_time_expression_shift> (?let rightExpression)
+      let lessThanExpression = @ctInfixExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .lessThan,
+        rightExpression
+      )
+      let equalExpression = @ctInfixExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .equal,
+        rightExpression
+      )
+      outExpression = @ctInfixExpressionAST (
+        !lessThanExpression,
+        operatorLocation,
+        .bitWiseOrOp,
+        equalExpression
+      )
     or
       $≥$ // (a ≥ b) equivalent to not (a < b)
       let operatorLocation = @location.here
-      <compile_time_expression_shift> ?let rightExpression
-      let expression = @ctInfixExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.lessThan
-        !rightExpression
-      }
-      outExpression = @ctPrefixExpressionAST {
-        !operatorLocation
-        !.notOp
-        !expression
-      }
+      <compile_time_expression_shift> (?let rightExpression)
+      let expression = @ctInfixExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .lessThan,
+        rightExpression
+      )
+      outExpression = @ctPrefixExpressionAST (
+        !operatorLocation,
+        .notOp,
+        expression
+      )
     or
       $<$
       let operatorLocation = @location.here
-      <compile_time_expression_shift> ?let rightExpression
-      outExpression = @ctInfixExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.lessThan
-        !rightExpression
-      }
+      <compile_time_expression_shift> (?let rightExpression)
+      outExpression = @ctInfixExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .lessThan,
+        rightExpression
+      )
     or
       $>$ // (a > b) equivalent to not ((a == b) | (a < b))
       let operatorLocation = @location.here
-      <compile_time_expression_shift> ?let rightExpression
-     let lessThanExpression = @ctInfixExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.lessThan
-        !rightExpression
-      }
-      let equalExpression = @ctInfixExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.equal
-        !rightExpression
-      }
-      let lessThanOrEqualExpression = @ctInfixExpressionAST {
-        !lessThanExpression
-        !operatorLocation
-        !.bitWiseOrOp
-        !equalExpression
-      }
-      outExpression = @ctPrefixExpressionAST {
-        !operatorLocation
-        !.notOp
-        !lessThanOrEqualExpression
-      }
+      <compile_time_expression_shift> (?let rightExpression)
+     let lessThanExpression = @ctInfixExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .lessThan,
+        rightExpression
+      )
+      let equalExpression = @ctInfixExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .equal,
+        rightExpression
+      )
+      let lessThanOrEqualExpression = @ctInfixExpressionAST (
+        !lessThanExpression,
+        operatorLocation,
+        .bitWiseOrOp,
+        equalExpression
+      )
+      outExpression = @ctPrefixExpressionAST (
+        !operatorLocation,
+        .notOp,
+        lessThanOrEqualExpression
+      )
     end
   }
 
   //·····················································································································
 
-  rule <compile_time_expression_shift> !@ctExpressionAST outExpression {
-    <compile_time_expression_addition> ?outExpression
+  rule <compile_time_expression_shift> (!@ctExpressionAST outExpression ) {
+    <compile_time_expression_addition> (?outExpression)
     repeat
     while
       $<<$
       let operatorLocation = @location.here
-      <compile_time_expression_addition> ?let rightExpression
-      outExpression = @ctInfixExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.leftShift
-        !rightExpression
-      }
+      <compile_time_expression_addition> (?let rightExpression)
+      outExpression = @ctInfixExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .leftShift,
+        rightExpression
+      )
     while
       $>>$
       let operatorLocation = @location.here
-      <compile_time_expression_addition> ?let rightExpression
-      outExpression = @ctInfixExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.rightShift
-        !rightExpression
-      }
+      <compile_time_expression_addition> (?let rightExpression)
+      outExpression = @ctInfixExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .rightShift,
+        rightExpression
+      )
     end
   }
 
   //·····················································································································
 
-  rule <compile_time_expression_addition> !@ctExpressionAST outExpression {
-    <compile_time_expression_product> ?outExpression
+  rule <compile_time_expression_addition> (!@ctExpressionAST outExpression ) {
+    <compile_time_expression_product> (?outExpression)
     repeat
     while
       $+$
       let operatorLocation = @location.here
-      <compile_time_expression_product> ?let rightExpression
-      outExpression = @ctInfixExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.addOp
-        !rightExpression
-      }
+      <compile_time_expression_product> (?let rightExpression)
+      outExpression = @ctInfixExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .addOp,
+        rightExpression
+      )
     while
       $-$
       let operatorLocation = @location.here
-      <compile_time_expression_product> ?let rightExpression
-      outExpression = @ctInfixExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.addOp
-        !@ctPrefixExpressionAST {!operatorLocation !.minusOp !rightExpression}
-      }
+      <compile_time_expression_product> (?let rightExpression)
+      outExpression = @ctInfixExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .addOp,
+        @ctPrefixExpressionAST (!operatorLocation, .minusOp, rightExpression)
+      )
     end
   }
 
   //·····················································································································
 
-  rule <compile_time_expression_product> !@ctExpressionAST outExpression {
-    <compile_time_primary> ?outExpression
+  rule <compile_time_expression_product> (!@ctExpressionAST outExpression ) {
+    <compile_time_primary> (?outExpression)
     repeat
     while
       $*$
       let operatorLocation = @location.here
-      <compile_time_primary> ?let rightExpression
-      outExpression = @ctInfixExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.mulOp
-        !rightExpression
-      }
+      <compile_time_primary> (?let rightExpression)
+      outExpression = @ctInfixExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .mulOp,
+        rightExpression
+      )
    while
       $%$
       let operatorLocation = @location.here
-      <compile_time_primary> ?let rightExpression
-      outExpression = @ctInfixExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.modOp
-        !rightExpression
-      }
+      <compile_time_primary> (?let rightExpression)
+      outExpression = @ctInfixExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .modOp,
+        rightExpression
+      )
     while
       $!%$
       let operatorLocation = @location.here
-      <compile_time_primary> ?let rightExpression
-      outExpression = @ctInfixExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.moduloNoOvf
-        !rightExpression
-      }
+      <compile_time_primary> (?let rightExpression)
+      outExpression = @ctInfixExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .moduloNoOvf,
+        rightExpression
+      )
     while
       $/$
       let operatorLocation = @location.here
-      <compile_time_primary> ?let rightExpression
-      outExpression = @ctInfixExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.divOp
-        !rightExpression
-      }
+      <compile_time_primary> (?let rightExpression)
+      outExpression = @ctInfixExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .divOp,
+        rightExpression
+      )
     while
       $!/$
       let operatorLocation = @location.here
-      <compile_time_primary> ?let rightExpression
-      outExpression = @ctInfixExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.divNoOvf
-        !rightExpression
-      }
+      <compile_time_primary> (?let rightExpression)
+      outExpression = @ctInfixExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .divNoOvf,
+        rightExpression
+      )
     end
   }
 
   //·····················································································································
 
-  rule <compile_time_primary> !@ctExpressionAST outExpression {
+  rule <compile_time_primary> (!@ctExpressionAST outExpression ) {
     $not$
     let operatorLocation = @location.here
-    <compile_time_primary> ?let expression
-    outExpression = @ctPrefixExpressionAST {
-      !operatorLocation
-      !.notOp
-      !expression
-    }
+    <compile_time_primary> (?let expression)
+    outExpression = @ctPrefixExpressionAST (
+      !operatorLocation,
+      .notOp,
+      expression
+    )
   }
 
   //·····················································································································
 
-  rule <compile_time_primary> !@ctExpressionAST outExpression {
+  rule <compile_time_primary> (!@ctExpressionAST outExpression ) {
     $-$
     let operatorLocation = @location.here
-    <compile_time_primary> ?let expression
-    outExpression = @ctPrefixExpressionAST {
-      !operatorLocation
-      !.minusOp
-      !expression
-    }
+    <compile_time_primary> (?let expression)
+    outExpression = @ctPrefixExpressionAST (
+      !operatorLocation,
+      .minusOp,
+      expression
+    )
   }
 
   //·····················································································································
 
-  rule <compile_time_primary> !@ctExpressionAST outExpression {
+  rule <compile_time_primary> (!@ctExpressionAST outExpression ) {
     $($
-    <compile_time_expression> ?outExpression
+    <compile_time_expression> (?outExpression)
     $)$
   }
 
   //·····················································································································
 
-  rule <compile_time_primary> !@ctExpressionAST outExpression {
+  rule <compile_time_primary> (!@ctExpressionAST outExpression ) {
     $yes$
     outExpression = @ctTrueExpressionAST ()
   }
 
   //·····················································································································
 
-  rule <compile_time_primary> !@ctExpressionAST outExpression {
+  rule <compile_time_primary> (!@ctExpressionAST outExpression ) {
     $no$
     outExpression = @ctFalseExpressionAST ()
   }
 
   //·····················································································································
 
-  rule <compile_time_primary> !@ctExpressionAST outExpression {
-    $integer$ ?let value
-    outExpression = @ctIntExpressionAST {!value}
+  rule <compile_time_primary> (!@ctExpressionAST outExpression ) {
+    $integer$ (?let value)
+    outExpression = @ctIntExpressionAST (!value)
   }
 
   //·····················································································································
 
-  rule <compile_time_primary> !@ctExpressionAST outExpression {
-    $identifier$ ?let name
-    outExpression = @ctIdentifierExpressionAST {!name}
+  rule <compile_time_primary> (!@ctExpressionAST outExpression ) {
+    $identifier$ (?let name)
+    outExpression = @ctIdentifierExpressionAST (!name)
   }
 
   //·····················································································································
@@ -410,40 +410,40 @@ map @ctCheckMap {
 
 //·······················································································································
 
-abstract proc @ctExpressionAST checkCompileTimeExpression ?let @ctCheckMap inMap
+abstract proc @ctExpressionAST checkCompileTimeExpression (?let @ctCheckMap inMap)
 
 //·······················································································································
 
-override proc @ctInfixExpressionAST checkCompileTimeExpression ?let @ctCheckMap inMap {
-  [self.mLeftExpression checkCompileTimeExpression  !inMap]
-  [self.mRightExpression checkCompileTimeExpression !inMap]
+override proc @ctInfixExpressionAST.checkCompileTimeExpression (?let @ctCheckMap inMap ) {
+  self.mLeftExpression.checkCompileTimeExpression  (!inMap)
+  self.mRightExpression.checkCompileTimeExpression (!inMap)
 }
 
 //·······················································································································
 
-override proc @ctPrefixExpressionAST checkCompileTimeExpression ?let @ctCheckMap inMap {
-  [self.mExpression checkCompileTimeExpression !inMap]
+override proc @ctPrefixExpressionAST.checkCompileTimeExpression (?let @ctCheckMap inMap ) {
+  self.mExpression.checkCompileTimeExpression (!inMap)
 }
 
 //·······················································································································
 
-override proc @ctTrueExpressionAST checkCompileTimeExpression ?let @ctCheckMap unused inMap {
+override proc @ctTrueExpressionAST.checkCompileTimeExpression (?let @ctCheckMap unused inMap ) {
 }
 
 //·······················································································································
 
-override proc @ctFalseExpressionAST checkCompileTimeExpression ?let @ctCheckMap unused inMap {
+override proc @ctFalseExpressionAST.checkCompileTimeExpression (?let @ctCheckMap unused inMap ) {
 }
 
 //·······················································································································
 
-override proc @ctIntExpressionAST checkCompileTimeExpression ?let @ctCheckMap unused inMap {
+override proc @ctIntExpressionAST.checkCompileTimeExpression (?let @ctCheckMap unused inMap ) {
 }
 
 //·······················································································································
 
-override proc @ctIdentifierExpressionAST checkCompileTimeExpression ?let @ctCheckMap inMap {
-  [inMap searchKey !self.mIdentifier]
+override proc @ctIdentifierExpressionAST.checkCompileTimeExpression (?let @ctCheckMap inMap ) {
+  inMap.searchKey (!self.mIdentifier)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -459,17 +459,17 @@ map @ctMap {
 //·······················································································································
 
 abstract proc @ctExpressionAST computeCompileTimeExpression
-  ?let @ctMap inMap
-  !result: @bigint outValue
+  (?let @ctMap inMap,
+  !result: @bigint outValue)
 
 //·······················································································································
 
-override proc @ctInfixExpressionAST computeCompileTimeExpression
-  ?let @ctMap inMap
+override proc @ctInfixExpressionAST.computeCompileTimeExpression
+  (?let @ctMap inMap,
   !result: @bigint outValue
-{
-  [self.mLeftExpression computeCompileTimeExpression  !inMap ?result: let left]
-  [self.mRightExpression computeCompileTimeExpression !inMap ?result: let right]
+) {
+  self.mLeftExpression.computeCompileTimeExpression  (!inMap, ?result: let left)
+  self.mRightExpression.computeCompileTimeExpression (!inMap, ?result: let right)
   switch self.mInfixOperator
    case equal     : outValue = if left == right then 1 else 0 end
    case lessThan  : outValue = if left <  right then 1 else 0 end
@@ -490,11 +490,11 @@ override proc @ctInfixExpressionAST computeCompileTimeExpression
 
 //·······················································································································
 
-override proc @ctPrefixExpressionAST computeCompileTimeExpression
-  ?let @ctMap inMap
+override proc @ctPrefixExpressionAST.computeCompileTimeExpression
+  (?let @ctMap inMap,
   !result: @bigint outValue
-{
-  [self.mExpression computeCompileTimeExpression !inMap ?result: let exp]
+) {
+  self.mExpression.computeCompileTimeExpression (!inMap, ?result: let exp)
   switch self.mPrefixOperator
    case minusOp  : outValue = - exp
    case notOp  : outValue = if exp == 0 then 1 else 0 end
@@ -503,38 +503,38 @@ override proc @ctPrefixExpressionAST computeCompileTimeExpression
 
 //·······················································································································
 
-override proc @ctTrueExpressionAST computeCompileTimeExpression
-  ?let @ctMap unused inMap
+override proc @ctTrueExpressionAST.computeCompileTimeExpression
+  (?let @ctMap unused inMap,
   !result: @bigint outValue
-{
+) {
   outValue = 1
 }
 
 //·······················································································································
 
-override proc @ctFalseExpressionAST computeCompileTimeExpression
-  ?let @ctMap unused inMap
+override proc @ctFalseExpressionAST.computeCompileTimeExpression
+  (?let @ctMap unused inMap,
   !result: @bigint outValue
-{
+) {
   outValue = 0
 }
 
 //·······················································································································
 
-override proc @ctIntExpressionAST computeCompileTimeExpression
-  ?let @ctMap unused inMap
+override proc @ctIntExpressionAST.computeCompileTimeExpression
+  (?let @ctMap unused inMap,
   !result: @bigint outValue
-{
+) {
   outValue = self.mValue.bigint
 }
 
 //·······················································································································
 
-override proc @ctIdentifierExpressionAST computeCompileTimeExpression
-  ?let @ctMap inMap
+override proc @ctIdentifierExpressionAST.computeCompileTimeExpression
+  (?let @ctMap inMap,
   !result: @bigint outValue
-{
-  [inMap searchKey !self.mIdentifier ?outValue]
+) {
+  inMap.searchKey (!self.mIdentifier, ?outValue)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————

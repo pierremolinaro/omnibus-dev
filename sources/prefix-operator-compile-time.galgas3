@@ -9,7 +9,7 @@ enum @compileTimePrefixOperatorEnumeration  %equatable{
 
 //·······················································································································
 
-func @compileTimePrefixOperatorEnumeration string -> @string {
+func @compileTimePrefixOperatorEnumeration.string () -> @string {
   switch self
   case notOp   : result = "not"
   case minusOp : result = "-"
@@ -18,7 +18,7 @@ func @compileTimePrefixOperatorEnumeration string -> @string {
 
 //·······················································································································
 
-func @compileTimePrefixOperatorEnumeration prefixOperator -> @prefixOperator {
+func @compileTimePrefixOperatorEnumeration.prefixOperator () -> @prefixOperator {
   switch self
   case notOp   : result = .notOp
   case minusOp : result = .minusOp
@@ -38,7 +38,7 @@ class @compiletimePrefixOperatorAST : @abstractDeclarationAST {
 
 //·······················································································································
 
-override func @compiletimePrefixOperatorAST locationForErrorSignaling -> @location outLocation {
+override func @compiletimePrefixOperatorAST.locationForErrorSignaling () -> @location outLocation {
   outLocation = self.mPrefixOperatorLocation
 }
 
@@ -50,7 +50,7 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <compileTimePrefixOperator> !@compileTimePrefixOperatorEnumeration outOperator {
+  rule <compileTimePrefixOperator> (!@compileTimePrefixOperatorEnumeration outOperator ) {
     select
       $not$
       outOperator = .notOp
@@ -62,28 +62,28 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <declaration> ?!@ast ioAST {
+  rule <declaration> (?!@ast ioAST ) {
     $compiletime$
     $func$
     let operationLocation = @location.here
-    <compileTimePrefixOperator> ?let prefixOperator
+    <compileTimePrefixOperator> (?let prefixOperator)
     $($
-    $identifier$ ?let receiverName
-    $\$type$ ?let receiverType
+    $identifier$ (?let receiverName)
+    $\$type$ (?let receiverType)
     $)$
     $->$
-    $\$type$ ?let resultType
+    $\$type$ (?let resultType)
     ${$
-    <compile_time_expression> ?let @ctExpressionAST expression
+    <compile_time_expression> (?let @ctExpressionAST expression)
     $}$
-    ioAST.mDeclarationListAST += !@compiletimePrefixOperatorAST {
-      !prefixOperator
-      !operationLocation
-      !receiverName
-      !receiverType
-      !expression
-      !resultType
-    }
+    ioAST.mDeclarationListAST += !@compiletimePrefixOperatorAST (
+      !prefixOperator,
+      operationLocation,
+      receiverName,
+      receiverType,
+      expression,
+      resultType
+    )
   }
 
   //·····················································································································
@@ -94,19 +94,19 @@ syntax extension omnibus_syntax {
 //  PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @compiletimePrefixOperatorAST enterInPrecedenceGraph
-  ?!@semanticTypePrecedenceGraph ioGraph
-{
-  let nodeName = @lstring {!self.mPrefixOperator.string + "." + self.mReceiverTypeName !self.mPrefixOperatorLocation}
-  [!?ioGraph addNode !nodeName !self]
-  [!?ioGraph addEdge !from: nodeName !to: self.mReceiverTypeName]
-  [!?ioGraph addEdge !from: nodeName !to: self.mResultTypeName]
-  [!?ioGraph addEdge !from: compileTimeDeclarationBarrier () !to: nodeName]
+override proc @compiletimePrefixOperatorAST.enterInPrecedenceGraph
+  (?!@semanticTypePrecedenceGraph ioGraph
+) {
+  let nodeName = @lstring (!self.mPrefixOperator.string + "." + self.mReceiverTypeName, self.mPrefixOperatorLocation)
+  !?ioGraph.addNode (!nodeName, !self)
+  !?ioGraph.addEdge (!from: nodeName, !to: self.mReceiverTypeName)
+  !?ioGraph.addEdge (!from: nodeName, !to: self.mResultTypeName)
+  !?ioGraph.addEdge (!from: compileTimeDeclarationBarrier (), !to: nodeName)
 }
 
 //·······················································································································
 
-override func @compiletimePrefixOperatorAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+override func @compiletimePrefixOperatorAST.keyRepresentationForErrorSignaling () -> @string outRepresentation {
   outRepresentation = self.mPrefixOperator.string + " " + self.mReceiverTypeName
 }
 
@@ -114,39 +114,39 @@ override func @compiletimePrefixOperatorAST keyRepresentationForErrorSignaling -
 //!  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @compiletimePrefixOperatorAST enterInContext
-  ?!context: @semanticContext ioContext
-  ?!@declarationDecorationList unused ioDecoratedDeclarationList
-  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
-  ?!@routineListIR unused ioRoutineListIR
-  ?!staticlistValues: @staticListInitializationMap unused ioStaticListValueMap
-  ?!staticEntityMap: @staticEntityMap unused ioStaticEntityMap
-  ?!registerUserAccess: @controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
+override proc @compiletimePrefixOperatorAST.enterInContext
+  (?!context: @semanticContext ioContext,
+  ?!@declarationDecorationList unused ioDecoratedDeclarationList,
+  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList,
+  ?!@routineListIR unused ioRoutineListIR,
+  ?!staticlistValues: @staticListInitializationMap unused ioStaticListValueMap,
+  ?!staticEntityMap: @staticEntityMap unused ioStaticEntityMap,
+  ?!registerUserAccess: @controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST,
   ?!userDefinedTypes: @userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
-{
+) {
 //--- Check types
-  [!?ioContext.mTypeMap makeEntry !self.mReceiverTypeName ?let receiverTypeProxy]
+  !?ioContext.mTypeMap.makeEntry (!self.mReceiverTypeName, ?let receiverTypeProxy)
   let receiverType = receiverTypeProxy.type
-  [receiverType checkIsCompileTimeType !self.mReceiverTypeName.location]
-  [!?ioContext.mTypeMap makeEntry !self.mResultTypeName ?let resultTypeProxy]
+  receiverType.checkIsCompileTimeType (!self.mReceiverTypeName.location)
+  !?ioContext.mTypeMap.makeEntry (!self.mResultTypeName, ?let resultTypeProxy)
   let resultType = resultTypeProxy.type
-  [resultType checkIsCompileTimeType !self.mResultTypeName.location]
+  resultType.checkIsCompileTimeType (!self.mResultTypeName.location)
 //--- Check native operator expression
   var @ctCheckMap ctCheckMap = @()
-  [!?ctCheckMap insertKey !self.mReceiverName]
-  [self.mExpression checkCompileTimeExpression !ctCheckMap]
+  !?ctCheckMap.insertKey (!self.mReceiverName)
+  self.mExpression.checkCompileTimeExpression (!ctCheckMap)
 //--- Enter in infix operator map
   let key = prefixOperatorMapKey (!receiverType !self.mPrefixOperator !self.mPrefixOperatorLocation)
-  let definition = @compileTimePrefixOperatorUsage {
-    !self.mPrefixOperatorLocation
-    !self.mReceiverName
-    !self.mExpression
-  }
-  [!?ioContext.mPrefixOperatorMap insertKey !key !receiverType !resultType !definition]
+  let definition = @compileTimePrefixOperatorUsage (
+    !self.mPrefixOperatorLocation,
+    self.mReceiverName,
+    self.mExpression
+  )
+  !?ioContext.mPrefixOperatorMap.insertKey (!key, !receiverType, !resultType, !definition)
 //--- Enter derived operators ?
   if self.mPrefixOperator == .minusOp then
     let minusNoOvf_key = prefixOperatorMapKey (!receiverType !.minusNoOvf !self.mPrefixOperatorLocation)
-    [!?ioContext.mPrefixOperatorMap insertKey !minusNoOvf_key !receiverType !resultType !definition]
+    !?ioContext.mPrefixOperatorMap.insertKey (!minusNoOvf_key, !receiverType, !resultType, !definition)
   end
 }
 
@@ -162,21 +162,21 @@ class @compileTimePrefixOperatorUsage : @prefixOperatorUsage {
 
 //·······················································································································
 
-override proc @compileTimePrefixOperatorUsage generateCode
-  ?let @objectIR inReceiverOperand
-  ?let @location unused inOperatorLocation
-  ?let @omnibusType inResultType
-  ?noPanicCode: let @bool unused inDoNotGeneratePanicCode
-  ?safeMode: let @bool unused inSafeMode
-  ?!@semanticTemporariesStruct unused ioTemporaries
-  ?!@instructionListIR unused ioInstructionGenerationList
+override proc @compileTimePrefixOperatorUsage.generateCode
+  (?let @objectIR inReceiverOperand,
+  ?let @location unused inOperatorLocation,
+  ?let @omnibusType inResultType,
+  ?noPanicCode: let @bool unused inDoNotGeneratePanicCode,
+  ?safeMode: let @bool unused inSafeMode,
+  ?!@semanticTemporariesStruct unused ioTemporaries,
+  ?!@instructionListIR unused ioInstructionGenerationList,
   !@objectIR outResultValue
-{
-  [inReceiverOperand extractLiteralInteger ?1* ?value: let receiverValue]
+) {
+  inReceiverOperand.extractLiteralInteger (?1*, ?value: let receiverValue)
   var @ctMap varMap = @()
-  [!?varMap insertKey !self.mReceiverOperandName !receiverValue]
-  [self.mExpression computeCompileTimeExpression !varMap ?result: let @bigint result]
-  outResultValue = .literalInteger {!type: inResultType !value: result}
+  !?varMap.insertKey (!self.mReceiverOperandName, !receiverValue)
+  self.mExpression.computeCompileTimeExpression (!varMap, ?result: let @bigint result)
+  outResultValue = .literalInteger (!type: inResultType, !value: result)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————

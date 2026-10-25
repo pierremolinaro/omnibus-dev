@@ -1,13 +1,13 @@
 
-setter @instructionListIR testArrayIndex
-  ?let @objectIR inIndex
-  ?let @location inErrorLocation
-  ?let @bigint inSize
+mutating proc @instructionListIR.testArrayIndex
+  (?let @objectIR inIndex,
+  ?let @location inErrorLocation,
+  ?let @bigint inSize,
   !@bool outGeneratePanicInstruction
-{
-  [inIndex.type.kind extractInteger ?1* ?max:let max ?unsigned:let isUnsigned ?1*]
+) {
+  inIndex.type.kind.extractInteger (?1*, ?max:let max, ?unsigned:let isUnsigned, ?1*)
   outGeneratePanicInstruction = (not isUnsigned) || (max >= inSize)
-  self += !@testArrayIndexIR {!inIndex !inErrorLocation !inSize}
+  self += !@testArrayIndexIR (!inIndex, inErrorLocation, inSize)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -20,12 +20,12 @@ class @testArrayIndexIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @testArrayIndexIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext inGenerationContext
+override proc @testArrayIndexIR.llvmInstructionCode
+  (?!@string ioLLVMcode,
+  ?let @generationContext inGenerationContext,
   ?!@generationAdds ioGenerationAdds
-{
-  [self.mIndex.type.kind extractInteger ?1* ?max:let max ?unsigned:let isUnsigned ?1*]
+) {
+  self.mIndex.type.kind.extractInteger (?1*, ?max:let max, ?unsigned:let isUnsigned, ?1*)
 //--- Test index >= 0 (for signed index)
   if not isUnsigned then
     let testToZero = "%test.index.zero." + ioGenerationAdds.mUniqueIndex
@@ -67,10 +67,10 @@ override proc @testArrayIndexIR llvmInstructionCode
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @testArrayIndexIR enterAccessibleEntities
-  ?!@stringset ioInvokedRoutineSet
+override proc @testArrayIndexIR.enterAccessibleEntities
+  (?!@stringset ioInvokedRoutineSet,
   ?!@uint unused ioMaxBranchOfOnInstructions
-{
+) {
   if not [option omnibus_options.noPanicGeneration value] then
     ioInvokedRoutineSet ++= panicRoutineNameForLocationFile (!self.mErrorLocation)
   end

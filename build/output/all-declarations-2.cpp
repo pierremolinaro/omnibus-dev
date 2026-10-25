@@ -7139,15 +7139,15 @@ void cPtr_controlRegisterGroupDeclarationAST::method_noteTypesInPrecedenceGraph 
                                                                                  Compiler * inCompiler
                                                                                  COMMA_UNUSED_LOCATION_ARGS) {
   const GGS_controlRegisterGroupDeclarationAST temp_0 = this ;
-  UpEnumerator_controlRegisterDeclarationList enumerator_11096 (temp_0.readProperty_mRegisters ()) ;
-  while (enumerator_11096.hasCurrentObject ()) {
+  UpEnumerator_controlRegisterDeclarationList enumerator_11176 (temp_0.readProperty_mRegisters ()) ;
+  while (enumerator_11176.hasCurrentObject ()) {
     {
-    ioArgument_ioGraph.setter_noteNode (enumerator_11096.current (HERE).readProperty_mRegisterTypeName () COMMA_SOURCE_FILE ("declaration-control-register.galgas3", 297)) ;
+    ioArgument_ioGraph.setter_noteNode (enumerator_11176.current (HERE).readProperty_mRegisterTypeName () COMMA_SOURCE_FILE ("declaration-control-register.galgas3", 297)) ;
     }
     {
-    ioArgument_ioGraph.setter_addEdge (function_compileTimeDeclarationBarrier (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas3", 298)), enumerator_11096.current (HERE).readProperty_mRegisterTypeName () COMMA_SOURCE_FILE ("declaration-control-register.galgas3", 298)) ;
+    ioArgument_ioGraph.setter_addEdge (function_compileTimeDeclarationBarrier (inCompiler COMMA_SOURCE_FILE ("declaration-control-register.galgas3", 298)), enumerator_11176.current (HERE).readProperty_mRegisterTypeName () COMMA_SOURCE_FILE ("declaration-control-register.galgas3", 298)) ;
     }
-    enumerator_11096.gotoNextObject () ;
+    enumerator_11176.gotoNextObject () ;
   }
 }
 
@@ -10981,39 +10981,39 @@ GGS_string extensionGetter_matchingFormalArgument (const GGS_effectiveArgumentPa
     break ;
   case GGS_effectiveArgumentPassingModeAST::Enumeration::enum_input:
     {
-      GGS_lstring extractedValue_733__0 ;
-      temp_0.getAssociatedValuesFor_input (extractedValue_733__0) ;
+      GGS_lstring extractedValue_739__0 ;
+      temp_0.getAssociatedValuesFor_input (extractedValue_739__0) ;
       result_result = GGS_string ("!") ;
     }
     break ;
   case GGS_effectiveArgumentPassingModeAST::Enumeration::enum_inputWithType:
     {
-      GGS_bool extractedValue_773__0 ;
-      GGS_lstring extractedValue_775__1 ;
-      GGS_lstring extractedValue_777__2 ;
-      temp_0.getAssociatedValuesFor_inputWithType (extractedValue_773__0, extractedValue_775__1, extractedValue_777__2) ;
+      GGS_bool extractedValue_779__0 ;
+      GGS_lstring extractedValue_782__1 ;
+      GGS_lstring extractedValue_785__2 ;
+      temp_0.getAssociatedValuesFor_inputWithType (extractedValue_779__0, extractedValue_782__1, extractedValue_785__2) ;
       result_result = GGS_string ("!") ;
     }
     break ;
   case GGS_effectiveArgumentPassingModeAST::Enumeration::enum_output:
     {
-      GGS_expressionAST extractedValue_810__0 ;
-      GGS_location extractedValue_812__1 ;
-      temp_0.getAssociatedValuesFor_output (extractedValue_810__0, extractedValue_812__1) ;
+      GGS_expressionAST extractedValue_818__0 ;
+      GGS_location extractedValue_821__1 ;
+      temp_0.getAssociatedValuesFor_output (extractedValue_818__0, extractedValue_821__1) ;
       result_result = GGS_string ("\?") ;
     }
     break ;
   case GGS_effectiveArgumentPassingModeAST::Enumeration::enum_outputInput:
     {
-      GGS_lstring extractedValue_850__0 ;
-      temp_0.getAssociatedValuesFor_outputInput (extractedValue_850__0) ;
+      GGS_lstring extractedValue_859__0 ;
+      temp_0.getAssociatedValuesFor_outputInput (extractedValue_859__0) ;
       result_result = GGS_string ("\?!") ;
     }
     break ;
   case GGS_effectiveArgumentPassingModeAST::Enumeration::enum_outputInputSelfVariable:
     {
-      GGS_lstring extractedValue_901__0 ;
-      temp_0.getAssociatedValuesFor_outputInputSelfVariable (extractedValue_901__0) ;
+      GGS_lstring extractedValue_910__0 ;
+      temp_0.getAssociatedValuesFor_outputInputSelfVariable (extractedValue_910__0) ;
       result_result = GGS_string ("\?!") ;
     }
     break ;
@@ -11642,23 +11642,23 @@ GGS_lstring extensionGetter_mangledName (const GGS_effectiveArgumentListAST & in
                                          Compiler * inCompiler
                                          COMMA_UNUSED_LOCATION_ARGS) {
   GGS_lstring result_result ; // Returned variable
-  GGS_string var_s_1477 = GGS_string::makeEmptyString () ;
+  GGS_string var_s_1490 = GGS_string::makeEmptyString () ;
   GalgasBool test_0 = GalgasBool::boolTrue ;
   if (GalgasBool::boolTrue == test_0) {
     test_0 = GGS_bool (ComparisonKind::notEqual, constinArgument_inReceiverTypeName.objectCompare (GGS_string::makeEmptyString ())).boolEnum () ;
     if (GalgasBool::boolTrue == test_0) {
-      var_s_1477.plusAssignOperation(constinArgument_inReceiverTypeName.add_operation (GGS_string ("."), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas3", 40)), inCompiler  COMMA_SOURCE_FILE ("effective-parameters.galgas3", 40)) ;
+      var_s_1490.plusAssignOperation(constinArgument_inReceiverTypeName.add_operation (GGS_string ("."), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas3", 40)), inCompiler  COMMA_SOURCE_FILE ("effective-parameters.galgas3", 40)) ;
     }
   }
-  var_s_1477.plusAssignOperation(constinArgument_inFunctionName.readProperty_string ().add_operation (GGS_string ("("), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas3", 42)), inCompiler  COMMA_SOURCE_FILE ("effective-parameters.galgas3", 42)) ;
+  var_s_1490.plusAssignOperation(constinArgument_inFunctionName.readProperty_string ().add_operation (GGS_string ("("), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas3", 42)), inCompiler  COMMA_SOURCE_FILE ("effective-parameters.galgas3", 42)) ;
   const GGS_effectiveArgumentListAST temp_1 = inObject ;
-  UpEnumerator_effectiveArgumentListAST enumerator_1630 (temp_1) ;
-  while (enumerator_1630.hasCurrentObject ()) {
-    var_s_1477.plusAssignOperation(extensionGetter_matchingFormalArgument (enumerator_1630.current_mEffectiveParameterKind (HERE), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas3", 44)).add_operation (enumerator_1630.current_mSelector (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas3", 44)).add_operation (GGS_string (":"), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas3", 44)), inCompiler  COMMA_SOURCE_FILE ("effective-parameters.galgas3", 44)) ;
-    enumerator_1630.gotoNextObject () ;
+  UpEnumerator_effectiveArgumentListAST enumerator_1643 (temp_1) ;
+  while (enumerator_1643.hasCurrentObject ()) {
+    var_s_1490.plusAssignOperation(extensionGetter_matchingFormalArgument (enumerator_1643.current_mEffectiveParameterKind (HERE), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas3", 44)).add_operation (enumerator_1643.current_mSelector (HERE).readProperty_string (), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas3", 44)).add_operation (GGS_string (":"), inCompiler COMMA_SOURCE_FILE ("effective-parameters.galgas3", 44)), inCompiler  COMMA_SOURCE_FILE ("effective-parameters.galgas3", 44)) ;
+    enumerator_1643.gotoNextObject () ;
   }
-  var_s_1477.plusAssignOperation(GGS_string (")"), inCompiler  COMMA_SOURCE_FILE ("effective-parameters.galgas3", 46)) ;
-  result_result = GGS_lstring::init_21__21_ (var_s_1477, constinArgument_inFunctionName.readProperty_location (), inCompiler COMMA_HERE) ;
+  var_s_1490.plusAssignOperation(GGS_string (")"), inCompiler  COMMA_SOURCE_FILE ("effective-parameters.galgas3", 46)) ;
+  result_result = GGS_lstring::init_21__21_ (var_s_1490, constinArgument_inFunctionName.readProperty_location (), inCompiler COMMA_HERE) ;
 //---
   return result_result ;
 }
@@ -16762,14 +16762,14 @@ void extensionMethod_noteTypesInPrecedenceGraph (const GGS_taskListAST inObject,
                                                  Compiler * inCompiler
                                                  COMMA_UNUSED_LOCATION_ARGS) {
   const GGS_taskListAST temp_0 = inObject ;
-  UpEnumerator_taskListAST enumerator_4689 (temp_0) ;
-  while (enumerator_4689.hasCurrentObject ()) {
-    UpEnumerator_syncInstructionBranchListAST enumerator_4729 (enumerator_4689.current_mGuardedCommandList (HERE)) ;
-    while (enumerator_4729.hasCurrentObject ()) {
-      extensionMethod_noteInstructionListTypesInPrecedenceGraph (enumerator_4729.current (HERE).readProperty_mInstructionList (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas3", 148)) ;
-      enumerator_4729.gotoNextObject () ;
+  UpEnumerator_taskListAST enumerator_4732 (temp_0) ;
+  while (enumerator_4732.hasCurrentObject ()) {
+    UpEnumerator_syncInstructionBranchListAST enumerator_4772 (enumerator_4732.current_mGuardedCommandList (HERE)) ;
+    while (enumerator_4772.hasCurrentObject ()) {
+      extensionMethod_noteInstructionListTypesInPrecedenceGraph (enumerator_4772.current (HERE).readProperty_mInstructionList (), ioArgument_ioGraph, inCompiler COMMA_SOURCE_FILE ("task-declaration.galgas3", 148)) ;
+      enumerator_4772.gotoNextObject () ;
     }
-    enumerator_4689.gotoNextObject () ;
+    enumerator_4732.gotoNextObject () ;
   }
 }
 

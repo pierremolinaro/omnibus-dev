@@ -24,10 +24,10 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList  {
+  rule <instruction> (?!@ast ioAST ,?!@instructionListAST ioInstructionList  ) {
     $switch$
     let instructionLocation = @location.here
-    <expression> !?ioAST ?let @expressionAST switchExpression
+    <expression> (!?ioAST, ?let @expressionAST switchExpression)
     let switchExpressionEndLocation = @location.here
     ${$
     var @switchCaseListAST switchCaseList = @[]
@@ -35,25 +35,25 @@ syntax extension omnibus_syntax {
       $case$
       var @lstringlist caseIdentifiers = @[]
       repeat
-        $identifier$ ?let caseIdf
+        $identifier$ (?let caseIdf)
         caseIdentifiers += !caseIdf
       while
         $,$
       end
       $:$
-      <instructionList> !?ioAST ?let instructionList
+      <instructionList> (!?ioAST, ?let instructionList)
       switchCaseList += !caseIdentifiers !instructionList
     while
     end
     let endOfInstruction = @location.here
     $}$
-    ioInstructionList += !@switchInstructionAST {
-      !instructionLocation
-      !switchExpression
-      !switchExpressionEndLocation
-      !switchCaseList
-      !endOfInstruction
-    }
+    ioInstructionList += !@switchInstructionAST (
+      !instructionLocation,
+      switchExpression,
+      switchExpressionEndLocation,
+      switchCaseList,
+      endOfInstruction
+    )
   }
 
   //·····················································································································
@@ -64,10 +64,10 @@ syntax extension omnibus_syntax {
 //  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @switchInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [self.mSwitchExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+override proc @switchInstructionAST.noteInstructionTypesInPrecedenceGraph (?!@semanticTypePrecedenceGraph ioGraph ) {
+  self.mSwitchExpression.noteExpressionTypesInPrecedenceGraph (!?ioGraph)
   for (* instructionList) in self.mSwitchCaseList do
-    [instructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+    instructionList.noteInstructionListTypesInPrecedenceGraph (!?ioGraph)
   end
 }
 
@@ -75,39 +75,39 @@ override proc @switchInstructionAST noteInstructionTypesInPrecedenceGraph ?!@sem
 //  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @switchInstructionAST instructionSemanticAnalysis
-  ?self:let @omnibusType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
+override proc @switchInstructionAST.instructionSemanticAnalysis
+  (?self:let @omnibusType inSelfType,
+  ?routineAttributes:let @routineAttributes inRoutineAttributes,
+  ?context:let @semanticContext inContext,
+  ?mode:let @mode inMode,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap,
+  ?!alloca:@allocaList ioAllocaList,
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-{
+) {
 //--- Analyze test expression
   var @instructionListIR switchExpressionGenerationList = @[]
-  [self.mSwitchExpression analyzeExpression
-    !self:inSelfType
-    !routineAttributes: @()
-    !optionalTargetType:voidType ()
-    !context:inContext
-    !mode:inMode
-    !?temporary:ioTemporaries
-    !?staticEntityMap:ioStaticEntityMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:switchExpressionGenerationList
+  self.mSwitchExpression.analyzeExpression
+    (!self:inSelfType,
+    !routineAttributes: @(),
+    !optionalTargetType:voidType (),
+    !context:inContext,
+    !mode:inMode,
+    !?temporary:ioTemporaries,
+    !?staticEntityMap:ioStaticEntityMap,
+    !?variableMap:ioUniversalMap,
+    !?alloca:ioAllocaList,
+    !?instructionListIR:switchExpressionGenerationList,
     ?result:@objectIR switchValueIR
-  ]
-  [!?ioInstructionGenerationList appendLoadWhenReference
-    !?ioTemporaries
+  )
+  !?ioInstructionGenerationList.appendLoadWhenReference
+    (!?ioTemporaries,
     !?switchValueIR
-  ]
+  )
 //--- Check inferred type
-  let switchTypeName = @lstring {!switchValueIR.type.omnibusTypeDescriptionName !self.mEndOf_test_expression}
-  [inContext.mTypeConstantMap searchKey !switchTypeName ?let enumConstantMap]
+  let switchTypeName = @lstring (!switchValueIR.type.omnibusTypeDescriptionName, self.mEndOf_test_expression)
+  inContext.mTypeConstantMap.searchKey (!switchTypeName, ?let enumConstantMap)
   if not switchValueIR.type.kind.isEnumeration then
     error (self.mEndOf_test_expression
       : "test expression type is '" + switchValueIR.omnibusTypeDescriptionName + "', it should be boolean")
@@ -116,13 +116,13 @@ override proc @switchInstructionAST instructionSemanticAnalysis
     error (self.mEndOf_test_expression : "test expression type should not be static")
   end
 //--- Analyse case list
-  [!?ioUniversalMap openOverrideForSelectBlock]
+  !?ioUniversalMap.openOverrideForSelectBlock ()
   var @stringset usedEnumerationValues = @[]
   var @switchCaseListIR switchCaseListIR = @[]
   for (caseIdentifiers instructionList) in self.mSwitchCaseList do
     var @uintlist caseIdentifierIndexList = @[]
     for (caseIdf) in caseIdentifiers do
-      [enumConstantMap searchKey !caseIdf ?let @bigint constantIdx ?1*]
+      enumConstantMap.searchKey (!caseIdf, ?let @bigint constantIdx, ?1*)
       caseIdentifierIndexList += !constantIdx
       if [usedEnumerationValues hasKey !caseIdf] then
         error (caseIdf : "duplicated enumeration constant" fixit remove)
@@ -130,21 +130,21 @@ override proc @switchInstructionAST instructionSemanticAnalysis
       usedEnumerationValues ++= caseIdf
     end
     var @instructionListIR instructionGenerationList = @[]
-    [instructionList analyzeBranchInstructionList
-      !self:inSelfType
-      !routineAttributes:inRoutineAttributes
-      !endOfInstructionList:self.mEndOf_switch_instruction
-      !context:inContext
-      !mode:inMode
-      !?temporary:ioTemporaries
-      !?staticEntityMap:ioStaticEntityMap
-      !?variableMap:ioUniversalMap
-      !?alloca:ioAllocaList
+    instructionList.analyzeBranchInstructionList
+      (!self:inSelfType,
+      !routineAttributes:inRoutineAttributes,
+      !endOfInstructionList:self.mEndOf_switch_instruction,
+      !context:inContext,
+      !mode:inMode,
+      !?temporary:ioTemporaries,
+      !?staticEntityMap:ioStaticEntityMap,
+      !?variableMap:ioUniversalMap,
+      !?alloca:ioAllocaList,
       !?instructionListIR:instructionGenerationList
-    ]
+    )
     switchCaseListIR += !caseIdentifierIndexList !instructionGenerationList
   end
-  [!?ioUniversalMap closeOverride !self.mEndOf_switch_instruction]
+  !?ioUniversalMap.closeOverride (!self.mEndOf_switch_instruction)
 //--- Check all enumeration values are named in switch instructions
   for (lkey 2*) in enumConstantMap do
     if not [usedEnumerationValues hasKey !lkey] then
@@ -152,12 +152,12 @@ override proc @switchInstructionAST instructionSemanticAnalysis
     end
   end
 //--- Code generation
-  ioInstructionGenerationList += !@switchInstructionIR {
-    !self.mEndOf_test_expression.endLocationIndex
-    !switchExpressionGenerationList
-    !switchValueIR
-    !switchCaseListIR
-  }
+  ioInstructionGenerationList += !@switchInstructionIR (
+    !self.mEndOf_test_expression.endLocationIndex,
+    switchExpressionGenerationList,
+    switchValueIR,
+    switchCaseListIR
+  )
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -180,13 +180,13 @@ class @switchInstructionIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @switchInstructionIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext inGenerationContext
+override proc @switchInstructionIR.llvmInstructionCode
+  (?!@string ioLLVMcode,
+  ?let @generationContext inGenerationContext,
   ?!@generationAdds ioGenerationAdds
-{
+) {
 //--- Generate instructions that compute switch expression
-  [self.mSwitchExpressionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  self.mSwitchExpressionGenerationList.instructionListLLVMCode (!?ioLLVMcode, !inGenerationContext, !?ioGenerationAdds)
 //--- Generate switch instruction
   let labelOtherwise = "switch." + self.mLabelIndex + ".otherwise"
   ioLLVMcode += "  switch " + self.mSwitchExpression.llvmTypeName + " " + self.mSwitchExpression.llvmName
@@ -201,7 +201,7 @@ override proc @switchInstructionIR llvmInstructionCode
 //--- Generate branches
   for (* instructionList) in self.mCaseGenerationList do (branchIdx)
     ioLLVMcode += "switch." + self.mLabelIndex + ".branch." + branchIdx + ":\n"
-    [instructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+    instructionList.instructionListLLVMCode (!?ioLLVMcode, !inGenerationContext, !?ioGenerationAdds)
     ioLLVMcode += "  br label %" + labelOtherwise + "\n\n"
   end
 //--- Otherwise label
@@ -210,13 +210,13 @@ override proc @switchInstructionIR llvmInstructionCode
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @switchInstructionIR enterAccessibleEntities
-  ?!@stringset ioInvokedRoutineSet
+override proc @switchInstructionIR.enterAccessibleEntities
+  (?!@stringset ioInvokedRoutineSet,
   ?!@uint ioMaxBranchOfOnInstructions
-{
-  [self.mSwitchExpressionGenerationList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
+) {
+  self.mSwitchExpressionGenerationList.enterAccessibleEntities (!?ioInvokedRoutineSet, !?ioMaxBranchOfOnInstructions)
   for (* instructionList) in self.mCaseGenerationList do
-    [instructionList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
+    instructionList.enterAccessibleEntities (!?ioInvokedRoutineSet, !?ioMaxBranchOfOnInstructions)
   end
 }
 

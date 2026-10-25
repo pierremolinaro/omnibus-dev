@@ -280,7 +280,7 @@ void callExtensionMethod_enterCodeForDivisionWithZeroDivisorPanic (class cPtr_bi
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@semanticContext insertGetter'
+//Extension mutating proc '@semanticContext insertGetter'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -294,7 +294,7 @@ void extensionSetter_insertGetter (class GGS_semanticContext & ioObject,
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@semanticContext addComputedPropertyGetter'
+//Extension mutating proc '@semanticContext addComputedPropertyGetter'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -322,7 +322,7 @@ class GGS_string function_getterLLVMName (const class GGS_string & constinArgume
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@semanticContext insertPropertySetter'
+//Extension mutating proc '@semanticContext insertPropertySetter'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -347,7 +347,7 @@ class GGS_propertySetterMap extensionGetter_propertySetterMap (const class GGS_s
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@staticEntityMap findOrAddStaticString'
+//Extension mutating proc '@staticEntityMap findOrAddStaticString'
 //
 //--------------------------------------------------------------------------------------------------
 

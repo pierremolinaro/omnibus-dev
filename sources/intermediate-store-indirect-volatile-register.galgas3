@@ -1,10 +1,10 @@
 
-setter @instructionListIR appendStoreIndirectVolatileRegister
-  ?let @omnibusType inTargetVarType
-  ?let @string inLLVMName
+mutating proc @instructionListIR.appendStoreIndirectVolatileRegister
+  (?let @omnibusType inTargetVarType,
+  ?let @string inLLVMName,
   ?let @objectIR inSourceValue
-{
-  self += !@storeIndirectVolatileIR {!inTargetVarType !inLLVMName !inSourceValue}
+) {
+  self += !@storeIndirectVolatileIR (!inTargetVarType, inLLVMName, inSourceValue)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -17,11 +17,11 @@ class @storeIndirectVolatileIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @storeIndirectVolatileIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
+override proc @storeIndirectVolatileIR.llvmInstructionCode
+  (?!@string ioLLVMcode,
+  ?let @generationContext unused inGenerationContext,
   ?!@generationAdds ioGenerationAdds
-{
+) {
   let llvmType = self.mTargetVarType.llvmTypeName
   let ptr = "%registerPointer." + ioGenerationAdds.mUniqueIndex
   ioGenerationAdds.mUniqueIndex += 1

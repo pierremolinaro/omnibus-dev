@@ -11,7 +11,7 @@ class @compileTimeConvertToBooleanAST : @abstractDeclarationAST {
 
 //·······················································································································
 
-override func @compileTimeConvertToBooleanAST locationForErrorSignaling -> @location outLocation {
+override func @compileTimeConvertToBooleanAST.locationForErrorSignaling () -> @location outLocation {
   outLocation = self.mReceiverTypeName.location
 }
 
@@ -26,7 +26,7 @@ class @llvmConvertToBooleanAST : @abstractDeclarationAST {
 
 //·······················································································································
 
-override func @llvmConvertToBooleanAST locationForErrorSignaling -> @location outLocation {
+override func @llvmConvertToBooleanAST.locationForErrorSignaling () -> @location outLocation {
   outLocation = self.mReceiverTypeName.location
 }
 
@@ -38,39 +38,39 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <declaration> ?!@ast ioAST {
+  rule <declaration> (?!@ast ioAST ) {
     $compiletime$
     $func$
     $($
-    $identifier$ ?let receiverName
-    $\$type$ ?let receiverTypeName
+    $identifier$ (?let receiverName)
+    $\$type$ (?let receiverTypeName)
     $)$
-    $identifier$ ?let converterName
+    $identifier$ (?let converterName)
     ${$
-    <compile_time_expression> ?let @ctExpressionAST expression
+    <compile_time_expression> (?let @ctExpressionAST expression)
     $}$
-    ioAST.mDeclarationListAST += !@compileTimeConvertToBooleanAST {
-      !receiverName
-      !receiverTypeName
-      !converterName
-      !expression
-    }
+    ioAST.mDeclarationListAST += !@compileTimeConvertToBooleanAST (
+      !receiverName,
+      receiverTypeName,
+      converterName,
+      expression
+    )
   }
 
   //·····················································································································
 
-  rule <declaration> ?!@ast ioAST {
-    <llvm_function_header> ?let receiverName ?let receiverTypeName ?let unused receiverGenericFormalParameterList
-    $identifier$ ?let converterName
+  rule <declaration> (?!@ast ioAST ) {
+    <llvm_function_header> (?let receiverName, ?let receiverTypeName, ?let unused receiverGenericFormalParameterList)
+    $identifier$ (?let converterName)
     ${$
-    <llvm_instruction_list> ?let instructionList
+    <llvm_instruction_list> (?let instructionList)
     $}$
-    ioAST.mDeclarationListAST += !@llvmConvertToBooleanAST {
-      !receiverName
-      !receiverTypeName
-      !converterName
-      !instructionList
-    }
+    ioAST.mDeclarationListAST += !@llvmConvertToBooleanAST (
+      !receiverName,
+      receiverTypeName,
+      converterName,
+      instructionList
+    )
   }
 
   //·····················································································································
@@ -81,33 +81,33 @@ syntax extension omnibus_syntax {
 //  PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @compileTimeConvertToBooleanAST enterInPrecedenceGraph
-  ?!@semanticTypePrecedenceGraph ioGraph
-{
-  let nodeName = @lstring {!self.mReceiverTypeName.string + "." + self.mConverterName !self.mReceiverTypeName.location}
-  [!?ioGraph addNode !nodeName !self]
-  [!?ioGraph addEdge !from: nodeName !to: self.mReceiverTypeName]
+override proc @compileTimeConvertToBooleanAST.enterInPrecedenceGraph
+  (?!@semanticTypePrecedenceGraph ioGraph
+) {
+  let nodeName = @lstring (!self.mReceiverTypeName.string + "." + self.mConverterName, self.mReceiverTypeName.location)
+  !?ioGraph.addNode (!nodeName, !self)
+  !?ioGraph.addEdge (!from: nodeName, !to: self.mReceiverTypeName)
 }
 
 //·······················································································································
 
-override func @compileTimeConvertToBooleanAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+override func @compileTimeConvertToBooleanAST.keyRepresentationForErrorSignaling () -> @string outRepresentation {
   outRepresentation = self.mReceiverTypeName.string + "." + self.mConverterName
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @llvmConvertToBooleanAST enterInPrecedenceGraph
-  ?!@semanticTypePrecedenceGraph ioGraph
-{
-  let nodeName = @lstring {!self.mReceiverTypeName.string + "." + self.mConverterName !self.mReceiverTypeName.location}
-  [!?ioGraph addNode !nodeName !self]
-  [!?ioGraph addEdge !from: nodeName !to: self.mReceiverTypeName]
+override proc @llvmConvertToBooleanAST.enterInPrecedenceGraph
+  (?!@semanticTypePrecedenceGraph ioGraph
+) {
+  let nodeName = @lstring (!self.mReceiverTypeName.string + "." + self.mConverterName, self.mReceiverTypeName.location)
+  !?ioGraph.addNode (!nodeName, !self)
+  !?ioGraph.addEdge (!from: nodeName, !to: self.mReceiverTypeName)
 }
 
 //·······················································································································
 
-override func @llvmConvertToBooleanAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+override func @llvmConvertToBooleanAST.keyRepresentationForErrorSignaling () -> @string outRepresentation {
   outRepresentation = self.mReceiverTypeName.string + "." + self.mConverterName
 }
 
@@ -115,56 +115,56 @@ override func @llvmConvertToBooleanAST keyRepresentationForErrorSignaling -> @st
 //!  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @compileTimeConvertToBooleanAST enterInContext
-  ?!context:@semanticContext ioContext
-  ?!@declarationDecorationList unused ioDecoratedDeclarationList
-  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
-  ?!@routineListIR unused ioRoutineListIR
-  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
-  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
-  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
+override proc @compileTimeConvertToBooleanAST.enterInContext
+  (?!context:@semanticContext ioContext,
+  ?!@declarationDecorationList unused ioDecoratedDeclarationList,
+  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList,
+  ?!@routineListIR unused ioRoutineListIR,
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap,
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap,
+  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST,
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
-{
+) {
   if self.mConverterName.string != "convertToBoolean" then
     error (self.mConverterName : "the implicit converter name should be 'convertToBoolean'")
   end
 //--- Check types
-  [!?ioContext.mTypeMap makeEntry !self.mReceiverTypeName ?let receiverTypeProxy]
+  !?ioContext.mTypeMap.makeEntry (!self.mReceiverTypeName, ?let receiverTypeProxy)
   let receiverType = receiverTypeProxy.type
-  [receiverType checkIsCompileTimeType !self.mReceiverTypeName.location]
+  receiverType.checkIsCompileTimeType (!self.mReceiverTypeName.location)
 //--- Check native operator expression
   var @ctCheckMap ctCheckMap = @()
-  [!?ctCheckMap insertKey !self.mReceiverName]
-  [self.mExpression checkCompileTimeExpression !ctCheckMap]
+  !?ctCheckMap.insertKey (!self.mReceiverName)
+  self.mExpression.checkCompileTimeExpression (!ctCheckMap)
 //--- Enter in infix operator map
-  let key = @lstring {!receiverType.omnibusTypeDescriptionName !self.mReceiverTypeName.location}
-  let converter = @compileTimeImplicitConverterToBoolean {!self.mReceiverName !self.mExpression}
-  [!?ioContext.mImplicitConversionToBooleanMap insertKey !key !converter]
+  let key = @lstring (!receiverType.omnibusTypeDescriptionName, self.mReceiverTypeName.location)
+  let converter = @compileTimeImplicitConverterToBoolean (!self.mReceiverName, self.mExpression)
+  !?ioContext.mImplicitConversionToBooleanMap.insertKey (!key, !converter)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @llvmConvertToBooleanAST enterInContext
-  ?!context:@semanticContext ioContext
-  ?!@declarationDecorationList unused ioDecoratedDeclarationList
-  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
-  ?!@routineListIR unused ioRoutineListIR
-  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
-  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
-  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
+override proc @llvmConvertToBooleanAST.enterInContext
+  (?!context:@semanticContext ioContext,
+  ?!@declarationDecorationList unused ioDecoratedDeclarationList,
+  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList,
+  ?!@routineListIR unused ioRoutineListIR,
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap,
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap,
+  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST,
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
-{
+) {
   if self.mConverterName.string != "convertToBoolean" then
     error (self.mConverterName : "the implicit converter name should be 'convertToBoolean'")
   end
 //--- Check types
-  [!?ioContext.mTypeMap makeEntry !self.mReceiverTypeName ?let receiverTypeProxy]
+  !?ioContext.mTypeMap.makeEntry (!self.mReceiverTypeName, ?let receiverTypeProxy)
   let receiverType = receiverTypeProxy.type
-  [receiverType checkIsNotCompileTimeType !self.mReceiverTypeName.location]
+  receiverType.checkIsNotCompileTimeType (!self.mReceiverTypeName.location)
 //--- Enter in infix operator map
-  let key = @lstring {!receiverType.omnibusTypeDescriptionName !self.mReceiverTypeName.location}
-  let converter = @llvmImplicitConverterToBoolean {!self.mReceiverName !receiverType !self.mInstructionList}
-  [!?ioContext.mImplicitConversionToBooleanMap insertKey !key !converter]
+  let key = @lstring (!receiverType.omnibusTypeDescriptionName, self.mReceiverTypeName.location)
+  let converter = @llvmImplicitConverterToBoolean (!self.mReceiverName, receiverType, self.mInstructionList)
+  !?ioContext.mImplicitConversionToBooleanMap.insertKey (!key, !converter)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -186,7 +186,7 @@ enum @implicitBooleanConversionResult {
 
 //·······················································································································
 
-func @implicitBooleanConversionResult llvmName -> @string {
+func @implicitBooleanConversionResult.llvmName () -> @string {
   switch self
   case compileTime (@bool value) : result = if value then 1 else 0 end
   case llvmVariable (@string name) : result = name
@@ -201,12 +201,12 @@ abstract class @abstractImplicitConverterToBoolean {
 //·······················································································································
 
 abstract proc @abstractImplicitConverterToBoolean generateConvertToBooleanCode
-  ?let @objectIR inReceiverOperand
-  ?let @location inErrorLocation
-  ?!@semanticTemporariesStruct ioTemporaries
-  ?!@instructionListIR ioInstructionGenerationList
-  ?!alloca:@allocaList ioAllocaList
-  !@implicitBooleanConversionResult outResult
+  (?let @objectIR inReceiverOperand,
+  ?let @location inErrorLocation,
+  ?!@semanticTemporariesStruct ioTemporaries,
+  ?!@instructionListIR ioInstructionGenerationList,
+  ?!alloca:@allocaList ioAllocaList,
+  !@implicitBooleanConversionResult outResult)
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -217,19 +217,19 @@ class @compileTimeImplicitConverterToBoolean :  @abstractImplicitConverterToBool
 
 //·······················································································································
 
-override proc @compileTimeImplicitConverterToBoolean generateConvertToBooleanCode
-  ?let @objectIR inReceiverOperand
-  ?let @location unused inErrorLocation
-  ?!@semanticTemporariesStruct unused ioTemporaries
-  ?!@instructionListIR unused ioInstructionGenerationList
-  ?!alloca: @allocaList unused ioAllocaList
+override proc @compileTimeImplicitConverterToBoolean.generateConvertToBooleanCode
+  (?let @objectIR inReceiverOperand,
+  ?let @location unused inErrorLocation,
+  ?!@semanticTemporariesStruct unused ioTemporaries,
+  ?!@instructionListIR unused ioInstructionGenerationList,
+  ?!alloca: @allocaList unused ioAllocaList,
   !@implicitBooleanConversionResult outResult
-{
-  [inReceiverOperand extractLiteralInteger ?1* ?value: let receiverValue]
+) {
+  inReceiverOperand.extractLiteralInteger (?1*, ?value: let receiverValue)
   var @ctMap varMap = @()
-  [!?varMap insertKey !self.mReceiverName !receiverValue]
-  [self.mExpression computeCompileTimeExpression !varMap ?result: let result]
-  outResult = .compileTime {!value: result != 0}
+  !?varMap.insertKey (!self.mReceiverName, !receiverValue)
+  self.mExpression.computeCompileTimeExpression (!varMap, ?result: let result)
+  outResult = .compileTime (!value: result != 0)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -242,55 +242,55 @@ class @llvmImplicitConverterToBoolean :  @abstractImplicitConverterToBoolean {
 
 //·······················································································································
 
-override proc @llvmImplicitConverterToBoolean generateConvertToBooleanCode
-  ?let @objectIR inReceiverOperand
-  ?let @location unused inErrorLocation
-  ?!@semanticTemporariesStruct ioTemporaries
-  ?!@instructionListIR ioInstructionGenerationList
-  ?!alloca: @allocaList ioAllocaList
+override proc @llvmImplicitConverterToBoolean.generateConvertToBooleanCode
+  (?let @objectIR inReceiverOperand,
+  ?let @location unused inErrorLocation,
+  ?!@semanticTemporariesStruct ioTemporaries,
+  ?!@instructionListIR ioInstructionGenerationList,
+  ?!alloca: @allocaList ioAllocaList,
   !@implicitBooleanConversionResult outResult
-{
+) {
   if self.mInstructionList.count == 0 then
-    outResult = .llvmVariable {!name: inReceiverOperand.llvmName}
+    outResult = .llvmVariable (!name: inReceiverOperand.llvmName)
   else
     var @assignmentGenerationVarMap varMap = @()
-    [!?varMap insertKey !self.mReceiverName !inReceiverOperand.llvmName]
+    !?varMap.insertKey (!self.mReceiverName, !inReceiverOperand.llvmName)
     let resultLLVMName = "%temp" + ioTemporaries.mTemporaryIndex
     ioTemporaries.mTemporaryIndex += 1
-    [!?varMap insertKey !"result".nowhere !resultLLVMName]
+    !?varMap.insertKey (!"result".nowhere, !resultLLVMName)
 
     var @assignmentGenerationVarMap typeMap = @()
-    [!?typeMap insertKey !self.mReceiverName !self.mReceiverType.llvmTypeName]
+    !?typeMap.insertKey (!self.mReceiverName, !self.mReceiverType.llvmTypeName)
 
     var @stringlist generatedInstructions = @[]
-    [self.mInstructionList generateIRCode !varMap !typeMap !?generatedInstructions !?ioTemporaries.mTemporaryIndex !?ioAllocaList]
+    self.mInstructionList.generateIRCode (!varMap, !typeMap, !?generatedInstructions, !?ioTemporaries.mTemporaryIndex, !?ioAllocaList)
     for (str) in generatedInstructions do
-      [!?ioInstructionGenerationList appendInstructionAsFreeString !str !@[]]
+      !?ioInstructionGenerationList.appendInstructionAsFreeString (!str, !@[])
     end
-    outResult = .llvmVariable {!name: resultLLVMName}
+    outResult = .llvmVariable (!name: resultLLVMName)
   end
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc @implicitConversionToBooleanMap generateConvertToBooleanCode
-  ?let @objectIR inReceiverOperand
-  ?let @location inErrorLocation
-  ?!@semanticTemporariesStruct ioTemporaries
-  ?!@instructionListIR ioInstructionGenerationList
-  ?!alloca:@allocaList ioAllocaList
+  (?let @objectIR inReceiverOperand,
+  ?let @location inErrorLocation,
+  ?!@semanticTemporariesStruct ioTemporaries,
+  ?!@instructionListIR ioInstructionGenerationList,
+  ?!alloca:@allocaList ioAllocaList,
   !@implicitBooleanConversionResult outResult
-{
-  let key = @lstring {!inReceiverOperand.omnibusTypeDescriptionName !inErrorLocation}
-  [self searchKey !key ?let converter]
-  [converter generateConvertToBooleanCode
-    !inReceiverOperand
-    !inErrorLocation
-    !?ioTemporaries
-    !?ioInstructionGenerationList
-    !?alloca: ioAllocaList
+) {
+  let key = @lstring (!inReceiverOperand.omnibusTypeDescriptionName, inErrorLocation)
+  self.searchKey (!key, ?let converter)
+  converter.generateConvertToBooleanCode
+    (!inReceiverOperand,
+    !inErrorLocation,
+    !?ioTemporaries,
+    !?ioInstructionGenerationList,
+    !?alloca: ioAllocaList,
     ?outResult
-  ]
+  )
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————

@@ -14,12 +14,12 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
+  rule <primary> (?!@ast ioAST ,!@expressionAST outExpression ) {
     $addressof$
     $($
-    <lvalue> !?ioAST ?let lvalue
+    <lvalue> (!?ioAST, ?let lvalue)
     $)$
-    outExpression = @addressofExpressionAST {!lvalue}
+    outExpression = @addressofExpressionAST (!lvalue)
   }
 
   //·····················································································································
@@ -30,65 +30,65 @@ syntax extension omnibus_syntax {
 //!  PRECEDENCE GRAPH FROM EXPRESSION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @addressofExpressionAST addDependenceEdgeForStaticExpression
-  ?let @lstring unused inConstantName
+override proc @addressofExpressionAST.addDependenceEdgeForStaticExpression
+  (?let @lstring unused inConstantName,
   ?!@semanticTypePrecedenceGraph unused ioGraph
-{
+) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //!  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @addressofExpressionAST noteExpressionTypesInPrecedenceGraph
-  ?!@semanticTypePrecedenceGraph ioGraph
-{
-  [self.mLValue noteInstructionTypesInPrecedenceGraph !?ioGraph]
+override proc @addressofExpressionAST.noteExpressionTypesInPrecedenceGraph
+  (?!@semanticTypePrecedenceGraph ioGraph
+) {
+  self.mLValue.noteInstructionTypesInPrecedenceGraph (!?ioGraph)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //!  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @addressofExpressionAST analyzeExpression
-  ?self:let @omnibusType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?optionalTargetType:let @omnibusType unused inOptionalTargetType
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+override proc @addressofExpressionAST.analyzeExpression
+  (?self:let @omnibusType inSelfType,
+  ?routineAttributes:let @routineAttributes inRoutineAttributes,
+  ?optionalTargetType:let @omnibusType unused inOptionalTargetType,
+  ?context:let @semanticContext inContext,
+  ?mode:let @mode inMode,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap,
+  ?!alloca:@allocaList ioAllocaList,
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList,
   !result:@objectIR outResult
-{
+) {
   if [inRoutineAttributes contains !.isGuard] then
     error (self.mLValue.mIdentifier : "addressof () cannot be used in guard" spoil outResult)
   else
   //--- Analyze LValue
-    [self.mLValue analyzeLValue
-      !self: inSelfType
-      !forAddressOf:true
-      !routineAttributes:inRoutineAttributes
-      !context: inContext
-      !mode: inMode
-      !?temporary: ioTemporaries
-      !?staticEntityMap:ioStaticEntityMap
-      !?variableMap:ioUniversalMap
-      !?alloca: ioAllocaList
-      !?instructionListIR: ioInstructionGenerationList
+    self.mLValue.analyzeLValue
+      (!self: inSelfType,
+      !forAddressOf:true,
+      !routineAttributes:inRoutineAttributes,
+      !context: inContext,
+      !mode: inMode,
+      !?temporary: ioTemporaries,
+      !?staticEntityMap:ioStaticEntityMap,
+      !?variableMap:ioUniversalMap,
+      !?alloca: ioAllocaList,
+      !?instructionListIR: ioInstructionGenerationList,
       ?let @LValueRepresentation lvalueIR
-    ]
+    )
     let resultTypeProxy = [inContext.mTypeMap searchKey
       !("u" + inContext.mTargetParameters.mPointerSize.string).nowhere
     ]
     let resultType = resultTypeProxy.type
-    getNewTempValue (!resultType !?ioTemporaries ?outResult)
-    ioInstructionGenerationList += !@addressofInstructionIR {
-      !outResult
-      !lvalueIR
-    }
+    getNewTempValue (!resultType, !?ioTemporaries, ?outResult)
+    ioInstructionGenerationList += !@addressofInstructionIR (
+      !outResult,
+      lvalueIR
+    )
   end
 }
 
@@ -103,11 +103,11 @@ class @addressofInstructionIR : @abstractInstructionIR {
 
 //·······················································································································
 
-override proc @addressofInstructionIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
+override proc @addressofInstructionIR.llvmInstructionCode
+  (?!@string ioLLVMcode,
+  ?let @generationContext unused inGenerationContext,
   ?!@generationAdds unused ioGenerationAdds
-{
+) {
   ioLLVMcode += "  " + self.mTarget.llvmName + " = ptrtoint " + self.mLValue.type.llvmTypeName + "* " + self.mLValue.llvmName
              + " to " + self.mTarget.llvmTypeName + " ; addressof\n"
 }

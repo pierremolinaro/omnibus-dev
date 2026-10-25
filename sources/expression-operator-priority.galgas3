@@ -13,390 +13,390 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <expression> ?!@ast ioAST !@expressionAST outExpression {
-    <expression_logical_and> !?ioAST ?outExpression
+  rule <expression> (?!@ast ioAST ,!@expressionAST outExpression ) {
+    <expression_logical_and> (!?ioAST, ?outExpression)
     repeat
     while
       $||$
       let operatorLocation = @location.here
-      <expression_logical_and> !?ioAST ?let rightExpression
+      <expression_logical_and> (!?ioAST, ?let rightExpression)
     //--- x or y equivalent to not (not x and not y)
-      let andExpression = @booleanShortCircuitAndOperatorExpressionAST {
-        !@prefixOperatorExpressionAST {!operatorLocation !.notOp !outExpression}
-        !operatorLocation
-        !@prefixOperatorExpressionAST {!operatorLocation !.notOp !rightExpression}
-      }
-      outExpression = @prefixOperatorExpressionAST {
-        !operatorLocation
-        !.notOp
-        !andExpression
-      }
+      let andExpression = @booleanShortCircuitAndOperatorExpressionAST (
+        !@prefixOperatorExpressionAST (!operatorLocation, .notOp, outExpression),
+        operatorLocation,
+        @prefixOperatorExpressionAST (!operatorLocation, .notOp, rightExpression)
+      )
+      outExpression = @prefixOperatorExpressionAST (
+        !operatorLocation,
+        .notOp,
+        andExpression
+      )
     end
   }
 
   //·····················································································································
 
-  rule <expression_logical_and> ?!@ast ioAST !@expressionAST outExpression {
-    <expression_bitwise_or> !?ioAST ?outExpression
+  rule <expression_logical_and> (?!@ast ioAST ,!@expressionAST outExpression ) {
+    <expression_bitwise_or> (!?ioAST, ?outExpression)
     repeat
     while
       $&&$
       let operatorLocation = @location.here
-      <expression_bitwise_or> !?ioAST ?let rightExpression
-      outExpression = @booleanShortCircuitAndOperatorExpressionAST {
-        !outExpression
-        !operatorLocation
-        !rightExpression
-      }
+      <expression_bitwise_or> (!?ioAST, ?let rightExpression)
+      outExpression = @booleanShortCircuitAndOperatorExpressionAST (
+        !outExpression,
+        operatorLocation,
+        rightExpression
+      )
     end
   }
 
   //·····················································································································
 
-  rule <expression_bitwise_or> ?!@ast ioAST !@expressionAST outExpression {
-    <expression_bitwise_xor> !?ioAST ?outExpression
+  rule <expression_bitwise_or> (?!@ast ioAST ,!@expressionAST outExpression ) {
+    <expression_bitwise_xor> (!?ioAST, ?outExpression)
     repeat
     while
       $|$
       let operatorLocation = @location.here
-      <expression_bitwise_xor> !?ioAST ?let rightExpression
-      outExpression = @omnibusInfixOperatorExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.bitWiseOrOp
-        !rightExpression
-      }
+      <expression_bitwise_xor> (!?ioAST, ?let rightExpression)
+      outExpression = @omnibusInfixOperatorExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .bitWiseOrOp,
+        rightExpression
+      )
     end
   }
 
   //·····················································································································
 
-  rule <expression_bitwise_xor> ?!@ast ioAST !@expressionAST outExpression {
-    <expression_bitwise_and> !?ioAST ?outExpression
+  rule <expression_bitwise_xor> (?!@ast ioAST ,!@expressionAST outExpression ) {
+    <expression_bitwise_and> (!?ioAST, ?outExpression)
     repeat
     while
       $^$
       let operatorLocation = @location.here
-      <expression_bitwise_and> !?ioAST ?let rightExpression
-      outExpression = @omnibusInfixOperatorExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.bitWiseXorOp
-        !rightExpression
-      }
+      <expression_bitwise_and> (!?ioAST, ?let rightExpression)
+      outExpression = @omnibusInfixOperatorExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .bitWiseXorOp,
+        rightExpression
+      )
     end
    }
 
   //·····················································································································
 
-  rule <expression_bitwise_and> ?!@ast ioAST !@expressionAST outExpression {
-    <expression_equality> !?ioAST ?outExpression
+  rule <expression_bitwise_and> (?!@ast ioAST ,!@expressionAST outExpression ) {
+    <expression_equality> (!?ioAST, ?outExpression)
     repeat
     while
       $&$
       let operatorLocation = @location.here
-      <expression_equality> !?ioAST ?let rightExpression
-      outExpression = @omnibusInfixOperatorExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.bitWiseAndOp
-        !rightExpression
-      }
+      <expression_equality> (!?ioAST, ?let rightExpression)
+      outExpression = @omnibusInfixOperatorExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .bitWiseAndOp,
+        rightExpression
+      )
     end
   }
 
   //·····················································································································
 
-  rule <expression_equality> ?!@ast ioAST !@expressionAST outExpression {
-    <expression_comparison> !?ioAST ?outExpression
+  rule <expression_equality> (?!@ast ioAST ,!@expressionAST outExpression ) {
+    <expression_comparison> (!?ioAST, ?outExpression)
     select
     or
       $==$
       let operatorLocation = @location.here
-      <expression_comparison> !?ioAST ?let rightExpression
-      outExpression = @omnibusInfixOperatorExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.equal
-        !rightExpression
-      }
+      <expression_comparison> (!?ioAST, ?let rightExpression)
+      outExpression = @omnibusInfixOperatorExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .equal,
+        rightExpression
+      )
     or
       $≠$
       let operatorLocation = @location.here
-      <expression_comparison> !?ioAST ?let rightExpression
-      let expression = @omnibusInfixOperatorExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.equal
-        !rightExpression
-      }
-      outExpression = @prefixOperatorExpressionAST {
-        !operatorLocation
-        !.notOp
-        !expression
-      }
+      <expression_comparison> (!?ioAST, ?let rightExpression)
+      let expression = @omnibusInfixOperatorExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .equal,
+        rightExpression
+      )
+      outExpression = @prefixOperatorExpressionAST (
+        !operatorLocation,
+        .notOp,
+        expression
+      )
     end
   }
 
   //·····················································································································
 
-  rule <expression_comparison> ?!@ast ioAST !@expressionAST outExpression {
-    <expression_shift> !?ioAST ?outExpression
+  rule <expression_comparison> (?!@ast ioAST ,!@expressionAST outExpression ) {
+    <expression_shift> (!?ioAST, ?outExpression)
     select
     or
       $≤$
       let operatorLocation = @location.here
-      <expression_shift> !?ioAST ?let rightExpression
-      outExpression = @omnibusInfixOperatorExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.infEqual
-        !rightExpression
-      }
+      <expression_shift> (!?ioAST, ?let rightExpression)
+      outExpression = @omnibusInfixOperatorExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .infEqual,
+        rightExpression
+      )
     or
       $≥$
       let operatorLocation = @location.here
-      <expression_shift> !?ioAST ?let rightExpression
-      let expression = @omnibusInfixOperatorExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.lessThan
-        !rightExpression
-      }
-      outExpression = @prefixOperatorExpressionAST {
-        !operatorLocation
-        !.notOp
-        !expression
-      }
+      <expression_shift> (!?ioAST, ?let rightExpression)
+      let expression = @omnibusInfixOperatorExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .lessThan,
+        rightExpression
+      )
+      outExpression = @prefixOperatorExpressionAST (
+        !operatorLocation,
+        .notOp,
+        expression
+      )
     or
       $<$
       let operatorLocation = @location.here
-      <expression_shift> !?ioAST ?let rightExpression
-      outExpression = @omnibusInfixOperatorExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.lessThan
-        !rightExpression
-      }
+      <expression_shift> (!?ioAST, ?let rightExpression)
+      outExpression = @omnibusInfixOperatorExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .lessThan,
+        rightExpression
+      )
     or
       $>$
       let operatorLocation = @location.here
-      <expression_shift> !?ioAST ?let rightExpression
-      let expression = @omnibusInfixOperatorExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.infEqual
-        !rightExpression
-      }
-      outExpression = @prefixOperatorExpressionAST {
-        !operatorLocation
-        !.notOp
-        !expression
-      }
+      <expression_shift> (!?ioAST, ?let rightExpression)
+      let expression = @omnibusInfixOperatorExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .infEqual,
+        rightExpression
+      )
+      outExpression = @prefixOperatorExpressionAST (
+        !operatorLocation,
+        .notOp,
+        expression
+      )
     end
   }
 
   //·····················································································································
 
-  rule <expression_shift> ?!@ast ioAST !@expressionAST outExpression {
-    <expression_addition> !?ioAST ?outExpression
+  rule <expression_shift> (?!@ast ioAST ,!@expressionAST outExpression ) {
+    <expression_addition> (!?ioAST, ?outExpression)
     repeat
     while
       $<<$
       let operatorLocation = @location.here
-      <expression_addition> !?ioAST ?let rightExpression
-      outExpression = @omnibusInfixOperatorExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.leftShiftOp
-        !rightExpression
-      }
+      <expression_addition> (!?ioAST, ?let rightExpression)
+      outExpression = @omnibusInfixOperatorExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .leftShiftOp,
+        rightExpression
+      )
     while
       $>>$
       let operatorLocation = @location.here
-      <expression_addition> !?ioAST ?let rightExpression
-      outExpression = @omnibusInfixOperatorExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.rightShiftOp
-        !rightExpression
-      }
+      <expression_addition> (!?ioAST, ?let rightExpression)
+      outExpression = @omnibusInfixOperatorExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .rightShiftOp,
+        rightExpression
+      )
     end
   }
 
   //·····················································································································
 
-  rule <expression_addition> ?!@ast ioAST !@expressionAST outExpression {
-    <expression_product> !?ioAST ?outExpression
+  rule <expression_addition> (?!@ast ioAST ,!@expressionAST outExpression ) {
+    <expression_product> (!?ioAST, ?outExpression)
     repeat
     while
       $+$
       let operatorLocation = @location.here
-      <expression_product> !?ioAST ?let rightExpression
-      outExpression = @omnibusInfixOperatorExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.addOp
-        !rightExpression
-      }
+      <expression_product> (!?ioAST, ?let rightExpression)
+      outExpression = @omnibusInfixOperatorExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .addOp,
+        rightExpression
+      )
     while
       $+%$
       let operatorLocation = @location.here
-      <expression_product> !?ioAST ?let rightExpression
-      outExpression = @omnibusInfixOperatorExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.addOpNoOvf
-        !rightExpression
-      }
+      <expression_product> (!?ioAST, ?let rightExpression)
+      outExpression = @omnibusInfixOperatorExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .addOpNoOvf,
+        rightExpression
+      )
     while
       $-$
       let operatorLocation = @location.here
-      <expression_product> !?ioAST ?let rightExpression
-      outExpression = @omnibusInfixOperatorExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.subOp
-        !rightExpression
-      }
+      <expression_product> (!?ioAST, ?let rightExpression)
+      outExpression = @omnibusInfixOperatorExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .subOp,
+        rightExpression
+      )
     while
       $-%$
       let operatorLocation = @location.here
-      <expression_product> !?ioAST ?let rightExpression
-      outExpression = @omnibusInfixOperatorExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.subOpNoOvf
-        !rightExpression
-      }
+      <expression_product> (!?ioAST, ?let rightExpression)
+      outExpression = @omnibusInfixOperatorExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .subOpNoOvf,
+        rightExpression
+      )
     end
   }
 
   //·····················································································································
 
-  rule <expression_product> ?!@ast ioAST !@expressionAST outExpression {
-    <primary> !?ioAST ?outExpression
+  rule <expression_product> (?!@ast ioAST ,!@expressionAST outExpression ) {
+    <primary> (!?ioAST, ?outExpression)
     repeat
     while
       $*$
       let operatorLocation = @location.here
-      <primary> !?ioAST ?let rightExpression
-      outExpression = @omnibusInfixOperatorExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.mulOp
-        !rightExpression
-      }
+      <primary> (!?ioAST, ?let rightExpression)
+      outExpression = @omnibusInfixOperatorExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .mulOp,
+        rightExpression
+      )
     while
       $*%$
       let operatorLocation = @location.here
-      <primary> !?ioAST ?let rightExpression
-      outExpression = @omnibusInfixOperatorExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.mulOpNoOvf
-        !rightExpression
-      }
+      <primary> (!?ioAST, ?let rightExpression)
+      outExpression = @omnibusInfixOperatorExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .mulOpNoOvf,
+        rightExpression
+      )
     while
       $%$
       let operatorLocation = @location.here
-      <primary> !?ioAST ?let rightExpression
-      outExpression = @omnibusInfixOperatorExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.modOp
-        !rightExpression
-      }
+      <primary> (!?ioAST, ?let rightExpression)
+      outExpression = @omnibusInfixOperatorExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .modOp,
+        rightExpression
+      )
     while
       $!%$
       let operatorLocation = @location.here
-      <primary> !?ioAST ?let rightExpression
-      outExpression = @omnibusInfixOperatorExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.modOpNoOvf
-        !rightExpression
-      }
+      <primary> (!?ioAST, ?let rightExpression)
+      outExpression = @omnibusInfixOperatorExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .modOpNoOvf,
+        rightExpression
+      )
     while
       $/$
       let operatorLocation = @location.here
-      <primary> !?ioAST ?let rightExpression
-      outExpression = @omnibusInfixOperatorExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.divOp
-        !rightExpression
-      }
+      <primary> (!?ioAST, ?let rightExpression)
+      outExpression = @omnibusInfixOperatorExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .divOp,
+        rightExpression
+      )
     while
       $!/$
       let operatorLocation = @location.here
-      <primary> !?ioAST ?let rightExpression
-      outExpression = @omnibusInfixOperatorExpressionAST {
-        !outExpression
-        !operatorLocation
-        !.divOpNoOvf
-        !rightExpression
-      }
+      <primary> (!?ioAST, ?let rightExpression)
+      outExpression = @omnibusInfixOperatorExpressionAST (
+        !outExpression,
+        operatorLocation,
+        .divOpNoOvf,
+        rightExpression
+      )
     end
   }
 
   //·····················································································································
 
-  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
+  rule <primary> (?!@ast ioAST ,!@expressionAST outExpression ) {
     $~$
     let operatorLocation = @location.here
-    <primary> !?ioAST ?let expression
-    outExpression = @prefixOperatorExpressionAST {
-      !operatorLocation
-      !.bitWiseComplement
-      !expression
-    }
+    <primary> (!?ioAST, ?let expression)
+    outExpression = @prefixOperatorExpressionAST (
+      !operatorLocation,
+      .bitWiseComplement,
+      expression
+    )
   }
 
   //·····················································································································
 
-  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
+  rule <primary> (?!@ast ioAST ,!@expressionAST outExpression ) {
     $not$
     let operatorLocation = @location.here
-    <primary> !?ioAST ?let expression
-    outExpression = @prefixOperatorExpressionAST {
-      !operatorLocation
-      !.notOp
-      !expression
-    }
+    <primary> (!?ioAST, ?let expression)
+    outExpression = @prefixOperatorExpressionAST (
+      !operatorLocation,
+      .notOp,
+      expression
+    )
   }
 
   //·····················································································································
 
-  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
+  rule <primary> (?!@ast ioAST ,!@expressionAST outExpression ) {
     $-$
     let operatorLocation = @location.here
-    <primary> !?ioAST ?let expression
-    outExpression = @prefixOperatorExpressionAST {
-      !operatorLocation
-      !.minusOp
-      !expression
-    }
+    <primary> (!?ioAST, ?let expression)
+    outExpression = @prefixOperatorExpressionAST (
+      !operatorLocation,
+      .minusOp,
+      expression
+    )
   }
 
   //·····················································································································
 
-  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
+  rule <primary> (?!@ast ioAST ,!@expressionAST outExpression ) {
     $-%$
     let operatorLocation = @location.here
-    <primary> !?ioAST ?let expression
-    outExpression = @prefixOperatorExpressionAST {
-      !operatorLocation
-      !.minusNoOvf
-      !expression
-    }
+    <primary> (!?ioAST, ?let expression)
+    outExpression = @prefixOperatorExpressionAST (
+      !operatorLocation,
+      .minusNoOvf,
+      expression
+    )
   }
 
   //·····················································································································
 
-  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
+  rule <primary> (?!@ast ioAST ,!@expressionAST outExpression ) {
     $($
-    <expression> !?ioAST ?outExpression
+    <expression> (!?ioAST, ?outExpression)
     $)$
   }
 
@@ -408,23 +408,23 @@ syntax extension omnibus_syntax {
 //  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract proc @expressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph
+abstract proc @expressionAST noteExpressionTypesInPrecedenceGraph (?!@semanticTypePrecedenceGraph ioGraph)
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract proc @expressionAST analyzeExpression
-  ?self:let @omnibusType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?optionalTargetType:let @omnibusType inTargetType
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  !result:@objectIR outResult
+  (?self:let @omnibusType inSelfType,
+  ?routineAttributes:let @routineAttributes inRoutineAttributes,
+  ?optionalTargetType:let @omnibusType inTargetType,
+  ?context:let @semanticContext inContext,
+  ?mode:let @mode inMode,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap,
+  ?!alloca:@allocaList ioAllocaList,
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList,
+  !result:@objectIR outResult)
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————

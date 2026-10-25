@@ -9,7 +9,7 @@ class @typeAliasDeclarationAST : @abstractDeclarationAST {
 
 //·······················································································································
 
-override func @typeAliasDeclarationAST locationForErrorSignaling -> @location {
+override func @typeAliasDeclarationAST.locationForErrorSignaling () -> @location {
   result = self.mAliasTypeName.location
 }
 
@@ -21,18 +21,18 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <declaration> ?!@ast ioAST {
+  rule <declaration> (?!@ast ioAST ) {
     $typealias$
-    $\$type$ ?let newTypeName
+    $\$type$ (?let newTypeName)
     $=$
-    <type_definition> !?ioAST ?let typeName
-    ioAST.mDeclarationListAST += !@typeAliasDeclarationAST {!newTypeName !typeName}
+    <type_definition> (!?ioAST, ?let typeName)
+    ioAST.mDeclarationListAST += !@typeAliasDeclarationAST (!newTypeName, typeName)
   }
 
   //·····················································································································
 
-  rule <type_definition> ?!@ast unused ioAST !@lstring outTypeName {
-    $\$type$ ?outTypeName // Simple redéfinition de type
+  rule <type_definition> (?!@ast unused ioAST ,!@lstring outTypeName ) {
+    $\$type$ (?outTypeName) // Simple redéfinition de type
   }
 
   //·····················································································································
@@ -43,16 +43,16 @@ syntax extension omnibus_syntax {
 //!  PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @typeAliasDeclarationAST enterInPrecedenceGraph
-  ?!@semanticTypePrecedenceGraph ioGraph
-{
-  [!?ioGraph addNode !self.mAliasTypeName !self]
-  [!?ioGraph addEdge !from: self.mAliasTypeName !to: self.mOriginalTypeName]
+override proc @typeAliasDeclarationAST.enterInPrecedenceGraph
+  (?!@semanticTypePrecedenceGraph ioGraph
+) {
+  !?ioGraph.addNode (!self.mAliasTypeName, !self)
+  !?ioGraph.addEdge (!from: self.mAliasTypeName, !to: self.mOriginalTypeName)
 }
 
 //·······················································································································
 
-override func @typeAliasDeclarationAST keyRepresentationForErrorSignaling -> @string {
+override func @typeAliasDeclarationAST.keyRepresentationForErrorSignaling () -> @string {
   result = "typealias " + self.mAliasTypeName
 }
 
@@ -60,23 +60,23 @@ override func @typeAliasDeclarationAST keyRepresentationForErrorSignaling -> @st
 //!  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @typeAliasDeclarationAST enterInContext
-  ?!context:@semanticContext ioContext
-  ?!@declarationDecorationList unused ioDecoratedDeclarationList
-  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
-  ?!@routineListIR unused ioRoutineListIR
-  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
-  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
-  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
+override proc @typeAliasDeclarationAST.enterInContext
+  (?!context:@semanticContext ioContext,
+  ?!@declarationDecorationList unused ioDecoratedDeclarationList,
+  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList,
+  ?!@routineListIR unused ioRoutineListIR,
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap,
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap,
+  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST,
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
-{
+) {
 //---------- Enter in type map
-  [ioContext.mTypeMap searchType !lkey:self.mOriginalTypeName ?type: let type ]
+  ioContext.mTypeMap.searchType (!lkey:self.mOriginalTypeName, ?type: let type )
 //---------- Enter in type map
-  [!?ioContext.mTypeMap insertType
-    !self.mAliasTypeName
+  !?ioContext.mTypeMap.insertType
+    (!self.mAliasTypeName,
     !type:type
-  ]
+  )
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————

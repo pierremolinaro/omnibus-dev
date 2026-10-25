@@ -11,7 +11,7 @@ class @globalConstantDeclarationAST : @abstractDeclarationAST {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override func @globalConstantDeclarationAST locationForErrorSignaling -> @location outLocation {
+override func @globalConstantDeclarationAST.locationForErrorSignaling () -> @location outLocation {
   outLocation = self.mConstantName.location
 }
 
@@ -23,29 +23,29 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <declaration> ?!@ast ioAST {
+  rule <declaration> (?!@ast ioAST ) {
     $let$
     var @lstringlist attributeList = @[]
     repeat
     while
-      $@attribute$ ?let attribute
+      $@attribute$ (?let attribute)
       attributeList += !attribute
     end
-    $identifier$ ?let constantName
+    $identifier$ (?let constantName)
     let @lstring typeName
     select
       typeName = "".nowhere
     or
-      <type_definition> !?ioAST ?typeName
+      <type_definition> (!?ioAST, ?typeName)
     end
     $=$
-    <expression> !?ioAST ?let @expressionAST expression
-    ioAST.mDeclarationListAST += !@globalConstantDeclarationAST {
-      !constantName
-      !attributeList
-      !typeName
-      !expression
-    }
+    <expression> (!?ioAST, ?let @expressionAST expression)
+    ioAST.mDeclarationListAST += !@globalConstantDeclarationAST (
+      !constantName,
+      attributeList,
+      typeName,
+      expression
+    )
   }
 
   //·····················································································································
@@ -57,26 +57,26 @@ syntax extension omnibus_syntax {
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract proc @expressionAST addDependenceEdgeForStaticExpression
-  ?let @lstring inConstantName
-  ?!@semanticTypePrecedenceGraph ioGraph
+  (?let @lstring inConstantName,
+  ?!@semanticTypePrecedenceGraph ioGraph)
 
 //·······················································································································
 
-override proc @globalConstantDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @globalConstantDeclarationAST.enterInPrecedenceGraph (?!@semanticTypePrecedenceGraph ioGraph ) {
 //--- Add 'constant name' node
-  [!?ioGraph addNode !self.mConstantName !self]
+  !?ioGraph.addNode (!self.mConstantName, !self)
 //--- Add dependency from constant type name
   if self.mConstantTypeName.string != "" then
-    [!?ioGraph addEdge !from: self.mConstantName !to: self.mConstantTypeName]
+    !?ioGraph.addEdge (!from: self.mConstantName, !to: self.mConstantTypeName)
   end
 //--- Add dependency from source expression
-  [self.mSourceExpression addDependenceEdgeForStaticExpression !self.mConstantName !?ioGraph]
-  [!?ioGraph addEdge !from: self.mConstantName !to: compileTimeDeclarationBarrier ()]
+  self.mSourceExpression.addDependenceEdgeForStaticExpression (!self.mConstantName, !?ioGraph)
+  !?ioGraph.addEdge (!from: self.mConstantName, !to: compileTimeDeclarationBarrier ())
 }
 
 //·······················································································································
 
-override func @globalConstantDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+override func @globalConstantDeclarationAST.keyRepresentationForErrorSignaling () -> @string outRepresentation {
   outRepresentation = "global constant " + self.mConstantName
 }
 
@@ -84,16 +84,16 @@ override func @globalConstantDeclarationAST keyRepresentationForErrorSignaling -
 //!  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @globalConstantDeclarationAST enterInContext
-  ?!context:@semanticContext ioContext
-  ?!@declarationDecorationList unused ioDecoratedDeclarationList
-  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
-  ?!@routineListIR unused ioRoutineListIR
-  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
+override proc @globalConstantDeclarationAST.enterInContext
+  (?!context:@semanticContext ioContext,
+  ?!@declarationDecorationList unused ioDecoratedDeclarationList,
+  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList,
+  ?!@routineListIR unused ioRoutineListIR,
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST,
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
-{
+) {
   var displayValue = false
   for (attribute) in self.mAttributeList do
     if attribute.string != "display" then
@@ -106,16 +106,16 @@ override proc @globalConstantDeclarationAST enterInContext
   end
 //--- Analyze source expression
   computeStaticExpression (
-    !?context: ioContext
-    !?staticEntityMap:ioStaticEntityMap
-    !expression:self.mSourceExpression
-    !errorLocation:self.mConstantName.location
-    !optionalContextualTypeName:self.mConstantTypeName
+    !?context: ioContext,
+    !?staticEntityMap:ioStaticEntityMap,
+    !expression:self.mSourceExpression,
+    !errorLocation:self.mConstantName.location,
+    !optionalContextualTypeName:self.mConstantTypeName,
     ?result:let @objectIR expressionResult
   )
 //--- Enter in context
-  [!?ioContext.mGlobalConstantMap insertKey !self.mConstantName !expressionResult]
-  [!?ioContext.mValuedObjectMap insertGlobalConstant !self.mConstantName !expressionResult]
+  !?ioContext.mGlobalConstantMap.insertKey (!self.mConstantName, !expressionResult)
+  !?ioContext.mValuedObjectMap.insertGlobalConstant (!self.mConstantName, !expressionResult)
 //--- Display ?
   if displayValue then
     print (!"Global constant '" + self.mConstantName + "' = " + expressionResult.llvmValue + "\n")
@@ -127,9 +127,9 @@ override proc @globalConstantDeclarationAST enterInContext
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc buildGlobalConstantMapHTMLFile
-  ?@globalConstantMap inGlobalConstantMap
+  (?@globalConstantMap inGlobalConstantMap,
   ?sourceFile:let @lstring inSourceFile
-{
+) {
 //------------------------------------ Build an HTML file that contains all declared constants
   let @string typeDumpFilePath = inSourceFile.string + ".global-constants.html"
   if [option omnibus_options.emitGlobalConstantHTMLDumpFile value] then
@@ -152,9 +152,9 @@ proc buildGlobalConstantMapHTMLFile
       !firstLetterSet
       !tableOfTypeString
     ]
-    [typeDumpString writeToFileWhenDifferentContents !typeDumpFilePath ?*]
+    typeDumpString.writeToFileWhenDifferentContents (!typeDumpFilePath, ?*)
   else
-    [@string deleteFileIfExists !typeDumpFilePath]
+    @string.deleteFileIfExists (!typeDumpFilePath)
   end
 }
 
@@ -172,7 +172,7 @@ filewrapper constantDumpGenerationTemplate in "../generation-templates/" {
 
 //·······················································································································
 
-func linkForGlobalConstant ?let @string inConstantName -> @string {
+func linkForGlobalConstant (?let @string inConstantName ) -> @string {
   result = "<a class=\"header_link\" href=\"#" + inConstantName + "\">" + inConstantName + "</a>"
 }
 

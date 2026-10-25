@@ -18,14 +18,14 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <declaration> ?!@ast ioAST {
+  rule <declaration> (?!@ast ioAST ) {
     $required$
-    <function_header>
-      !?ioAST
-      ?mode:let @mode mode
-      ?name:let procName
-      ?attributes:let attributeList
-      ?formalArguments:let procFormalArgumentList
+    <function_header>(
+      !?ioAST,
+      ?mode:let @mode mode,
+      ?name:let procName,
+      ?attributes:let attributeList,
+      ?formalArguments:let procFormalArgumentList)
     var isGlobal = false
     for (attribute) in attributeList do
       if attribute.string == exportedAttribute () then
@@ -53,28 +53,28 @@ syntax extension omnibus_syntax {
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc checkRequiredProcedures
-  ?ast:let @ast inAST
-  ?context: let @semanticContext inContext
+  (?ast:let @ast inAST,
+  ?context: let @semanticContext inContext,
   ?endOfSourceFile:let @location unused inEndOfSourceFile
-{
+) {
   for requiredFunction in inAST.mRequiredFunctionListAST do
     let requiredFunctionSignature = [requiredFunction.mFormalArgumentList routineSignature !requiredFunction.mName]
     let requiredFunctionMangledName = requiredFunction.mName.string + requiredFunctionSignature
     if not [inContext.mRoutineMap hasKey !requiredFunctionMangledName] then
       error (requiredFunction.mName : "required func is not implemented")
     else
-      [inContext.mRoutineMap searchKey
-        !requiredFunctionMangledName.nowhere
-        ?let implementedPublic
-        ?let implementedSignature
-        ?let implementedReturnTypeProxy // null if no returned value
-        ?let unused implementedModeDictionary
-        ?let implementedIsExported
+      inContext.mRoutineMap.searchKey
+        (!requiredFunctionMangledName.nowhere,
+        ?let implementedPublic,
+        ?let implementedSignature,
+        ?let implementedReturnTypeProxy, // null if no returned value
+        ?let unused implementedModeDictionary,
+        ?let implementedIsExported,
         ?let implementedMode
-      ]
+      )
       let errorLocation = [inContext.mRoutineMap locationForKey !requiredFunctionMangledName]
     //--- Check signatures
-      routineTypedSignature2 (!inContext.mTypeMap !requiredFunction.mFormalArgumentList ?let requiredTypedSignature)
+      routineTypedSignature2 (!inContext.mTypeMap, !requiredFunction.mFormalArgumentList, ?let requiredTypedSignature)
       if requiredTypedSignature.typedString != implementedSignature.typedString then
         error (errorLocation
         : "function signature should be " + requiredTypedSignature.typedString + " (as required by required function declaration)")  

@@ -1,6 +1,6 @@
 
-setter @instructionListIR appendSourceLineComment ?let @location inSourceLocation {
-  self += !@sourceLocationIR {!inSourceLocation}
+mutating proc @instructionListIR.appendSourceLineComment (?let @location inSourceLocation ) {
+  self += !@sourceLocationIR (!inSourceLocation)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -11,11 +11,11 @@ class @sourceLocationIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @sourceLocationIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
+override proc @sourceLocationIR.llvmInstructionCode
+  (?!@string ioLLVMcode,
+  ?let @generationContext unused inGenerationContext,
   ?!@generationAdds unused ioGenerationAdds
-{
+) {
   if self.mSourceLocation.isNowhere then
     ioLLVMcode += ";---------\n"
   else

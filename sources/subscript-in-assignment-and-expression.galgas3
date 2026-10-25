@@ -1,55 +1,55 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc handleArraySubscriptNew
-  ?self:let @omnibusType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?let @expressionAST inIndexExpression 
-  ?let @location inErrorLocation
-  ?let @bool inCheckIndexExpression
-  ?arraySize:let @bigint inArraySize
-  ?elementType:let @omnibusType inElementType
-  ?!@instructionListIR ioInstructionGenerationList
+  (?self:let @omnibusType inSelfType,
+  ?routineAttributes:let @routineAttributes inRoutineAttributes,
+  ?context:let @semanticContext inContext,
+  ?mode:let @mode inMode,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap,
+  ?!alloca:@allocaList ioAllocaList,
+  ?let @expressionAST inIndexExpression,
+  ?let @location inErrorLocation,
+  ?let @bool inCheckIndexExpression,
+  ?arraySize:let @bigint inArraySize,
+  ?elementType:let @omnibusType inElementType,
+  ?!@instructionListIR ioInstructionGenerationList,
   !@objectIR outIndexIR
-{
+) {
 //--- Analyze index expression
-  [inIndexExpression analyzeExpression
-    !self:inSelfType
-    !routineAttributes:inRoutineAttributes
-    !optionalTargetType:voidType ()
-    !context:inContext
-    !mode:inMode
-    !?temporary:ioTemporaries
-    !?staticEntityMap:ioStaticEntityMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:ioInstructionGenerationList
+  inIndexExpression.analyzeExpression
+    (!self:inSelfType,
+    !routineAttributes:inRoutineAttributes,
+    !optionalTargetType:voidType (),
+    !context:inContext,
+    !mode:inMode,
+    !?temporary:ioTemporaries,
+    !?staticEntityMap:ioStaticEntityMap,
+    !?variableMap:ioUniversalMap,
+    !?alloca:ioAllocaList,
+    !?instructionListIR:ioInstructionGenerationList,
     ?result:@objectIR indexResult
-  ]
-  [!?ioInstructionGenerationList appendLoadWhenReference
-    !?ioTemporaries
+  )
+  !?ioInstructionGenerationList.appendLoadWhenReference
+    (!?ioTemporaries,
     !?indexResult
-  ]  
+  )
   if indexResult.isLiteralInteger then // Static expression
-    [indexResult extractLiteralInteger ?1* ?value:let @bigint indexValue]
+    indexResult.extractLiteralInteger (?1*, ?value:let @bigint indexValue)
     if (indexValue < 0) || (indexValue >= inArraySize) then
       error (inErrorLocation : "static index should be positive and < " + inArraySize spoil outIndexIR)
     else
-      outIndexIR = @objectIR.literalInteger {!type:inElementType !value:indexValue}
+      outIndexIR = @objectIR.literalInteger (!type:inElementType, !value:indexValue)
     end
   elsif indexResult.type.kind.isInteger then
     if inCheckIndexExpression && not [option omnibus_options.noPanicGeneration value] then
-      [!?ioInstructionGenerationList testArrayIndex
-        !indexResult
-        !inErrorLocation
-        !inArraySize
+      !?ioInstructionGenerationList.testArrayIndex
+        (!indexResult,
+        !inErrorLocation,
+        !inArraySize,
         ?let @bool generatePanicInstruction
-      ]
+      )
       if generatePanicInstruction && inMode.isSafe then
         error (inErrorLocation : "index computation can generate panic and routine is not safe")
       end

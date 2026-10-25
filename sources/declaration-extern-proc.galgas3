@@ -20,23 +20,23 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <declaration> ?!@ast ioAST {
+  rule <declaration> (?!@ast ioAST ) {
     $extern$
-    <function_header>
-      !?ioAST
-      ?mode:let @mode mode
-      ?name:let procName
-      ?attributes:let attributeList
-      ?formalArguments:let procFormalArgumentList
+    <function_header>(
+      !?ioAST,
+      ?mode:let @mode mode,
+      ?name:let procName,
+      ?attributes:let attributeList,
+      ?formalArguments:let procFormalArgumentList)
     let @lstring returnTypeName
     select
       returnTypeName = "".here
     or
       $->$
-      <type_definition> !?ioAST ?returnTypeName
+      <type_definition> (!?ioAST, ?returnTypeName)
     end
     $:$
-    $"string"$ ?let llvmName
+    $"string"$ (?let llvmName)
     ioAST.mExternFunctionListAST +=
       !procName
       !mode
@@ -55,13 +55,13 @@ syntax extension omnibus_syntax {
 //  PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc @externFunctionDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+proc @externFunctionDeclarationListAST noteTypesInPrecedenceGraph (?!@semanticTypePrecedenceGraph ioGraph ) {
   for (* * * mProcFormalArgumentList mReturnTypeName * *) in self do
     for (* * formalArgumentTypeName *) in mProcFormalArgumentList do
-      [!?ioGraph noteNode !formalArgumentTypeName]
+      !?ioGraph.noteNode (!formalArgumentTypeName)
     end
     if mReturnTypeName.string != "" then
-      [!?ioGraph noteNode !mReturnTypeName]
+      !?ioGraph.noteNode (!mReturnTypeName)
     end
   end
 }
@@ -71,34 +71,34 @@ proc @externFunctionDeclarationListAST noteTypesInPrecedenceGraph ?!@semanticTyp
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc @externFunctionDeclarationListAST enterExternProcInContext
-  ?!context:@semanticContext ioContext
-{
+  (?!context:@semanticContext ioContext
+) {
   for externProcedure in self do
-    [externProcedure enterExternProcInContext !?context:ioContext]
+    externProcedure.enterExternProcInContext (!?context:ioContext)
   end
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc @externFunctionDeclarationListAST.@element enterExternProcInContext
-  ?!context:@semanticContext ioContext
-{
+  (?!context:@semanticContext ioContext
+) {
 //--- Signature
-  routineTypedSignature (!?ioContext.mTypeMap !self.mProcFormalArgumentList ?let signature)
+  routineTypedSignature (!?ioContext.mTypeMap, !self.mProcFormalArgumentList, ?let signature)
 //--- Return type
-  [!?ioContext.mTypeMap makeOptionalEntry !self.mReturnTypeName ?let returnTypeProxy]
+  !?ioContext.mTypeMap.makeOptionalEntry (!self.mReturnTypeName, ?let returnTypeProxy)
 //--- Enter in context
   let @routineLLVMNameDict routineLLVMNameDict = [self.mMode routineLLVMDictionaryForFunction !self.mRoutineNameForGeneration]
   let routineMangledName = [signature mangledName !receiverTypeName: "" !functionName: self.mExternProcedureName]
-  [!?ioContext.mRoutineMap insertKey
-    !routineMangledName
-    !true
-    !signature
-    !returnTypeProxy
-    !routineLLVMNameDict
-    !false
+  !?ioContext.mRoutineMap.insertKey
+    (!routineMangledName,
+    !true,
+    !signature,
+    !returnTypeProxy,
+    !routineLLVMNameDict,
+    !false,
     !self.mMode
-  ]
+  )
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -106,33 +106,33 @@ proc @externFunctionDeclarationListAST.@element enterExternProcInContext
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc @externFunctionDeclarationListAST externProcedureSemanticAnalysis
-  ?context:let @semanticContext inContext
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  (?context:let @semanticContext inContext,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
+) {
   for externProc in self do
-    [externProc externProcedureSemanticAnalysis
-      !context:inContext
-      !?temporary:ioTemporaries
+    externProc.externProcedureSemanticAnalysis
+      (!context:inContext,
+      !?temporary:ioTemporaries,
       !?intermediateCode:ioIntermediateCodeStruct
-    ]
+    )
   end
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc @externFunctionDeclarationListAST.@element externProcedureSemanticAnalysis
-  ?context:let @semanticContext inContext
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+  (?context:let @semanticContext inContext,
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries,
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
+) {
 //--- Analyse formal arguments
   var @routineFormalArgumentListIR formalArguments = @[]
   enterFormalArguments (
-    !context:inContext
-    !self.mProcFormalArgumentList
-    !? %from @()
-    !?formalArguments
+    !context:inContext,
+    !self.mProcFormalArgumentList,
+    !? %from @(),
+    !?formalArguments,
     !warningOnUnusedArgs: true
   )
 //--- Return type
@@ -142,18 +142,18 @@ proc @externFunctionDeclarationListAST.@element externProcedureSemanticAnalysis
     [inContext.mTypeMap searchKey !self.mReturnTypeName]
   end
 //--- Routine name for generation
-  [!?ioIntermediateCodeStruct.mExternProcedureMapIR insertKey
-    !self.mRoutineNameForGeneration
-    !formalArguments
+  !?ioIntermediateCodeStruct.mExternProcedureMapIR.insertKey
+    (!self.mRoutineNameForGeneration,
+    !formalArguments,
     !returnType
-  ]
-  ioIntermediateCodeStruct.mRoutineListIR += !@externRoutineIR {
-    !self.mRoutineNameForGeneration
-    !isRequired:false // Is not root
-    !warnsIfUnused:false
-    !formalArguments
-    !returnType
-  }
+  )
+  ioIntermediateCodeStruct.mRoutineListIR += !@externRoutineIR (
+    !self.mRoutineNameForGeneration,
+    !isRequired:false, // Is not root
+    !warnsIfUnused:false,
+    formalArguments,
+    returnType
+  )
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -167,11 +167,11 @@ class @externRoutineIR : @abstractRoutineIR {
 
 //·······················································································································
 
-override proc @externRoutineIR llvmCodeGeneration
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
+override proc @externRoutineIR.llvmCodeGeneration
+  (?!@string ioLLVMcode,
+  ?let @generationContext unused inGenerationContext,
   ?!@generationAdds unused ioGenerationAdds
-{
+) {
   ioLLVMcode += "declare"
   if self.mReturnType.isNull then
     ioLLVMcode += " void"
@@ -205,12 +205,12 @@ map @externProcedureMapIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc @externProcedureMapIR llvmPrototypeGeneration  ?!@string unused ioLLVMcode {
+proc @externProcedureMapIR llvmPrototypeGeneration  (?!@string unused ioLLVMcode ) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc @externProcedureMapIR.@element llvmPrototypeGeneration  ?!@string ioLLVMcode {
+proc @externProcedureMapIR.@element llvmPrototypeGeneration  (?!@string ioLLVMcode ) {
   let procName = llvmNameForFunction (!self.lkey.string)
   ioLLVMcode += "declare"
   if self.mReturnType.isNull then

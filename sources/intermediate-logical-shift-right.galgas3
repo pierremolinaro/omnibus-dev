@@ -1,17 +1,17 @@
 
-setter @instructionListIR appendLogicalShiftRight
-  ?!@objectIR ioResult
-  ?let @uint inShiftAmount
+mutating proc @instructionListIR.appendLogicalShiftRight
+  (?!@objectIR ioResult,
+  ?let @uint inShiftAmount,
   ?!@semanticTemporariesStruct ioTemporaries
-{
+) {
   if ioResult.isLiteralInteger then
-    [ioResult extractLiteralInteger ?type:let @omnibusType type ?value:let @bigint value]
-    ioResult = .literalInteger {!type:type !value:value >> inShiftAmount}
+    ioResult.extractLiteralInteger (?type:let @omnibusType type, ?value:let @bigint value)
+    ioResult = .literalInteger (!type:type, !value:value >> inShiftAmount)
   else
-    [!?self appendLoadWhenReference !?ioTemporaries !?ioResult]
+    !?self.appendLoadWhenReference (!?ioTemporaries, !?ioResult)
     let source = ioResult
-    getNewTempValue (!source.type !?ioTemporaries ?ioResult)
-    self += !@logicalRightShiftIR {!ioResult !source !inShiftAmount}
+    getNewTempValue (!source.type, !?ioTemporaries, ?ioResult)
+    self += !@logicalRightShiftIR (!ioResult, source, inShiftAmount)
   end
 }
 
@@ -25,11 +25,11 @@ class @logicalRightShiftIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @logicalRightShiftIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
+override proc @logicalRightShiftIR.llvmInstructionCode
+  (?!@string ioLLVMcode,
+  ?let @generationContext unused inGenerationContext,
   ?!@generationAdds unused ioGenerationAdds
-{
+) {
   ioLLVMcode += "  " + self.mResult.llvmName + " = "
   ioLLVMcode += "lshr " + self.mResult .llvmTypeName + " " + self.mSource.llvmName + ", " + self.mShiftAmount + "\n"
 }

@@ -1,6 +1,6 @@
 
-setter @instructionListIR generateRelease ?let @omnibusType inType ?let @lstring in_omnibusName {
-  self += !@releaseIR {!inType !in_omnibusName}
+mutating proc @instructionListIR.generateRelease (?let @omnibusType inType ,?let @lstring in_omnibusName ) {
+  self += !@releaseIR (!inType, in_omnibusName)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -12,12 +12,12 @@ class @releaseIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @releaseIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
+override proc @releaseIR.llvmInstructionCode
+  (?!@string ioLLVMcode,
+  ?let @generationContext unused inGenerationContext,
   ?!@generationAdds ioGenerationAdds
-{
-  [self.mType generateRelease !self.mOmnibusName !?ioLLVMcode !?ioGenerationAdds]
+) {
+  self.mType.generateRelease (!self.mOmnibusName, !?ioLLVMcode, !?ioGenerationAdds)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————

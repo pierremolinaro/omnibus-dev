@@ -20,20 +20,20 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
+  rule <instruction> (?!@ast ioAST ,?!@instructionListAST ioInstructionList ) {
     $for$
-    $identifier$ ?let varName
+    $identifier$ (?let varName)
     $in$
-    $identifier$ ?let iteratedObject
+    $identifier$ (?let iteratedObject)
     var staticWhileExpression = false
     let @expressionAST whileExpression
     select
-      whileExpression = @literalBooleanInExpressionAST {!true}
+      whileExpression = @literalBooleanInExpressionAST (!true)
       staticWhileExpression = true
     or
       $while$
       select
-        $@attribute$ ? let attributeValue
+        $@attribute$ (? let attributeValue)
         if attributeValue.string == staticAttribute () then
           staticWhileExpression = true
         else
@@ -42,23 +42,23 @@ syntax extension omnibus_syntax {
         end
       or
       end
-      <expression> !?ioAST ?whileExpression
+      <expression> (!?ioAST, ?whileExpression)
     end
     let endOf_whileExpression_instruction = @location.here
     ${$
-    <instructionList> !?ioAST ?let instructionList
+    <instructionList> (!?ioAST, ?let instructionList)
     let endOfInstruction = @location.here
     $}$
-    ioInstructionList += !@forInstructionAST {
-      !varName.location
-      !varName
-      !iteratedObject
-      !whileExpression
-      !endOf_whileExpression_instruction
-      !staticWhileExpression
-      !instructionList
-      !endOfInstruction
-    }
+    ioInstructionList += !@forInstructionAST (
+      !varName.location,
+      varName,
+      iteratedObject,
+      whileExpression,
+      endOf_whileExpression_instruction,
+      staticWhileExpression,
+      instructionList,
+      endOfInstruction
+    )
   }
 
   //·····················································································································
@@ -69,27 +69,27 @@ syntax extension omnibus_syntax {
 //  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @forInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [self.mDoInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+override proc @forInstructionAST.noteInstructionTypesInPrecedenceGraph (?!@semanticTypePrecedenceGraph ioGraph ) {
+  self.mDoInstructionList.noteInstructionListTypesInPrecedenceGraph (!?ioGraph)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @forInstructionAST instructionSemanticAnalysis
-  ?self:let @omnibusType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
+override proc @forInstructionAST.instructionSemanticAnalysis
+  (?self:let @omnibusType inSelfType,
+  ?routineAttributes:let @routineAttributes inRoutineAttributes,
+  ?context:let @semanticContext inContext,
+  ?mode:let @mode inMode,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap,
+  ?!alloca:@allocaList ioAllocaList,
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-{
+) {
 //--- Analyze iterated expression
-  [!?ioUniversalMap searchValuedObjectForReadAccess !self.mIteratedObject ?let @objectIR iteratedObjectPointer]
+  !?ioUniversalMap.searchValuedObjectForReadAccess (!self.mIteratedObject, ?let @objectIR iteratedObjectPointer)
 //--- Type kind
   let iteratedType = iteratedObjectPointer.type
 //--- Get iterated element type
@@ -99,40 +99,40 @@ override proc @forInstructionAST instructionSemanticAnalysis
     error (self.mIteratedObject : "this object is not enumerable" spoil iteratedElementType)
   case literalString :
     iteratedElementType = [inContext.mTypeMap searchKey !"u8".nowhere].type
-  case staticSubscript (elementType *) :
+  case staticSubscript (elementType, *) :
     iteratedElementType = elementType
   end
 //---
-  let omnibusName = @lstring {!self.mVarName.string + "." + ioTemporaries.mTemporaryIndex !self.mVarName}
+  let omnibusName = @lstring (!self.mVarName.string + "." + ioTemporaries.mTemporaryIndex, self.mVarName)
   ioTemporaries.mTemporaryIndex += 1
   ioAllocaList += !llvmNameForLocalVariable (!omnibusName) !iteratedElementType !false
 //--- Analyze instruction list
-  [!?ioUniversalMap openOverrideForRepeatBlock]
-  [!?ioUniversalMap insertLocalConstant !self.mVarName !false !iteratedElementType !omnibusName]
+  !?ioUniversalMap.openOverrideForRepeatBlock ()
+  !?ioUniversalMap.insertLocalConstant (!self.mVarName, !false, !iteratedElementType, !omnibusName)
 //------------------------------------ Analyze while expression
   var @instructionListIR whileExpression_GenerationList = @[]
-  [self.mWhileExpression analyzeExpression
-    !self:inSelfType
-    !routineAttributes:inRoutineAttributes
-    !optionalTargetType:voidType ()
-    !context:inContext
-    !mode:inMode
-    !?temporary:ioTemporaries
-    !?staticEntityMap:ioStaticEntityMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:whileExpression_GenerationList
+  self.mWhileExpression.analyzeExpression
+    (!self:inSelfType,
+    !routineAttributes:inRoutineAttributes,
+    !optionalTargetType:voidType (),
+    !context:inContext,
+    !mode:inMode,
+    !?temporary:ioTemporaries,
+    !?staticEntityMap:ioStaticEntityMap,
+    !?variableMap:ioUniversalMap,
+    !?alloca:ioAllocaList,
+    !?instructionListIR:whileExpression_GenerationList,
     ?result:let @objectIR whileExpressionResult
-  ]
+  )
 //--- Check "while" expression type is boolean
-  [inContext.mImplicitConversionToBooleanMap generateConvertToBooleanCode
-    !whileExpressionResult
-    !self.mEndOf_whileExpression
-    !?ioTemporaries
-    !?whileExpression_GenerationList
-    !?alloca: ioAllocaList
+  inContext.mImplicitConversionToBooleanMap.generateConvertToBooleanCode
+    (!whileExpressionResult,
+    !self.mEndOf_whileExpression,
+    !?ioTemporaries,
+    !?whileExpression_GenerationList,
+    !?alloca: ioAllocaList,
     ?let whileExpressionBooleanResult
-  ]
+  )
   switch whileExpressionBooleanResult
   case compileTime (boolValue) :
     if not boolValue then
@@ -142,49 +142,49 @@ override proc @forInstructionAST instructionSemanticAnalysis
   end
 //------------------------------------ "DO" instruction list
   var @instructionListIR doInstructionList_GenerationList = @[]
-  [self.mDoInstructionList analyzeBranchInstructionList
-    !self:inSelfType
-    !routineAttributes:inRoutineAttributes
-    !endOfInstructionList:self.mEndOf_for_instruction
-    !context:inContext
-    !mode:inMode
-    !?temporary:ioTemporaries
-    !?staticEntityMap:ioStaticEntityMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
+  self.mDoInstructionList.analyzeBranchInstructionList
+    (!self:inSelfType,
+    !routineAttributes:inRoutineAttributes,
+    !endOfInstructionList:self.mEndOf_for_instruction,
+    !context:inContext,
+    !mode:inMode,
+    !?temporary:ioTemporaries,
+    !?staticEntityMap:ioStaticEntityMap,
+    !?variableMap:ioUniversalMap,
+    !?alloca:ioAllocaList,
     !?instructionListIR:doInstructionList_GenerationList
-  ]
-  [!?ioUniversalMap closeOverride !self.mEndOf_for_instruction]
+  )
+  !?ioUniversalMap.closeOverride (!self.mEndOf_for_instruction)
 //------------------------------------ Code generation
   switch iteratedType.subscript
   case noSubscript :
   case literalString :
-    ioInstructionGenerationList += !@forInstructionOnLiteralStringIR {
-      !omnibusName
-      !self.mIteratedObject.location
-      !iteratedObjectPointer
-      !iteratedType
-      !whileExpression_GenerationList
-      !whileExpressionResult
-      !doInstructionList_GenerationList
-    }
-  case staticSubscript (elementType size) :
+    ioInstructionGenerationList += !@forInstructionOnLiteralStringIR (
+      !omnibusName,
+      self.mIteratedObject.location,
+      iteratedObjectPointer,
+      iteratedType,
+      whileExpression_GenerationList,
+      whileExpressionResult,
+      doInstructionList_GenerationList
+    )
+  case staticSubscript (elementType, size) :
   //--- Static array map ? If yes, enter invoked function set
     var @stringset invokedFunctionSet = @[]
     if [ioTemporaries.mStaticArrayMapForTemporaries hasKey !self.mIteratedObject] then
-      [ioTemporaries.mStaticArrayMapForTemporaries searchKey !self.mIteratedObject ?invokedFunctionSet]
+      ioTemporaries.mStaticArrayMapForTemporaries.searchKey (!self.mIteratedObject, ?invokedFunctionSet)
     end
-    ioInstructionGenerationList += !@forInstructionOnArrayIR {
-      !omnibusName
-      !self.mIteratedObject
-      !iteratedObjectPointer
-      !whileExpression_GenerationList
-      !whileExpressionBooleanResult.llvmName
-      !doInstructionList_GenerationList
-      !elementType
-      !size
-      !invokedFunctionSet
-    }
+    ioInstructionGenerationList += !@forInstructionOnArrayIR (
+      !omnibusName,
+      self.mIteratedObject,
+      iteratedObjectPointer,
+      whileExpression_GenerationList,
+      whileExpressionBooleanResult.llvmName,
+      doInstructionList_GenerationList,
+      elementType,
+      size,
+      invokedFunctionSet
+    )
   end
 }
 
@@ -236,11 +236,11 @@ class @forInstructionOnArrayIR : @abstractInstructionIR {
 //
 //endLabel:
 
-override proc @forInstructionOnArrayIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext inGenerationContext
+override proc @forInstructionOnArrayIR.llvmInstructionCode
+  (?!@string ioLLVMcode,
+  ?let @generationContext inGenerationContext,
   ?!@generationAdds ioGenerationAdds
-{
+) {
   let elementTypeLLVMName = self.mElementType.llvmTypeName
   let listTypeLLVMName = "[" + self.mArraySize + " x " + elementTypeLLVMName + "]"
   let locationIndex = self.mIteratedObjectName.location.endLocationIndex.string
@@ -284,7 +284,7 @@ override proc @forInstructionOnArrayIR llvmInstructionCode
 //------------ While
   ioLLVMcode += whileLabel + ":\n"
 //--- While instructions
-  [self.mWhileInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  self.mWhileInstructionList.instructionListLLVMCode (!?ioLLVMcode, !inGenerationContext, !?ioGenerationAdds)
   ioLLVMcode += "  br i1 " + self.mWhileExpressionBooleanResult_llvmName + ", label %" + loopLabel + ", label %" + endLabel + "\n\n"
 
 //------------ Loop
@@ -295,7 +295,7 @@ override proc @forInstructionOnArrayIR llvmInstructionCode
   ioLLVMcode += "  store " + elementTypeLLVMName + " %" + currentValue + ", " + elementTypeLLVMName
              + "* " + llvmNameForLocalVariable (!self.mEnumeratedValueName) + "\n"
 //--- Loop instructions
-  [self.mDoInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  self.mDoInstructionList.instructionListLLVMCode (!?ioLLVMcode, !inGenerationContext, !?ioGenerationAdds)
   ioLLVMcode += "  br label %" + nextLabel + "\n\n"
 
   ioLLVMcode += nextLabel + ":\n"
@@ -312,12 +312,12 @@ override proc @forInstructionOnArrayIR llvmInstructionCode
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @forInstructionOnArrayIR enterAccessibleEntities
-  ?!@stringset ioInvokedRoutineSet
+override proc @forInstructionOnArrayIR.enterAccessibleEntities
+  (?!@stringset ioInvokedRoutineSet,
   ?!@uint ioMaxBranchOfOnInstructions
-{
-  [self.mWhileInstructionList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
-  [self.mDoInstructionList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
+) {
+  self.mWhileInstructionList.enterAccessibleEntities (!?ioInvokedRoutineSet, !?ioMaxBranchOfOnInstructions)
+  self.mDoInstructionList.enterAccessibleEntities (!?ioInvokedRoutineSet, !?ioMaxBranchOfOnInstructions)
   ioInvokedRoutineSet += self.mInvokedFunctionSet
 }
 
@@ -337,11 +337,11 @@ class @forInstructionOnLiteralStringIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @forInstructionOnLiteralStringIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext inGenerationContext
+override proc @forInstructionOnLiteralStringIR.llvmInstructionCode
+  (?!@string ioLLVMcode,
+  ?let @generationContext inGenerationContext,
   ?!@generationAdds ioGenerationAdds
-{
+) {
   let startLabel = "for.label.start." + self.mLocation.endLocationIndex
   let testLabel = "for.label.test." + self.mLocation.endLocationIndex
   let loopLabel = "for.label.loop." + self.mLocation.endLocationIndex
@@ -369,7 +369,7 @@ override proc @forInstructionOnLiteralStringIR llvmInstructionCode
 //------------ While
   ioLLVMcode += whileLabel + ":\n"
 //--- While instructions
-  [self.mWhileInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  self.mWhileInstructionList.instructionListLLVMCode (!?ioLLVMcode, !inGenerationContext, !?ioGenerationAdds)
   ioLLVMcode += "  br i1 " + self.mWhileExpressionResult.llvmName + ", label %" + loopLabel + ", label %" + endLabel + "\n\n"
 
 //--------------------- Loop
@@ -378,7 +378,7 @@ override proc @forInstructionOnLiteralStringIR llvmInstructionCode
   ioLLVMcode += "  store i8 %" + currentVar + ", "
   ioLLVMcode += "i8 * " + llvmNameForLocalVariable (!self.mVarName) + "\n"
 //--- Loop body
-  [self.mDoInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  self.mDoInstructionList.instructionListLLVMCode (!?ioLLVMcode, !inGenerationContext, !?ioGenerationAdds)
   ioLLVMcode += "  br label %" + nextLabel + "\n\n"
 //--- Next value
   ioLLVMcode += nextLabel + ":\n"
@@ -392,12 +392,12 @@ override proc @forInstructionOnLiteralStringIR llvmInstructionCode
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @forInstructionOnLiteralStringIR enterAccessibleEntities
-  ?!@stringset ioInvokedRoutineSet
+override proc @forInstructionOnLiteralStringIR.enterAccessibleEntities
+  (?!@stringset ioInvokedRoutineSet,
   ?!@uint ioMaxBranchOfOnInstructions
-{
-  [self.mWhileInstructionList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
-  [self.mDoInstructionList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
+) {
+  self.mWhileInstructionList.enterAccessibleEntities (!?ioInvokedRoutineSet, !?ioMaxBranchOfOnInstructions)
+  self.mDoInstructionList.enterAccessibleEntities (!?ioInvokedRoutineSet, !?ioMaxBranchOfOnInstructions)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————

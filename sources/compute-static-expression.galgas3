@@ -3,37 +3,37 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc computeStaticExpression
-  ?!context:@semanticContext ioContext
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?expression:let @expressionAST inExpression
-  ?errorLocation:let @location inErrorLocation
-  ?optionalContextualTypeName:let @lstring inOptionalTypeName
+  (?!context:@semanticContext ioContext,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?expression:let @expressionAST inExpression,
+  ?errorLocation:let @location inErrorLocation,
+  ?optionalContextualTypeName:let @lstring inOptionalTypeName,
   !result:@objectIR outStaticExpressionIR
-{
+) {
 //--- Get destination type
   let @omnibusType annotationType
   if inOptionalTypeName.string == "" then
     annotationType = voidType ()
   else
-    [ioContext.mTypeMap searchType !lkey:inOptionalTypeName ?type:annotationType]
+    ioContext.mTypeMap.searchType (!lkey:inOptionalTypeName, ?type:annotationType)
   end
 //---
   var @semanticTemporariesStruct unusedSemanticTemporariesStruct = @()
   var @allocaList unusedAllocaList = @[]
   var @instructionListIR unusedInstructionListIR = @[]
-  [inExpression analyzeExpression
-    !self:voidType ()
-    !routineAttributes: @()
-    !optionalTargetType:annotationType
-    !context:ioContext
-    !mode:.bootMode
-    !?temporary: unusedSemanticTemporariesStruct
-    !?staticEntityMap: ioStaticEntityMap
-    !?variableMap:ioContext.mValuedObjectMap
-    !?alloca: unusedAllocaList
-    !?instructionListIR: unusedInstructionListIR
+  inExpression.analyzeExpression
+    (!self:voidType (),
+    !routineAttributes: @(),
+    !optionalTargetType:annotationType,
+    !context:ioContext,
+    !mode:.bootMode,
+    !?temporary: unusedSemanticTemporariesStruct,
+    !?staticEntityMap: ioStaticEntityMap,
+    !?variableMap:ioContext.mValuedObjectMap,
+    !?alloca: unusedAllocaList,
+    !?instructionListIR: unusedInstructionListIR,
     ?result:let @objectIR expressionIR
-  ]
+  )
   if not expressionIR.isStatic then
     error (inErrorLocation : "expression is not static" spoil outStaticExpressionIR)
   else

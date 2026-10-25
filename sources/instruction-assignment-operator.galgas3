@@ -6,7 +6,7 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <assignment_combined_with_operator> !@omnibusInfixOperator outInfixOperator !@location outOperatorLocation {
+  rule <assignment_combined_with_operator> (!@omnibusInfixOperator outInfixOperator ,!@location outOperatorLocation ) {
     select
       $|=$
       outInfixOperator = .bitWiseOrOp
@@ -46,38 +46,30 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
+  rule <instruction> (?!@ast ioAST ,?!@instructionListAST ioInstructionList ) {
   //--- LValue
-    <lvalue> !?ioAST ?let lvalue
+    <lvalue> (!?ioAST, ?let lvalue)
     let instructionLocation = @location.here
   //--- Assignment operator
-    <assignment_combined_with_operator> ?let infixOperator ?let operatorLocation
+    <assignment_combined_with_operator> (?let infixOperator, ?let operatorLocation)
   //--- Right expression
-    <expression> !?ioAST ?let @expressionAST rightExpression
+    <expression> (!?ioAST, ?let @expressionAST rightExpression)
   //--- Build source expression
     var @primaryInExpressionAccessListAST expressionAccessList = @[]
-    [lvalue.mOperand buildExpressionAccessList !?expressionAccessList]
-//    for (access) in lvalue.mAccessList do
-//      switch access
-//      case property (@lstring name) :
-//        expressionAccessList += !.property {!name:name}
-//      case arrayAccess (@expressionAST index @location endOfIndex checkIndexExpression) :
-//        expressionAccessList += !.arrayAccess {!index:index !endOfIndex:endOfIndex !checkIndexExpression:checkIndexExpression}
-//      end
-//    end
-    let leftExpression = @primaryInExpressionAST {!lvalue.mIdentifier !expressionAccessList}
-    let expression = @omnibusInfixOperatorExpressionAST {
-      !leftExpression
-      !operatorLocation
-      !infixOperator
-      !rightExpression
-    }
+    lvalue.mOperand.buildExpressionAccessList (!?expressionAccessList)
+    let leftExpression = @primaryInExpressionAST (!lvalue.mIdentifier, expressionAccessList)
+    let expression = @omnibusInfixOperatorExpressionAST (
+      !leftExpression,
+      operatorLocation,
+      infixOperator,
+      rightExpression
+    )
   //--- Build assignment instruction
-    ioInstructionList += !@assignmentInstructionAST {
-      !instructionLocation
-      !lvalue
-      !expression
-    }
+    ioInstructionList += !@assignmentInstructionAST (
+      !instructionLocation,
+      lvalue,
+      expression
+    )
   }
 
   //·····················································································································
@@ -86,15 +78,15 @@ syntax extension omnibus_syntax {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc @LValueOperandAST buildExpressionAccessList ?!@primaryInExpressionAccessListAST ioExpressionAccessList {
+proc @LValueOperandAST buildExpressionAccessList (?!@primaryInExpressionAccessListAST ioExpressionAccessList ) {
   switch self
   case noOperand :
-  case property (@lstring name @LValueOperandAST next) :
-    ioExpressionAccessList += !.property {!name:name}
-    [next buildExpressionAccessList !?ioExpressionAccessList]
-  case arrayAccess (@expressionAST index @location endOfIndex @bool checkIndexExpression @LValueOperandAST next) :
-    ioExpressionAccessList += !.arrayAccess {!index:index !endOfIndex:endOfIndex !checkIndexExpression:checkIndexExpression}
-    [next buildExpressionAccessList !?ioExpressionAccessList]
+  case property (@lstring name, @LValueOperandAST next) :
+    ioExpressionAccessList += !.property (!name:name)
+    next.buildExpressionAccessList (!?ioExpressionAccessList)
+  case arrayAccess (@expressionAST index, @location endOfIndex, @bool checkIndexExpression, @LValueOperandAST next) :
+    ioExpressionAccessList += !.arrayAccess (!index:index, !endOfIndex:endOfIndex, !checkIndexExpression:checkIndexExpression)
+    next.buildExpressionAccessList (!?ioExpressionAccessList)
   end
 }
 

@@ -1,19 +1,19 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-setter @instructionListIR appendCopyFromReferences
-  ?let @assignmentOperatorMap inAssignmentOperatorMap
-  ?!@semanticTemporariesStruct ioTemporaries
-  ?errorLocation:let @location inErrorLocation
-  ?source:let @objectIR inSourcePossibleReference
+mutating proc @instructionListIR.appendCopyFromReferences
+  (?let @assignmentOperatorMap inAssignmentOperatorMap,
+  ?!@semanticTemporariesStruct ioTemporaries,
+  ?errorLocation:let @location inErrorLocation,
+  ?source:let @objectIR inSourcePossibleReference,
   ?target:let @LValueRepresentation inTargetReference
-{
+) {
 //---
   if not inSourcePossibleReference.isReference then
     var loadedResultValue = inSourcePossibleReference
-    [!?self appendLoadWhenReference
-      !?ioTemporaries
+    !?self.appendLoadWhenReference (
+      !?ioTemporaries,
       !?loadedResultValue
-    ]
+    )
     let result = checkAssignmentCompatibility (
       !inAssignmentOperatorMap
       !source:loadedResultValue
@@ -21,15 +21,15 @@ setter @instructionListIR appendCopyFromReferences
       !errorLocation:inErrorLocation
       !staticTypeAllowed:false
     )
-    [!?self appendStoreToUniversalReference !inTargetReference.llvmName !inTargetReference.type !result]
+    !?self.appendStoreToUniversalReference (!inTargetReference.llvmName, !inTargetReference.type, !result)
   else // Call a copy routine
-    [inSourcePossibleReference extractReference ?type:let sourceType ?llvmName:let sourceLLVMName]
+    inSourcePossibleReference.extractReference (?type:let sourceType, ?llvmName:let sourceLLVMName)
     if sourceType.omnibusTypeDescriptionName != inTargetReference.type.omnibusTypeDescriptionName then
       error (inErrorLocation
       : "object of type " + inTargetReference.type.omnibusTypeDescriptionName
         + " cannot be assigned from expression of type " + sourceType.omnibusTypeDescriptionName)
     end
-    self += !@copyFromReferencesIR {!inTargetReference !sourceLLVMName}
+    self += !@copyFromReferencesIR (!inTargetReference, sourceLLVMName)
   end
 }
 
@@ -42,11 +42,11 @@ class @copyFromReferencesIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @copyFromReferencesIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
+override proc @copyFromReferencesIR.llvmInstructionCode
+  (?!@string ioLLVMcode,
+  ?let @generationContext unused inGenerationContext,
   ?!@generationAdds unused ioGenerationAdds
-{
+) {
   let assignmentFunctionLLVMName = assignmentOperatorFuncName (!self.mTarget.type !self.mTarget.type)
   let llvmTypeName = self.mTarget.type.llvmTypeName
   ioLLVMcode += "  call void @" + assignmentFunctionLLVMName.assemblerRepresentation
@@ -55,10 +55,10 @@ override proc @copyFromReferencesIR llvmInstructionCode
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @copyFromReferencesIR enterAccessibleEntities
-  ?!@stringset ioInvokedRoutineSet
+override proc @copyFromReferencesIR.enterAccessibleEntities
+  (?!@stringset ioInvokedRoutineSet,
   ?!@uint unused ioMaxBranchOfOnInstructions
-{
+) {
   let assignmentFunctionLLVMName = assignmentOperatorFuncName (!self.mTarget.type !self.mTarget.type)
   ioInvokedRoutineSet ++= assignmentFunctionLLVMName
 }

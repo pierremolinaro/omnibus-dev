@@ -9,11 +9,11 @@ class @standaloneRoutineCallIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @standaloneRoutineCallIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
+override proc @standaloneRoutineCallIR.llvmInstructionCode
+  (?!@string ioLLVMcode,
+  ?let @generationContext unused inGenerationContext,
   ?!@generationAdds unused ioGenerationAdds
-{
+) {
   ioLLVMcode += "  "
   if self.mResult == .void then
     ioLLVMcode += "call void"
@@ -38,10 +38,10 @@ override proc @standaloneRoutineCallIR llvmInstructionCode
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @standaloneRoutineCallIR enterAccessibleEntities
-  ?!@stringset ioInvokedRoutineSet
+override proc @standaloneRoutineCallIR.enterAccessibleEntities
+  (?!@stringset ioInvokedRoutineSet,
   ?!@uint unused ioMaxBranchOfOnInstructions
- {
+ ) {
   ioInvokedRoutineSet ++= self.mFunctionNameForGeneration
 }
 

@@ -13,39 +13,39 @@ struct @intermediateCodeStruct {
   public var @taskMapIR mTaskMapIR = @()
   public var @globalTaskVariableList mGlobalTaskVariableList = @[]
   public var @uint mMaxBranchOfOnInstructions = 0
-  public var @targetParameters mTargetParameters = @{
-    !.here
-    !@[]
-    !"".nowhere
-    !"".nowhere
-    !0
-    !false
-    ! @{!0 !.nowhere}
-    ! @{!0 !.nowhere}
-    !"".nowhere
-    ! @{!0 !.nowhere}
-    ! @{!0 !.nowhere}
-    ! @{!0 !.nowhere}
-    ! @{!0 !.nowhere}
-    ! @{!0 !.nowhere}
-    !"".nowhere
-    ! @{!0 !.nowhere}
-    !"".nowhere
-    !"".nowhere
-    !"".nowhere
-    !"".nowhere
-    !@[]
-    !@[]
-    !@[]
-    !"".nowhere
-    !"".nowhere
-    !"".nowhere
-    ! @{!0 !.nowhere}
-    !"".nowhere
-    !"".nowhere
-    !"".nowhere
-    !"".nowhere
-  }
+  public var @targetParameters mTargetParameters = @(
+    !.here,
+    @[],
+    "".nowhere,
+    "".nowhere,
+    0,
+    false,
+     @(!0, .nowhere),
+     @(!0, .nowhere),
+    "".nowhere,
+     @(!0, .nowhere),
+     @(!0, .nowhere),
+     @(!0, .nowhere),
+     @(!0, .nowhere),
+     @(!0, .nowhere),
+    "".nowhere,
+     @(!0, .nowhere),
+    "".nowhere,
+    "".nowhere,
+    "".nowhere,
+    "".nowhere,
+    @[],
+    @[],
+    @[],
+    "".nowhere,
+    "".nowhere,
+    "".nowhere,
+     @(!0, .nowhere),
+    "".nowhere,
+    "".nowhere,
+    "".nowhere,
+    "".nowhere
+  )
   public var @driverListIR mDriverList = @[]
   public var @staticListInvokedFunctionSetMap mStaticArrayMapForIntermediate = @()
   public var @globalSyncInstanceMapIR mGlobalSyncInstanceMap = @()
@@ -71,25 +71,25 @@ abstract class @abstractRoutineIR {
 //·······················································································································
 
 proc @abstractRoutineIR svcDeclarationGeneration
-  ?!@primitiveAndServiceIRlist unused ioPrimitiveAndServiceList
-  ?!@sectionIRlist unused ioSectionList
+  (?!@primitiveAndServiceIRlist unused ioPrimitiveAndServiceList,
+  ?!@sectionIRlist unused ioSectionList,
   ?!@generationAdds unused ioGenerationAdds
-{
+) {
 }
 
 //·······················································································································
 
 abstract proc @abstractRoutineIR llvmCodeGeneration
-  ?!@string ioLLVMcode
-  ?let @generationContext inGenerationContext
-  ?!@generationAdds ioGenerationAdds
+  (?!@string ioLLVMcode,
+  ?let @generationContext inGenerationContext,
+  ?!@generationAdds ioGenerationAdds)
 
 //·······················································································································
 
 proc @abstractRoutineIR enterAccessibleEntities
-   ?!@stringset unused ioInvokedRoutineSet
+   (?!@stringset unused ioInvokedRoutineSet,
    ?!@uint unused ioMaxBranchOfOnInstructions
-{
+) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -101,14 +101,14 @@ list @routineListIR {
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc @routineListIR llvmRoutineGeneration
-  ?!@string ioLLVMcode
-  ?let @generationContext inGenerationContext
+  (?!@string ioLLVMcode,
+  ?let @generationContext inGenerationContext,
   ?!@generationAdds ioGenerationAdds
-{
+) {
   for routine in self do
     ioLLVMcode += llvmTitleComment (!"Routine " + routine.mRoutine.mRoutineMangledName)
     ioGenerationAdds.mUniqueIndex = 0
-    [routine.mRoutine llvmCodeGeneration !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+    routine.mRoutine.llvmCodeGeneration (!?ioLLVMcode, !inGenerationContext, !?ioGenerationAdds)
   end
 }
 

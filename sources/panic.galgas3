@@ -17,9 +17,9 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <declaration> ?!@ast ioAST {
+  rule <declaration> (?!@ast ioAST ) {
     $panic$
-    $@attribute$ ?let attribute
+    $@attribute$ (?let attribute)
     let @bool isSetup
     if attribute.string == "setup" then
       isSetup = true
@@ -28,17 +28,17 @@ syntax extension omnibus_syntax {
     else
       error (attribute : "attribute should be @setup or @loop" spoil isSetup)
     end
-    $integer$ ?let priority
+    $integer$ (?let priority)
     ${$
-    <instructionList> !?ioAST ?let instructionList
+    <instructionList> (!?ioAST, ?let instructionList)
     let endOfInstructionList = @location.here
     $}$
-    ioAST.mDeclarationListAST += !@panicAST {
-      !isSetup
-      !instructionList
-      !endOfInstructionList
-      !priority
-    }
+    ioAST.mDeclarationListAST += !@panicAST (
+      !isSetup,
+      instructionList,
+      endOfInstructionList,
+      priority
+    )
   }
 
   //·····················································································································
@@ -49,31 +49,31 @@ syntax extension omnibus_syntax {
 //!  PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc @panicAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [self.mPanicInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+proc @panicAST noteTypesInPrecedenceGraph (?!@semanticTypePrecedenceGraph ioGraph ) {
+  self.mPanicInstructionList.noteInstructionListTypesInPrecedenceGraph (!?ioGraph)
 }
 
 //·······················································································································
 
-override proc @panicAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
- let nodeName = @lstring {
-   !"panic " + if self.mIsSetup then "setup" else "loop" end + " " + self.mPriority.bigint
-   !self.mPriority.location
- }
- [!?ioGraph addNode !nodeName !self]
-  let configNode =  @lstring {!configurationNodeNameForPrecedenceGraph () !self.mPriority.location}
- [!?ioGraph addEdge !from: nodeName !to: configNode]
+override proc @panicAST.enterInPrecedenceGraph (?!@semanticTypePrecedenceGraph ioGraph ) {
+ let nodeName = @lstring (
+   !"panic " + if self.mIsSetup then "setup" else "loop" end + " " + self.mPriority.bigint,
+   self.mPriority.location
+ )
+ !?ioGraph.addNode (!nodeName, !self)
+  let configNode =  @lstring (!configurationNodeNameForPrecedenceGraph (), self.mPriority.location)
+ !?ioGraph.addEdge (!from: nodeName, !to: configNode)
 }
 
 //·······················································································································
 
-override func @panicAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+override func @panicAST.keyRepresentationForErrorSignaling () -> @string outRepresentation {
   outRepresentation = "panic " + if self.mIsSetup then "setup" else "loop" end + " " + self.mPriority.bigint
 }
 
 //·······················································································································
 
-override func @panicAST locationForErrorSignaling -> @location outLocation {
+override func @panicAST.locationForErrorSignaling () -> @location outLocation {
   outLocation = self.mPriority.location
 }
 
@@ -81,7 +81,7 @@ override func @panicAST locationForErrorSignaling -> @location outLocation {
 //! UTILITY
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func panicRoutineNameForLocationFile ?let @location inLocation -> @string {
+func panicRoutineNameForLocationFile (?let @location inLocation ) -> @string {
   if inLocation.isNowhere then
     result = "raise.panic.nofile"
   else
@@ -91,7 +91,7 @@ func panicRoutineNameForLocationFile ?let @location inLocation -> @string {
 
 //·······················································································································
 
-func panicRoutineNameForFilePath ?let @string inFilePath -> @string {
+func panicRoutineNameForFilePath (?let @string inFilePath ) -> @string {
   if inFilePath == "" then
     result = "raise.panic.nofile"
   else
@@ -112,26 +112,26 @@ map @panicRoutinePriorityMap {
 
 //·······················································································································
 
-override proc @panicAST enterInContext
-  ?!context:@semanticContext ioContext
-  ?!@declarationDecorationList ioDecoratedDeclarationList
-  ?!@decoratedRegularRoutineList ioDecoratedRoutineList
-  ?!@routineListIR unused ioRoutineListIR
-  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
-  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
-  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
+override proc @panicAST.enterInContext
+  (?!context:@semanticContext ioContext,
+  ?!@declarationDecorationList ioDecoratedDeclarationList,
+  ?!@decoratedRegularRoutineList ioDecoratedRoutineList,
+  ?!@routineListIR unused ioRoutineListIR,
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap,
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap,
+  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST,
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
-{
+) {
   if self.mIsSetup then
-    [!?ioContext.mPanicSetupRoutinePriorityMap insertSetupKey !@{!self.mPriority.bigint.string !self.mPriority.location}]
+    !?ioContext.mPanicSetupRoutinePriorityMap.insertSetupKey (!@(!self.mPriority.bigint.string, self.mPriority.location))
   else
-    [!?ioContext.mPanicLoopRoutinePriorityMap insertLoopKey !@{!self.mPriority.bigint.string !self.mPriority.location}]
+    !?ioContext.mPanicLoopRoutinePriorityMap.insertLoopKey (!@(!self.mPriority.bigint.string, self.mPriority.location))
   end
 //---------------- Add decorated declaration
-  ioDecoratedDeclarationList += !@decoratedPanicRoutine {
-    !self.mIsSetup
-    !self.mPriority
-  }
+  ioDecoratedDeclarationList += !@decoratedPanicRoutine (
+    !self.mIsSetup,
+    self.mPriority
+  )
 //--- Insert predefined input arguments
   var @routineFormalArgumentListAST arguments = @[]
   arguments +=
@@ -149,10 +149,10 @@ override proc @panicAST enterInContext
     !"".nowhere
     !staticStringTypeName ().nowhere
     !"FILE".nowhere
-  let routineMangledName = @lstring {
-    !"panic." + if self.mIsSetup then "setup" else "loop" end + "." + self.mPriority.bigint
-    !self.mPriority.location
-  }
+  let routineMangledName = @lstring (
+    !"panic." + if self.mIsSetup then "setup" else "loop" end + "." + self.mPriority.bigint,
+    self.mPriority.location
+  )
   ioDecoratedRoutineList +=
     !receiverTypeName: "".nowhere // Empty string if standalone function
     !mode:.panicMode
@@ -174,44 +174,44 @@ override proc @panicAST enterInContext
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc appendPanicRoutines
-  ?allSourceFilePaths:let @stringset inSourceFileAbsolutePathSet
+  (?allSourceFilePaths:let @stringset inSourceFileAbsolutePathSet,
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
-  ioIntermediateCodeStruct.mRoutineListIR += !@universalModePanicRoutineIR {
-    !"section.user.handle.panic".nowhere
-    !isRequired:false
+) {
+  ioIntermediateCodeStruct.mRoutineListIR += !@universalModePanicRoutineIR (
+    !"section.user.handle.panic".nowhere,
+    !isRequired:false,
     !warnsIfUnused:false
-  }
+  )
 //--- Section panic routine
-  ioIntermediateCodeStruct.mRoutineListIR += !@sectionModePanicRoutineIR {
-    !"section.implementation.handle.panic".nowhere
-    !isRequired:false
-    !warnsIfUnused:false
-    !ioIntermediateCodeStruct.mPanicSetupListIR
-    !ioIntermediateCodeStruct.mPanicLoopListIR
-  }
+  ioIntermediateCodeStruct.mRoutineListIR += !@sectionModePanicRoutineIR (
+    !"section.implementation.handle.panic".nowhere,
+    !isRequired:false,
+    !warnsIfUnused:false,
+    ioIntermediateCodeStruct.mPanicSetupListIR,
+    ioIntermediateCodeStruct.mPanicLoopListIR
+  )
 //--- Panic routines, specific to every source file
   for (sourceFilePath) in inSourceFileAbsolutePathSet do
-    ioIntermediateCodeStruct.mRoutineListIR += !@fileSpecificPanicRoutineIR {
-      !panicRoutineNameForFilePath (!sourceFilePath).nowhere
-      !isRequired:false
-      !warnsIfUnused:false
-      !sourceFilePath
-    }
+    ioIntermediateCodeStruct.mRoutineListIR += !@fileSpecificPanicRoutineIR (
+      !panicRoutineNameForFilePath (!sourceFilePath).nowhere,
+      !isRequired:false,
+      !warnsIfUnused:false,
+      sourceFilePath
+    )
   end
-  ioIntermediateCodeStruct.mRoutineListIR += !@fileSpecificPanicRoutineIR {
-    !panicRoutineNameForFilePath (!"").nowhere
-    !isRequired:false
-    !warnsIfUnused:false
-    !""
-  }
+  ioIntermediateCodeStruct.mRoutineListIR += !@fileSpecificPanicRoutineIR (
+    !panicRoutineNameForFilePath (!"").nowhere,
+    !isRequired:false,
+    !warnsIfUnused:false,
+    ""
+  )
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //!  SEMANTIC ANALYSIS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once panicModeName -> @string {
+func %once panicModeName () -> @string {
   result = "panic"
 }
 
@@ -224,17 +224,17 @@ class @decoratedPanicRoutine : @abstractDecoratedDeclaration {
 
 //·······················································································································
 
-override proc @decoratedPanicRoutine semanticAnalysis
-  ?context:let @semanticContext unused inContext
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
+override proc @decoratedPanicRoutine.semanticAnalysis
+  (?context:let @semanticContext unused inContext,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
+) {
 //--- Code generation
   if self.mIsSetup then
-    [!?ioTemporaries.mPanicSetupRoutinePriorityMap insertSetupKey !@{!self.mPriority.bigint.string !self.mPriority.location}]
+    !?ioTemporaries.mPanicSetupRoutinePriorityMap.insertSetupKey (!@(!self.mPriority.bigint.string, self.mPriority.location))
     ioIntermediateCodeStruct.mPanicSetupListIR += !self.mPriority.bigint
   else
-    [!?ioTemporaries.mPanicLoopRoutinePriorityMap insertLoopKey !@{!self.mPriority.bigint.string !self.mPriority.location}]
+    !?ioTemporaries.mPanicLoopRoutinePriorityMap.insertLoopKey (!@(!self.mPriority.bigint.string, self.mPriority.location))
     ioIntermediateCodeStruct.mPanicLoopListIR += !self.mPriority.bigint
   end
 }
@@ -252,12 +252,12 @@ sortedlist @panicSortedListIR {
 //·······················································································································
 
 proc generatePanicCode
-  ?!@string ioLLVMcode
-  ?generationContext:let @generationContext inGenerationContext
+  (?!@string ioLLVMcode,
+  ?generationContext:let @generationContext inGenerationContext,
   ?!generationAdds:@generationAdds ioGenerationAdds
-{
+) {
 //--- Panic for isr
-  [!?ioGenerationAdds.mStaticEntityMap findOrAddStaticString !"" ?let emptyStringIndex]
+  !?ioGenerationAdds.mStaticEntityMap.findOrAddStaticString (!"", ?let emptyStringIndex)
   ioLLVMcode += llvmTitleComment (!"Panic for ISR")
   ioLLVMcode += "define internal void @panic.isr (" + inGenerationContext.mPanicCodeLLVMType.llvmTypeName + " %in.CODE) " + llvmAttributeFunction () + "noreturn {\n"
   ioLLVMcode += "  %str.FILE = load i8*, i8** " + literalStringName (!emptyStringIndex) + "\n"
@@ -280,21 +280,21 @@ class @fileSpecificPanicRoutineIR : @abstractRoutineIR {
 
 //·······················································································································
 
-override proc @fileSpecificPanicRoutineIR llvmCodeGeneration
-  ?!@string ioLLVMcode
-  ?let @generationContext inGenerationContext
+override proc @fileSpecificPanicRoutineIR.llvmCodeGeneration
+  (?!@string ioLLVMcode,
+  ?let @generationContext inGenerationContext,
   ?!@generationAdds ioGenerationAdds
-{
+) {
   let arguments = " ("
     + inGenerationContext.mPanicLineLLVMType.llvmTypeName + " %in.LINE, "
     + inGenerationContext.mPanicCodeLLVMType.llvmTypeName + " %in.CODE, "
     + "i8* %in.FILE)"
   let fileBaseName = self.inFilePath.lastPathComponent.deletingPathExtension
 
-  [!?ioGenerationAdds.mStaticEntityMap findOrAddStaticString
-    !fileBaseName
+  !?ioGenerationAdds.mStaticEntityMap.findOrAddStaticString
+    (!fileBaseName,
     ?let staticStringIndex
-  ]
+  )
   ioLLVMcode += llvmTitleComment (!self.mRoutineMangledName)
   ioLLVMcode += "define internal void @" + self.mRoutineMangledName.string.assemblerRepresentation + " ("
   ioLLVMcode += inGenerationContext.mPanicLineLLVMType.llvmTypeName + " %in.LINE, "
@@ -307,10 +307,10 @@ override proc @fileSpecificPanicRoutineIR llvmCodeGeneration
 
 //·······················································································································
 
-override proc @fileSpecificPanicRoutineIR enterAccessibleEntities
-   ?!@stringset ioInvokedRoutineSet
+override proc @fileSpecificPanicRoutineIR.enterAccessibleEntities
+   (?!@stringset ioInvokedRoutineSet,
    ?!@uint unused ioMaxBranchOfOnInstructions
-{
+) {
   ioInvokedRoutineSet ++= llvmNameForSectionCall (!panicRoutineName ())
 }
 
@@ -323,11 +323,11 @@ class @universalModePanicRoutineIR : @abstractRoutineIR {
 
 //·······················································································································
 
-override proc @universalModePanicRoutineIR llvmCodeGeneration
-  ?!@string ioLLVMcode
-  ?let @generationContext inGenerationContext
+override proc @universalModePanicRoutineIR.llvmCodeGeneration
+  (?!@string ioLLVMcode,
+  ?let @generationContext inGenerationContext,
   ?!@generationAdds unused ioGenerationAdds
-{
+) {
   let arguments = " ("
     + inGenerationContext.mPanicLineLLVMType.llvmTypeName + " %in.LINE, "
     + inGenerationContext.mPanicCodeLLVMType.llvmTypeName + " %in.CODE, "
@@ -341,11 +341,11 @@ override proc @universalModePanicRoutineIR llvmCodeGeneration
 
 //·······················································································································
 
-override proc @universalModePanicRoutineIR svcDeclarationGeneration
-  ?!@primitiveAndServiceIRlist unused ioPrimitiveAndServiceList
-  ?!@sectionIRlist ioSectionList
+override proc @universalModePanicRoutineIR.svcDeclarationGeneration
+  (?!@primitiveAndServiceIRlist unused ioPrimitiveAndServiceList,
+  ?!@sectionIRlist ioSectionList,
   ?!@generationAdds unused ioGenerationAdds
-{
+) {
   ioSectionList +=
     !llvmNameForSectionCall (!panicRoutineName ())
     !llvmNameForSectionImplementation (!panicRoutineName ())
@@ -354,10 +354,10 @@ override proc @universalModePanicRoutineIR svcDeclarationGeneration
 
 //·······················································································································
 
-override proc @universalModePanicRoutineIR enterAccessibleEntities
-   ?!@stringset ioInvokedRoutineSet
+override proc @universalModePanicRoutineIR.enterAccessibleEntities
+   (?!@stringset ioInvokedRoutineSet,
    ?!@uint unused ioMaxBranchOfOnInstructions
-{
+) {
   ioInvokedRoutineSet ++= llvmNameForSectionImplementation (!panicRoutineName ())
 }
 
@@ -372,11 +372,11 @@ class @sectionModePanicRoutineIR : @abstractRoutineIR {
 
 //·······················································································································
 
-override proc @sectionModePanicRoutineIR llvmCodeGeneration
-  ?!@string ioLLVMcode
-  ?let @generationContext inGenerationContext
+override proc @sectionModePanicRoutineIR.llvmCodeGeneration
+  (?!@string ioLLVMcode,
+  ?let @generationContext inGenerationContext,
   ?!@generationAdds unused ioGenerationAdds
-{
+) {
   ioLLVMcode += llvmTitleComment (!"Raise Panic internal (section mode)")
 
   let arguments = " ("
@@ -401,10 +401,10 @@ override proc @sectionModePanicRoutineIR llvmCodeGeneration
 
 //·······················································································································
 
-override proc @sectionModePanicRoutineIR enterAccessibleEntities
-   ?!@stringset ioInvokedRoutineSet
+override proc @sectionModePanicRoutineIR.enterAccessibleEntities
+   (?!@stringset ioInvokedRoutineSet,
    ?!@uint unused ioMaxBranchOfOnInstructions
-{
+) {
   for (priority) in self.mPanicSetupListIR do
     ioInvokedRoutineSet ++= "panic.setup." + priority
   end

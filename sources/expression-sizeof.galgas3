@@ -20,20 +20,20 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
+  rule <primary> (?!@ast ioAST ,!@expressionAST outExpression ) {
     $sizeof$
     $($
-    <lvalue> !?ioAST ?let lvalue
+    <lvalue> (!?ioAST, ?let lvalue)
     $)$
-    outExpression = @sizeofExpressionAST {!lvalue}
+    outExpression = @sizeofExpressionAST (!lvalue)
   }
 
   //·····················································································································
 
-  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
+  rule <primary> (?!@ast ioAST ,!@expressionAST outExpression ) {
     $sizeof$
-    <type_definition> !?ioAST ?let typeName
-    outExpression = @sizeofTypeAST {!typeName}
+    <type_definition> (!?ioAST, ?let typeName)
+    outExpression = @sizeofTypeAST (!typeName)
   }
 
   //·····················································································································
@@ -44,35 +44,35 @@ syntax extension omnibus_syntax {
 //  PRECEDENCE GRAPH FROM EXPRESSION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @sizeofExpressionAST addDependenceEdgeForStaticExpression
-  ?let @lstring unused inConstantName
+override proc @sizeofExpressionAST.addDependenceEdgeForStaticExpression
+  (?let @lstring unused inConstantName,
   ?!@semanticTypePrecedenceGraph unused ioGraph
-{
+) {
 }
 
 //·······················································································································
 
-override proc @sizeofTypeAST addDependenceEdgeForStaticExpression
-  ?let @lstring unused inConstantName
+override proc @sizeofTypeAST.addDependenceEdgeForStaticExpression
+  (?let @lstring unused inConstantName,
   ?!@semanticTypePrecedenceGraph unused ioGraph
-{
+) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @sizeofExpressionAST noteExpressionTypesInPrecedenceGraph
-  ?!@semanticTypePrecedenceGraph unused ioGraph
-{
+override proc @sizeofExpressionAST.noteExpressionTypesInPrecedenceGraph
+  (?!@semanticTypePrecedenceGraph unused ioGraph
+) {
 }
 
 //·······················································································································
 
-override proc @sizeofTypeAST noteExpressionTypesInPrecedenceGraph
-  ?!@semanticTypePrecedenceGraph ioGraph
-{
-  [!?ioGraph noteNode !self.mTypeName]
+override proc @sizeofTypeAST.noteExpressionTypesInPrecedenceGraph
+  (?!@semanticTypePrecedenceGraph ioGraph
+) {
+  !?ioGraph.noteNode (!self.mTypeName)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -81,33 +81,33 @@ override proc @sizeofTypeAST noteExpressionTypesInPrecedenceGraph
 //! @sizeofExpressionAST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @sizeofExpressionAST analyzeExpression
-  ?self:let @omnibusType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?optionalTargetType:let @omnibusType unused inOptionalTargetType
-  ?context:let @semanticContext inContext
-  ?mode:let @mode unused inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList unused ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+override proc @sizeofExpressionAST.analyzeExpression
+  (?self:let @omnibusType inSelfType,
+  ?routineAttributes:let @routineAttributes inRoutineAttributes,
+  ?optionalTargetType:let @omnibusType unused inOptionalTargetType,
+  ?context:let @semanticContext inContext,
+  ?mode:let @mode unused inMode,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap,
+  ?!alloca:@allocaList unused ioAllocaList,
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList,
   !result:@objectIR outResult
-{
+) {
   if [inRoutineAttributes contains !.isGuard] then
     error (self.mLValue.mIdentifier : "sizeof () cannot be used in guard" spoil outResult)
   else
   //--- Analyze LValue
-    [ioUniversalMap searchValuedObjectType !context:inContext !selfType:inSelfType !self.mLValue ?let type ]
+    ioUniversalMap.searchValuedObjectType (!context:inContext, !selfType:inSelfType, !self.mLValue, ?let type )
     let resultTypeProxy = [inContext.mTypeMap searchKey
       !("u" + inContext.mTargetParameters.mPointerSize).nowhere
     ]
     let resultType = resultTypeProxy.type
-    getNewTempValue (!resultType !?ioTemporaries ?outResult)
-    ioInstructionGenerationList += !@sizeofInstructionIR {
-      !outResult
-      !type
-    }
+    getNewTempValue (!resultType, !?ioTemporaries, ?outResult)
+    ioInstructionGenerationList += !@sizeofInstructionIR (
+      !outResult,
+      type
+    )
   end
 }
 
@@ -115,19 +115,19 @@ override proc @sizeofExpressionAST analyzeExpression
 //! @sizeofTypeAST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @sizeofTypeAST analyzeExpression
-  ?self:let @omnibusType unused inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?optionalTargetType:let @omnibusType unused inOptionalTargetType
-  ?context:let @semanticContext inContext
-  ?mode:let @mode unused inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap unused  ioUniversalMap
-  ?!alloca:@allocaList unused ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+override proc @sizeofTypeAST.analyzeExpression
+  (?self:let @omnibusType unused inSelfType,
+  ?routineAttributes:let @routineAttributes inRoutineAttributes,
+  ?optionalTargetType:let @omnibusType unused inOptionalTargetType,
+  ?context:let @semanticContext inContext,
+  ?mode:let @mode unused inMode,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap unused  ioUniversalMap,
+  ?!alloca:@allocaList unused ioAllocaList,
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList,
   !result:@objectIR outResult
-{
+) {
   if [inRoutineAttributes contains !.isGuard] then
     error (self.mTypeName : "sizeof () cannot be used in guard"  spoil outResult)
   else
@@ -136,8 +136,8 @@ override proc @sizeofTypeAST analyzeExpression
       !("u" + inContext.mTargetParameters.mPointerSize).nowhere
     ]
     let resultType = resultTypeProxy.type
-    getNewTempValue (!resultType !?ioTemporaries ?outResult)
-    ioInstructionGenerationList += !@sizeofInstructionIR {!outResult!type}
+    getNewTempValue (!resultType, !?ioTemporaries, ?outResult)
+    ioInstructionGenerationList += !@sizeofInstructionIR (!outResult, type)
   end
 }
 
@@ -154,11 +154,11 @@ class @sizeofInstructionIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @sizeofInstructionIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
+override proc @sizeofInstructionIR.llvmInstructionCode
+  (?!@string ioLLVMcode,
+  ?let @generationContext unused inGenerationContext,
   ?!@generationAdds unused ioGenerationAdds
-{
+) {
   let typeName = self.mSourceType.llvmTypeName
   ioLLVMcode += "  " + self.mTarget.llvmName + ".asPtr = getelementptr inbounds " + typeName + ", " + typeName + "* null, i32 1\n"
   ioLLVMcode += "  " + self.mTarget.llvmName + " = ptrtoint " + typeName + "* " + self.mTarget.llvmName + ".asPtr to i32\n"

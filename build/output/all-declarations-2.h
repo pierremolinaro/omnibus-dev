@@ -89,7 +89,7 @@ extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_storeComputedPropertyV
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@instructionListIR generateRelease'
+//Extension mutating proc '@instructionListIR generateRelease'
 //
 //--------------------------------------------------------------------------------------------------
 

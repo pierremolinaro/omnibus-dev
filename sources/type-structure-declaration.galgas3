@@ -26,8 +26,8 @@ enum @propertyKindAST {
   case uninitializedStoredProperty // declared by "var", no initialization
   case initializedConstantProperty (@expressionAST initExpression) // declared by "let"
   case uninitializedConstantProperty // declared by "let", no initialization
-  case readOnlyComputedProperty (@instructionListAST instructionList @location endOfInstructionList)
-  case writeComputedProperty (@instructionListAST instructionList @location endOfInstructionList)
+  case readOnlyComputedProperty (@instructionListAST instructionList, @location endOfInstructionList)
+  case writeComputedProperty (@instructionListAST instructionList, @location endOfInstructionList)
 }
 
 //·······················································································································
@@ -49,9 +49,9 @@ syntax extension omnibus_syntax {
   //·····················································································································
 
   rule <private_or_public_struct_property_declaration>
-    ?!@ast ioAST
+    (?!@ast ioAST,
     ?!@structurePropertyListAST ioPropertyListAST
-  {
+  ) {
     let @propertyVisibility visibility
     select
       visibility = .isPrivate
@@ -59,42 +59,42 @@ syntax extension omnibus_syntax {
       $public$
       visibility = .isPublic
     end
-    <struct_property_declaration> !?ioAST !visibility !?ioPropertyListAST
+    <struct_property_declaration> (!?ioAST, !visibility, !?ioPropertyListAST)
   }
 
   //·····················································································································
 
   rule <private_struct_property_declaration>
-    ?!@ast ioAST
+    (?!@ast ioAST,
     ?!@structurePropertyListAST ioPropertyListAST
-  {
-    <struct_property_declaration> !?ioAST !.isPrivate !?ioPropertyListAST
+  ) {
+    <struct_property_declaration> (!?ioAST, !.isPrivate, !?ioPropertyListAST)
   }
 
   //·····················································································································
 
   rule <struct_property_declaration>
-    ?!@ast ioAST
-    ?let @propertyVisibility inVisibility
+    (?!@ast ioAST,
+    ?let @propertyVisibility inVisibility,
     ?!@structurePropertyListAST ioPropertyListAST
-  {
+  ) {
     $let$
-    $identifier$ ?let propertyName
+    $identifier$ (?let propertyName)
     let @lstring typeName
     select
-      <type_definition> !?ioAST ?typeName
+      <type_definition> (!?ioAST, ?typeName)
     or
       typeName = "".nowhere
     end
     select
       $=$
-      <expression> !?ioAST ?let initExpression
+      <expression> (!?ioAST, ?let initExpression)
       ioPropertyListAST +=
         !propertyName
         !@[]
         !inVisibility
         !typeName
-        !.initializedConstantProperty{!initExpression:initExpression}
+        !.initializedConstantProperty(!initExpression:initExpression)
     or
       ioPropertyListAST +=
         !propertyName
@@ -108,71 +108,71 @@ syntax extension omnibus_syntax {
   //·····················································································································
 
   rule <struct_property_declaration>
-    ?!@ast ioAST
-    ?let @propertyVisibility inVisibility
+    (?!@ast ioAST,
+    ?let @propertyVisibility inVisibility,
     ?!@structurePropertyListAST ioPropertyListAST
-  {
+  ) {
     $var$
-    $identifier$ ?let propertyName
+    $identifier$ (?let propertyName)
     var @propertyAttributeList propertyAttributeList = @[]
     repeat
     while
-      $@attribute$ ?let attribute
-      $integer$ ?let value
+      $@attribute$ (?let attribute)
+      $integer$ (?let value)
       propertyAttributeList += !attribute !value
     end
     select
-      <type_definition> !?ioAST  ?let typeName
+      <type_definition> (!?ioAST, ?let typeName)
       select
         ioPropertyListAST += !propertyName !@[] !inVisibility !typeName !.uninitializedStoredProperty
       or
-       <propertyGetterSetter>
-         !?ioAST
-         !inVisibility
-         !propertyName
-         !propertyAttributeList
-         !typeName
-         !?ioPropertyListAST
+       <propertyGetterSetter>(
+         !?ioAST,
+         !inVisibility,
+         !propertyName,
+         !propertyAttributeList,
+         !typeName,
+         !?ioPropertyListAST)
       or
         $=$
-        <expression> !?ioAST ?let initExpression
+        <expression> (!?ioAST, ?let initExpression)
         ioPropertyListAST +=
           !propertyName
           !propertyAttributeList
           !inVisibility
           !typeName
-          !.initializedStoredProperty{!initExpression:initExpression}
+          !.initializedStoredProperty(!initExpression:initExpression)
       end
     or
       $=$
-      <expression> !?ioAST ?let initExpression
+      <expression> (!?ioAST, ?let initExpression)
       ioPropertyListAST +=
         !propertyName
         !propertyAttributeList
         !inVisibility
         !"".nowhere
-        !.initializedStoredProperty{!initExpression:initExpression}
+        !.initializedStoredProperty(!initExpression:initExpression)
     end
   }
 
   //·····················································································································
 
   rule <propertyGetterSetter>
-    ?!@ast ioAST
-    ?let @propertyVisibility inVisibility
-    ?let @lstring inPropertyName
-    ?let @propertyAttributeList inPropertyAttributeList
-    ?let @lstring inTypeName
+    (?!@ast ioAST,
+    ?let @propertyVisibility inVisibility,
+    ?let @lstring inPropertyName,
+    ?let @propertyAttributeList inPropertyAttributeList,
+    ?let @lstring inTypeName,
     ?!@structurePropertyListAST ioPropertyListAST
-  {
+  ) {
     ${$
     select
       var getterDefined = false
       var setterDefined = false
       repeat
-        $@attribute$ ?let getterOrSetter
+        $@attribute$ (?let getterOrSetter)
         ${$
-        <instructionList> !?ioAST ?let instructionList
+        <instructionList> (!?ioAST, ?let instructionList)
         let endOfInstructionList = @location.here
         $}$
         if getterOrSetter.string == "get" then
@@ -181,10 +181,10 @@ syntax extension omnibus_syntax {
             !inPropertyAttributeList
             !inVisibility
             !inTypeName
-            !.readOnlyComputedProperty{
-              !instructionList: instructionList
+            !.readOnlyComputedProperty(
+              !instructionList: instructionList,
               !endOfInstructionList: endOfInstructionList
-            }
+            )
           if getterDefined then
             error (getterOrSetter : "duplicate func definition")
           end
@@ -195,10 +195,10 @@ syntax extension omnibus_syntax {
             !inPropertyAttributeList
             !inVisibility
             !inTypeName
-            !.writeComputedProperty{
-              !instructionList: instructionList
+            !.writeComputedProperty(
+              !instructionList: instructionList,
               !endOfInstructionList: endOfInstructionList
-            }
+            )
           if setterDefined then
             error (getterOrSetter : "duplicate setter definition")
           end
@@ -214,50 +214,50 @@ syntax extension omnibus_syntax {
         error (.here : "a func should be defined, and optionaly a setter")
       end
     or // func only
-      <instructionList> !?ioAST ?let readInstructionList
+      <instructionList> (!?ioAST, ?let readInstructionList)
       let endOfReadInstructionList = @location.here
       ioPropertyListAST +=
         !inPropertyName
         !inPropertyAttributeList
         !inVisibility
         !inTypeName
-        !.readOnlyComputedProperty{
-          !instructionList: readInstructionList
+        !.readOnlyComputedProperty(
+          !instructionList: readInstructionList,
           !endOfInstructionList: endOfReadInstructionList
-        }
+        )
     end
     $}$
   }
 
   //·····················································································································
 
-  rule <declaration> ?!@ast ioAST {
+  rule <declaration> (?!@ast ioAST ) {
     $struct$
-    $\$type$ ?let structureName
+    $\$type$ (?let structureName)
     var @lstringlist attributeList = @[]
     repeat
     while
-      $@attribute$ ?let attribute
+      $@attribute$ (?let attribute)
       attributeList += !attribute
     end
     ${$
     var @structurePropertyListAST fieldList = @[]
     repeat
     while
-      <private_or_public_struct_property_declaration> !?ioAST !?fieldList
+      <private_or_public_struct_property_declaration> (!?ioAST, !?fieldList)
     while
-      <function_declaration> !?ioAST !receiverTypeName: structureName
+      <function_declaration> (!?ioAST, !receiverTypeName: structureName)
     end
     $}$
-    ioAST.mDeclarationListAST += !@structureDeclarationAST {
-      !structureName
-      !structureName
-      !structureName
-      !attributeList
-      !true // Generate assignment routine
-      !fieldList
-      !true
-    }
+    ioAST.mDeclarationListAST += !@structureDeclarationAST (
+      !structureName,
+      structureName,
+      structureName,
+      attributeList,
+      true, // Generate assignment routine
+      fieldList,
+      true
+    )
   }
 
   //·····················································································································
@@ -268,37 +268,37 @@ syntax extension omnibus_syntax {
 //!  PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @structureDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @structureDeclarationAST.enterInPrecedenceGraph (?!@semanticTypePrecedenceGraph ioGraph ) {
 //--- Add structure type name as node
-  [!?ioGraph addNode !self.mReceiverTypeName !self]
+  !?ioGraph.addNode (!self.mReceiverTypeName, !self)
 //--- Add property types
   for (3* fieldTypeName propertyKind) in self.mStructurePropertyListAST do
     if fieldTypeName.string != "" then
-      [!?ioGraph addEdge !from: self.mReceiverTypeName !to: fieldTypeName]
+      !?ioGraph.addEdge (!from: self.mReceiverTypeName, !to: fieldTypeName)
     end
     switch propertyKind
     case uninitializedStoredProperty, uninitializedConstantProperty :
     case initializedStoredProperty (initExpression) :
-      [initExpression addDependenceEdgeForStaticExpression !self.mReceiverTypeName !?ioGraph]
+      initExpression.addDependenceEdgeForStaticExpression (!self.mReceiverTypeName, !?ioGraph)
     case initializedConstantProperty (initExpression) :
-      [initExpression addDependenceEdgeForStaticExpression !self.mReceiverTypeName !?ioGraph]
-    case readOnlyComputedProperty (instructionList *) :
-      [instructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
-    case writeComputedProperty (writeInstructionList *) :
-      [writeInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+      initExpression.addDependenceEdgeForStaticExpression (!self.mReceiverTypeName, !?ioGraph)
+    case readOnlyComputedProperty (instructionList, *) :
+      instructionList.noteInstructionListTypesInPrecedenceGraph (!?ioGraph)
+    case writeComputedProperty (writeInstructionList, *) :
+      writeInstructionList.noteInstructionListTypesInPrecedenceGraph (!?ioGraph)
     end
   end
 }
 
 //·······················································································································
 
-override func @structureDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+override func @structureDeclarationAST.keyRepresentationForErrorSignaling () -> @string outRepresentation {
   outRepresentation = self.mReceiverTypeName
 }
 
 //·······················································································································
 
-override func @structureDeclarationAST locationForErrorSignaling -> @location outLocation {
+override func @structureDeclarationAST.locationForErrorSignaling () -> @location outLocation {
   outLocation = self.mReceiverTypeName.location
 }
 
@@ -323,20 +323,20 @@ sortedlist @sortedOperandIRList %equatable {
 //·······················································································································
 
 proc @structurePropertyListAST.@element enterPropertyInContext
-  ?!context:@semanticContext ioContext
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?receiverTypeName:let @lstring inReceiverTypeName
-  ?omnibusTypeName: let @lstring inOmnibusTypeSpecificName
-  ?receiverLLVMBaseTypeName:let @string inReceiverLLVMBaseTypeName
-  ?!@decoratedRegularRoutineList ioDecoratedRoutineList
-  ?!@propertyList ioPropertyList
-  ?!@sortedOperandIRList sortedOperandIRList
-  ?!@constructorSignature constructorSignature
-  ?!@string ioConstructorKey
+  (?!context:@semanticContext ioContext,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?receiverTypeName:let @lstring inReceiverTypeName,
+  ?omnibusTypeName: let @lstring inOmnibusTypeSpecificName,
+  ?receiverLLVMBaseTypeName:let @string inReceiverLLVMBaseTypeName,
+  ?!@decoratedRegularRoutineList ioDecoratedRoutineList,
+  ?!@propertyList ioPropertyList,
+  ?!@sortedOperandIRList sortedOperandIRList,
+  ?!@constructorSignature constructorSignature,
+  ?!@string ioConstructorKey,
   ?!@bool canBeCopied
-{
+) {
 //---------- Attributes
-  var @lbigint explicitAlignment = @{!0 !.nowhere}
+  var @lbigint explicitAlignment = @(!0, .nowhere)
   var alignmentDefined = false
   for (attribute align) in self.mPropertyAttributeList do
     if attribute.string != "align" then
@@ -362,11 +362,11 @@ proc @structurePropertyListAST.@element enterPropertyInContext
   switch self.mPropertyKind
   case initializedConstantProperty (initExpression) :
     computeStaticExpression (
-      !?context: ioContext
-      !?staticEntityMap:ioStaticEntityMap
-      !expression: initExpression
-      !errorLocation: self.mPropertyName.location
-      !optionalContextualTypeName: self.mPropertyTypeName
+      !?context: ioContext,
+      !?staticEntityMap:ioStaticEntityMap,
+      !expression: initExpression,
+      !errorLocation: self.mPropertyName.location,
+      !optionalContextualTypeName: self.mPropertyTypeName,
       ?result:let @objectIR expressionIR
     )
     let @omnibusType actualPropertyType
@@ -381,19 +381,19 @@ proc @structurePropertyListAST.@element enterPropertyInContext
     if not actualPropertyType.copyable then
       canBeCopied = false
     end
-    [!?ioContext insertGetter
-      !omnibusTypeName: inOmnibusTypeSpecificName
-      !self.mPropertyName
-      !self.mVisibility
-      !.constantProperty {!value:[expressionIR withType !actualPropertyType]}
-    ]
+    !?ioContext.insertGetter
+      (!omnibusTypeName: inOmnibusTypeSpecificName,
+      !self.mPropertyName,
+      !self.mVisibility,
+      !.constantProperty (!value:[expressionIR withType !actualPropertyType])
+    )
   case initializedStoredProperty (initExpression) :
     computeStaticExpression (
-      !?context: ioContext
-      !?staticEntityMap:ioStaticEntityMap
-      !expression: initExpression
-      !errorLocation: self.mPropertyName.location
-      !optionalContextualTypeName: self.mPropertyTypeName
+      !?context: ioContext,
+      !?staticEntityMap:ioStaticEntityMap,
+      !expression: initExpression,
+      !errorLocation: self.mPropertyName.location,
+      !optionalContextualTypeName: self.mPropertyTypeName,
       ?result:let @objectIR expressionIR
     )
     var @omnibusType actualPropertyType
@@ -415,18 +415,18 @@ proc @structurePropertyListAST.@element enterPropertyInContext
     end
     let propertyIndex = ioPropertyList.count
     ioPropertyList += !self.mPropertyName.string !actualPropertyType
-    [!?ioContext insertGetter
-      !omnibusTypeName: inOmnibusTypeSpecificName
-      !self.mPropertyName
-      !self.mVisibility
-      !.storedProperty{!type:actualPropertyType !index:propertyIndex}
-    ]
-    [!?ioContext insertPropertySetter
-      !inReceiverTypeName
-      !self.mPropertyName
-      !self.mVisibility
-      !.storedProperty{!type:actualPropertyType !index:propertyIndex}
-    ]
+    !?ioContext.insertGetter
+      (!omnibusTypeName: inOmnibusTypeSpecificName,
+      !self.mPropertyName,
+      !self.mVisibility,
+      !.storedProperty(!type:actualPropertyType, !index:propertyIndex)
+    )
+    !?ioContext.insertPropertySetter
+      (!inReceiverTypeName,
+      !self.mPropertyName,
+      !self.mVisibility,
+      !.storedProperty(!type:actualPropertyType, !index:propertyIndex)
+    )
     sortedOperandIRList += ![expressionIR withType !actualPropertyType] !propertyIndex
   case uninitializedStoredProperty :
     if not optionalPropertyType.instanciable then
@@ -434,18 +434,18 @@ proc @structurePropertyListAST.@element enterPropertyInContext
     end
     let propertyIndex = ioPropertyList.count
     ioPropertyList += !self.mPropertyName.string !optionalPropertyType
-    [!?ioContext insertGetter
-      !omnibusTypeName: inOmnibusTypeSpecificName
-      !self.mPropertyName
-      !self.mVisibility
-      !.storedProperty{!type: optionalPropertyType!index:propertyIndex}
-    ]
-    [!?ioContext insertPropertySetter
-      !inReceiverTypeName
-      !self.mPropertyName
-      !self.mVisibility
-      !.storedProperty{!type:optionalPropertyType !index:propertyIndex}
-    ]
+    !?ioContext.insertGetter
+      (!omnibusTypeName: inOmnibusTypeSpecificName,
+      !self.mPropertyName,
+      !self.mVisibility,
+      !.storedProperty(!type: optionalPropertyType, !index:propertyIndex)
+    )
+    !?ioContext.insertPropertySetter
+      (!inReceiverTypeName,
+      !self.mPropertyName,
+      !self.mVisibility,
+      !.storedProperty(!type:optionalPropertyType, !index:propertyIndex)
+    )
     constructorSignature += !self.mPropertyName.string !optionalPropertyType !propertyIndex
     ioConstructorKey += "!" + self.mPropertyName
   case uninitializedConstantProperty :
@@ -454,33 +454,33 @@ proc @structurePropertyListAST.@element enterPropertyInContext
     end
     let propertyIndex = ioPropertyList.count
     ioPropertyList += !self.mPropertyName.string !optionalPropertyType
-    [!?ioContext insertGetter
-      !omnibusTypeName: inOmnibusTypeSpecificName
-      !self.mPropertyName
-      !self.mVisibility
-      !.storedProperty{!type: optionalPropertyType!index:propertyIndex}
-    ]
+    !?ioContext.insertGetter
+      (!omnibusTypeName: inOmnibusTypeSpecificName,
+      !self.mPropertyName,
+      !self.mVisibility,
+      !.storedProperty(!type: optionalPropertyType, !index:propertyIndex)
+    )
     constructorSignature += !self.mPropertyName.string !optionalPropertyType !propertyIndex
     ioConstructorKey += "!" + self.mPropertyName
-  case readOnlyComputedProperty (instructionList endOfInstructionList) :
+  case readOnlyComputedProperty (instructionList, endOfInstructionList) :
     if not optionalPropertyType.instanciable then
       error (self.mPropertyName : optionalPropertyType.omnibusTypeDescriptionName + " type is not instanciable")
     end
     let llvmRoutineName = getterLLVMName (!inReceiverLLVMBaseTypeName !self.mPropertyName)
     let modeDictionary = [@mode.anyMode routineLLVMDictionaryForFunction !llvmRoutineName]
-    [!?ioContext insertGetter
-      !omnibusTypeName: inOmnibusTypeSpecificName
-      !self.mPropertyName
-      !self.mVisibility
-      !.computedProperty{
-        !typeProxy: [ioContext.mTypeMap searchKey !self.mPropertyTypeName]
+    !?ioContext.insertGetter
+      (!omnibusTypeName: inOmnibusTypeSpecificName,
+      !self.mPropertyName,
+      !self.mVisibility,
+      !.computedProperty(
+        !typeProxy: [ioContext.mTypeMap searchKey !self.mPropertyTypeName],
         !modeDictionary:modeDictionary
-      }
-    ]
-    let functionLLVMName = @lstring {
-      !llvmRoutineName
-      !self.mPropertyName.location
-    }
+      )
+    )
+    let functionLLVMName = @lstring (
+      !llvmRoutineName,
+      self.mPropertyName.location
+    )
     ioDecoratedRoutineList +=
       !receiverTypeName: inReceiverTypeName
       !mode:.anyMode
@@ -495,7 +495,7 @@ proc @structurePropertyListAST.@element enterPropertyInContext
       !instructionList
       !endOfInstructionList
       !returnTypeName: self.mPropertyTypeName
-  case writeComputedProperty (writeInstructionList endOfWriteInstructionList) :
+  case writeComputedProperty (writeInstructionList, endOfWriteInstructionList) :
     if not optionalPropertyType.instanciable then
       error (self.mPropertyName : optionalPropertyType.omnibusTypeDescriptionName + " type is not instanciable")
     end
@@ -503,26 +503,26 @@ proc @structurePropertyListAST.@element enterPropertyInContext
     let getterModeDictionary = [@mode.anyMode routineLLVMDictionaryForFunction !llvmGetterRoutineName]
     let llvmSetterRoutineName = setterLLVMName (!inReceiverLLVMBaseTypeName !self.mPropertyName)
     let setterModeDictionary = [@mode.anyMode routineLLVMDictionaryForFunction !llvmSetterRoutineName]
-    [!?ioContext insertPropertySetter
-      !inReceiverTypeName
-      !self.mPropertyName
-      !self.mVisibility
-      !.computedProperty {
-        !typeProxy: [ioContext.mTypeMap searchKey !self.mPropertyTypeName]
-        !getterModeDictionary: getterModeDictionary
+    !?ioContext.insertPropertySetter
+      (!inReceiverTypeName,
+      !self.mPropertyName,
+      !self.mVisibility,
+      !.computedProperty (
+        !typeProxy: [ioContext.mTypeMap searchKey !self.mPropertyTypeName],
+        !getterModeDictionary: getterModeDictionary,
         !setterModeDictionary: setterModeDictionary
-      }
-    ]
-    let functionLLVMName = @lstring {
-      !llvmSetterRoutineName
-      !self.mPropertyName.location
-    }
+      )
+    )
+    let functionLLVMName = @lstring (
+      !llvmSetterRoutineName,
+      self.mPropertyName.location
+    )
     let @routineFormalArgumentListAST formalArgumentList = @[
       @(
         .input,
         "".nowhere,
         self.mPropertyTypeName,
-        @{!"newValue" !endOfWriteInstructionList}
+        @(!"newValue", endOfWriteInstructionList)
       )
     ]
     ioDecoratedRoutineList +=
@@ -544,48 +544,46 @@ proc @structurePropertyListAST.@element enterPropertyInContext
 
 //·······················································································································
 
-override proc @structureDeclarationAST enterInContext
-  ?!context:@semanticContext ioContext
-  ?!@declarationDecorationList unused ioDecoratedDeclarationList
-  ?!@decoratedRegularRoutineList ioDecoratedRoutineList
-  ?!@routineListIR ioRoutineListIR
-  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
+override proc @structureDeclarationAST.enterInContext
+  (?!context:@semanticContext ioContext,
+  ?!@declarationDecorationList unused ioDecoratedDeclarationList,
+  ?!@decoratedRegularRoutineList ioDecoratedRoutineList,
+  ?!@routineListIR ioRoutineListIR,
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST,
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR ioUserLLVMTypeDefinitionListIR
-{
+) {
 //---------------------------------------- Properties
   var @propertyList propertyList = @[]
-//  @propertyGetterMap propertyGetterMap = @[]
   var @sortedOperandIRList sortedOperandIRList = @[]
   var @constructorSignature constructorSignature = @[]
   var @string constructorKey = "("
   var canBeCopied = true
   for property in self.mStructurePropertyListAST do
-    [property enterPropertyInContext
-      !?context:ioContext
-      !?staticEntityMap:ioStaticEntityMap
-      !receiverTypeName:self.mReceiverTypeName
-      !omnibusTypeName: self.mOmnibusTypeSpecificName
-      !receiverLLVMBaseTypeName: self.mLLVMBaseTypeName
-      !?ioDecoratedRoutineList
-      !?propertyList
-//      !?propertyGetterMap
-      !?sortedOperandIRList
-      !?constructorSignature
-      !?constructorKey
+    property.enterPropertyInContext
+      (!?context:ioContext,
+      !?staticEntityMap:ioStaticEntityMap,
+      !receiverTypeName:self.mReceiverTypeName,
+      !omnibusTypeName: self.mOmnibusTypeSpecificName,
+      !receiverLLVMBaseTypeName: self.mLLVMBaseTypeName,
+      !?ioDecoratedRoutineList,
+      !?propertyList,
+      !?sortedOperandIRList,
+      !?constructorSignature,
+      !?constructorKey,
       !?canBeCopied
-    ]
+    )
   end
   constructorKey += ")"
 //---------------------------------------- Constructor map
   var @constructorMap constructorMap = @()
-  [!?constructorMap insertKey
-    ! @{!constructorKey !self.mReceiverTypeName.location}
-    !constructorSignature
-    !.structure {!sortedOperandList:sortedOperandIRList}
-  ]
-  [!?ioContext.mTypeConstructorMap insertKey !self.mOmnibusTypeSpecificName !constructorMap]
+  !?constructorMap.insertKey
+    (! @(!constructorKey, self.mReceiverTypeName.location),
+    !constructorSignature,
+    !.structure (!sortedOperandList:sortedOperandIRList)
+  )
+  !?ioContext.mTypeConstructorMap.insertKey (!self.mOmnibusTypeSpecificName, !constructorMap)
 //---------------------------------------- Attribute instanciable, copyable
   var typeAttributes = @omnibusTypeAttributes.instanciable
 //---------------------------------------- Check structure is copyable
@@ -604,35 +602,35 @@ override proc @structureDeclarationAST enterInContext
     typeAttributes = typeAttributes | .copyable
   end
 //---------------------------------------- Enter in type map
-  let structureType = @omnibusType {
-    !subscript:.noSubscript
-    !attributes:typeAttributes
-    !omnibusTypeDescriptionName:self.mOmnibusTypeSpecificName
-    !kind:.structure {!propertyList:propertyList}
+  let structureType = @omnibusType (
+    !subscript:.noSubscript,
+    !attributes:typeAttributes,
+    !omnibusTypeDescriptionName:self.mOmnibusTypeSpecificName,
+    !kind:.structure (!propertyList:propertyList),
     !llvmBaseTypeName:self.mLLVMBaseTypeName
-  }
-  [!?ioContext.mTypeMap insertType
-    !self.mReceiverTypeName
+  )
+  !?ioContext.mTypeMap.insertType
+    (!self.mReceiverTypeName,
     !type:structureType
-  ]
+  )
 //-------------------------------------------- GenerateLLVM type definition
-  ioUserLLVMTypeDefinitionListIR += !@userLLVMSructureTypeDefinitionIR {
-    !structureType.llvmTypeName
-    !propertyList
-  }
+  ioUserLLVMTypeDefinitionListIR += !@userLLVMSructureTypeDefinitionIR (
+    !structureType.llvmTypeName,
+    propertyList
+  )
 //----------------- Assignment
 //--- Enter assignment function from references
   let assignmentFunctionLLVMName = assignmentOperatorFuncName (!structureType !structureType)
-  ioRoutineListIR += !@structureTypeAssignFunctionIR {
-    !assignmentFunctionLLVMName.nowhere
-    !isRequired: false
-    !warnsIfUnused: false
-    !structureType
-  }
+  ioRoutineListIR += !@structureTypeAssignFunctionIR (
+    !assignmentFunctionLLVMName.nowhere,
+    !isRequired: false,
+    !warnsIfUnused: false,
+    structureType
+  )
 //--- Enter assignment operator
   let key = assignmentOperatorKey (!structureType !.nowhere !structureType)
-  let operatorUsage = @structureAssignmentOperatorUsage {!structureType}
-  [!?ioContext.mAssignmentOperatorMap insertKey !key !operatorUsage]
+  let operatorUsage = @structureAssignmentOperatorUsage (!structureType)
+  !?ioContext.mAssignmentOperatorMap.insertKey (!key, !operatorUsage)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -645,7 +643,7 @@ class @userLLVMSructureTypeDefinitionIR : @userLLVMTypeDefinitionIR {
 
 //·······················································································································
 
-override proc @userLLVMSructureTypeDefinitionIR generateLLVMType ?!@string ioLLVMcode {
+override proc @userLLVMSructureTypeDefinitionIR.generateLLVMType (?!@string ioLLVMcode ) {
   ioLLVMcode += self.mLLVMDefinedTypeName + " = type {"
   for (* mType) in self.mPropertyList
     do ioLLVMcode += mType.llvmTypeName
@@ -663,16 +661,16 @@ class @structureAssignmentOperatorUsage : @abstractAssignmentOperatorUsage {
 
 //·······················································································································
 
-override proc @structureAssignmentOperatorUsage generateCode
-    ?!@semanticTemporariesStruct ioTemporaries
-    ?!@instructionListIR ioInstructionListIR
-    ?!@allocaList unused ioAllocaList
-    ?let @omnibusType inTargetType
-    ?let @string inTargetLLVMName
-    ?let @objectIR inSourcePossibleReference
-    ?let @location inErrorLocation
+override proc @structureAssignmentOperatorUsage.generateCode
+    (?!@semanticTemporariesStruct ioTemporaries,
+    ?!@instructionListIR ioInstructionListIR,
+    ?!@allocaList unused ioAllocaList,
+    ?let @omnibusType inTargetType,
+    ?let @string inTargetLLVMName,
+    ?let @objectIR inSourcePossibleReference,
+    ?let @location inErrorLocation,
     ?initializedTarget: let @bool inTargetIsInitialized
-{
+) {
   let structTypeName = inTargetType.llvmTypeName
   let arcAssignmentList = [inTargetType arcList !@[]]
   if not inTargetIsInitialized then
@@ -683,10 +681,10 @@ override proc @structureAssignmentOperatorUsage generateCode
         s += ", i32 " + idx
       end
       s += " ; " + propertyName + "\n"
-      [!?ioInstructionListIR appendInstructionAsFreeString !s !@[]]
+      !?ioInstructionListIR.appendInstructionAsFreeString (!s, !@[])
       let propertyTypeLLVMName = propertyType.llvmTypeName
       s = "store " + propertyTypeLLVMName + " null, " + propertyTypeLLVMName + "* " + llvmPropertyPtrName
-      [!?ioInstructionListIR appendInstructionAsFreeString !s !@[]]
+      !?ioInstructionListIR.appendInstructionAsFreeString (!s, !@[])
     end
   end
   switch inSourcePossibleReference
@@ -696,27 +694,27 @@ override proc @structureAssignmentOperatorUsage generateCode
     error (inErrorLocation : "invalid structure assignment «llvmArrayDynamicValues»")
   case llvmArrayStaticValues (3*) :
     error (inErrorLocation : "invalid structure assignment «llvmArrayStaticValues»")
-  case llvmArrayRepeatedStaticValue (3* @uint idx) :
+  case llvmArrayRepeatedStaticValue (3*, @uint idx) :
     let assignmentFunctionLLVMName =  assignmentOperatorFuncName (!inTargetType !inTargetType)
     let s = " call void  @" + assignmentFunctionLLVMName.assemblerRepresentation
         + " (" + inTargetType.llvmTypeName + "* " + inTargetLLVMName
           + ", " + inTargetType.llvmTypeName + "* @gconst." + idx + ")"
-    [!?ioInstructionListIR appendInstructionAsFreeString !s !@[assignmentFunctionLLVMName]]
+    !?ioInstructionListIR.appendInstructionAsFreeString (!s, !@[assignmentFunctionLLVMName])
   case reference (2*) :
     let assignmentFunctionLLVMName = assignmentOperatorFuncName (!inTargetType !inTargetType)
     let s = " call void  @" + assignmentFunctionLLVMName.assemblerRepresentation
         + " (" + inTargetType.llvmTypeName + "* " + inTargetLLVMName
           + ", " + inTargetType.llvmTypeName + "* " + inSourcePossibleReference.llvmName + ")"
-    [!?ioInstructionListIR appendInstructionAsFreeString !s !@[assignmentFunctionLLVMName]]
-  case llvmStructureValue (* sortedOperandValues) :
+    !?ioInstructionListIR.appendInstructionAsFreeString (!s, !@[assignmentFunctionLLVMName])
+  case llvmStructureValue (*, sortedOperandValues) :
     let uniqueValue = ioTemporaries.mTemporaryIndex
     ioTemporaries.mTemporaryIndex += 1
     for (operand idx) in sortedOperandValues do
       let ptr = "%ptr." + uniqueValue + "." + idx
       var s = ptr + " = getelementptr " + structTypeName + ", " + structTypeName + "* " + inTargetLLVMName + ", i32 0, i32 " + idx
-      [!?ioInstructionListIR appendInstructionAsFreeString !s !@[]]
+      !?ioInstructionListIR.appendInstructionAsFreeString (!s, !@[])
       s = "store " + operand.llvmTypeName + " " + operand.llvmName + ", " + operand.llvmTypeName + "* " + ptr
-      [!?ioInstructionListIR appendInstructionAsFreeString !s !@[]]
+      !?ioInstructionListIR.appendInstructionAsFreeString (!s, !@[])
     end
   case literalInteger (2*) :
     error (inErrorLocation : "invalid structure assignment «literalInteger»")
@@ -741,11 +739,11 @@ class @structureTypeAssignFunctionIR : @abstractRoutineIR {
 
 //·······················································································································
 
-override proc @structureTypeAssignFunctionIR llvmCodeGeneration
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
+override proc @structureTypeAssignFunctionIR.llvmCodeGeneration
+  (?!@string ioLLVMcode,
+  ?let @generationContext unused inGenerationContext,
   ?!@generationAdds ioGenerationAdds
-{
+) {
   let arcAssignmentList = [self.mStructureType arcList !@[]]
   let structureTypeLLVMTypeName = self.mStructureType.llvmTypeName
   ioLLVMcode += "define internal void @" + self.mRoutineMangledName.string.assemblerRepresentation

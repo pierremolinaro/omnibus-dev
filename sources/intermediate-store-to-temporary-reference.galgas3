@@ -1,11 +1,11 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-setter @instructionListIR appendStoreTemporaryReference
-  ?let @omnibusType inTargetVarType
-  ?let @string inLLVMName
+mutating proc @instructionListIR.appendStoreTemporaryReference
+  (?let @omnibusType inTargetVarType,
+  ?let @string inLLVMName,
   ?let @objectIR inSourceValue
-{
-  self += !@storeFromTemporaryReferenceIR {!inTargetVarType !inLLVMName !inSourceValue}
+) {
+  self += !@storeFromTemporaryReferenceIR (!inTargetVarType, inLLVMName, inSourceValue)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -18,11 +18,11 @@ class @storeFromTemporaryReferenceIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @storeFromTemporaryReferenceIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
+override proc @storeFromTemporaryReferenceIR.llvmInstructionCode
+  (?!@string ioLLVMcode,
+  ?let @generationContext unused inGenerationContext,
   ?!@generationAdds unused ioGenerationAdds
-{
+) {
   let llvmType = self.mTargetVarType.llvmTypeName
   ioLLVMcode += "  store " + llvmType + " " + self.mSourceValue.llvmName + ", " + llvmType + "* " + self.mLLVMTargetVarName + "\n"
 }

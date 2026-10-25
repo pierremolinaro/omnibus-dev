@@ -20,11 +20,11 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <instructionList> ?!@ast ioAST !@instructionListAST outInstructionList {
+  rule <instructionList> (?!@ast ioAST ,!@instructionListAST outInstructionList ) {
     outInstructionList = @[]
     repeat
     while
-      <instruction> !?ioAST !?outInstructionList
+      <instruction> (!?ioAST, !?outInstructionList)
 //      $;$
 //     select
 //        $;$
@@ -45,15 +45,15 @@ syntax extension omnibus_syntax {
 //!  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract proc @instructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph
+abstract proc @instructionAST noteInstructionTypesInPrecedenceGraph (?!@semanticTypePrecedenceGraph ioGraph)
 
 //·······················································································································
 
 proc @instructionListAST noteInstructionListTypesInPrecedenceGraph
-  ?!@semanticTypePrecedenceGraph ioGraph
-{
+  (?!@semanticTypePrecedenceGraph ioGraph
+) {
   for (mInstruction) in self do
-    [mInstruction noteInstructionTypesInPrecedenceGraph !?ioGraph]
+    mInstruction.noteInstructionTypesInPrecedenceGraph (!?ioGraph)
   end
 }
 
@@ -69,76 +69,76 @@ boolset @routineAttributes {
 //·······················································································································
 
 abstract proc @instructionAST instructionSemanticAnalysis
-  ?self:let @omnibusType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  (?self:let @omnibusType inSelfType,
+  ?routineAttributes:let @routineAttributes inRoutineAttributes,
+  ?context:let @semanticContext inContext,
+  ?mode:let @mode inMode,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap,
+  ?!alloca:@allocaList ioAllocaList,
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList)
 
 //·······················································································································
 
 proc @instructionListAST analyzeBranchInstructionList
-  ?self:let @omnibusType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?endOfInstructionList:@location inEndOfInstructionList
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
+  (?self:let @omnibusType inSelfType,
+  ?routineAttributes:let @routineAttributes inRoutineAttributes,
+  ?endOfInstructionList:@location inEndOfInstructionList,
+  ?context:let @semanticContext inContext,
+  ?mode:let @mode inMode,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap,
+  ?!alloca:@allocaList ioAllocaList,
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-{
+) {
 //--- Begin branch
-  [!?ioUniversalMap openBranch]
+  !?ioUniversalMap.openBranch ()
   for (mInstruction) in self do
-    [!?ioInstructionGenerationList appendSourceLineComment !mInstruction.mInstructionLocation]
-    [mInstruction instructionSemanticAnalysis
-      !self:inSelfType
-      !routineAttributes:inRoutineAttributes
-      !context:inContext
-      !mode:inMode
-      !?temporary:ioTemporaries
-      !?staticEntityMap:ioStaticEntityMap
-      !?variableMap:ioUniversalMap
-      !?alloca:ioAllocaList
+    !?ioInstructionGenerationList.appendSourceLineComment (!mInstruction.mInstructionLocation)
+    mInstruction.instructionSemanticAnalysis
+      (!self:inSelfType,
+      !routineAttributes:inRoutineAttributes,
+      !context:inContext,
+      !mode:inMode,
+      !?temporary:ioTemporaries,
+      !?staticEntityMap:ioStaticEntityMap,
+      !?variableMap:ioUniversalMap,
+      !?alloca:ioAllocaList,
       !?instructionListIR:ioInstructionGenerationList
-    ]
+    )
   end
 //--- End branch
-  [!?ioUniversalMap closeBranch !inEndOfInstructionList]
+  !?ioUniversalMap.closeBranch (!inEndOfInstructionList)
 }
 
 //·······················································································································
 
 proc @instructionListAST analyzeRoutineInstructionList
-  ?self:let @omnibusType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
+  (?self:let @omnibusType inSelfType,
+  ?routineAttributes:let @routineAttributes inRoutineAttributes,
+  ?context:let @semanticContext inContext,
+  ?mode:let @mode inMode,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap,
+  ?!alloca:@allocaList ioAllocaList,
   ?!generatedCode:@instructionListIR ioInstructionGenerationList
-{
+) {
   for (mInstruction) in self do
-    [!?ioInstructionGenerationList appendSourceLineComment !mInstruction.mInstructionLocation]
-    [mInstruction instructionSemanticAnalysis
-      !self:inSelfType
-      !routineAttributes:inRoutineAttributes
-      !context:inContext
-      !mode:inMode
-      !?temporary:ioTemporaries
-      !?staticEntityMap:ioStaticEntityMap
-      !?variableMap:ioUniversalMap
-      !?alloca:ioAllocaList
+    !?ioInstructionGenerationList.appendSourceLineComment (!mInstruction.mInstructionLocation)
+    mInstruction.instructionSemanticAnalysis
+      (!self:inSelfType,
+      !routineAttributes:inRoutineAttributes,
+      !context:inContext,
+      !mode:inMode,
+      !?temporary:ioTemporaries,
+      !?staticEntityMap:ioStaticEntityMap,
+      !?variableMap:ioUniversalMap,
+      !?alloca:ioAllocaList,
       !?instructionListIR:ioInstructionGenerationList
-    ]
+    )
   end
 }
 
@@ -147,16 +147,16 @@ proc @instructionListAST analyzeRoutineInstructionList
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc @instructionListIR instructionListLLVMCode
-  ?!@string ioLLVMcode
-  ?let @generationContext inGenerationContext
+  (?!@string ioLLVMcode,
+  ?let @generationContext inGenerationContext,
   ?!@generationAdds ioGenerationAdds
-{
+) {
   for (mInstructionGeneration) in self do
-    [mInstructionGeneration llvmInstructionCode
-      !?ioLLVMcode
-      !inGenerationContext
+    mInstructionGeneration.llvmInstructionCode
+      (!?ioLLVMcode,
+      !inGenerationContext,
       !?ioGenerationAdds
-    ]
+    )
   end
 }
 

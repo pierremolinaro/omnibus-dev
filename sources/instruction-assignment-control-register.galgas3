@@ -4,7 +4,7 @@
 
 enum @controlRegisterAssignmentOperatorKind {
   case assignment
-  case assignmentWithOperator (@omnibusInfixOperator infixOperator @location operatorLocation)
+  case assignmentWithOperator (@omnibusInfixOperator infixOperator, @location operatorLocation)
 }
 
 //·······················································································································
@@ -23,26 +23,26 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
-    <control_register_lvalue> !?ioAST ?let registerLValue
+  rule <instruction> (?!@ast ioAST ,?!@instructionListAST ioInstructionList ) {
+    <control_register_lvalue> (!?ioAST, ?let registerLValue)
   //--- Assignment or assignment operator
     let @controlRegisterAssignmentOperatorKind assignmentKind
     select
       $=$
       assignmentKind = .assignment
     or
-      <assignment_combined_with_operator> ?let infixOperator ?let operatorLocation
-      assignmentKind = .assignmentWithOperator {!infixOperator:infixOperator !operatorLocation:operatorLocation}
+      <assignment_combined_with_operator> (?let infixOperator, ?let operatorLocation)
+      assignmentKind = .assignmentWithOperator (!infixOperator:infixOperator, !operatorLocation:operatorLocation)
     end
   //--- Source expression
-    <expression> !?ioAST ?let sourceExpression
+    <expression> (!?ioAST, ?let sourceExpression)
   //---
-    ioInstructionList += !@controlRegisterAssignmentInstructionAST {
-      !registerLValue.mRegisterGroupName.location
-      !registerLValue
-      !assignmentKind
-      !sourceExpression
-    }
+    ioInstructionList += !@controlRegisterAssignmentInstructionAST (
+      !registerLValue.mRegisterGroupName.location,
+      registerLValue,
+      assignmentKind,
+      sourceExpression
+    )
   }
 
   //·····················································································································
@@ -53,64 +53,64 @@ syntax extension omnibus_syntax {
 //!  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @controlRegisterAssignmentInstructionAST noteInstructionTypesInPrecedenceGraph
-  ?!@semanticTypePrecedenceGraph ioGraph
-{
-  [self.mControlRegisterLValue noteExpressionTypesInPrecedenceGraph !?ioGraph]
-  [self.mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+override proc @controlRegisterAssignmentInstructionAST.noteInstructionTypesInPrecedenceGraph
+  (?!@semanticTypePrecedenceGraph ioGraph
+) {
+  self.mControlRegisterLValue.noteExpressionTypesInPrecedenceGraph (!?ioGraph)
+  self.mSourceExpression.noteExpressionTypesInPrecedenceGraph (!?ioGraph)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //!  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @controlRegisterAssignmentInstructionAST instructionSemanticAnalysis
-  ?self:let @omnibusType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
+override proc @controlRegisterAssignmentInstructionAST.instructionSemanticAnalysis
+  (?self:let @omnibusType inSelfType,
+  ?routineAttributes:let @routineAttributes inRoutineAttributes,
+  ?context:let @semanticContext inContext,
+  ?mode:let @mode inMode,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap,
+  ?!alloca:@allocaList ioAllocaList,
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-{
+) {
 //-------------------- Analyze control register LValue
-  [self.mControlRegisterLValue controlRegisterLValueSemanticAnalysis
-    !writeAccess:true
-    !self: inSelfType
-    !routineAttributes: inRoutineAttributes
-    !context: inContext
-    !mode: inMode
-    !?temporary: ioTemporaries
-    !?staticEntityMap: ioStaticEntityMap
-    !?variableMap: ioUniversalMap
-    !?alloca: ioAllocaList
-    !?instructionListIR: ioInstructionGenerationList
-    ?registerType:let registerType
-    ?registerBitCount:*
-    ?sliceMap:*
+  self.mControlRegisterLValue.controlRegisterLValueSemanticAnalysis
+    (!writeAccess:true,
+    !self: inSelfType,
+    !routineAttributes: inRoutineAttributes,
+    !context: inContext,
+    !mode: inMode,
+    !?temporary: ioTemporaries,
+    !?staticEntityMap: ioStaticEntityMap,
+    !?variableMap: ioUniversalMap,
+    !?alloca: ioAllocaList,
+    !?instructionListIR: ioInstructionGenerationList,
+    ?registerType:let registerType,
+    ?registerBitCount:*,
+    ?sliceMap:*,
     ?llvmRegisterAddressName:let llvmRegAddressName
-  ]
+  )
 //-------------------- Analyze source expression
-  [self.mSourceExpression analyzeExpression
-    !self:inSelfType
-    !routineAttributes:inRoutineAttributes
-    !optionalTargetType:registerType
-    !context:inContext
-    !mode:inMode
-    !?temporary:ioTemporaries
-    !?staticEntityMap:ioStaticEntityMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:ioInstructionGenerationList
+  self.mSourceExpression.analyzeExpression
+    (!self:inSelfType,
+    !routineAttributes:inRoutineAttributes,
+    !optionalTargetType:registerType,
+    !context:inContext,
+    !mode:inMode,
+    !?temporary:ioTemporaries,
+    !?staticEntityMap:ioStaticEntityMap,
+    !?variableMap:ioUniversalMap,
+    !?alloca:ioAllocaList,
+    !?instructionListIR:ioInstructionGenerationList,
     ?result:@objectIR sourceIR
-  ]
+  )
 //-------------------- Load source expression
-  [!?ioInstructionGenerationList appendLoadWhenReference
-    !?ioTemporaries
+  !?ioInstructionGenerationList.appendLoadWhenReference
+    (!?ioTemporaries,
     !?sourceIR
-  ]
+  )
 //-------------------- Perform assignment
   let t = sourceIR.type
   if not t.copyable then
@@ -118,26 +118,26 @@ override proc @controlRegisterAssignmentInstructionAST instructionSemanticAnalys
   else
     switch self.mAssignmentKind
     case assignment :
-      [!?ioInstructionGenerationList appendStoreIndirectVolatileRegister !registerType !llvmRegAddressName !sourceIR]
-    case assignmentWithOperator (infixOperator operatorLocation) :
+      !?ioInstructionGenerationList.appendStoreIndirectVolatileRegister (!registerType, !llvmRegAddressName, !sourceIR)
+    case assignmentWithOperator (infixOperator, operatorLocation) :
     //--- Load register
-      getNewTempValue (!registerType !?ioTemporaries ?let registerValueIR)
-      [!?ioInstructionGenerationList appendLoadIndirectVolatileRegister !registerValueIR !llvmRegAddressName]
+      getNewTempValue (!registerType, !?ioTemporaries, ?let registerValueIR)
+      !?ioInstructionGenerationList.appendLoadIndirectVolatileRegister (!registerValueIR, !llvmRegAddressName)
     //--- Perform operation
       let key = infixOperatorMapKey (!registerType !infixOperator !operatorLocation !sourceIR.type)
-      [inContext.mInfixOperatorMap searchKey !key ?let resultType ?let operatorUsage]
-      [operatorUsage generateCode
-         !registerValueIR
-         !operatorLocation
-         !sourceIR
-         !resultType
-         !?ioTemporaries
-         !?ioAllocaList
-         !?ioInstructionGenerationList
+      inContext.mInfixOperatorMap.searchKey (!key, ?let resultType, ?let operatorUsage)
+      operatorUsage.generateCode
+         (!registerValueIR,
+         !operatorLocation,
+         !sourceIR,
+         !resultType,
+         !?ioTemporaries,
+         !?ioAllocaList,
+         !?ioInstructionGenerationList,
          ?let operationResult
-      ]
+      )
     //--- Store register
-      [!?ioInstructionGenerationList appendStoreIndirectVolatileRegister !registerType !llvmRegAddressName !operationResult]
+      !?ioInstructionGenerationList.appendStoreIndirectVolatileRegister (!registerType, !llvmRegAddressName, !operationResult)
     end
   end
 }

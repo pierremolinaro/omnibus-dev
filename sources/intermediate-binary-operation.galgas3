@@ -40,15 +40,15 @@ enum @llvmBinaryOperation {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-setter @instructionListIR appendBinaryOperation
-  ?let @objectIR inTarget
-  ?let @omnibusType inOperandType
-  ?let @location inLocation
-  ?let @objectIR inLeft
-  ?let @llvmBinaryOperation inOperation
+mutating proc @instructionListIR.appendBinaryOperation
+  (?let @objectIR inTarget,
+  ?let @omnibusType inOperandType,
+  ?let @location inLocation,
+  ?let @objectIR inLeft,
+  ?let @llvmBinaryOperation inOperation,
   ?let @objectIR inRight
-{
-  self += !@binaryOperationIR {!inTarget !inOperandType !inLeft !inOperation !inRight !inLocation}
+) {
+  self += !@binaryOperationIR (!inTarget, inOperandType, inLeft, inOperation, inRight, inLocation)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -64,10 +64,10 @@ class @binaryOperationIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @binaryOperationIR enterAccessibleEntities
-  ?!@stringset ioInvokedRoutineSet
+override proc @binaryOperationIR.enterAccessibleEntities
+  (?!@stringset ioInvokedRoutineSet,
   ?!@uint unused ioMaxBranchOfOnInstructions
-{
+) {
   if not [option omnibus_options.noPanicGeneration value] then
     ioInvokedRoutineSet ++= panicRoutineNameForLocationFile (!self.mLocation)
   end
@@ -76,12 +76,12 @@ override proc @binaryOperationIR enterAccessibleEntities
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc @binaryOperationIR enterCodeForOverflowOperation
-  ?let @string inOperation
-  ?let @bigint inPanicCode
-  ?!@string ioLLVMcode
-  ?let @generationContext inGenerationContext
+  (?let @string inOperation,
+  ?let @bigint inPanicCode,
+  ?!@string ioLLVMcode,
+  ?let @generationContext inGenerationContext,
   ?!@generationAdds ioGenerationAdds
-{
+) {
   let llvmType = self.mOperandType.llvmTypeName
   ioLLVMcode += "  " + self.mTarget.llvmName + ".r = call {" + llvmType + ", i1} @llvm." + inOperation + ".with.overflow." + llvmType
   ioLLVMcode += " (" + llvmType + " " + self.mLeft.llvmName + ", " + llvmType + " " + self.mRight.llvmName + ")\n"
@@ -103,12 +103,12 @@ proc @binaryOperationIR enterCodeForOverflowOperation
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc @binaryOperationIR enterCodeForDivisionWithZeroDivisorPanic
-  ?let @string inOperation
-  ?let @bigint inPanicCode
-  ?!@string ioLLVMcode
-  ?let @generationContext inGenerationContext
+  (?let @string inOperation,
+  ?let @bigint inPanicCode,
+  ?!@string ioLLVMcode,
+  ?let @generationContext inGenerationContext,
   ?!@generationAdds ioGenerationAdds
-{
+) {
   let llvmType = self.mOperandType.llvmTypeName
   ioLLVMcode += "  " + self.mRight.llvmName + ".isZero = icmp eq " + llvmType + " " + self.mRight.llvmName + ", 0\n"
   let labelName = "label." + ioGenerationAdds.mUniqueIndex
@@ -125,11 +125,11 @@ proc @binaryOperationIR enterCodeForDivisionWithZeroDivisorPanic
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @binaryOperationIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext inGenerationContext
+override proc @binaryOperationIR.llvmInstructionCode
+  (?!@string ioLLVMcode,
+  ?let @generationContext inGenerationContext,
   ?!@generationAdds ioGenerationAdds
-{
+) {
   let llvmType = self.mOperandType.llvmTypeName
   switch self.mOperation
   case addNoOVF :
@@ -147,85 +147,85 @@ override proc @binaryOperationIR llvmInstructionCode
   case sremNoOVF :
     ioLLVMcode += "  " + self.mTarget.llvmName + " = srem " + llvmType + " " + self.mLeft.llvmName + ", " + self.mRight.llvmName + "\n"
   case uaddOVF :
-    [self enterCodeForOverflowOperation
-      !"uadd"
-      !panicCodeForUnsignedAdditionOverflow ()
-      !?ioLLVMcode
-      !inGenerationContext
+    self.enterCodeForOverflowOperation
+      (!"uadd",
+      !panicCodeForUnsignedAdditionOverflow (),
+      !?ioLLVMcode,
+      !inGenerationContext,
       !?ioGenerationAdds
-    ]
+    )
   case saddOVF :
-    [self enterCodeForOverflowOperation
-      !"sadd"
-      !panicCodeForSignedAdditionOverflow ()
-      !?ioLLVMcode
-      !inGenerationContext
+    self.enterCodeForOverflowOperation
+      (!"sadd",
+      !panicCodeForSignedAdditionOverflow (),
+      !?ioLLVMcode,
+      !inGenerationContext,
       !?ioGenerationAdds
-    ]
+    )
   case usubOVF :
-    [self enterCodeForOverflowOperation
-      !"usub"
-      !panicCodeForUnsignedSubtractOverflow ()
-      !?ioLLVMcode
-      !inGenerationContext
+    self.enterCodeForOverflowOperation
+      (!"usub",
+      !panicCodeForUnsignedSubtractOverflow (),
+      !?ioLLVMcode,
+      !inGenerationContext,
       !?ioGenerationAdds
-    ]
+    )
   case ssubOVF :
-    [self enterCodeForOverflowOperation
-      !"ssub"
-      !panicCodeForSignedSubtractOverflow ()
-      !?ioLLVMcode
-      !inGenerationContext
+    self.enterCodeForOverflowOperation
+      (!"ssub",
+      !panicCodeForSignedSubtractOverflow (),
+      !?ioLLVMcode,
+      !inGenerationContext,
       !?ioGenerationAdds
-    ]
+    )
   case umulOVF :
-    [self enterCodeForOverflowOperation
-      !"umul"
-      !panicCodeForUnsignedMultiplicationOverflow ()
-      !?ioLLVMcode
-      !inGenerationContext
+    self.enterCodeForOverflowOperation
+      (!"umul",
+      !panicCodeForUnsignedMultiplicationOverflow (),
+      !?ioLLVMcode,
+      !inGenerationContext,
       !?ioGenerationAdds
-    ]
+    )
   case smulOVF :
-    [self enterCodeForOverflowOperation
-      !"smul"
-      !panicCodeForSignedMultiplicationOverflow ()
-      !?ioLLVMcode
-      !inGenerationContext
+    self.enterCodeForOverflowOperation
+      (!"smul",
+      !panicCodeForSignedMultiplicationOverflow (),
+      !?ioLLVMcode,
+      !inGenerationContext,
       !?ioGenerationAdds
-    ]
+    )
   case udivOVF :
-    [self enterCodeForDivisionWithZeroDivisorPanic
-      !"udiv"
-      !panicCodeForUnsignedDivisionByZero ()
-      !?ioLLVMcode
-      !inGenerationContext
+    self.enterCodeForDivisionWithZeroDivisorPanic
+      (!"udiv",
+      !panicCodeForUnsignedDivisionByZero (),
+      !?ioLLVMcode,
+      !inGenerationContext,
       !?ioGenerationAdds
-    ]
+    )
   case sdivOVF :
-    [self enterCodeForDivisionWithZeroDivisorPanic
-      !"sdiv"
-      !panicCodeForSignedDivisionByZero ()
-      !?ioLLVMcode
-      !inGenerationContext
+    self.enterCodeForDivisionWithZeroDivisorPanic
+      (!"sdiv",
+      !panicCodeForSignedDivisionByZero (),
+      !?ioLLVMcode,
+      !inGenerationContext,
       !?ioGenerationAdds
-    ]
+    )
   case uremOVF :
-    [self enterCodeForDivisionWithZeroDivisorPanic
-      !"urem"
-      !panicCodeForUnsignedRemainderByZero ()
-      !?ioLLVMcode
-      !inGenerationContext
+    self.enterCodeForDivisionWithZeroDivisorPanic
+      (!"urem",
+      !panicCodeForUnsignedRemainderByZero (),
+      !?ioLLVMcode,
+      !inGenerationContext,
       !?ioGenerationAdds
-    ]
+    )
   case sremOVF :
-    [self enterCodeForDivisionWithZeroDivisorPanic
-      !"srem"
-      !panicCodeForSignedRemainderByZero ()
-      !?ioLLVMcode
-      !inGenerationContext
+    self.enterCodeForDivisionWithZeroDivisorPanic
+      (!"srem",
+      !panicCodeForSignedRemainderByZero (),
+      !?ioLLVMcode,
+      !inGenerationContext,
       !?ioGenerationAdds
-    ]
+    )
   case and :
     ioLLVMcode += "  " + self.mTarget.llvmName + " = and " + llvmType + " " + self.mLeft.llvmName + ", " + self.mRight.llvmName + "\n"
   case ior :

@@ -23,40 +23,40 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
+  rule <instruction> (?!@ast ioAST ,?!@instructionListAST ioInstructionList ) {
     $var$
-    $identifier$ ?let varName
+    $identifier$ (?let varName)
     $=$
-    <expression> !?ioAST ?let @expressionAST expression
-    ioInstructionList += !@varInstructionWithAssignmentAST {
-      !varName.location
-      !varName
-      !"".here
-      !expression
-    }
+    <expression> (!?ioAST, ?let @expressionAST expression)
+    ioInstructionList += !@varInstructionWithAssignmentAST (
+      !varName.location,
+      varName,
+      "".here,
+      expression
+    )
   }
 
   //·····················································································································
 
-  rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
+  rule <instruction> (?!@ast ioAST ,?!@instructionListAST ioInstructionList ) {
     $var$
-    $identifier$ ?let varName
-    <type_definition> !?ioAST ?let typeName
-    ioInstructionList += !@varDeclarationInstructionAST {
-      !varName.location
-      !varName
-      !typeName
-    }
+    $identifier$ (?let varName)
+    <type_definition> (!?ioAST, ?let typeName)
+    ioInstructionList += !@varDeclarationInstructionAST (
+      !varName.location,
+      varName,
+      typeName
+    )
     select
     or
       $=$
-      <expression> !?ioAST ?let @expressionAST sourceExpression
-      let assignmentTargetAST = @LValueAST {!varName !.noOperand}
-      ioInstructionList += !@assignmentInstructionAST {
-       !assignmentTargetAST.mIdentifier.location
-       !assignmentTargetAST
-       !sourceExpression
-     }
+      <expression> (!?ioAST, ?let @expressionAST sourceExpression)
+      let assignmentTargetAST = @LValueAST (!varName, .noOperand)
+      ioInstructionList += !@assignmentInstructionAST (
+       !assignmentTargetAST.mIdentifier.location,
+       assignmentTargetAST,
+       sourceExpression
+     )
     end
   }
 
@@ -68,52 +68,52 @@ syntax extension omnibus_syntax {
 //  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @varInstructionWithAssignmentAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @varInstructionWithAssignmentAST.noteInstructionTypesInPrecedenceGraph (?!@semanticTypePrecedenceGraph ioGraph ) {
   if self.mOptionalTypeName.string != "" then
-    [!?ioGraph noteNode !self.mOptionalTypeName]
+    !?ioGraph.noteNode (!self.mOptionalTypeName)
   end
-  [self.mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  self.mSourceExpression.noteExpressionTypesInPrecedenceGraph (!?ioGraph)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @varDeclarationInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [!?ioGraph noteNode !self.mTypeName]
+override proc @varDeclarationInstructionAST.noteInstructionTypesInPrecedenceGraph (?!@semanticTypePrecedenceGraph ioGraph ) {
+  !?ioGraph.noteNode (!self.mTypeName)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @varInstructionWithAssignmentAST instructionSemanticAnalysis
-  ?self:let @omnibusType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
+override proc @varInstructionWithAssignmentAST.instructionSemanticAnalysis
+  (?self:let @omnibusType inSelfType,
+  ?routineAttributes:let @routineAttributes inRoutineAttributes,
+  ?context:let @semanticContext inContext,
+  ?mode:let @mode inMode,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap,
+  ?!alloca:@allocaList ioAllocaList,
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-{
+) {
   let @omnibusType targetType = if self.mOptionalTypeName.string == ""
     then voidType ()
     else [inContext.mTypeMap searchKey !self.mOptionalTypeName].type
   end
 //--- Analyze source expression
-  [self.mSourceExpression analyzeExpression
-    !self:inSelfType
-    !routineAttributes:inRoutineAttributes
-    !optionalTargetType:targetType
-    !context:inContext
-    !mode:inMode
-    !?temporary:ioTemporaries
-    !?staticEntityMap:ioStaticEntityMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:ioInstructionGenerationList
+  self.mSourceExpression.analyzeExpression
+    (!self:inSelfType,
+    !routineAttributes:inRoutineAttributes,
+    !optionalTargetType:targetType,
+    !context:inContext,
+    !mode:inMode,
+    !?temporary:ioTemporaries,
+    !?staticEntityMap:ioStaticEntityMap,
+    !?variableMap:ioUniversalMap,
+    !?alloca:ioAllocaList,
+    !?instructionListIR:ioInstructionGenerationList,
     ?result:let @objectIR sourcePossibleReference
-  ]
+  )
   let result = checkAssignmentCompatibility (
     !inContext.mAssignmentOperatorMap
     !source:sourcePossibleReference
@@ -122,37 +122,37 @@ override proc @varInstructionWithAssignmentAST instructionSemanticAnalysis
     !staticTypeAllowed:false
   )
 //--- Declare local variable
-  let omnibusLocalVariableName = @lstring {!self.mVarName.string + "." + ioTemporaries.mTemporaryIndex !self.mVarName}
+  let omnibusLocalVariableName = @lstring (!self.mVarName.string + "." + ioTemporaries.mTemporaryIndex, self.mVarName)
   ioTemporaries.mTemporaryIndex += 1
-  [!?ioUniversalMap insertLocalVariable !self.mVarName !result.type !omnibusLocalVariableName !.hasUnreadValue !false]
+  !?ioUniversalMap.insertLocalVariable (!self.mVarName, !result.type, !omnibusLocalVariableName, !.hasUnreadValue, !false)
 //--- Code generation
   ioAllocaList += !llvmNameForLocalVariable (!omnibusLocalVariableName) !result.type !false
 //--- Assignment generation
-  [!?ioInstructionGenerationList appendAssignmentIR
-    !?ioTemporaries
-    !inContext.mAssignmentOperatorMap
-    !?ioAllocaList
-    !result.type
-    !llvmNameForLocalVariable (!omnibusLocalVariableName)
-    !sourcePossibleReference
-    !self.mVarName
+  !?ioInstructionGenerationList.appendAssignmentIR
+    (!?ioTemporaries,
+    !inContext.mAssignmentOperatorMap,
+    !?ioAllocaList,
+    !result.type,
+    !llvmNameForLocalVariable (!omnibusLocalVariableName),
+    !sourcePossibleReference,
+    !self.mVarName,
     !initializedTarget: false
-  ]
+  )
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @varDeclarationInstructionAST instructionSemanticAnalysis
-  ?self:let @omnibusType unused inSelfType
-  ?routineAttributes:let @routineAttributes unused inRoutineAttributes
-  ?context:let @semanticContext inContext
-  ?mode:let @mode unused inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
+override proc @varDeclarationInstructionAST.instructionSemanticAnalysis
+  (?self:let @omnibusType unused inSelfType,
+  ?routineAttributes:let @routineAttributes unused inRoutineAttributes,
+  ?context:let @semanticContext inContext,
+  ?mode:let @mode unused inMode,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap,
+  ?!alloca:@allocaList ioAllocaList,
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
-{
+) {
   let targetType = [inContext.mTypeMap searchKey !self.mTypeName].type
 //---
   if targetType.isCompileTimeType then
@@ -161,9 +161,9 @@ override proc @varDeclarationInstructionAST instructionSemanticAnalysis
     error (self.mVarName : "$" + targetType.omnibusTypeDescriptionName + " type is not instanciable")
   end
 //--- Declare local variable
-  let omnibusName = @lstring {!self.mVarName.string + "." + ioTemporaries.mTemporaryIndex !self.mVarName}
+  let omnibusName = @lstring (!self.mVarName.string + "." + ioTemporaries.mTemporaryIndex, self.mVarName)
   ioTemporaries.mTemporaryIndex += 1
-  [!?ioUniversalMap insertLocalVariable !self.mVarName !targetType !omnibusName !.noValue !true]
+  !?ioUniversalMap.insertLocalVariable (!self.mVarName, !targetType, !omnibusName, !.noValue, !true)
 //--- Code generation
   ioAllocaList += !llvmNameForLocalVariable (!omnibusName) !targetType !false
 }

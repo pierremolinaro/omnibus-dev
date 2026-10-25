@@ -1,13 +1,13 @@
 
-setter @instructionListIR appendComputeSubscriptedVolatileRegisterAddress
-  ?!@semanticTemporariesStruct ioTemporaries
-  !@string outLLVMResultVarName
-  ?let @objectIR inIndexIR
-  ?let @string inAddressLLVMname
+mutating proc @instructionListIR.appendComputeSubscriptedVolatileRegisterAddress
+  (?!@semanticTemporariesStruct ioTemporaries,
+  !@string outLLVMResultVarName,
+  ?let @objectIR inIndexIR,
+  ?let @string inAddressLLVMname,
   ?let @uint inElementSize
-{
-  [!?ioTemporaries newTempLLVMVar ?outLLVMResultVarName]
-  self += !@computeSubscriptedVolatileRegisterAddress {!outLLVMResultVarName !inIndexIR !inAddressLLVMname !inElementSize}
+) {
+  !?ioTemporaries.newTempLLVMVar (?outLLVMResultVarName)
+  self += !@computeSubscriptedVolatileRegisterAddress (!outLLVMResultVarName, inIndexIR, inAddressLLVMname, inElementSize)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -21,16 +21,16 @@ class @computeSubscriptedVolatileRegisterAddress : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @computeSubscriptedVolatileRegisterAddress llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
+override proc @computeSubscriptedVolatileRegisterAddress.llvmInstructionCode
+  (?!@string ioLLVMcode,
+  ?let @generationContext unused inGenerationContext,
   ?!@generationAdds ioGenerationAdds
-{
+) {
   let registerIndexName = "%register.index." + ioGenerationAdds.mUniqueIndex
   let scriptedRegisterOffsetName = "%register.offset." + ioGenerationAdds.mUniqueIndex
   ioGenerationAdds.mUniqueIndex += 1
 //--- Needs to perform an extend to i32 ?
-  [self.mIndexResult.type.kind extractInteger ?3* ?bitCount:let bitCount]
+  self.mIndexResult.type.kind.extractInteger (?3*, ?bitCount:let bitCount)
   if bitCount < 32 then
     ioLLVMcode += "  " + registerIndexName + " = zext " + self.mIndexResult.llvmTypeName
                + " " + self.mIndexResult.llvmName + " to i32 ; extend index to i32\n"

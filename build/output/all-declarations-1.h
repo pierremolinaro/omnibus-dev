@@ -1778,7 +1778,7 @@ void extensionMethod_llvmPrototypeGeneration (const class GGS_externProcedureMap
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@instructionListIR appendCopyFromReferences'
+//Extension mutating proc '@instructionListIR appendCopyFromReferences'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -2849,7 +2849,7 @@ extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_integerBuiltinFunction
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@instructionListIR appendStoreTemporaryReference'
+//Extension mutating proc '@instructionListIR appendStoreTemporaryReference'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -3053,7 +3053,7 @@ extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_storeFromTemporaryRefe
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@instructionListIR appendGetComputedPropertyValue'
+//Extension mutating proc '@instructionListIR appendGetComputedPropertyValue'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -3185,7 +3185,7 @@ class cPtr_getComputedPropertyValueIR : public cPtr_abstractInstructionIR {
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@semanticTemporariesStruct newTempLLVMVar'
+//Extension mutating proc '@semanticTemporariesStruct newTempLLVMVar'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -4825,7 +4825,7 @@ extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_primaryInExpressionAST
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@instructionListIR appendStoreIndirectVolatileRegister'
+//Extension mutating proc '@instructionListIR appendStoreIndirectVolatileRegister'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -10041,7 +10041,7 @@ extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_addressofInstructionIR
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@instructionListIR appendLoadFromReference'
+//Extension mutating proc '@instructionListIR appendLoadFromReference'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -10268,7 +10268,7 @@ class Lexique_omnibus_5F_lexique : public Lexique {
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@instructionListIR testArrayIndex'
+//Extension mutating proc '@instructionListIR testArrayIndex'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -10672,7 +10672,7 @@ extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_literalStringInExpress
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@instructionListIR appendBoolToUInt'
+//Extension mutating proc '@instructionListIR appendBoolToUInt'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -10868,7 +10868,7 @@ extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_boolToUIntIR_2E_weak ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@instructionListIR appendShortCircuitAndOperation'
+//Extension mutating proc '@instructionListIR appendShortCircuitAndOperation'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -13209,7 +13209,7 @@ void callExtensionMethod_computeCompileTimeExpression (class cPtr_ctExpressionAS
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@instructionListIR appendStoreComputedPropertyValue'
+//Extension mutating proc '@instructionListIR appendStoreComputedPropertyValue'
 //
 //--------------------------------------------------------------------------------------------------
 

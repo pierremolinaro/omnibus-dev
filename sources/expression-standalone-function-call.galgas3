@@ -16,10 +16,10 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
-    $identifier$ ?let standaloneFunctionName
-    <effective_parameters> !?ioAST ?let arguments ?let endOfArguments
-    outExpression = @standaloneFunctionInExpressionAST {!standaloneFunctionName !arguments !endOfArguments}
+  rule <primary> (?!@ast ioAST ,!@expressionAST outExpression ) {
+    $identifier$ (?let standaloneFunctionName)
+    <effective_parameters> (!?ioAST, ?let arguments, ?let endOfArguments)
+    outExpression = @standaloneFunctionInExpressionAST (!standaloneFunctionName, arguments, endOfArguments)
   }
 
   //·····················································································································
@@ -30,19 +30,19 @@ syntax extension omnibus_syntax {
 //! PRECEDENCE GRAPH FROM EXPRESSION
 //-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @standaloneFunctionInExpressionAST addDependenceEdgeForStaticExpression
-  ?let @lstring inConstantName
+override proc @standaloneFunctionInExpressionAST.addDependenceEdgeForStaticExpression
+  (?let @lstring inConstantName,
   ?!@semanticTypePrecedenceGraph ioGraph
-{
-  [!?ioGraph addEdge !from: inConstantName !to: self.mStandaloneFunctionName]
+) {
+  !?ioGraph.addEdge (!from: inConstantName, !to: self.mStandaloneFunctionName)
   for (mEffectiveParameterKind *) in self.mArguments do
     switch mEffectiveParameterKind
     case input (*):
-    case inputWithType (* @lstring typeName *) :
+    case inputWithType (*, @lstring typeName, *) :
       if typeName.string != "" then
-        [!?ioGraph noteNode !typeName]
+        !?ioGraph.noteNode (!typeName)
       end
-    case output (expression *) : [expression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+    case output (expression, *) : expression.addDependenceEdgeForStaticExpression (!inConstantName, !?ioGraph)
     case outputInput (*) :
     case outputInputSelfVariable (*) :
     end
@@ -53,17 +53,17 @@ override proc @standaloneFunctionInExpressionAST addDependenceEdgeForStaticExpre
 //! NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @standaloneFunctionInExpressionAST noteExpressionTypesInPrecedenceGraph
-  ?!@semanticTypePrecedenceGraph ioGraph
-{
+override proc @standaloneFunctionInExpressionAST.noteExpressionTypesInPrecedenceGraph
+  (?!@semanticTypePrecedenceGraph ioGraph
+) {
   for (mEffectiveParameterKind *) in self.mArguments do
     switch mEffectiveParameterKind
     case input (*):
-    case inputWithType (* @lstring typeName *) :
+    case inputWithType (*, @lstring typeName, *) :
       if typeName.string != "" then
-        [!?ioGraph noteNode !typeName]
+        !?ioGraph.noteNode (!typeName)
       end
-    case output (expression *) : [expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+    case output (expression, *) : expression.noteExpressionTypesInPrecedenceGraph (!?ioGraph)
     case outputInput (*) :
     case outputInputSelfVariable (*) :
     end
@@ -74,19 +74,19 @@ override proc @standaloneFunctionInExpressionAST noteExpressionTypesInPrecedence
 //! SEMANTICS
 //-——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @standaloneFunctionInExpressionAST analyzeExpression
-  ?self:let @omnibusType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?optionalTargetType:let @omnibusType unused inOptionalTargetType
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+override proc @standaloneFunctionInExpressionAST.analyzeExpression
+  (?self:let @omnibusType inSelfType,
+  ?routineAttributes:let @routineAttributes inRoutineAttributes,
+  ?optionalTargetType:let @omnibusType unused inOptionalTargetType,
+  ?context:let @semanticContext inContext,
+  ?mode:let @mode inMode,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap,
+  ?!alloca:@allocaList ioAllocaList,
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList,
   !result:@objectIR outFunctionCallReturnedValue
-{
+) {
 //--- Cannot call a function in guard
   if [inRoutineAttributes contains !.isGuard] then
     error (self.mStandaloneFunctionName.location : "a routine cannot be called in guard")
@@ -96,17 +96,17 @@ override proc @standaloneFunctionInExpressionAST analyzeExpression
 //--- Get called function signature
   let signature = [self.mArguments routineSignature !self.mStandaloneFunctionName.location]
 //--- Search function in map
-  let requiredFunctionMangledName = @lstring {!self.mStandaloneFunctionName.string + signature !self.mStandaloneFunctionName}
+  let requiredFunctionMangledName = @lstring (!self.mStandaloneFunctionName.string + signature, self.mStandaloneFunctionName)
 //--- Cannot call a function in guard
-  [inContext.mRoutineMap searchKey
-    !requiredFunctionMangledName
-    ?let unused implementedPublic
-    ?let formalSignature
-    ?let formalReturnTypeProxy // null if no returned value
-    ?let implementedModeDictionary
-    ?let unused isExported
+  inContext.mRoutineMap.searchKey
+    (!requiredFunctionMangledName,
+    ?let unused implementedPublic,
+    ?let formalSignature,
+    ?let formalReturnTypeProxy, // null if no returned value
+    ?let implementedModeDictionary,
+    ?let unused isExported,
     ?let unused implementedMode
-  ]
+  )
 //--- Check routine is actually a function
   if formalReturnTypeProxy.isNull then
     error (requiredFunctionMangledName : "this function does not return any value" spoil outFunctionCallReturnedValue)
@@ -116,29 +116,29 @@ override proc @standaloneFunctionInExpressionAST analyzeExpression
   //--- Analyze effective parameters
     var @procCallEffectiveParameterListIR effectiveParameterListIR = @[]
     analyzeEffectiveParameters (
-      !self:inSelfType
-      !routineAttributes:inRoutineAttributes
-      !formal:formalSignature
-      !effective: self.mArguments
-      !errorLocation:requiredFunctionMangledName.location
-      !context:inContext
-      !requiredMode:inMode
-      !?temporary:ioTemporaries
-      !?staticEntityMap:ioStaticEntityMap
-      !?variableMap:ioUniversalMap
-      !?alloca:ioAllocaList
-      !?instructionListIR:ioInstructionGenerationList
+      !self:inSelfType,
+      !routineAttributes:inRoutineAttributes,
+      !formal:formalSignature,
+      !effective: self.mArguments,
+      !errorLocation:requiredFunctionMangledName.location,
+      !context:inContext,
+      !requiredMode:inMode,
+      !?temporary:ioTemporaries,
+      !?staticEntityMap:ioStaticEntityMap,
+      !?variableMap:ioUniversalMap,
+      !?alloca:ioAllocaList,
+      !?instructionListIR:ioInstructionGenerationList,
       !?effectiveIR:effectiveParameterListIR
     )
   //--- New LLVM variable for function call result
-    getNewTempValue (!formalReturnTypeProxy.type !?ioTemporaries ?outFunctionCallReturnedValue)
+    getNewTempValue (!formalReturnTypeProxy.type, !?ioTemporaries, ?outFunctionCallReturnedValue)
   //--- Code generation
-    ioInstructionGenerationList += !@standaloneRoutineCallIR {
-      !outFunctionCallReturnedValue
-      !routineLLVMName
-      !functionLLVMName
-      !effectiveParameterListIR
-    }
+    ioInstructionGenerationList += !@standaloneRoutineCallIR (
+      !outFunctionCallReturnedValue,
+      routineLLVMName,
+      functionLLVMName,
+      effectiveParameterListIR
+    )
   end
 }
 

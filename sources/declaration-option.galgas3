@@ -6,16 +6,16 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <declaration> ?!@ast unused ioAST {
+  rule <declaration> (?!@ast unused ioAST ) {
     $option$
-    $"string"$ ?let constantName
+    $"string"$ (?let constantName)
     var @stringlist suggestionList = @[]
     var found = false
-    for (domain identifier) in @application.boolOptionNameList while not found do       let invocationString = @application.boolOptionInvocationString {!domain !identifier}
+    for (domain identifier) in @application.boolOptionNameList while not found do       let invocationString = @application.boolOptionInvocationString (domain, identifier)
       suggestionList += !"\"" + invocationString + "\""
       found = invocationString == constantName.string
       if found then
-        [@application setBoolOptionValue !domain !identifier !true]
+        @application.setBoolOptionValue (!domain, !identifier, !true)
       end
     end 
     if not found then

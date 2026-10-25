@@ -17,23 +17,23 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList  {
+  rule <instruction> (?!@ast ioAST ,?!@instructionListAST ioInstructionList  ) {
 //    $do$
     $while$
     let instructionLocation = @location.here
-    <expression> !?ioAST ?let @expressionAST testExpression
+    <expression> (!?ioAST, ?let @expressionAST testExpression)
     let testExpressionEndLocation = @location.here
     ${$
-    <instructionList> !?ioAST ?let instructionList
+    <instructionList> (!?ioAST, ?let instructionList)
     let endOfInstruction = @location.here
     $}$
-    ioInstructionList += !@whileInstructionAST {
-      !instructionLocation
-      !testExpression
-      !testExpressionEndLocation
-      !instructionList
-      !endOfInstruction
-    }
+    ioInstructionList += !@whileInstructionAST (
+      !instructionLocation,
+      testExpression,
+      testExpressionEndLocation,
+      instructionList,
+      endOfInstruction
+    )
   }
 
   //·····················································································································
@@ -44,54 +44,54 @@ syntax extension omnibus_syntax {
 //  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @whileInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [self.mWhileInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
-  [self.m_while_Expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+override proc @whileInstructionAST.noteInstructionTypesInPrecedenceGraph (?!@semanticTypePrecedenceGraph ioGraph ) {
+  self.mWhileInstructionList.noteInstructionListTypesInPrecedenceGraph (!?ioGraph)
+  self.m_while_Expression.noteExpressionTypesInPrecedenceGraph (!?ioGraph)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @whileInstructionAST instructionSemanticAnalysis
-  ?self:let @omnibusType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
+override proc @whileInstructionAST.instructionSemanticAnalysis
+  (?self:let @omnibusType inSelfType,
+  ?routineAttributes:let @routineAttributes inRoutineAttributes,
+  ?context:let @semanticContext inContext,
+  ?mode:let @mode inMode,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap,
+  ?!alloca:@allocaList ioAllocaList,
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-{
+) {
 //--- Analyze test expression
   var @instructionListIR testInstructionGenerationList = @[]
-  [self.m_while_Expression analyzeExpression
-    !self:inSelfType
-    !routineAttributes:inRoutineAttributes
-    !optionalTargetType:voidType ()
-    !context:inContext
-    !mode:inMode
-    !?temporary:ioTemporaries
-    !?staticEntityMap:ioStaticEntityMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:testInstructionGenerationList
+  self.m_while_Expression.analyzeExpression
+    (!self:inSelfType,
+    !routineAttributes:inRoutineAttributes,
+    !optionalTargetType:voidType (),
+    !context:inContext,
+    !mode:inMode,
+    !?temporary:ioTemporaries,
+    !?staticEntityMap:ioStaticEntityMap,
+    !?variableMap:ioUniversalMap,
+    !?alloca:ioAllocaList,
+    !?instructionListIR:testInstructionGenerationList,
     ?result:@objectIR testValue
-  ]
-  [!?testInstructionGenerationList appendLoadWhenReference
-    !?ioTemporaries
+  )
+  !?testInstructionGenerationList.appendLoadWhenReference
+    (!?ioTemporaries,
     !?testValue
-  ]
+  )
 //--- Check result is allowed for condition
-  [inContext.mImplicitConversionToBooleanMap generateConvertToBooleanCode
-    !testValue
-    !self.mEndOf_test_expression
-    !?ioTemporaries
-    !?testInstructionGenerationList
-    !?alloca: ioAllocaList
+  inContext.mImplicitConversionToBooleanMap.generateConvertToBooleanCode
+    (!testValue,
+    !self.mEndOf_test_expression,
+    !?ioTemporaries,
+    !?testInstructionGenerationList,
+    !?alloca: ioAllocaList,
     ?let booleanResult
-  ]
+  )
   switch booleanResult
   case compileTime (*) :
     error (self.mEndOf_test_expression : "test expression type should not be a compile time expression")
@@ -99,27 +99,27 @@ override proc @whileInstructionAST instructionSemanticAnalysis
   end
 //--- Analyze instruction list
   var @instructionListIR instructionGenerationList = @[]
-  [!?ioUniversalMap openOverrideForRepeatBlock]
-  [self.mWhileInstructionList analyzeBranchInstructionList
-    !self:inSelfType
-    !routineAttributes:inRoutineAttributes
-    !endOfInstructionList:self.mEndOf_while_instruction
-    !context:inContext
-    !mode:inMode
-    !?temporary:ioTemporaries
-    !?staticEntityMap:ioStaticEntityMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
+  !?ioUniversalMap.openOverrideForRepeatBlock ()
+  self.mWhileInstructionList.analyzeBranchInstructionList
+    (!self:inSelfType,
+    !routineAttributes:inRoutineAttributes,
+    !endOfInstructionList:self.mEndOf_while_instruction,
+    !context:inContext,
+    !mode:inMode,
+    !?temporary:ioTemporaries,
+    !?staticEntityMap:ioStaticEntityMap,
+    !?variableMap:ioUniversalMap,
+    !?alloca:ioAllocaList,
     !?instructionListIR:instructionGenerationList
-  ]
-  [!?ioUniversalMap closeOverride !self.mEndOf_while_instruction]
+  )
+  !?ioUniversalMap.closeOverride (!self.mEndOf_while_instruction)
 //--- Code generation
-  ioInstructionGenerationList += !@whileInstructionIR {
-    !self.mEndOf_test_expression.endLocationIndex
-    !testInstructionGenerationList
-    !booleanResult.llvmName
-    !instructionGenerationList
- }
+  ioInstructionGenerationList += !@whileInstructionIR (
+    !self.mEndOf_test_expression.endLocationIndex,
+    testInstructionGenerationList,
+    booleanResult.llvmName,
+    instructionGenerationList
+ )
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -135,32 +135,32 @@ class @whileInstructionIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @whileInstructionIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext inGenerationContext
+override proc @whileInstructionIR.llvmInstructionCode
+  (?!@string ioLLVMcode,
+  ?let @generationContext inGenerationContext,
   ?!@generationAdds ioGenerationAdds
-{
+) {
   let labelTest = "while." + self.mLabelIndex + ".test"
   let labelLoop = "while." + self.mLabelIndex + ".loop"
   let labelEnd  = "while." + self.mLabelIndex + ".end"
   ioLLVMcode += "  br label %" + labelTest + "\n\n"
   ioLLVMcode += labelTest + ":\n"
-  [self.mTestInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  self.mTestInstructionGenerationList.instructionListLLVMCode (!?ioLLVMcode, !inGenerationContext, !?ioGenerationAdds)
   ioLLVMcode += "  br i1 " + self.m_while_llvmName + ", label %" + labelLoop + ", label %" + labelEnd + "\n\n"
   ioLLVMcode += labelLoop + ":\n"
-  [self.mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  self.mInstructionGenerationList.instructionListLLVMCode (!?ioLLVMcode, !inGenerationContext, !?ioGenerationAdds)
   ioLLVMcode += "  br label %" + labelTest + "\n\n"
   ioLLVMcode += labelEnd + ":\n"
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @whileInstructionIR enterAccessibleEntities
-  ?!@stringset ioInvokedRoutineSet
+override proc @whileInstructionIR.enterAccessibleEntities
+  (?!@stringset ioInvokedRoutineSet,
   ?!@uint ioMaxBranchOfOnInstructions
-{
-  [self.mTestInstructionGenerationList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
-  [self.mInstructionGenerationList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
+) {
+  self.mTestInstructionGenerationList.enterAccessibleEntities (!?ioInvokedRoutineSet, !?ioMaxBranchOfOnInstructions)
+  self.mInstructionGenerationList.enterAccessibleEntities (!?ioInvokedRoutineSet, !?ioMaxBranchOfOnInstructions)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————

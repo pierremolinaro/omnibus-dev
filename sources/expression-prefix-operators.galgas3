@@ -21,65 +21,65 @@ class @prefixOperatorExpressionAST : @expressionAST {
 //  PRECEDENCE GRAPH FROM EXPRESSION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @prefixOperatorExpressionAST addDependenceEdgeForStaticExpression
-  ?let @lstring inConstantName
+override proc @prefixOperatorExpressionAST.addDependenceEdgeForStaticExpression
+  (?let @lstring inConstantName,
   ?!@semanticTypePrecedenceGraph ioGraph
-{
-  [self.mExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+) {
+  self.mExpression.addDependenceEdgeForStaticExpression (!inConstantName, !?ioGraph)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @prefixOperatorExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [self.mExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+override proc @prefixOperatorExpressionAST.noteExpressionTypesInPrecedenceGraph (?!@semanticTypePrecedenceGraph ioGraph ) {
+  self.mExpression.noteExpressionTypesInPrecedenceGraph (!?ioGraph)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @prefixOperatorExpressionAST analyzeExpression
-  ?self:let @omnibusType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?optionalTargetType:let @omnibusType inOptionalTargetType
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+override proc @prefixOperatorExpressionAST.analyzeExpression
+  (?self:let @omnibusType inSelfType,
+  ?routineAttributes:let @routineAttributes inRoutineAttributes,
+  ?optionalTargetType:let @omnibusType inOptionalTargetType,
+  ?context:let @semanticContext inContext,
+  ?mode:let @mode inMode,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap,
+  ?!alloca:@allocaList ioAllocaList,
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList,
   !result:@objectIR outResult
-{
+) {
 //--- Analyze expression
-  [self.mExpression analyzeExpression
-    !self:inSelfType
-    !routineAttributes:inRoutineAttributes
-    !optionalTargetType:inOptionalTargetType
-    !context:inContext
-    !mode:inMode
-    !?temporary:ioTemporaries
-    !?staticEntityMap:ioStaticEntityMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:ioInstructionGenerationList
+  self.mExpression.analyzeExpression
+    (!self:inSelfType,
+    !routineAttributes:inRoutineAttributes,
+    !optionalTargetType:inOptionalTargetType,
+    !context:inContext,
+    !mode:inMode,
+    !?temporary:ioTemporaries,
+    !?staticEntityMap:ioStaticEntityMap,
+    !?variableMap:ioUniversalMap,
+    !?alloca:ioAllocaList,
+    !?instructionListIR:ioInstructionGenerationList,
     ?result: let @objectIR expressionResult
-  ]
+  )
 //--- Generate code
   let currentlyInSafeMode = inMode.isSafe
   let @bool noPanicGeneration = [option omnibus_options.noPanicGeneration value]
-  [inContext.mPrefixOperatorMap generatePrefixOperatorCode
-    !expressionResult
-    !self.mOp
-    !self.mOperatorLocation
-    !safeMode: currentlyInSafeMode
-    !noPanicCode: noPanicGeneration
-    !?ioTemporaries
-    !?ioInstructionGenerationList
+  inContext.mPrefixOperatorMap.generatePrefixOperatorCode
+    (!expressionResult,
+    !self.mOp,
+    !self.mOperatorLocation,
+    !safeMode: currentlyInSafeMode,
+    !noPanicCode: noPanicGeneration,
+    !?ioTemporaries,
+    !?ioInstructionGenerationList,
     ?outResult
-  ]
+  )
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————

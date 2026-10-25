@@ -1,14 +1,14 @@
 
-setter @instructionListIR appendGetArrayElementReference
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?arrayReference:let @objectIR inArrayIR
-  ?elementType:let @omnibusType inElementType
-  ?index:let @objectIR inIndexIR
+mutating proc @instructionListIR.appendGetArrayElementReference
+  (?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?arrayReference:let @objectIR inArrayIR,
+  ?elementType:let @omnibusType inElementType,
+  ?index:let @objectIR inIndexIR,
   !elementPtr:@objectIR outElementPtr
-{
-  [!?ioTemporaries newTempLLVMVar ?let llvmName ]
-  outElementPtr = @objectIR.reference {!type:inElementType !llvmName:llvmName}
-  self += !@getArrayElementReferenceIR {!outElementPtr !inArrayIR !inIndexIR}
+) {
+  !?ioTemporaries.newTempLLVMVar (?let llvmName )
+  outElementPtr = @objectIR.reference (!type:inElementType, !llvmName:llvmName)
+  self += !@getArrayElementReferenceIR (!outElementPtr, inArrayIR, inIndexIR)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -21,11 +21,11 @@ class @getArrayElementReferenceIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @getArrayElementReferenceIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
+override proc @getArrayElementReferenceIR.llvmInstructionCode
+  (?!@string ioLLVMcode,
+  ?let @generationContext unused inGenerationContext,
   ?!@generationAdds unused ioGenerationAdds
-{
+) {
   let llvmType = self.mArray.type.llvmTypeName
   ioLLVMcode += "  " + self.mTarget.llvmName + " = getelementptr inbounds "
   ioLLVMcode += llvmType + ", " + llvmType + " * " + self.mArray.llvmName + ", i32 0, " + self.mIndex.llvmTypeName

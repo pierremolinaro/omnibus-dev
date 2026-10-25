@@ -24,7 +24,7 @@ enum @mode %comparable {
 
 //·······················································································································
 
-func @mode string -> @string {
+func @mode.string () -> @string {
   switch self
   case userMode : result = "user"
   case safeUserMode : result = "safe user"
@@ -46,7 +46,7 @@ func @mode string -> @string {
 
 //·······················································································································
 
-func @mode isSafe -> @bool {
+func @mode.isSafe () -> @bool {
   switch self
   case userMode : result = false
   case safeUserMode : result = true
@@ -68,7 +68,7 @@ func @mode isSafe -> @bool {
 
 //·······················································································································
 
-func @mode routineLLVMDictionaryForFunction ?let @string inRoutineNameForGeneration -> @routineLLVMNameDict {
+func @mode.routineLLVMDictionaryForFunction (?let @string inRoutineNameForGeneration ) -> @routineLLVMNameDict {
   result = @[@(self, inRoutineNameForGeneration)]
   switch self
   case serviceMode : // If routine is in service mode ...
@@ -132,10 +132,10 @@ func @mode routineLLVMDictionaryForFunction ?let @string inRoutineNameForGenerat
 
 //·······················································································································
 
-func @mode routineLLVMDictionaryForSystemRoutine
-  ?let @string inUserRoutineNameForGeneration
+func @mode.routineLLVMDictionaryForSystemRoutine
+  (?let @string inUserRoutineNameForGeneration,
   ?let @string inImplementationRoutineNameForGeneration
-  -> @routineLLVMNameDict
+  ) -> @routineLLVMNameDict
 {
   result = @[@(self, inImplementationRoutineNameForGeneration)]
   result += !.userMode !inUserRoutineNameForGeneration
@@ -178,11 +178,11 @@ func @mode routineLLVMDictionaryForSystemRoutine
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func checkModeAndReturnsRoutineLLVMName ?let @routineLLVMNameDict inCalledRoutineDictionary
-               ?let @mode inCallerRoutineMode
-               ?let @lstring inRoutineName -> @string {
+func checkModeAndReturnsRoutineLLVMName (?let @routineLLVMNameDict inCalledRoutineDictionary,
+               ?let @mode inCallerRoutineMode,
+               ?let @lstring inRoutineName ) -> @string {
   if [inCalledRoutineDictionary hasKey !inCallerRoutineMode] then
-    [inCalledRoutineDictionary searchKey !inCallerRoutineMode ?result]
+    inCalledRoutineDictionary.searchKey (!inCallerRoutineMode, ?result)
   else
     var m = "the '" + inRoutineName + "' routine cannot be invoked from '" + inCallerRoutineMode + "' mode, but only from:"
     for (key *) in inCalledRoutineDictionary do

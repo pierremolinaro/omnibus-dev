@@ -5039,7 +5039,7 @@ void callExtensionMethod_semanticAnalysis (class cPtr_abstractDecoratedDeclarati
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@instructionListIR appendEnterRegisterAddress'
+//Extension mutating proc '@instructionListIR appendEnterRegisterAddress'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -6860,7 +6860,7 @@ extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_functionDeclarationAST
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@routineMapForContext addFunctionWithInputArgument'
+//Extension mutating proc '@routineMapForContext addFunctionWithInputArgument'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -6892,7 +6892,7 @@ void routine_routineTypedSignature_26__3F__21_ (class GGS_unifiedTypeMap & ioArg
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@routineMapForContext addFunctionWithTwoInputArguments'
+//Extension mutating proc '@routineMapForContext addFunctionWithTwoInputArguments'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -6915,7 +6915,7 @@ void extensionSetter_addFunctionWithTwoInputArguments (class GGS_routineMapForCo
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@instructionListIR referenceFromPossibleValue'
+//Extension mutating proc '@instructionListIR referenceFromPossibleValue'
 //
 //--------------------------------------------------------------------------------------------------
 

@@ -1,10 +1,10 @@
 
-setter @instructionListIR appendShiftLeft
-  ?let @objectIR inResult
-  ?let @objectIR inSource
+mutating proc @instructionListIR.appendShiftLeft
+  (?let @objectIR inResult,
+  ?let @objectIR inSource,
   ?let @uint inShiftAmount
-{
-  self += !@leftShiftIR {!inResult !inSource !inShiftAmount}
+) {
+  self += !@leftShiftIR (!inResult, inSource, inShiftAmount)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -17,11 +17,11 @@ class @leftShiftIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @leftShiftIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
+override proc @leftShiftIR.llvmInstructionCode
+  (?!@string ioLLVMcode,
+  ?let @generationContext unused inGenerationContext,
   ?!@generationAdds unused ioGenerationAdds
-{
+) {
   ioLLVMcode += "  " + self.mResult.llvmName
              + " = shl " + self.mSource.llvmTypeName + " " + self.mSource.llvmName
              + ", " + self.mShiftAmount + "\n"

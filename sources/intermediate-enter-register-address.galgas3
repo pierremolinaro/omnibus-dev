@@ -1,13 +1,13 @@
 
-setter @instructionListIR appendEnterRegisterAddress
-  ?!@semanticTemporariesStruct ioTemporaries
-  !@string out_llvmName
-  ?let @bigint inBaseAddress
-  ?let @bigint inAddressOffset
+mutating proc @instructionListIR.appendEnterRegisterAddress
+  (?!@semanticTemporariesStruct ioTemporaries,
+  !@string out_llvmName,
+  ?let @bigint inBaseAddress,
+  ?let @bigint inAddressOffset,
   ?let @string inRegisterName
-{
-  [!?ioTemporaries newTempLLVMVar ?out_llvmName]
-  self += !@enterRegisterAddressIR {!out_llvmName !inBaseAddress !inAddressOffset !inRegisterName}
+) {
+  !?ioTemporaries.newTempLLVMVar (?out_llvmName)
+  self += !@enterRegisterAddressIR (!out_llvmName, inBaseAddress, inAddressOffset, inRegisterName)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -21,11 +21,11 @@ class @enterRegisterAddressIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @enterRegisterAddressIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
+override proc @enterRegisterAddressIR.llvmInstructionCode
+  (?!@string ioLLVMcode,
+  ?let @generationContext unused inGenerationContext,
   ?!@generationAdds unused ioGenerationAdds
-{
+) {
   ioLLVMcode += "  " + self.mLLVMName + " = add i32 " + self.mBaseAddress
              + ", " + self.mAddressOffset + " ; " + self.mRegisterName
              + " at " + self.mBaseAddress.hexString + " = " + self.mAddressOffset.hexString + "\n"

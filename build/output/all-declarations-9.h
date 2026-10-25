@@ -89,7 +89,7 @@ extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_storeToUniversalRefere
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@semanticTypePrecedenceGraph noteUINTType'
+//Extension mutating proc '@semanticTypePrecedenceGraph noteUINTType'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -640,6 +640,17 @@ class GGS_string function_llvmNameForGlobalSyncInstance (const class GGS_string 
 
 //--------------------------------------------------------------------------------------------------
 //
+//Extension mutating proc '@universalValuedObjectMap readAccess'
+//
+//--------------------------------------------------------------------------------------------------
+
+void extensionSetter_readAccess (class GGS_universalValuedObjectMap & ioObject,
+                                 const class GGS_lstring constin_inValuedObjectName,
+                                 class Compiler * inCompiler
+                                 COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
 //Routine 'procAnalyzeAccesListInExpression?self?routineAttributes?optionalTargetType?context?mode&temporary&staticEntityMap&variableMap&alloca&instructionListIR?&result'
 //
 //--------------------------------------------------------------------------------------------------
@@ -670,17 +681,6 @@ void extensionMethod_searchEntity (const class GGS_universalValuedObjectMap inOb
                                    class GGS_valuedObject & out_outEntity,
                                    class Compiler * inCompiler
                                    COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension setter '@universalValuedObjectMap readAccess'
-//
-//--------------------------------------------------------------------------------------------------
-
-void extensionSetter_readAccess (class GGS_universalValuedObjectMap & ioObject,
-                                 const class GGS_lstring constin_inValuedObjectName,
-                                 class Compiler * inCompiler
-                                 COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 //

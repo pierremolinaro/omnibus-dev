@@ -29,30 +29,30 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <declaration> ?!@ast ioAST {
+  rule <declaration> (?!@ast ioAST ) {
     $task$
-    $identifier$ ?let taskName
+    $identifier$ (?let taskName)
     var @lstringlist higherPriorityTaskList = @[]
     select
     or
       $>$
       repeat
-        $identifier$ ?let aTaskName
+        $identifier$ (?let aTaskName)
         higherPriorityTaskList += !aTaskName
       while
         $,$
       end
     end
-    $@attribute$ ?let stackSizeAttribute
+    $@attribute$ (?let stackSizeAttribute)
     if stackSizeAttribute.string != "stacksize" then
       error (stackSizeAttribute : "this attribute should be @stacksize")
     end
-    $integer$ ?let @lbigint stackSize
+    $integer$ (?let @lbigint stackSize)
   //--- @autostart attribute
     var autoStart = false
     select
     or
-      $@attribute$ ?let activateAttribute
+      $@attribute$ (?let activateAttribute)
       if activateAttribute.string != "autostart" then
         error (activateAttribute : "this attribute should be @autostart")
       end
@@ -66,39 +66,39 @@ syntax extension omnibus_syntax {
     var @syncInstructionBranchListAST branchList = @[]
     repeat
     while
-      <private_struct_property_declaration> !?ioAST !?taskVarList
+      <private_struct_property_declaration> (!?ioAST, !?taskVarList)
     while
       $func$
-      $identifier$ ?let procName
-      <procedure_formal_arguments> !?ioAST ?let @routineFormalArgumentListAST formalArgumentList
+      $identifier$ (?let procName)
+      <procedure_formal_arguments> (!?ioAST, ?let @routineFormalArgumentListAST formalArgumentList)
       let @lstring returnTypeName
       select
         returnTypeName = "".here
       or
         $->$
-        <type_definition> !?ioAST ?returnTypeName
+        <type_definition> (!?ioAST, ?returnTypeName)
       end
       ${$
-      <instructionList> !?ioAST ?let instructionList
-      ioAST.mDeclarationListAST += !@functionDeclarationAST {
-        !.userMode
-        !false
-        !taskName
-        !procName
-        !@[]
-        !formalArgumentList
-        !returnTypeName
-        !instructionList
-        !.here
-      }
+      <instructionList> (!?ioAST, ?let instructionList)
+      ioAST.mDeclarationListAST += !@functionDeclarationAST (
+        !.userMode,
+        false,
+        taskName,
+        procName,
+        @[],
+        formalArgumentList,
+        returnTypeName,
+        instructionList,
+        .here
+      )
       $}$
     while
-      <task_event> !?ioAST !taskName: taskName !?setup: taskSetupList !?activate: taskActivateList !?deactivate: taskDeactivateList
+      <task_event> (!?ioAST, !taskName: taskName, !?setup: taskSetupList, !?activate: taskActivateList, !?deactivate: taskDeactivateList)
     while
       $while$
-      <guarded_command> !?ioAST !false ?let @guardedCommandAST guardedCommand
+      <guarded_command> (!?ioAST, !false, ?let @guardedCommandAST guardedCommand)
       ${$
-      <instructionList> !?ioAST ?let instructionList
+      <instructionList> (!?ioAST, ?let instructionList)
       let endOfInstructions = @location.here
       $}$
       branchList += !guardedCommand !instructionList !endOfInstructions
@@ -123,15 +123,15 @@ syntax extension omnibus_syntax {
       !branchList
       !endOfTask
       !autoStart
-    ioAST.mDeclarationListAST += !@structureDeclarationAST {
-      !taskName
-      !taskName
-      !taskName
-      !@[]
-      !false // Generate assignment routine
-      !taskVarList
-      !false
-    }
+    ioAST.mDeclarationListAST += !@structureDeclarationAST (
+      !taskName,
+      taskName,
+      taskName,
+      @[],
+      false, // Generate assignment routine
+      taskVarList,
+      false
+    )
   }
 
   //·····················································································································
@@ -142,10 +142,10 @@ syntax extension omnibus_syntax {
 //!  PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc @taskListAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+proc @taskListAST noteTypesInPrecedenceGraph (?!@semanticTypePrecedenceGraph ioGraph ) {
   for (* * * * * * mGuardedCommandList * *) in self do
     for guardedCommand in mGuardedCommandList do
-      [guardedCommand.mInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+      guardedCommand.mInstructionList.noteInstructionListTypesInPrecedenceGraph (!?ioGraph)
     end
   end
 }
@@ -163,13 +163,13 @@ map @taskMap {
 //·······················································································································
 
 proc @taskListAST enterInContext
-  ?!context:@semanticContext ioContext
-  ?!@declarationDecorationList ioDecoratedDeclarationList
-  ?!@decoratedRegularRoutineList ioDecoratedRoutineList
-  ?!@routineListIR ioRoutineListIR
-  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
+  (?!context:@semanticContext ioContext,
+  ?!@declarationDecorationList ioDecoratedDeclarationList,
+  ?!@decoratedRegularRoutineList ioDecoratedRoutineList,
+  ?!@routineListIR ioRoutineListIR,
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap,
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
-{
+) {
 //------------- Sort tasks following their relative priority
   var @taskListAST taskList = self
   var @taskListAST sortedTaskList = @[]
@@ -196,7 +196,7 @@ proc @taskListAST enterInContext
           !task.mEndOfTaskDeclaration
           !task.mAutoStart
         continue = true
-        [!?taskList removeAtIndex ?9* !idx]
+        !?taskList.removeAtIndex (?9*, !idx)
       else
         idx = idx + 1
       end
@@ -222,29 +222,29 @@ proc @taskListAST enterInContext
   var @decoratedTaskList decoratedTaskList = @[]
   for task in sortedTaskList do (taskIndex)
   //---- Add activate function
-    [!?ioContext.mRoutineMap addFunctionWithoutArgument
-      !omnibusTypeDescriptionName: task.mTaskName
-      !llvmBaseTypeName: task.mTaskName
-      !methodName: @{!"activate" !task.mTaskName.location}
-      !mode:.safeUserMode
-      !resultTypeProxy:.null
+    !?ioContext.mRoutineMap.addFunctionWithoutArgument
+      (!omnibusTypeDescriptionName: task.mTaskName,
+      !llvmBaseTypeName: task.mTaskName,
+      !methodName: @(!"activate", task.mTaskName.location),
+      !mode:.safeUserMode,
+      !resultTypeProxy:.null,
       ?routineLLVMName:*
-    ]
+    )
     let assemblerTaskName = task.mTaskName.string.assemblerRepresentation
     let activateTaskCallName = llvmNameForServiceCall (!llvmNameForActivateTask ())
-    ioRoutineListIR += !@taskActivateFunctionIR {
-      !routineMangledNameFromAST (!task.mTaskName !"activate".nowhere !@[])
-      !isRequired:false
-      !warnsIfUnused:false
-      !assemblerTaskName
-      !activateTaskCallName
-      !taskIndex
-    }
+    ioRoutineListIR += !@taskActivateFunctionIR (
+      !routineMangledNameFromAST (!task.mTaskName !"activate".nowhere !@[]),
+      !isRequired:false,
+      !warnsIfUnused:false,
+      assemblerTaskName,
+      activateTaskCallName,
+      taskIndex
+    )
   //------------------------------------------- Analyze task guarded command
   //  Build a "task.loop" function that contains a sync instruction
     var @instructionListAST taskListInstructionList = @[]
     if task.mGuardedCommandList.count > 0 then
-      let syncInstruction = @syncInstructionAST {!task.mTaskName.location !task.mGuardedCommandList !task.mTaskName.location}
+      let syncInstruction = @syncInstructionAST (!task.mTaskName.location, task.mGuardedCommandList, task.mTaskName.location)
       taskListInstructionList += !syncInstruction
     end
     let routineMangledName = routineMangledNameFromAST (!task.mTaskName !llvmNameForTaskLoopFunction ().nowhere ! @[])
@@ -262,19 +262,19 @@ proc @taskListAST enterInContext
       !taskListInstructionList
       !task.mTaskName.location
       !returnTypeName: "".nowhere
-    [ioContext.mTypeMap searchType !lkey:task.mTaskName ?type:let taskType]
-    [!?ioContext.mValuedObjectMap insertTask !task.mTaskName !taskType]
+    ioContext.mTypeMap.searchType (!lkey:task.mTaskName, ?type:let taskType)
+    !?ioContext.mValuedObjectMap.insertTask (!task.mTaskName, !taskType)
     var initialValueList = @sortedOperandIRList @[]
-    let typeName = @lstring {!taskType.omnibusTypeDescriptionName !task.mTaskName.location}
-    [ioContext.mTypeConstructorMap searchKey !typeName ?let constructorMap]
+    let typeName = @lstring (!taskType.omnibusTypeDescriptionName, task.mTaskName.location)
+    ioContext.mTypeConstructorMap.searchKey (!typeName, ?let constructorMap)
     for (* * initValue) in constructorMap do
 //    for (* * initValue) in [taskType constructorMap2] do
-      [initValue extractStructure ?sortedOperandList: initialValueList]
+      initValue.extractStructure (?sortedOperandList: initialValueList)
     end
     ioContext.mGlobalTaskVariableList +=
       !task.mTaskName.string
       !task.mTaskName.string
-      !.llvmStructureValue{!type:taskType !values:initialValueList}
+      !.llvmStructureValue(!type:taskType, !values:initialValueList)
   //---
     decoratedTaskList +=
       !task.mTaskName
@@ -286,7 +286,7 @@ proc @taskListAST enterInContext
       !task.mAutoStart
   end
 //---------------- Add decorated declaration
-  ioDecoratedDeclarationList += !@decoratedTaskListDeclaration {!decoratedTaskList}
+  ioDecoratedDeclarationList += !@decoratedTaskListDeclaration (!decoratedTaskList)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -311,27 +311,27 @@ class @decoratedTaskListDeclaration : @abstractDecoratedDeclaration {
 
 //·······················································································································
 
-override proc @decoratedTaskListDeclaration semanticAnalysis
-  ?context:let @semanticContext inContext
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
+override proc @decoratedTaskListDeclaration.semanticAnalysis
+  (?context:let @semanticContext inContext,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
+) {
   for task in self.mTaskList do (priority)
-    [task taskSemanticAnalysis
-      !context:inContext
-      !priority:priority
-      !?temporary:ioTemporaries
+    task.taskSemanticAnalysis
+      (!context:inContext,
+      !priority:priority,
+      !?temporary:ioTemporaries,
       !?intermediateCode:ioIntermediateCodeStruct
-    ]
+    )
   end
 }
 
 //·······················································································································
 
 private proc analyzeOrderedTaskRoutines
-  ?let @taskSetupListAST inTaskRoutineLISTAST
+  (?let @taskSetupListAST inTaskRoutineLISTAST,
   !@stringlist outSetupOrderedList
-{
+) {
   outSetupOrderedList = @[]
   if inTaskRoutineLISTAST.count > 0 then
   //--- Check there is exactly one entry without any precedence
@@ -368,7 +368,7 @@ private proc analyzeOrderedTaskRoutines
           outSetupOrderedList += !name.string
           precedenceSet ++= name.string
           continue = true
-          [!?taskSetupListAST removeAtIndex ?2* !idx]
+          !?taskSetupListAST.removeAtIndex (?2*, !idx)
         else
           idx = idx + 1
         end
@@ -384,12 +384,12 @@ private proc analyzeOrderedTaskRoutines
 //·······················································································································
 
 proc @decoratedTaskList.@element taskSemanticAnalysis
-  ?context:let @semanticContext inContext
-  ?priority:let @uint inPriority
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+  (?context:let @semanticContext inContext,
+  ?priority:let @uint inPriority,
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries,
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
-  [inContext.mTypeMap searchType !lkey:self.mTaskName ?type: let taskType]
+) {
+  inContext.mTypeMap.searchType (!lkey:self.mTaskName, ?type: let taskType)
 //------------------------------------------- Check stack size is >= 64, and a multiple of 8
   let stackSize = self.mStackSize.bigint
   if (stackSize < 64) || ((stackSize mod 8) != 0) then
@@ -397,33 +397,33 @@ proc @decoratedTaskList.@element taskSemanticAnalysis
   end
 //------------------------------------------- Analyze task setup routines
   analyzeOrderedTaskRoutines (
-    !self.mTaskSetupListAST
+    !self.mTaskSetupListAST,
     ?let setupOrderedList
   )
 //------------------------------------------- Analyze task activate routines
   analyzeOrderedTaskRoutines (
-    !self.mTaskActivateListAST
+    !self.mTaskActivateListAST,
     ?let activateOrderedList
   )
 //------------------------------------------- Analyze task deactivate routines
   analyzeOrderedTaskRoutines (
-    !self.mTaskDeactivateListAST
+    !self.mTaskDeactivateListAST,
     ?let deactivateOrderedList
   )
 //------------------------------------------- Task Name string constant index
-  [!?ioIntermediateCodeStruct.mStaticEntityMap findOrAddStaticString !self.mTaskName.string ?let taskNameStringIndex]
+  !?ioIntermediateCodeStruct.mStaticEntityMap.findOrAddStaticString (!self.mTaskName.string, ?let taskNameStringIndex)
 //------------------------------------------- Generate task
-  [!?ioIntermediateCodeStruct.mTaskMapIR insertKey
-    !self.mTaskName
-    !taskType
-    !inPriority
-    !self.mStackSize.bigint
-    !setupOrderedList
-    !activateOrderedList
-    !deactivateOrderedList
-    !taskNameStringIndex
+  !?ioIntermediateCodeStruct.mTaskMapIR.insertKey
+    (!self.mTaskName,
+    !taskType,
+    !inPriority,
+    !self.mStackSize.bigint,
+    !setupOrderedList,
+    !activateOrderedList,
+    !deactivateOrderedList,
+    !taskNameStringIndex,
     !self.mAutoStart
-  ]
+  )
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -471,11 +471,11 @@ list @globalTaskVariableList {
 //·······················································································································
 
 proc @taskMapIR generateCode
-  ?!@string ioLLVMcode
-  ?let @generationContext inGenerationContext
-  ?!@generationAdds unused ioGenerationAdds
+  (?!@string ioLLVMcode,
+  ?let @generationContext inGenerationContext,
+  ?!@generationAdds unused ioGenerationAdds,
   ?!@primitiveAndServiceIRlist ioServiceList
-{
+) {
 //---------- Declare "activate task" service
   ioLLVMcode += llvmTitleComment (!"Activate task service")
   let activateTaskImplementationName = llvmNameForServiceImplementation (!llvmNameForActivateTask ())
@@ -603,11 +603,11 @@ class @taskActivateFunctionIR : @abstractRoutineIR {
 
 //·······················································································································
 
-override proc @taskActivateFunctionIR llvmCodeGeneration
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
+override proc @taskActivateFunctionIR.llvmCodeGeneration
+  (?!@string ioLLVMcode,
+  ?let @generationContext unused inGenerationContext,
   ?!@generationAdds unused ioGenerationAdds
-{
+) {
   ioLLVMcode += "define internal void @" + self.mRoutineMangledName.string.assemblerRepresentation + " "
   ioLLVMcode += "(%" + self.mAssemblerTaskName + "* " + llvmNameForSelf () + ")" + llvmAttributeFunction () + "{\n"
   ioLLVMcode += "  call void @" + self.mActivateServiceInvocationName + " (i8 " + self.mTaskIndex + ")\n"

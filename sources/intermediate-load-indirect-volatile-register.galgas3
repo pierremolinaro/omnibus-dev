@@ -1,9 +1,9 @@
 
-setter @instructionListIR appendLoadIndirectVolatileRegister
-  ?let @objectIR inTargetValue
+mutating proc @instructionListIR.appendLoadIndirectVolatileRegister
+  (?let @objectIR inTargetValue,
   ?let @string inLLVMName
-{
-  self += !@loadIndirectVolatileIR {!inTargetValue !inLLVMName}
+) {
+  self += !@loadIndirectVolatileIR (!inTargetValue, inLLVMName)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -15,11 +15,11 @@ class @loadIndirectVolatileIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @loadIndirectVolatileIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
+override proc @loadIndirectVolatileIR.llvmInstructionCode
+  (?!@string ioLLVMcode,
+  ?let @generationContext unused inGenerationContext,
   ?!@generationAdds ioGenerationAdds
-{
+) {
   let llvmType = self.mTargetValue.llvmTypeName
   let ptr = "%registerPointer." + ioGenerationAdds.mUniqueIndex
   ioGenerationAdds.mUniqueIndex += 1

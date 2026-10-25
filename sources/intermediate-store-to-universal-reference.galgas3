@@ -1,11 +1,11 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-setter @instructionListIR appendStoreToUniversalReference
-  ?let @string inLLVMVarName
-  ?let @omnibusType inTargetVarType
+mutating proc @instructionListIR.appendStoreToUniversalReference
+  (?let @string inLLVMVarName,
+  ?let @omnibusType inTargetVarType,
   ?let @objectIR inSourceValue
-{
-  self += !@storeToUniversalReferenceIR {!inLLVMVarName !inTargetVarType !inSourceValue}
+) {
+  self += !@storeToUniversalReferenceIR (!inLLVMVarName, inTargetVarType, inSourceValue)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -18,54 +18,54 @@ class @storeToUniversalReferenceIR : @abstractInstructionIR {
 
 //·······················································································································
 
-override proc @storeToUniversalReferenceIR enterAccessibleEntities
-  ?!@stringset ioInvokedRoutineSet
+override proc @storeToUniversalReferenceIR.enterAccessibleEntities
+  (?!@stringset ioInvokedRoutineSet,
   ?!@uint unused ioMaxBranchOfOnInstructions
-{
+) {
   switch self.mSourceValue
   case void :
   case null (*) :
-  case reference (* *) :
-  case llvmNamedValue (* *) :
-  case literalInteger  (* *) :
-  case llvmStructureValue (* *) :
-  case llvmArrayRepeatedDynamicValue (* * value) :
+  case reference (*, *) :
+  case llvmNamedValue (*, *) :
+  case literalInteger  (*, *) :
+  case llvmStructureValue (*, *) :
+  case llvmArrayRepeatedDynamicValue (*, *, value) :
     let llvmAssignRoutineName = assignmentOperatorFuncName (!value.type !value.type)
     ioInvokedRoutineSet ++= llvmAssignRoutineName
   case llvmArrayRepeatedStaticValue (4*) :
   case llvmArrayStaticValues (3*) :
-  case llvmArrayDynamicValues (* @operandIRList operands) :
+  case llvmArrayDynamicValues (*, @operandIRList operands) :
     for (value) in operands do
       if not value.isStatic then
         let llvmAssignRoutineName = assignmentOperatorFuncName (!value.type !value.type)
         ioInvokedRoutineSet ++= llvmAssignRoutineName
       end
     end
-  case literalString  (* *) :
+  case literalString  (*, *) :
   case zero (*) :
   end
 }
 
 //·······················································································································
 
-override proc @storeToUniversalReferenceIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
+override proc @storeToUniversalReferenceIR.llvmInstructionCode
+  (?!@string ioLLVMcode,
+  ?let @generationContext unused inGenerationContext,
   ?!@generationAdds ioGenerationAdds
-{
+) {
   let llvmType = self.mTargetVarType.llvmTypeName
   switch self.mSourceValue
   case void :
     ioLLVMcode += "<< ERROR @storeToUniversalReferenceIR llvmInstructionCode void >>\n"
   case null (*) :
     ioLLVMcode += "  store " +  llvmType + " null, " + llvmType + "* " + self.mLLVMTargetVarName + "\n"
-  case reference (* *) :
+  case reference (*, *) :
     ioLLVMcode += "<< ERROR @storeToUniversalReferenceIR llvmInstructionCode reference >>\n"
-  case llvmNamedValue (* @string llvmName) :
+  case llvmNamedValue (*, @string llvmName) :
     ioLLVMcode += "  store " +  llvmType + " " + llvmName + ", " + llvmType + "* " + self.mLLVMTargetVarName + "\n"
-  case literalInteger  (* @bigint value) :
+  case literalInteger  (*, @bigint value) :
     ioLLVMcode += "  store " +  llvmType + " " + value + ", " + llvmType + "* " + self.mLLVMTargetVarName + "\n"
-  case llvmStructureValue (* @sortedOperandIRList operands) :
+  case llvmStructureValue (*, @sortedOperandIRList operands) :
     for (value index) in operands do
       let tempVar = "%temp.addr." + ioGenerationAdds.mUniqueIndex
       ioGenerationAdds.mUniqueIndex += 1
@@ -74,7 +74,7 @@ override proc @storeToUniversalReferenceIR llvmInstructionCode
       let valueType = value.llvmTypeName
       ioLLVMcode += "  store " +  valueType + " " + value.llvmName + ", " + valueType + "* " + tempVar + "\n"
     end
-  case llvmArrayRepeatedDynamicValue (type size value) :
+  case llvmArrayRepeatedDynamicValue (type, size, value) :
     let indexVarName = "%index." + ioGenerationAdds.mUniqueIndex
     let nextIndexVarName = "%index.next." + ioGenerationAdds.mUniqueIndex
     let ptrVarName = "%element.ptr." + ioGenerationAdds.mUniqueIndex
@@ -97,7 +97,7 @@ override proc @storeToUniversalReferenceIR llvmInstructionCode
     ioLLVMcode += "  " + loopTestName + " = icmp ult i32 " + nextIndexVarName + ", " + size + "\n"
     ioLLVMcode += "  br i1 " + loopTestName + ", label %" + loopLabel + ", label %" + exitLabel + "\n"
     ioLLVMcode += exitLabel + ":\n\n"
-  case llvmArrayRepeatedStaticValue (type size value *) :
+  case llvmArrayRepeatedStaticValue (type, size, value, *) :
     let indexVarName = "%index." + ioGenerationAdds.mUniqueIndex
     let nextIndexVarName = "%index.next." + ioGenerationAdds.mUniqueIndex
     let ptrVarName = "%element.ptr." + ioGenerationAdds.mUniqueIndex
@@ -118,7 +118,7 @@ override proc @storeToUniversalReferenceIR llvmInstructionCode
     ioLLVMcode += "  " + loopTestName + " = icmp ult i32 " + nextIndexVarName + ", " + size + "\n"
     ioLLVMcode += "  br i1 " + loopTestName + ", label %" + loopLabel + ", label %" + exitLabel + "\n"
     ioLLVMcode += exitLabel + ":\n\n"
-  case llvmArrayStaticValues (* @operandIRList operands *) :
+  case llvmArrayStaticValues (*, @operandIRList operands, *) :
     ioLLVMcode += ";--- Assign static array from static value\n"
     for (value) in operands do (index)
       let tempVar = "%temp.addr." + ioGenerationAdds.mUniqueIndex
@@ -128,7 +128,7 @@ override proc @storeToUniversalReferenceIR llvmInstructionCode
       let valueType = value.llvmTypeName
       ioLLVMcode += "  store " +  valueType + " " + value.llvmName + ", " + valueType + "* " + tempVar + "\n"
     end
-  case llvmArrayDynamicValues (* @operandIRList operands) :
+  case llvmArrayDynamicValues (*, @operandIRList operands) :
     ioLLVMcode += ";--- Assign static array from dynamic values\n"
     for (value) in operands do (index)
       let tempVar = "%temp.addr." + ioGenerationAdds.mUniqueIndex
@@ -144,7 +144,7 @@ override proc @storeToUniversalReferenceIR llvmInstructionCode
         ioLLVMcode += " (" + valueType + "* " + tempVar + ", " + valueType + "* " + value.llvmName + ")\n"
       end
     end
-  case literalString  (* *) :
+  case literalString  (*, *) :
   case zero (*) :
     ioLLVMcode += "  store " +  llvmType + " " + self.mSourceValue.llvmName + ", " + llvmType + "* " + self.mLLVMTargetVarName + "\n"
   end

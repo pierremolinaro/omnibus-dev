@@ -1,44 +1,44 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once panicRoutineName -> @string { result = "handle.panic" }
+func %once panicRoutineName () -> @string { result = "handle.panic" }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once panicCodeForAssertViolation -> @bigint { result = 1 }
+func %once panicCodeForAssertViolation () -> @bigint { result = 1 }
 
-func %once panicCodeForUnsignedAdditionOverflow -> @bigint { result = 2 }
+func %once panicCodeForUnsignedAdditionOverflow () -> @bigint { result = 2 }
 
-func %once panicCodeForSignedAdditionOverflow -> @bigint { result = 3 }
+func %once panicCodeForSignedAdditionOverflow () -> @bigint { result = 3 }
 
-func %once panicCodeForUnsignedSubtractOverflow -> @bigint { result = 4 }
+func %once panicCodeForUnsignedSubtractOverflow () -> @bigint { result = 4 }
 
-func %once panicCodeForSignedSubtractOverflow -> @bigint { result = 5 }
+func %once panicCodeForSignedSubtractOverflow () -> @bigint { result = 5 }
 
-func %once panicCodeForUnsignedMultiplicationOverflow -> @bigint { result = 6 }
+func %once panicCodeForUnsignedMultiplicationOverflow () -> @bigint { result = 6 }
 
-func %once panicCodeForSignedMultiplicationOverflow -> @bigint { result = 7 }
+func %once panicCodeForSignedMultiplicationOverflow () -> @bigint { result = 7 }
 
-func %once panicCodeForUnsignedDivisionByZero -> @bigint { result = 8 }
+func %once panicCodeForUnsignedDivisionByZero () -> @bigint { result = 8 }
 
-func %once panicCodeForSignedDivisionByZero -> @bigint { result = 9 }
+func %once panicCodeForSignedDivisionByZero () -> @bigint { result = 9 }
 
-func %once panicCodeForUnsignedRemainderByZero -> @bigint { result = 10 }
+func %once panicCodeForUnsignedRemainderByZero () -> @bigint { result = 10 }
 
-func %once panicCodeForSignedRemainderByZero -> @bigint { result = 11 }
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————
-
-func %once panicCodeForConvertOverflow -> @bigint { result = 12 }
+func %once panicCodeForSignedRemainderByZero () -> @bigint { result = 11 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once panicCodeForNegativeArrayIndex -> @bigint { result = 14 }
-
-func %once panicCodeForTooLargeArrayIndex -> @bigint { result = 15 }
+func %once panicCodeForConvertOverflow () -> @bigint { result = 12 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once panicCodeForClosedSync -> @bigint { result = 16 }
+func %once panicCodeForNegativeArrayIndex () -> @bigint { result = 14 }
+
+func %once panicCodeForTooLargeArrayIndex () -> @bigint { result = 15 }
+
+//—————————————————————————————————————————————————————————————————————————————————————————————————
+
+func %once panicCodeForClosedSync () -> @bigint { result = 16 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 

@@ -14,9 +14,9 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <primary> ?!@ast unused ioAST !@expressionAST outExpression {
-    $"string"$ ?let @lstring stringLiteral
-    outExpression = @literalStringInExpressionAST {!stringLiteral}
+  rule <primary> (?!@ast unused ioAST ,!@expressionAST outExpression ) {
+    $"string"$ (?let @lstring stringLiteral)
+    outExpression = @literalStringInExpressionAST (!stringLiteral)
   }
 
   //·····················································································································
@@ -27,40 +27,40 @@ syntax extension omnibus_syntax {
 //  PRECEDENCE GRAPH FROM EXPRESSION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @literalStringInExpressionAST addDependenceEdgeForStaticExpression
-  ?let @lstring inConstantName
+override proc @literalStringInExpressionAST.addDependenceEdgeForStaticExpression
+  (?let @lstring inConstantName,
   ?!@semanticTypePrecedenceGraph ioGraph
-{
-  [!?ioGraph addEdge !from: inConstantName !to: @{!staticStringTypeName () !inConstantName.location}]
+) {
+  !?ioGraph.addEdge (!from: inConstantName, !to: @(!staticStringTypeName (), inConstantName.location))
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @literalStringInExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [!?ioGraph noteNode !ctIntegerTypeName ().nowhere]
+override proc @literalStringInExpressionAST.noteExpressionTypesInPrecedenceGraph (?!@semanticTypePrecedenceGraph ioGraph ) {
+  !?ioGraph.noteNode (!ctIntegerTypeName ().nowhere)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @literalStringInExpressionAST analyzeExpression
-  ?self:let @omnibusType unused inSelfType
-  ?routineAttributes:let @routineAttributes unused inRoutineAttributes
-  ?optionalTargetType:let @omnibusType unused inOptionalTargetType
-  ?context:let @semanticContext unused inContext
-  ?mode:let @mode unused inMode
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaryIndex
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap unused ioUniversalMap
-  ?!alloca:@allocaList unused ioAllocaList
-  ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
+override proc @literalStringInExpressionAST.analyzeExpression
+  (?self:let @omnibusType unused inSelfType,
+  ?routineAttributes:let @routineAttributes unused inRoutineAttributes,
+  ?optionalTargetType:let @omnibusType unused inOptionalTargetType,
+  ?context:let @semanticContext unused inContext,
+  ?mode:let @mode unused inMode,
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaryIndex,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap unused ioUniversalMap,
+  ?!alloca:@allocaList unused ioAllocaList,
+  ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList,
   !result:@objectIR outResult
-{
-  [!?ioStaticEntityMap findOrAddStaticString !self.mLiteralString.string ?let staticStringIndex]
-  outResult = .literalString {!utf8Size:self.mLiteralString.string.utf8Length + 1 !index:staticStringIndex}
+) {
+  !?ioStaticEntityMap.findOrAddStaticString (!self.mLiteralString.string, ?let staticStringIndex)
+  outResult = .literalString (!utf8Size:self.mLiteralString.string.utf8Length + 1, !index:staticStringIndex)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————

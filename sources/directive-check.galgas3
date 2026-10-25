@@ -15,17 +15,17 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
+  rule <instruction> (?!@ast ioAST ,?!@instructionListAST ioInstructionList ) {
     $ctAssert$
     let @lstring checkMessage
     select
       checkMessage = "".here
     or
-      $"string"$ ?checkMessage
+      $"string"$ (?checkMessage)
     end
     $($
-    <expression> !?ioAST ?let @expressionAST expression
-    ioInstructionList += !@checkInstructionAST {!checkMessage.location !checkMessage !expression}
+    <expression> (!?ioAST, ?let @expressionAST expression)
+    ioInstructionList += !@checkInstructionAST (!checkMessage.location, checkMessage, expression)
     $)$
   }
 
@@ -37,48 +37,48 @@ syntax extension omnibus_syntax {
 //  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @checkInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [self.mExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+override proc @checkInstructionAST.noteInstructionTypesInPrecedenceGraph (?!@semanticTypePrecedenceGraph ioGraph ) {
+  self.mExpression.noteExpressionTypesInPrecedenceGraph (!?ioGraph)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @checkInstructionAST instructionSemanticAnalysis
-  ?self:let @omnibusType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
+override proc @checkInstructionAST.instructionSemanticAnalysis
+  (?self:let @omnibusType inSelfType,
+  ?routineAttributes:let @routineAttributes inRoutineAttributes,
+  ?context:let @semanticContext inContext,
+  ?mode:let @mode inMode,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap,
+  ?!alloca:@allocaList ioAllocaList,
   ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
-{
+) {
 //--- Analyze expression
   var @instructionListIR instructionGenerationList = @[]
-  [self.mExpression analyzeExpression
-    !self:inSelfType
-    !routineAttributes:inRoutineAttributes
-    !optionalTargetType:voidType ()
-    !context:inContext
-    !mode:inMode
-    !?temporary:ioTemporaries
-    !?staticEntityMap:ioStaticEntityMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:instructionGenerationList
+  self.mExpression.analyzeExpression
+    (!self:inSelfType,
+    !routineAttributes:inRoutineAttributes,
+    !optionalTargetType:voidType (),
+    !context:inContext,
+    !mode:inMode,
+    !?temporary:ioTemporaries,
+    !?staticEntityMap:ioStaticEntityMap,
+    !?variableMap:ioUniversalMap,
+    !?alloca:ioAllocaList,
+    !?instructionListIR:instructionGenerationList,
     ?result: let @objectIR expressionResult
-  ]
-  [inContext.mImplicitConversionToBooleanMap generateConvertToBooleanCode
-    !expressionResult
-    !self.mCheckMessage.location
-    !?ioTemporaries
-    !?instructionGenerationList
-    !?alloca: ioAllocaList
+  )
+  inContext.mImplicitConversionToBooleanMap.generateConvertToBooleanCode
+    (!expressionResult,
+    !self.mCheckMessage.location,
+    !?ioTemporaries,
+    !?instructionGenerationList,
+    !?alloca: ioAllocaList,
     ?let booleanOperand
-  ]
+  )
 //---
   switch booleanOperand
   case compileTime (boolValue) :

@@ -78,8 +78,8 @@ syntax extension omnibus_target_specific_syntax {
 
   //·····················································································································
 
-  rule <configuration_key> ?let @string inKey {
-    $identifier$ ?let key
+  rule <configuration_key> (?let @string inKey ) {
+    $identifier$ (?let key)
     if key.string != inKey then
       error (key : "invalid key (found '" + key + "', required '" + inKey + "'" fixit replace inKey)
     end
@@ -88,14 +88,14 @@ syntax extension omnibus_target_specific_syntax {
 
   //·····················································································································
 
-  rule <python_utility_tool_list> !@2lstringlist outPythonUtilityToolList {
-    <configuration_key> !"PYTHON_UTILITIES"
+  rule <python_utility_tool_list> (!@2lstringlist outPythonUtilityToolList ) {
+    <configuration_key> (!"PYTHON_UTILITIES")
     outPythonUtilityToolList = @[]
     repeat
       while
-      $"string"$ ?let relativePath
+      $"string"$ (?let relativePath)
       $->$
-      $"string"$ ?let destinationFile
+      $"string"$ (?let destinationFile)
       outPythonUtilityToolList += !relativePath !destinationFile
     end
   }
@@ -103,23 +103,23 @@ syntax extension omnibus_target_specific_syntax {
   //·····················································································································
 
   rule <configuration_start_symbol>
-    ?!@ast ioAST
-    !importClauseList:@lstringlist outImportedFileList
+    (?!@ast ioAST,
+    !importClauseList:@lstringlist outImportedFileList,
     !endOfSourceFile:@location outEndOfSourceFile
-  {
+  ) {
     let loc = @location.here
-    <python_utility_tool_list> ?let python_utilityToolList
-    <configuration_key> !"PYTHON_BUILD"
-    $"string"$ ?let python_build
-    <configuration_key> !"LINKER_SCRIPT"
-    $"string"$ ?let linkerScript
-    <configuration_key> !"PANIC_CODE_TYPE_NAME"
-    $\$type$ ?let panicCodeTypeName
-    <configuration_key> !"PANIC_LINE_TYPE_NAME"
-    $\$type$ ?let panicLineTypeName
-    <configuration_key> !"POINTER_BIT_COUNT"
-    $integer$ ?let pointerSize
-    <configuration_key> !"DYNAMIC_ARRAY"
+    <python_utility_tool_list> (?let python_utilityToolList)
+    <configuration_key> (!"PYTHON_BUILD")
+    $"string"$ (?let python_build)
+    <configuration_key> (!"LINKER_SCRIPT")
+    $"string"$ (?let linkerScript)
+    <configuration_key> (!"PANIC_CODE_TYPE_NAME")
+    $\$type$ (?let panicCodeTypeName)
+    <configuration_key> (!"PANIC_LINE_TYPE_NAME")
+    $\$type$ (?let panicLineTypeName)
+    <configuration_key> (!"POINTER_BIT_COUNT")
+    $integer$ (?let pointerSize)
+    <configuration_key> (!"DYNAMIC_ARRAY")
     let @bool handleDynamicArray
     select
       $yes$
@@ -128,11 +128,11 @@ syntax extension omnibus_target_specific_syntax {
       $no$
       handleDynamicArray = false
     end
-    <configuration_key> !"SYSTEM_STACK_SIZE"
-    $integer$ ?let systemStackSize
-    <configuration_key> !"NOP"
-    $"string"$ ?let nopInstructionStringInLLVM
-    <configuration_key> !"BIT_BAND"
+    <configuration_key> (!"SYSTEM_STACK_SIZE")
+    $integer$ (?let systemStackSize)
+    <configuration_key> (!"NOP")
+    $"string"$ (?let nopInstructionStringInLLVM)
+    <configuration_key> (!"BIT_BAND")
     let @lbigint bitbandRegisterBaseAddress
     let @lbigint bitbandRegisterEndAddress
     let @lbigint bitbandRegisterRelocationAddress
@@ -140,148 +140,148 @@ syntax extension omnibus_target_specific_syntax {
     let @lbigint bitbandRegisterBitMultiplier
     select
       $no$
-      bitbandRegisterBaseAddress = @{!0 !.here}
-      bitbandRegisterEndAddress = @{!0 !.here}
-      bitbandRegisterRelocationAddress = @{!0 !.here}
-      bitbandRegisterOffsetMultiplier = @{!0 !.here}
-      bitbandRegisterBitMultiplier = @{!0 !.here}
+      bitbandRegisterBaseAddress = @(!0, .here)
+      bitbandRegisterEndAddress = @(!0, .here)
+      bitbandRegisterRelocationAddress = @(!0, .here)
+      bitbandRegisterOffsetMultiplier = @(!0, .here)
+      bitbandRegisterBitMultiplier = @(!0, .here)
     or
-      $integer$ ?bitbandRegisterBaseAddress
-      $integer$ ?bitbandRegisterEndAddress
-      $integer$ ?bitbandRegisterRelocationAddress
-      $integer$ ?bitbandRegisterOffsetMultiplier
-      $integer$ ?bitbandRegisterBitMultiplier
+      $integer$ (?bitbandRegisterBaseAddress)
+      $integer$ (?bitbandRegisterEndAddress)
+      $integer$ (?bitbandRegisterRelocationAddress)
+      $integer$ (?bitbandRegisterOffsetMultiplier)
+      $integer$ (?bitbandRegisterBitMultiplier)
     end
-    <configuration_key> !"SERVICE_HANDLER"
-    $"string"$ ?let serviceHandler
-    <configuration_key> !"SERVICE_SYSTEM_STACK_SIZE"
-    $integer$ ?let servicePushedRegisterByteSize
-    <configuration_key> !"SERVICE_DISPATCHER_HEADER"
-    $"string"$ ?let serviceDispatcherHeader
-    <configuration_key> !"SERVICE_DISPATCHER_ENTRY"
-    $"string"$ ?let serviceDispatcherEntry
-    <configuration_key> !"SERVICE_ENTRY_NO_RETURNED_VALUE"
-    $"string"$ ?let serviceEntryNoReturnedValue
-    <configuration_key> !"SERVICE_ENTRY_WITH_RETURNED_VALUE"
-    $"string"$ ?let serviceEntryReturnValue
-    <configuration_key> !"SECTION_HANDLER"
-    $"string"$ ?let sectionHandler
-    <configuration_key> !"SECTION_SYSTEM_STACK_SIZE"
-    $integer$ ?let sectionPushedRegisterByteSize
-    <configuration_key> !"SECTION_DISPATCHER_HEADER"
-    $"string"$ ?let sectionDispatcherHeader
-    <configuration_key> !"SECTION_DISPATCHER_ENTRY"
-    $"string"$ ?let sectionDispatcherEntry
-    <configuration_key> !"SECTION_ENTRY_FROM_UNKNOWN_MODE"
-    $"string"$ ?let sectionDispatcherInvocationFromAnyMode
-    <configuration_key> !"SECTION_ENTRY_FROM_USER_MODE"
-    $"string"$ ?let sectionDispatcherInvocationFromUserMode
-    <configuration_key> !"INTERRUPT_HANDLER"
-    $"string"$ ?let xtrInterruptHandler
-    <configuration_key> !"INTERRUPT_USER_STACK_SIZE"
-    $integer$ ?let stackedUserRegisterOnInterruptByteSize
-    <configuration_key> !"UNUSED_INTERRUPT"
-    $"string"$ ?let undefinedInterruptHandler
-    <configuration_key> !"CPP_FILES"
+    <configuration_key> (!"SERVICE_HANDLER")
+    $"string"$ (?let serviceHandler)
+    <configuration_key> (!"SERVICE_SYSTEM_STACK_SIZE")
+    $integer$ (?let servicePushedRegisterByteSize)
+    <configuration_key> (!"SERVICE_DISPATCHER_HEADER")
+    $"string"$ (?let serviceDispatcherHeader)
+    <configuration_key> (!"SERVICE_DISPATCHER_ENTRY")
+    $"string"$ (?let serviceDispatcherEntry)
+    <configuration_key> (!"SERVICE_ENTRY_NO_RETURNED_VALUE")
+    $"string"$ (?let serviceEntryNoReturnedValue)
+    <configuration_key> (!"SERVICE_ENTRY_WITH_RETURNED_VALUE")
+    $"string"$ (?let serviceEntryReturnValue)
+    <configuration_key> (!"SECTION_HANDLER")
+    $"string"$ (?let sectionHandler)
+    <configuration_key> (!"SECTION_SYSTEM_STACK_SIZE")
+    $integer$ (?let sectionPushedRegisterByteSize)
+    <configuration_key> (!"SECTION_DISPATCHER_HEADER")
+    $"string"$ (?let sectionDispatcherHeader)
+    <configuration_key> (!"SECTION_DISPATCHER_ENTRY")
+    $"string"$ (?let sectionDispatcherEntry)
+    <configuration_key> (!"SECTION_ENTRY_FROM_UNKNOWN_MODE")
+    $"string"$ (?let sectionDispatcherInvocationFromAnyMode)
+    <configuration_key> (!"SECTION_ENTRY_FROM_USER_MODE")
+    $"string"$ (?let sectionDispatcherInvocationFromUserMode)
+    <configuration_key> (!"INTERRUPT_HANDLER")
+    $"string"$ (?let xtrInterruptHandler)
+    <configuration_key> (!"INTERRUPT_USER_STACK_SIZE")
+    $integer$ (?let stackedUserRegisterOnInterruptByteSize)
+    <configuration_key> (!"UNUSED_INTERRUPT")
+    $"string"$ (?let undefinedInterruptHandler)
+    <configuration_key> (!"CPP_FILES")
     var @lstringlist C_definitionFiles = @[]
     repeat
     while
-      $"string"$ ?let fileRelativePath
+      $"string"$ (?let fileRelativePath)
       C_definitionFiles += !fileRelativePath
     end
-    <configuration_key> !"S_FILES"
+    <configuration_key> (!"S_FILES")
     var @lstringlist S_definitionFiles = @[]
     repeat
     while
-      $"string"$ ?let fileRelativePath
+      $"string"$ (?let fileRelativePath)
       S_definitionFiles += !fileRelativePath
     end
-    <configuration_key> !"LL_FILES"
+    <configuration_key> (!"LL_FILES")
     var @lstringlist LL_definitionFiles = @[]
     repeat
     while
-      $"string"$ ?let fileRelativePath
+      $"string"$ (?let fileRelativePath)
       LL_definitionFiles += !fileRelativePath
     end
     outImportedFileList = @[]
-    <configuration_key> !"OMNIBUS_FILES"
+    <configuration_key> (!"OMNIBUS_FILES")
     repeat
     while
-      $"string"$ ?let relativeFilePath
+      $"string"$ (?let relativeFilePath)
       outImportedFileList += !relativeFilePath
     end
-    <interruptConfigList> ?let interruptionConfigurationList ?let interruptConstantList
+    <interruptConfigList> (?let interruptionConfigurationList, ?let interruptConstantList)
     let @uint ptrSize
     if pointerSize.bigint == 0 then
       error (pointerSize : "zero size pointer is invalid" spoil ptrSize)
     else
       ptrSize = pointerSize.bigint.uint
     end
-    let parameters = @targetParameters {
-      !loc
-      !python_utilityToolList
-      !python_build
-      !linkerScript
-      !ptrSize
-      !handleDynamicArray
-      !systemStackSize
-      !stackedUserRegisterOnInterruptByteSize
-      !nopInstructionStringInLLVM
-      !bitbandRegisterBaseAddress
-      !bitbandRegisterEndAddress
-      !bitbandRegisterRelocationAddress
-      !bitbandRegisterOffsetMultiplier
-      !bitbandRegisterBitMultiplier
-      !sectionHandler
-      !sectionPushedRegisterByteSize
-      !sectionDispatcherHeader
-      !sectionDispatcherEntry
-      !sectionDispatcherInvocationFromAnyMode
-      !sectionDispatcherInvocationFromUserMode
-      !C_definitionFiles
-      !S_definitionFiles
-      !LL_definitionFiles
-      !xtrInterruptHandler
-      !undefinedInterruptHandler
-      !serviceHandler
-      !servicePushedRegisterByteSize
-      !serviceDispatcherEntry
-      !serviceDispatcherHeader
-      !serviceEntryNoReturnedValue
-      !serviceEntryReturnValue
-   }
-   ioAST.mDeclarationListAST += !@configurationDeclarationAST {
-      !panicCodeTypeName
-      !panicLineTypeName
-      !parameters
-      !interruptionConfigurationList
-    }
+    let parameters = @targetParameters (
+      !loc,
+      python_utilityToolList,
+      python_build,
+      linkerScript,
+      ptrSize,
+      handleDynamicArray,
+      systemStackSize,
+      stackedUserRegisterOnInterruptByteSize,
+      nopInstructionStringInLLVM,
+      bitbandRegisterBaseAddress,
+      bitbandRegisterEndAddress,
+      bitbandRegisterRelocationAddress,
+      bitbandRegisterOffsetMultiplier,
+      bitbandRegisterBitMultiplier,
+      sectionHandler,
+      sectionPushedRegisterByteSize,
+      sectionDispatcherHeader,
+      sectionDispatcherEntry,
+      sectionDispatcherInvocationFromAnyMode,
+      sectionDispatcherInvocationFromUserMode,
+      C_definitionFiles,
+      S_definitionFiles,
+      LL_definitionFiles,
+      xtrInterruptHandler,
+      undefinedInterruptHandler,
+      serviceHandler,
+      servicePushedRegisterByteSize,
+      serviceDispatcherEntry,
+      serviceDispatcherHeader,
+      serviceEntryNoReturnedValue,
+      serviceEntryReturnValue
+   )
+   ioAST.mDeclarationListAST += !@configurationDeclarationAST (
+      !panicCodeTypeName,
+      panicLineTypeName,
+      parameters,
+      interruptionConfigurationList
+    )
     outEndOfSourceFile = .here
-    ioAST.mDeclarationListAST += !@enumerationDeclarationAST {
-      ! @{!isrSlotTypeName () !xtrInterruptHandler.location}
-      !interruptConstantList
-    }
+    ioAST.mDeclarationListAST += !@enumerationDeclarationAST (
+      ! @(!isrSlotTypeName (), xtrInterruptHandler.location),
+      interruptConstantList
+    )
   }
 
  //·····················································································································
 
   rule <interruptConfigList>
-    !@interruptionConfigurationList interruptionConfigurationList
+    (!@interruptionConfigurationList interruptionConfigurationList,
     !@enumerationConstantList outEnumerationConstantList
-  {
+  ) {
     interruptionConfigurationList = @[]
     outEnumerationConstantList = @[]
-    <configuration_key> !"INTERRUPTS"
+    <configuration_key> (!"INTERRUPTS")
     repeat
     while
-      $identifier$ ?let interruptName
+      $identifier$ (?let interruptName)
       let @interruptionPanicCode interruptionPanicCode
       select
         interruptionPanicCode = .noCode
       or
         $->$
-        $integer$ ?let panicCode
-        interruptionPanicCode = .code {!value:panicCode}
+        $integer$ (?let panicCode)
+        interruptionPanicCode = .code (!value:panicCode)
         outEnumerationConstantList += !interruptName !panicCode
       end
       interruptionConfigurationList += !interruptName !interruptionPanicCode
@@ -296,35 +296,35 @@ syntax extension omnibus_target_specific_syntax {
 //!  PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once configurationNodeNameForPrecedenceGraph -> @string {
+func %once configurationNodeNameForPrecedenceGraph () -> @string {
   result = "config"
 }
 
 //·······················································································································
 
-func %once isrSlotTypeName -> @string {
+func %once isrSlotTypeName () -> @string {
   result = "ISRSlot"
 }
 
 //·······················································································································
 
-override proc @configurationDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  let rootNode =  @lstring {!configurationNodeNameForPrecedenceGraph () !self.mPanicCodeTypeName.location}
-  [!?ioGraph addNode !rootNode !self]
-  [!?ioGraph addEdge !from: rootNode !to: self.mPanicCodeTypeName]
-  [!?ioGraph addEdge !from: rootNode !to: self.mPanicCodeTypeName]
-  [!?ioGraph addEdge !from: rootNode !to: ctBoolTypeName ().nowhere]
+override proc @configurationDeclarationAST.enterInPrecedenceGraph (?!@semanticTypePrecedenceGraph ioGraph ) {
+  let rootNode =  @lstring (!configurationNodeNameForPrecedenceGraph (), self.mPanicCodeTypeName.location)
+  !?ioGraph.addNode (!rootNode, !self)
+  !?ioGraph.addEdge (!from: rootNode, !to: self.mPanicCodeTypeName)
+  !?ioGraph.addEdge (!from: rootNode, !to: self.mPanicCodeTypeName)
+  !?ioGraph.addEdge (!from: rootNode, !to: ctBoolTypeName ().nowhere)
 }
 
 //·······················································································································
 
-override func @configurationDeclarationAST locationForErrorSignaling -> @location outLocation {
+override func @configurationDeclarationAST.locationForErrorSignaling () -> @location outLocation {
   outLocation = self.mPanicCodeTypeName.location
 }
 
 //·······················································································································
 
-override func @configurationDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+override func @configurationDeclarationAST.keyRepresentationForErrorSignaling () -> @string outRepresentation {
   outRepresentation = configurationNodeNameForPrecedenceGraph ()
 }
 
@@ -333,29 +333,29 @@ override func @configurationDeclarationAST keyRepresentationForErrorSignaling ->
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 // Duplicate configuration is detected in noteTypesInPrecedenceGraph
 
-override proc @configurationDeclarationAST enterInContext
-  ?!context:@semanticContext ioContext
-  ?!@declarationDecorationList unused ioDecoratedDeclarationList
-  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
-  ?!@routineListIR unused ioRoutineListIR
-  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
-  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
-  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
+override proc @configurationDeclarationAST.enterInContext
+  (?!context:@semanticContext ioContext,
+  ?!@declarationDecorationList unused ioDecoratedDeclarationList,
+  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList,
+  ?!@routineListIR unused ioRoutineListIR,
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap,
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap,
+  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST,
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
-{
+) {
 //---
   if ioContext.mTargetParameters.mPointerSize != 0 then
     error (self.mTargetParameters.mConfigurationLocation : "duplicate configuration")
   end
   ioContext.mTargetParameters = self.mTargetParameters
 //--- Panic code type
-  [ioContext.mTypeMap searchType
-    !lkey:self.mPanicCodeTypeName
+  ioContext.mTypeMap.searchType
+    (!lkey:self.mPanicCodeTypeName,
     ?type:let panicCodeType
-  ]
+  )
   ioContext.mPanicCodeType = panicCodeType
   if ioContext.mPanicCodeType.kind.isInteger then
-    [ioContext.mPanicCodeType.kind extractInteger ?2* ?unsigned:let unsigned ?1*]
+    ioContext.mPanicCodeType.kind.extractInteger (?2*, ?unsigned:let unsigned, ?1*)
     if not unsigned then
       error (self.mPanicCodeTypeName : "this type should be an unsigned integer type")
     end
@@ -363,13 +363,13 @@ override proc @configurationDeclarationAST enterInContext
     error (self.mPanicCodeTypeName : "this type should be an unsigned integer type")
   end
 //--- Panic line type
-  [ioContext.mTypeMap searchType
-    !lkey:self.mPanicLineTypeName
+  ioContext.mTypeMap.searchType
+    (!lkey:self.mPanicLineTypeName,
     ?type:let panicLineType
-  ]
+  )
   ioContext.mPanicLineType = panicLineType
   if ioContext.mPanicLineType.kind.isInteger then
-    [ioContext.mPanicLineType.kind extractInteger ?2* ?unsigned:let unsigned ?1*]
+    ioContext.mPanicLineType.kind.extractInteger (?2*, ?unsigned:let unsigned, ?1*)
     if not unsigned then
       error (self.mPanicLineTypeName : "this type should be an unsigned integer type")
     end
@@ -379,7 +379,7 @@ override proc @configurationDeclarationAST enterInContext
 //--------------------------------- Interrupt panic codes
   var @stringset panicCodeSet = @[]
   for (name panicCode) in self.mInterruptionConfigurationList do
-    [!?ioContext.mAvailableInterruptMap insertKey !name !panicCode]
+    !?ioContext.mAvailableInterruptMap.insertKey (!name, !panicCode)
     switch panicCode
     case noCode :
     case code (value) :

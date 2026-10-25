@@ -14,11 +14,11 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
+  rule <instruction> (?!@ast ioAST ,?!@instructionListAST ioInstructionList ) {
     $panic$
     let loc = @location.here
-    <expression> !?ioAST ?let @expressionAST codeExpression
-    ioInstructionList += !@panicInstructionAST {!loc !codeExpression}
+    <expression> (!?ioAST, ?let @expressionAST codeExpression)
+    ioInstructionList += !@panicInstructionAST (!loc, codeExpression)
   }
 
   //·····················································································································
@@ -29,44 +29,44 @@ syntax extension omnibus_syntax {
 //  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @panicInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [self.mCodeExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+override proc @panicInstructionAST.noteInstructionTypesInPrecedenceGraph (?!@semanticTypePrecedenceGraph ioGraph ) {
+  self.mCodeExpression.noteExpressionTypesInPrecedenceGraph (!?ioGraph)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @panicInstructionAST instructionSemanticAnalysis
-  ?self:let @omnibusType inSelfType
-  ?routineAttributes:let @routineAttributes unused inRoutineAttributes
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
+override proc @panicInstructionAST.instructionSemanticAnalysis
+  (?self:let @omnibusType inSelfType,
+  ?routineAttributes:let @routineAttributes unused inRoutineAttributes,
+  ?context:let @semanticContext inContext,
+  ?mode:let @mode inMode,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap,
+  ?!alloca:@allocaList ioAllocaList,
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-{
+) {
 //--- Panic allowed ?
   if inMode == .panicMode then
     error (self.mInstructionLocation : "operations that can generate panic are not allowed in " + panicModeName () + " mode")
   end
 //--- Analyze expression
   var @instructionListIR unusedInstructionListIR = @[]
-  [self.mCodeExpression analyzeExpression
-    !self:inSelfType
-    !routineAttributes: @()
-    !optionalTargetType:inContext.mPanicCodeType
-    !context:inContext
-    !mode:inMode
-    !?temporary:ioTemporaries
-    !?staticEntityMap:ioStaticEntityMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:unusedInstructionListIR
+  self.mCodeExpression.analyzeExpression
+    (!self:inSelfType,
+    !routineAttributes: @(),
+    !optionalTargetType:inContext.mPanicCodeType,
+    !context:inContext,
+    !mode:inMode,
+    !?temporary:ioTemporaries,
+    !?staticEntityMap:ioStaticEntityMap,
+    !?variableMap:ioUniversalMap,
+    !?alloca:ioAllocaList,
+    !?instructionListIR:unusedInstructionListIR,
     ?result:let @objectIR result
-  ]
+  )
 //--- Expression type check
 //--- Expression is static ?
   if (unusedInstructionListIR.count > 0)
@@ -74,16 +74,16 @@ override proc @panicInstructionAST instructionSemanticAnalysis
      || (result.omnibusTypeDescriptionName != ctIntegerTypeName ()) then
     error (self.mInstructionLocation : "throw expression should be a literal integer")
   else
-    [inContext.mPanicCodeType.kind extractInteger ?min:let min ?max:let max ?2*]
-    [result extractLiteralInteger ?1* ?value:let throwValue]
+    inContext.mPanicCodeType.kind.extractInteger (?min:let min, ?max:let max, ?2*)
+    result.extractLiteralInteger (?1*, ?value:let throwValue)
     if (throwValue < min) || (throwValue > max) then
       error (self.mInstructionLocation
       : "panic expression cannot be represented by an `" + inContext.mPanicCodeType.omnibusTypeDescriptionName)
     elsif not [option omnibus_options.noPanicGeneration value] then
-      ioInstructionGenerationList += !@panicInstructionIR {
-        !self.mInstructionLocation
-        !throwValue
-      }
+      ioInstructionGenerationList += !@panicInstructionIR (
+        !self.mInstructionLocation,
+        throwValue
+      )
     end
   end
 }
@@ -99,11 +99,11 @@ class @panicInstructionIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @panicInstructionIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext inGenerationContext
+override proc @panicInstructionIR.llvmInstructionCode
+  (?!@string ioLLVMcode,
+  ?let @generationContext inGenerationContext,
   ?!@generationAdds unused ioGenerationAdds
-{
+) {
   ioLLVMcode += "  call void @" + panicRoutineNameForLocationFile (!self.mThrowLocation).assemblerRepresentation + " ("
   ioLLVMcode += inGenerationContext.mPanicLineLLVMType.llvmTypeName + " " + self.mThrowLocation.endLine + ", "
   ioLLVMcode += inGenerationContext.mPanicCodeLLVMType.llvmTypeName + " " + self.mPanicCode + ")\n"
@@ -111,10 +111,10 @@ override proc @panicInstructionIR llvmInstructionCode
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @panicInstructionIR enterAccessibleEntities
-  ?!@stringset ioInvokedRoutineSet
+override proc @panicInstructionIR.enterAccessibleEntities
+  (?!@stringset ioInvokedRoutineSet,
   ?!@uint unused ioMaxBranchOfOnInstructions
-{
+) {
   ioInvokedRoutineSet ++= panicRoutineNameForLocationFile (!self.mThrowLocation)
 }
 

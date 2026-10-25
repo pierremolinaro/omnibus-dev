@@ -22,13 +22,13 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <declaration> ?!@ast ioAST {
-    <function_declaration> !?ioAST !receiverTypeName: "".nowhere
+  rule <declaration> (?!@ast ioAST ) {
+    <function_declaration> (!?ioAST, !receiverTypeName: "".nowhere)
   }
 
   //·····················································································································
 
-  rule <function_declaration> ?!@ast ioAST ?receiverTypeName: let @lstring inReceiverTypeName {
+  rule <function_declaration> (?!@ast ioAST ,?receiverTypeName: let @lstring inReceiverTypeName ) {
   //--- Public ?
     let @bool publicAccess
     select
@@ -37,38 +37,38 @@ syntax extension omnibus_syntax {
       $public$
       publicAccess = true
     end
-    <function_header>
-      !?ioAST
-      ?mode:let @mode mode
-      ?name:let procName
-      ?attributes:let attributeList
-      ?formalArguments:let procFormalArgumentList
+    <function_header>(
+      !?ioAST,
+      ?mode:let @mode mode,
+      ?name:let procName,
+      ?attributes:let attributeList,
+      ?formalArguments:let procFormalArgumentList)
     let @lstring returnTypeName
     select
       returnTypeName = "".here
     or
       $->$
-      <type_definition>!?ioAST  ?returnTypeName
+      <type_definition>(!?ioAST, ?returnTypeName)
     end
     ${$
-    <instructionList> !?ioAST ?let instructionList
+    <instructionList> (!?ioAST, ?let instructionList)
     $}$
-    ioAST.mDeclarationListAST += !@functionDeclarationAST {
-      !mode
-      !publicAccess
-      !inReceiverTypeName
-      !procName
-      !attributeList
-      !procFormalArgumentList
-      !returnTypeName
-      !instructionList
-      !.here
-    }
+    ioAST.mDeclarationListAST += !@functionDeclarationAST (
+      !mode,
+      publicAccess,
+      inReceiverTypeName,
+      procName,
+      attributeList,
+      procFormalArgumentList,
+      returnTypeName,
+      instructionList,
+      .here
+    )
   }
 
   //·····················································································································
 
-  rule <mode> !@mode outMode {
+  rule <mode> (!@mode outMode ) {
     select
       outMode = .anyMode
     or
@@ -121,22 +121,22 @@ syntax extension omnibus_syntax {
   //·····················································································································
 
   rule <function_header>
-    ?!@ast ioAST
-    !mode:@mode outMode
-    !name:@lstring outProcName
-    !attributes:@lstringlist outAttributeList
+    (?!@ast ioAST,
+    !mode:@mode outMode,
+    !name:@lstring outProcName,
+    !attributes:@lstringlist outAttributeList,
     !formalArguments:@routineFormalArgumentListAST outProcFormalArgumentList
-  {
+  ) {
     $func$
-    $identifier$ ?outProcName
-    <mode> ?outMode
+    $identifier$ (?outProcName)
+    <mode> (?outMode)
     outAttributeList = @[]
     repeat
     while
-      $@attribute$ ?let attribute
+      $@attribute$ (?let attribute)
       outAttributeList += !attribute
     end
-    <procedure_formal_arguments> !?ioAST ?outProcFormalArgumentList
+    <procedure_formal_arguments> (!?ioAST, ?outProcFormalArgumentList)
   }
 
   //·····················································································································
@@ -147,7 +147,7 @@ syntax extension omnibus_syntax {
 //  NOTE TYPES IN PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @functionDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @functionDeclarationAST.enterInPrecedenceGraph (?!@semanticTypePrecedenceGraph ioGraph ) {
   var s = ""
   if self.mReceiverTypeName.string != "" then
     s += self.mReceiverTypeName.string + "."
@@ -157,31 +157,31 @@ override proc @functionDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrec
     s += formalArgumentPassingMode.formalPassingModeString + selector + ":"
   end
   s += ")"
-  let nodeName = @lstring {!s !self.mFunctionName.location}
-  [!?ioGraph addNode !nodeName !self]
-  [!?ioGraph addEdge !from: nodeName !to: compileTimeDeclarationBarrier ()]
+  let nodeName = @lstring (!s, self.mFunctionName.location)
+  !?ioGraph.addNode (!nodeName, !self)
+  !?ioGraph.addEdge (!from: nodeName, !to: compileTimeDeclarationBarrier ())
 //---
   for (* * formalArgumentTypeName *) in self.mFunctionFormalArgumentList do
-    [!?ioGraph noteNode !formalArgumentTypeName]
+    !?ioGraph.noteNode (!formalArgumentTypeName)
   end
-  [self.mFunctionInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
+  self.mFunctionInstructionList.noteInstructionListTypesInPrecedenceGraph (!?ioGraph)
   if self.mReceiverTypeName.string != "" then
-    [!?ioGraph noteNode !self.mReceiverTypeName]
+    !?ioGraph.noteNode (!self.mReceiverTypeName)
   end
   if self.mFunctionReturnTypeName.string != "" then
-    [!?ioGraph noteNode !self.mFunctionReturnTypeName]
+    !?ioGraph.noteNode (!self.mFunctionReturnTypeName)
   end
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override func @functionDeclarationAST keyRepresentationForErrorSignaling -> @string {
+override func @functionDeclarationAST.keyRepresentationForErrorSignaling () -> @string {
   result = "function " + self.mReceiverTypeName + "." + self.mFunctionName
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override func @functionDeclarationAST locationForErrorSignaling -> @location {
+override func @functionDeclarationAST.locationForErrorSignaling () -> @location {
   result = self.mFunctionName.location
 }
 
@@ -189,20 +189,20 @@ override func @functionDeclarationAST locationForErrorSignaling -> @location {
 //  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @functionDeclarationAST enterInContext
-  ?!context:@semanticContext ioContext
-  ?!@declarationDecorationList unused ioDecoratedDeclarationList
-  ?!@decoratedRegularRoutineList ioDecoratedRoutineList
-  ?!@routineListIR unused ioRoutineListIR
-  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
-  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
-  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
+override proc @functionDeclarationAST.enterInContext
+  (?!context:@semanticContext ioContext,
+  ?!@declarationDecorationList unused ioDecoratedDeclarationList,
+  ?!@decoratedRegularRoutineList ioDecoratedRoutineList,
+  ?!@routineListIR unused ioRoutineListIR,
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap,
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap,
+  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST,
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
-{
+) {
 //--- Signature
-  routineTypedSignature (!?ioContext.mTypeMap !self.mFunctionFormalArgumentList ?let signature)
+  routineTypedSignature (!?ioContext.mTypeMap, !self.mFunctionFormalArgumentList, ?let signature)
 //--- Return type
-  [!?ioContext.mTypeMap makeOptionalEntry !self.mFunctionReturnTypeName ?let returnTypeProxy]
+  !?ioContext.mTypeMap.makeOptionalEntry (!self.mFunctionReturnTypeName, ?let returnTypeProxy)
 //--- Attributes
   var warnIfUnused = true
   var exportedFunction = false
@@ -237,15 +237,15 @@ override proc @functionDeclarationAST enterInContext
 //---------------- Enter in routine map (for function availability)
   let routineLLVMNameDict = [self.mMode routineLLVMDictionaryForFunction !functionLLVMName]
   let routineMangledName = [signature mangledName !receiverTypeName: self.mReceiverTypeName.string !functionName: self.mFunctionName]
-  [!?ioContext.mRoutineMap insertKey
-    !routineMangledName
-    !self.mPublicFunction
-    !signature
-    !returnTypeProxy
-    !routineLLVMNameDict
-    !exportedFunction
+  !?ioContext.mRoutineMap.insertKey
+    (!routineMangledName,
+    !self.mPublicFunction,
+    !signature,
+    !returnTypeProxy,
+    !routineLLVMNameDict,
+    !exportedFunction,
     !self.mMode
-  ]
+  )
 //---------------- Add decorated declaration (for function semantic analysis)
   ioDecoratedRoutineList +=
     !receiverTypeName: self.mReceiverTypeName
@@ -288,46 +288,46 @@ dict @routineLLVMNameDict : @mode {
 
 //·······················································································································
 
-setter @routineMapForContext addFunctionWithoutArgument
-  ?omnibusTypeDescriptionName: let @string inOmnibusTypeDescriptionName
-  ?llvmBaseTypeName:let @string inLLVMBaseTypeName
-  ?methodName:let @lstring inMethodName
-  ?mode:let @mode inMode
-  ?resultTypeProxy:let @unifiedTypeMapEntry inResultType
+mutating proc @routineMapForContext.addFunctionWithoutArgument
+  (?omnibusTypeDescriptionName: let @string inOmnibusTypeDescriptionName,
+  ?llvmBaseTypeName:let @string inLLVMBaseTypeName,
+  ?methodName:let @lstring inMethodName,
+  ?mode:let @mode inMode,
+  ?resultTypeProxy:let @unifiedTypeMapEntry inResultType,
   !routineLLVMName:@lstring outRoutineLLVMName
-{
+) {
   let @routineFormalArgumentListAST formalArguments = @[]
-  let routineMangledName = @lstring {
-    !inOmnibusTypeDescriptionName + "." + inMethodName.string + [formalArguments routineSignature !inMethodName]
-    !inMethodName
-  }
+  let routineMangledName = @lstring (
+    !inOmnibusTypeDescriptionName + "." + inMethodName.string + [formalArguments routineSignature !inMethodName],
+    inMethodName
+  )
   outRoutineLLVMName = routineMangledNameFromAST (!inLLVMBaseTypeName !inMethodName !formalArguments)
   let modeDictionary = [inMode routineLLVMDictionaryForFunction !outRoutineLLVMName]
-  [!?self insertKey
-    !routineMangledName
-    !true
-    !@[]
-    !inResultType
-    !modeDictionary
-    !false
+  !?self.insertKey (
+    !routineMangledName,
+    !true,
+    !@[],
+    !inResultType,
+    !modeDictionary,
+    !false,
     !inMode
-  ]
+  )
 }
 
 //·······················································································································
 
-setter @routineMapForContext addFunctionWithInputArgument
-  ?omnibusTypeDescriptionName: let @string inOmnibusTypeDescriptionName
-  ?!context:@semanticContext ioContext
-  ?llvmBaseTypeName:let @string inLLVMBaseTypeName
-  ?methodName:let @lstring inMethodName
-  ?mode:let @mode inMode
-  ?inputArgumentSelector:let @string inInputSelector
-  ?inputArgumentTypeProxy:let @unifiedTypeMapEntry inInputArgumentTypeProxy
-  ?inputArgumentName: let @string inInputArgumentName
-  ?resultTypeProxy:let @unifiedTypeMapEntry inResultType
+mutating proc @routineMapForContext.addFunctionWithInputArgument
+  (?omnibusTypeDescriptionName: let @string inOmnibusTypeDescriptionName,
+  ?!context:@semanticContext ioContext,
+  ?llvmBaseTypeName:let @string inLLVMBaseTypeName,
+  ?methodName:let @lstring inMethodName,
+  ?mode:let @mode inMode,
+  ?inputArgumentSelector:let @string inInputSelector,
+  ?inputArgumentTypeProxy:let @unifiedTypeMapEntry inInputArgumentTypeProxy,
+  ?inputArgumentName: let @string inInputArgumentName,
+  ?resultTypeProxy:let @unifiedTypeMapEntry inResultType,
   !routineLLVMName:@lstring outRoutineLLVMName
-{
+) {
   let argumentList = @routineFormalArgumentListAST @[
     @(
       .input,
@@ -336,41 +336,41 @@ setter @routineMapForContext addFunctionWithInputArgument
       inInputArgumentName.nowhere
     )
   ]
-  routineTypedSignature (!?ioContext.mTypeMap !argumentList ?let signature)
-  let routineMangledName = @lstring {
-    !inOmnibusTypeDescriptionName + "." + inMethodName.string + [argumentList routineSignature !inMethodName]
-    !inMethodName
-  }
+  routineTypedSignature (!?ioContext.mTypeMap, !argumentList, ?let signature)
+  let routineMangledName = @lstring (
+    !inOmnibusTypeDescriptionName + "." + inMethodName.string + [argumentList routineSignature !inMethodName],
+    inMethodName
+  )
   outRoutineLLVMName = routineMangledNameFromAST (!inLLVMBaseTypeName !inMethodName !argumentList)
   let modeDictionary = [inMode routineLLVMDictionaryForFunction !outRoutineLLVMName]
-  [!?self insertKey
-    !routineMangledName
-    !true
-    !signature
-    !inResultType
-    !modeDictionary
-    !false
+  !?self.insertKey (
+    !routineMangledName,
+    !true,
+    !signature,
+    !inResultType,
+    !modeDictionary,
+    !false,
     !inMode
-  ]
+  )
 }
 
 //·······················································································································
 
-setter @routineMapForContext addFunctionWithTwoInputArguments
-  ?omnibusTypeDescriptionName: let @string inOmnibusTypeDescriptionName
-  ?!context:@semanticContext ioContext
-  ?llvmBaseTypeName:let @string inLLVMBaseTypeName
-  ?methodName:let @lstring inMethodName
-  ?mode:let @mode inMode
-  ?inputArgumentSelector1:let @string inInputSelector1
-  ?inputArgumentTypeProxy1:let @unifiedTypeMapEntry inInputArgumentTypeProxy1
-  ?inputArgumentName1: let @string inInputArgumentName1
-  ?inputArgumentSelector2:let @string inInputSelector2
-  ?inputArgumentTypeProxy2:let @unifiedTypeMapEntry inInputArgumentTypeProxy2
-  ?inputArgumentName2: let @string inInputArgumentName2
-  ?resultTypeProxy:let @unifiedTypeMapEntry inResultType
+mutating proc @routineMapForContext.addFunctionWithTwoInputArguments
+  (?omnibusTypeDescriptionName: let @string inOmnibusTypeDescriptionName,
+  ?!context:@semanticContext ioContext,
+  ?llvmBaseTypeName:let @string inLLVMBaseTypeName,
+  ?methodName:let @lstring inMethodName,
+  ?mode:let @mode inMode,
+  ?inputArgumentSelector1:let @string inInputSelector1,
+  ?inputArgumentTypeProxy1:let @unifiedTypeMapEntry inInputArgumentTypeProxy1,
+  ?inputArgumentName1: let @string inInputArgumentName1,
+  ?inputArgumentSelector2:let @string inInputSelector2,
+  ?inputArgumentTypeProxy2:let @unifiedTypeMapEntry inInputArgumentTypeProxy2,
+  ?inputArgumentName2: let @string inInputArgumentName2,
+  ?resultTypeProxy:let @unifiedTypeMapEntry inResultType,
   !routineLLVMName:@lstring outRoutineLLVMName
-{
+) {
   let argumentList = @routineFormalArgumentListAST @[
     @(
       .input,
@@ -387,24 +387,24 @@ setter @routineMapForContext addFunctionWithTwoInputArguments
   ]
   outRoutineLLVMName = routineMangledNameFromAST (
     !inLLVMBaseTypeName
-    ! @{!inMethodName !.nowhere}
+    ! @(!inMethodName, .nowhere)
     !argumentList
   )
-  routineTypedSignature (!?ioContext.mTypeMap !argumentList ?let signature)
-  let routineMangledName = @lstring {
-    !inOmnibusTypeDescriptionName + "." + inMethodName.string + [argumentList routineSignature !inMethodName]
-    !inMethodName
-  }
+  routineTypedSignature (!?ioContext.mTypeMap, !argumentList, ?let signature)
+  let routineMangledName = @lstring (
+    !inOmnibusTypeDescriptionName + "." + inMethodName.string + [argumentList routineSignature !inMethodName],
+    inMethodName
+  )
   let modeDictionary = [inMode routineLLVMDictionaryForFunction !outRoutineLLVMName]
-  [!?self insertKey
-    !routineMangledName
-    !true
-    !signature
-    !inResultType
-    !modeDictionary
-    !false
+  !?self.insertKey (
+    !routineMangledName,
+    !true,
+    !signature,
+    !inResultType,
+    !modeDictionary,
+    !false,
     !inMode
-  ]
+  )
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————

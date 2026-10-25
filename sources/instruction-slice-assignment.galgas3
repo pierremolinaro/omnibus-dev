@@ -33,27 +33,27 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
+  rule <instruction> (?!@ast ioAST ,?!@instructionListAST ioInstructionList ) {
     ${$
-    $\$type$ ?let typeName
+    $\$type$ (?let typeName)
     var @sliceAssignmentListAST sliceAssignmentListAST = @[]
     repeat
-      $?selector:$ ?let sliceWidth
+      $?selector:$ (?let sliceWidth)
       let @sliceTargetAST sliceKind
       select
         $_$
         sliceKind = .discarded
       or
-        <lvalue> !?ioAST ?let target
-        sliceKind = .lValue {!target:target}
+        <lvalue> (!?ioAST, ?let target)
+        sliceKind = .lValue (!target:target)
       or
         $var$
-        $identifier$ ?let varName
-        sliceKind = .varDeclaration {!varName:varName}
+        $identifier$ (?let varName)
+        sliceKind = .varDeclaration (!varName:varName)
       or
         $let$
-        $identifier$ ?let letName
-        sliceKind = .letDeclaration {!letName:letName}
+        $identifier$ (?let letName)
+        sliceKind = .letDeclaration (!letName:letName)
       end
       sliceAssignmentListAST += !sliceWidth !sliceKind
     while
@@ -61,15 +61,15 @@ syntax extension omnibus_syntax {
     $}$
   //--- Source expression
     $=$
-    <expression> !?ioAST ?let sourceExpression
+    <expression> (!?ioAST, ?let sourceExpression)
   //--- AST
-    ioInstructionList += !@sliceAssignmentInstructionAST {
-      !typeName.location
-      !typeName
-      !sliceAssignmentListAST
-      !sourceExpression
-      !.here
-    }
+    ioInstructionList += !@sliceAssignmentInstructionAST (
+      !typeName.location,
+      typeName,
+      sliceAssignmentListAST,
+      sourceExpression,
+      .here
+    )
   }
 
   //·····················································································································
@@ -80,16 +80,16 @@ syntax extension omnibus_syntax {
 //  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @sliceAssignmentInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [!?ioGraph noteNode !self.mTypeName]
-  [self.mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+override proc @sliceAssignmentInstructionAST.noteInstructionTypesInPrecedenceGraph (?!@semanticTypePrecedenceGraph ioGraph ) {
+  !?ioGraph.noteNode (!self.mTypeName)
+  self.mSourceExpression.noteExpressionTypesInPrecedenceGraph (!?ioGraph)
   for (* sliceKind) in self.mSliceAssignmentList do
     switch sliceKind
     case discarded :
     case varDeclaration (*) :
     case letDeclaration (*) :
     case lValue (@LValueAST target) :
-      [target noteInstructionTypesInPrecedenceGraph !?ioGraph]
+      target.noteInstructionTypesInPrecedenceGraph (!?ioGraph)
     end
   end
 }
@@ -98,17 +98,17 @@ override proc @sliceAssignmentInstructionAST noteInstructionTypesInPrecedenceGra
 //  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @sliceAssignmentInstructionAST instructionSemanticAnalysis
-  ?self:let @omnibusType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
+override proc @sliceAssignmentInstructionAST.instructionSemanticAnalysis
+  (?self:let @omnibusType inSelfType,
+  ?routineAttributes:let @routineAttributes inRoutineAttributes,
+  ?context:let @semanticContext inContext,
+  ?mode:let @mode inMode,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap,
+  ?!alloca:@allocaList ioAllocaList,
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-{
+) {
 //--- Search Type
   let resultType = [inContext.mTypeMap searchKey !self.mTypeName].type
 //--- Check type is an unsigned integer type
@@ -116,34 +116,34 @@ override proc @sliceAssignmentInstructionAST instructionSemanticAnalysis
   if not resultType.kind.isInteger then
     error (self.mTypeName: "this type should be an unsigned integer type" spoil bitCount)
   else
-    [resultType.kind extractInteger ?2* ?unsigned:let unsigned ?bitCount:bitCount]
+    resultType.kind.extractInteger (?2*, ?unsigned:let unsigned, ?bitCount:bitCount)
     if not unsigned then
       error (self.mTypeName: "this type should be an unsigned integer type" spoil bitCount)
     end
   end
 //--- Analyze source expression
-  [self.mSourceExpression analyzeExpression
-    !self:inSelfType
-    !routineAttributes:inRoutineAttributes
-    !optionalTargetType:resultType
-    !context:inContext
-    !mode:inMode
-    !?temporary:ioTemporaries
-    !?staticEntityMap:ioStaticEntityMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:ioInstructionGenerationList
+  self.mSourceExpression.analyzeExpression
+    (!self:inSelfType,
+    !routineAttributes:inRoutineAttributes,
+    !optionalTargetType:resultType,
+    !context:inContext,
+    !mode:inMode,
+    !?temporary:ioTemporaries,
+    !?staticEntityMap:ioStaticEntityMap,
+    !?variableMap:ioUniversalMap,
+    !?alloca:ioAllocaList,
+    !?instructionListIR:ioInstructionGenerationList,
     ?result:@objectIR sourceOperand
-  ]
+  )
 //--- Load from reference ?
-  [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?sourceOperand]
+  !?ioInstructionGenerationList.appendLoadWhenReference (!?ioTemporaries, !?sourceOperand)
 //--- If source operand is static type, check value and convert it to 'resultType'
   if sourceOperand.isLiteralInteger then
-    [sourceOperand extractLiteralInteger ?1* ?value:let @bigint value]
+    sourceOperand.extractLiteralInteger (?1*, ?value:let @bigint value)
     if value >= (1 << bitCount) then
       error (self.mSourceExpressionLocation : "static value too large" spoil sourceOperand)
     else
-      sourceOperand = .literalInteger {!type:resultType !value:value}
+      sourceOperand = .literalInteger (!type:resultType, !value:value)
     end
   end
 //--- Analyze slices
@@ -157,12 +157,12 @@ override proc @sliceAssignmentInstructionAST instructionSemanticAnalysis
       error (sliceWidthStr : "anonymous selector not allowed here" spoil sliceWidth, sliceTypeName)
     elsif sliceWidthStr.string == "b" then
       sliceWidth = 1
-      sliceTypeName = @{!boolTypeName () !self.mTypeName.location}
+      sliceTypeName = @(!boolTypeName (), self.mTypeName.location)
     elsif not sliceWidthStr.string.isDecimalUnsignedNumber then
       error (sliceWidthStr : "the selector should be an unsigned integer value" spoil sliceWidth, sliceTypeName)
     else
       sliceWidth = [sliceWidthStr decimalUnsignedNumber]
-      sliceTypeName = @{!"u" + sliceWidth !self.mTypeName.location}
+      sliceTypeName = @(!"u" + sliceWidth, self.mTypeName.location)
       if sliceWidth == 0 then
         error (sliceWidthStr : "the bit slice width should be > 0")
       end
@@ -176,73 +176,73 @@ override proc @sliceAssignmentInstructionAST instructionSemanticAnalysis
     end
     let sliceType = [inContext.mTypeMap searchKey !sliceTypeName].type
   //--- Shift and truncate source value
-    [!?ioInstructionGenerationList appendLogicalShiftRight !?sourceOperandForSlicing !rightShiftAmount !?ioTemporaries]
-    [!?ioInstructionGenerationList appendTrunc !sliceType !?sourceOperandForSlicing !?ioTemporaries]
+    !?ioInstructionGenerationList.appendLogicalShiftRight (!?sourceOperandForSlicing, !rightShiftAmount, !?ioTemporaries)
+    !?ioInstructionGenerationList.appendTrunc (!sliceType, !?sourceOperandForSlicing, !?ioTemporaries)
   //--- Analyze target
     switch sliceKind
     case discarded :
     case varDeclaration (varName) :
     //--- Declare local variable
-      let omnibusLocalVariableName = @lstring {!varName.string + "." + ioTemporaries.mTemporaryIndex !varName}
+      let omnibusLocalVariableName = @lstring (!varName.string + "." + ioTemporaries.mTemporaryIndex, varName)
       ioTemporaries.mTemporaryIndex += 1
-      [!?ioUniversalMap insertLocalVariable !varName !sliceType !omnibusLocalVariableName !.hasUnreadValue !false]
+      !?ioUniversalMap.insertLocalVariable (!varName, !sliceType, !omnibusLocalVariableName, !.hasUnreadValue, !false)
     //--- Code generation
       ioAllocaList += !llvmNameForLocalVariable (!omnibusLocalVariableName) !sliceType !false
     //--- Target reference
-      let targetRef = @LValueRepresentation {
-        !sliceType
-        !llvmNameForLocalVariable (!omnibusLocalVariableName)
-      }
+      let targetRef = @LValueRepresentation (
+        !sliceType,
+        llvmNameForLocalVariable (!omnibusLocalVariableName)
+      )
    //--- Generate assignment instruction
-      [!?ioInstructionGenerationList appendCopyFromReferences
-        !inContext.mAssignmentOperatorMap
-        !?ioTemporaries
-        !errorLocation:varName.location
-        !source:sourceOperandForSlicing
+      !?ioInstructionGenerationList.appendCopyFromReferences
+        (!inContext.mAssignmentOperatorMap,
+        !?ioTemporaries,
+        !errorLocation:varName.location,
+        !source:sourceOperandForSlicing,
         !target:targetRef
-      ]
+      )
     case letDeclaration (letName) :
     //--- Declare local constant
-      let omnibusLocalVariableName = @lstring {!letName.string + "." + ioTemporaries.mTemporaryIndex !letName}
+      let omnibusLocalVariableName = @lstring (!letName.string + "." + ioTemporaries.mTemporaryIndex, letName)
       ioTemporaries.mTemporaryIndex += 1
-      [!?ioUniversalMap insertLocalConstant !letName !false !sliceType !omnibusLocalVariableName]
+      !?ioUniversalMap.insertLocalConstant (!letName, !false, !sliceType, !omnibusLocalVariableName)
     //--- Code generation
       ioAllocaList += !llvmNameForLocalVariable (!omnibusLocalVariableName) !sliceType !false
     //--- Target reference
-      let targetRef = @LValueRepresentation {
-        !sliceType
-        !llvmNameForLocalVariable (!omnibusLocalVariableName)
-       }
+      let targetRef = @LValueRepresentation (
+        !sliceType,
+        llvmNameForLocalVariable (!omnibusLocalVariableName)
+       )
     //--- Generate assignment instruction
-      [!?ioInstructionGenerationList appendCopyFromReferences
-        !inContext.mAssignmentOperatorMap
-        !?ioTemporaries
-        !errorLocation:letName.location
-        !source:sourceOperandForSlicing
+      !?ioInstructionGenerationList.appendCopyFromReferences
+        (!inContext.mAssignmentOperatorMap,
+        !?ioTemporaries,
+        !errorLocation:letName.location,
+        !source:sourceOperandForSlicing,
         !target:targetRef
-      ]
+      )
     case lValue (@LValueAST target) :
-      [target analyzeLValue
-        !self: inSelfType
-        !forAddressOf: false
-        !routineAttributes:inRoutineAttributes
-        !context: inContext
-        !mode: inMode
-        !?temporary: ioTemporaries
-        !?staticEntityMap:ioStaticEntityMap
-        !?variableMap:ioUniversalMap
-        !?alloca: ioAllocaList
-        !?instructionListIR: ioInstructionGenerationList
+      target.analyzeLValue
+        (!self: inSelfType,
+        !forAddressOf: false,
+        !routineAttributes:inRoutineAttributes,
+        !context: inContext,
+        !mode: inMode,
+        !?temporary: ioTemporaries,
+        !?staticEntityMap:ioStaticEntityMap,
+        !?variableMap:ioUniversalMap,
+        !?alloca: ioAllocaList,
+        !?instructionListIR: ioInstructionGenerationList,
         ?let @LValueRepresentation lvalueIR
-      ]
+      )
     //--- Generate assignment instruction
-      [!?ioInstructionGenerationList appendCopyFromReferences
-        !inContext.mAssignmentOperatorMap
-        !?ioTemporaries
-        !errorLocation:target.mIdentifier
-        !source:sourceOperandForSlicing
+      !?ioInstructionGenerationList.appendCopyFromReferences
+        (!inContext.mAssignmentOperatorMap,
+        !?ioTemporaries,
+        !errorLocation:target.mIdentifier,
+        !source:sourceOperandForSlicing,
         !target:lvalueIR
-      ]
+      )
     end
   end
 }

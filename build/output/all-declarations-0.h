@@ -12495,7 +12495,7 @@ extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_abstractRoutineIR_2E_w
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@instructionListIR appendStoreToUniversalReference'
+//Extension mutating proc '@instructionListIR appendStoreToUniversalReference'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -17475,7 +17475,7 @@ extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_llvmAssignmentOperator
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@instructionListIR appendAssignmentIR'
+//Extension mutating proc '@instructionListIR appendAssignmentIR'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -18583,7 +18583,7 @@ class GGS_lstring function_prefixOperatorMapKey (const class GGS_omnibusType & c
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@instructionListIR appendInstructionAsFreeString'
+//Extension mutating proc '@instructionListIR appendInstructionAsFreeString'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -20127,7 +20127,7 @@ extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_infixOperatorRoutineIR
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@instructionListIR appendExtend'
+//Extension mutating proc '@instructionListIR appendExtend'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -20323,7 +20323,7 @@ extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_extendIR_2E_weak ;
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@instructionListIR appendLogicalShiftRight'
+//Extension mutating proc '@instructionListIR appendLogicalShiftRight'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -20448,6 +20448,18 @@ class cPtr_logicalRightShiftIR : public cPtr_abstractInstructionIR {
 
 //--------------------------------------------------------------------------------------------------
 //
+//Extension mutating proc '@instructionListIR appendLoadWhenReference'
+//
+//--------------------------------------------------------------------------------------------------
+
+void extensionSetter_appendLoadWhenReference (class GGS_instructionListIR & ioObject,
+                                              class GGS_semanticTemporariesStruct & io_ioTemporaries,
+                                              class GGS_objectIR & io_ioObject,
+                                              class Compiler * inCompiler
+                                              COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
 //Routine 'getNewTempValue?&!'
 //
 //--------------------------------------------------------------------------------------------------
@@ -20457,18 +20469,6 @@ void routine_getNewTempValue_3F__26__21_ (const class GGS_omnibusType constinArg
                                           class GGS_objectIR & outArgument2,
                                           class Compiler * inCompiler
                                           COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension setter '@instructionListIR appendLoadWhenReference'
-//
-//--------------------------------------------------------------------------------------------------
-
-void extensionSetter_appendLoadWhenReference (class GGS_instructionListIR & ioObject,
-                                              class GGS_semanticTemporariesStruct & io_ioTemporaries,
-                                              class GGS_objectIR & io_ioObject,
-                                              class Compiler * inCompiler
-                                              COMMA_LOCATION_ARGS) ;
 
 //--------------------------------------------------------------------------------------------------
 // Phase 1: @logicalRightShiftIR_2E_weak weak reference class

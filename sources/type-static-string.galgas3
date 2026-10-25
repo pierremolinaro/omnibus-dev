@@ -7,7 +7,7 @@ class @literalStringDeclarationAST : @abstractDeclarationAST {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override func @literalStringDeclarationAST locationForErrorSignaling -> @location outLocation {
+override func @literalStringDeclarationAST.locationForErrorSignaling () -> @location outLocation {
   outLocation = .nowhere
 }
 
@@ -15,17 +15,17 @@ override func @literalStringDeclarationAST locationForErrorSignaling -> @locatio
 //  PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @literalStringDeclarationAST enterInPrecedenceGraph
-  ?!@semanticTypePrecedenceGraph ioGraph
-{
+override proc @literalStringDeclarationAST.enterInPrecedenceGraph
+  (?!@semanticTypePrecedenceGraph ioGraph
+) {
   let literalStringTypeName = staticStringTypeName ().nowhere
-  [!?ioGraph addNode !literalStringTypeName !self]
-  [!?ioGraph addEdge !from: literalStringTypeName !to: "u8".nowhere]
+  !?ioGraph.addNode (!literalStringTypeName, !self)
+  !?ioGraph.addEdge (!from: literalStringTypeName, !to: "u8".nowhere)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override func @literalStringDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+override func @literalStringDeclarationAST.keyRepresentationForErrorSignaling () -> @string outRepresentation {
   outRepresentation = "literal string " + staticStringTypeName ()
 }
 
@@ -33,25 +33,25 @@ override func @literalStringDeclarationAST keyRepresentationForErrorSignaling ->
 //  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @literalStringDeclarationAST enterInContext
-  ?!context:@semanticContext ioContext
-  ?!@declarationDecorationList unused ioDecoratedDeclarationList
-  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
-  ?!@routineListIR unused ioRoutineListIR
-  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
-  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
-  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
+override proc @literalStringDeclarationAST.enterInContext
+  (?!context:@semanticContext ioContext,
+  ?!@declarationDecorationList unused ioDecoratedDeclarationList,
+  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList,
+  ?!@routineListIR unused ioRoutineListIR,
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap,
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap,
+  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST,
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
-{
+) {
 //--- Enter in type map
   let selfType = literalStringType ()
-  [!?ioContext.mTypeMap insertType
-    !staticStringTypeName ().nowhere
+  !?ioContext.mTypeMap.insertType
+    (!staticStringTypeName ().nowhere,
     !type: selfType
-  ]
+  )
 //--- Enter assignment operator
   let key = assignmentOperatorKey (!selfType !.nowhere !selfType)
-  [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage ()]
+  !?ioContext.mAssignmentOperatorMap.insertKey (!key, !@simpleCopyAssignmentOperatorUsage ())
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————

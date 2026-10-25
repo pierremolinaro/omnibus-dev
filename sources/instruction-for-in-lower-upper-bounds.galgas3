@@ -21,37 +21,37 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
+  rule <instruction> (?!@ast ioAST ,?!@instructionListAST ioInstructionList ) {
     $for$
     let @lstring varName
     select
       $_$
       varName = "".here
     or
-      $identifier$ ?varName
+      $identifier$ (?varName)
     end
-    <type_definition> !?ioAST ?let typeName
+    <type_definition> (!?ioAST, ?let typeName)
     $in$
-    <expression> !?ioAST  ?let @expressionAST lowerBoundExpression
+    <expression> (!?ioAST, ?let @expressionAST lowerBoundExpression)
     let endOf_lowerBoundExpression_instruction = @location.here
     $..<$
-    <expression> !?ioAST  ?let @expressionAST upperBoundExpression
+    <expression> (!?ioAST, ?let @expressionAST upperBoundExpression)
     let endOf_upperBoundExpression_instruction = @location.here
     ${$
-    <instructionList> !?ioAST ?let instructionList
+    <instructionList> (!?ioAST, ?let instructionList)
     let endOfInstruction = @location.here
     $}$
-    ioInstructionList += !@forLowerUpperBoundInstructionAST {
-      !varName.location
-      !varName
-      !typeName
-      !lowerBoundExpression
-      !endOf_lowerBoundExpression_instruction
-      !upperBoundExpression
-      !endOf_upperBoundExpression_instruction
-      !instructionList
-      !endOfInstruction
-    }
+    ioInstructionList += !@forLowerUpperBoundInstructionAST (
+      !varName.location,
+      varName,
+      typeName,
+      lowerBoundExpression,
+      endOf_lowerBoundExpression_instruction,
+      upperBoundExpression,
+      endOf_upperBoundExpression_instruction,
+      instructionList,
+      endOfInstruction
+    )
   }
 
   //·····················································································································
@@ -62,36 +62,36 @@ syntax extension omnibus_syntax {
 //  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @forLowerUpperBoundInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @forLowerUpperBoundInstructionAST.noteInstructionTypesInPrecedenceGraph (?!@semanticTypePrecedenceGraph ioGraph ) {
   if self.mTypeName.string != "" then
-    [!?ioGraph noteNode !self.mTypeName]
+    !?ioGraph.noteNode (!self.mTypeName)
   end
-  [self.mDoInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
-  [self.mLowerBoundExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
-  [self.mUpperBoundExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+  self.mDoInstructionList.noteInstructionListTypesInPrecedenceGraph (!?ioGraph)
+  self.mLowerBoundExpression.noteExpressionTypesInPrecedenceGraph (!?ioGraph)
+  self.mUpperBoundExpression.noteExpressionTypesInPrecedenceGraph (!?ioGraph)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @forLowerUpperBoundInstructionAST instructionSemanticAnalysis
-  ?self:let @omnibusType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
+override proc @forLowerUpperBoundInstructionAST.instructionSemanticAnalysis
+  (?self:let @omnibusType inSelfType,
+  ?routineAttributes:let @routineAttributes inRoutineAttributes,
+  ?context:let @semanticContext inContext,
+  ?mode:let @mode inMode,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap,
+  ?!alloca:@allocaList ioAllocaList,
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-{
+) {
 //--- Get iterated element type
   let type = [inContext.mTypeMap searchKey !self.mTypeName].type
   switch type.kind
   case boolean, void :
     error (self.mTypeName : "an integer type is required here")
-  case staticArrayType (* *) :
+  case staticArrayType (*, *) :
     error (self.mTypeName : "an integer type is required here")
   case dynamicArrayType (*) :
     error (self.mTypeName : "an integer type is required here")
@@ -114,42 +114,42 @@ override proc @forLowerUpperBoundInstructionAST instructionSemanticAnalysis
     error (self.mTypeName : "an integer type is required here")
   case function (3*) :
     error (self.mTypeName : "an integer type is required here")
-  case integer (@bigint unused min @bigint unused max @bool unsigned @uint unused bitCount) :
+  case integer (@bigint unused min, @bigint unused max, @bool unsigned, @uint unused bitCount) :
   //--- Analyze expressions
-    [self.mLowerBoundExpression analyzeExpression
-      !self:inSelfType
-      !routineAttributes:inRoutineAttributes
-      !optionalTargetType:type
-      !context:inContext
-      !mode:inMode
-      !?temporary:ioTemporaries
-      !?staticEntityMap:ioStaticEntityMap
-      !?variableMap:ioUniversalMap
-      !?alloca:ioAllocaList
-      !?instructionListIR:ioInstructionGenerationList
+    self.mLowerBoundExpression.analyzeExpression
+      (!self:inSelfType,
+      !routineAttributes:inRoutineAttributes,
+      !optionalTargetType:type,
+      !context:inContext,
+      !mode:inMode,
+      !?temporary:ioTemporaries,
+      !?staticEntityMap:ioStaticEntityMap,
+      !?variableMap:ioUniversalMap,
+      !?alloca:ioAllocaList,
+      !?instructionListIR:ioInstructionGenerationList,
       ?result:@objectIR lowerBoundExpressionResult
-    ]
-    [!?ioInstructionGenerationList appendLoadWhenReference
-      !?ioTemporaries
+    )
+    !?ioInstructionGenerationList.appendLoadWhenReference
+      (!?ioTemporaries,
       !?lowerBoundExpressionResult
-    ]
-    [self.mUpperBoundExpression analyzeExpression
-      !self:inSelfType
-      !routineAttributes:inRoutineAttributes
-      !optionalTargetType:type
-      !context:inContext
-      !mode:inMode
-      !?temporary:ioTemporaries
-      !?staticEntityMap:ioStaticEntityMap
-      !?variableMap:ioUniversalMap
-      !?alloca:ioAllocaList
-      !?instructionListIR:ioInstructionGenerationList
+    )
+    self.mUpperBoundExpression.analyzeExpression
+      (!self:inSelfType,
+      !routineAttributes:inRoutineAttributes,
+      !optionalTargetType:type,
+      !context:inContext,
+      !mode:inMode,
+      !?temporary:ioTemporaries,
+      !?staticEntityMap:ioStaticEntityMap,
+      !?variableMap:ioUniversalMap,
+      !?alloca:ioAllocaList,
+      !?instructionListIR:ioInstructionGenerationList,
       ?result:@objectIR upperBoundExpressionResult
-    ]
-    [!?ioInstructionGenerationList appendLoadWhenReference
-      !?ioTemporaries
+    )
+    !?ioInstructionGenerationList.appendLoadWhenReference
+      (!?ioTemporaries,
       !?upperBoundExpressionResult
-    ]
+    )
   //--- Check expression types
     let lowerBound = checkAssignmentCompatibility (
       !inContext.mAssignmentOperatorMap
@@ -166,39 +166,39 @@ override proc @forLowerUpperBoundInstructionAST instructionSemanticAnalysis
       !staticTypeAllowed:false
     )
   //---
-    [!?ioUniversalMap openOverrideForRepeatBlock]
+    !?ioUniversalMap.openOverrideForRepeatBlock ()
   //--- Enter iteration variable name
-    let enumeratedVarName = @lstring {!self.mVarName.string + "." + ioTemporaries.mTemporaryIndex !self.mVarName}
+    let enumeratedVarName = @lstring (!self.mVarName.string + "." + ioTemporaries.mTemporaryIndex, self.mVarName)
     ioTemporaries.mTemporaryIndex += 1
     ioAllocaList += !llvmNameForLocalVariable (!enumeratedVarName) !type !false
     if self.mVarName.string != "" then
-     [!?ioUniversalMap insertLocalConstant !self.mVarName !false !type !enumeratedVarName]
+     !?ioUniversalMap.insertLocalConstant (!self.mVarName, !false, !type, !enumeratedVarName)
     end
   //--- Analyze instruction list
     var @instructionListIR instructionGenerationList = @[]
-    [self.mDoInstructionList analyzeBranchInstructionList
-      !self:inSelfType
-      !routineAttributes:inRoutineAttributes
-      !endOfInstructionList:self.mEndOf_do_instruction
-      !context:inContext
-      !mode:inMode
-      !?temporary:ioTemporaries
-      !?staticEntityMap:ioStaticEntityMap
-      !?variableMap:ioUniversalMap
-      !?alloca:ioAllocaList
+    self.mDoInstructionList.analyzeBranchInstructionList
+      (!self:inSelfType,
+      !routineAttributes:inRoutineAttributes,
+      !endOfInstructionList:self.mEndOf_do_instruction,
+      !context:inContext,
+      !mode:inMode,
+      !?temporary:ioTemporaries,
+      !?staticEntityMap:ioStaticEntityMap,
+      !?variableMap:ioUniversalMap,
+      !?alloca:ioAllocaList,
       !?instructionListIR:instructionGenerationList
-    ]
-    [!?ioUniversalMap closeOverride !self.mEndOf_do_instruction]
+    )
+    !?ioUniversalMap.closeOverride (!self.mEndOf_do_instruction)
   //--- Code generation
-    ioInstructionGenerationList += !@forLowerUpperBoundInstructionIR {
-      !enumeratedVarName
-      !type
-      !unsigned
-      !self.mEndOf_do_instruction
-      !lowerBound
-      !upperBound
-      !instructionGenerationList
-    }
+    ioInstructionGenerationList += !@forLowerUpperBoundInstructionIR (
+      !enumeratedVarName,
+      type,
+      unsigned,
+      self.mEndOf_do_instruction,
+      lowerBound,
+      upperBound,
+      instructionGenerationList
+    )
   end
 }
 
@@ -221,11 +221,11 @@ class @forLowerUpperBoundInstructionIR : @abstractInstructionIR {
 //  is implemented as:
 //         x := LOW ; while x < UP do INST ; x := x + 1 end
 
-override proc @forLowerUpperBoundInstructionIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext inGenerationContext
+override proc @forLowerUpperBoundInstructionIR.llvmInstructionCode
+  (?!@string ioLLVMcode,
+  ?let @generationContext inGenerationContext,
   ?!@generationAdds ioGenerationAdds
-{
+) {
   let llvmType = self.mType.llvmTypeName
   let llvmVarName = llvmNameForLocalVariable (!self.mVarName)
   let testLabel = "for." + self.mLocation.endLocationIndex + ".test"
@@ -247,7 +247,7 @@ override proc @forLowerUpperBoundInstructionIR llvmInstructionCode
   ioLLVMcode += "  br i1 " + testResult + ", label %" + loopLabel + ", label %" + endLabel + "\n\n"
 //--- Loop
   ioLLVMcode += loopLabel + ":\n"
-  [self.mInstructionList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  self.mInstructionList.instructionListLLVMCode (!?ioLLVMcode, !inGenerationContext, !?ioGenerationAdds)
   ioLLVMcode += "  " + currentVarName + " = load " + llvmType + ", " + llvmType + " * " + llvmVarName + "\n"
   ioLLVMcode += "  " + nextVarName + " = add " + llvmType + " " + currentVarName + ", 1\n"
   ioLLVMcode += "  store " + llvmType + " " + nextVarName + ", " + llvmType + " * " + llvmVarName + "\n"
@@ -258,11 +258,11 @@ override proc @forLowerUpperBoundInstructionIR llvmInstructionCode
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @forLowerUpperBoundInstructionIR enterAccessibleEntities
-  ?!@stringset ioInvokedRoutineSet
+override proc @forLowerUpperBoundInstructionIR.enterAccessibleEntities
+  (?!@stringset ioInvokedRoutineSet,
   ?!@uint ioMaxBranchOfOnInstructions
-{
-  [self.mInstructionList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
+) {
+  self.mInstructionList.enterAccessibleEntities (!?ioInvokedRoutineSet, !?ioMaxBranchOfOnInstructions)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————

@@ -1290,6 +1290,34 @@ class GGS_constructorMap : public AC_GALGAS_root {
 
 extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_constructorMap ;
 
+//--------------------------------------------------------------------------------------------------
+//
+//Extension mutating proc '@routineMapForContext addFunctionWithoutArgument'
+//
+//--------------------------------------------------------------------------------------------------
+
+void extensionSetter_addFunctionWithoutArgument (class GGS_routineMapForContext & ioObject,
+                                                 const class GGS_string constin_inOmnibusTypeDescriptionName,
+                                                 const class GGS_string constin_inLLVMBaseTypeName,
+                                                 const class GGS_lstring constin_inMethodName,
+                                                 const class GGS_mode constin_inMode,
+                                                 const class GGS_unifiedTypeMapEntry constin_inResultType,
+                                                 class GGS_lstring & out_outRoutineLLVMName,
+                                                 class Compiler * inCompiler
+                                                 COMMA_LOCATION_ARGS) ;
+
+//--------------------------------------------------------------------------------------------------
+//
+//Extension mutating proc '@universalValuedObjectMap insertTask'
+//
+//--------------------------------------------------------------------------------------------------
+
+void extensionSetter_insertTask (class GGS_universalValuedObjectMap & ioObject,
+                                 const class GGS_lstring constin_inTaskName,
+                                 const class GGS_omnibusType constin_inTaskType,
+                                 class Compiler * inCompiler
+                                 COMMA_LOCATION_ARGS) ;
+
 
 //--------------------------------------------------------------------------------------------------
 //
@@ -1368,34 +1396,6 @@ extern StringListCommandLineOption gOption_omnibus_5F_options_pathList ;
 void extensionMethod_searchType (const class GGS_unifiedTypeMap inObject,
                                  const class GGS_lstring constin_inLKey,
                                  class GGS_omnibusType & out_outTypeDefinition,
-                                 class Compiler * inCompiler
-                                 COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension setter '@routineMapForContext addFunctionWithoutArgument'
-//
-//--------------------------------------------------------------------------------------------------
-
-void extensionSetter_addFunctionWithoutArgument (class GGS_routineMapForContext & ioObject,
-                                                 const class GGS_string constin_inOmnibusTypeDescriptionName,
-                                                 const class GGS_string constin_inLLVMBaseTypeName,
-                                                 const class GGS_lstring constin_inMethodName,
-                                                 const class GGS_mode constin_inMode,
-                                                 const class GGS_unifiedTypeMapEntry constin_inResultType,
-                                                 class GGS_lstring & out_outRoutineLLVMName,
-                                                 class Compiler * inCompiler
-                                                 COMMA_LOCATION_ARGS) ;
-
-//--------------------------------------------------------------------------------------------------
-//
-//Extension setter '@universalValuedObjectMap insertTask'
-//
-//--------------------------------------------------------------------------------------------------
-
-void extensionSetter_insertTask (class GGS_universalValuedObjectMap & ioObject,
-                                 const class GGS_lstring constin_inTaskName,
-                                 const class GGS_omnibusType constin_inTaskType,
                                  class Compiler * inCompiler
                                  COMMA_LOCATION_ARGS) ;
 
@@ -3066,7 +3066,7 @@ extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_taskActivateFunctionIR
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@instructionListIR appendGetUniversalPropertyReference'
+//Extension mutating proc '@instructionListIR appendGetUniversalPropertyReference'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -5266,7 +5266,7 @@ extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_systemUserRoutineIR_2E
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@instructionListIR appendFreeComment'
+//Extension mutating proc '@instructionListIR appendFreeComment'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -5454,7 +5454,7 @@ extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_freeCommentIR_2E_weak 
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@instructionListIR appendGetUniversalArrayElementReference'
+//Extension mutating proc '@instructionListIR appendGetUniversalArrayElementReference'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -8943,7 +8943,7 @@ extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_switchInstructionIR_2E
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@instructionListIR appendSelectOperation'
+//Extension mutating proc '@instructionListIR appendSelectOperation'
 //
 //--------------------------------------------------------------------------------------------------
 

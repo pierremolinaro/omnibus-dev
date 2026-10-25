@@ -10,18 +10,18 @@ graph @semanticTypePrecedenceGraph (@declarationListAST) {
 
 //·······················································································································
 
-setter @semanticTypePrecedenceGraph noteUINTType ?let @uint inBitSize ?let @location inErrorLocation {
-  let typeName = @lstring {!"u" + inBitSize !inErrorLocation}
-  [!?self noteNode !typeName]
+mutating proc @semanticTypePrecedenceGraph.noteUINTType (?let @uint inBitSize ,?let @location inErrorLocation ) {
+  let typeName = @lstring (!"u" + inBitSize, inErrorLocation)
+  !?self.noteNode (!typeName)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract proc @abstractDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph
+abstract proc @abstractDeclarationAST enterInPrecedenceGraph (?!@semanticTypePrecedenceGraph ioGraph)
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract func @abstractDeclarationAST keyRepresentationForErrorSignaling -> @string
+abstract func @abstractDeclarationAST keyRepresentationForErrorSignaling () -> @string
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //  COMPILE TIME BARRIER FOR PRECEDENCE GRAPH
@@ -32,41 +32,41 @@ class @compileTimeDeclarationBarrierAST : @abstractDeclarationAST {
 
 //·······················································································································
 
-override proc @compileTimeDeclarationBarrierAST enterInPrecedenceGraph
-  ?!@semanticTypePrecedenceGraph ioGraph
-{
-  [!?ioGraph addNode !compileTimeDeclarationBarrier () !self]
+override proc @compileTimeDeclarationBarrierAST.enterInPrecedenceGraph
+  (?!@semanticTypePrecedenceGraph ioGraph
+) {
+  !?ioGraph.addNode (!compileTimeDeclarationBarrier (), !self)
 }
 
 //·······················································································································
 
-override func @compileTimeDeclarationBarrierAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+override func @compileTimeDeclarationBarrierAST.keyRepresentationForErrorSignaling () -> @string outRepresentation {
   outRepresentation = compileTimeDeclarationBarrier ()
 }
 
 //·······················································································································
 
-override func @compileTimeDeclarationBarrierAST locationForErrorSignaling -> @location outLocation {
+override func @compileTimeDeclarationBarrierAST.locationForErrorSignaling () -> @location outLocation {
   outLocation = .nowhere
 }
 
 //·······················································································································
 
-override proc @compileTimeDeclarationBarrierAST enterInContext
-  ?!context:@semanticContext unused ioContext
-  ?!@declarationDecorationList unused ioDecoratedDeclarationList
-  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
-  ?!@routineListIR unused ioRoutineListIR
-  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
-  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
-  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
+override proc @compileTimeDeclarationBarrierAST.enterInContext
+  (?!context:@semanticContext unused ioContext,
+  ?!@declarationDecorationList unused ioDecoratedDeclarationList,
+  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList,
+  ?!@routineListIR unused ioRoutineListIR,
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap,
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap,
+  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST,
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
-{
+) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-private proc appendUnsignedOperatorsTo ?let @string inTypeName ?!@semanticTypePrecedenceGraph ioPrecedenceGraph {
+private proc appendUnsignedOperatorsTo (?let @string inTypeName ,?!@semanticTypePrecedenceGraph ioPrecedenceGraph ) {
 //--- ==
 //  appendInfixOperatorDeclaration (!.equal !"icmp eq" !inTypeName !boolTypeName () !?ioPrecedenceGraph)
 //--- ≤
@@ -74,20 +74,20 @@ private proc appendUnsignedOperatorsTo ?let @string inTypeName ?!@semanticTypePr
 //--- <
 //  appendInfixOperatorDeclaration (!.lessThan !"icmp ult" !inTypeName !boolTypeName () !?ioPrecedenceGraph)
 //--- +
-  appendInfixOperatorDeclaration (!.addOp !"add" !inTypeName !inTypeName !?ioPrecedenceGraph)
+  appendInfixOperatorDeclaration (!.addOp, !"add", !inTypeName, !inTypeName, !?ioPrecedenceGraph)
 //  appendInfixOperatorDeclaration (!.addOpNoOvf !"add" !inTypeName !inTypeName !?ioPrecedenceGraph)
 //--- -
-  appendInfixOperatorDeclaration (!.subOp !"sub" !inTypeName !inTypeName !?ioPrecedenceGraph)
+  appendInfixOperatorDeclaration (!.subOp, !"sub", !inTypeName, !inTypeName, !?ioPrecedenceGraph)
 //  appendInfixOperatorDeclaration (!.subOpNoOvf !"sub" !inTypeName !inTypeName !?ioPrecedenceGraph)
 //--- *
-  appendInfixOperatorDeclaration (!.mulOp !"mul" !inTypeName !inTypeName !?ioPrecedenceGraph)
+  appendInfixOperatorDeclaration (!.mulOp, !"mul", !inTypeName, !inTypeName, !?ioPrecedenceGraph)
 //  appendInfixOperatorDeclaration (!.mulOpNoOvf !"mul" !inTypeName !inTypeName !?ioPrecedenceGraph)
 //--- /
-  appendInfixOperatorDeclaration (!.divOp !"udiv" !inTypeName !inTypeName !?ioPrecedenceGraph)
-  appendInfixOperatorDeclaration (!.divOpNoOvf !"udiv" !inTypeName !inTypeName !?ioPrecedenceGraph)
+  appendInfixOperatorDeclaration (!.divOp, !"udiv", !inTypeName, !inTypeName, !?ioPrecedenceGraph)
+  appendInfixOperatorDeclaration (!.divOpNoOvf, !"udiv", !inTypeName, !inTypeName, !?ioPrecedenceGraph)
 //--- %
-  appendInfixOperatorDeclaration (!.modOp !"urem" !inTypeName !inTypeName !?ioPrecedenceGraph)
-  appendInfixOperatorDeclaration (!.modOpNoOvf !"urem" !inTypeName !inTypeName !?ioPrecedenceGraph)
+  appendInfixOperatorDeclaration (!.modOp, !"urem", !inTypeName, !inTypeName, !?ioPrecedenceGraph)
+  appendInfixOperatorDeclaration (!.modOpNoOvf, !"urem", !inTypeName, !inTypeName, !?ioPrecedenceGraph)
 //--- |
 //  appendInfixOperatorDeclaration (!.bitWiseOrOp !"or" !inTypeName !inTypeName !?ioPrecedenceGraph)
 //--- &
@@ -97,12 +97,12 @@ private proc appendUnsignedOperatorsTo ?let @string inTypeName ?!@semanticTypePr
 //--- >>
 //  appendInfixOperatorDeclaration (!.rightShiftOp !"lshr" !inTypeName !inTypeName !?ioPrecedenceGraph)
 //--- ~
-  appendPrefixOperatorDeclaration_bitWiseComplement (!inTypeName !?ioPrecedenceGraph)
+  appendPrefixOperatorDeclaration_bitWiseComplement (!inTypeName, !?ioPrecedenceGraph)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-private proc appendSignedOperatorsTo ?let @string inTypeName ?!@semanticTypePrecedenceGraph ioPrecedenceGraph {
+private proc appendSignedOperatorsTo (?let @string inTypeName ,?!@semanticTypePrecedenceGraph ioPrecedenceGraph ) {
 //--- ==
 //  appendInfixOperatorDeclaration (!.equal !"icmp eq" !inTypeName !boolTypeName () !?ioPrecedenceGraph)
 //--- ≤
@@ -110,20 +110,20 @@ private proc appendSignedOperatorsTo ?let @string inTypeName ?!@semanticTypePrec
 //--- <
 //  appendInfixOperatorDeclaration (!.lessThan !"icmp slt" !inTypeName !boolTypeName () !?ioPrecedenceGraph)
 //--- +
-  appendInfixOperatorDeclaration (!.addOp !"add" !inTypeName !inTypeName !?ioPrecedenceGraph)
+  appendInfixOperatorDeclaration (!.addOp, !"add", !inTypeName, !inTypeName, !?ioPrecedenceGraph)
 //  appendInfixOperatorDeclaration (!.addOpNoOvf !"add" !inTypeName !inTypeName !?ioPrecedenceGraph)
 //--- -
-  appendInfixOperatorDeclaration (!.subOp !"sub" !inTypeName !inTypeName !?ioPrecedenceGraph)
+  appendInfixOperatorDeclaration (!.subOp, !"sub", !inTypeName, !inTypeName, !?ioPrecedenceGraph)
 //  appendInfixOperatorDeclaration (!.subOpNoOvf !"sub" !inTypeName !inTypeName !?ioPrecedenceGraph)
 //--- *
-  appendInfixOperatorDeclaration (!.mulOp !"mul" !inTypeName !inTypeName !?ioPrecedenceGraph)
+  appendInfixOperatorDeclaration (!.mulOp, !"mul", !inTypeName, !inTypeName, !?ioPrecedenceGraph)
 //  appendInfixOperatorDeclaration (!.mulOpNoOvf !"mul" !inTypeName !inTypeName !?ioPrecedenceGraph)
 //--- %
-  appendInfixOperatorDeclaration (!.modOp !"srem" !inTypeName !inTypeName !?ioPrecedenceGraph)
-  appendInfixOperatorDeclaration (!.modOpNoOvf !"srem" !inTypeName !inTypeName !?ioPrecedenceGraph)
+  appendInfixOperatorDeclaration (!.modOp, !"srem", !inTypeName, !inTypeName, !?ioPrecedenceGraph)
+  appendInfixOperatorDeclaration (!.modOpNoOvf, !"srem", !inTypeName, !inTypeName, !?ioPrecedenceGraph)
 //--- /
-  appendInfixOperatorDeclaration (!.divOp !"sdiv" !inTypeName !inTypeName !?ioPrecedenceGraph)
-  appendInfixOperatorDeclaration (!.divOpNoOvf !"sdiv" !inTypeName !inTypeName !?ioPrecedenceGraph)
+  appendInfixOperatorDeclaration (!.divOp, !"sdiv", !inTypeName, !inTypeName, !?ioPrecedenceGraph)
+  appendInfixOperatorDeclaration (!.divOpNoOvf, !"sdiv", !inTypeName, !inTypeName, !?ioPrecedenceGraph)
 //--- |
 //  appendInfixOperatorDeclaration (!.bitWiseOrOp !"or" !inTypeName !inTypeName !?ioPrecedenceGraph)
 //--- &
@@ -133,25 +133,25 @@ private proc appendSignedOperatorsTo ?let @string inTypeName ?!@semanticTypePrec
 //--- >>
 //  appendInfixOperatorDeclaration (!.rightShiftOp !"ashr" !inTypeName !inTypeName !?ioPrecedenceGraph)
 //--- - prefixed
-  appendPrefixOperatorDeclaration_minus (!inTypeName !?ioPrecedenceGraph)
+  appendPrefixOperatorDeclaration_minus (!inTypeName, !?ioPrecedenceGraph)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc buildOrderedDeclarationList
-  ?ast: let @ast inAST
-  ?sourceFile: let @string inSourceFile
-  ?endOfSourceFile: let @location inEndOfSourceFile
+  (?ast: let @ast inAST,
+  ?sourceFile: let @string inSourceFile,
+  ?endOfSourceFile: let @location inEndOfSourceFile,
   !orderedDeclarationList: @declarationListAST outSortedDeclarationListAST
-{
+) {
 //-------------------------------------- Build precedence graph
   var @semanticTypePrecedenceGraph precedenceGraph = @()
   for (mDeclaration) in inAST.mDeclarationListAST do
-    [mDeclaration enterInPrecedenceGraph !?precedenceGraph]
+    mDeclaration.enterInPrecedenceGraph (!?precedenceGraph)
 //    message "Declaration : " + [mDeclaration keyRepresentationForErrorSignaling] + "\n"
   end
-  [inAST.mExternFunctionListAST noteTypesInPrecedenceGraph !?precedenceGraph]
-  [inAST.mTaskListAST noteTypesInPrecedenceGraph !?precedenceGraph]
+  inAST.mExternFunctionListAST.noteTypesInPrecedenceGraph (!?precedenceGraph)
+  inAST.mTaskListAST.noteTypesInPrecedenceGraph (!?precedenceGraph)
 //--------------------------------------- Add needed UIntXX and IntXX types
   var addintegerTypeCount = 0
   for (mValue) in precedenceGraph.undefinedNodeKeyList do
@@ -159,20 +159,20 @@ proc buildOrderedDeclarationList
     let Uxx = [mValue componentsSeparatedByString !"u"]
     if (Uxx.count == 2) && ([Uxx mValueAtIndex !0] == "" ) && [Uxx mValueAtIndex !1].isDecimalUnsignedNumber then
       let n = [Uxx mValueAtIndex !1].decimalUnsignedNumber
-      let declaration = @integerDeclarationAST {!false !n}
-      [declaration enterInPrecedenceGraph !?precedenceGraph]
+      let declaration = @integerDeclarationAST (!false, n)
+      declaration.enterInPrecedenceGraph (!?precedenceGraph)
     //--- Add assignment operator declaration
-      appendUnsignedOperatorsTo (!mValue !?precedenceGraph)
+      appendUnsignedOperatorsTo (!mValue, !?precedenceGraph)
     //---
       addintegerTypeCount += 1
     else
       let Ixx = [mValue componentsSeparatedByString !"i"]
       if (Ixx.count == 2) && ([Ixx mValueAtIndex !0] == "" ) && [Ixx mValueAtIndex !1].isDecimalUnsignedNumber then
         let n = [Ixx mValueAtIndex !1].decimalUnsignedNumber
-        let declaration = @integerDeclarationAST {!true !n}
-        [declaration enterInPrecedenceGraph !?precedenceGraph]
+        let declaration = @integerDeclarationAST (!true, n)
+        declaration.enterInPrecedenceGraph (!?precedenceGraph)
       //--- Add assignment operator declaration
-        appendSignedOperatorsTo (!mValue !?precedenceGraph)
+        appendSignedOperatorsTo (!mValue, !?precedenceGraph)
       //---
         addintegerTypeCount += 1
       end
@@ -180,7 +180,7 @@ proc buildOrderedDeclarationList
   end
 //------------------------------------------  Add compile time barrier
   let compileTimeDeclarationBarrierAST = @compileTimeDeclarationBarrierAST ()
-  [compileTimeDeclarationBarrierAST enterInPrecedenceGraph !?precedenceGraph]
+  compileTimeDeclarationBarrierAST.enterInPrecedenceGraph (!?precedenceGraph)
 //------------------------------------------  Display ?
   if (@uint.errorCount == 0) &&[option omnibus_options.printPasses value] then
     print (!"    Added " + addintegerTypeCount + " integer types\n")
@@ -189,7 +189,7 @@ proc buildOrderedDeclarationList
   if (@uint.errorCount == 0) && [option omnibus_options.emitDeclarationDependencyGraphFile value] then
     let s = precedenceGraph.graphviz
     let filePath = inSourceFile + ".declarationDependency.dot"
-    [s writeToFileWhenDifferentContents !filePath ?*]
+    s.writeToFileWhenDifferentContents (!filePath, ?*)
   end
 //------------------------------------------  Get ordered declaration list
   outSortedDeclarationListAST = @[]
@@ -198,12 +198,12 @@ proc buildOrderedDeclarationList
       error (mValue : mValue.string + " is not defined in declaration dependency graph")
     end
   else
-    [precedenceGraph topologicalSort
-      ?outSortedDeclarationListAST
+    precedenceGraph.topologicalSort
+      (?outSortedDeclarationListAST,
+      ?*,
+      ?let @declarationListAST unsortedSemanticDeclarationListAST,
       ?*
-      ?let @declarationListAST unsortedSemanticDeclarationListAST
-      ?*
-    ]
+    )
     if unsortedSemanticDeclarationListAST.count > 0 then
       var s = "semantic analysis not performed, "
             + unsortedSemanticDeclarationListAST.count

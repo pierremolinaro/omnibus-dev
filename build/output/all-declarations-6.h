@@ -247,7 +247,7 @@ extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_llvmVarInstruction_2E_
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@llvmGenerationInstructionList appendReturn'
+//Extension mutating proc '@llvmGenerationInstructionList appendReturn'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -669,7 +669,7 @@ void callExtensionMethod_generateIRCode (class cPtr_abstractLLVMInstruction * in
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@instructionListIR appendBinaryOperation'
+//Extension mutating proc '@instructionListIR appendBinaryOperation'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -2169,7 +2169,7 @@ extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_typeAliasDeclarationAS
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@instructionListIR appendShiftLeft'
+//Extension mutating proc '@instructionListIR appendShiftLeft'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -5374,7 +5374,7 @@ extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_availableInterruptMap_
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@instructionListIR appendEnterRegisterGroupSubscriptedAddress'
+//Extension mutating proc '@instructionListIR appendEnterRegisterGroupSubscriptedAddress'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -7990,7 +7990,7 @@ extern const GALGAS_TypeDescriptor kTypeDescriptor_GALGAS_enumToUintRoutineIR_2E
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@instructionListIR appendNOP'
+//Extension mutating proc '@instructionListIR appendNOP'
 //
 //--------------------------------------------------------------------------------------------------
 

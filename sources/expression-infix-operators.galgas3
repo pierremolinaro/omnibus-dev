@@ -25,7 +25,7 @@ enum @omnibusInfixOperator {
 
 //·······················································································································
 
-func @omnibusInfixOperator string -> @string {
+func @omnibusInfixOperator.string () -> @string {
   switch self
    case equal     : result = "=="
    case lessThan : result = "<"
@@ -61,224 +61,79 @@ class @omnibusInfixOperatorExpressionAST : @expressionAST {
 //  PRECEDENCE GRAPH FROM EXPRESSION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @omnibusInfixOperatorExpressionAST addDependenceEdgeForStaticExpression
-  ?let @lstring inConstantName
+override proc @omnibusInfixOperatorExpressionAST.addDependenceEdgeForStaticExpression
+  (?let @lstring inConstantName,
   ?!@semanticTypePrecedenceGraph ioGraph
-{
-  [self.mLeftExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
-  [self.mRightExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+) {
+  self.mLeftExpression.addDependenceEdgeForStaticExpression (!inConstantName, !?ioGraph)
+  self.mRightExpression.addDependenceEdgeForStaticExpression (!inConstantName, !?ioGraph)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @omnibusInfixOperatorExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [self.mLeftExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
-  [self.mRightExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+override proc @omnibusInfixOperatorExpressionAST.noteExpressionTypesInPrecedenceGraph (?!@semanticTypePrecedenceGraph ioGraph ) {
+  self.mLeftExpression.noteExpressionTypesInPrecedenceGraph (!?ioGraph)
+  self.mRightExpression.noteExpressionTypesInPrecedenceGraph (!?ioGraph)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @omnibusInfixOperatorExpressionAST analyzeExpression
-  ?self:let @omnibusType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?optionalTargetType:let @omnibusType inOptionalTargetType
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+override proc @omnibusInfixOperatorExpressionAST.analyzeExpression
+  (?self:let @omnibusType inSelfType,
+  ?routineAttributes:let @routineAttributes inRoutineAttributes,
+  ?optionalTargetType:let @omnibusType inOptionalTargetType,
+  ?context:let @semanticContext inContext,
+  ?mode:let @mode inMode,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap,
+  ?!alloca:@allocaList ioAllocaList,
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList,
   !result:@objectIR outResult
-{
+) {
 //------------------- Analyze left expression
-  [self.mLeftExpression analyzeExpression
-    !self:inSelfType
-    !routineAttributes:inRoutineAttributes
-    !optionalTargetType:inOptionalTargetType
-    !context:inContext
-    !mode:inMode
-    !?temporary:ioTemporaries
-    !?staticEntityMap:ioStaticEntityMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:ioInstructionGenerationList
+  self.mLeftExpression.analyzeExpression
+    (!self:inSelfType,
+    !routineAttributes:inRoutineAttributes,
+    !optionalTargetType:inOptionalTargetType,
+    !context:inContext,
+    !mode:inMode,
+    !?temporary:ioTemporaries,
+    !?staticEntityMap:ioStaticEntityMap,
+    !?variableMap:ioUniversalMap,
+    !?alloca:ioAllocaList,
+    !?instructionListIR:ioInstructionGenerationList,
     ?result:let @objectIR leftOperand
-  ]
+  )
 //------------------- Analyze right expression
-  [self.mRightExpression analyzeExpression
-    !self:inSelfType
-    !routineAttributes:inRoutineAttributes
-    !optionalTargetType: leftOperand.type
-    !context:inContext
-    !mode:inMode
-    !?temporary:ioTemporaries
-    !?staticEntityMap:ioStaticEntityMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:ioInstructionGenerationList
+  self.mRightExpression.analyzeExpression
+    (!self:inSelfType,
+    !routineAttributes:inRoutineAttributes,
+    !optionalTargetType: leftOperand.type,
+    !context:inContext,
+    !mode:inMode,
+    !?temporary:ioTemporaries,
+    !?staticEntityMap:ioStaticEntityMap,
+    !?variableMap:ioUniversalMap,
+    !?alloca:ioAllocaList,
+    !?instructionListIR:ioInstructionGenerationList,
     ?result: let @objectIR rightOperand
-  ]
+  )
 //------------------- Generate code
-  [inContext.mInfixOperatorMap generateInfixOperatorCode
-    !leftOperand
-    !self.mInfixOperator
-    !self.mOperatorLocation
-    !rightOperand
-    !?ioTemporaries
-    !?ioAllocaList
-    !?ioInstructionGenerationList
+  inContext.mInfixOperatorMap.generateInfixOperatorCode
+    (!leftOperand,
+    !self.mInfixOperator,
+    !self.mOperatorLocation,
+    !rightOperand,
+    !?ioTemporaries,
+    !?ioAllocaList,
+    !?ioInstructionGenerationList,
     ?outResult
-  ]
+  )
 }
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————
-
-//func getInfixOperatorMap
-//  ?let @omnibusInfixOperator inOp
-//  ?context:let @semanticContext inContext
-//  ?mode:let @mode inMode
-//  ?let @location inOperatorLocation
-//  -> @infixOperatorMap_EX outOperatorMap
-//{
-//  switch inOp
-//  case equal :
-//    outOperatorMap = inContext.mEqualOperatorMap
-//  case lessThan :
-//    outOperatorMap = inContext.mStrictInfOperatorMap
-//  case infEqual :
-//    outOperatorMap = inContext.mInfEqualOperatorMap
-//  case bitWiseAndOp :
-//    outOperatorMap = inContext.mAndOperatorMap
-//  case bitWiseOrOp :
-//    outOperatorMap = inContext.mOrOperatorMap
-//  case bitWiseXorOp :
-//    outOperatorMap = inContext.mXorOperatorMap
-//  case booleanXorOp :
-//    outOperatorMap = inContext.mBooleanXorOperatorMap
-//  case addOp :
-//    if inMode == .panicMode then
-//      error inOperatorLocation : "operations that can generate panic are not allowed in " + panicModeName () + " mode"
-//    end
-//    if [option omnibus_options.noPanicGeneration value] then
-//      outOperatorMap = inContext.mAddNoOvfOperatorMap
-//    else
-//      outOperatorMap = inContext.mAddOperatorMap
-//    end
-//  case addOpNoOvf :
-//    outOperatorMap = inContext.mAddNoOvfOperatorMap
-//  case subOp :
-//    if inMode == .panicMode then
-//      error inOperatorLocation : "operations that can generate panic are not allowed in " + panicModeName () + " mode"
-//    end
-//    if [option omnibus_options.noPanicGeneration value] then
-//      outOperatorMap = inContext.mSubNoOvfOperatorMap
-//    else
-//      outOperatorMap = inContext.mSubOperatorMap
-//    end
-//  case subOpNoOvf :
-//    outOperatorMap = inContext.mSubNoOvfOperatorMap
-//  case mulOp :
-//    if inMode == .panicMode then
-//      error inOperatorLocation : "operations that can generate panic are not allowed in " + panicModeName () + " mode"
-//    end
-//    if [option omnibus_options.noPanicGeneration value] then
-//      outOperatorMap = inContext.mMulNoOvfOperatorMap
-//    else
-//      outOperatorMap = inContext.mMulOperatorMap
-//    end
-//  case mulOpNoOvf :
-//    outOperatorMap = inContext.mMulNoOvfOperatorMap
-//  case divOp :
-//    if inMode == .panicMode then
-//      error inOperatorLocation : "operations that can generate panic are not allowed in " + panicModeName () + " mode"
-//    end
-//    if [option omnibus_options.noPanicGeneration value] then
-//      outOperatorMap = inContext.mDivNoOvfOperatorMap
-//    else
-//      outOperatorMap = inContext.mDivOperatorMap
-//    end
-//  case divOpNoOvf :
-//    outOperatorMap = inContext.mDivNoOvfOperatorMap
-//  case modOp :
-//    if inMode == .panicMode then
-//      error inOperatorLocation : "operations that can generate panic are not allowed in " + panicModeName () + " mode"
-//    end
-//    if [option omnibus_options.noPanicGeneration value] then
-//      outOperatorMap = inContext.mModNoOvfOperatorMap
-//    else
-//      outOperatorMap = inContext.mModOperatorMap
-//    end
-//  case modOpNoOvf :
-//    outOperatorMap = inContext.mModNoOvfOperatorMap
-//  case leftShiftOp :
-//    outOperatorMap = inContext.mLeftShiftOperatorMap
-//  case rightShiftOp :
-//    outOperatorMap = inContext.mRightShiftOperatorMap
-//  end
-//}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————
-
-//abstract class @omnibusInfixOperatorDescription {
-//  @llvmBinaryOperation mOperator
-//}
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————
-
-//abstract proc @omnibusInfixOperatorDescription generateInfixOperatorCode
-//  ?!@semanticTemporariesStruct ioTemporaries
-//  ?!@instructionListIR ioInstructionGenerationList
-//  ?let @objectIR inLeftOperand
-//  ?let @location inOperatorLocation
-//  ?let @objectIR inRightOperand
-//  ?let @omnibusType inResultType
-//  !@objectIR outResultValue
-
-//—————————————————————————————————————————————————————————————————————————————————————————————————
-
-//func @omnibusInfixOperatorDescription performStaticOperation
-//  ?let @bigint inLeft
-//  ?let @bigint inRight
-//  -> @bigint
-//{
-//  switch mOperator
-//  case addNoOVF : result = inLeft + inRight
-//  case subNoOVF : result = inLeft - inRight
-//  case mulNoOVF : result = inLeft * inRight
-//  case udivNoOVF : result = inLeft / inRight
-//  case sdivNoOVF : result = inLeft / inRight
-//  case uremNoOVF : result = inLeft mod inRight
-//  case sremNoOVF : result = inLeft mod inRight
-//
-//  case uaddOVF : result = inLeft + inRight
-//  case saddOVF : result = inLeft + inRight
-//  case usubOVF : result = inLeft - inRight
-//  case ssubOVF : result = inLeft - inRight
-//  case umulOVF : result = inLeft * inRight
-//  case smulOVF : result = inLeft * inRight
-//  case udivOVF : result = inLeft / inRight
-//  case sdivOVF : result = inLeft / inRight
-//  case uremOVF : result = inLeft mod inRight
-//  case sremOVF : result = inLeft mod inRight
-//
-//  case and : result = inLeft & inRight
-//  case ior : result = inLeft | inRight
-//  case xor : result = inLeft ^ inRight
-//  case shl : result = inLeft << [inRight uint]
-//  case ashr : result = inLeft >> [inRight uint]
-//  case lshr : result = inLeft >> [inRight uint]
-//
-//  case icmp_eq : result = [inLeft == inRight bigint]
-//  case icmp_ult : result = [inLeft < inRight bigint]
-//  case icmp_ule : result = [inLeft <= inRight bigint]
-//  case icmp_slt : result = [inLeft < inRight bigint]
-//  case icmp_sle : result = [inLeft <= inRight bigint]
-//  end
-//}
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————

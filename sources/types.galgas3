@@ -16,7 +16,7 @@ class @omnibusType {
 
 enum @subscript {
   case noSubscript
-  case staticSubscript (@omnibusType elementType @bigint size)
+  case staticSubscript (@omnibusType elementType, @bigint size)
   case literalString
 }
 
@@ -36,24 +36,24 @@ enum @typeKind %equatable {
   case enumeration (@uint bitCount)
   case structure (@propertyList propertyList)
   case syncTool
-  case integer (@bigint min @bigint max @bool unsigned @uint bitCount)
+  case integer (@bigint min, @bigint max, @bool unsigned, @uint bitCount)
   case compileTimeInteger
   case compileTimeBool
   case llvmType (@bigint bitSize)
-  case generic (@genericFormalParameterList parameters
-                @ctExpressionAST whereClause
+  case generic (@genericFormalParameterList parameters,
+                @ctExpressionAST whereClause,
                 @llvmStringDefinition llvmNativeTypeNameExpression)
   case opaque (@bigint bitCount)
-  case staticArrayType (@omnibusType elementType @bigint size)
+  case staticArrayType (@omnibusType elementType, @bigint size)
   case dynamicArrayType (@omnibusType elementType)
-  case function (@mode mode
-                 @routineTypedSignature signature
+  case function (@mode mode,
+                 @routineTypedSignature signature,
                  @unifiedTypeMapEntry returnTypeProxy)
 }
 
 //·······················································································································
 
-func @omnibusType llvmTypeName -> @string {
+func @omnibusType.llvmTypeName () -> @string {
   switch self.kind
   case void :
     result = "void"
@@ -67,7 +67,7 @@ func @omnibusType llvmTypeName -> @string {
     result = "%" + self.llvmBaseTypeName.assemblerRepresentation
   case syncTool :
     result = "%" + self.llvmBaseTypeName.assemblerRepresentation
-  case integer (* * * @uint bitCount) :
+  case integer (*, *, *, @uint bitCount) :
     result = "i" + bitCount
   case compileTimeBool, compileTimeInteger :
     result = "" // No LLVM type, Compile Time Type
@@ -77,11 +77,11 @@ func @omnibusType llvmTypeName -> @string {
     result = self.llvmBaseTypeName
   case opaque (@bigint bitCount) :
     result = "i" + bitCount
-  case staticArrayType (* *) :
+  case staticArrayType (*, *) :
     result = "%" + self.llvmBaseTypeName.assemblerRepresentation
   case dynamicArrayType (*) :
     result = "%ptrtype" // "i" + ptrSize
-  case function (* signature returnTypeProxy) :
+  case function (*, signature, returnTypeProxy) :
     if returnTypeProxy.isNull then
       result = "void"
     else
@@ -103,7 +103,7 @@ func @omnibusType llvmTypeName -> @string {
 
 //·······················································································································
 
-proc @omnibusType checkIsCompileTimeType ?let @location inErrorLocation {
+proc @omnibusType checkIsCompileTimeType (?let @location inErrorLocation ) {
   if not (self.kind.isCompileTimeBool | self.kind.isCompileTimeInteger) then
     error (inErrorLocation : "this type should be a compile time type")
   end
@@ -111,7 +111,7 @@ proc @omnibusType checkIsCompileTimeType ?let @location inErrorLocation {
 
 //·······················································································································
 
-proc @omnibusType checkIsNotCompileTimeType ?let @location inErrorLocation {
+proc @omnibusType checkIsNotCompileTimeType (?let @location inErrorLocation ) {
   if self.kind.isCompileTimeBool | self.kind.isCompileTimeInteger then
     error (inErrorLocation : "this type should not be a compile time type")
   end
@@ -119,89 +119,89 @@ proc @omnibusType checkIsNotCompileTimeType ?let @location inErrorLocation {
 
 //·······················································································································
 
-func @omnibusType isCompileTimeType -> @bool {
+func @omnibusType.isCompileTimeType () -> @bool {
   result = self.kind.isCompileTimeBool | self.kind.isCompileTimeInteger
 }
 
 //·······················································································································
 
-func %once compileTimeIntegerType -> @omnibusType {
-  result = @{
-    !subscript:.noSubscript
-    !attributes: .copyable
-    !omnibusTypeDescriptionName: ctIntegerTypeName ()
-    !kind:.compileTimeInteger
+func %once compileTimeIntegerType () -> @omnibusType {
+  result = @(
+    !subscript:.noSubscript,
+    !attributes: .copyable,
+    !omnibusTypeDescriptionName: ctIntegerTypeName (),
+    !kind:.compileTimeInteger,
     !llvmBaseTypeName: "" // Compile Time Type
-  }
+  )
 }
 
 //·······················································································································
 
-func %once compileTimeBoolType -> @omnibusType {
-  result = @{
-    !subscript:.noSubscript
-    !attributes: .copyable
-    !omnibusTypeDescriptionName: ctBoolTypeName ()
-    !kind:.compileTimeBool
+func %once compileTimeBoolType () -> @omnibusType {
+  result = @(
+    !subscript:.noSubscript,
+    !attributes: .copyable,
+    !omnibusTypeDescriptionName: ctBoolTypeName (),
+    !kind:.compileTimeBool,
     !llvmBaseTypeName: "" // Compile Time Type
-  }
+  )
 }
 
 //·······················································································································
 
-func %once boolType -> @omnibusType {
-  result = @{
-    !subscript:.noSubscript
-    !attributes: .copyable | .instanciable
-    !omnibusTypeDescriptionName: boolTypeName ()
-    !kind: .boolean
+func %once boolType () -> @omnibusType {
+  result = @(
+    !subscript:.noSubscript,
+    !attributes: .copyable | .instanciable,
+    !omnibusTypeDescriptionName: boolTypeName (),
+    !kind: .boolean,
     !llvmBaseTypeName: boolTypeName ()
-  }
+  )
 }
 
 //·······················································································································
 
-func %once literalStringType -> @omnibusType {
-  result = @{
-    !subscript:.literalString
-    !attributes:.instanciable | .copyable
-    !omnibusTypeDescriptionName:staticStringTypeName ()
-    !kind:.literalString
+func %once literalStringType () -> @omnibusType {
+  result = @(
+    !subscript:.literalString,
+    !attributes:.instanciable | .copyable,
+    !omnibusTypeDescriptionName:staticStringTypeName (),
+    !kind:.literalString,
     !llvmBaseTypeName:staticStringTypeName ()
-  }
+  )
 }
 
 //·······················································································································
 
-func %once voidType -> @omnibusType {
-  result = @{
-    !subscript:.noSubscript
-    !attributes: @()
-    !omnibusTypeDescriptionName:""
-    !kind:.void
+func %once voidType () -> @omnibusType {
+  result = @(
+    !subscript:.noSubscript,
+    !attributes: @(),
+    !omnibusTypeDescriptionName:"",
+    !kind:.void,
     !llvmBaseTypeName:""
-  }
+  )
 }
 
 //·······················································································································
 
-func @omnibusType instanciable -> @bool {
+func @omnibusType.instanciable () -> @bool {
   result = [self.attributes contains !.instanciable]
 }
 
 //·······················································································································
 
-func @omnibusType copyable -> @bool {
+func @omnibusType.copyable () -> @bool {
   result = [self.attributes contains !.copyable]
 }
 
 //·······················································································································
 
 proc @omnibusType generateRetain
-  ?let @string inOmnibusName
-  ?!@string ioLLVMcode
+  (?let @string inOmnibusName,
+  ?!@string ioLLVMcode,
   ?!@generationAdds ioGenerationAdds
-{
+) {
   let llvmTypeName = self.llvmTypeName
   let LLVMVariable =  llvmNameForLocalVariable (!inOmnibusName)
   if self.kind.isDynamicArrayType then
@@ -232,10 +232,10 @@ proc @omnibusType generateRetain
 //·······················································································································
 
 proc @omnibusType generateInsulate
-  ?let @string inOmnibusName
-  ?!@string ioLLVMcode
+  (?let @string inOmnibusName,
+  ?!@string ioLLVMcode,
   ?!@generationAdds ioGenerationAdds
-{
+) {
   let llvmTypeName = self.llvmTypeName
   let LLVMVariable =  llvmNameForLocalVariable (!inOmnibusName)
   if self.kind.isDynamicArrayType then
@@ -269,10 +269,10 @@ proc @omnibusType generateInsulate
 //·······················································································································
 
 proc @omnibusType generateRelease
-  ?let @string inOmnibusName
-  ?!@string ioLLVMcode
+  (?let @string inOmnibusName,
+  ?!@string ioLLVMcode,
   ?!@generationAdds ioGenerationAdds
-{
+) {
   let llvmTypeName = self.llvmTypeName
   let LLVMVariable =  llvmNameForLocalVariable (!inOmnibusName)
   if self.kind.isDynamicArrayType then
@@ -300,7 +300,7 @@ proc @omnibusType generateRelease
 
 //·······················································································································
 
-func @omnibusType descriptionForHTMLFile -> @string {
+func @omnibusType.descriptionForHTMLFile () -> @string {
   switch self.kind
   case void :
     result = "Void"
@@ -314,7 +314,7 @@ func @omnibusType descriptionForHTMLFile -> @string {
     result = "Structure"
   case syncTool :
     result = "Synchronization tool"
-  case integer (* * @bool unsigned @uint bitCount) :
+  case integer (*, *, @bool unsigned, @uint bitCount) :
     result = "Integer (" + bitCount + " bit" + if bitCount > 1 then "s" else "" end
            + ", " + if unsigned then "unsigned" else "signed" end + ")"
   case compileTimeBool :
@@ -327,7 +327,7 @@ func @omnibusType descriptionForHTMLFile -> @string {
     result = "LLVM Type"
   case opaque (@bigint bitCount) :
     result = "Opaque (" + bitCount + " bits)"
-  case staticArrayType (* *) :
+  case staticArrayType (*, *) :
     result = "Static array"
   case dynamicArrayType (*) :
     result = "Dynamic array"
@@ -346,12 +346,12 @@ list @arcAssignmentList {
 
 //·······················································································································
 
-func @omnibusType arcList ?let @uintlist inPropertyIndexPath -> @arcAssignmentList {
+func @omnibusType.arcList (?let @uintlist inPropertyIndexPath ) -> @arcAssignmentList {
   result = @[]
   if self.kind.isDynamicArrayType then
     result += !"" !self !inPropertyIndexPath
   elsif self.kind.isStructure then
-    [self.kind extractStructure ?propertyList:let @propertyList propertyList]
+    self.kind.extractStructure (?propertyList:let @propertyList propertyList)
     for (* propertyType) in propertyList do (idx)
       let indexPath = inPropertyIndexPath + @[@(idx)]
       result += [propertyType arcList !indexPath]
@@ -361,10 +361,10 @@ func @omnibusType arcList ?let @uintlist inPropertyIndexPath -> @arcAssignmentLi
 
 //·······················································································································
 
-func @omnibusType deinitNeeded -> @bool {
+func @omnibusType.deinitNeeded () -> @bool {
   result = self.kind.isDynamicArrayType
   if self.kind.isStructure then
-    [self.kind extractStructure ?propertyList:let @propertyList propertyList]
+    self.kind.extractStructure (?propertyList:let @propertyList propertyList)
     for (* propertyType) in propertyList while not result do
       result = propertyType.deinitNeeded
     end
@@ -376,13 +376,13 @@ func @omnibusType deinitNeeded -> @bool {
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc buildTypeMapHTMLFile
-  ?let @unifiedTypeMap inTypeMap
-  ?let @routineMapForContext inRoutineMap
-  ?let @infixOperatorMap inTerminusInfixOperatorMap
-  ?let @prefixOperatorMap inTerminusPrefixOperatorMap
-  ?let @assignmentOperatorMap inAssignmentOperatorMap
+  (?let @unifiedTypeMap inTypeMap,
+  ?let @routineMapForContext inRoutineMap,
+  ?let @infixOperatorMap inTerminusInfixOperatorMap,
+  ?let @prefixOperatorMap inTerminusPrefixOperatorMap,
+  ?let @assignmentOperatorMap inAssignmentOperatorMap,
   ?sourceFile:let @lstring inSourceFile
-{
+) {
 //------------------------------------ Build an HTML file that contains all types
   let @string typeDumpFilePath = inSourceFile.string + ".types.html"
   if [option omnibus_options.emitTypeMap value] then
@@ -409,9 +409,9 @@ proc buildTypeMapHTMLFile
       !inTerminusPrefixOperatorMap
       !inAssignmentOperatorMap
     ]
-    [typeDumpString writeToFileWhenDifferentContents !typeDumpFilePath ?*]
+    typeDumpString.writeToFileWhenDifferentContents (!typeDumpFilePath, ?*)
   else
-    [@string deleteFileIfExists !typeDumpFilePath]
+    @string.deleteFileIfExists (!typeDumpFilePath)
   end
 }
 
@@ -433,7 +433,7 @@ filewrapper typeDumpGenerationTemplate in "../generation-templates/" {
 
 //·······················································································································
 
-func linkForHTMLTypeMap ?let @string inTypeName -> @string {
+func linkForHTMLTypeMap (?let @string inTypeName ) -> @string {
   result = "<a class=\"header_link\" href=\"#" + inTypeName + "\">" + inTypeName + "</a>"
 }
 
@@ -442,14 +442,14 @@ func linkForHTMLTypeMap ?let @string inTypeName -> @string {
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc declareLLVMTypes
-  ?let @userLLVMTypeDefinitionListIR inUserLLVMTypeDefinitionListIR
+  (?let @userLLVMTypeDefinitionListIR inUserLLVMTypeDefinitionListIR,
   ?!@string ioLLVMcode
-{
+) {
 //--- Generate LLVM type definition (using forward type is allowed for pointers)
   ioLLVMcode += llvmTitleComment (!"User Defined Types")
   ioLLVMcode += "%ptrtype = type i8* ; Generic pointer type for dynamic objects\n"
   for (type) in inUserLLVMTypeDefinitionListIR do
-    [type generateLLVMType !?ioLLVMcode]
+    type.generateLLVMType (!?ioLLVMcode)
   end
   ioLLVMcode += "\n"
 }
@@ -464,7 +464,7 @@ abstract class @userLLVMTypeDefinitionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract proc @userLLVMTypeDefinitionIR generateLLVMType ?!@string ioLLVMcode
+abstract proc @userLLVMTypeDefinitionIR generateLLVMType (?!@string ioLLVMcode)
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 

@@ -15,17 +15,17 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
-    <lvalue> !?ioAST ?let assignmentTargetAST
+  rule <instruction> (?!@ast ioAST ,?!@instructionListAST ioInstructionList ) {
+    <lvalue> (!?ioAST, ?let assignmentTargetAST)
   //--- Source expression
     $=$
-    <expression> !?ioAST ?let sourceExpression
+    <expression> (!?ioAST, ?let sourceExpression)
   //--- AST
-    ioInstructionList += !@assignmentInstructionAST {
-      !assignmentTargetAST.mIdentifier.location
-      !assignmentTargetAST
-      !sourceExpression
-    }
+    ioInstructionList += !@assignmentInstructionAST (
+      !assignmentTargetAST.mIdentifier.location,
+      assignmentTargetAST,
+      sourceExpression
+    )
   }
 
   //·····················································································································
@@ -36,67 +36,67 @@ syntax extension omnibus_syntax {
 //!  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @assignmentInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [self.mSourceExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
-  [self.mTargetAST noteInstructionTypesInPrecedenceGraph !?ioGraph]
+override proc @assignmentInstructionAST.noteInstructionTypesInPrecedenceGraph (?!@semanticTypePrecedenceGraph ioGraph ) {
+  self.mSourceExpression.noteExpressionTypesInPrecedenceGraph (!?ioGraph)
+  self.mTargetAST.noteInstructionTypesInPrecedenceGraph (!?ioGraph)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //!  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @assignmentInstructionAST instructionSemanticAnalysis
-  ?self:let @omnibusType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
+override proc @assignmentInstructionAST.instructionSemanticAnalysis
+  (?self:let @omnibusType inSelfType,
+  ?routineAttributes:let @routineAttributes inRoutineAttributes,
+  ?context:let @semanticContext inContext,
+  ?mode:let @mode inMode,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap,
+  ?!alloca:@allocaList ioAllocaList,
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-{
-  [ioUniversalMap searchValuedObjectType !context: inContext !selfType:inSelfType !self.mTargetAST ?let targetType]
+) {
+  ioUniversalMap.searchValuedObjectType (!context: inContext, !selfType:inSelfType, !self.mTargetAST, ?let targetType)
 //--- Analyze source expression
-  [self.mSourceExpression analyzeExpression
-    !self:inSelfType
-    !routineAttributes:inRoutineAttributes
-    !optionalTargetType:targetType
-    !context:inContext
-    !mode:inMode
-    !?temporary:ioTemporaries
-    !?staticEntityMap:ioStaticEntityMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:ioInstructionGenerationList
+  self.mSourceExpression.analyzeExpression
+    (!self:inSelfType,
+    !routineAttributes:inRoutineAttributes,
+    !optionalTargetType:targetType,
+    !context:inContext,
+    !mode:inMode,
+    !?temporary:ioTemporaries,
+    !?staticEntityMap:ioStaticEntityMap,
+    !?variableMap:ioUniversalMap,
+    !?alloca:ioAllocaList,
+    !?instructionListIR:ioInstructionGenerationList,
     ?result: let @objectIR sourceOperandPossibleReference
-  ]
+  )
 //--- Analyze LValue
   var @instructionListListIR pendingStoreComputedPropertyInstructionGenerationList = @[]
-  [self.mTargetAST analyzeLValueInAssignment
-    !self: inSelfType
-    !routineAttributes:inRoutineAttributes
-    !context: inContext
-    !mode: inMode
-    !?temporary: ioTemporaries
-    !?staticEntityMap:ioStaticEntityMap
-    !?variableMap:ioUniversalMap
-    !?alloca: ioAllocaList
-    !?instructionListIR: ioInstructionGenerationList
-    !?pendingStoreComputedPropertyList: pendingStoreComputedPropertyInstructionGenerationList
+  self.mTargetAST.analyzeLValueInAssignment
+    (!self: inSelfType,
+    !routineAttributes:inRoutineAttributes,
+    !context: inContext,
+    !mode: inMode,
+    !?temporary: ioTemporaries,
+    !?staticEntityMap:ioStaticEntityMap,
+    !?variableMap:ioUniversalMap,
+    !?alloca: ioAllocaList,
+    !?instructionListIR: ioInstructionGenerationList,
+    !?pendingStoreComputedPropertyList: pendingStoreComputedPropertyInstructionGenerationList,
     ?let @LValueRepresentation lvalueIR
-  ]
+  )
 //--- New assignment test
-  [!?ioInstructionGenerationList appendAssignmentIR
-    !?ioTemporaries
-    !inContext.mAssignmentOperatorMap
-    !?ioAllocaList
-    !lvalueIR.type
-    !lvalueIR.llvmName
-    !sourceOperandPossibleReference
-    !self.mInstructionLocation
+  !?ioInstructionGenerationList.appendAssignmentIR
+    (!?ioTemporaries,
+    !inContext.mAssignmentOperatorMap,
+    !?ioAllocaList,
+    !lvalueIR.type,
+    !lvalueIR.llvmName,
+    !sourceOperandPossibleReference,
+    !self.mInstructionLocation,
     !initializedTarget: true
-  ]
+  )
 //--- Append pending computed property store (in reverse order)
   for > (instructionList) in pendingStoreComputedPropertyInstructionGenerationList do
     ioInstructionGenerationList += instructionList
@@ -106,43 +106,43 @@ override proc @assignmentInstructionAST instructionSemanticAnalysis
 //·······················································································································
 
 proc @LValueAST analyzeLValueInAssignment
-  ?self:let @omnibusType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  ?!pendingStoreComputedPropertyList:@instructionListListIR ioPendingStoreComputedPropertyInstructionGenerationListList
+  (?self:let @omnibusType inSelfType,
+  ?routineAttributes:let @routineAttributes inRoutineAttributes,
+  ?context:let @semanticContext inContext,
+  ?mode:let @mode inMode,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap,
+  ?!alloca:@allocaList ioAllocaList,
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList,
+  ?!pendingStoreComputedPropertyList:@instructionListListIR ioPendingStoreComputedPropertyInstructionGenerationListList,
   !@LValueRepresentation outInternalRepresentation
-{
+) {
   if self.mIdentifier.string == "" then // Receiver is "self"
     if inSelfType.kind == .void then
       error (self.mIdentifier : "self is not available in this context" spoil outInternalRepresentation)
     else
       analyzeSelfLValueInAssignment (
-        !self:inSelfType
-        !routineAttributes:inRoutineAttributes
-        !context:inContext
-        !mode:inMode
-        !?temporary: ioTemporaries
-        !?staticEntityMap:ioStaticEntityMap
-        !?variableMap: ioUniversalMap
-        !?alloca: ioAllocaList
-        !?instructionListIR: ioInstructionGenerationList
-        !?pendingStoreComputedPropertyList: ioPendingStoreComputedPropertyInstructionGenerationListList
-        !self.mOperand
+        !self:inSelfType,
+        !routineAttributes:inRoutineAttributes,
+        !context:inContext,
+        !mode:inMode,
+        !?temporary: ioTemporaries,
+        !?staticEntityMap:ioStaticEntityMap,
+        !?variableMap: ioUniversalMap,
+        !?alloca: ioAllocaList,
+        !?instructionListIR: ioInstructionGenerationList,
+        !?pendingStoreComputedPropertyList: ioPendingStoreComputedPropertyInstructionGenerationListList,
+        !self.mOperand,
         ?outInternalRepresentation
       )
     end
   else
-    [ioUniversalMap searchEntity !self.mIdentifier ?let @valuedObject entity]
+    ioUniversalMap.searchEntity (!self.mIdentifier, ?let @valuedObject entity)
     switch entity
     case task (*) :
       error (self.mIdentifier : "a task has no value" spoil outInternalRepresentation)
-    case driver (* *) :
+    case driver (*, *) :
       error (self.mIdentifier : "a driver has no value" spoil outInternalRepresentation)
     case globalConstant (*) :
       error (self.mIdentifier : "a global constant cannot be written" spoil outInternalRepresentation)
@@ -150,22 +150,22 @@ proc @LValueAST analyzeLValueInAssignment
       error (self.mIdentifier : "a local constant cannot be written" spoil outInternalRepresentation)
     case globalSyncInstance (2*) :
       error (self.mIdentifier : "a global sync instance is not allowed here" spoil outInternalRepresentation)
-    case localVariable (@omnibusType variableType @lstring omnibusName) :
+    case localVariable (@omnibusType variableType, @lstring omnibusName) :
       analyzeVariableInLValueInAssignment (
-        !self: inSelfType
-        !routineAttributes:inRoutineAttributes
-        !context: inContext
-        !mode: inMode
-        !?temporary: ioTemporaries
-        !?staticEntityMap:ioStaticEntityMap
-        !?variableMap: ioUniversalMap
-        !?alloca: ioAllocaList
-        !?instructionListIR: ioInstructionGenerationList
-        !?pendingStoreComputedPropertyList: ioPendingStoreComputedPropertyInstructionGenerationListList
-        !variableName: self.mIdentifier
-        !llvmName:llvmNameForLocalVariable (!omnibusName)
-        !type: variableType
-        !self.mOperand
+        !self: inSelfType,
+        !routineAttributes:inRoutineAttributes,
+        !context: inContext,
+        !mode: inMode,
+        !?temporary: ioTemporaries,
+        !?staticEntityMap:ioStaticEntityMap,
+        !?variableMap: ioUniversalMap,
+        !?alloca: ioAllocaList,
+        !?instructionListIR: ioInstructionGenerationList,
+        !?pendingStoreComputedPropertyList: ioPendingStoreComputedPropertyInstructionGenerationListList,
+        !variableName: self.mIdentifier,
+        !llvmName:llvmNameForLocalVariable (!omnibusName),
+        !type: variableType,
+        !self.mOperand,
         ?outInternalRepresentation
       )
     end
@@ -175,158 +175,158 @@ proc @LValueAST analyzeLValueInAssignment
 //·······················································································································
 
 private proc analyzeVariableInLValueInAssignment
-  ?self:let @omnibusType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  ?!pendingStoreComputedPropertyList:@instructionListListIR ioPendingStoreComputedPropertyInstructionGenerationListList
-  ?variableName:let @lstring inVariableName
-  ?llvmName:let @string inLLVMName
-  ?type:let @omnibusType inVariableType
-  ?let @LValueOperandAST inOperand
+  (?self:let @omnibusType inSelfType,
+  ?routineAttributes:let @routineAttributes inRoutineAttributes,
+  ?context:let @semanticContext inContext,
+  ?mode:let @mode inMode,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap,
+  ?!alloca:@allocaList ioAllocaList,
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList,
+  ?!pendingStoreComputedPropertyList:@instructionListListIR ioPendingStoreComputedPropertyInstructionGenerationListList,
+  ?variableName:let @lstring inVariableName,
+  ?llvmName:let @string inLLVMName,
+  ?type:let @omnibusType inVariableType,
+  ?let @LValueOperandAST inOperand,
   !@LValueRepresentation outInternalRepresentation
-{
+) {
   var currentType = inVariableType
   var currentLLVMName = inLLVMName
   switch inOperand
   case noOperand :
-    [!?ioUniversalMap searchValuedObjectForWriteAccess !inVariableName ?*]
-  case property (@lstring name @LValueOperandAST nextOperand) :
-    [!?ioUniversalMap searchValuedObjectForReadWriteAccess !inVariableName ?*]
+    !?ioUniversalMap.searchValuedObjectForWriteAccess (!inVariableName, ?*)
+  case property (@lstring name, @LValueOperandAST nextOperand) :
+    !?ioUniversalMap.searchValuedObjectForReadWriteAccess (!inVariableName, ?*)
     handlePropertyAccessInAssignment (
-      !self: inSelfType
-      !?currentType
-      !?currentLLVMName
-      !routineAttributes: inRoutineAttributes
-      !context: inContext
-      !mode: inMode
-      !?temporary: ioTemporaries
-      !?staticEntityMap: ioStaticEntityMap
-      !?variableMap: ioUniversalMap
-      !?alloca: ioAllocaList
-      !?instructionListIR: ioInstructionGenerationList
-      !?pendingStoreComputedPropertyList: ioPendingStoreComputedPropertyInstructionGenerationListList
-      !name
+      !self: inSelfType,
+      !?currentType,
+      !?currentLLVMName,
+      !routineAttributes: inRoutineAttributes,
+      !context: inContext,
+      !mode: inMode,
+      !?temporary: ioTemporaries,
+      !?staticEntityMap: ioStaticEntityMap,
+      !?variableMap: ioUniversalMap,
+      !?alloca: ioAllocaList,
+      !?instructionListIR: ioInstructionGenerationList,
+      !?pendingStoreComputedPropertyList: ioPendingStoreComputedPropertyInstructionGenerationListList,
+      !name,
       !nextOperand
     )
-  case arrayAccess (indexExpression endOfIndex checkIndexExpression nextOperand) :
-    [!?ioUniversalMap searchValuedObjectForReadWriteAccess !inVariableName ?*]
+  case arrayAccess (indexExpression, endOfIndex, checkIndexExpression, nextOperand) :
+    !?ioUniversalMap.searchValuedObjectForReadWriteAccess (!inVariableName, ?*)
     handleArrayAccessInAssignment (
-      !self: inSelfType
-      !?currentType
-      !?currentLLVMName
-      !routineAttributes: inRoutineAttributes
-      !context: inContext
-      !mode: inMode
-      !?temporary: ioTemporaries
-      !?staticEntityMap: ioStaticEntityMap
-      !?variableMap: ioUniversalMap
-      !?alloca: ioAllocaList
-      !?instructionListIR: ioInstructionGenerationList
-      !?pendingStoreComputedPropertyList: ioPendingStoreComputedPropertyInstructionGenerationListList
-      !indexExpression
-      !endOfIndex
-      !checkIndexExpression
+      !self: inSelfType,
+      !?currentType,
+      !?currentLLVMName,
+      !routineAttributes: inRoutineAttributes,
+      !context: inContext,
+      !mode: inMode,
+      !?temporary: ioTemporaries,
+      !?staticEntityMap: ioStaticEntityMap,
+      !?variableMap: ioUniversalMap,
+      !?alloca: ioAllocaList,
+      !?instructionListIR: ioInstructionGenerationList,
+      !?pendingStoreComputedPropertyList: ioPendingStoreComputedPropertyInstructionGenerationListList,
+      !indexExpression,
+      !endOfIndex,
+      !checkIndexExpression,
       !nextOperand
     )
   end
-  outInternalRepresentation = @{!currentType !currentLLVMName}
+  outInternalRepresentation = @(!currentType, currentLLVMName)
 }
 
 //·······················································································································
 
 private proc handlePropertyAccessInAssignment
-  ?self:let @omnibusType inSelfType
-  ?!@omnibusType ioCurrentType
-  ?!@string ioCurrentLLVMName
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  ?!pendingStoreComputedPropertyList:@instructionListListIR ioPendingStoreComputedPropertyInstructionGenerationListList
-  ?let @lstring inPropertyName
+  (?self:let @omnibusType inSelfType,
+  ?!@omnibusType ioCurrentType,
+  ?!@string ioCurrentLLVMName,
+  ?routineAttributes:let @routineAttributes inRoutineAttributes,
+  ?context:let @semanticContext inContext,
+  ?mode:let @mode inMode,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap,
+  ?!alloca:@allocaList ioAllocaList,
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList,
+  ?!pendingStoreComputedPropertyList:@instructionListListIR ioPendingStoreComputedPropertyInstructionGenerationListList,
+  ?let @lstring inPropertyName,
   ?let @LValueOperandAST inNextOperand
-{
+) {
 //  let typeName = @lstring.new {!ioCurrentType.omnibusTypeDescriptionName !.here}
   let propertySetterMap = [inContext propertySetterMap !ioCurrentType]
 //  [inContext.mTypePropertySetterMap searchKey !typeName ?let propertySetterMap]
 //  let @propertySetterMap propertySetterMap = ioCurrentType.propertySetterMap2
-  [propertySetterMap searchKey !inPropertyName ?* ?let @propertySetterKind propertyAccess]
+  propertySetterMap.searchKey (!inPropertyName, ?*, ?let @propertySetterKind propertyAccess)
   switch propertyAccess
-  case computedProperty (@unifiedTypeMapEntry computedPropertyType getterModeDictionary setterModeDictionary) :
+  case computedProperty (@unifiedTypeMapEntry computedPropertyType, getterModeDictionary, setterModeDictionary) :
   //--- Get property value
     let getterRoutineLLVMName = checkModeAndReturnsRoutineLLVMName (!getterModeDictionary !inMode !inPropertyName)
-    [!?ioInstructionGenerationList appendGetComputedPropertyValue
-      !?ioTemporaries
-      !.reference {!type: ioCurrentType !llvmName: ioCurrentLLVMName}
-      !getterRoutineLLVMName
-      !computedPropertyType.type
+    !?ioInstructionGenerationList.appendGetComputedPropertyValue
+      (!?ioTemporaries,
+      !.reference (!type: ioCurrentType, !llvmName: ioCurrentLLVMName),
+      !getterRoutineLLVMName,
+      !computedPropertyType.type,
       ?@objectIR resultValueIR
-    ]
+    )
   //--- Transform in reference
-    [!?ioInstructionGenerationList referenceFromPossibleValue !?ioTemporaries !?ioAllocaList !?resultValueIR]
+    !?ioInstructionGenerationList.referenceFromPossibleValue (!?ioTemporaries, !?ioAllocaList, !?resultValueIR)
   //--- Append pending computed property store
     let setterRoutineLLVMName = checkModeAndReturnsRoutineLLVMName (!setterModeDictionary !inMode !inPropertyName)
     var @instructionListIR pendingStoreComputedPropertyInstructionGenerationList = @[]
     var tempValueIR = resultValueIR
-    [!?pendingStoreComputedPropertyInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?tempValueIR]
-    [!?pendingStoreComputedPropertyInstructionGenerationList appendStoreComputedPropertyValue
-      !.reference {!type: ioCurrentType !llvmName: ioCurrentLLVMName}
-      !setterRoutineLLVMName
+    !?pendingStoreComputedPropertyInstructionGenerationList.appendLoadWhenReference (!?ioTemporaries, !?tempValueIR)
+    !?pendingStoreComputedPropertyInstructionGenerationList.appendStoreComputedPropertyValue
+      (!.reference (!type: ioCurrentType, !llvmName: ioCurrentLLVMName),
+      !setterRoutineLLVMName,
       !tempValueIR
-    ]
+    )
     ioPendingStoreComputedPropertyInstructionGenerationListList += !pendingStoreComputedPropertyInstructionGenerationList
   //---
     ioCurrentType = resultValueIR.type
     ioCurrentLLVMName = resultValueIR.llvmName
     handleNextOperandInAssignment (
-      !self: inSelfType
-      !?ioCurrentType
-      !?ioCurrentLLVMName
-      !inNextOperand
-      !routineAttributes: inRoutineAttributes
-      !context: inContext
-      !mode: inMode
-      !?temporary: ioTemporaries
-      !?staticEntityMap: ioStaticEntityMap
-      !?variableMap: ioUniversalMap
-      !?alloca: ioAllocaList
-      !?instructionListIR: ioInstructionGenerationList
+      !self: inSelfType,
+      !?ioCurrentType,
+      !?ioCurrentLLVMName,
+      !inNextOperand,
+      !routineAttributes: inRoutineAttributes,
+      !context: inContext,
+      !mode: inMode,
+      !?temporary: ioTemporaries,
+      !?staticEntityMap: ioStaticEntityMap,
+      !?variableMap: ioUniversalMap,
+      !?alloca: ioAllocaList,
+      !?instructionListIR: ioInstructionGenerationList,
       !?pendingStoreComputedPropertyList: ioPendingStoreComputedPropertyInstructionGenerationListList
     )
-  case storedProperty (@omnibusType propertyType @uint index) :
-    [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
-    [!?ioInstructionGenerationList appendGetUniversalPropertyReference
-      !ioCurrentType
-      !ioCurrentLLVMName
-      !newLLVMvariable
-      !index
+  case storedProperty (@omnibusType propertyType, @uint index) :
+    !?ioTemporaries.newTempLLVMVar (?let newLLVMvariable)
+    !?ioInstructionGenerationList.appendGetUniversalPropertyReference
+      (!ioCurrentType,
+      !ioCurrentLLVMName,
+      !newLLVMvariable,
+      !index,
       !inPropertyName
-    ]
+    )
     ioCurrentType = propertyType
     ioCurrentLLVMName = newLLVMvariable
     handleNextOperandInAssignment (
-      !self: inSelfType
-      !?ioCurrentType
-      !?ioCurrentLLVMName
-      !inNextOperand
-      !routineAttributes: inRoutineAttributes
-      !context: inContext
-      !mode: inMode
-      !?temporary: ioTemporaries
-      !?staticEntityMap: ioStaticEntityMap
-      !?variableMap: ioUniversalMap
-      !?alloca: ioAllocaList
-      !?instructionListIR: ioInstructionGenerationList
+      !self: inSelfType,
+      !?ioCurrentType,
+      !?ioCurrentLLVMName,
+      !inNextOperand,
+      !routineAttributes: inRoutineAttributes,
+      !context: inContext,
+      !mode: inMode,
+      !?temporary: ioTemporaries,
+      !?staticEntityMap: ioStaticEntityMap,
+      !?variableMap: ioUniversalMap,
+      !?alloca: ioAllocaList,
+      !?instructionListIR: ioInstructionGenerationList,
       !?pendingStoreComputedPropertyList: ioPendingStoreComputedPropertyInstructionGenerationListList
     )
   end
@@ -335,23 +335,23 @@ private proc handlePropertyAccessInAssignment
 //·······················································································································
 
 private proc handleArrayAccessInAssignment
-  ?self:let @omnibusType inSelfType
-  ?!@omnibusType ioCurrentType
-  ?!@string ioCurrentLLVMName
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  ?!pendingStoreComputedPropertyList:@instructionListListIR ioPendingStoreComputedPropertyInstructionGenerationListList
-  ?let @expressionAST inIndexExpression
-  ?let @location inEndOfIndex
-  ?let @bool inCheckIndexExpression
+  (?self:let @omnibusType inSelfType,
+  ?!@omnibusType ioCurrentType,
+  ?!@string ioCurrentLLVMName,
+  ?routineAttributes:let @routineAttributes inRoutineAttributes,
+  ?context:let @semanticContext inContext,
+  ?mode:let @mode inMode,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap,
+  ?!alloca:@allocaList ioAllocaList,
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList,
+  ?!pendingStoreComputedPropertyList:@instructionListListIR ioPendingStoreComputedPropertyInstructionGenerationListList,
+  ?let @expressionAST inIndexExpression,
+  ?let @location inEndOfIndex,
+  ?let @bool inCheckIndexExpression,
   ?let @LValueOperandAST inNextOperand
-{
+) {
   switch ioCurrentType.subscript
   case noSubscript :
     error (inEndOfIndex
@@ -360,47 +360,47 @@ private proc handleArrayAccessInAssignment
     error (inEndOfIndex
     : "the receiver type is literal string and does not accept subscripting"
     spoil ioCurrentType, ioCurrentLLVMName)
-  case staticSubscript (@omnibusType elementType @bigint arraySize) :
+  case staticSubscript (@omnibusType elementType, @bigint arraySize) :
     handleArraySubscriptNew (
-      !self: inSelfType
-      !routineAttributes:inRoutineAttributes
-      !context: inContext
-      !mode: inMode
-      !?temporary: ioTemporaries
-      !?staticEntityMap:ioStaticEntityMap
-      !?variableMap:ioUniversalMap
-      !?alloca: ioAllocaList
-      !inIndexExpression
-      !inEndOfIndex
-      !inCheckIndexExpression
-      !arraySize:arraySize
-      !elementType:elementType
-      !?ioInstructionGenerationList
+      !self: inSelfType,
+      !routineAttributes:inRoutineAttributes,
+      !context: inContext,
+      !mode: inMode,
+      !?temporary: ioTemporaries,
+      !?staticEntityMap:ioStaticEntityMap,
+      !?variableMap:ioUniversalMap,
+      !?alloca: ioAllocaList,
+      !inIndexExpression,
+      !inEndOfIndex,
+      !inCheckIndexExpression,
+      !arraySize:arraySize,
+      !elementType:elementType,
+      !?ioInstructionGenerationList,
       ?let @objectIR indexIR
     )
-    [!?ioTemporaries newTempLLVMVar ?let newLLVMvariable]
-    [!?ioInstructionGenerationList appendGetUniversalArrayElementReference
-      !ioCurrentType
-      !ioCurrentLLVMName
-      !elementType
-      !newLLVMvariable
+    !?ioTemporaries.newTempLLVMVar (?let newLLVMvariable)
+    !?ioInstructionGenerationList.appendGetUniversalArrayElementReference
+      (!ioCurrentType,
+      !ioCurrentLLVMName,
+      !elementType,
+      !newLLVMvariable,
       !indexIR
-    ]
+    )
     ioCurrentType = elementType
     ioCurrentLLVMName = newLLVMvariable
     handleNextOperandInAssignment (
-      !self: inSelfType
-      !?ioCurrentType
-      !?ioCurrentLLVMName
-      !inNextOperand
-      !routineAttributes: inRoutineAttributes
-      !context: inContext
-      !mode: inMode
-      !?temporary: ioTemporaries
-      !?staticEntityMap: ioStaticEntityMap
-      !?variableMap: ioUniversalMap
-      !?alloca: ioAllocaList
-      !?instructionListIR: ioInstructionGenerationList
+      !self: inSelfType,
+      !?ioCurrentType,
+      !?ioCurrentLLVMName,
+      !inNextOperand,
+      !routineAttributes: inRoutineAttributes,
+      !context: inContext,
+      !mode: inMode,
+      !?temporary: ioTemporaries,
+      !?staticEntityMap: ioStaticEntityMap,
+      !?variableMap: ioUniversalMap,
+      !?alloca: ioAllocaList,
+      !?instructionListIR: ioInstructionGenerationList,
       !?pendingStoreComputedPropertyList: ioPendingStoreComputedPropertyInstructionGenerationListList
     )
   end
@@ -409,116 +409,116 @@ private proc handleArrayAccessInAssignment
 //·······················································································································
 
 private proc analyzeSelfLValueInAssignment
-  ?self:let @omnibusType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-  ?!pendingStoreComputedPropertyList:@instructionListListIR ioPendingStoreComputedPropertyInstructionGenerationListList
-  ?let @LValueOperandAST inOperand
+  (?self:let @omnibusType inSelfType,
+  ?routineAttributes:let @routineAttributes inRoutineAttributes,
+  ?context:let @semanticContext inContext,
+  ?mode:let @mode inMode,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap,
+  ?!alloca:@allocaList ioAllocaList,
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList,
+  ?!pendingStoreComputedPropertyList:@instructionListListIR ioPendingStoreComputedPropertyInstructionGenerationListList,
+  ?let @LValueOperandAST inOperand,
   !@LValueRepresentation outInternalRepresentation
-{
+) {
   var currentType = inSelfType
   var currentLLVMName = llvmNameForSelf ()
   switch inOperand
   case noOperand :
-  case property (@lstring name @LValueOperandAST next) :
+  case property (@lstring name, @LValueOperandAST next) :
     handlePropertyAccessInAssignment (
-      !self: inSelfType
-      !?currentType
-      !?currentLLVMName
-      !routineAttributes: inRoutineAttributes
-      !context: inContext
-      !mode: inMode
-      !?temporary: ioTemporaries
-      !?staticEntityMap: ioStaticEntityMap
-      !?variableMap: ioUniversalMap
-      !?alloca: ioAllocaList
-      !?instructionListIR: ioInstructionGenerationList
-      !?pendingStoreComputedPropertyList: ioPendingStoreComputedPropertyInstructionGenerationListList
-      !name
+      !self: inSelfType,
+      !?currentType,
+      !?currentLLVMName,
+      !routineAttributes: inRoutineAttributes,
+      !context: inContext,
+      !mode: inMode,
+      !?temporary: ioTemporaries,
+      !?staticEntityMap: ioStaticEntityMap,
+      !?variableMap: ioUniversalMap,
+      !?alloca: ioAllocaList,
+      !?instructionListIR: ioInstructionGenerationList,
+      !?pendingStoreComputedPropertyList: ioPendingStoreComputedPropertyInstructionGenerationListList,
+      !name,
       !next
     )
-  case arrayAccess (indexExpression endOfIndex checkIndexExpression nextOperand) :
+  case arrayAccess (indexExpression, endOfIndex, checkIndexExpression, nextOperand) :
     handleArrayAccessInAssignment (
-      !self: inSelfType
-      !?currentType
-      !?currentLLVMName
-      !routineAttributes: inRoutineAttributes
-      !context: inContext
-      !mode: inMode
-      !?temporary: ioTemporaries
-      !?staticEntityMap: ioStaticEntityMap
-      !?variableMap: ioUniversalMap
-      !?alloca: ioAllocaList
-      !?instructionListIR: ioInstructionGenerationList
-      !?pendingStoreComputedPropertyList: ioPendingStoreComputedPropertyInstructionGenerationListList
-      !indexExpression
-      !endOfIndex
-      !checkIndexExpression
+      !self: inSelfType,
+      !?currentType,
+      !?currentLLVMName,
+      !routineAttributes: inRoutineAttributes,
+      !context: inContext,
+      !mode: inMode,
+      !?temporary: ioTemporaries,
+      !?staticEntityMap: ioStaticEntityMap,
+      !?variableMap: ioUniversalMap,
+      !?alloca: ioAllocaList,
+      !?instructionListIR: ioInstructionGenerationList,
+      !?pendingStoreComputedPropertyList: ioPendingStoreComputedPropertyInstructionGenerationListList,
+      !indexExpression,
+      !endOfIndex,
+      !checkIndexExpression,
       !nextOperand
     )
   end
-  outInternalRepresentation = @{!currentType !currentLLVMName}
+  outInternalRepresentation = @(!currentType, currentLLVMName)
 }
 
 //·······················································································································
 
 private proc handleNextOperandInAssignment
-  ?self:let @omnibusType inSelfType
-  ?!@omnibusType ioCurrentType
-  ?!@string ioCurrentLLVMName
-  ?let @LValueOperandAST inOperand
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+  (?self:let @omnibusType inSelfType,
+  ?!@omnibusType ioCurrentType,
+  ?!@string ioCurrentLLVMName,
+  ?let @LValueOperandAST inOperand,
+  ?routineAttributes:let @routineAttributes inRoutineAttributes,
+  ?context:let @semanticContext inContext,
+  ?mode:let @mode inMode,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap,
+  ?!alloca:@allocaList ioAllocaList,
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList,
   ?!pendingStoreComputedPropertyList:@instructionListListIR ioPendingStoreComputedPropertyInstructionGenerationListList
-{
+) {
   switch inOperand
   case noOperand :
-  case property (@lstring name @LValueOperandAST next) :
+  case property (@lstring name, @LValueOperandAST next) :
     handlePropertyAccessInAssignment (
-      !self: inSelfType
-      !?ioCurrentType
-      !?ioCurrentLLVMName
-      !routineAttributes: inRoutineAttributes
-      !context: inContext
-      !mode: inMode
-      !?temporary: ioTemporaries
-      !?staticEntityMap: ioStaticEntityMap
-      !?variableMap: ioUniversalMap
-      !?alloca: ioAllocaList
-      !?instructionListIR: ioInstructionGenerationList
-      !?pendingStoreComputedPropertyList: ioPendingStoreComputedPropertyInstructionGenerationListList
-      !name
+      !self: inSelfType,
+      !?ioCurrentType,
+      !?ioCurrentLLVMName,
+      !routineAttributes: inRoutineAttributes,
+      !context: inContext,
+      !mode: inMode,
+      !?temporary: ioTemporaries,
+      !?staticEntityMap: ioStaticEntityMap,
+      !?variableMap: ioUniversalMap,
+      !?alloca: ioAllocaList,
+      !?instructionListIR: ioInstructionGenerationList,
+      !?pendingStoreComputedPropertyList: ioPendingStoreComputedPropertyInstructionGenerationListList,
+      !name,
       !next
     )
-  case arrayAccess (indexExpression endOfIndex checkIndexExpression nextOperand) :
+  case arrayAccess (indexExpression, endOfIndex, checkIndexExpression, nextOperand) :
     handleArrayAccessInAssignment (
-      !self: inSelfType
-      !?ioCurrentType
-      !?ioCurrentLLVMName
-      !routineAttributes: inRoutineAttributes
-      !context: inContext
-      !mode: inMode
-      !?temporary: ioTemporaries
-      !?staticEntityMap: ioStaticEntityMap
-      !?variableMap: ioUniversalMap
-      !?alloca: ioAllocaList
-      !?instructionListIR: ioInstructionGenerationList
-      !?pendingStoreComputedPropertyList: ioPendingStoreComputedPropertyInstructionGenerationListList
-      !indexExpression
-      !endOfIndex
-      !checkIndexExpression
+      !self: inSelfType,
+      !?ioCurrentType,
+      !?ioCurrentLLVMName,
+      !routineAttributes: inRoutineAttributes,
+      !context: inContext,
+      !mode: inMode,
+      !?temporary: ioTemporaries,
+      !?staticEntityMap: ioStaticEntityMap,
+      !?variableMap: ioUniversalMap,
+      !?alloca: ioAllocaList,
+      !?instructionListIR: ioInstructionGenerationList,
+      !?pendingStoreComputedPropertyList: ioPendingStoreComputedPropertyInstructionGenerationListList,
+      !indexExpression,
+      !endOfIndex,
+      !checkIndexExpression,
       !nextOperand
     )
   end

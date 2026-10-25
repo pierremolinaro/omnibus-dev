@@ -1,27 +1,27 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-setter @instructionListIR referenceFromPossibleValue // Turn a value to a reference
-  ?!@semanticTemporariesStruct ioTemporaries
-  ?!@allocaList ioAllocaList
+mutating proc @instructionListIR.referenceFromPossibleValue // Turn a value to a reference
+  (?!@semanticTemporariesStruct ioTemporaries,
+  ?!@allocaList ioAllocaList,
   ?!@objectIR ioObjectIR
-{
+) {
   let @bool performStore
   switch ioObjectIR
   case void : // Do nothing
     performStore = false
-  case reference (* *) : // Already a reference: do nothing
+  case reference (*, *) : // Already a reference: do nothing
     performStore = false
-  case llvmNamedValue (* *) :
+  case llvmNamedValue (*, *) :
     performStore = true
-  case literalInteger  (* *) :
+  case literalInteger  (*, *) :
     performStore = true
   case null (*) :
     performStore = true
-  case llvmStructureValue (* *) :
+  case llvmStructureValue (*, *) :
     performStore = true
   case llvmArrayStaticValues (3*) :
     performStore = true
-  case literalString  (* *) :
+  case literalString  (*, *) :
     performStore = true
   case zero (*) :
     performStore = true
@@ -40,8 +40,8 @@ setter @instructionListIR referenceFromPossibleValue // Turn a value to a refere
   //--- Add temporary reference to allocation list
     ioAllocaList += !llvmTemporaryName !ioObjectIR.type !false
   //--- Store value to temporary reference
-    [!?self appendStoreTemporaryReference !ioObjectIR.type !llvmTemporaryName !ioObjectIR]
-    ioObjectIR = .reference {!type:ioObjectIR.type !llvmName:llvmTemporaryName}
+    !?self.appendStoreTemporaryReference (!ioObjectIR.type, !llvmTemporaryName, !ioObjectIR)
+    ioObjectIR = .reference (!type:ioObjectIR.type, !llvmName:llvmTemporaryName)
   end
 }
 

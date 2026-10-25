@@ -9,13 +9,13 @@ class @integerDeclarationAST : @abstractDeclarationAST {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override func @integerDeclarationAST locationForErrorSignaling -> @location outLocation {
+override func @integerDeclarationAST.locationForErrorSignaling () -> @location outLocation {
   outLocation = .nowhere
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func @integerDeclarationAST typeName -> @string outName {
+func @integerDeclarationAST.typeName () -> @string outName {
   outName = if self.mIsSigned then "i" else "u" end + self.mSize
 }
 
@@ -23,19 +23,19 @@ func @integerDeclarationAST typeName -> @string outName {
 //  PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @integerDeclarationAST enterInPrecedenceGraph
-  ?!@semanticTypePrecedenceGraph ioGraph
-{
+override proc @integerDeclarationAST.enterInPrecedenceGraph
+  (?!@semanticTypePrecedenceGraph ioGraph
+) {
   let nodeName = self.typeName.nowhere
-  [!?ioGraph addNode !nodeName !self]
-  [!?ioGraph addEdge !from: nodeName !to: ctIntegerTypeName ().nowhere]
-  [!?ioGraph addEdge !from: nodeName !to: boolTypeName ().nowhere]
-  [!?ioGraph addEdge !from: nodeName !to: ctBoolTypeName ().nowhere]
+  !?ioGraph.addNode (!nodeName, !self)
+  !?ioGraph.addEdge (!from: nodeName, !to: ctIntegerTypeName ().nowhere)
+  !?ioGraph.addEdge (!from: nodeName, !to: boolTypeName ().nowhere)
+  !?ioGraph.addEdge (!from: nodeName, !to: ctBoolTypeName ().nowhere)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override func @integerDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+override func @integerDeclarationAST.keyRepresentationForErrorSignaling () -> @string outRepresentation {
   outRepresentation = "integer " + self.typeName
 }
 
@@ -43,7 +43,7 @@ override func @integerDeclarationAST keyRepresentationForErrorSignaling -> @stri
 //!  UTILITIES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func minValueForInteger ?let @bool inIsUnsigned ?let @uint inBitCount -> @bigint {
+func minValueForInteger (?let @bool inIsUnsigned, ?let @uint inBitCount ) -> @bigint {
   if inIsUnsigned then
     result = 0
   else // Signed
@@ -53,7 +53,7 @@ func minValueForInteger ?let @bool inIsUnsigned ?let @uint inBitCount -> @bigint
 
 //·······················································································································
 
-func maxValueForInteger ?let @bool inIsUnsigned ?let @uint inBitCount -> @bigint {
+func maxValueForInteger (?let @bool inIsUnsigned, ?let @uint inBitCount ) -> @bigint {
   if inIsUnsigned then
     result = (1 << inBitCount) - 1
   else // Signed
@@ -65,18 +65,18 @@ func maxValueForInteger ?let @bool inIsUnsigned ?let @uint inBitCount -> @bigint
 //!  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @integerDeclarationAST enterInContext
-  ?!context:@semanticContext ioContext
-  ?!@declarationDecorationList unused ioDecoratedDeclarationList
-  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
-  ?!@routineListIR ioRoutineListIR
-  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
-  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
-  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
+override proc @integerDeclarationAST.enterInContext
+  (?!context:@semanticContext ioContext,
+  ?!@declarationDecorationList unused ioDecoratedDeclarationList,
+  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList,
+  ?!@routineListIR ioRoutineListIR,
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap,
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap,
+  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST,
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
-{
+) {
   let integerTypeName = self.typeName.nowhere
-  [!?ioContext.mTypeMap makeEntry !integerTypeName ?let selfTypeProxy]
+  !?ioContext.mTypeMap.makeEntry (!integerTypeName, ?let selfTypeProxy)
 //--------------------------------------- Get min and max
   let min = minValueForInteger (!not self.mIsSigned !self.mSize)
   let max = maxValueForInteger (!not self.mIsSigned !self.mSize)
@@ -84,112 +84,112 @@ override proc @integerDeclarationAST enterInContext
   let llvmTypeName = "i" + self.mSize
 //--------------------------------------- byteSwapped
   if (self.mSize mod 16) == 0 then
-    [!?ioContext addComputedPropertyGetter
-      !omnibusTypeName: integerTypeName
-      !llvmBaseTypeName:integerTypeName
-      !propertyName:"byteSwapped".nowhere
-      !mode:.anySafeMode
-      !visibility: .isPublic
-      !resultTypeProxy:selfTypeProxy
+    !?ioContext.addComputedPropertyGetter
+      (!omnibusTypeName: integerTypeName,
+      !llvmBaseTypeName:integerTypeName,
+      !propertyName:"byteSwapped".nowhere,
+      !mode:.anySafeMode,
+      !visibility: .isPublic,
+      !resultTypeProxy:selfTypeProxy,
       ?routineLLVMName: let routineLLVMName
-    ]
-    ioRoutineListIR += !@integerBuiltinFunctionIR {
-      !routineLLVMName
-      !isRequired:false
-      !warnsIfUnused:false
-      !llvmTypeName
-      !"bswap"
-    }
+    )
+    ioRoutineListIR += !@integerBuiltinFunctionIR (
+      !routineLLVMName,
+      !isRequired:false,
+      !warnsIfUnused:false,
+      llvmTypeName,
+      "bswap"
+    )
   end
 //--------------------------------------- bitreverse
-  [!?ioContext addComputedPropertyGetter
-    !omnibusTypeName: integerTypeName
-    !llvmBaseTypeName:integerTypeName
-    !propertyName:"bitReversed".nowhere
-    !mode:.anySafeMode
-    !visibility: .isPublic
-    !resultTypeProxy:selfTypeProxy
+  !?ioContext.addComputedPropertyGetter
+    (!omnibusTypeName: integerTypeName,
+    !llvmBaseTypeName:integerTypeName,
+    !propertyName:"bitReversed".nowhere,
+    !mode:.anySafeMode,
+    !visibility: .isPublic,
+    !resultTypeProxy:selfTypeProxy,
     ?routineLLVMName: var routineLLVMName
-  ]
-  ioRoutineListIR += !@integerBuiltinFunctionIR {
-    !routineLLVMName
-    !isRequired:false
-    !warnsIfUnused:false
-    !llvmTypeName
-    !"bitreverse"
-  }
+  )
+  ioRoutineListIR += !@integerBuiltinFunctionIR (
+    !routineLLVMName,
+    !isRequired:false,
+    !warnsIfUnused:false,
+    llvmTypeName,
+    "bitreverse"
+  )
 //--------------------------------------- leadingZeroCount
-  [!?ioContext addComputedPropertyGetter
-    !omnibusTypeName: integerTypeName
-    !llvmBaseTypeName:integerTypeName
-    !propertyName:"leadingZeroCount".nowhere
-    !mode:.anySafeMode
-    !visibility: .isPublic
-    !resultTypeProxy:selfTypeProxy
+  !?ioContext.addComputedPropertyGetter
+    (!omnibusTypeName: integerTypeName,
+    !llvmBaseTypeName:integerTypeName,
+    !propertyName:"leadingZeroCount".nowhere,
+    !mode:.anySafeMode,
+    !visibility: .isPublic,
+    !resultTypeProxy:selfTypeProxy,
     ?routineLLVMName: routineLLVMName
-  ]
-  ioRoutineListIR += !@integerBuiltinFunctionIR {
-    !routineLLVMName
-    !isRequired:false
-    !warnsIfUnused:false
-    !llvmTypeName
-    !"ctlz"
-  }
+  )
+  ioRoutineListIR += !@integerBuiltinFunctionIR (
+    !routineLLVMName,
+    !isRequired:false,
+    !warnsIfUnused:false,
+    llvmTypeName,
+    "ctlz"
+  )
 //--------------------------------------- trainingZeroCount
-  [!?ioContext addComputedPropertyGetter
-    !omnibusTypeName: integerTypeName
-    !llvmBaseTypeName:integerTypeName
-    !propertyName:"trainingZeroCount".nowhere
-    !mode:.anySafeMode
-    !visibility: .isPublic
-    !resultTypeProxy:selfTypeProxy
+  !?ioContext.addComputedPropertyGetter
+    (!omnibusTypeName: integerTypeName,
+    !llvmBaseTypeName:integerTypeName,
+    !propertyName:"trainingZeroCount".nowhere,
+    !mode:.anySafeMode,
+    !visibility: .isPublic,
+    !resultTypeProxy:selfTypeProxy,
     ?routineLLVMName: routineLLVMName
-  ]
-  ioRoutineListIR += !@integerBuiltinFunctionIR {
-    !routineLLVMName
-    !isRequired:false
-    !warnsIfUnused:false
-    !llvmTypeName
-    !"cttz"
-  }
+  )
+  ioRoutineListIR += !@integerBuiltinFunctionIR (
+    !routineLLVMName,
+    !isRequired:false,
+    !warnsIfUnused:false,
+    llvmTypeName,
+    "cttz"
+  )
 //--------------------------------------- setBitCountMethodName
-  [!?ioContext addComputedPropertyGetter
-    !omnibusTypeName: integerTypeName
-    !llvmBaseTypeName: integerTypeName
-    !propertyName:"setBitCount".nowhere
-    !mode:.anySafeMode
-    !visibility: .isPublic
-    !resultTypeProxy:selfTypeProxy
+  !?ioContext.addComputedPropertyGetter
+    (!omnibusTypeName: integerTypeName,
+    !llvmBaseTypeName: integerTypeName,
+    !propertyName:"setBitCount".nowhere,
+    !mode:.anySafeMode,
+    !visibility: .isPublic,
+    !resultTypeProxy:selfTypeProxy,
     ?routineLLVMName: routineLLVMName
-  ]
-  ioRoutineListIR += !@integerBuiltinFunctionIR {
-    !routineLLVMName
-    !isRequired:false
-    !warnsIfUnused:false
-    !llvmTypeName
-    !"ctpop"
-  }
+  )
+  ioRoutineListIR += !@integerBuiltinFunctionIR (
+    !routineLLVMName,
+    !isRequired:false,
+    !warnsIfUnused:false,
+    llvmTypeName,
+    "ctpop"
+  )
 //--------------------------------------- Class constant map
   var @constantMap constantMap = @()
-  [!?constantMap insertKey !"min".nowhere !min !integerTypeName]
-  [!?constantMap insertKey !"max".nowhere !max !integerTypeName]
-  [!?ioContext.mTypeConstantMap insertKey
-    !integerTypeName
+  !?constantMap.insertKey (!"min".nowhere, !min, !integerTypeName)
+  !?constantMap.insertKey (!"max".nowhere, !max, !integerTypeName)
+  !?ioContext.mTypeConstantMap.insertKey
+    (!integerTypeName,
     !constantMap
-  ]
+  )
 //--------------------------------------- Constructor map
   var @constructorMap constructorMap = @()
-  [!?constructorMap insertKey !"()".nowhere !@[] !.simple {!value:0}]
-  [!?ioContext.mTypeConstructorMap insertKey !integerTypeName !constructorMap]
+  !?constructorMap.insertKey (!"()".nowhere, !@[], !.simple (!value:0))
+  !?ioContext.mTypeConstructorMap.insertKey (!integerTypeName, !constructorMap)
 //--------------------------------------- Enter in type map
-  let integerType = @omnibusType {
-    !subscript:.noSubscript
-    !attributes:.instanciable | .copyable
-    !omnibusTypeDescriptionName:integerTypeName
-    !kind:.integer {!min:min !max:max !unsigned:not self.mIsSigned !bitCount:self.mSize}
+  let integerType = @omnibusType (
+    !subscript:.noSubscript,
+    !attributes:.instanciable | .copyable,
+    !omnibusTypeDescriptionName:integerTypeName,
+    !kind:.integer (!min:min, !max:max, !unsigned:not self.mIsSigned, !bitCount:self.mSize),
     !llvmBaseTypeName: integerTypeName
-  }
-  [!?ioContext.mTypeMap insertType !integerTypeName !type:integerType]
+  )
+  !?ioContext.mTypeMap.insertType (!integerTypeName, !type:integerType)
 //--------------------------------------- Enter integer <-> integer operators
 //  enter_integer_integer_operators (
 //    !integerTypeName:integerTypeName
@@ -210,77 +210,77 @@ override proc @integerDeclarationAST enterInContext
 //  )
 //--------------------------------------- Assignment
   var key = assignmentOperatorKey (!integerType !.nowhere !integerType)
-  [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage ()]
+  !?ioContext.mAssignmentOperatorMap.insertKey (!key, !@simpleCopyAssignmentOperatorUsage ())
   key = assignmentOperatorKey (!integerType !.nowhere !compileTimeIntegerType ())
-  [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage ()]
+  !?ioContext.mAssignmentOperatorMap.insertKey (!key, !@simpleCopyAssignmentOperatorUsage ())
 //--- Copy from reference is used by dynamic arraies
   let functionName = assignmentOperatorFuncName (!integerType !integerType)
-  ioRoutineListIR += !@simpleAssignmentCopyRoutineIR {
-    !functionName.nowhere
-    !isRequired: false
-    !warnsIfUnused: false
-    !integerType
-  }
+  ioRoutineListIR += !@simpleAssignmentCopyRoutineIR (
+    !functionName.nowhere,
+    !isRequired: false,
+    !warnsIfUnused: false,
+    integerType
+  )
 //--------------------------------------- Infix operator between integers
   let boolType = boolType ()
 //--- Enter == infix operator
-  addIntegerInfixOperator (!.equal !integerType !"icmp eq" !?ioContext.mInfixOperatorMap !boolType)
+  addIntegerInfixOperator (!.equal, !integerType, !"icmp eq", !?ioContext.mInfixOperatorMap, !boolType)
 //--- Enter ≤ infix operator
   addIntegerInfixOperator (
-    !.infEqual
-    !integerType
-    !if self.mIsSigned then "icmp sle" else "icmp ule" end
-    !?ioContext.mInfixOperatorMap
+    !.infEqual,
+    !integerType,
+    !if self.mIsSigned then "icmp sle" else "icmp ule" end,
+    !?ioContext.mInfixOperatorMap,
     !boolType
   )
 //--- Enter < infix operator
   addIntegerInfixOperator (
-    !.lessThan
-    !integerType
-    !if self.mIsSigned then "icmp slt" else "icmp ult" end
-    !?ioContext.mInfixOperatorMap
+    !.lessThan,
+    !integerType,
+    !if self.mIsSigned then "icmp slt" else "icmp ult" end,
+    !?ioContext.mInfixOperatorMap,
     !boolType
   )
 //--- Enter << infix operator
-  addIntegerInfixOperator (!.leftShiftOp !integerType !"shl" !?ioContext.mInfixOperatorMap !integerType)
+  addIntegerInfixOperator (!.leftShiftOp, !integerType, !"shl", !?ioContext.mInfixOperatorMap, !integerType)
 //--- Enter >> infix operator
   addIntegerInfixOperator (
-    !.rightShiftOp
-    !integerType
-    !if self.mIsSigned then "ashr" else "lshr" end
-    !?ioContext.mInfixOperatorMap
+    !.rightShiftOp,
+    !integerType,
+    !if self.mIsSigned then "ashr" else "lshr" end,
+    !?ioContext.mInfixOperatorMap,
     !integerType
   )
 //--- Enter | infix operator
-  addIntegerInfixOperator (!.bitWiseOrOp !integerType !"or" !?ioContext.mInfixOperatorMap !integerType)
+  addIntegerInfixOperator (!.bitWiseOrOp, !integerType, !"or", !?ioContext.mInfixOperatorMap, !integerType)
 //--- Enter & infix operator
-  addIntegerInfixOperator (!.bitWiseAndOp !integerType !"and" !?ioContext.mInfixOperatorMap !integerType)
+  addIntegerInfixOperator (!.bitWiseAndOp, !integerType, !"and", !?ioContext.mInfixOperatorMap, !integerType)
 //--- Enter ^ infix operator
-  addIntegerInfixOperator (!.bitWiseXorOp !integerType !"xor" !?ioContext.mInfixOperatorMap !integerType)
+  addIntegerInfixOperator (!.bitWiseXorOp, !integerType, !"xor", !?ioContext.mInfixOperatorMap, !integerType)
 //--- Enter +% infix operator
-  addIntegerInfixOperator (!.addOpNoOvf !integerType !"add" !?ioContext.mInfixOperatorMap !integerType)
+  addIntegerInfixOperator (!.addOpNoOvf, !integerType, !"add", !?ioContext.mInfixOperatorMap, !integerType)
 //--- Enter -% infix operator
-  addIntegerInfixOperator (!.subOpNoOvf !integerType !"sub" !?ioContext.mInfixOperatorMap !integerType)
+  addIntegerInfixOperator (!.subOpNoOvf, !integerType, !"sub", !?ioContext.mInfixOperatorMap, !integerType)
 //--- Enter *% infix operator
-  addIntegerInfixOperator (!.mulOpNoOvf !integerType !"mul" !?ioContext.mInfixOperatorMap !integerType)
+  addIntegerInfixOperator (!.mulOpNoOvf, !integerType, !"mul", !?ioContext.mInfixOperatorMap, !integerType)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc addIntegerInfixOperator
-  ?let @omnibusInfixOperator inInfixOperator
-  ?let @omnibusType inIntegerType
-  ?let @string inLLVMOp
-  ?!@infixOperatorMap ioInfixOperatorMap
+  (?let @omnibusInfixOperator inInfixOperator,
+  ?let @omnibusType inIntegerType,
+  ?let @string inLLVMOp,
+  ?!@infixOperatorMap ioInfixOperatorMap,
   ?let @omnibusType inResultType
-{
+) {
   let ctIntType = compileTimeIntegerType ()
   var key = infixOperatorMapKey (!inIntegerType !inInfixOperator !.nowhere !inIntegerType)
-  [!?ioInfixOperatorMap insertKey !key !inResultType !@inlineInfixOperatorUsage {!inLLVMOp}]
+  !?ioInfixOperatorMap.insertKey (!key, !inResultType, !@inlineInfixOperatorUsage (!inLLVMOp))
   key = infixOperatorMapKey (!inIntegerType !inInfixOperator !.nowhere !ctIntType)
-  [!?ioInfixOperatorMap insertKey !key !inResultType !@inlineInfix_integer_compileTimeInt_operatorUsage {!inLLVMOp}]
+  !?ioInfixOperatorMap.insertKey (!key, !inResultType, !@inlineInfix_integer_compileTimeInt_operatorUsage (!inLLVMOp))
   key = infixOperatorMapKey (!ctIntType !inInfixOperator !.nowhere !inIntegerType)
-  [!?ioInfixOperatorMap insertKey !key !inResultType !@inlineInfix_compileTimeInt_integer_operatorUsage {!inLLVMOp}]
+  !?ioInfixOperatorMap.insertKey (!key, !inResultType, !@inlineInfix_compileTimeInt_integer_operatorUsage (!inLLVMOp))
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -293,19 +293,19 @@ class @inlineInfix_integer_compileTimeInt_operatorUsage : @omnibusInfixOperatorU
 
 //·······················································································································
 
-override proc @inlineInfix_integer_compileTimeInt_operatorUsage generateCode
-  ?let @objectIR inLeftOperand
-  ?let @location inOperatorLocation
-  ?let @objectIR inRightOperand
-  ?let @omnibusType inResultType
-  ?!@semanticTemporariesStruct ioTemporaries
-  ?!@allocaList unused ioAllocaList
-  ?!@instructionListIR ioInstructionGenerationList
+override proc @inlineInfix_integer_compileTimeInt_operatorUsage.generateCode
+  (?let @objectIR inLeftOperand,
+  ?let @location inOperatorLocation,
+  ?let @objectIR inRightOperand,
+  ?let @omnibusType inResultType,
+  ?!@semanticTemporariesStruct ioTemporaries,
+  ?!@allocaList unused ioAllocaList,
+  ?!@instructionListIR ioInstructionGenerationList,
   !@objectIR outResultValue
-{
+) {
 //--- Check right ctInt belong to left integer range
-  [inLeftOperand.type.kind extractInteger ?min: let minValue ?max: let maxValue ?2*]
-  [inRightOperand extractLiteralInteger ?1* ?value:let value]
+  inLeftOperand.type.kind.extractInteger (?min: let minValue, ?max: let maxValue, ?2*)
+  inRightOperand.extractLiteralInteger (?1*, ?value:let value)
   if value < minValue then
     error (inOperatorLocation
     : "right operand is a compile time integer with an invalid value, lower than $"
@@ -317,11 +317,11 @@ override proc @inlineInfix_integer_compileTimeInt_operatorUsage generateCode
   end
 //---
   var leftOperand = inLeftOperand
-  [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?leftOperand]
-  getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
+  !?ioInstructionGenerationList.appendLoadWhenReference (!?ioTemporaries, !?leftOperand)
+  getNewTempValue (!inResultType, !?ioTemporaries, ?outResultValue)
   let s = outResultValue.llvmName + " = " + self.mLLVMOperation + " " + leftOperand.type.llvmTypeName
         + " " + leftOperand.llvmName + ", " + inRightOperand.llvmName
-  [!?ioInstructionGenerationList appendInstructionAsFreeString !s !@[]]
+  !?ioInstructionGenerationList.appendInstructionAsFreeString (!s, !@[])
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -334,19 +334,19 @@ class @inlineInfix_compileTimeInt_integer_operatorUsage : @omnibusInfixOperatorU
 
 //·······················································································································
 
-override proc @inlineInfix_compileTimeInt_integer_operatorUsage generateCode
-  ?let @objectIR inLeftOperand
-  ?let @location inOperatorLocation
-  ?let @objectIR inRightOperand
-  ?let @omnibusType inResultType
-  ?!@semanticTemporariesStruct ioTemporaries
-  ?!@allocaList unused ioAllocaList
-  ?!@instructionListIR ioInstructionGenerationList
+override proc @inlineInfix_compileTimeInt_integer_operatorUsage.generateCode
+  (?let @objectIR inLeftOperand,
+  ?let @location inOperatorLocation,
+  ?let @objectIR inRightOperand,
+  ?let @omnibusType inResultType,
+  ?!@semanticTemporariesStruct ioTemporaries,
+  ?!@allocaList unused ioAllocaList,
+  ?!@instructionListIR ioInstructionGenerationList,
   !@objectIR outResultValue
-{
+) {
 //--- Check right ctInt belong to right integer range
-  [inRightOperand.type.kind extractInteger ?min: let minValue ?max: let maxValue ?2*]
-  [inLeftOperand extractLiteralInteger ?1* ?value:let value]
+  inRightOperand.type.kind.extractInteger (?min: let minValue, ?max: let maxValue, ?2*)
+  inLeftOperand.extractLiteralInteger (?1*, ?value:let value)
   if value < minValue then
     error (inOperatorLocation
     : "left operand is a compile time integer with an invalid value, lower than $"
@@ -358,11 +358,11 @@ override proc @inlineInfix_compileTimeInt_integer_operatorUsage generateCode
   end
 //---
   var rightOperand = inRightOperand
-  [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?rightOperand]
-  getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
+  !?ioInstructionGenerationList.appendLoadWhenReference (!?ioTemporaries, !?rightOperand)
+  getNewTempValue (!inResultType, !?ioTemporaries, ?outResultValue)
   let s = outResultValue.llvmName + " = " + self.mLLVMOperation + " " + rightOperand.type.llvmTypeName
         + " " + inLeftOperand.llvmName + ", " + rightOperand.llvmName
-  [!?ioInstructionGenerationList appendInstructionAsFreeString !s !@[]]
+  !?ioInstructionGenerationList.appendInstructionAsFreeString (!s, !@[])
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -376,11 +376,11 @@ class @integerBuiltinFunctionIR : @abstractRoutineIR {
 
 //·······················································································································
 
-override proc @integerBuiltinFunctionIR llvmCodeGeneration
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
+override proc @integerBuiltinFunctionIR.llvmCodeGeneration
+  (?!@string ioLLVMcode,
+  ?let @generationContext unused inGenerationContext,
   ?!@generationAdds ioGenerationAdds
-{
+) {
   ioLLVMcode += "define internal " + self.mLLVMTypeName + " @" + self.mRoutineMangledName.string.assemblerRepresentation
   ioLLVMcode += " (" + self.mLLVMTypeName + "* %inValue) {\n"
   ioLLVMcode += "  %value = load " + self.mLLVMTypeName + ", " + self.mLLVMTypeName + "* %inValue\n"

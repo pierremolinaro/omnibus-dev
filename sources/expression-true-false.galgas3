@@ -14,16 +14,16 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <primary> ?!@ast unused ioAST !@expressionAST outExpression {
+  rule <primary> (?!@ast unused ioAST ,!@expressionAST outExpression ) {
     $yes$
-    outExpression = @literalBooleanInExpressionAST {!true}
+    outExpression = @literalBooleanInExpressionAST (!true)
   }
 
   //·····················································································································
 
-  rule <primary> ?!@ast unused ioAST !@expressionAST outExpression {
+  rule <primary> (?!@ast unused ioAST ,!@expressionAST outExpression ) {
     $no$
-    outExpression = @literalBooleanInExpressionAST {!false}
+    outExpression = @literalBooleanInExpressionAST (!false)
   }
 
   //·····················································································································
@@ -34,41 +34,41 @@ syntax extension omnibus_syntax {
 //  PRECEDENCE GRAPH FROM EXPRESSION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @literalBooleanInExpressionAST addDependenceEdgeForStaticExpression
-  ?let @lstring inConstantName
+override proc @literalBooleanInExpressionAST.addDependenceEdgeForStaticExpression
+  (?let @lstring inConstantName,
   ?!@semanticTypePrecedenceGraph ioGraph
-{
-  [!?ioGraph addEdge !from: inConstantName !to: ctBoolTypeName ().nowhere]
+) {
+  !?ioGraph.addEdge (!from: inConstantName, !to: ctBoolTypeName ().nowhere)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @literalBooleanInExpressionAST noteExpressionTypesInPrecedenceGraph
-     ?!@semanticTypePrecedenceGraph unused ioGraph
-{
+override proc @literalBooleanInExpressionAST.noteExpressionTypesInPrecedenceGraph
+     (?!@semanticTypePrecedenceGraph unused ioGraph
+) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @literalBooleanInExpressionAST analyzeExpression
-  ?self:let @omnibusType unused inSelfType
-  ?routineAttributes:let @routineAttributes unused inRoutineAttributes
-  ?optionalTargetType:let @omnibusType unused inOptionalTargetType
-  ?context:let @semanticContext unused inContext
-  ?mode:let @mode unused inMode
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaryIndex
-  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap unused ioUniversalMap
-  ?!alloca:@allocaList unused ioAllocaList
-  ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList
+override proc @literalBooleanInExpressionAST.analyzeExpression
+  (?self:let @omnibusType unused inSelfType,
+  ?routineAttributes:let @routineAttributes unused inRoutineAttributes,
+  ?optionalTargetType:let @omnibusType unused inOptionalTargetType,
+  ?context:let @semanticContext unused inContext,
+  ?mode:let @mode unused inMode,
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaryIndex,
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap unused ioUniversalMap,
+  ?!alloca:@allocaList unused ioAllocaList,
+  ?!instructionListIR:@instructionListIR unused ioInstructionGenerationList,
   !result:@objectIR outResult
-{
+) {
 //  outResult = .literalInteger {!type:[inContext booleanType !.nowhere] !value:if mValue then 1 else 0 end}
-  outResult = .literalInteger {!type: compileTimeBoolType () !value: if self.mValue then 1 else 0 end}
+  outResult = .literalInteger (!type: compileTimeBoolType (), !value: if self.mValue then 1 else 0 end)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————

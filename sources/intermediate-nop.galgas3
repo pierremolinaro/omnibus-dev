@@ -1,5 +1,5 @@
 
-setter @instructionListIR appendNOP {
+mutating proc @instructionListIR.appendNOP () {
   self += !@nopIR ()
 }
 
@@ -10,11 +10,11 @@ class @nopIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @nopIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext inGenerationContext
+override proc @nopIR.llvmInstructionCode
+  (?!@string ioLLVMcode,
+  ?let @generationContext inGenerationContext,
   ?!@generationAdds unused ioGenerationAdds
-{
+) {
   ioLLVMcode += "  " + inGenerationContext.mNopInstructionInLLVM + " ; NOP instruction in LLVM\n"
 }
 

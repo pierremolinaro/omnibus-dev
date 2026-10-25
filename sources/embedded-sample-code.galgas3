@@ -24,7 +24,7 @@ before {
     if [fw fileExistsAtPath !path] then
       let text = [fw textFileContentsAtPath !path]
       let sourceName = path.lastPathComponent
-      [text writeToFileWhenDifferentContents !sourceName ?*]
+      text.writeToFileWhenDifferentContents (!sourceName, ?*)
     else
       error ("".nowhere : "there is no '" + path + "' embedded file")
     end  

@@ -24,20 +24,20 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
+  rule <primary> (?!@ast ioAST ,!@expressionAST outExpression ) {
     ${$
-    $©group$ ?let registerGroupName
+    $©group$ (?let registerGroupName)
     $.$
-    $identifier$ ?let registerName
+    $identifier$ (?let registerName)
     var @registerIntegerFieldListAST integerFieldValues = @[]
     repeat
-      $!selector:$ ?let registerFieldName
-      <expression> !?ioAST ?let expression
+      $!selector:$ (?let registerFieldName)
+      <expression> (!?ioAST, ?let expression)
       integerFieldValues += !registerFieldName !expression !.here
     while
     end
     $}$
-    outExpression = @registerConstantExpressionAST {!registerGroupName !registerName !integerFieldValues}
+    outExpression = @registerConstantExpressionAST (!registerGroupName, registerName, integerFieldValues)
   }
 
   //·····················································································································
@@ -48,21 +48,21 @@ syntax extension omnibus_syntax {
 //  PRECEDENCE GRAPH FROM EXPRESSION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @registerConstantExpressionAST addDependenceEdgeForStaticExpression
-  ?let @lstring unused inConstantName
+override proc @registerConstantExpressionAST.addDependenceEdgeForStaticExpression
+  (?let @lstring unused inConstantName,
   ?!@semanticTypePrecedenceGraph unused ioGraph
-{
+) {
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @registerConstantExpressionAST noteExpressionTypesInPrecedenceGraph
-  ?!@semanticTypePrecedenceGraph ioGraph
-{
+override proc @registerConstantExpressionAST.noteExpressionTypesInPrecedenceGraph
+  (?!@semanticTypePrecedenceGraph ioGraph
+) {
   for (* expression *) in self.mFieldValues do
-    [expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+    expression.noteExpressionTypesInPrecedenceGraph (!?ioGraph)
   end
 }
 
@@ -70,37 +70,37 @@ override proc @registerConstantExpressionAST noteExpressionTypesInPrecedenceGrap
 //  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @registerConstantExpressionAST analyzeExpression
-  ?self:let @omnibusType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?optionalTargetType:let @omnibusType unused inOptionalTargetType
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+override proc @registerConstantExpressionAST.analyzeExpression
+  (?self:let @omnibusType inSelfType,
+  ?routineAttributes:let @routineAttributes inRoutineAttributes,
+  ?optionalTargetType:let @omnibusType unused inOptionalTargetType,
+  ?context:let @semanticContext inContext,
+  ?mode:let @mode inMode,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap,
+  ?!alloca:@allocaList ioAllocaList,
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList,
   !result:@objectIR outResult
-{
+) {
 //------------------------------------------------------ Search Control register Group
-  [inContext.mControlRegisterGroupMap searchKey
-    !self.mRegisterGroupName
-    ?*
+  inContext.mControlRegisterGroupMap.searchKey
+    (!self.mRegisterGroupName,
+    ?*,
     ?let controlRegisterMap
-  ]
+  )
 //------------------------------------------------------ Search Control register
-  [controlRegisterMap searchKey
-    !self.mRegisterName
-    ?let registerType
-    ?2*
-    ?let @sliceMap unused registerBitSliceMap
-    ?let @controlRegisterFieldMap registerFieldMap
-    ?2*
-    ?let registerBitCount
-    ?let unused powerOfTwoForArraySize
+  controlRegisterMap.searchKey
+    (!self.mRegisterName,
+    ?let registerType,
+    ?2*,
+    ?let @sliceMap unused registerBitSliceMap,
+    ?let @controlRegisterFieldMap registerFieldMap,
+    ?2*,
+    ?let registerBitCount,
+    ?let unused powerOfTwoForArraySize,
     ?let unused elementArraySize
-  ]
+  )
 //------------------------------------------------------ Valuated fields
   var @bigint accumulatedFieldStaticValues = 0
   var @operandIRList operandList = @[]
@@ -108,34 +108,34 @@ override proc @registerConstantExpressionAST analyzeExpression
     if fieldName.string == "" then
       error (fieldName : "anonymous selector not allowed here" spoil operandList)
     else
-      [registerFieldMap searchKey
-        !fieldName
-        ?let @uint fieldBitIndex
+      registerFieldMap.searchKey
+        (!fieldName,
+        ?let @uint fieldBitIndex,
         ?let @uint fieldBitCount
-      ]
-      let inferredTypeName = @lstring {!"u" + fieldBitCount !fieldName.location}
-      [inContext.mTypeMap searchType !lkey:inferredTypeName ?type:let inferredType]
+      )
+      let inferredTypeName = @lstring (!"u" + fieldBitCount, fieldName.location)
+      inContext.mTypeMap.searchType (!lkey:inferredTypeName, ?type:let inferredType)
     //--- Analyze expression
-      [expression analyzeExpression
-        !self:inSelfType
-        !routineAttributes:inRoutineAttributes
-        !optionalTargetType:inferredType
-        !context:inContext
-        !mode:inMode
-        !?temporary:ioTemporaries
-        !?staticEntityMap:ioStaticEntityMap
-        !?variableMap:ioUniversalMap
-        !?alloca:ioAllocaList
-        !?instructionListIR:ioInstructionGenerationList
+      expression.analyzeExpression
+        (!self:inSelfType,
+        !routineAttributes:inRoutineAttributes,
+        !optionalTargetType:inferredType,
+        !context:inContext,
+        !mode:inMode,
+        !?temporary:ioTemporaries,
+        !?staticEntityMap:ioStaticEntityMap,
+        !?variableMap:ioUniversalMap,
+        !?alloca:ioAllocaList,
+        !?instructionListIR:ioInstructionGenerationList,
         ?result:@objectIR expressionResult
-      ]
-      [!?ioInstructionGenerationList appendLoadWhenReference
-        !?ioTemporaries
+      )
+      !?ioInstructionGenerationList.appendLoadWhenReference
+        (!?ioTemporaries,
         !?expressionResult
-      ]
+      )
     //--- Check expression type
       if expressionResult.type.kind.isCompileTimeInteger then
-        [expressionResult extractLiteralInteger ?1* ?value:let @bigint value]
+        expressionResult.extractLiteralInteger (?1*, ?value:let @bigint value)
         if value < 0 then
           error (expressionLocation: "this integer expression should be positive")
         elsif value < (1 << fieldBitCount) then
@@ -144,7 +144,7 @@ override proc @registerConstantExpressionAST analyzeExpression
           error (expressionLocation: "expression too large (should be < " + (1 << fieldBitCount) + ")")
         end
       elsif expressionResult.type.kind.isInteger then
-        [expressionResult.type.kind extractInteger ?2* ?unsigned:let @bool unsigned ?bitCount:let @uint expressionBitCount]
+        expressionResult.type.kind.extractInteger (?2*, ?unsigned:let @bool unsigned, ?bitCount:let @uint expressionBitCount)
         if not unsigned then
           error (expressionLocation: "an unsigned integer expression is required here")
         elsif expressionBitCount != fieldBitCount then
@@ -153,13 +153,13 @@ override proc @registerConstantExpressionAST analyzeExpression
         //--- Perform an bit extend to register type or a trunc
           var partialResult = expressionResult
           if expressionBitCount < registerBitCount then
-            getNewTempValue (!registerType !?ioTemporaries ?let extendedResult)
-            [!?ioInstructionGenerationList appendExtend !extendedResult !partialResult]
+            getNewTempValue (!registerType, !?ioTemporaries, ?let extendedResult)
+            !?ioInstructionGenerationList.appendExtend (!extendedResult, !partialResult)
             partialResult = extendedResult
           end
         //--- Perform left shift
-          getNewTempValue (!registerType !?ioTemporaries ?let shiftedResult)
-          [!?ioInstructionGenerationList appendShiftLeft !shiftedResult !partialResult !fieldBitIndex]
+          getNewTempValue (!registerType, !?ioTemporaries, ?let shiftedResult)
+          !?ioInstructionGenerationList.appendShiftLeft (!shiftedResult, !partialResult, !fieldBitIndex)
         //---- Accumulate
           operandList += !shiftedResult
         end
@@ -167,17 +167,17 @@ override proc @registerConstantExpressionAST analyzeExpression
     end
   end
 //------------------------------------------------------ Result
-  outResult = .literalInteger {!type: registerType!value:accumulatedFieldStaticValues}
+  outResult = .literalInteger (!type: registerType, !value:accumulatedFieldStaticValues)
   for (operand) in operandList do
-    getNewTempValue (!registerType !?ioTemporaries ?let newResult)
-    [!?ioInstructionGenerationList appendBinaryOperation
-      !newResult
-      !newResult.type
-      !.here
-      !outResult
-      !.ior
+    getNewTempValue (!registerType, !?ioTemporaries, ?let newResult)
+    !?ioInstructionGenerationList.appendBinaryOperation
+      (!newResult,
+      !newResult.type,
+      !.here,
+      !outResult,
+      !.ior,
       !operand
-    ]
+    )
     outResult = newResult
   end
 }

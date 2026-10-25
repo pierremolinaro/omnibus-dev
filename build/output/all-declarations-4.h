@@ -1879,7 +1879,7 @@ class GGS_string extensionGetter_string (const class GGS_valuedObjectState & inO
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@instructionListIR appendTrunc'
+//Extension mutating proc '@instructionListIR appendTrunc'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -2126,7 +2126,7 @@ void extensionMethod_analyzeBranchInstructionList (const class GGS_instructionLi
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@instructionListIR appendSourceLineComment'
+//Extension mutating proc '@instructionListIR appendSourceLineComment'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -2137,7 +2137,7 @@ void extensionSetter_appendSourceLineComment (class GGS_instructionListIR & ioOb
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@universalValuedObjectMap closeBranch'
+//Extension mutating proc '@universalValuedObjectMap closeBranch'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -2148,7 +2148,7 @@ void extensionSetter_closeBranch (class GGS_universalValuedObjectMap & ioObject,
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@universalValuedObjectMap openBranch'
+//Extension mutating proc '@universalValuedObjectMap openBranch'
 //
 //--------------------------------------------------------------------------------------------------
 

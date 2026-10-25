@@ -5,12 +5,12 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func checkAssignmentCompatibility
-  ?let @assignmentOperatorMap inAssignmentOperatorMap
-  ?source:let @objectIR inSourceValue
-  ?targetAnnotationType:let @omnibusType inOptionalTargetAnnotationType
-  ?errorLocation:let @location inErrorLocation
+  (?let @assignmentOperatorMap inAssignmentOperatorMap,
+  ?source:let @objectIR inSourceValue,
+  ?targetAnnotationType:let @omnibusType inOptionalTargetAnnotationType,
+  ?errorLocation:let @location inErrorLocation,
   ?staticTypeAllowed:let @bool inStaticTypeAllowed
-  -> @objectIR
+  ) -> @objectIR
 {
   if inOptionalTargetAnnotationType.kind.isVoid then
     result = inSourceValue
@@ -18,7 +18,7 @@ func checkAssignmentCompatibility
     result = [inSourceValue withType !inOptionalTargetAnnotationType]
   else
     let key = assignmentOperatorKey (!inOptionalTargetAnnotationType !.nowhere !inSourceValue.type)
-    [inAssignmentOperatorMap searchKey !key ?*]
+    inAssignmentOperatorMap.searchKey (!key, ?*)
     result = [inSourceValue withType !inOptionalTargetAnnotationType]
   end
 
@@ -34,9 +34,9 @@ func checkAssignmentCompatibility
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 abstract proc @abstractDecoratedDeclaration semanticAnalysis
-  ?context:let @semanticContext inContext
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
+  (?context:let @semanticContext inContext,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct)
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
@@ -50,7 +50,7 @@ struct @semanticTemporariesStruct {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-setter @semanticTemporariesStruct newTempLLVMVar !@string outTempLLVMVar {
+mutating proc @semanticTemporariesStruct.newTempLLVMVar (!@string outTempLLVMVar ) {
   outTempLLVMVar = "%temp." + self.mTemporaryIndex
   self.mTemporaryIndex += 1
 }
@@ -58,47 +58,47 @@ setter @semanticTemporariesStruct newTempLLVMVar !@string outTempLLVMVar {
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc getNewTempValue
-  ?let @omnibusType inType
-  ?!@semanticTemporariesStruct ioTemporaries
+  (?let @omnibusType inType,
+  ?!@semanticTemporariesStruct ioTemporaries,
   !@objectIR outTempVariable
-{
+) {
   if inType.kind == .void then
     outTempVariable = .void
   else
-    [!?ioTemporaries newTempLLVMVar ?let llvmName ]
-    outTempVariable = .llvmNamedValue {!type: inType !llvmName:llvmName}
+    !?ioTemporaries.newTempLLVMVar (?let llvmName )
+    outTempVariable = .llvmNamedValue (!type: inType, !llvmName:llvmName)
   end
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc getNewTempReference
-  ?let @omnibusType inType
-  ?!@semanticTemporariesStruct ioTemporaries
+  (?let @omnibusType inType,
+  ?!@semanticTemporariesStruct ioTemporaries,
   !@objectIR outTempVariable
-{
+) {
   if inType.kind == .void then
     outTempVariable = .void
   else
-    [!?ioTemporaries newTempLLVMVar ?let llvmName ]
-    outTempVariable = .reference {!type: inType !llvmName:llvmName}
+    !?ioTemporaries.newTempLLVMVar (?let llvmName )
+    outTempVariable = .reference (!type: inType, !llvmName:llvmName)
   end
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc semanticAnalysis
-  ?sourceFile:let @string unused inSourceFile
-  ?ast:let @ast inAST
-  ?allSourceFilePaths:let @stringset inSourceFileAbsolutePathSet
-  ?decoratedDeclarationList:let @declarationDecorationList inDecoratedDeclarationList
-  ?decoratedRoutineList: let @decoratedRegularRoutineList inDecoratedRoutineList
-  ?routineListIR:let @routineListIR inRoutineListIR
-  ?context:let @semanticContext inSemanticContext
-  ?endOfSourceFile:let @location inEndOfSourceFile
-  ?staticEntityMap:let @staticEntityMap inStaticEntityMap
+  (?sourceFile:let @string unused inSourceFile,
+  ?ast:let @ast inAST,
+  ?allSourceFilePaths:let @stringset inSourceFileAbsolutePathSet,
+  ?decoratedDeclarationList:let @declarationDecorationList inDecoratedDeclarationList,
+  ?decoratedRoutineList: let @decoratedRegularRoutineList inDecoratedRoutineList,
+  ?routineListIR:let @routineListIR inRoutineListIR,
+  ?context:let @semanticContext inSemanticContext,
+  ?endOfSourceFile:let @location inEndOfSourceFile,
+  ?staticEntityMap:let @staticEntityMap inStaticEntityMap,
   !intermediateCode:@intermediateCodeStruct outIntermediateCodeStruct
-{
+) {
   outIntermediateCodeStruct = @()
   outIntermediateCodeStruct.mRoutineListIR = inRoutineListIR
   outIntermediateCodeStruct.mTargetParameters = inSemanticContext.mTargetParameters
@@ -107,32 +107,32 @@ proc semanticAnalysis
 //---
   var @semanticTemporariesStruct temporaries = @()
   for (declaration) in inDecoratedDeclarationList do
-    [declaration semanticAnalysis
-      !context:inSemanticContext
-      !?temporary:temporaries
+    declaration.semanticAnalysis
+      (!context:inSemanticContext,
+      !?temporary:temporaries,
       !?intermediateCode:outIntermediateCodeStruct
-     ]
+     )
   end
 //  log inDecoratedRoutineList
-  [inDecoratedRoutineList routineSemanticAnalysis
-    !context:inSemanticContext
-    !?temporary:temporaries
+  inDecoratedRoutineList.routineSemanticAnalysis
+    (!context:inSemanticContext,
+    !?temporary:temporaries,
     !?intermediateCode:outIntermediateCodeStruct
-   ]
-  [inAST.mExternFunctionListAST externProcedureSemanticAnalysis
-    !context:inSemanticContext
-    !?temporary:temporaries
+   )
+  inAST.mExternFunctionListAST.externProcedureSemanticAnalysis
+    (!context:inSemanticContext,
+    !?temporary:temporaries,
     !?intermediateCode:outIntermediateCodeStruct
-  ]
+  )
 //--- Add panic routines
   appendPanicRoutines (
-    !allSourceFilePaths:inSourceFileAbsolutePathSet
+    !allSourceFilePaths:inSourceFileAbsolutePathSet,
     !?intermediateCode:outIntermediateCodeStruct
   )
 //--- Check required procedure are defined
   checkRequiredProcedures (
-    !ast:inAST
-    !context:inSemanticContext
+    !ast:inAST,
+    !context:inSemanticContext,
     !endOfSourceFile:inEndOfSourceFile
   )
 }

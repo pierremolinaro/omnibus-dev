@@ -1,18 +1,18 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once llvmAttributeFunction -> @string {
+func %once llvmAttributeFunction () -> @string {
   result = " nounwind minsize optsize "
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once staticAttribute -> @string {
+func %once staticAttribute () -> @string {
   result = "static"
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once compileTimeDeclarationBarrier -> @lstring {
+func %once compileTimeDeclarationBarrier () -> @lstring {
   result = "«compile time»".nowhere
 }
 
@@ -20,21 +20,21 @@ func %once compileTimeDeclarationBarrier -> @lstring {
 //!   Type
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func registerGroupNameFromOmnibusName ?let @lstring inName -> @lstring {
-  result = @{!"registers " + inName !inName.location}
+func registerGroupNameFromOmnibusName (?let @lstring inName ) -> @lstring {
+  result = @(!"registers " + inName, inName.location)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //!  Literal Strings
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func literalStringName ?let @uint inIndex -> @string {
+func literalStringName (?let @uint inIndex ) -> @string {
   result = "@string." + inIndex
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func literalCharacterArrayName ?let @uint inIndex -> @string {
+func literalCharacterArrayName (?let @uint inIndex ) -> @string {
   result = "@str.array." + inIndex
 }
 
@@ -42,22 +42,22 @@ func literalCharacterArrayName ?let @uint inIndex -> @string {
 //!   Infix operators
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func infixOperatorMapKey ?let @omnibusType inLeftType
-                         ?let @omnibusInfixOperator inInfixOperator
-                         ?let @location inOperatorLocation
-                         ?let @omnibusType inRightType -> @lstring 
+func infixOperatorMapKey (?let @omnibusType inLeftType,
+                         ?let @omnibusInfixOperator inInfixOperator,
+                         ?let @location inOperatorLocation,
+                         ?let @omnibusType inRightType ) -> @lstring 
 {
   var s = inLeftType.omnibusTypeDescriptionName + " " + inInfixOperator
   s += " " + inRightType.omnibusTypeDescriptionName
-  result = @{!s !inOperatorLocation}
+  result = @(!s, inOperatorLocation)
 }
 
 //·······················································································································
  
 func infixOperatorFunctionName
-      ?let @omnibusType inLeftType
-      ?let @omnibusInfixOperator inOperator
-      ?let @omnibusType inRightType -> @string
+      (?let @omnibusType inLeftType,
+      ?let @omnibusInfixOperator inOperator,
+      ?let @omnibusType inRightType ) -> @string
 {
   result = "operator." + inLeftType.omnibusTypeDescriptionName + "."
   switch inOperator
@@ -87,9 +87,9 @@ func infixOperatorFunctionName
 //!   Prefix operators
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func prefixOperatorMapKey ?let @omnibusType inReceiverType
-                          ?let @prefixOperator inOperator
-                          ?let @location inOperatorLocation -> @lstring 
+func prefixOperatorMapKey (?let @omnibusType inReceiverType,
+                          ?let @prefixOperator inOperator,
+                          ?let @location inOperatorLocation ) -> @lstring 
 {
   var @string s
   switch inOperator
@@ -99,14 +99,14 @@ func prefixOperatorMapKey ?let @omnibusType inReceiverType
    case bitWiseComplement : s = "~"
   end
   s += " " + inReceiverType.omnibusTypeDescriptionName
-  result = @{!s !inOperatorLocation}
+  result = @(!s, inOperatorLocation)
 }
 
 //·······················································································································
  
 func prefixOperatorFunctionName
-      ?let @omnibusType inReceiverType
-      ?let @prefixOperator inOperator -> @string
+      (?let @omnibusType inReceiverType,
+      ?let @prefixOperator inOperator ) -> @string
 {
   result = "operator."
   switch inOperator
@@ -122,7 +122,7 @@ func prefixOperatorFunctionName
 //!   Predefined types
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once staticStringTypeName -> @string {
+func %once staticStringTypeName () -> @string {
   result = "literalString"
 }
 
@@ -130,13 +130,13 @@ func %once staticStringTypeName -> @string {
 //!   Functions
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once functionResultVariableName -> @string {
+func %once functionResultVariableName () -> @string {
   result = "result"
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForFunction ?let @string inName -> @string {
+func llvmNameForFunction (?let @string inName ) -> @string {
   result = inName.assemblerRepresentation
 }
 
@@ -144,7 +144,7 @@ func llvmNameForFunction ?let @string inName -> @string {
 //!   Getter LLVM name
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func getterLLVMName ?@string inReceiverLLVMTypeName ?let @string inPropertyName -> @string {
+func getterLLVMName (?@string inReceiverLLVMTypeName, ?let @string inPropertyName ) -> @string {
   result = "get." + inReceiverLLVMTypeName + "." + inPropertyName
 }
 
@@ -152,7 +152,7 @@ func getterLLVMName ?@string inReceiverLLVMTypeName ?let @string inPropertyName 
 //!   Setter LLVM name
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func setterLLVMName ?@string inReceiverLLVMTypeName ?let @string inPropertyName -> @string {
+func setterLLVMName (?@string inReceiverLLVMTypeName, ?let @string inPropertyName ) -> @string {
   result = "set." + inReceiverLLVMTypeName + "." + inPropertyName
 }
 
@@ -160,13 +160,13 @@ func setterLLVMName ?@string inReceiverLLVMTypeName ?let @string inPropertyName 
 //!   Interrupt routine
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForServiceInterrupt ?let @lstring inName -> @lstring {
-  result = @{!"interrupt.service." + inName !inName.location}
+func llvmNameForServiceInterrupt (?let @lstring inName ) -> @lstring {
+  result = @(!"interrupt.service." + inName, inName.location)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForSectionInterrupt ?let @string inName -> @string {
+func llvmNameForSectionInterrupt (?let @string inName ) -> @string {
   result = "interrupt.section." + inName
 }
 
@@ -174,13 +174,13 @@ func llvmNameForSectionInterrupt ?let @string inName -> @string {
 //!   Services
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForServiceCall ?let @string inName -> @string {
+func llvmNameForServiceCall (?let @string inName ) -> @string {
   result = "service.user." + inName.assemblerRepresentation
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForServiceImplementation ?let @string inName -> @string {
+func llvmNameForServiceImplementation (?let @string inName ) -> @string {
   result = "service.implementation." + inName.assemblerRepresentation
 }
 
@@ -188,13 +188,13 @@ func llvmNameForServiceImplementation ?let @string inName -> @string {
 //!   Sections
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForSectionCall ?let @string inName -> @string {
+func llvmNameForSectionCall (?let @string inName ) -> @string {
   result = "section.user." + inName.assemblerRepresentation
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForSectionImplementation ?let @string inName -> @string {
+func llvmNameForSectionImplementation (?let @string inName ) -> @string {
   result = "section.implementation." + inName.assemblerRepresentation
 }
 
@@ -202,13 +202,13 @@ func llvmNameForSectionImplementation ?let @string inName -> @string {
 //!   Guards
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once acceptVariableOmnibusName -> @string {
+func %once acceptVariableOmnibusName () -> @string {
   result = "accept"
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once waitForGuardChangeFunctionName -> @string {
+func %once waitForGuardChangeFunctionName () -> @string {
   result = "guard.wait.for.change"
 }
 
@@ -216,25 +216,25 @@ func %once waitForGuardChangeFunctionName -> @string {
 //!  Variable names
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForLocalVariable ?let @string inName -> @string {
+func llvmNameForLocalVariable (?let @string inName ) -> @string {
   result = "%" + "var." + inName.assemblerRepresentation
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once llvmNameForSelf -> @string {
+func %once llvmNameForSelf () -> @string {
   result = "%self"
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForGlobalVariable ?let @string inName -> @string {
+func llvmNameForGlobalVariable (?let @string inName ) -> @string {
   result = "@gvar." + inName.assemblerRepresentation
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func llvmNameForGlobalSyncInstance ?let @string inName -> @string {
+func llvmNameForGlobalSyncInstance (?let @string inName ) -> @string {
   result = "@gsync." + inName.assemblerRepresentation
 }
 
@@ -242,37 +242,37 @@ func llvmNameForGlobalSyncInstance ?let @string inName -> @string {
 //!   Attributes
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once instantiableAttribute -> @string {
+func %once instantiableAttribute () -> @string {
   result = "instantiable"
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once copyableAttribute -> @string {
+func %once copyableAttribute () -> @string {
   result = "copyable"
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once mutatingAttribute -> @string {
+func %once mutatingAttribute () -> @string {
   result = "mutating"
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once userAttributeForRegister -> @string {
+func %once userAttributeForRegister () -> @string {
   result = "user"
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once noUnusedWarningAttribute -> @string {
+func %once noUnusedWarningAttribute () -> @string {
   result = "noUnusedWarning"
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once exportedAttribute -> @string {
+func %once exportedAttribute () -> @string {
   result = "exported"
 }
 
@@ -280,54 +280,54 @@ func %once exportedAttribute -> @string {
 //! Tasks
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func stackNameForTask ?let @string inTaskName -> @string {
+func stackNameForTask (?let @string inTaskName ) -> @string {
   result = "@" + "task.stack." + inTaskName.assemblerRepresentation
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func setupNameForTaskType ?let @string inTaskTypeName -> @string {
+func setupNameForTaskType (?let @string inTaskTypeName ) -> @string {
   result = "@" + "task.setup." + inTaskTypeName.assemblerRepresentation
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func activateNameForTaskType ?let @string inTaskTypeName -> @string {
+func activateNameForTaskType (?let @string inTaskTypeName ) -> @string {
   result = "task.activate." + inTaskTypeName
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func deactivateNameForTaskType ?let @string inTaskTypeName -> @string {
+func deactivateNameForTaskType (?let @string inTaskTypeName ) -> @string {
   result = "@" + ("task.deactivate." + inTaskTypeName).assemblerRepresentation
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func stackAddressForTask ?let @string inTaskName -> @string {
+func stackAddressForTask (?let @string inTaskName ) -> @string {
   result = "%" + ("task.stack.address." + inTaskName).assemblerRepresentation
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func mainRoutineNameForTask ?let @string inTaskName -> @string {
+func mainRoutineNameForTask (?let @string inTaskName ) -> @string {
   result = "@" + ("task.main." + inTaskName).assemblerRepresentation
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once llvmNameForTaskLoopFunction -> @string {
+func %once llvmNameForTaskLoopFunction () -> @string {
   result = "task.loop"
 }
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once llvmNameForTaskWaitsForActivation-> @string {
+func %once llvmNameForTaskWaitsForActivation() -> @string {
   result = "xtr.wait.for.activation"
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once llvmNameForActivateTask-> @string {
+func %once llvmNameForActivateTask() -> @string {
   result = "xtr.activate.task"
 }
 
@@ -335,13 +335,13 @@ func %once llvmNameForActivateTask-> @string {
 //!  Heap alloc and free
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once memoryAllocSectionName -> @string {
+func %once memoryAllocSectionName () -> @string {
   result = "heap.memory.alloc"
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once memoryFreeSectionName -> @string {
+func %once memoryFreeSectionName () -> @string {
   result = "heap.memory.free"
 }
 
@@ -349,7 +349,7 @@ func %once memoryFreeSectionName -> @string {
 //! Register Group Array Name
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func registerGroupAddressArrayLLVMname ?let @string inGroupName -> @string {
+func registerGroupAddressArrayLLVMname (?let @string inGroupName ) -> @string {
   result = "@register.group.array." + inGroupName.assemblerRepresentation
 }
 //—————————————————————————————————————————————————————————————————————————————————————————————————

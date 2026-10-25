@@ -1,23 +1,23 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-setter @instructionListIR appendLoadWhenReference
-  ?!@semanticTemporariesStruct ioTemporaries
+mutating proc @instructionListIR.appendLoadWhenReference
+  (?!@semanticTemporariesStruct ioTemporaries,
   ?!@objectIR ioObject
-{
+) {
   switch ioObject
   case void :
     error (.nowhere : "<<@instructionListIR appendLoadWhenReference void>>" spoil ioObject)
-  case reference (@omnibusType type llvmName) :
-    getNewTempValue (!type !?ioTemporaries ?let resultingValue)
-    [!?self appendLoadFromReference !resultingValue !llvmName]
+  case reference (@omnibusType type, llvmName) :
+    getNewTempValue (!type, !?ioTemporaries, ?let resultingValue)
+    !?self.appendLoadFromReference (!resultingValue, !llvmName)
     ioObject = resultingValue
 //--- Values
-  case literalInteger (**) :
+  case literalInteger (*, *) :
   case null (*) :
-  case llvmNamedValue (**) :
-  case llvmStructureValue (* *) :
+  case llvmNamedValue (*, *) :
+  case llvmStructureValue (*, *) :
   case llvmArrayStaticValues (3*) :
-  case literalString (**) :
+  case literalString (*, *) :
   case zero (*) :
   case llvmArrayRepeatedStaticValue (4*) :
   case llvmArrayRepeatedDynamicValue (3*) :

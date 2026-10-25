@@ -1,10 +1,10 @@
 
-setter @instructionListIR appendStoreComputedPropertyValue
-  ?let @objectIR inReceiverIR
-  ?let @string inLLVMSetterName
+mutating proc @instructionListIR.appendStoreComputedPropertyValue
+  (?let @objectIR inReceiverIR,
+  ?let @string inLLVMSetterName,
   ?let @objectIR inValueIR
-{
-  self += !@storeComputedPropertyValueIR {!inReceiverIR !inLLVMSetterName !inValueIR}
+) {
+  self += !@storeComputedPropertyValueIR (!inReceiverIR, inLLVMSetterName, inValueIR)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -17,11 +17,11 @@ class @storeComputedPropertyValueIR : @abstractInstructionIR {
 
 //·······················································································································
 
-override proc @storeComputedPropertyValueIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
+override proc @storeComputedPropertyValueIR.llvmInstructionCode
+  (?!@string ioLLVMcode,
+  ?let @generationContext unused inGenerationContext,
   ?!@generationAdds unused ioGenerationAdds
-{
+) {
   ioLLVMcode += "  call void @" + self.mLLVMSetterName.assemblerRepresentation
   ioLLVMcode += " (" + self.mReceiverIR.type.llvmTypeName + "* " + self.mReceiverIR.llvmName + ", "
   ioLLVMcode += self.mValueIR.type.llvmTypeName + " " + self.mValueIR.llvmName + ")\n"
@@ -29,10 +29,10 @@ override proc @storeComputedPropertyValueIR llvmInstructionCode
 
 //·······················································································································
 
-override proc @storeComputedPropertyValueIR enterAccessibleEntities
-  ?!@stringset ioInvokedRoutineSet
+override proc @storeComputedPropertyValueIR.enterAccessibleEntities
+  (?!@stringset ioInvokedRoutineSet,
   ?!@uint unused ioMaxBranchOfOnInstructions
-{
+) {
   ioInvokedRoutineSet ++= self.mLLVMSetterName
 }
 

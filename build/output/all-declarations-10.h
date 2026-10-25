@@ -99,7 +99,7 @@ void callExtensionMethod_baseGuardAnalyze (class cPtr_callInstructionAST * inObj
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@universalValuedObjectMap insertDriver'
+//Extension mutating proc '@universalValuedObjectMap insertDriver'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -112,7 +112,7 @@ void extensionSetter_insertDriver (class GGS_universalValuedObjectMap & ioObject
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@universalValuedObjectMap insertGlobalConstant'
+//Extension mutating proc '@universalValuedObjectMap insertGlobalConstant'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -124,7 +124,7 @@ void extensionSetter_insertGlobalConstant (class GGS_universalValuedObjectMap & 
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@universalValuedObjectMap insertGlobalSyncInstance'
+//Extension mutating proc '@universalValuedObjectMap insertGlobalSyncInstance'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -136,7 +136,7 @@ void extensionSetter_insertGlobalSyncInstance (class GGS_universalValuedObjectMa
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@universalValuedObjectMap insertLocalConstant'
+//Extension mutating proc '@universalValuedObjectMap insertLocalConstant'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -150,7 +150,7 @@ void extensionSetter_insertLocalConstant (class GGS_universalValuedObjectMap & i
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@universalValuedObjectMap insertUsedLocalConstant'
+//Extension mutating proc '@universalValuedObjectMap insertUsedLocalConstant'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -164,7 +164,7 @@ void extensionSetter_insertUsedLocalConstant (class GGS_universalValuedObjectMap
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@universalValuedObjectMap insertLocalVariable'
+//Extension mutating proc '@universalValuedObjectMap insertLocalVariable'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -193,7 +193,7 @@ void extensionMethod_searchValuedObject (const class GGS_universalValuedObjectMa
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@universalValuedObjectMap searchValuedObjectForReadAccess'
+//Extension mutating proc '@universalValuedObjectMap searchValuedObjectForReadAccess'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -205,7 +205,7 @@ void extensionSetter_searchValuedObjectForReadAccess (class GGS_universalValuedO
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@universalValuedObjectMap searchValuedObjectForWriteAccess'
+//Extension mutating proc '@universalValuedObjectMap searchValuedObjectForWriteAccess'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -217,7 +217,7 @@ void extensionSetter_searchValuedObjectForWriteAccess (class GGS_universalValued
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@universalValuedObjectMap searchValuedObjectForReadWriteAccess'
+//Extension mutating proc '@universalValuedObjectMap searchValuedObjectForReadWriteAccess'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -277,7 +277,7 @@ void extensionMethod_checkLocalVariableFinalState (const class GGS_universalValu
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@universalValuedObjectMap openOverrideForSelectBlock'
+//Extension mutating proc '@universalValuedObjectMap openOverrideForSelectBlock'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -287,7 +287,7 @@ void extensionSetter_openOverrideForSelectBlock (class GGS_universalValuedObject
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@universalValuedObjectMap openOverrideForRepeatBlock'
+//Extension mutating proc '@universalValuedObjectMap openOverrideForRepeatBlock'
 //
 //--------------------------------------------------------------------------------------------------
 
@@ -297,7 +297,7 @@ void extensionSetter_openOverrideForRepeatBlock (class GGS_universalValuedObject
 
 //--------------------------------------------------------------------------------------------------
 //
-//Extension setter '@universalValuedObjectMap closeOverride'
+//Extension mutating proc '@universalValuedObjectMap closeOverride'
 //
 //--------------------------------------------------------------------------------------------------
 

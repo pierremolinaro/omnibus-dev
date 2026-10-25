@@ -22,21 +22,21 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <declaration> ?!@ast ioAST {
+  rule <declaration> (?!@ast ioAST ) {
     $enum$
-    $\$type$ ?let enumerationName
+    $\$type$ (?let enumerationName)
     ${$
     var @enumerationConstantList enumCaseList = @[]
     var idx = 0
     repeat
       $case$
-      $identifier$ ?let constantName
+      $identifier$ (?let constantName)
       enumCaseList += !constantName !idx
       idx = idx + 1
     while
     end
     $}$
-    ioAST.mDeclarationListAST += !@enumerationDeclarationAST {!enumerationName !enumCaseList}
+    ioAST.mDeclarationListAST += !@enumerationDeclarationAST (!enumerationName, enumCaseList)
   }
 
   //·····················································································································
@@ -47,10 +47,10 @@ syntax extension omnibus_syntax {
 //!  PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @enumerationDeclarationAST enterInPrecedenceGraph
-  ?!@semanticTypePrecedenceGraph ioGraph
-{
-  [!?ioGraph addNode !self.mEnumerationName !self]
+override proc @enumerationDeclarationAST.enterInPrecedenceGraph
+  (?!@semanticTypePrecedenceGraph ioGraph
+) {
+  !?ioGraph.addNode (!self.mEnumerationName, !self)
 //--- Mark dependance from $uintN used for value property
   var @bigint maxValue = 0
   for (* value) in self.mCaseNameList do
@@ -63,18 +63,18 @@ override proc @enumerationDeclarationAST enterInPrecedenceGraph
     representationBitCount += 1 ;
     maxValue = maxValue / 2
   end
-  [!?ioGraph addEdge !from: self.mEnumerationName !to: ("u" + representationBitCount).nowhere]
+  !?ioGraph.addEdge (!from: self.mEnumerationName, !to: ("u" + representationBitCount).nowhere)
 }
 
 //·······················································································································
 
-override func @enumerationDeclarationAST locationForErrorSignaling -> @location outLocation {
+override func @enumerationDeclarationAST.locationForErrorSignaling () -> @location outLocation {
   outLocation = self.mEnumerationName.location
 }
 
 //·······················································································································
 
-override func @enumerationDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+override func @enumerationDeclarationAST.keyRepresentationForErrorSignaling () -> @string outRepresentation {
   outRepresentation = "enum " + self.mEnumerationName
 }
 
@@ -82,29 +82,29 @@ override func @enumerationDeclarationAST keyRepresentationForErrorSignaling -> @
 //!  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @enumerationDeclarationAST enterInContext
-  ?!context:@semanticContext ioContext
-  ?!@declarationDecorationList unused ioDecoratedDeclarationList
-  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
-  ?!@routineListIR ioRoutineListIR
-  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
-  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
-  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
+override proc @enumerationDeclarationAST.enterInContext
+  (?!context:@semanticContext ioContext,
+  ?!@declarationDecorationList unused ioDecoratedDeclarationList,
+  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList,
+  ?!@routineListIR ioRoutineListIR,
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap,
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap,
+  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST,
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
-{
+) {
 //---------------- Build constant map
   var @constantMap enumConstantMap = @()
   var @bigint maxValue = 0
   for (name value) in self.mCaseNameList do
-    [!?enumConstantMap insertKey !name !value !self.mEnumerationName]
+    !?enumConstantMap.insertKey (!name, !value, !self.mEnumerationName)
     if maxValue < value then
       maxValue = value
     end
   end
-  [!?ioContext.mTypeConstantMap insertKey
-    !self.mEnumerationName
+  !?ioContext.mTypeConstantMap.insertKey
+    (!self.mEnumerationName,
     !enumConstantMap
-  ]
+  )
 //---------------- Compute representation bit count
   var @uint representationBitCount = 0
   loop (@uint.max) while maxValue > 0 do
@@ -113,54 +113,54 @@ override proc @enumerationDeclarationAST enterInContext
   end
 //---------------- Property map: add uintN() accessor
   let integerTypeProxy = [ioContext.mTypeMap searchKey
-    ! @{!"u" + representationBitCount !self.mEnumerationName}
+    ! @(!"u" + representationBitCount, self.mEnumerationName)
   ]
-  [!?ioContext addComputedPropertyGetter
-    !omnibusTypeName: self.mEnumerationName
-    !llvmBaseTypeName:self.mEnumerationName
-    !propertyName: @{!"u" + representationBitCount !self.mEnumerationName}
-    !mode:.anySafeMode
-    !visibility: .isPublic
-    !resultTypeProxy:integerTypeProxy
+  !?ioContext.addComputedPropertyGetter
+    (!omnibusTypeName: self.mEnumerationName,
+    !llvmBaseTypeName:self.mEnumerationName,
+    !propertyName: @(!"u" + representationBitCount, self.mEnumerationName),
+    !mode:.anySafeMode,
+    !visibility: .isPublic,
+    !resultTypeProxy:integerTypeProxy,
     ?routineLLVMName: let conversionToUIntN
-  ]
-  ioRoutineListIR += !@enumToUintRoutineIR {
-    !conversionToUIntN
-    !isRequired:false
-    !warnsIfUnused:false
-    !"i" + representationBitCount
-  }
+  )
+  ioRoutineListIR += !@enumToUintRoutineIR (
+    !conversionToUIntN,
+    !isRequired:false,
+    !warnsIfUnused:false,
+    "i" + representationBitCount
+  )
 //---------------- Insert enumeration in type map
-  let enumerationType = @omnibusType {
-    !subscript:.noSubscript
-    !attributes:.instanciable | .copyable
-    !omnibusTypeDescriptionName: self.mEnumerationName
-    !kind:.enumeration {!bitCount:representationBitCount}
+  let enumerationType = @omnibusType (
+    !subscript:.noSubscript,
+    !attributes:.instanciable | .copyable,
+    !omnibusTypeDescriptionName: self.mEnumerationName,
+    !kind:.enumeration (!bitCount:representationBitCount),
     !llvmBaseTypeName: self.mEnumerationName
-  }
-  [!?ioContext.mTypeMap insertType !self.mEnumerationName !type:enumerationType]
+  )
+  !?ioContext.mTypeMap.insertType (!self.mEnumerationName, !type:enumerationType)
 //--- Enter assignment operator
   let key = assignmentOperatorKey (!enumerationType !self.mEnumerationName.location !enumerationType)
-  [!?ioContext.mAssignmentOperatorMap insertKey !key !@simpleCopyAssignmentOperatorUsage ()]
+  !?ioContext.mAssignmentOperatorMap.insertKey (!key, !@simpleCopyAssignmentOperatorUsage ())
 //---------------- Infix operators
 //  enterEnumerationComparisonOperators (!typeName:mEnumerationName !?context:ioContext)
   let boolType = boolType ()
 //--- Enter == infix operator
-  addIntegerInfixOperator (!.equal !enumerationType !"icmp eq" !?ioContext.mInfixOperatorMap !boolType)
+  addIntegerInfixOperator (!.equal, !enumerationType, !"icmp eq", !?ioContext.mInfixOperatorMap, !boolType)
 //--- Enter ≤ infix operator
   addIntegerInfixOperator (
-    !.infEqual
-    !enumerationType
-    !"icmp ule"
-    !?ioContext.mInfixOperatorMap
+    !.infEqual,
+    !enumerationType,
+    !"icmp ule",
+    !?ioContext.mInfixOperatorMap,
     !boolType
   )
 //--- Enter < infix operator
   addIntegerInfixOperator (
-    !.lessThan
-    !enumerationType
-    !"icmp ult"
-    !?ioContext.mInfixOperatorMap
+    !.lessThan,
+    !enumerationType,
+    !"icmp ult",
+    !?ioContext.mInfixOperatorMap,
     !boolType
   )
 }
@@ -173,17 +173,17 @@ override proc @enumerationDeclarationAST enterInContext
 //{
 //  let key = combineTypeNamesForInfixOperator (!inTypeName.string !inTypeName.string)
 //  let booleanType = [ioContext booleanType !.nowhere]
-//  [!?ioContext.mEqualOperatorMap insertKey
+//  !?ioContext.mEqualOperatorMap insertKey
 //    !key
 //    !booleanType
 //    !@infixObjectObjectOperatorDescription.new {!.icmp_eq}
 //  ]
-//  [!?ioContext.mStrictInfOperatorMap insertKey
+//  !?ioContext.mStrictInfOperatorMap insertKey
 //    !key
 //    !booleanType
 //    !@infixObjectObjectOperatorDescription.new {!.icmp_ult}
 //  ]
-//  [!?ioContext.mInfEqualOperatorMap insertKey
+//  !?ioContext.mInfEqualOperatorMap insertKey
 //    !key
 //    !booleanType
 //    !@infixObjectObjectOperatorDescription.new {!.icmp_ule}
@@ -200,11 +200,11 @@ class @enumToUintRoutineIR : @abstractRoutineIR {
 
 //·······················································································································
 
-override proc @enumToUintRoutineIR llvmCodeGeneration
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
+override proc @enumToUintRoutineIR.llvmCodeGeneration
+  (?!@string ioLLVMcode,
+  ?let @generationContext unused inGenerationContext,
   ?!@generationAdds unused ioGenerationAdds
-{
+) {
   let routineLLVMName = llvmNameForFunction (!self.mRoutineMangledName.string)
   ioLLVMcode += "define internal " + self.mEnumerationLLVMTypeName + " @" + routineLLVMName
   ioLLVMcode += " (" + self.mEnumerationLLVMTypeName + "* %inValue) nounwind {\n"

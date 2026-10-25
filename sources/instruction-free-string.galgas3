@@ -1,7 +1,7 @@
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-setter @instructionListIR appendInstructionAsFreeString ?let @string inString ?let @stringset inInvokedFunctionSet {
-  self += !@freeStringIR {!inString !inInvokedFunctionSet}
+mutating proc @instructionListIR.appendInstructionAsFreeString (?let @string inString ,?let @stringset inInvokedFunctionSet ) {
+  self += !@freeStringIR (!inString, inInvokedFunctionSet)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -13,20 +13,20 @@ class @freeStringIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @freeStringIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
+override proc @freeStringIR.llvmInstructionCode
+  (?!@string ioLLVMcode,
+  ?let @generationContext unused inGenerationContext,
   ?!@generationAdds unused ioGenerationAdds
-{
+) {
   ioLLVMcode += "  " + self.mString + "\n"
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @freeStringIR enterAccessibleEntities
-  ?!@stringset ioInvokedRoutineSet
+override proc @freeStringIR.enterAccessibleEntities
+  (?!@stringset ioInvokedRoutineSet,
   ?!@uint unused ioMaxBranchOfOnInstructions
- {
+ ) {
   ioInvokedRoutineSet += self.mInvokedFunctionSet
 }
 

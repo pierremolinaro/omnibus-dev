@@ -9,9 +9,9 @@ enum @routineKind %equatable {
 
 //·······················································································································
 
-func routineMangledNameFromAST ?let @string inReceiverTypeName
-                               ?let @lstring inRoutineName
-                               ?let @routineFormalArgumentListAST inFormalArgumentList -> @lstring
+func routineMangledNameFromAST (?let @string inReceiverTypeName,
+                               ?let @lstring inRoutineName,
+                               ?let @routineFormalArgumentListAST inFormalArgumentList ) -> @lstring
 {
   var s = "func."
   if inReceiverTypeName != "" then
@@ -23,14 +23,14 @@ func routineMangledNameFromAST ?let @string inReceiverTypeName
     s += formalArgumentPassingMode.formalPassingModeString + selector + ":"
   end
   s += ")"
-  result = @{!s !inRoutineName.location}
+  result = @(!s, inRoutineName.location)
 }
 
 //·······················································································································
 
-func routineMangledNameFromCall ?let @string inReceiverTypeName
-                                ?let @lstring inRoutineName
-                                ?let @effectiveArgumentListAST inEffectiveParameterList-> @lstring
+func routineMangledNameFromCall (?let @string inReceiverTypeName,
+                                ?let @lstring inRoutineName,
+                                ?let @effectiveArgumentListAST inEffectiveParameterList) -> @lstring
 {
   var s = "func."
   if inReceiverTypeName != "" then
@@ -42,7 +42,7 @@ func routineMangledNameFromCall ?let @string inReceiverTypeName
     s += passingMode.matchingFormalArgument + selector + ":"
   end
   s += ")"
-  result = @{!s !inRoutineName.location}
+  result = @(!s, inRoutineName.location)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————

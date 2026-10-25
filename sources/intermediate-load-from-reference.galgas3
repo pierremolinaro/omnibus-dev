@@ -1,9 +1,9 @@
 
-setter @instructionListIR appendLoadFromReference
-  ?let @objectIR inTargetValue
+mutating proc @instructionListIR.appendLoadFromReference
+  (?let @objectIR inTargetValue,
   ?let @string inLLVMName
-{
-  self += !@loadFromReferenceIR {!inTargetValue !inLLVMName}
+) {
+  self += !@loadFromReferenceIR (!inTargetValue, inLLVMName)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -15,11 +15,11 @@ class @loadFromReferenceIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @loadFromReferenceIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
+override proc @loadFromReferenceIR.llvmInstructionCode
+  (?!@string ioLLVMcode,
+  ?let @generationContext unused inGenerationContext,
   ?!@generationAdds unused ioGenerationAdds
-{
+) {
   let llvmType = self.mTargetValue.llvmTypeName
   ioLLVMcode += "  " + self.mTargetValue.llvmName + " = load " + llvmType + ", " + llvmType + " * " + self.mLLVMName + "\n"
 }

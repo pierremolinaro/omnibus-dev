@@ -17,25 +17,25 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <declaration> ?!@ast ioAST {
+  rule <declaration> (?!@ast ioAST ) {
     $opaque$
-    $\$type$ ?let opaqueTypeName
+    $\$type$ (?let opaqueTypeName)
     var @lstringlist attributeList = @[]
     repeat
     while
-      $@attribute$ ?let attribute
+      $@attribute$ (?let attribute)
       attributeList += !attribute
     end
     ${$
-    <expression> !?ioAST ?let sizeExpression
+    <expression> (!?ioAST, ?let sizeExpression)
     let sizeExpressionLocation = @location.here
     $}$
-    ioAST.mDeclarationListAST += !@typeOpaqueDeclarationAST {
-      !opaqueTypeName
-      !sizeExpression
-      !sizeExpressionLocation
-      !attributeList
-    }
+    ioAST.mDeclarationListAST += !@typeOpaqueDeclarationAST (
+      !opaqueTypeName,
+      sizeExpression,
+      sizeExpressionLocation,
+      attributeList
+    )
   }
 
   //·····················································································································
@@ -46,29 +46,29 @@ syntax extension omnibus_syntax {
 //!  PRECEDENCE GRAPH FROM EXPRESSION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc @typeOpaqueDeclarationAST noteTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [!?ioGraph noteNode !self.mOpaqueTypeName]
-  [self.mSizeExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+proc @typeOpaqueDeclarationAST noteTypesInPrecedenceGraph (?!@semanticTypePrecedenceGraph ioGraph ) {
+  !?ioGraph.noteNode (!self.mOpaqueTypeName)
+  self.mSizeExpression.noteExpressionTypesInPrecedenceGraph (!?ioGraph)
 }
 
 //·······················································································································
 
-override proc @typeOpaqueDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @typeOpaqueDeclarationAST.enterInPrecedenceGraph (?!@semanticTypePrecedenceGraph ioGraph ) {
 //--- Add structure type name as node
-  [!?ioGraph addNode !self.mOpaqueTypeName !self]
+  !?ioGraph.addNode (!self.mOpaqueTypeName, !self)
 //--- Add size expression
-  [self.mSizeExpression addDependenceEdgeForStaticExpression !self.mOpaqueTypeName !?ioGraph]
+  self.mSizeExpression.addDependenceEdgeForStaticExpression (!self.mOpaqueTypeName, !?ioGraph)
 }
 
 //·······················································································································
 
-override func @typeOpaqueDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+override func @typeOpaqueDeclarationAST.keyRepresentationForErrorSignaling () -> @string outRepresentation {
   outRepresentation = "opaque " + self.mOpaqueTypeName
 }
 
 //·······················································································································
 
-override func @typeOpaqueDeclarationAST locationForErrorSignaling -> @location outLocation {
+override func @typeOpaqueDeclarationAST.locationForErrorSignaling () -> @location outLocation {
   outLocation = self.mOpaqueTypeName.location
 }
 
@@ -76,16 +76,16 @@ override func @typeOpaqueDeclarationAST locationForErrorSignaling -> @location o
 //!  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @typeOpaqueDeclarationAST enterInContext
-  ?!context:@semanticContext ioContext
-  ?!@declarationDecorationList unused ioDecoratedDeclarationList
-  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
-  ?!@routineListIR unused ioRoutineListIR
-  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
+override proc @typeOpaqueDeclarationAST.enterInContext
+  (?!context:@semanticContext ioContext,
+  ?!@declarationDecorationList unused ioDecoratedDeclarationList,
+  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList,
+  ?!@routineListIR unused ioRoutineListIR,
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST,
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
-{
+) {
   var @omnibusTypeAttributes opaqueTypeAttributes = @()
   var copyable = false
   for (attribute) in self.mAttributeList do
@@ -110,11 +110,11 @@ override proc @typeOpaqueDeclarationAST enterInContext
   end
 //--- Compute opaque type size
   computeStaticExpression (
-    !?context: ioContext
-    !?staticEntityMap:ioStaticEntityMap
-    !expression:self.mSizeExpression
-    !errorLocation:self.mSizeExpressionLocation
-    !optionalContextualTypeName:"".nowhere
+    !?context: ioContext,
+    !?staticEntityMap:ioStaticEntityMap,
+    !expression:self.mSizeExpression,
+    !errorLocation:self.mSizeExpressionLocation,
+    !optionalContextualTypeName:"".nowhere,
     ?result:let @objectIR sizeExpressionIR
   )
   if not sizeExpressionIR.isLiteralInteger then
@@ -122,18 +122,18 @@ override proc @typeOpaqueDeclarationAST enterInContext
   else
     var @constructorMap constructorMap = @()
     if [opaqueTypeAttributes contains !.instanciable] then
-      [!?constructorMap insertKey !"()".nowhere !@[] !.simple {!value:0}]
-      [!?ioContext.mTypeConstructorMap insertKey !self.mOpaqueTypeName !constructorMap]
+      !?constructorMap.insertKey (!"()".nowhere, !@[], !.simple (!value:0))
+      !?ioContext.mTypeConstructorMap.insertKey (!self.mOpaqueTypeName, !constructorMap)
     end
-    [sizeExpressionIR extractLiteralInteger ?1* ?value:let bitSize]
-    let opaqueType = @omnibusType {
-      !subscript:.noSubscript
-      !attributes:opaqueTypeAttributes
-      !omnibusTypeDescriptionName:self.mOpaqueTypeName
-      !kind:.opaque {!bitCount:bitSize}
+    sizeExpressionIR.extractLiteralInteger (?1*, ?value:let bitSize)
+    let opaqueType = @omnibusType (
+      !subscript:.noSubscript,
+      !attributes:opaqueTypeAttributes,
+      !omnibusTypeDescriptionName:self.mOpaqueTypeName,
+      !kind:.opaque (!bitCount:bitSize),
       !llvmBaseTypeName:self.mOpaqueTypeName
-    }
-    [!?ioContext.mTypeMap insertType !self.mOpaqueTypeName !type:opaqueType]
+    )
+    !?ioContext.mTypeMap.insertType (!self.mOpaqueTypeName, !type:opaqueType)
   end
 //--- Add Assignment ?
   if copyable then

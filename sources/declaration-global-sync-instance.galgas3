@@ -16,22 +16,22 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <declaration> ?!@ast ioAST {
+  rule <declaration> (?!@ast ioAST ) {
     $sync$
-    $identifier$ ?let syncInstanceName
+    $identifier$ (?let syncInstanceName)
     let @lstring syncTypeName
     select
       syncTypeName = "".here
     or
-      <type_definition> !?ioAST ?syncTypeName
+      <type_definition> (!?ioAST, ?syncTypeName)
     end
     $=$
-    <expression> !?ioAST ?let @expressionAST expression
-    ioAST.mDeclarationListAST += !@syncToolInstanceDeclarationAST {
-      !syncTypeName
-      !syncInstanceName
-      !expression
-    }
+    <expression> (!?ioAST, ?let @expressionAST expression)
+    ioAST.mDeclarationListAST += !@syncToolInstanceDeclarationAST (
+      !syncTypeName,
+      syncInstanceName,
+      expression
+    )
   }
 
   //·····················································································································
@@ -42,23 +42,23 @@ syntax extension omnibus_syntax {
 //  ENTER IN PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @syncToolInstanceDeclarationAST enterInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [!?ioGraph addNode !self.mSyncInstanceName !self]
+override proc @syncToolInstanceDeclarationAST.enterInPrecedenceGraph (?!@semanticTypePrecedenceGraph ioGraph ) {
+  !?ioGraph.addNode (!self.mSyncInstanceName, !self)
   if self.mSyncTypeName.string != "" then
-    [!?ioGraph addEdge !from: self.mSyncInstanceName !to: self.mSyncTypeName]
+    !?ioGraph.addEdge (!from: self.mSyncInstanceName, !to: self.mSyncTypeName)
   end
-  [self.mSourceExpression addDependenceEdgeForStaticExpression !self.mSyncInstanceName !?ioGraph]
+  self.mSourceExpression.addDependenceEdgeForStaticExpression (!self.mSyncInstanceName, !?ioGraph)
 }
 
 //·······················································································································
 
-override func @syncToolInstanceDeclarationAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+override func @syncToolInstanceDeclarationAST.keyRepresentationForErrorSignaling () -> @string outRepresentation {
   outRepresentation = "sync " + self.mSyncInstanceName
 }
 
 //·······················································································································
 
-override func @syncToolInstanceDeclarationAST locationForErrorSignaling -> @location outLocation {
+override func @syncToolInstanceDeclarationAST.locationForErrorSignaling () -> @location outLocation {
   outLocation = self.mSyncInstanceName.location
 }
 
@@ -76,30 +76,30 @@ map @globalSyncInstanceMap {
 
 //·······················································································································
 
-override proc @syncToolInstanceDeclarationAST enterInContext
-  ?!context:@semanticContext ioContext
-  ?!@declarationDecorationList ioDecoratedDeclarationList
-  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
-  ?!@routineListIR unused ioRoutineListIR
-  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
+override proc @syncToolInstanceDeclarationAST.enterInContext
+  (?!context:@semanticContext ioContext,
+  ?!@declarationDecorationList ioDecoratedDeclarationList,
+  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList,
+  ?!@routineListIR unused ioRoutineListIR,
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST,
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
-{
+) {
 //--- Get sync type
   let @omnibusType optionalSyncType
   if self.mSyncTypeName.string == "" then
     optionalSyncType = voidType ()
   else
-    [ioContext.mTypeMap searchType !lkey:self.mSyncTypeName ?type:optionalSyncType]
+    ioContext.mTypeMap.searchType (!lkey:self.mSyncTypeName, ?type:optionalSyncType)
   end
 //--- Analyze source expression
   computeStaticExpression (
-    !?context: ioContext
-    !?staticEntityMap:ioStaticEntityMap
-    !expression:self.mSourceExpression
-    !errorLocation:self.mSyncInstanceName
-    !optionalContextualTypeName:"".nowhere
+    !?context: ioContext,
+    !?staticEntityMap:ioStaticEntityMap,
+    !expression:self.mSourceExpression,
+    !errorLocation:self.mSyncInstanceName,
+    !optionalContextualTypeName:"".nowhere,
     ?result:let @objectIR expressionResult
   )
 //--- Check variable type and expression type
@@ -111,19 +111,19 @@ override proc @syncToolInstanceDeclarationAST enterInContext
     !staticTypeAllowed:false
   )
 //---------------- Enter variable in global variable map
-  [!?ioContext.mGlobalSyncInstanceMap insertKey
-    !self.mSyncInstanceName
-    !result.type
+  !?ioContext.mGlobalSyncInstanceMap.insertKey
+    (!self.mSyncInstanceName,
+    !result.type,
     !result
-  ]
+  )
 //---------------- Check type is a sync tool type
   if not result.type.kind.isSyncTool then
     error (self.mSyncInstanceName : "the type is not a synchronization tool type")
   end
 //---------------- Enter in valuated object map
-  [!?ioContext.mValuedObjectMap insertGlobalSyncInstance !self.mSyncInstanceName !result.type]
+  !?ioContext.mValuedObjectMap.insertGlobalSyncInstance (!self.mSyncInstanceName, !result.type)
 //---------------- Add decorated declaration
-  ioDecoratedDeclarationList += !@decoratedSyncInstance {!self.mSyncInstanceName !result}
+  ioDecoratedDeclarationList += !@decoratedSyncInstance (!self.mSyncInstanceName, result)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -137,15 +137,15 @@ class @decoratedSyncInstance : @abstractDecoratedDeclaration {
 
 //·······················································································································
 
-override proc @decoratedSyncInstance semanticAnalysis
-  ?context:let @semanticContext unused inContext
-  ?!temporary:@semanticTemporariesStruct unused ioTemporaries
+override proc @decoratedSyncInstance.semanticAnalysis
+  (?context:let @semanticContext unused inContext,
+  ?!temporary:@semanticTemporariesStruct unused ioTemporaries,
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
-  [!?ioIntermediateCodeStruct.mGlobalSyncInstanceMap insertKey
-    !self.mSyncInstanceName
+) {
+  !?ioIntermediateCodeStruct.mGlobalSyncInstanceMap.insertKey
+    (!self.mSyncInstanceName,
     !self.mExpressionGeneratedCode
-  ]
+  )
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -159,7 +159,7 @@ map @globalSyncInstanceMapIR {
 
 //·······················································································································
 
-proc @globalSyncInstanceMapIR.@element generateLLVM ?!@string ioLLVMcode {
+proc @globalSyncInstanceMapIR.@element generateLLVM (?!@string ioLLVMcode ) {
   ioLLVMcode += llvmNameForGlobalSyncInstance (!self.lkey.string) + " = internal global "
   ioLLVMcode += self.mInitialValue.type.llvmTypeName + " " + self.mInitialValue.llvmValue + "\n"
 }

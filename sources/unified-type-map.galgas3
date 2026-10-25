@@ -15,7 +15,7 @@
 //
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func @unifiedTypeMap unsolvedEntryList -> @lstringlist {
+func @unifiedTypeMap.unsolvedEntryList () -> @lstringlist {
   result = @[]
   for (lkey element) in self do
     if element.mDefinition.isUnsolved then
@@ -26,49 +26,49 @@ func @unifiedTypeMap unsolvedEntryList -> @lstringlist {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-setter @unifiedTypeMap makeEntry ?let @lstring inLKey !@unifiedTypeMapEntry outEntry {
-  if let node = self @[inLKey] then
-    outEntry = .element {!weakElement: node.mElement}
+mutating proc @unifiedTypeMap.makeEntry (?let @lstring inLKey ,!@unifiedTypeMapEntry outEntry ) {
+  if let node = self [inLKey] then
+    outEntry = .element (!weakElement: node.mElement)
   else
-    let newElement = @unifiedTypeMapElementClass {!inLKey !.unsolved}
-    [!?self internalInsertKey !inLKey !newElement]
-    outEntry = .element {!weakElement: newElement}
+    let newElement = @unifiedTypeMapElementClass (!inLKey, .unsolved)
+    !?self.internalInsertKey (!inLKey, !newElement)
+    outEntry = .element (!weakElement: newElement)
   end
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-setter @unifiedTypeMap makeOptionalEntry ?let @lstring inLKey !@unifiedTypeMapEntry outEntry {
+mutating proc @unifiedTypeMap.makeOptionalEntry (?let @lstring inLKey ,!@unifiedTypeMapEntry outEntry ) {
   if inLKey.string == "" then
     outEntry = .null
-  elsif let node = self @[inLKey] then
-    outEntry = .element {!weakElement: node.mElement}
+  elsif let node = self [inLKey] then
+    outEntry = .element (!weakElement: node.mElement)
   else
-    let newElement = @unifiedTypeMapElementClass {! inLKey !.unsolved}
-    [!?self internalInsertKey !inLKey !newElement]
-    outEntry = .element {!weakElement: newElement}
+    let newElement = @unifiedTypeMapElementClass (! inLKey, .unsolved)
+    !?self.internalInsertKey (!inLKey, !newElement)
+    outEntry = .element (!weakElement: newElement)
   end
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-setter @unifiedTypeMap makeEntryFromString ?let @string inKey !@unifiedTypeMapEntry outEntry {
-  if let node = self @[inKey] then
-    outEntry = .element {!weakElement: node.mElement}
+mutating proc @unifiedTypeMap.makeEntryFromString (?let @string inKey ,!@unifiedTypeMapEntry outEntry ) {
+  if let node = self [inKey] then
+    outEntry = .element (!weakElement: node.mElement)
   else
-    let newElement = @unifiedTypeMapElementClass {! @{!inKey !.nowhere}!.unsolved}
-    [!?self internalInsertKey ! @{!inKey !.nowhere} !newElement]
-    outEntry = .element {!weakElement: newElement}
+    let newElement = @unifiedTypeMapElementClass (! @(!inKey, .nowhere), .unsolved)
+    !?self.internalInsertKey (! @(!inKey, .nowhere), !newElement)
+    outEntry = .element (!weakElement: newElement)
   end
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func @unifiedTypeMap searchKey ?let @lstring inLKey -> @unifiedTypeMapEntry {
+func @unifiedTypeMap.searchKey (?let @lstring inLKey ) -> @unifiedTypeMapEntry {
   if inLKey.string == "" then
     result = .null
-  elsif let node = self @[inLKey] then
-    result = .element {!weakElement: node.mElement}
+  elsif let node = self [inLKey] then
+    result = .element (!weakElement: node.mElement)
   else
     error (inLKey : "there is not '@" + inLKey + "' type" spoil result)
   end
@@ -76,26 +76,26 @@ func @unifiedTypeMap searchKey ?let @lstring inLKey -> @unifiedTypeMapEntry {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-setter @unifiedTypeMap insertType ?let @lstring inTypeName ?type: let @omnibusType inTypeDefinition {
-  if let node = self @[inTypeName] then
+mutating proc @unifiedTypeMap.insertType (?let @lstring inTypeName ,?type: let @omnibusType inTypeDefinition ) {
+  if let node = self [inTypeName] then
     switch node.mElement.mDefinition
     case solved (*) :
       error (inTypeName : "type already defined")
     case unsolved :
       var e = node.mElement
-      e.mDefinition = .solved {!type: inTypeDefinition}
+      e.mDefinition = .solved (!type: inTypeDefinition)
     end
   else
-    let newElement = @unifiedTypeMapElementClass {! inTypeName !.solved {!type: inTypeDefinition}}
-    [!?self internalInsertKey !inTypeName !newElement]
+    let newElement = @unifiedTypeMapElementClass (! inTypeName, .solved (!type: inTypeDefinition))
+    !?self.internalInsertKey (!inTypeName, !newElement)
   end
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc @unifiedTypeMap searchType ?lkey: let @lstring inLKey
-                                  !type: @omnibusType outTypeDefinition {
-  if let node = self @[inLKey] then
+proc @unifiedTypeMap searchType (?lkey: let @lstring inLKey,
+                                  !type: @omnibusType outTypeDefinition ) {
+  if let node = self [inLKey] then
     switch node.mElement.mDefinition
     case solved (definition) :
       outTypeDefinition = definition
@@ -141,7 +141,7 @@ enum @unifiedTypeMapEntry %equatable {
 // @unifiedTypeMapElementClass getters
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func @unifiedTypeMapElementClass definition -> @omnibusType {
+func @unifiedTypeMapElementClass.definition () -> @omnibusType {
   switch self.mDefinition
   case unsolved :
     error (.nowhere : "unsolved type" spoil result)
@@ -154,7 +154,7 @@ func @unifiedTypeMapElementClass definition -> @omnibusType {
 //! @unifiedTypeMapEntry getters
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func @unifiedTypeMapEntry type -> @omnibusType {
+func @unifiedTypeMapEntry.type () -> @omnibusType {
   switch self
   case null :
     error (.nowhere : "null type" spoil result)
@@ -174,7 +174,7 @@ func @unifiedTypeMapEntry type -> @omnibusType {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func @unifiedTypeMapEntry key -> @string {
+func @unifiedTypeMapEntry.key () -> @string {
   switch self
   case null :
     error (.nowhere : "null type" spoil result)

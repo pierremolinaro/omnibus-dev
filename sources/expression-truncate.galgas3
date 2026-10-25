@@ -16,23 +16,23 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
+  rule <primary> (?!@ast ioAST ,!@expressionAST outExpression ) {
     $truncate$
     let @lstring typeName
     select
       typeName = "".here
     or
-      <type_definition> !?ioAST ?typeName
+      <type_definition> (!?ioAST, ?typeName)
     end
     $($
-    <expression> !?ioAST ?outExpression
+    <expression> (!?ioAST, ?outExpression)
     let endOfExpression = @location.here
     $)$
-    outExpression = @truncateExpressionAST {
-      !outExpression
-      !typeName
-      !endOfExpression
-    }
+    outExpression = @truncateExpressionAST (
+      !outExpression,
+      typeName,
+      endOfExpression
+    )
   }
 
   //·····················································································································
@@ -43,13 +43,13 @@ syntax extension omnibus_syntax {
 //  PRECEDENCE GRAPH FROM EXPRESSION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @truncateExpressionAST addDependenceEdgeForStaticExpression
-  ?let @lstring inConstantName
+override proc @truncateExpressionAST.addDependenceEdgeForStaticExpression
+  (?let @lstring inConstantName,
   ?!@semanticTypePrecedenceGraph ioGraph
-{
-  [self.mExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+) {
+  self.mExpression.addDependenceEdgeForStaticExpression (!inConstantName, !?ioGraph)
   if self.mTypeName.string != "" then
-    [!?ioGraph noteNode !self.mTypeName]
+    !?ioGraph.noteNode (!self.mTypeName)
   end
 }
 
@@ -57,10 +57,10 @@ override proc @truncateExpressionAST addDependenceEdgeForStaticExpression
 //  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @truncateExpressionAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [self.mExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+override proc @truncateExpressionAST.noteExpressionTypesInPrecedenceGraph (?!@semanticTypePrecedenceGraph ioGraph ) {
+  self.mExpression.noteExpressionTypesInPrecedenceGraph (!?ioGraph)
   if self.mTypeName.string != "" then
-    [!?ioGraph noteNode !self.mTypeName]
+    !?ioGraph.noteNode (!self.mTypeName)
   end
 }
 
@@ -70,37 +70,37 @@ override proc @truncateExpressionAST noteExpressionTypesInPrecedenceGraph ?!@sem
 //! @truncateExpressionAST
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @truncateExpressionAST analyzeExpression
-  ?self:let @omnibusType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?optionalTargetType:let @omnibusType inOptionalTargetType
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+override proc @truncateExpressionAST.analyzeExpression
+  (?self:let @omnibusType inSelfType,
+  ?routineAttributes:let @routineAttributes inRoutineAttributes,
+  ?optionalTargetType:let @omnibusType inOptionalTargetType,
+  ?context:let @semanticContext inContext,
+  ?mode:let @mode inMode,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap,
+  ?!alloca:@allocaList ioAllocaList,
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList,
   !result:@objectIR outResult
-{
+) {
 //--- Analyze expression
-  [self.mExpression analyzeExpression
-    !self:inSelfType
-    !routineAttributes:inRoutineAttributes
-    !optionalTargetType:voidType ()
-    !context:inContext
-    !mode:inMode
-    !?temporary:ioTemporaries
-    !?staticEntityMap:ioStaticEntityMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:ioInstructionGenerationList
+  self.mExpression.analyzeExpression
+    (!self:inSelfType,
+    !routineAttributes:inRoutineAttributes,
+    !optionalTargetType:voidType (),
+    !context:inContext,
+    !mode:inMode,
+    !?temporary:ioTemporaries,
+    !?staticEntityMap:ioStaticEntityMap,
+    !?variableMap:ioUniversalMap,
+    !?alloca:ioAllocaList,
+    !?instructionListIR:ioInstructionGenerationList,
     ?result:@objectIR expressionResult
-  ]
-  [!?ioInstructionGenerationList appendLoadWhenReference
-    !?ioTemporaries
+  )
+  !?ioInstructionGenerationList.appendLoadWhenReference
+    (!?ioTemporaries,
     !?expressionResult
-  ]
+  )
 //--- Analyze type
   let @omnibusType resultType = if self.mTypeName.string == ""
     then inOptionalTargetType
@@ -112,18 +112,18 @@ override proc @truncateExpressionAST analyzeExpression
   elsif not expressionResult.type.kind.isInteger then
     error (self.mEndOfExpression : "expression type is not an integer type" spoil outResult)
   else
-    [expressionResult.type.kind extractInteger ?min:let minSource ?max:let maxSource ?1* ?bitCount:let expSize]
-    [resultType.kind extractInteger ?min:let minTarget ?max:let maxTarget ?unsigned:* ?bitCount:let resultSize]
+    expressionResult.type.kind.extractInteger (?min:let minSource, ?max:let maxSource, ?1*, ?bitCount:let expSize)
+    resultType.kind.extractInteger (?min:let minTarget, ?max:let maxTarget, ?unsigned:*, ?bitCount:let resultSize)
     let alwaysPossible = (minTarget <= minSource) && (maxTarget >= maxSource)
     if alwaysPossible then
       error (self.mTypeName:"useless explicit conversion")
     end
     if resultSize < expSize then
-      getNewTempValue (!resultType !?ioTemporaries ?outResult)
-      ioInstructionGenerationList += !@truncateInstructionIR {
-        !outResult
-        !expressionResult
-      }
+      getNewTempValue (!resultType, !?ioTemporaries, ?outResult)
+      ioInstructionGenerationList += !@truncateInstructionIR (
+        !outResult,
+        expressionResult
+      )
     else
       outResult = [expressionResult withType !resultType]
     end
@@ -143,11 +143,11 @@ class @truncateInstructionIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @truncateInstructionIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
+override proc @truncateInstructionIR.llvmInstructionCode
+  (?!@string ioLLVMcode,
+  ?let @generationContext unused inGenerationContext,
   ?!@generationAdds unused ioGenerationAdds
-{
+) {
   let operandType = self.mOperand.llvmTypeName
   ioLLVMcode += "  " + self.mTarget.llvmName + " = trunc " + operandType + " " + self.mOperand.llvmName
      + " to " + self.mTarget.llvmTypeName + "\n"

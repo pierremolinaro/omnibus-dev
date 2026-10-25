@@ -7,7 +7,7 @@ class @compiletimeBoolAST : @abstractDeclarationAST {
 
 //·······················································································································
 
-override func @compiletimeBoolAST locationForErrorSignaling -> @location outLocation {
+override func @compiletimeBoolAST.locationForErrorSignaling () -> @location outLocation {
   outLocation = .nowhere
 }
 
@@ -15,16 +15,16 @@ override func @compiletimeBoolAST locationForErrorSignaling -> @location outLoca
 //  PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @compiletimeBoolAST enterInPrecedenceGraph
-  ?!@semanticTypePrecedenceGraph ioGraph
-{
+override proc @compiletimeBoolAST.enterInPrecedenceGraph
+  (?!@semanticTypePrecedenceGraph ioGraph
+) {
   let nodeName = ctBoolTypeName ().nowhere
-  [!?ioGraph addNode !nodeName !self]
+  !?ioGraph.addNode (!nodeName, !self)
 }
 
 //·······················································································································
 
-override func @compiletimeBoolAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+override func @compiletimeBoolAST.keyRepresentationForErrorSignaling () -> @string outRepresentation {
   outRepresentation = ctBoolTypeName ()
 }
 
@@ -32,41 +32,41 @@ override func @compiletimeBoolAST keyRepresentationForErrorSignaling -> @string 
 //  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func %once ctBoolTypeName ->@string {
+func %once ctBoolTypeName () ->@string {
   result = "ctBool"
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @compiletimeBoolAST enterInContext
-  ?!context:@semanticContext ioContext
-  ?!@declarationDecorationList unused ioDecoratedDeclarationList
-  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
-  ?!@routineListIR unused ioRoutineListIR
-  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
-  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
-  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
+override proc @compiletimeBoolAST.enterInContext
+  (?!context:@semanticContext ioContext,
+  ?!@declarationDecorationList unused ioDecoratedDeclarationList,
+  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList,
+  ?!@routineListIR unused ioRoutineListIR,
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap,
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap,
+  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST,
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
-{
+) {
   let ctBoolTypeName = ctBoolTypeName ().nowhere
   let ctBoolType = compileTimeBoolType ()
  //--- Enter type
-  [!?ioContext.mTypeMap insertType ! ctBoolTypeName !type: ctBoolType]
+  !?ioContext.mTypeMap.insertType (! ctBoolTypeName, !type: ctBoolType)
  //--- Enter not prefix operator
   var key = prefixOperatorMapKey (!ctBoolType !.notOp !.nowhere)
-  [!?ioContext.mPrefixOperatorMap insertKey !key !ctBoolType !ctBoolType !@compileTimeBoolNotOperator ()]
+  !?ioContext.mPrefixOperatorMap.insertKey (!key, !ctBoolType, !ctBoolType, !@compileTimeBoolNotOperator ())
  //--- Enter | infix operator
   key = infixOperatorMapKey (!ctBoolType !.bitWiseOrOp !.nowhere !ctBoolType)
-  [!?ioContext.mInfixOperatorMap insertKey !key !ctBoolType !@compileTimeBoolOrOperator ()]
+  !?ioContext.mInfixOperatorMap.insertKey (!key, !ctBoolType, !@compileTimeBoolOrOperator ())
  //--- Enter ^ infix operator
   key = infixOperatorMapKey (!ctBoolType !.bitWiseXorOp !.nowhere !ctBoolType)
-  [!?ioContext.mInfixOperatorMap insertKey !key !ctBoolType !@compileTimeBoolXorOperator ()]
+  !?ioContext.mInfixOperatorMap.insertKey (!key, !ctBoolType, !@compileTimeBoolXorOperator ())
  //--- Enter == infix operator
   key = infixOperatorMapKey (!ctBoolType !.equal !.nowhere !ctBoolType)
-  [!?ioContext.mInfixOperatorMap insertKey !key !ctBoolType !@compileTimeBoolEqualOperator ()]
+  !?ioContext.mInfixOperatorMap.insertKey (!key, !ctBoolType, !@compileTimeBoolEqualOperator ())
 //--- Implicit conversion to i1 for test expressions
-  key = @lstring {!ctBoolType.omnibusTypeDescriptionName !.nowhere}
-  [!?ioContext.mImplicitConversionToBooleanMap insertKey !key !@compileTimeBoolImplicitConverterToBoolean ()]
+  key = @lstring (!ctBoolType.omnibusTypeDescriptionName, .nowhere)
+  !?ioContext.mImplicitConversionToBooleanMap.insertKey (!key, !@compileTimeBoolImplicitConverterToBoolean ())
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -78,16 +78,16 @@ class @compileTimeBoolImplicitConverterToBoolean : @abstractImplicitConverterToB
 
 //·······················································································································
 
-override proc @compileTimeBoolImplicitConverterToBoolean generateConvertToBooleanCode
-  ?let @objectIR inReceiverOperand
-  ?let @location unused inErrorLocation
-  ?!@semanticTemporariesStruct unused ioTemporaries
-  ?!@instructionListIR unused ioInstructionGenerationList
-  ?!alloca:@allocaList unused ioAllocaList
+override proc @compileTimeBoolImplicitConverterToBoolean.generateConvertToBooleanCode
+  (?let @objectIR inReceiverOperand,
+  ?let @location unused inErrorLocation,
+  ?!@semanticTemporariesStruct unused ioTemporaries,
+  ?!@instructionListIR unused ioInstructionGenerationList,
+  ?!alloca:@allocaList unused ioAllocaList,
   !@implicitBooleanConversionResult outResult
-{
-  [inReceiverOperand extractLiteralInteger ?1* ?value: let receiverValue]
-  outResult = .compileTime {!value: receiverValue != 0}
+) {
+  inReceiverOperand.extractLiteralInteger (?1*, ?value: let receiverValue)
+  outResult = .compileTime (!value: receiverValue != 0)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -99,18 +99,18 @@ class @compileTimeBoolNotOperator : @prefixOperatorUsage {
 
 //·······················································································································
 
-override proc @compileTimeBoolNotOperator generateCode
-  ?let @objectIR inReceiverOperand
-  ?let @location unused inOperatorLocation
-  ?let @omnibusType inResultType
-  ?noPanicCode: let @bool unused inDoNotGeneratePanicCode
-  ?safeMode: let @bool unused inSafeMode
-  ?!@semanticTemporariesStruct unused ioTemporaries
-  ?!@instructionListIR unused ioInstructionGenerationList
+override proc @compileTimeBoolNotOperator.generateCode
+  (?let @objectIR inReceiverOperand,
+  ?let @location unused inOperatorLocation,
+  ?let @omnibusType inResultType,
+  ?noPanicCode: let @bool unused inDoNotGeneratePanicCode,
+  ?safeMode: let @bool unused inSafeMode,
+  ?!@semanticTemporariesStruct unused ioTemporaries,
+  ?!@instructionListIR unused ioInstructionGenerationList,
   !@objectIR outResultValue
-{
-  [inReceiverOperand extractLiteralInteger ?1* ?value: let receiverValue]
-  outResultValue = .literalInteger {!type: inResultType !value: if receiverValue == 0 then 1 else 0 end}
+) {
+  inReceiverOperand.extractLiteralInteger (?1*, ?value: let receiverValue)
+  outResultValue = .literalInteger (!type: inResultType, !value: if receiverValue == 0 then 1 else 0 end)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -122,19 +122,19 @@ class @compileTimeBoolEqualOperator : @omnibusInfixOperatorUsage {
 
 //·······················································································································
 
-override proc @compileTimeBoolEqualOperator generateCode
-  ?let @objectIR inLeftOperand
-  ?let @location unused inOperatorLocation
-  ?let @objectIR inRightOperand
-  ?let @omnibusType inResultType
-  ?!@semanticTemporariesStruct unused ioTemporaries
-  ?!@allocaList unused ioAllocaList
-  ?!@instructionListIR unused ioInstructionGenerationList
+override proc @compileTimeBoolEqualOperator.generateCode
+  (?let @objectIR inLeftOperand,
+  ?let @location unused inOperatorLocation,
+  ?let @objectIR inRightOperand,
+  ?let @omnibusType inResultType,
+  ?!@semanticTemporariesStruct unused ioTemporaries,
+  ?!@allocaList unused ioAllocaList,
+  ?!@instructionListIR unused ioInstructionGenerationList,
   !@objectIR outResultValue
-{
-  [inLeftOperand extractLiteralInteger ?1* ?value: let leftValue]
-  [inRightOperand extractLiteralInteger ?1* ?value: let rightValue]
-  outResultValue = .literalInteger {!type: inResultType !value: leftValue == rightValue}
+) {
+  inLeftOperand.extractLiteralInteger (?1*, ?value: let leftValue)
+  inRightOperand.extractLiteralInteger (?1*, ?value: let rightValue)
+  outResultValue = .literalInteger (!type: inResultType, !value: leftValue == rightValue)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -144,19 +144,19 @@ class @compileTimeBoolXorOperator : @omnibusInfixOperatorUsage {
 
 //·······················································································································
 
-override proc @compileTimeBoolXorOperator generateCode
-  ?let @objectIR inLeftOperand
-  ?let @location unused inOperatorLocation
-  ?let @objectIR inRightOperand
-  ?let @omnibusType inResultType
-  ?!@semanticTemporariesStruct unused ioTemporaries
-  ?!@allocaList unused ioAllocaList
-  ?!@instructionListIR unused ioInstructionGenerationList
+override proc @compileTimeBoolXorOperator.generateCode
+  (?let @objectIR inLeftOperand,
+  ?let @location unused inOperatorLocation,
+  ?let @objectIR inRightOperand,
+  ?let @omnibusType inResultType,
+  ?!@semanticTemporariesStruct unused ioTemporaries,
+  ?!@allocaList unused ioAllocaList,
+  ?!@instructionListIR unused ioInstructionGenerationList,
   !@objectIR outResultValue
-{
-  [inLeftOperand extractLiteralInteger ?1* ?value: let leftValue]
-  [inRightOperand extractLiteralInteger ?1* ?value: let rightValue]
-  outResultValue = .literalInteger {!type: inResultType !value: leftValue ^ rightValue}
+) {
+  inLeftOperand.extractLiteralInteger (?1*, ?value: let leftValue)
+  inRightOperand.extractLiteralInteger (?1*, ?value: let rightValue)
+  outResultValue = .literalInteger (!type: inResultType, !value: leftValue ^ rightValue)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -166,19 +166,19 @@ class @compileTimeBoolOrOperator : @omnibusInfixOperatorUsage {
 
 //·······················································································································
 
-override proc @compileTimeBoolOrOperator generateCode
-  ?let @objectIR inLeftOperand
-  ?let @location unused inOperatorLocation
-  ?let @objectIR inRightOperand
-  ?let @omnibusType inResultType
-  ?!@semanticTemporariesStruct unused ioTemporaries
-  ?!@allocaList unused ioAllocaList
-  ?!@instructionListIR unused ioInstructionGenerationList
+override proc @compileTimeBoolOrOperator.generateCode
+  (?let @objectIR inLeftOperand,
+  ?let @location unused inOperatorLocation,
+  ?let @objectIR inRightOperand,
+  ?let @omnibusType inResultType,
+  ?!@semanticTemporariesStruct unused ioTemporaries,
+  ?!@allocaList unused ioAllocaList,
+  ?!@instructionListIR unused ioInstructionGenerationList,
   !@objectIR outResultValue
-{
-  [inLeftOperand extractLiteralInteger ?1* ?value: let leftValue]
-  [inRightOperand extractLiteralInteger ?1* ?value: let rightValue]
-  outResultValue = .literalInteger {!type: inResultType !value: leftValue | rightValue}
+) {
+  inLeftOperand.extractLiteralInteger (?1*, ?value: let leftValue)
+  inRightOperand.extractLiteralInteger (?1*, ?value: let rightValue)
+  outResultValue = .literalInteger (!type: inResultType, !value: leftValue | rightValue)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————

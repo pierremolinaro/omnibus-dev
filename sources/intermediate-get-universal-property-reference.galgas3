@@ -1,12 +1,12 @@
 
-setter @instructionListIR appendGetUniversalPropertyReference
-  ?let @omnibusType inType
-  ?let @string inLLVMName
-  ?let @string inElementLLVMName
-  ?let @uint inPropertyIndex
+mutating proc @instructionListIR.appendGetUniversalPropertyReference
+  (?let @omnibusType inType,
+  ?let @string inLLVMName,
+  ?let @string inElementLLVMName,
+  ?let @uint inPropertyIndex,
   ?let @string inPropertyName
-{
-  self += !@getUniversalPropertyReferenceIR {!inType !inLLVMName !inElementLLVMName !inPropertyIndex !inPropertyName}
+) {
+  self += !@getUniversalPropertyReferenceIR (!inType, inLLVMName, inElementLLVMName, inPropertyIndex, inPropertyName)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -21,11 +21,11 @@ class @getUniversalPropertyReferenceIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @getUniversalPropertyReferenceIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
+override proc @getUniversalPropertyReferenceIR.llvmInstructionCode
+  (?!@string ioLLVMcode,
+  ?let @generationContext unused inGenerationContext,
   ?!@generationAdds unused ioGenerationAdds
-{
+) {
   let llvmType = self.mType.llvmTypeName
   ioLLVMcode += "  " + self.mElementLLVMName + " = getelementptr inbounds "
   ioLLVMcode += llvmType + ", " + llvmType + " * " + self.mLLVMName + ", i32 0, i32 " + self.mPropertyIndex

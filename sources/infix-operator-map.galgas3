@@ -17,39 +17,39 @@ abstract class @omnibusInfixOperatorUsage {
 //·······················································································································
 
 abstract proc @omnibusInfixOperatorUsage generateCode
-  ?let @objectIR inLeftOperand
-  ?let @location inOperatorLocation
-  ?let @objectIR inRightOperand
-  ?let @omnibusType inResultType
-  ?!@semanticTemporariesStruct ioTemporaries
-  ?!@allocaList ioAllocaList
-  ?!@instructionListIR ioInstructionGenerationList
-  !@objectIR outResultValue
+  (?let @objectIR inLeftOperand,
+  ?let @location inOperatorLocation,
+  ?let @objectIR inRightOperand,
+  ?let @omnibusType inResultType,
+  ?!@semanticTemporariesStruct ioTemporaries,
+  ?!@allocaList ioAllocaList,
+  ?!@instructionListIR ioInstructionGenerationList,
+  !@objectIR outResultValue)
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc @infixOperatorMap generateInfixOperatorCode
-  ?let @objectIR inLeftOperand
-  ?let @omnibusInfixOperator inInfixOperator
-  ?let @location inOperatorLocation
-  ?let @objectIR inRightOperand
-  ?!@semanticTemporariesStruct ioTemporaries
-  ?!@allocaList ioAllocaList
-  ?!@instructionListIR ioInstructionGenerationList
+  (?let @objectIR inLeftOperand,
+  ?let @omnibusInfixOperator inInfixOperator,
+  ?let @location inOperatorLocation,
+  ?let @objectIR inRightOperand,
+  ?!@semanticTemporariesStruct ioTemporaries,
+  ?!@allocaList ioAllocaList,
+  ?!@instructionListIR ioInstructionGenerationList,
   !@objectIR outResultValue
-{
+) {
   let key = infixOperatorMapKey (!inLeftOperand.type !inInfixOperator !inOperatorLocation !inRightOperand.type)
-  [self searchKey !key ?let resultType ?let operatorUsage]
-  [operatorUsage generateCode
-    !inLeftOperand
-    !inOperatorLocation
-    !inRightOperand
-    !resultType
-    !?ioTemporaries
-    !?ioAllocaList
-    !?ioInstructionGenerationList
+  self.searchKey (!key, ?let resultType, ?let operatorUsage)
+  operatorUsage.generateCode
+    (!inLeftOperand,
+    !inOperatorLocation,
+    !inRightOperand,
+    !resultType,
+    !?ioTemporaries,
+    !?ioAllocaList,
+    !?ioInstructionGenerationList,
     ?outResultValue
-  ]
+  )
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -62,24 +62,24 @@ class @inlineInfixOperatorUsage : @omnibusInfixOperatorUsage {
 
 //·······················································································································
 
-override proc @inlineInfixOperatorUsage generateCode
-  ?let @objectIR inLeftOperand
-  ?let @location unused inOperatorLocation
-  ?let @objectIR inRightOperand
-  ?let @omnibusType inResultType
-  ?!@semanticTemporariesStruct ioTemporaries
-  ?!@allocaList unused ioAllocaList
-  ?!@instructionListIR ioInstructionGenerationList
+override proc @inlineInfixOperatorUsage.generateCode
+  (?let @objectIR inLeftOperand,
+  ?let @location unused inOperatorLocation,
+  ?let @objectIR inRightOperand,
+  ?let @omnibusType inResultType,
+  ?!@semanticTemporariesStruct ioTemporaries,
+  ?!@allocaList unused ioAllocaList,
+  ?!@instructionListIR ioInstructionGenerationList,
   !@objectIR outResultValue
-{
+) {
   var leftOperand = inLeftOperand
-  [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?leftOperand]
+  !?ioInstructionGenerationList.appendLoadWhenReference (!?ioTemporaries, !?leftOperand)
   var rightOperand = inRightOperand
-  [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?rightOperand]
-  getNewTempValue (!inResultType !?ioTemporaries ?outResultValue)
+  !?ioInstructionGenerationList.appendLoadWhenReference (!?ioTemporaries, !?rightOperand)
+  getNewTempValue (!inResultType, !?ioTemporaries, ?outResultValue)
   let s = outResultValue.llvmName + " = " + self.mLLVMOperation + " " + leftOperand.type.llvmTypeName
         + " " + leftOperand.llvmName + ", " + rightOperand.llvmName
-  [!?ioInstructionGenerationList appendInstructionAsFreeString !s !@[]]
+  !?ioInstructionGenerationList.appendInstructionAsFreeString (!s, !@[])
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————

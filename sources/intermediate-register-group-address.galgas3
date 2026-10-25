@@ -1,13 +1,13 @@
 
-setter @instructionListIR appendEnterRegisterGroupSubscriptedAddress
-  ?!@semanticTemporariesStruct ioTemporaries
-  !@string out_llvmName
-  ?let @string inGroupName
-  ?let @uint inGroupSize
+mutating proc @instructionListIR.appendEnterRegisterGroupSubscriptedAddress
+  (?!@semanticTemporariesStruct ioTemporaries,
+  !@string out_llvmName,
+  ?let @string inGroupName,
+  ?let @uint inGroupSize,
   ?let @objectIR inIndexIR
-{
-  [!?ioTemporaries newTempLLVMVar ?out_llvmName]
-  self += !@enterRegisterGroupSubscriptedAddressIR {!out_llvmName !inGroupName !inGroupSize !inIndexIR}
+) {
+  !?ioTemporaries.newTempLLVMVar (?out_llvmName)
+  self += !@enterRegisterGroupSubscriptedAddressIR (!out_llvmName, inGroupName, inGroupSize, inIndexIR)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -21,11 +21,11 @@ class @enterRegisterGroupSubscriptedAddressIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @enterRegisterGroupSubscriptedAddressIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
+override proc @enterRegisterGroupSubscriptedAddressIR.llvmInstructionCode
+  (?!@string ioLLVMcode,
+  ?let @generationContext unused inGenerationContext,
   ?!@generationAdds unused ioGenerationAdds
-{
+) {
   let groupArrayName = registerGroupAddressArrayLLVMname (!self.mGroupName)
   ioLLVMcode += "  " + self.mLLVMName + ".addr = getelementptr inbounds [" + self.mGroupSize
              + " x i32], [" + self.mGroupSize + " x i32]* " + groupArrayName

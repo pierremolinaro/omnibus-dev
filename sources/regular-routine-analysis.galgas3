@@ -21,26 +21,26 @@ list @decoratedRegularRoutineList {
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc @decoratedRegularRoutineList routineSemanticAnalysis
-  ?context:let @semanticContext inContext
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  (?context:let @semanticContext inContext,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
+) {
   for function in self do
-    [function semanticAnalysis
-      !context: inContext
-      !?temporary: ioTemporaries
+    function.semanticAnalysis
+      (!context: inContext,
+      !?temporary: ioTemporaries,
       !?intermediateCode: ioIntermediateCodeStruct
-    ]
+    )
   end
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc @decoratedRegularRoutineList.@element semanticAnalysis
-  ?context:let @semanticContext inContext
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
+  (?context:let @semanticContext inContext,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
   ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
+) {
 //--- Reset temporaries index
   ioTemporaries.mTemporaryIndex = 0
 //--- Receiver type
@@ -50,60 +50,60 @@ proc @decoratedRegularRoutineList.@element semanticAnalysis
     end
 //--- Variable map
   var universalMap = inContext.mValuedObjectMap
-  [!?universalMap openOverrideForSelectBlock]
-  [!?universalMap openBranch]
+  !?universalMap.openOverrideForSelectBlock ()
+  !?universalMap.openBranch ()
 //--- Return value ?
   if self.returnTypeName.string != "" then
-    let resultVarName = @lstring {!functionResultVariableName () !self.returnTypeName.location}
+    let resultVarName = @lstring (!functionResultVariableName (), self.returnTypeName.location)
     let resultType = [inContext.mTypeMap searchKey !self.returnTypeName].type
-    [!?universalMap insertLocalVariable !resultVarName !resultType !resultVarName !.noValue !true]
+    !?universalMap.insertLocalVariable (!resultVarName, !resultType, !resultVarName, !.noValue, !true)
   end
 //--- Analyse formal arguments
   var @routineFormalArgumentListIR formalArguments = @[]
   enterFormalArguments (
-    !context:inContext
-    !self.formalArgumentList
-    !?universalMap
-    !?formalArguments
+    !context:inContext,
+    !self.formalArgumentList,
+    !?universalMap,
+    !?formalArguments,
     !warningOnUnusedArgs: self.warningOnUnusedArgs
   )
 //--- Analyze instruction list
   var @allocaList allocaList = @[]
   var @instructionListIR instructionGenerationList = @[]
-  [self.mInstructionList analyzeRoutineInstructionList
-    !self:receiverType
-    !routineAttributes: self.routineAttributes
-    !context:inContext
-    !mode:self.mode
-    !?temporary:ioTemporaries
-    !?staticEntityMap:ioIntermediateCodeStruct.mStaticEntityMap
-    !?variableMap:universalMap
-    !?alloca:allocaList
+  self.mInstructionList.analyzeRoutineInstructionList
+    (!self:receiverType,
+    !routineAttributes: self.routineAttributes,
+    !context:inContext,
+    !mode:self.mode,
+    !?temporary:ioTemporaries,
+    !?staticEntityMap:ioIntermediateCodeStruct.mStaticEntityMap,
+    !?variableMap:universalMap,
+    !?alloca:allocaList,
     !?generatedCode:instructionGenerationList
-  ]
+  )
 //--- End of variableMap
-  [universalMap checkLocalVariableFinalState !?instructionGenerationList]
-  [!?universalMap closeBranch !self.mEndOfRoutineDeclaration]
-  [!?universalMap closeOverride !self.mEndOfRoutineDeclaration]
+  universalMap.checkLocalVariableFinalState (!?instructionGenerationList)
+  !?universalMap.closeBranch (!self.mEndOfRoutineDeclaration)
+  !?universalMap.closeOverride (!self.mEndOfRoutineDeclaration)
 //--- Code generation
   let returnType = if self.returnTypeName.string == "" then
     voidType ()
   else
     [inContext.mTypeMap searchKey !self.returnTypeName].type
   end
-  ioIntermediateCodeStruct.mRoutineListIR += !@regularRoutineIR {
-    !self.routineMangledLLVMName
-    !isRequired:self.isRequired
-    !warnsIfUnused:self.warnIfUnused
-    !receiverType
-    !formalArguments
-    !allocaList
-    !instructionGenerationList
-    !self.exportedRoutine
-    !self.routineKind
-    !returnType
-    !false
-  }
+  ioIntermediateCodeStruct.mRoutineListIR += !@regularRoutineIR (
+    !self.routineMangledLLVMName,
+    !isRequired:self.isRequired,
+    !warnsIfUnused:self.warnIfUnused,
+    receiverType,
+    formalArguments,
+    allocaList,
+    instructionGenerationList,
+    self.exportedRoutine,
+    self.routineKind,
+    returnType,
+    false
+  )
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -116,7 +116,7 @@ list @allocaList {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc @allocaList generateAllocaList ?!@string ioLLVMcode {
+proc @allocaList generateAllocaList (?!@string ioLLVMcode ) {
   for (variable type *) in self do
     ioLLVMcode += "  " + variable + " = alloca " + type.llvmTypeName + "\n"
   end
@@ -146,25 +146,25 @@ class @regularRoutineIR : @abstractRoutineIR {
 
 //·······················································································································
 
-override proc @regularRoutineIR enterAccessibleEntities
-   ?!@stringset ioInvokedRoutineSet
+override proc @regularRoutineIR.enterAccessibleEntities
+   (?!@stringset ioInvokedRoutineSet,
    ?!@uint ioMaxBranchOfOnInstructions
-{
+) {
   for instruction in self.mInstructionGenerationList do
-    [instruction.mInstructionGeneration enterAccessibleEntities
-      !?ioInvokedRoutineSet
+    instruction.mInstructionGeneration.enterAccessibleEntities
+      (!?ioInvokedRoutineSet,
       !?ioMaxBranchOfOnInstructions
-    ]
+    )
   end
 }
 
 //·······················································································································
 
-override proc @regularRoutineIR llvmCodeGeneration
-  ?!@string ioLLVMcode
-  ?let @generationContext inGenerationContext
+override proc @regularRoutineIR.llvmCodeGeneration
+  (?!@string ioLLVMcode,
+  ?let @generationContext inGenerationContext,
   ?!@generationAdds ioGenerationAdds
-{
+) {
   ioLLVMcode += "define"
   if not self.mExportedFunction then
     ioLLVMcode += " internal"
@@ -215,7 +215,7 @@ override proc @regularRoutineIR llvmCodeGeneration
     case output, inputOutput :
     end
   end
-  [allocaList generateAllocaList !?ioLLVMcode]
+  allocaList.generateAllocaList (!?ioLLVMcode)
 //--- Copy input arguments and generate retain instructions for input arguments
 //    Insulate input and input/output arguments
   for (mFormalArgumentKind mFormalArgumentType mFormalArgumentName) in self.mFormalArgumentListForGeneration do
@@ -225,37 +225,37 @@ override proc @regularRoutineIR llvmCodeGeneration
       let llvmType = mFormalArgumentType.llvmTypeName
       ioLLVMcode += "  store " + llvmType + " %in." + mFormalArgumentName + ", " + llvmType + " * "
                  + llvmNameForLocalVariable (!mFormalArgumentName) + "\n"
-      [mFormalArgumentType generateRetain !mFormalArgumentName !?ioLLVMcode !?ioGenerationAdds]
+      mFormalArgumentType.generateRetain (!mFormalArgumentName, !?ioLLVMcode, !?ioGenerationAdds)
       if self.mKind == .section then
-        [mFormalArgumentType generateInsulate !mFormalArgumentName !?ioLLVMcode !?ioGenerationAdds]
+        mFormalArgumentType.generateInsulate (!mFormalArgumentName, !?ioLLVMcode, !?ioGenerationAdds)
       end
     case inputOutput :
       if self.mKind == .section then
        ioLLVMcode += ";--------- Insulate input/output argument '" + mFormalArgumentName + "'\n"
-       [mFormalArgumentType generateInsulate !mFormalArgumentName !?ioLLVMcode !?ioGenerationAdds]
+       mFormalArgumentType.generateInsulate (!mFormalArgumentName, !?ioLLVMcode, !?ioGenerationAdds)
       end
     case output :
     end
   end
 //--- Instruction list
   ioLLVMcode += ";--------- Function instruction list\n"
-  [self.mInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  self.mInstructionGenerationList.instructionListLLVMCode (!?ioLLVMcode, !inGenerationContext, !?ioGenerationAdds)
 //--- Generate release instructions for input arguments
 //    Insulate output and input/output arguments
   for (mFormalArgumentKind mFormalArgumentType mFormalArgumentName) in self.mFormalArgumentListForGeneration do
     switch mFormalArgumentKind
     case input :
       ioLLVMcode += ";--------- Release input argument '" + mFormalArgumentName + "'\n"
-     [mFormalArgumentType generateRelease !mFormalArgumentName !?ioLLVMcode !?ioGenerationAdds]
+     mFormalArgumentType.generateRelease (!mFormalArgumentName, !?ioLLVMcode, !?ioGenerationAdds)
     case inputOutput :
       if self.mKind == .section then
        ioLLVMcode += ";--------- Insulate input/output argument '" + mFormalArgumentName + "'\n"
-       [mFormalArgumentType generateInsulate !mFormalArgumentName !?ioLLVMcode !?ioGenerationAdds]
+       mFormalArgumentType.generateInsulate (!mFormalArgumentName, !?ioLLVMcode, !?ioGenerationAdds)
       end
     case output :
       if self.mKind == .section then
        ioLLVMcode += ";--------- Insulate output argument '" + mFormalArgumentName + "'\n"
-       [mFormalArgumentType generateInsulate !mFormalArgumentName !?ioLLVMcode !?ioGenerationAdds]
+       mFormalArgumentType.generateInsulate (!mFormalArgumentName, !?ioLLVMcode, !?ioGenerationAdds)
       end
     end
   end

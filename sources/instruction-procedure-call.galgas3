@@ -28,34 +28,34 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
-    <procedure_call> !?ioAST ?let routineCallInstruction
+  rule <instruction> (?!@ast ioAST ,?!@instructionListAST ioInstructionList ) {
+    <procedure_call> (!?ioAST, ?let routineCallInstruction)
     ioInstructionList += !routineCallInstruction
   }
 
   //·····················································································································
 
-  rule <procedure_call> ?!@ast ioAST !@callInstructionAST outInstruction {
+  rule <procedure_call> (?!@ast ioAST ,!@callInstructionAST outInstruction ) {
     let instructionLocation = @location.here
-    <lvalue> !?ioAST ?let assignmentTargetAST
-    <effective_parameters> !?ioAST ?let arguments ?let endOfArguments
+    <lvalue> (!?ioAST, ?let assignmentTargetAST)
+    <effective_parameters> (!?ioAST, ?let arguments, ?let endOfArguments)
     if (assignmentTargetAST.mOperand == .noOperand) & (assignmentTargetAST.mIdentifier.string != "") then
-      outInstruction = @standAloneProcedureCallInstructionAST {
-        !instructionLocation
-        !arguments
-        !endOfArguments
-        !assignmentTargetAST.mIdentifier
-      }
+      outInstruction = @standAloneProcedureCallInstructionAST (
+        !instructionLocation,
+        arguments,
+        endOfArguments,
+        assignmentTargetAST.mIdentifier
+      )
     else
       var @accessInAssignmentListAST accessList = @[]
-      [assignmentTargetAST.mOperand buildProcedureCallAccessList !?accessList]
-      outInstruction = @procedureCallInstructionAST {
-        !instructionLocation
-        !arguments
-        !endOfArguments
-        !assignmentTargetAST.mIdentifier
-        !accessList
-      }
+      assignmentTargetAST.mOperand.buildProcedureCallAccessList (!?accessList)
+      outInstruction = @procedureCallInstructionAST (
+        !instructionLocation,
+        arguments,
+        endOfArguments,
+        assignmentTargetAST.mIdentifier,
+        accessList
+      )
     end
   }
 
@@ -65,15 +65,15 @@ syntax extension omnibus_syntax {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc @LValueOperandAST buildProcedureCallAccessList ?!@accessInAssignmentListAST ioAccessList {
+proc @LValueOperandAST buildProcedureCallAccessList (?!@accessInAssignmentListAST ioAccessList ) {
   switch self
   case noOperand :
-  case property (@lstring name @LValueOperandAST next) :
-    ioAccessList += !.property {!name:name}
-    [next buildProcedureCallAccessList !?ioAccessList]
-  case arrayAccess (@expressionAST index @location endOfIndex @bool checkIndexExpression @LValueOperandAST next) :
-    ioAccessList += !.arrayAccess {!index:index !endOfIndex:endOfIndex !checkIndexExpression:checkIndexExpression}
-    [next buildProcedureCallAccessList !?ioAccessList]
+  case property (@lstring name, @LValueOperandAST next) :
+    ioAccessList += !.property (!name:name)
+    next.buildProcedureCallAccessList (!?ioAccessList)
+  case arrayAccess (@expressionAST index, @location endOfIndex, @bool checkIndexExpression, @LValueOperandAST next) :
+    ioAccessList += !.arrayAccess (!index:index, !endOfIndex:endOfIndex, !checkIndexExpression:checkIndexExpression)
+    next.buildProcedureCallAccessList (!?ioAccessList)
   end
 }
 
@@ -81,25 +81,25 @@ proc @LValueOperandAST buildProcedureCallAccessList ?!@accessInAssignmentListAST
 //!  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @procedureCallInstructionAST noteInstructionTypesInPrecedenceGraph
-  ?!@semanticTypePrecedenceGraph ioGraph
-{
+override proc @procedureCallInstructionAST.noteInstructionTypesInPrecedenceGraph
+  (?!@semanticTypePrecedenceGraph ioGraph
+) {
 //  [mOperand noteInstructionTypesInPrecedenceGraph !?ioGraph]
   for (access) in self.mAccessList do
     switch access
     case property (*) :
-    case arrayAccess (@expressionAST indexExpression 2*) :
-      [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+    case arrayAccess (@expressionAST indexExpression, 2*) :
+      indexExpression.noteExpressionTypesInPrecedenceGraph (!?ioGraph)
     end
   end
   for (mEffectiveParameterKind *) in self.mArguments do
     switch mEffectiveParameterKind
     case input (*):
-    case inputWithType (* @lstring typeName *) :
+    case inputWithType (*, @lstring typeName, *) :
       if typeName.string != "" then
-        [!?ioGraph noteNode !typeName]
+        !?ioGraph.noteNode (!typeName)
       end
-    case output (expression *) : [expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+    case output (expression, *) : expression.noteExpressionTypesInPrecedenceGraph (!?ioGraph)
     case outputInput (*) :
     case outputInputSelfVariable (*) :
     end
@@ -108,17 +108,17 @@ override proc @procedureCallInstructionAST noteInstructionTypesInPrecedenceGraph
 
 //·······················································································································
 
-override proc @standAloneProcedureCallInstructionAST noteInstructionTypesInPrecedenceGraph
-  ?!@semanticTypePrecedenceGraph ioGraph
-{
+override proc @standAloneProcedureCallInstructionAST.noteInstructionTypesInPrecedenceGraph
+  (?!@semanticTypePrecedenceGraph ioGraph
+) {
   for (mEffectiveParameterKind *) in self.mArguments do
     switch mEffectiveParameterKind
     case input (*):
-    case inputWithType (* @lstring typeName *) :
+    case inputWithType (*, @lstring typeName, *) :
       if typeName.string != "" then
-        [!?ioGraph noteNode !typeName]
+        !?ioGraph.noteNode (!typeName)
       end
-    case output (expression *) : [expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+    case output (expression, *) : expression.noteExpressionTypesInPrecedenceGraph (!?ioGraph)
     case outputInput (*) :
     case outputInputSelfVariable (*) :
     end
@@ -129,11 +129,11 @@ override proc @standAloneProcedureCallInstructionAST noteInstructionTypesInPrece
 //!  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-func @effectiveArgumentPassingModeAST passingModeForActualSelector ?let @lstring inSelector -> @string {
+func @effectiveArgumentPassingModeAST.passingModeForActualSelector (?let @lstring inSelector ) -> @string {
   switch self
   case input (*) : result = "?"
-  case inputWithType (* * *) : result = "?"
-  case output (* *) : result = "!"
+  case inputWithType (*, *, *) : result = "?"
+  case output (*, *) : result = "!"
   case outputInput (*) : result = "!?"
   case outputInputSelfVariable (*) : result = "!?"
   end
@@ -152,31 +152,31 @@ list @procEffectiveParameterList {
 
 //·······················································································································
 
-override proc @standAloneProcedureCallInstructionAST instructionSemanticAnalysis
-  ?self:let @omnibusType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
+override proc @standAloneProcedureCallInstructionAST.instructionSemanticAnalysis
+  (?self:let @omnibusType inSelfType,
+  ?routineAttributes:let @routineAttributes inRoutineAttributes,
+  ?context:let @semanticContext inContext,
+  ?mode:let @mode inMode,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap,
+  ?!alloca:@allocaList ioAllocaList,
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-{
+) {
 //--- Called routine signature
   let calledRoutineSignature = [self.mArguments routineSignature !self.mSandAloneRoutineName.location]
 //--- Search routine in map
   let requiredFunctionMangledName = self.mSandAloneRoutineName.string + calledRoutineSignature
 //   log "keys " : [inContext.mRoutineMap keyList]
-  [inContext.mRoutineMap searchKey
-    ! @{!requiredFunctionMangledName !self.mSandAloneRoutineName}
-    ?let unused implementedPublic
-    ?let formalSignature
-    ?let formalReturnTypeProxy // null if no returned value
-    ?let implementedModeDictionary
-    ?let unused implementedIsExported
+  inContext.mRoutineMap.searchKey
+    (! @(!requiredFunctionMangledName, self.mSandAloneRoutineName),
+    ?let unused implementedPublic,
+    ?let formalSignature,
+    ?let formalReturnTypeProxy, // null if no returned value
+    ?let implementedModeDictionary,
+    ?let unused implementedIsExported,
     ?let unused implementedMode
-  ]
+  )
 //--- Check return type proxy is null
   if not formalReturnTypeProxy.isNull then
     error (self.mSandAloneRoutineName : "this function returns a value, cannot be used as a procedure")
@@ -186,18 +186,18 @@ override proc @standAloneProcedureCallInstructionAST instructionSemanticAnalysis
 //--- Analyze effective parameters
   var @procCallEffectiveParameterListIR effectiveParameterListIR = @[]
   analyzeEffectiveParameters (
-    !self:inSelfType
-    !routineAttributes:inRoutineAttributes
-    !formal:formalSignature
-    !effective:self.mArguments
-    !errorLocation:self.mSandAloneRoutineName.location
-    !context:inContext
-    !requiredMode:inMode
-    !?temporary:ioTemporaries
-    !?staticEntityMap:ioStaticEntityMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:ioInstructionGenerationList
+    !self:inSelfType,
+    !routineAttributes:inRoutineAttributes,
+    !formal:formalSignature,
+    !effective:self.mArguments,
+    !errorLocation:self.mSandAloneRoutineName.location,
+    !context:inContext,
+    !requiredMode:inMode,
+    !?temporary:ioTemporaries,
+    !?staticEntityMap:ioStaticEntityMap,
+    !?variableMap:ioUniversalMap,
+    !?alloca:ioAllocaList,
+    !?instructionListIR:ioInstructionGenerationList,
     !?effectiveIR:effectiveParameterListIR
   )
 
@@ -208,27 +208,27 @@ override proc @standAloneProcedureCallInstructionAST instructionSemanticAnalysis
     !self.mArguments
   )
 //--- Code generation
-  ioInstructionGenerationList += !@standaloneRoutineCallIR {
-    !.void
-    !routineMangledName
-    !functionLLVMName
-    !effectiveParameterListIR
-  }
+  ioInstructionGenerationList += !@standaloneRoutineCallIR (
+    !.void,
+    routineMangledName,
+    functionLLVMName,
+    effectiveParameterListIR
+  )
 }
 
 //·······················································································································
 
-override proc @procedureCallInstructionAST instructionSemanticAnalysis
-  ?self:let @omnibusType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
+override proc @procedureCallInstructionAST.instructionSemanticAnalysis
+  (?self:let @omnibusType inSelfType,
+  ?routineAttributes:let @routineAttributes inRoutineAttributes,
+  ?context:let @semanticContext inContext,
+  ?mode:let @mode inMode,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap,
+  ?!alloca:@allocaList ioAllocaList,
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-{
+) {
 //--- Analyze header identifier : it is a variable, as a standalone procedure call is handled in an other place
 //    If identifier is empty string, the receiver is "self"
   var receiverIsSelf = false
@@ -243,12 +243,12 @@ override proc @procedureCallInstructionAST instructionSemanticAnalysis
       currentLLVMAddressVar = llvmNameForSelf ()
     end
   else
-    [ioUniversalMap searchEntity !self.mIdentifier ?let @valuedObject entity]
+    ioUniversalMap.searchEntity (!self.mIdentifier, ?let @valuedObject entity)
     switch entity
     case task (@omnibusType type) :
       currentType = type
       currentLLVMAddressVar = llvmNameForGlobalVariable (!self.mIdentifier)
-    case driver (@omnibusType type instancied) :
+    case driver (@omnibusType type, instancied) :
       if instancied then
         currentType = type
         currentLLVMAddressVar = llvmNameForGlobalVariable (!self.mIdentifier)
@@ -259,13 +259,13 @@ override proc @procedureCallInstructionAST instructionSemanticAnalysis
       error (self.mIdentifier
         : "a global constant cannot be used in this context"
         spoil currentType, currentLLVMAddressVar)
-    case localConstant (@omnibusType type @lstring omnibusName *) :
+    case localConstant (@omnibusType type, @lstring omnibusName, *) :
       currentType = type
       currentLLVMAddressVar = llvmNameForLocalVariable (!omnibusName)
-    case localVariable (@omnibusType type @lstring omnibusName) :
+    case localVariable (@omnibusType type, @lstring omnibusName) :
       currentType = type
       currentLLVMAddressVar = llvmNameForLocalVariable (!omnibusName)
-    case globalSyncInstance (@omnibusType type @lstring omnibusName) :
+    case globalSyncInstance (@omnibusType type, @lstring omnibusName) :
       currentType = type
       currentLLVMAddressVar = llvmNameForGlobalSyncInstance (!omnibusName)
     end
@@ -274,16 +274,16 @@ override proc @procedureCallInstructionAST instructionSemanticAnalysis
   var currentObjectPropertyMap = [inContext propertyGetterMap !currentType]
 //--- Insulate last access (should be a "property", used as routine name
   var accessList = self.mAccessList
-  [!?accessList popLast ?let lastAccess]
+  !?accessList.popLast (?let lastAccess)
 //--- loop on access list
   for (access) in accessList do
     switch access
     case property (@lstring propertyName) :
-      [currentObjectPropertyMap searchKey
-        !propertyName
-        ?let visibility
+      currentObjectPropertyMap.searchKey
+        (!propertyName,
+        ?let visibility,
         ?let @propertyGetterKind propertyAccess
-      ]
+      )
       switch visibility
       case isPublic :
       case isPrivate :
@@ -297,50 +297,50 @@ override proc @procedureCallInstructionAST instructionSemanticAnalysis
         error (propertyName
           : "a context property cannot be used in this context"
           spoil currentType, currentLLVMAddressVar)
-      case storedProperty (@omnibusType propertyType @uint propertyIndex) :
-        [!?ioTemporaries newTempLLVMVar ?let llvmPropertyName]
-        [!?ioInstructionGenerationList appendGetUniversalPropertyReference
-          !currentType
-          !currentLLVMAddressVar
-          !llvmPropertyName
-          !propertyIndex
+      case storedProperty (@omnibusType propertyType, @uint propertyIndex) :
+        !?ioTemporaries.newTempLLVMVar (?let llvmPropertyName)
+        !?ioInstructionGenerationList.appendGetUniversalPropertyReference
+          (!currentType,
+          !currentLLVMAddressVar,
+          !llvmPropertyName,
+          !propertyIndex,
           !propertyName
-        ]
+        )
         currentType = propertyType
         currentLLVMAddressVar = llvmPropertyName
         currentObjectPropertyMap = [inContext propertyGetterMap !currentType]
-      case computedProperty (propertyTypeProxy modeDictionary) :
+      case computedProperty (propertyTypeProxy, modeDictionary) :
         let routineLLVMName = checkModeAndReturnsRoutineLLVMName (!modeDictionary !inMode !propertyName)
-        [!?ioInstructionGenerationList appendGetComputedPropertyValue
-          !?ioTemporaries
-          !.reference {!type:currentType !llvmName:currentLLVMAddressVar}
-          !routineLLVMName
-          !propertyTypeProxy.type
+        !?ioInstructionGenerationList.appendGetComputedPropertyValue
+          (!?ioTemporaries,
+          !.reference (!type:currentType, !llvmName:currentLLVMAddressVar),
+          !routineLLVMName,
+          !propertyTypeProxy.type,
           ?let resultValueIR
-        ]
+        )
         currentType = resultValueIR.type
         currentLLVMAddressVar = resultValueIR.llvmName
         currentObjectPropertyMap = [inContext propertyGetterMap !currentType]
       end
-    case arrayAccess (* @location endOfIndex *) :
+    case arrayAccess (*, @location endOfIndex, *) :
       error (endOfIndex : "not handled yet" spoil currentType, currentLLVMAddressVar)
     end
   end
 //--- Handle last access
   switch lastAccess
-  case arrayAccess (* @location endOfIndex *) :
+  case arrayAccess (*, @location endOfIndex, *) :
     error (endOfIndex : "a property is required here")
   case property (@lstring methodName) :
     let methodMangledName = [self.mArguments mangledName !receiverTypeName: currentType.omnibusTypeDescriptionName !functionName: methodName]
-    [inContext.mRoutineMap searchKey
-      !methodMangledName
-      ?let unused implementedPublic
-      ?let formalSignature
-      ?let formalReturnTypeProxy // null if no returned value
-      ?let implementedModeDictionary
-      ?let unused implementedIsExported
+    inContext.mRoutineMap.searchKey
+      (!methodMangledName,
+      ?let unused implementedPublic,
+      ?let formalSignature,
+      ?let formalReturnTypeProxy, // null if no returned value
+      ?let implementedModeDictionary,
+      ?let unused implementedIsExported,
       ?let unused implementedMode
-    ]
+    )
   //--- Check modes
     let functionLLVMName = checkModeAndReturnsRoutineLLVMName (!implementedModeDictionary !inMode !methodName)
   //--- Check routine does not return any value
@@ -349,31 +349,31 @@ override proc @procedureCallInstructionAST instructionSemanticAnalysis
     end
   //--- Add receiver as first parameter
     var @procCallEffectiveParameterListIR effectiveParameterListIR = @[
-      @(.outputInput, .reference {!type:currentType !llvmName:currentLLVMAddressVar})
+      @(.outputInput, .reference (!type:currentType, !llvmName:currentLLVMAddressVar))
     ]
   //--- Analyze effective parameters
     analyzeEffectiveParameters (
-      !self:inSelfType
-      !routineAttributes:inRoutineAttributes
-      !formal:formalSignature
-      !effective:self.mArguments
-      !errorLocation:methodName.location
-      !context:inContext
-      !requiredMode:inMode
-      !?temporary:ioTemporaries
-      !?staticEntityMap:ioStaticEntityMap
-      !?variableMap:ioUniversalMap
-      !?alloca:ioAllocaList
-      !?instructionListIR:ioInstructionGenerationList
+      !self:inSelfType,
+      !routineAttributes:inRoutineAttributes,
+      !formal:formalSignature,
+      !effective:self.mArguments,
+      !errorLocation:methodName.location,
+      !context:inContext,
+      !requiredMode:inMode,
+      !?temporary:ioTemporaries,
+      !?staticEntityMap:ioStaticEntityMap,
+      !?variableMap:ioUniversalMap,
+      !?alloca:ioAllocaList,
+      !?instructionListIR:ioInstructionGenerationList,
       !?effectiveIR:effectiveParameterListIR
     )
   //--- Generate call
-    ioInstructionGenerationList += !@standaloneRoutineCallIR {
-      !.void
-      !methodMangledName
-      !functionLLVMName
-      !effectiveParameterListIR
-    }
+    ioInstructionGenerationList += !@standaloneRoutineCallIR (
+      !.void,
+      methodMangledName,
+      functionLLVMName,
+      effectiveParameterListIR
+    )
   end
 }
 

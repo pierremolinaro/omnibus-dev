@@ -1,6 +1,6 @@
 
-setter @instructionListIR appendFreeComment ?let @string inComment {
-  self += !@freeCommentIR {!inComment}
+mutating proc @instructionListIR.appendFreeComment (?let @string inComment ) {
+  self += !@freeCommentIR (!inComment)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -11,11 +11,11 @@ class @freeCommentIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @freeCommentIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext unused inGenerationContext
+override proc @freeCommentIR.llvmInstructionCode
+  (?!@string ioLLVMcode,
+  ?let @generationContext unused inGenerationContext,
   ?!@generationAdds unused ioGenerationAdds
-{
+) {
   ioLLVMcode += ";--------- " + self.mComment + "\n"
 }
 

@@ -24,7 +24,7 @@ enum @compileTimeInfixOperatorEnumeration %equatable {
 
 //·······················································································································
 
-func @compileTimeInfixOperatorEnumeration string -> @string {
+func @compileTimeInfixOperatorEnumeration.string () -> @string {
  switch self
  case equal     : result = "=="
  case lessThan : result = "<"
@@ -45,7 +45,7 @@ func @compileTimeInfixOperatorEnumeration string -> @string {
 
 //·······················································································································
 
-func @compileTimeInfixOperatorEnumeration omnibusInfixOperator -> @omnibusInfixOperator {
+func @compileTimeInfixOperatorEnumeration.omnibusInfixOperator () -> @omnibusInfixOperator {
  switch self
  case equal     : result = .equal
  case lessThan : result = .lessThan
@@ -79,7 +79,7 @@ class @compileTimeInfixOperatorAST : @abstractDeclarationAST {
 
 //·······················································································································
 
-override func @compileTimeInfixOperatorAST locationForErrorSignaling -> @location outLocation {
+override func @compileTimeInfixOperatorAST.locationForErrorSignaling () -> @location outLocation {
   outLocation = self.mInfixOperatorLocation
 }
 
@@ -91,7 +91,7 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <compileTimeInfixOperator> !@compileTimeInfixOperatorEnumeration outOperator {
+  rule <compileTimeInfixOperator> (!@compileTimeInfixOperatorEnumeration outOperator ) {
     select
       $==$
       outOperator = .equal
@@ -139,34 +139,34 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <declaration> ?!@ast ioAST {
+  rule <declaration> (?!@ast ioAST ) {
     $compiletime$
     $func$
     $($
-    $identifier$ ?let leftArgument
-    $\$type$ ?let leftType
+    $identifier$ (?let leftArgument)
+    $\$type$ (?let leftType)
     $)$
     let operationLocation = @location.here
-    <compileTimeInfixOperator> ?let infixOperator
+    <compileTimeInfixOperator> (?let infixOperator)
     $($
-    $identifier$ ?let rightArgument
-    $\$type$ ?let rightType
+    $identifier$ (?let rightArgument)
+    $\$type$ (?let rightType)
     $)$
     $->$
-    $\$type$ ?let resultType
+    $\$type$ (?let resultType)
     ${$
-    <compile_time_expression> ?let @ctExpressionAST expression
+    <compile_time_expression> (?let @ctExpressionAST expression)
     $}$
-    ioAST.mDeclarationListAST += !@compileTimeInfixOperatorAST {
-      !infixOperator
-      !operationLocation
-      !leftArgument
-      !leftType
-      !rightArgument
-      !rightType
-      !expression
-      !resultType
-    }
+    ioAST.mDeclarationListAST += !@compileTimeInfixOperatorAST (
+      !infixOperator,
+      operationLocation,
+      leftArgument,
+      leftType,
+      rightArgument,
+      rightType,
+      expression,
+      resultType
+    )
   }
 
   //·····················································································································
@@ -177,20 +177,20 @@ syntax extension omnibus_syntax {
 //  PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @compileTimeInfixOperatorAST enterInPrecedenceGraph
-  ?!@semanticTypePrecedenceGraph ioGraph
-{
-  let nodeName = @lstring {!self.mInfixOperator.string + "." + self.mLeftTypeName + "." + self.mRightTypeName !self.mInfixOperatorLocation}
-  [!?ioGraph addNode !nodeName !self]
-  [!?ioGraph addEdge !from: nodeName !to: self.mLeftTypeName]
-  [!?ioGraph addEdge !from: nodeName !to: self.mRightTypeName]
-  [!?ioGraph addEdge !from: nodeName !to: self.mResultTypeName]
-  [!?ioGraph addEdge !from: compileTimeDeclarationBarrier () !to: nodeName]
+override proc @compileTimeInfixOperatorAST.enterInPrecedenceGraph
+  (?!@semanticTypePrecedenceGraph ioGraph
+) {
+  let nodeName = @lstring (!self.mInfixOperator.string + "." + self.mLeftTypeName + "." + self.mRightTypeName, self.mInfixOperatorLocation)
+  !?ioGraph.addNode (!nodeName, !self)
+  !?ioGraph.addEdge (!from: nodeName, !to: self.mLeftTypeName)
+  !?ioGraph.addEdge (!from: nodeName, !to: self.mRightTypeName)
+  !?ioGraph.addEdge (!from: nodeName, !to: self.mResultTypeName)
+  !?ioGraph.addEdge (!from: compileTimeDeclarationBarrier (), !to: nodeName)
 }
 
 //·······················································································································
 
-override func @compileTimeInfixOperatorAST keyRepresentationForErrorSignaling -> @string outRepresentation {
+override func @compileTimeInfixOperatorAST.keyRepresentationForErrorSignaling () -> @string outRepresentation {
   outRepresentation = self.mLeftTypeName.string + " " + self.mInfixOperator + " " + self.mRightTypeName
 }
 
@@ -198,58 +198,58 @@ override func @compileTimeInfixOperatorAST keyRepresentationForErrorSignaling ->
 //!  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @compileTimeInfixOperatorAST enterInContext
-  ?!context:@semanticContext ioContext
-  ?!@declarationDecorationList unused ioDecoratedDeclarationList
-  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
-  ?!@routineListIR unused ioRoutineListIR
-  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
-  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
-  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
+override proc @compileTimeInfixOperatorAST.enterInContext
+  (?!context:@semanticContext ioContext,
+  ?!@declarationDecorationList unused ioDecoratedDeclarationList,
+  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList,
+  ?!@routineListIR unused ioRoutineListIR,
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap,
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap,
+  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST,
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
-{
+) {
 //--- Check types
-  [!?ioContext.mTypeMap makeEntry !self.mLeftTypeName ?let leftTypeProxy]
+  !?ioContext.mTypeMap.makeEntry (!self.mLeftTypeName, ?let leftTypeProxy)
   let leftType = leftTypeProxy.type
-  [leftType checkIsCompileTimeType !self.mLeftTypeName.location]
-  [!?ioContext.mTypeMap makeEntry !self.mRightTypeName ?let rightTypeProxy]
+  leftType.checkIsCompileTimeType (!self.mLeftTypeName.location)
+  !?ioContext.mTypeMap.makeEntry (!self.mRightTypeName, ?let rightTypeProxy)
   let rightType = rightTypeProxy.type
-  [rightType checkIsCompileTimeType !self.mRightTypeName.location]
-  [!?ioContext.mTypeMap makeEntry !self.mResultTypeName ?let resultTypeProxy]
+  rightType.checkIsCompileTimeType (!self.mRightTypeName.location)
+  !?ioContext.mTypeMap.makeEntry (!self.mResultTypeName, ?let resultTypeProxy)
   let resultType = resultTypeProxy.type
-  [resultType checkIsCompileTimeType !self.mResultTypeName.location]
+  resultType.checkIsCompileTimeType (!self.mResultTypeName.location)
 //--- Check native operator expression
   var @ctCheckMap ctCheckMap = @()
-  [!?ctCheckMap insertKey !self.mLeftOperandName]
-  [!?ctCheckMap insertKey !self.mRightOperandName]
-  [self.mExpression checkCompileTimeExpression !ctCheckMap]
+  !?ctCheckMap.insertKey (!self.mLeftOperandName)
+  !?ctCheckMap.insertKey (!self.mRightOperandName)
+  self.mExpression.checkCompileTimeExpression (!ctCheckMap)
 //--- Enter in infix operator map
   let key = infixOperatorMapKey (!leftType !self.mInfixOperator !self.mInfixOperatorLocation !rightType)
-  let definition = @compileTimeInfixOperatorUsage {
-    !self.mLeftOperandName
-    !self.mRightOperandName
-    !self.mExpression
-  }
-  [!?ioContext.mInfixOperatorMap insertKey !key !resultType !definition]
+  let definition = @compileTimeInfixOperatorUsage (
+    !self.mLeftOperandName,
+    self.mRightOperandName,
+    self.mExpression
+  )
+  !?ioContext.mInfixOperatorMap.insertKey (!key, !resultType, !definition)
 //--- Define '≤' operator ?
   if (self.mInfixOperator == .equal) || (self.mInfixOperator == .lessThan) then
     let equal_key = infixOperatorMapKey (!leftType !.equal !self.mInfixOperatorLocation !rightType)
     let lessThan_key = infixOperatorMapKey (!leftType !.lessThan !self.mInfixOperatorLocation !rightType)
   if [ioContext.mInfixOperatorMap hasKey !equal_key] & [ioContext.mInfixOperatorMap hasKey !lessThan_key] then
-    [ioContext.mInfixOperatorMap searchKey !equal_key ?* ?let equalOperatorUsage]
-    [ioContext.mInfixOperatorMap searchKey !lessThan_key ?* ?let lessThanOperatorUsage]
+    ioContext.mInfixOperatorMap.searchKey (!equal_key, ?*, ?let equalOperatorUsage)
+    ioContext.mInfixOperatorMap.searchKey (!lessThan_key, ?*, ?let lessThanOperatorUsage)
     if let eou = equalOperatorUsage as @compileTimeInfixOperatorUsage,
        let ltou = lessThanOperatorUsage as @compileTimeInfixOperatorUsage then
-      let infEqual_definition = @compileTimeInfixInfEqualOperatorUsage {!eou !ltou}
+      let infEqual_definition = @compileTimeInfixInfEqualOperatorUsage (!eou, ltou)
       let infEqual_key = infixOperatorMapKey (!leftType !.infEqual !self.mInfixOperatorLocation !rightType)
-      [!?ioContext.mInfixOperatorMap insertKey !infEqual_key !resultType !infEqual_definition]
+      !?ioContext.mInfixOperatorMap.insertKey (!infEqual_key, !resultType, !infEqual_definition)
       end
     end
   end
 //--- Define '+%' operator ?
   if self.mInfixOperator == .addOp then
     let addOpNoOVF_key = infixOperatorMapKey (!leftType !.addOpNoOvf !self.mInfixOperatorLocation !rightType)
-    [!?ioContext.mInfixOperatorMap insertKey !addOpNoOVF_key !resultType !definition]
+    !?ioContext.mInfixOperatorMap.insertKey (!addOpNoOVF_key, !resultType, !definition)
   end
 }
 
@@ -266,32 +266,32 @@ class @compileTimeInfixOperatorUsage : @omnibusInfixOperatorUsage {
 //·······················································································································
 
 proc @compileTimeInfixOperatorUsage eval
-  ?let @objectIR inLeftOperand
-  ?let @objectIR inRightOperand
+  (?let @objectIR inLeftOperand,
+  ?let @objectIR inRightOperand,
   !@bigint outResult
-{
-  [inLeftOperand extractLiteralInteger ?1* ?value: let leftValue]
-  [inRightOperand extractLiteralInteger ?1* ?value: let rightValue]
+) {
+  inLeftOperand.extractLiteralInteger (?1*, ?value: let leftValue)
+  inRightOperand.extractLiteralInteger (?1*, ?value: let rightValue)
   var @ctMap varMap = @()
-  [!?varMap insertKey !self.mLeftOperandName !leftValue]
-  [!?varMap insertKey !self.mRightOperandName !rightValue]
-  [self.mExpression computeCompileTimeExpression !varMap ?result: outResult]
+  !?varMap.insertKey (!self.mLeftOperandName, !leftValue)
+  !?varMap.insertKey (!self.mRightOperandName, !rightValue)
+  self.mExpression.computeCompileTimeExpression (!varMap, ?result: outResult)
 }
 
 //·······················································································································
 
-override proc @compileTimeInfixOperatorUsage generateCode
-  ?let @objectIR inLeftOperand
-  ?let @location unused inOperatorLocation
-  ?let @objectIR inRightOperand
-  ?let @omnibusType inResultType
-  ?!@semanticTemporariesStruct unused ioTemporaries
-  ?!@allocaList unused ioAllocaList
-  ?!@instructionListIR unused ioInstructionGenerationList
+override proc @compileTimeInfixOperatorUsage.generateCode
+  (?let @objectIR inLeftOperand,
+  ?let @location unused inOperatorLocation,
+  ?let @objectIR inRightOperand,
+  ?let @omnibusType inResultType,
+  ?!@semanticTemporariesStruct unused ioTemporaries,
+  ?!@allocaList unused ioAllocaList,
+  ?!@instructionListIR unused ioInstructionGenerationList,
   !@objectIR outResultValue
-{
-  [self eval !inLeftOperand !inRightOperand ?let result]
-  outResultValue = .literalInteger {!type: inResultType !value: result}
+) {
+  self.eval (!inLeftOperand, !inRightOperand, ?let result)
+  outResultValue = .literalInteger (!type: inResultType, !value: result)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -303,21 +303,21 @@ class @compileTimeInfixInfEqualOperatorUsage : @omnibusInfixOperatorUsage {
 
 //·······················································································································
 
-override proc @compileTimeInfixInfEqualOperatorUsage generateCode
-  ?let @objectIR inLeftOperand
-  ?let @location unused inOperatorLocation
-  ?let @objectIR inRightOperand
-  ?let @omnibusType inResultType
-  ?!@semanticTemporariesStruct unused ioTemporaries
-  ?!@allocaList unused ioAllocaList
-  ?!@instructionListIR unused ioInstructionGenerationList
+override proc @compileTimeInfixInfEqualOperatorUsage.generateCode
+  (?let @objectIR inLeftOperand,
+  ?let @location unused inOperatorLocation,
+  ?let @objectIR inRightOperand,
+  ?let @omnibusType inResultType,
+  ?!@semanticTemporariesStruct unused ioTemporaries,
+  ?!@allocaList unused ioAllocaList,
+  ?!@instructionListIR unused ioInstructionGenerationList,
   !@objectIR outResultValue
-{
-  [self.mEqualOperatorUsage eval !inLeftOperand !inRightOperand ?var result]
+) {
+  self.mEqualOperatorUsage.eval (!inLeftOperand, !inRightOperand, ?var result)
   if result == 0 then
-    [self.mLessThanOperatorUsage eval !inLeftOperand !inRightOperand ?result]
+    self.mLessThanOperatorUsage.eval (!inLeftOperand, !inRightOperand, ?result)
   end
-  outResultValue = .literalInteger {!type: inResultType !value: result}
+  outResultValue = .literalInteger (!type: inResultType, !value: result)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————

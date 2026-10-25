@@ -16,19 +16,19 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
+  rule <primary> (?!@ast ioAST ,!@expressionAST outExpression ) {
     let @lstring optionalTypeName
     select
-      optionalTypeName = @{!"" !.here}
+      optionalTypeName = @(!"", .here)
     or
-      <type_definition> !?ioAST ?optionalTypeName
+      <type_definition> (!?ioAST, ?optionalTypeName)
     end
     $.$
-    $identifier$ ?let constantName
+    $identifier$ (?let constantName)
   //--- Properties and access
-    <expression_access_list> !?ioAST ?let accessList
+    <expression_access_list> (!?ioAST, ?let accessList)
   //---
-    outExpression = @typedConstantCallAST {!optionalTypeName !constantName !accessList}
+    outExpression = @typedConstantCallAST (!optionalTypeName, constantName, accessList)
   }
 
   //·····················································································································
@@ -38,28 +38,28 @@ syntax extension omnibus_syntax {
 //  PRECEDENCE GRAPH FROM EXPRESSION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @typedConstantCallAST addDependenceEdgeForStaticExpression
-  ?let @lstring inConstantName
+override proc @typedConstantCallAST.addDependenceEdgeForStaticExpression
+  (?let @lstring inConstantName,
   ?!@semanticTypePrecedenceGraph ioGraph
-{
+) {
   if self.mOptionalTypeName.string != "" then
-    [!?ioGraph addEdge !from: inConstantName !to: self.mOptionalTypeName]
+    !?ioGraph.addEdge (!from: inConstantName, !to: self.mOptionalTypeName)
   end
   for (access) in self.mAccessList do
     switch access
     case integerSlice (2*) :
     case property (*) :
-    case arrayAccess (@expressionAST indexExpression 2*) :
-      [indexExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
-    case funcCall (* @effectiveArgumentListAST arguments *) :
+    case arrayAccess (@expressionAST indexExpression, 2*) :
+      indexExpression.addDependenceEdgeForStaticExpression (!inConstantName, !?ioGraph)
+    case funcCall (*, @effectiveArgumentListAST arguments, *) :
       for (mEffectiveParameterKind *) in arguments do
         switch mEffectiveParameterKind
         case input (*):
-        case inputWithType (* @lstring typeName *) :
+        case inputWithType (*, @lstring typeName, *) :
           if typeName.string != "" then
-            [!?ioGraph noteNode !typeName]
+            !?ioGraph.noteNode (!typeName)
           end
-        case output (expression *) : [expression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+        case output (expression, *) : expression.addDependenceEdgeForStaticExpression (!inConstantName, !?ioGraph)
         case outputInput (*) :
         case outputInputSelfVariable (*) :
         end
@@ -72,25 +72,25 @@ override proc @typedConstantCallAST addDependenceEdgeForStaticExpression
 //  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @typedConstantCallAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
+override proc @typedConstantCallAST.noteExpressionTypesInPrecedenceGraph (?!@semanticTypePrecedenceGraph ioGraph ) {
   if self.mOptionalTypeName.string != "" then
-    [!?ioGraph noteNode !self.mOptionalTypeName]
+    !?ioGraph.noteNode (!self.mOptionalTypeName)
   end
   for (access) in self.mAccessList do
     switch access
     case integerSlice (2*) :
     case property (*) :
-    case arrayAccess (@expressionAST indexExpression 2*) :
-      [indexExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
-    case funcCall (* @effectiveArgumentListAST arguments *) :
+    case arrayAccess (@expressionAST indexExpression, 2*) :
+      indexExpression.noteExpressionTypesInPrecedenceGraph (!?ioGraph)
+    case funcCall (*, @effectiveArgumentListAST arguments, *) :
       for (mEffectiveParameterKind *) in arguments do
         switch mEffectiveParameterKind
         case input (*):
-        case inputWithType (* @lstring typeName *) :
+        case inputWithType (*, @lstring typeName, *) :
           if typeName.string != "" then
-            [!?ioGraph noteNode !typeName]
+            !?ioGraph.noteNode (!typeName)
           end
-        case output (expression *) : [expression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+        case output (expression, *) : expression.noteExpressionTypesInPrecedenceGraph (!?ioGraph)
         case outputInput (*) :
         case outputInputSelfVariable (*) :
         end
@@ -103,19 +103,19 @@ override proc @typedConstantCallAST noteExpressionTypesInPrecedenceGraph ?!@sema
 //  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @typedConstantCallAST analyzeExpression
-  ?self:let @omnibusType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?optionalTargetType:let @omnibusType inOptionalTargetType
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+override proc @typedConstantCallAST.analyzeExpression
+  (?self:let @omnibusType inSelfType,
+  ?routineAttributes:let @routineAttributes inRoutineAttributes,
+  ?optionalTargetType:let @omnibusType inOptionalTargetType,
+  ?context:let @semanticContext inContext,
+  ?mode:let @mode inMode,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap,
+  ?!alloca:@allocaList ioAllocaList,
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList,
   !result:@objectIR outResult
-{
+) {
 //--- Analyze constructor source type
   let @omnibusType inferredResultType
   if self.mOptionalTypeName.string == "" then
@@ -126,40 +126,40 @@ override proc @typedConstantCallAST analyzeExpression
   if inferredResultType.kind == .void then
     error (self.mConstructorName : "cannot infer type" spoil outResult)
   else
-    let typeName = @lstring {!inferredResultType.omnibusTypeDescriptionName !self.mConstructorName.location}
-    [inContext.mTypeConstantMap searchKey !typeName ?let classConstantMap]
+    let typeName = @lstring (!inferredResultType.omnibusTypeDescriptionName, self.mConstructorName.location)
+    inContext.mTypeConstantMap.searchKey (!typeName, ?let classConstantMap)
 //    let classConstantMap = inferredResultType.classConstantMap
-    [classConstantMap searchKey !self.mConstructorName ?let @bigint value ?let classTypeName]
+    classConstantMap.searchKey (!self.mConstructorName, ?let @bigint value, ?let classTypeName)
     let resultType = [inContext.mTypeMap searchKey !classTypeName].type
-    outResult = .literalInteger {!type:resultType !value:value}
+    outResult = .literalInteger (!type:resultType, !value:value)
   end
 //--- Analyze access list
   if self.mAccessList.count > 0 then
   //--- procAnalyzeAccesListInExpression works on reference, not value
   //    So we create articially a temporary reference for resulting value
-    getNewTempReference (!outResult.type !?ioTemporaries ?let newTemporaryReference)
+    getNewTempReference (!outResult.type, !?ioTemporaries, ?let newTemporaryReference)
   //--- ... add it into alloc list...
     ioAllocaList += !newTemporaryReference.llvmName !newTemporaryReference.type !false
   //--- ... and store resulting value into it
-    [!?ioInstructionGenerationList appendStoreTemporaryReference
-      !newTemporaryReference.type
-      !newTemporaryReference.llvmName
+    !?ioInstructionGenerationList.appendStoreTemporaryReference
+      (!newTemporaryReference.type,
+      !newTemporaryReference.llvmName,
       !outResult
-    ]
+    )
     outResult = newTemporaryReference
   //---
     procAnalyzeAccesListInExpression (
-      !self: inSelfType
-      !routineAttributes:inRoutineAttributes
-      !optionalTargetType: inOptionalTargetType
-      !context: inContext
-      !mode: inMode
-      !?temporary: ioTemporaries
-      !?staticEntityMap:ioStaticEntityMap
-      !?variableMap: ioUniversalMap
-      !?alloca: ioAllocaList
-      !?instructionListIR: ioInstructionGenerationList
-      !self.mAccessList
+      !self: inSelfType,
+      !routineAttributes:inRoutineAttributes,
+      !optionalTargetType: inOptionalTargetType,
+      !context: inContext,
+      !mode: inMode,
+      !?temporary: ioTemporaries,
+      !?staticEntityMap:ioStaticEntityMap,
+      !?variableMap: ioUniversalMap,
+      !?alloca: ioAllocaList,
+      !?instructionListIR: ioInstructionGenerationList,
+      !self.mAccessList,
       !?result: outResult
     )
   end

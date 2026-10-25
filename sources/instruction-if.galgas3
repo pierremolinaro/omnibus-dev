@@ -21,19 +21,19 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <instruction> ?!@ast ioAST ?!@instructionListAST ioInstructionList {
-    <if_instruction> !?ioAST ?let ifInstruction
+  rule <instruction> (?!@ast ioAST ,?!@instructionListAST ioInstructionList ) {
+    <if_instruction> (!?ioAST, ?let ifInstruction)
     ioInstructionList += !ifInstruction
   }
 
   //·····················································································································
 
-  rule <if_instruction> ?!@ast ioAST !@ifInstructionAST outIfInstruction {
+  rule <if_instruction> (?!@ast ioAST ,!@ifInstructionAST outIfInstruction ) {
     $if$
     let instructionLocation = @location.here
     let @bool staticIfExpression
     select
-      $@attribute$ ? let attributeValue
+      $@attribute$ (? let attributeValue)
       if attributeValue.string == staticAttribute () then
         staticIfExpression = true
       else
@@ -44,10 +44,10 @@ syntax extension omnibus_syntax {
     or
      staticIfExpression = false
     end
-    <expression> !?ioAST ?let @expressionAST testExpression
+    <expression> (!?ioAST, ?let @expressionAST testExpression)
     let testExpressionEndLocation = @location.here
     ${$
-    <instructionList> !?ioAST ?let thenInstructionList
+    <instructionList> (!?ioAST, ?let thenInstructionList)
     $}$
     let endOfThenBranch = @location.here
     let @instructionListAST elseInstructionList
@@ -56,25 +56,25 @@ syntax extension omnibus_syntax {
     or
       $else$
       ${$
-      <instructionList> !?ioAST ?elseInstructionList
+      <instructionList> (!?ioAST, ?elseInstructionList)
       $}$
     or
       $else$
-      <if_instruction> !?ioAST ?let ifInstruction
+      <if_instruction> (!?ioAST, ?let ifInstruction)
       elseInstructionList = @[@(ifInstruction)]
     end
     let endOfElseBranch = @location.here
-    outIfInstruction = @{
-      !instructionLocation
-      !testExpression
-      !testExpressionEndLocation
-      !staticIfExpression
-      !thenInstructionList
-      !endOfThenBranch
-      !elseInstructionList
-      !endOfElseBranch
-      !.here
-    }
+    outIfInstruction = @(
+      !instructionLocation,
+      testExpression,
+      testExpressionEndLocation,
+      staticIfExpression,
+      thenInstructionList,
+      endOfThenBranch,
+      elseInstructionList,
+      endOfElseBranch,
+      .here
+    )
   }
 
   //·····················································································································
@@ -85,54 +85,54 @@ syntax extension omnibus_syntax {
 //  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @ifInstructionAST noteInstructionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [self.mThenInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
-  [self.mElseInstructionList noteInstructionListTypesInPrecedenceGraph !?ioGraph]
-  [self.mTestExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+override proc @ifInstructionAST.noteInstructionTypesInPrecedenceGraph (?!@semanticTypePrecedenceGraph ioGraph ) {
+  self.mThenInstructionList.noteInstructionListTypesInPrecedenceGraph (!?ioGraph)
+  self.mElseInstructionList.noteInstructionListTypesInPrecedenceGraph (!?ioGraph)
+  self.mTestExpression.noteExpressionTypesInPrecedenceGraph (!?ioGraph)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 //  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @ifInstructionAST instructionSemanticAnalysis
-  ?self:let @omnibusType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
+override proc @ifInstructionAST.instructionSemanticAnalysis
+  (?self:let @omnibusType inSelfType,
+  ?routineAttributes:let @routineAttributes inRoutineAttributes,
+  ?context:let @semanticContext inContext,
+  ?mode:let @mode inMode,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap,
+  ?!alloca:@allocaList ioAllocaList,
   ?!instructionListIR:@instructionListIR ioInstructionGenerationList
-{
+) {
 //--- Analyze test expression
-  [self.mTestExpression analyzeExpression
-    !self:inSelfType
-    !routineAttributes:inRoutineAttributes
-    !optionalTargetType:voidType ()
-    !context:inContext
-    !mode:inMode
-    !?temporary:ioTemporaries
-    !?staticEntityMap:ioStaticEntityMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
-    !?instructionListIR:ioInstructionGenerationList
+  self.mTestExpression.analyzeExpression
+    (!self:inSelfType,
+    !routineAttributes:inRoutineAttributes,
+    !optionalTargetType:voidType (),
+    !context:inContext,
+    !mode:inMode,
+    !?temporary:ioTemporaries,
+    !?staticEntityMap:ioStaticEntityMap,
+    !?variableMap:ioUniversalMap,
+    !?alloca:ioAllocaList,
+    !?instructionListIR:ioInstructionGenerationList,
     ?result: @objectIR testResult
-  ]
-  [!?ioInstructionGenerationList appendLoadWhenReference
-    !?ioTemporaries
+  )
+  !?ioInstructionGenerationList.appendLoadWhenReference
+    (!?ioTemporaries,
     !?testResult
-  ]
+  )
 //--- Check result is allowed for condition
-  [inContext.mImplicitConversionToBooleanMap generateConvertToBooleanCode
-    !testResult
-    !self.mTestExpressionEndLocation
-    !?ioTemporaries
-    !?ioInstructionGenerationList
-    !?alloca: ioAllocaList
+  inContext.mImplicitConversionToBooleanMap.generateConvertToBooleanCode
+    (!testResult,
+    !self.mTestExpressionEndLocation,
+    !?ioTemporaries,
+    !?ioInstructionGenerationList,
+    !?alloca: ioAllocaList,
     ?let booleanResult
-  ]
+  )
 //----
   switch booleanResult
   case compileTime (*) :
@@ -144,43 +144,43 @@ override proc @ifInstructionAST instructionSemanticAnalysis
       error (self.mTestExpressionEndLocation : "'if' expression is not static")
     end
   end
-  [!?ioUniversalMap openOverrideForSelectBlock]
+  !?ioUniversalMap.openOverrideForSelectBlock ()
 //--- Analyze 'then' instruction list
   var @instructionListIR thenInstructionGenerationList = @[]
-  [self.mThenInstructionList analyzeBranchInstructionList
-    !self:inSelfType
-    !routineAttributes:inRoutineAttributes
-    !endOfInstructionList:self.mEndOfThenInstructionList
-    !context:inContext
-    !mode:inMode
-    !?temporary:ioTemporaries
-    !?staticEntityMap:ioStaticEntityMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
+  self.mThenInstructionList.analyzeBranchInstructionList
+    (!self:inSelfType,
+    !routineAttributes:inRoutineAttributes,
+    !endOfInstructionList:self.mEndOfThenInstructionList,
+    !context:inContext,
+    !mode:inMode,
+    !?temporary:ioTemporaries,
+    !?staticEntityMap:ioStaticEntityMap,
+    !?variableMap:ioUniversalMap,
+    !?alloca:ioAllocaList,
     !?instructionListIR:thenInstructionGenerationList
-  ]
+  )
 //--- Analyze 'else' instruction list
   var @instructionListIR elseInstructionGenerationList = @[]
-  [self.mElseInstructionList analyzeBranchInstructionList
-    !self:inSelfType
-    !routineAttributes:inRoutineAttributes
-    !endOfInstructionList:self.mEndOfElseInstructionList
-    !context:inContext
-    !mode:inMode
-    !?temporary:ioTemporaries
-    !?staticEntityMap:ioStaticEntityMap
-    !?variableMap:ioUniversalMap
-    !?alloca:ioAllocaList
+  self.mElseInstructionList.analyzeBranchInstructionList
+    (!self:inSelfType,
+    !routineAttributes:inRoutineAttributes,
+    !endOfInstructionList:self.mEndOfElseInstructionList,
+    !context:inContext,
+    !mode:inMode,
+    !?temporary:ioTemporaries,
+    !?staticEntityMap:ioStaticEntityMap,
+    !?variableMap:ioUniversalMap,
+    !?alloca:ioAllocaList,
     !?instructionListIR:elseInstructionGenerationList
-  ]
-  [!?ioUniversalMap closeOverride !self.mEndOf_if_instruction]
+  )
+  !?ioUniversalMap.closeOverride (!self.mEndOf_if_instruction)
 //--- Code generation
-  ioInstructionGenerationList += !@ifInstructionIR {
-    !booleanResult.llvmName
-    !self.mTestExpressionEndLocation
-    !thenInstructionGenerationList
-    !elseInstructionGenerationList
- }
+  ioInstructionGenerationList += !@ifInstructionIR (
+    !booleanResult.llvmName,
+    self.mTestExpressionEndLocation,
+    thenInstructionGenerationList,
+    elseInstructionGenerationList
+ )
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
@@ -196,11 +196,11 @@ class @ifInstructionIR : @abstractInstructionIR {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @ifInstructionIR llvmInstructionCode
-  ?!@string ioLLVMcode
-  ?let @generationContext inGenerationContext
+override proc @ifInstructionIR.llvmInstructionCode
+  (?!@string ioLLVMcode,
+  ?let @generationContext inGenerationContext,
   ?!@generationAdds ioGenerationAdds
-{
+) {
 //--- Labels
   let labelTrue = "if." + ioGenerationAdds.mUniqueIndex + ".true"
   let labelFalse = "if." + ioGenerationAdds.mUniqueIndex + ".false"
@@ -209,11 +209,11 @@ override proc @ifInstructionIR llvmInstructionCode
   ioLLVMcode += "  br i1 " + self.mLLVMTestName + ", label %" + labelTrue + ", label %" + labelFalse + "\n\n"
 //--- True branch
   ioLLVMcode += labelTrue + ":\n"
-  [self.mThenInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  self.mThenInstructionGenerationList.instructionListLLVMCode (!?ioLLVMcode, !inGenerationContext, !?ioGenerationAdds)
   ioLLVMcode += "  br label %" + labelEnd + "\n\n"
 //--- false branch
   ioLLVMcode += labelFalse + ":\n"
-  [self.mElseInstructionGenerationList instructionListLLVMCode !?ioLLVMcode !inGenerationContext !?ioGenerationAdds]
+  self.mElseInstructionGenerationList.instructionListLLVMCode (!?ioLLVMcode, !inGenerationContext, !?ioGenerationAdds)
   ioLLVMcode += "  br label %" + labelEnd + "\n\n"
 //--- end
   ioLLVMcode += labelEnd + ":\n"
@@ -221,12 +221,12 @@ override proc @ifInstructionIR llvmInstructionCode
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @ifInstructionIR enterAccessibleEntities
-  ?!@stringset ioInvokedRoutineSet
+override proc @ifInstructionIR.enterAccessibleEntities
+  (?!@stringset ioInvokedRoutineSet,
   ?!@uint ioMaxBranchOfOnInstructions
-{
-  [self.mThenInstructionGenerationList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
-  [self.mElseInstructionGenerationList enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
+) {
+  self.mThenInstructionGenerationList.enterAccessibleEntities (!?ioInvokedRoutineSet, !?ioMaxBranchOfOnInstructions)
+  self.mElseInstructionGenerationList.enterAccessibleEntities (!?ioInvokedRoutineSet, !?ioMaxBranchOfOnInstructions)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————

@@ -23,13 +23,13 @@ abstract class @abstractDeclarationAST {
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-abstract func @abstractDeclarationAST locationForErrorSignaling -> @location
+abstract func @abstractDeclarationAST locationForErrorSignaling () -> @location
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc @abstractDeclarationAST enterExtension
-  ?!@extendStaticArrayDeclarationDictAST unused ioExtendStaticArrayDeclarationAST
-  !@abstractDeclarationAST outNewDeclaration {
+  (?!@extendStaticArrayDeclarationDictAST unused ioExtendStaticArrayDeclarationAST,
+  !@abstractDeclarationAST outNewDeclaration ) {
   outNewDeclaration = self
 }
 

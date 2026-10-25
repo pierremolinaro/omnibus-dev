@@ -4,10 +4,10 @@
 //
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc @instructionListIR enterAccessibleEntities ?!@stringset ioInvokedRoutineSet
-                         ?!@uint ioMaxBranchOfOnInstructions {
+proc @instructionListIR enterAccessibleEntities (?!@stringset ioInvokedRoutineSet,
+                         ?!@uint ioMaxBranchOfOnInstructions ) {
   for (instruction) in self do
-    [instruction enterAccessibleEntities !?ioInvokedRoutineSet !?ioMaxBranchOfOnInstructions]
+    instruction.enterAccessibleEntities (!?ioInvokedRoutineSet, !?ioMaxBranchOfOnInstructions)
   end
 }
 
@@ -21,9 +21,9 @@ list @routineAccessibilityIR {
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc codeOptimization
- ?let @string inSourceFile
+ (?let @string inSourceFile,
  ?!intermediateCode:@intermediateCodeStruct ioIntermediateCodeStruct
-{
+) {
   var @routineAccessibilityIR routineAccessibilityIR = @[]
 //----------------------------------------------- Compute accessiblity graph
   var @stringset exploreRoutineSet = @[]
@@ -31,7 +31,7 @@ proc codeOptimization
   var @stringset definedRoutineSet = @[]
   for routine in ioIntermediateCodeStruct.mRoutineListIR do
     var @stringset accessibleRoutineSet = @[]
-    [routine.mRoutine enterAccessibleEntities !?accessibleRoutineSet !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions]
+    routine.mRoutine.enterAccessibleEntities (!?accessibleRoutineSet, !?ioIntermediateCodeStruct.mMaxBranchOfOnInstructions)
     routineAccessibilityIR += !routine.mRoutine !accessibleRoutineSet
     allRoutineSet += accessibleRoutineSet
     definedRoutineSet ++= routine.mRoutine.mRoutineMangledName
@@ -96,18 +96,18 @@ proc codeOptimization
 //--- Display invocation graph
   let filePath = inSourceFile + ".routineInvocation.dot"
   if [option omnibus_options.emitRoutineInvocationGraphFile value] then
-    displayInvocationGraph (!ioIntermediateCodeStruct.mRoutineListIR !filePath)
+    displayInvocationGraph (!ioIntermediateCodeStruct.mRoutineListIR, !filePath)
   else
-    [@string deleteFileIfExists !filePath]
+    @string.deleteFileIfExists (!filePath)
   end
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 private proc displayInvocationGraph
-  ?let @routineListIR inRoutineListIR
+  (?let @routineListIR inRoutineListIR,
   ?let @string inFilePath
-{
+) {
   var s = "digraph G {\n"
 //--- Build graph
   var @stringset definedRoutines = @[]
@@ -116,7 +116,7 @@ private proc displayInvocationGraph
     definedRoutines ++= routine.mRoutineMangledName
     allRoutines ++= routine.mRoutineMangledName
     var @stringset accessibleRoutineSet = @[]
-    [routine enterAccessibleEntities !?accessibleRoutineSet !? %from 0]
+    routine.enterAccessibleEntities (!?accessibleRoutineSet, !? %from 0)
     allRoutines += accessibleRoutineSet
     s += "  \"" + routine.mRoutineMangledName + "\" [shape=rectangle"
     if routine.isRequired then
@@ -133,7 +133,7 @@ private proc displayInvocationGraph
     s += "  \"" + undefined + "\" [shape=rectangle, color=red] ;\n"
   end
   s += "}\n"
-  [s writeToFileWhenDifferentContents !inFilePath ?*]
+  s.writeToFileWhenDifferentContents (!inFilePath, ?*)
   if undefinedRoutineSet.count > 0 then
     var m = undefinedRoutineSet.count.string + " undefined routine(s) in routine invocation graph"
     for (r) in undefinedRoutineSet do

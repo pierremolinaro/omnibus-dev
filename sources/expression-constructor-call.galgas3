@@ -21,19 +21,19 @@ class @constructorCallAST : @expressionAST {
 
 syntax extension omnibus_syntax {
 
-  rule <primary> ?!@ast ioAST !@expressionAST outExpression {
-    <type_definition> !?ioAST ?let typeName
+  rule <primary> (?!@ast ioAST ,!@expressionAST outExpression ) {
+    <type_definition> (!?ioAST, ?let typeName)
     $($
     var @functionCallEffectiveParameterListAST parameterList = @[]
     repeat
     while
-      $!selector:$ ?let selector
-      <expression> !?ioAST ?let expression
+      $!selector:$ (?let selector)
+      <expression> (!?ioAST, ?let expression)
       parameterList += !selector !expression
     end
     let errorLocation = @location.here
     $)$
-    outExpression = @constructorCallAST {!typeName !parameterList !errorLocation}
+    outExpression = @constructorCallAST (!typeName, parameterList, errorLocation)
   }
 
 }
@@ -42,14 +42,14 @@ syntax extension omnibus_syntax {
 //  PRECEDENCE GRAPH FROM EXPRESSION
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @constructorCallAST addDependenceEdgeForStaticExpression
-  ?let @lstring inConstantName
+override proc @constructorCallAST.addDependenceEdgeForStaticExpression
+  (?let @lstring inConstantName,
   ?!@semanticTypePrecedenceGraph ioGraph
-{
-  [!?ioGraph addEdge !from: inConstantName !to: self.mTypeName]
+) {
+  !?ioGraph.addEdge (!from: inConstantName, !to: self.mTypeName)
 
   for (* mExpression) in self.mParameterList do
-    [mExpression addDependenceEdgeForStaticExpression !inConstantName !?ioGraph]
+    mExpression.addDependenceEdgeForStaticExpression (!inConstantName, !?ioGraph)
   end
 }
 
@@ -57,10 +57,10 @@ override proc @constructorCallAST addDependenceEdgeForStaticExpression
 //  NOTE TYPES
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @constructorCallAST noteExpressionTypesInPrecedenceGraph ?!@semanticTypePrecedenceGraph ioGraph {
-  [!?ioGraph noteNode !self.mTypeName]
+override proc @constructorCallAST.noteExpressionTypesInPrecedenceGraph (?!@semanticTypePrecedenceGraph ioGraph ) {
+  !?ioGraph.noteNode (!self.mTypeName)
   for (* mExpression) in self.mParameterList do
-    [mExpression noteExpressionTypesInPrecedenceGraph !?ioGraph]
+    mExpression.noteExpressionTypesInPrecedenceGraph (!?ioGraph)
   end
 }
 
@@ -68,19 +68,19 @@ override proc @constructorCallAST noteExpressionTypesInPrecedenceGraph ?!@semant
 //  SEMANTICS
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @constructorCallAST analyzeExpression
-  ?self:let @omnibusType inSelfType
-  ?routineAttributes:let @routineAttributes inRoutineAttributes
-  ?optionalTargetType:let @omnibusType unused inOptionalTargetType
-  ?context:let @semanticContext inContext
-  ?mode:let @mode inMode
-  ?!temporary:@semanticTemporariesStruct ioTemporaries
-  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap
-  ?!variableMap:@universalValuedObjectMap ioUniversalMap
-  ?!alloca:@allocaList ioAllocaList
-  ?!instructionListIR:@instructionListIR ioInstructionGenerationList
+override proc @constructorCallAST.analyzeExpression
+  (?self:let @omnibusType inSelfType,
+  ?routineAttributes:let @routineAttributes inRoutineAttributes,
+  ?optionalTargetType:let @omnibusType unused inOptionalTargetType,
+  ?context:let @semanticContext inContext,
+  ?mode:let @mode inMode,
+  ?!temporary:@semanticTemporariesStruct ioTemporaries,
+  ?!staticEntityMap:@staticEntityMap ioStaticEntityMap,
+  ?!variableMap:@universalValuedObjectMap ioUniversalMap,
+  ?!alloca:@allocaList ioAllocaList,
+  ?!instructionListIR:@instructionListIR ioInstructionGenerationList,
   !result:@objectIR outResult
-{
+) {
 //--- Analyze effective argument list
   var constructorKey = "("
   for (selector *) in self.mParameterList do
@@ -89,28 +89,28 @@ override proc @constructorCallAST analyzeExpression
   constructorKey += ")"
 //--- Analyze constructor signature and init value
   let resultType = [inContext.mTypeMap searchKey !self.mTypeName].type
-  let typeName = @lstring {!resultType.omnibusTypeDescriptionName !self.mErrorLocation}
-  [inContext.mTypeConstructorMap searchKey !typeName ?let constructorMap]
+  let typeName = @lstring (!resultType.omnibusTypeDescriptionName, self.mErrorLocation)
+  inContext.mTypeConstructorMap.searchKey (!typeName, ?let constructorMap)
 //  let constructorMap = resultType.constructorMap2
-  [constructorMap searchKey ! @{!constructorKey !self.mErrorLocation} ?let constructorSignature ?let initValue]
+  constructorMap.searchKey (! @(!constructorKey, self.mErrorLocation), ?let constructorSignature, ?let initValue)
 //--- Examine init value
   switch initValue
-  case arrayValue (elementType size) :
+  case arrayValue (elementType, size) :
     if constructorKey == "(!repeated)" then
       let expression = [self.mParameterList mExpressionAtIndex !0]
-      [expression analyzeExpression
-        !self:inSelfType
-        !routineAttributes:inRoutineAttributes
-        !optionalTargetType:elementType
-        !context:inContext
-        !mode:inMode
-        !?temporary:ioTemporaries
-        !?staticEntityMap:ioStaticEntityMap
-        !?variableMap:ioUniversalMap
-        !?alloca:ioAllocaList
-        !?instructionListIR:ioInstructionGenerationList
+      expression.analyzeExpression
+        (!self:inSelfType,
+        !routineAttributes:inRoutineAttributes,
+        !optionalTargetType:elementType,
+        !context:inContext,
+        !mode:inMode,
+        !?temporary:ioTemporaries,
+        !?staticEntityMap:ioStaticEntityMap,
+        !?variableMap:ioUniversalMap,
+        !?alloca:ioAllocaList,
+        !?instructionListIR:ioInstructionGenerationList,
         ?result:let @objectIR expressionResult
-      ]
+      )
       let result = checkAssignmentCompatibility (
         !inContext.mAssignmentOperatorMap
         !source:expressionResult
@@ -120,14 +120,14 @@ override proc @constructorCallAST analyzeExpression
       )
       if result.isStatic then
         let idx = ioStaticEntityMap.mGlobalStructuredConstantList.count
-        outResult = .llvmArrayRepeatedStaticValue {!type:resultType !arraySize:size !value:result !index:idx}
+        outResult = .llvmArrayRepeatedStaticValue (!type:resultType, !arraySize:size, !value:result, !index:idx)
         var @operandIRList operandIRList = @[]
         for * in 0 ..< size do
           operandIRList += !result
         end
         ioStaticEntityMap.mGlobalStructuredConstantList += !resultType !operandIRList
       else
-        outResult = .llvmArrayRepeatedDynamicValue {!type:resultType !arraySize:size !value:result}
+        outResult = .llvmArrayRepeatedDynamicValue (!type:resultType, !arraySize:size, !value:result)
       end
     else
       var individualConstructor = "("
@@ -139,19 +139,19 @@ override proc @constructorCallAST analyzeExpression
         var @operandIRList operandIRList = @[]
         var resultIsStatic = true
         for (mSelector mExpression) in self.mParameterList do
-          [mExpression analyzeExpression
-            !self:inSelfType
-            !routineAttributes:inRoutineAttributes
-            !optionalTargetType:elementType
-            !context:inContext
-            !mode:inMode
-            !?temporary:ioTemporaries
-            !?staticEntityMap:ioStaticEntityMap
-            !?variableMap:ioUniversalMap
-            !?alloca:ioAllocaList
-            !?instructionListIR:ioInstructionGenerationList
+          mExpression.analyzeExpression
+            (!self:inSelfType,
+            !routineAttributes:inRoutineAttributes,
+            !optionalTargetType:elementType,
+            !context:inContext,
+            !mode:inMode,
+            !?temporary:ioTemporaries,
+            !?staticEntityMap:ioStaticEntityMap,
+            !?variableMap:ioUniversalMap,
+            !?alloca:ioAllocaList,
+            !?instructionListIR:ioInstructionGenerationList,
             ?result:let @objectIR expressionResult
-          ]
+          )
           let result = checkAssignmentCompatibility (
             !inContext.mAssignmentOperatorMap
             !source:expressionResult
@@ -164,22 +164,22 @@ override proc @constructorCallAST analyzeExpression
         end
         if resultIsStatic then
           let idx = ioStaticEntityMap.mGlobalStructuredConstantList.count
-          outResult = .llvmArrayStaticValues {!type:resultType !values:operandIRList !index:idx}
+          outResult = .llvmArrayStaticValues (!type:resultType, !values:operandIRList, !index:idx)
           ioStaticEntityMap.mGlobalStructuredConstantList += !resultType !operandIRList
         else
-          outResult = .llvmArrayDynamicValues {!type:resultType !values:operandIRList}
+          outResult = .llvmArrayDynamicValues (!type:resultType, !values:operandIRList)
         end
       else
         error (self.mErrorLocation : "invalid constructor" spoil outResult)
       end
     end
   case null :
-    outResult = .null {!type: resultType}
+    outResult = .null (!type: resultType)
   case simple (value) :
     if self.mParameterList.count != 0 then
       error (self.mErrorLocation : resultType.omnibusTypeDescriptionName + " constructor should have no parameter" spoil outResult)
     else
-      outResult = .literalInteger {!type: resultType !value:value}
+      outResult = .literalInteger (!type: resultType, !value:value)
     end
   case structure (sortedOperandList) :
     var sortedOperandIRList = sortedOperandList
@@ -193,19 +193,19 @@ override proc @constructorCallAST analyzeExpression
         if effective_mSelector.string != formal_mSelector  then
           error (effective_mSelector : "the selector should be '!" + formal_mSelector + ":'")
         end
-        [effective_mExpression analyzeExpression
-          !self:inSelfType
-          !routineAttributes:inRoutineAttributes
-          !optionalTargetType:formal_mType
-          !context:inContext
-          !mode:inMode
-          !?temporary:ioTemporaries
-          !?staticEntityMap:ioStaticEntityMap
-          !?variableMap:ioUniversalMap
-          !?alloca:ioAllocaList
-          !?instructionListIR:ioInstructionGenerationList
+        effective_mExpression.analyzeExpression
+          (!self:inSelfType,
+          !routineAttributes:inRoutineAttributes,
+          !optionalTargetType:formal_mType,
+          !context:inContext,
+          !mode:inMode,
+          !?temporary:ioTemporaries,
+          !?staticEntityMap:ioStaticEntityMap,
+          !?variableMap:ioUniversalMap,
+          !?alloca:ioAllocaList,
+          !?instructionListIR:ioInstructionGenerationList,
           ?result:let @objectIR expressionResult
-        ]
+        )
         var result = checkAssignmentCompatibility (
           !inContext.mAssignmentOperatorMap
           !source:expressionResult
@@ -213,10 +213,10 @@ override proc @constructorCallAST analyzeExpression
           !errorLocation:effective_mSelector.location
           !staticTypeAllowed:false
         )
-        [!?ioInstructionGenerationList appendLoadWhenReference !?ioTemporaries !?result]
+        !?ioInstructionGenerationList.appendLoadWhenReference (!?ioTemporaries, !?result)
         sortedOperandIRList += !result !formal_mFieldIndex
       end
-      outResult = .llvmStructureValue {!type:resultType !values:sortedOperandIRList}
+      outResult = .llvmStructureValue (!type:resultType, !values:sortedOperandIRList)
     end
   end
 }

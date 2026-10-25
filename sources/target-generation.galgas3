@@ -6,9 +6,9 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <declaration> ?!@ast ioAST {
+  rule <declaration> (?!@ast ioAST ) {
     $target$
-    $"string"$ ?let targetName
+    $"string"$ (?let targetName)
     ioAST.mTargetListAST += !targetName
   }
 
@@ -53,9 +53,9 @@ before {
       let filePath = path + f
       print (!"  " + filePath + '\n')
       let dir = filePath.deletingLastPathComponent
-      [dir makeDirectory]
+      dir.makeDirectory ()
       let text = [fw textFileContentsAtPath !f]
-      [text writeToFileWhenDifferentContents !filePath ?*]
+      text.writeToFileWhenDifferentContents (!filePath, ?*)
     end
   end
 }
@@ -73,24 +73,24 @@ filewrapper targetTemplates in "../embedded-sources/targets" {
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 proc generateTarget
-  ?currentDir:let @string inCurrentDirectory
-  ?productDirectory:let @string inProductDirectory
-  ?targetName:let @lstring inTargetName
+  (?currentDir:let @string inCurrentDirectory,
+  ?productDirectory:let @string inProductDirectory,
+  ?targetName:let @lstring inTargetName,
   ?targetParameters:let @targetParameters inTargetParameters
-{
+) {
 //--- Copy python utility scripts
   for (relativePath destinationFile) in inTargetParameters.mPython_utilityToolList do
     copyExecutableFile (
-      !currentDir:inCurrentDirectory
-      !from:inTargetName.string + "/" + relativePath
+      !currentDir:inCurrentDirectory,
+      !from:inTargetName.string + "/" + relativePath,
       !to:inProductDirectory + "/" + destinationFile
     )
   end
 //--- Copy linker.ld
   copyFileWithSubstitutions (
-    !currentDir:inCurrentDirectory
-    !from:inTargetName.string + "/" + inTargetParameters.mLinkerScript
-    !to:inProductDirectory + "/sources/linker.ld"
+    !currentDir:inCurrentDirectory,
+    !from:inTargetName.string + "/" + inTargetParameters.mLinkerScript,
+    !to:inProductDirectory + "/sources/linker.ld",
     !@[@("!SYSTEMSTACKSIZE!", inTargetParameters.mSystemStackSize.bigint.string)]
   )
 //--- Copy build.py
@@ -126,9 +126,9 @@ proc generateTarget
     warning .nowhere : "several optimization options: --" + opt_optimizationOption + " is used"
   end
   copyExecutableFileWithSubstitutions (
-    !currentDir:inCurrentDirectory
-    !from:inTargetName.string + "/" + inTargetParameters.mPython_build
-    !to:inProductDirectory + "/build.py"
+    !currentDir:inCurrentDirectory,
+    !from:inTargetName.string + "/" + inTargetParameters.mPython_build,
+    !to:inProductDirectory + "/build.py",
     !@[@("<<OPT_OPTIMIZATION_OPTION>>", opt_optimizationOption), @("<<LLC_OPTIMIZATION_OPTION>>", llc_optimizationOption)]
   )
 }
@@ -136,78 +136,78 @@ proc generateTarget
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 private proc copyExecutableFile
-  ?currentDir:let @string inCurrentDirectory
-  ?from:let @string inSourceFileNamePath
+  (?currentDir:let @string inCurrentDirectory,
+  ?from:let @string inSourceFileNamePath,
   ?to:let @string inDestinationAbsoluteFilePath
-{
+) {
   if [option omnibus_options.useDirAsTargetDir value] == "" then // From embedded file
     let fw = [filewrapper targetTemplates]
     let s = [fw textFileContentsAtPath !inSourceFileNamePath]
-    [s writeToExecutableFileWhenDifferentContents !inDestinationAbsoluteFilePath ?*]
+    s.writeToExecutableFileWhenDifferentContents (!inDestinationAbsoluteFilePath, ?*)
   else
     let targetDefinitionDir = [[option omnibus_options.useDirAsTargetDir value] absolutePathFromPath !inCurrentDirectory]
-    let s = @string.stringWithContentsOfFile {!targetDefinitionDir + "/" + inSourceFileNamePath}
-    [s writeToExecutableFileWhenDifferentContents !inDestinationAbsoluteFilePath ?*]
+    let s = @string.stringWithContentsOfFile (!targetDefinitionDir + "/" + inSourceFileNamePath)
+    s.writeToExecutableFileWhenDifferentContents (!inDestinationAbsoluteFilePath, ?*)
   end
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 private proc copyExecutableFileWithSubstitutions
-  ?currentDir:let @string inCurrentDirectory
-  ?from:let @string inSourceFileNamePath
-  ?to:let @string inDestinationAbsoluteFilePath
+  (?currentDir:let @string inCurrentDirectory,
+  ?from:let @string inSourceFileNamePath,
+  ?to:let @string inDestinationAbsoluteFilePath,
   ?let @2stringlist inSubstitutions
-{
+) {
   var @string s
   if [option omnibus_options.useDirAsTargetDir value] == "" then // From embedded file
     let fw = [filewrapper targetTemplates]
     s = [fw textFileContentsAtPath !inSourceFileNamePath]
   else
     let targetDefinitionDir = [[option omnibus_options.useDirAsTargetDir value] absolutePathFromPath !inCurrentDirectory]
-    s = @string.stringWithContentsOfFile {!targetDefinitionDir + "/" + inSourceFileNamePath}
+    s = @string.stringWithContentsOfFile (!targetDefinitionDir + "/" + inSourceFileNamePath)
   end
   for (templateString replacementString) in inSubstitutions do
     s = [s replacing !templateString !by: replacementString]
   end
-  [s writeToExecutableFileWhenDifferentContents !inDestinationAbsoluteFilePath ?*]
+  s.writeToExecutableFileWhenDifferentContents (!inDestinationAbsoluteFilePath, ?*)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 private proc copyFileWithSubstitutions
-  ?currentDir:let @string inCurrentDirectory
-  ?from:let @string inSourceFileNamePath
-  ?to:let @string inDestinationAbsoluteFilePath
+  (?currentDir:let @string inCurrentDirectory,
+  ?from:let @string inSourceFileNamePath,
+  ?to:let @string inDestinationAbsoluteFilePath,
   ?let @2stringlist inSubstitutions
-{
+) {
   var @string s
   if [option omnibus_options.useDirAsTargetDir value] == "" then // From embedded file
     let fw = [filewrapper targetTemplates]
     s = [fw textFileContentsAtPath !inSourceFileNamePath]
   else
     let targetDefinitionDir = [[option omnibus_options.useDirAsTargetDir value] absolutePathFromPath !inCurrentDirectory]
-    s = @string.stringWithContentsOfFile {!targetDefinitionDir + "/" + inSourceFileNamePath}
+    s = @string.stringWithContentsOfFile (!targetDefinitionDir + "/" + inSourceFileNamePath)
   end
   for (templateString replacementString) in inSubstitutions do
     s = [s replacing !templateString !by: replacementString]
   end
-  [s writeToFileWhenDifferentContents !inDestinationAbsoluteFilePath ?*]
+  s.writeToFileWhenDifferentContents (!inDestinationAbsoluteFilePath, ?*)
 }
 
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
 func getTargetTextFile
-  ?currentDir:let @string inCurrentDirectory
+  (?currentDir:let @string inCurrentDirectory,
   ?from:let @string inTargetFile
-  -> @string outContents
+  ) -> @string
 {
   if [option omnibus_options.useDirAsTargetDir value] == "" then // From embedded file
     let fw = [filewrapper targetTemplates]
-    outContents = [fw textFileContentsAtPath !inTargetFile]
+    result = [fw textFileContentsAtPath !inTargetFile]
   else
     let targetDefinitionDir = [[option omnibus_options.useDirAsTargetDir value] absolutePathFromPath !inCurrentDirectory]
-    outContents = @string.stringWithContentsOfFile {!targetDefinitionDir + "/" + inTargetFile}
+    result = @string.stringWithContentsOfFile (!targetDefinitionDir + "/" + inTargetFile)
   end
 }
 

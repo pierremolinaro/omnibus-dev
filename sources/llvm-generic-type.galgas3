@@ -37,7 +37,7 @@ class @llvmGenericType : @abstractDeclarationAST {
 
 //·······················································································································
 
-override func @llvmGenericType locationForErrorSignaling -> @location outLocation {
+override func @llvmGenericType.locationForErrorSignaling () -> @location outLocation {
   outLocation = self.mTypeName.location
 }
 
@@ -66,18 +66,18 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <generic_formal_arguments> !@genericFormalParameterList outGenericFormalParameterList {
+  rule <generic_formal_arguments> (!@genericFormalParameterList outGenericFormalParameterList ) {
     outGenericFormalParameterList = @[]
     select
     or
       $<$
       repeat
         select
-          $identifier$ ?let constantName
-          outGenericFormalParameterList += !.constant {!name: constantName}
+          $identifier$ (?let constantName)
+          outGenericFormalParameterList += !.constant (!name: constantName)
         or
-          $\$type$ ?let typeName
-          outGenericFormalParameterList += !.type {!name: typeName}
+          $\$type$ (?let typeName)
+          outGenericFormalParameterList += !.type (!name: typeName)
         end
       while
         $,$
@@ -88,36 +88,36 @@ syntax extension omnibus_syntax {
 
   //·····················································································································
 
-  rule <generic_where_clause> !@ctExpressionAST outWhereClause {
+  rule <generic_where_clause> (!@ctExpressionAST outWhereClause ) {
     select
       outWhereClause = @ctTrueExpressionAST ()
     or
       $where$
-      <compile_time_expression> ?outWhereClause
+      <compile_time_expression> (?outWhereClause)
     end
   }
 
   //·····················································································································
 
-  rule <declaration> ?!@ast ioAST {
+  rule <declaration> (?!@ast ioAST ) {
     $llvm$
-    $\$type$ ?let typeName
-    <generic_formal_arguments> ?let genericFormalParameterList
-    <generic_where_clause> ?let whereClause
+    $\$type$ (?let typeName)
+    <generic_formal_arguments> (?let genericFormalParameterList)
+    <generic_where_clause> (?let whereClause)
     ${$
-    $identifier$ ?let sizeKey
+    $identifier$ (?let sizeKey)
     if sizeKey.string != "size" then
       error (sizeKey : "this identifier should be 'size'")
     end
     $:$
-    $integer$ ?let bitSize
+    $integer$ (?let bitSize)
     $}$
-    ioAST.mDeclarationListAST += !@llvmGenericType {
-      !typeName
-      !genericFormalParameterList
-      !whereClause
-      !bitSize
-    }
+    ioAST.mDeclarationListAST += !@llvmGenericType (
+      !typeName,
+      genericFormalParameterList,
+      whereClause,
+      bitSize
+    )
   }
 
   //·····················································································································
@@ -128,16 +128,16 @@ syntax extension omnibus_syntax {
 //  PRECEDENCE GRAPH
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-override proc @llvmGenericType enterInPrecedenceGraph
-  ?!@semanticTypePrecedenceGraph ioGraph
-{
+override proc @llvmGenericType.enterInPrecedenceGraph
+  (?!@semanticTypePrecedenceGraph ioGraph
+) {
   let nodeName = self.mTypeName
-  [!?ioGraph addNode !nodeName !self]
+  !?ioGraph.addNode (!nodeName, !self)
 }
 
 //·······················································································································
 
-override func @llvmGenericType keyRepresentationForErrorSignaling -> @string outRepresentation {
+override func @llvmGenericType.keyRepresentationForErrorSignaling () -> @string outRepresentation {
   outRepresentation = "Generic type " + self.mTypeName.string
 }
 
@@ -145,60 +145,60 @@ override func @llvmGenericType keyRepresentationForErrorSignaling -> @string out
 //!  ENTER IN CONTEXT
 //—————————————————————————————————————————————————————————————————————————————————————————————————
 
-proc @genericFormalParameterList buildFormalGenericConstantMap ?!@ctCheckMap ioMap {
+proc @genericFormalParameterList buildFormalGenericConstantMap (?!@ctCheckMap ioMap ) {
   for (element) in self do
     switch element
     case type (*) :
     case constant (constantName) :
-      [!?ioMap insertKey !constantName]
+      !?ioMap.insertKey (!constantName)
     end
   end
 }
 
 //·······················································································································
 
-proc @llvmStringDefinition checkCompileTimeExpression ?let @ctCheckMap inMap {
+proc @llvmStringDefinition checkCompileTimeExpression (?let @ctCheckMap inMap ) {
   for (element) in self do
     switch element
     case string (*) :
     case variable (name) :
-      [inMap searchKey !name]
+      inMap.searchKey (!name)
     end
   end
 }
 
 //·······················································································································
 
-override proc @llvmGenericType enterInContext
-  ?!context:@semanticContext ioContext
-  ?!@declarationDecorationList unused ioDecoratedDeclarationList
-  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList
-  ?!@routineListIR unused ioRoutineListIR
-  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap
-  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap
-  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST
+override proc @llvmGenericType.enterInContext
+  (?!context:@semanticContext ioContext,
+  ?!@declarationDecorationList unused ioDecoratedDeclarationList,
+  ?!@decoratedRegularRoutineList unused ioDecoratedRoutineList,
+  ?!@routineListIR unused ioRoutineListIR,
+  ?!staticlistValues:@staticListInitializationMap unused ioStaticListValueMap,
+  ?!staticEntityMap:@staticEntityMap unused ioStaticEntityMap,
+  ?!registerUserAccess:@controlRegisterUserAccesMapAST unused ioControlRegisterUserAccesMapAST,
   ?!userDefinedTypes:@userLLVMTypeDefinitionListIR unused ioUserLLVMTypeDefinitionListIR
-{
+) {
 //--- Build formal generic constant parameter map
   var @ctCheckMap formalGenericConstantParameterMap = @()
-  [self.mGenericFormalParameterList buildFormalGenericConstantMap !?formalGenericConstantParameterMap]
+  self.mGenericFormalParameterList.buildFormalGenericConstantMap (!?formalGenericConstantParameterMap)
 //--- Check Where clause
-  [self.mWhereClause checkCompileTimeExpression !formalGenericConstantParameterMap]
+  self.mWhereClause.checkCompileTimeExpression (!formalGenericConstantParameterMap)
 //--- Check native LLVM type expression
 //  [mTypeNameExpressionString checkCompileTimeExpression !formalGenericConstantParameterMap]
 //---
   if self.mGenericFormalParameterList.count == 0 then
-    let llvmType = @omnibusType {
-      !subscript:.noSubscript
-      !attributes: .instanciable | .copyable
-      !omnibusTypeDescriptionName: self.mTypeName
-      !kind: .llvmType {!bitSize: self.mBitSize}
+    let llvmType = @omnibusType (
+      !subscript:.noSubscript,
+      !attributes: .instanciable | .copyable,
+      !omnibusTypeDescriptionName: self.mTypeName,
+      !kind: .llvmType (!bitSize: self.mBitSize),
       !llvmBaseTypeName: "i" + self.mBitSize
-    }
-    [!?ioContext.mTypeMap insertType
-      ! self.mTypeName
+    )
+    !?ioContext.mTypeMap.insertType
+      (! self.mTypeName,
       !type: llvmType
-    ]
+    )
   else
 //    let genericType = @omnibusType.new {
 //      !propertyGetterMap: @[]
@@ -211,7 +211,7 @@ override proc @llvmGenericType enterInContext
 //      !kind: .generic {!parameters: mGenericFormalParameterList !whereClause: mWhereClause !llvmNativeTypeNameExpression: ""}
 //      !llvmBaseTypeName: "" // A generic type cannot be instancied
 //    }
-//    [!?ioContext.mTypeMap insertType
+//    !?ioContext.mTypeMap insertType
 //      !lkey: mTypeName
 //      !type: genericType
 //    ]
